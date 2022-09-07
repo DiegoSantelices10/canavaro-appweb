@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-}
 
-module.exports = {
   images: {
-    domains: ['https://live.staticflickr.com/65535/'],
+    domains: ["live.staticflickr.com",
+                "trello-attachments.s3.amazonaws.com"],
   },
 }
+
+  
 
 module.exports = nextConfig

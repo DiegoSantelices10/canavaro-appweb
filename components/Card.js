@@ -1,7 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { convertToPath } from 'lib/items'
 
-export default function Card({data: {nombre, imagen, descripcion}}) {
+export default function Card({data: {id, nombre, imagen, descripcion}}) {
   return (
         <div  className="rounded-md mb-2 p-2 shadow-sm bg-white">
           <div className='flex justify-between items-center gap-x-2'>
@@ -10,7 +12,9 @@ export default function Card({data: {nombre, imagen, descripcion}}) {
               unoptimized
               src={imagen} width={110} height={110} />
             <div className='w-full self-start'>
-              <h1 className='font-bold'>{nombre}</h1>
+              <Link href={`/products/${convertToPath(nombre)}`}>
+                <a className='font-bold'>{nombre}</a>
+              </Link>
               <p className='font-normal text-gray-400 text-xs'>{descripcion}</p>
             </div>
           </div>

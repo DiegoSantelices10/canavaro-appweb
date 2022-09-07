@@ -1,9 +1,8 @@
 import Image from "next/image"
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router'
-import { stringify } from "postcss";
 
-export default function Home() {
+export default function Login() {
   const router = useRouter()
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
@@ -14,8 +13,8 @@ export default function Home() {
     },
     onSubmit: async function (values) {
      
-    router.push("/Home")
-    localStorage.setItem("user", stringify.JSON(values))
+    router.push("/home")
+    localStorage.setItem("user", JSON.stringify(values))
 
     },
   });
