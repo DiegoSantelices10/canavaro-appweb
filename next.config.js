@@ -4,7 +4,8 @@ const nextConfig = {
 
   images: {
     domains: ["live.staticflickr.com",
-                "trello-attachments.s3.amazonaws.com"],
+                "trello-attachments.s3.amazonaws.com",
+              ],
   },
 }
 
