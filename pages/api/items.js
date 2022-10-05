@@ -254,7 +254,8 @@ export default function handler(req, res)
       {
         "id": 25,
         "nombre": "Combo 1",
-        "descripcion": "1/2 Jamón, 1/2 Napolitana",
+        "gustos": "2 gustos",
+        "descripcion": "Jamón - Napolitana",
         "categoria": "promociones",
         "imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
         "tamanio": "Gigante",
@@ -263,7 +264,8 @@ export default function handler(req, res)
       {
         "id": 26,
         "nombre": "Combo 2",
-        "descripcion": "1/4 Jamón, 1/4 Napolitana, 1/4 Muzarella, 1/4 Fugazzeta",
+        "gustos": "4 gustos",
+        "descripcion": "Muzzarella - Napolitana - Jamón - Fugazzeta",
         "categoria": "promociones",
         "imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
         "tamanio": "Gigante",
@@ -272,7 +274,8 @@ export default function handler(req, res)
       {
         "id": 27,
         "nombre": "Combo 3",
-        "descripcion": "1/4 Calabresa, 1/4 Fugazzeta de la casa, 1/4 Jamón y Morron, 1/4 Super Napolitana",
+        "gustos": "4 gustos",
+        "descripcion": "Calabresa - Fuga de la casa - Jamón y Morron - Super Napolitana",
         "categoria": "promociones",
         "imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
         "tamanio": "Gigante",

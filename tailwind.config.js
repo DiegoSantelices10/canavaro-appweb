@@ -8,7 +8,10 @@ module.exports = {
     fontFamily: {
     'roboto': ['Roboto', 'sans-serif'],
     'poppins': ['Poppins', 'sans-serif'],
-    'amiri-quran': [ 'Amiri Quran', 'serif']
+    'amiri-quran': [ 'Amiri Quran', 'serif'],
+    'lato': 'Lato, sans-serif',
+    'source': ['Source Sans Pro', 'sans-serif'],
+    'oswald': ['Oswald', 'sans-serif' ]
     },
 
     extends: {},

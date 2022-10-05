@@ -10,7 +10,7 @@ export default function Layout( { children } ) {
             <title>Cavanaro</title>
         </Head>
             <Navbar/>
-            <main className="bg-slate-50">{children}</main>
+            <main className="bg-slate-50 font-poppins">{children}</main>
     </div>
   )
 }
