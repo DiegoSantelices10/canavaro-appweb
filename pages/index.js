@@ -2,12 +2,13 @@ import Image from "next/image"
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router'
 import { FaChevronRight, FaFacebook } from 'react-icons/fa';
-import Link from "next/link";
-
-
+import { useDispatch } from "react-redux";
+import { setUser } from 'store/reducers/userSlice'
 
 export default function Login() {
   const router = useRouter()
+  const dispatch = useDispatch()
+
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       direccion: "",
@@ -16,8 +17,11 @@ export default function Login() {
     },
     onSubmit: async function (values) {
 
+      dispatch(setUser({
+        direccion: values.direccion,
+        telefono: values.telefono
+      }))
       router.push("/home")
-      localStorage.setItem("user", JSON.stringify(values))
 
     },
   });

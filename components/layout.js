@@ -3,14 +3,17 @@ import Navbar from "/components/navbar"
 
 
 
-export default function Layout( { children } ) {
+export default function Layout( { children, title } ) {
   return (
     <div>
         <Head>
             <title>Cavanaro</title>
         </Head>
-            <Navbar/>
-            <main className="bg-slate-50 font-poppins">{children}</main>
+            <div className="w-full min-h-screen sm:w-1/2 md:w-1/2 lg:w-2/5 mx-auto bg-red-600">
+            <Navbar title={title}/>
+            <main className="font-poppins max-h-screen">{children}</main>
+            </div>
+            
     </div>
   )
-}
+} 

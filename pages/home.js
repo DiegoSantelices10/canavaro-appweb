@@ -4,25 +4,27 @@ import { getProducts } from "services/fetchData"
 import CardPromotion from 'components/cardPromotion'
 import Card from 'components/card'
 import Layout from 'components/layout'
-
+import { useSelector } from 'react-redux'
 
 export default function Home({ products }) {
-
-  const [renderProducts, setRenderProductos] = useState("pizzas")
-
-  const renderStore =  (renderProductos) => {
+    const [renderProducts, setRenderProductos] = useState("pizzas")
+    const { direccion } = useSelector(state => state.user)
+    
+    
+    const renderStore =  (renderProductos) => {
     return products[`${renderProductos}`]?.map(data => <Card key={data.id} data={data} />  )
   }
 
-  const renderPromotions = () => {
+    const renderPromotions = () => {
     return products[`promociones`]?.map(data => <CardPromotion key={data.id} data={data} />)
   }
 
 
   return (
-    <Layout>
-      <div className="container p-3 mx-auto lg:w-1/2 ">
+    <Layout title={direccion}>
+      <div className="container p-4 pt-7 mx-auto w-full bg-zinc-50 rounded-t-3xl">
           <h1 className="text-sm font-bold text-gray-800">Promociones</h1>
+          <hr className="pb-5" />
         <div className="flex overflow-x-auto  space-x-6 w-full pt-1 pb-3 pl-1">
         {renderPromotions()}
         </div>
