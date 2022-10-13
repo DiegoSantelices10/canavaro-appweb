@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  listaProductos: [],
-  cantProductos: 0,
-  cuentaTotal: 0
+  orderList: [],
+  totalQuantity: 0,
+  totalAmount: 0
 }
 
 export const orderSlice = createSlice({
@@ -11,28 +11,75 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {
     addProductList: (state, action) => {
-      state.listaProductos = [...state.listaProductos, action.payload]
-      state.cantProductos += 1
-      state.cuentaTotal = 0
+      const productIndex = state.orderList.findIndex(
+                           (item) => item.id === action.payload.id)
+      
+          if(productIndex >= 0) {
+            state.orderList[productIndex].cantidad += 1
+          } else {
+            const tempProduct = { ...action.payload, cantidad: 1 }
+            state.orderList.push(tempProduct)
+          }
     },
-    removeProductList: (state) => {
-      const productId = action.payload
-      state.cantProductos -= 1
-      state.listaProductos = state.listaProductos.filter(product => product.id !== productId)
+    
+    decreaseProductList: (state, action) => {
+      const productIndex = state.orderList.findIndex(
+                           (item) => item.id === action.payload.id)
+      
+      if(state.orderList[productIndex].cantidad > 1) {
+        state.orderList[productIndex].cantidad -= 1
+      } else if (state.orderList[productIndex].cantidad === 1) {
+        const newList = state.orderList.filter(
+                        (item) => item.id !== action.payload.id)
+
+        state.orderList = newList                
+      }
     },
-    incrementProductCount: (state, action) => {
-      state.value += action.payload
+
+    removeProductList: (state, action) => {
+      state.orderList = state.orderList.filter(
+                             product => product.id !== action.payload.id)
     },
-    decrementProductCount: (state, action) => {
-      state.value -= action.payload
+    
+    calculateSubTotal: (state, action) => {
+      const array = []
+      state.orderList.map((item) => {
+        const { precio, cantidad } = item
+        const listItemAmount = precio * cantidad
+        return array.push(listItemAmount)
+      })
+
+      const totalAmount = array.reduce((a, b) => {
+        return a + b
+      }, 0)
+      state.totalAmount = totalAmount
     },
-    setTotalCount: (state, action) => {
-      state.value += action.payload
-    },
+
+    calculateTotalQuantity: (state, action) => {
+      const array = []
+      state.orderList.map((item) => {
+        const { cantidad } = item
+        return array.push(cantidad)
+      })
+      const totalQuantity = array.reduce((a, b) => {
+        return a + b
+      }, 0)
+      state.totalQuantity = totalQuantity
+    }
+
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addProduct, removeProduct, incrementProductCount, decrementProductCount } = orderSlice.actions
+export const { 
+  addProductList, 
+  removeProductList, 
+  decreaseProductList, 
+  calculateSubTotal, 
+  calculateTotalQuantity 
+} = orderSlice.actions
 
+export const selectOrderist = (state) => state.order.orderList
+export const selectTotalQuantity = (state) => state.order.totalQuantity
+export const selectTotalAmount = (state) => state.order.totalAmount
 export default orderSlice.reducer

@@ -13,6 +13,7 @@ export default function Product({ productInfo: { data } }) {
             <div className='min-h-screen '>
                     {data.map(item => <ProductLayout key={item.id} data={item} />)}
             </div>  
+            
   )
 }
 
