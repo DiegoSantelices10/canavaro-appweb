@@ -244,7 +244,7 @@ export default function handler(req, res)
       },
       {
         "id": 24,
-        "nombre": "Promo xl empanadas",
+        "nombre": "Promo XL empanadas",
         "descripcion": "18 empanadas a elección",
         "categoria": "promociones",
         "imagen": "	https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/066b2bedc1d9b8e909f718c0cf7a93b9/Promo_Docena.png",
@@ -254,7 +254,7 @@ export default function handler(req, res)
       {
         "id": 25,
         "nombre": "Combo 1",
-        "gustos": "2 gustos",
+        "gustos": "de 2 gustos",
         "descripcion": "Jamón - Napolitana",
         "categoria": "promociones",
         "imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
@@ -264,7 +264,7 @@ export default function handler(req, res)
       {
         "id": 26,
         "nombre": "Combo 2",
-        "gustos": "4 gustos",
+        "gustos": "de 4 gustos",
         "descripcion": "Muzzarella - Napolitana - Jamón - Fugazzeta",
         "categoria": "promociones",
         "imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
@@ -274,7 +274,7 @@ export default function handler(req, res)
       {
         "id": 27,
         "nombre": "Combo 3",
-        "gustos": "4 gustos",
+        "gustos": "de 4 gustos",
         "descripcion": "Calabresa - Fuga de la casa - Jamón y Morron - Super Napolitana",
         "categoria": "promociones",
         "imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
@@ -284,7 +284,7 @@ export default function handler(req, res)
       {
         "id": 28,
         "nombre": "Combo 4",
-        "descripcion": "Combo 1 o 2, mas 6 empanadas a elección",
+        "descripcion": "Combo 1 o 2 + 6 empanadas",
         "categoria": "promociones",
         "imagen": "https://live.staticflickr.com/65535/49084418862_9fdf0824bf_m.jpg",
         "tamanio": "Gigante",
@@ -293,7 +293,7 @@ export default function handler(req, res)
       {
         "id": 29,
         "nombre": "Combo 5",
-        "descripcion": "Combo 1 o 2, mas 12 empanadas a elección",
+        "descripcion": "Combo 1 o 2 + 12 empanadas",
         "categoria": "promociones",
         "imagen": "https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
         "tamanio": "Gigante",
@@ -302,7 +302,7 @@ export default function handler(req, res)
       {
         "id": 30,
         "nombre": "Combo 6",
-        "descripcion": "Combo 3, mas 12 empanadas a elección",
+        "descripcion": "Combo 3 + 12 empanadas",
         "categoria": "promociones",
         "imagen": "https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
         "tamanio": "Gigante",

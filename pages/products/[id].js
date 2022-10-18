@@ -1,9 +1,6 @@
 import { getItemData, getPathsFromTitle } from "lib/items";
-import Image from "next/image";
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
 import ProductLayout from '../../components/productLayout'
-import Layout from '../../components/layout'
 
 
 
@@ -11,9 +8,8 @@ export default function Product({ productInfo: { data } }) {
 
   return (
             <div className='min-h-screen '>
-                    {data.map(item => <ProductLayout key={item.id} data={item} />)}
+                {data.map(item => <ProductLayout key={item.id} data={item} />)}
             </div>  
-            
   )
 }
 
