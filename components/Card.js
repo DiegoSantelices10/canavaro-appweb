@@ -13,14 +13,13 @@ export default function Card({data: {id, nombre, imagen, descripcion}}) {
               </Link>
               <p className='text-gray-400 text-xs'>{descripcion}</p>
             </div>
-         
-          <Image
+         <Image
               className='rounded-md'
               src={imagen} 
-              priority={true}
               width={140} 
               height={140} 
-              alt={nombre} />            
+              alt={nombre} />
+                      
           </div>
         </div>
   )

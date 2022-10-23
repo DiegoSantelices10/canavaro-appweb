@@ -31,12 +31,10 @@ export default function Login() {
     <div className="h-screen font-poppins bg-slate-50">
       <div className="flex flex-col h-full justify-center px-4 md:w-1/2 md:mx-auto lg:w-1/3">
         <div className="mx-auto">
-          <Image src="/images/logocanavaro.png" width={150} height={150} alt="logo" />
+          <Image src="/images/logocanavaro.png" width={170} height={170} alt="logo" />
         </div>
         <div className="text-center text-xs text-gray-400 font-normal">
           <h1>Pelliza 1794 - Olivos</h1>
-          <p>11-2714-3259</p>
-          <p>4711-3259</p>
         </div>
      
         <div className="w-full mt-7">

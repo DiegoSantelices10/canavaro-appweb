@@ -31,23 +31,23 @@ export default function Home({ products }) {
 
   return (
     <Layout title={direccion}>
-      <div className="container p-4 pt-7 mx-auto w-full bg-zinc-50 rounded-t-3xl">
+      <div className="container p-4 mt-16 mx-auto w-full bg-zinc-50 rounded-t-3xl">
           <h1 className="text-sm font-bold text-gray-800">Promociones</h1>
           <hr className="pb-5" />
         <div className="flex overflow-x-scroll flexp   space-x-6 w-full pt-1 pb-3 pl-1">
-        <style jsx>
-          {`
-           .flexp::-webkit-scrollbar-thumb { 
-            background: #E4E4E4;    
-            border-radius: 20px;  
-            }
-           
-            .flexp::-webkit-scrollbar {
-              height: 4px;
+            <style jsx>
+              {`
+              .flexp::-webkit-scrollbar-thumb { 
+                background: #E4E4E4;    
+                border-radius: 20px;  
+                }
               
-            }
-          `}</style>
-         {renderPromotions()}
+                .flexp::-webkit-scrollbar {
+                  height: 4px;
+                  
+                }
+              `}</style>
+            {renderPromotions()}
         </div>
         <div className="flex justify-center items-center w-full gap-3 py-6 text-sm f">
             <button onClick={() => setRenderProductos("pizzas")} className={renderProducts !== "pizzas" ? "w-32 rounded-3xl font-medium" : "w-32 font-medium bg-gray-300 text-white rounded-3xl"}>Pizzas</button>

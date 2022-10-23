@@ -11,15 +11,22 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {
     addProductList: (state, action) => {
-      const productIndex = state.orderList.findIndex(
-                           (item) => item.id === action.payload.id)
+
+      if(action.payload.categoria == "pizzas") {
+        const productIndex = state.orderList.findIndex((item) => item.tamanio === action.payload.tamanio)
+            productIndex >= 0 ? 
+                state.orderList[productIndex].cantidad += 1 :
+                      state.orderList.push({ ...action.payload, cantidad: 1 })
+      }
+
+      // const productIndex = state.orderList.findIndex((item) => item.id === action.payload.id)
       
-          if(productIndex >= 0) {
-            state.orderList[productIndex].cantidad += 1
-          } else {
-            const tempProduct = { ...action.payload, cantidad: 1 }
-            state.orderList.push(tempProduct)
-          }
+      //     if(productIndex >= 0) {
+      //       state.orderList[productIndex].cantidad += 1
+      //     } else {
+      //       const tempProduct = { ...action.payload, cantidad: 1 }
+      //       state.orderList.push(tempProduct)
+      //     }
     },
     
     decreaseProductList: (state, action) => {
