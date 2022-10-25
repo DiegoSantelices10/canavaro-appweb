@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import PizzaInfo from "./pizzaInfo";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { getProducts } from "services/fetchData";
 
-import { addProductList, removeProductList, decreaseProductList } from "store/reducers/orderSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { addProductPizza, 
+  addProductEmpanada, 
+  decrementProduct, 
+  calculateSubTotal, 
+  calculateTotalQuantity 
+} from "store/reducers/orderSlice";
+
+  import { useDispatch, useSelector } from "react-redux";
 
 
 export default function ProductLayout({ data, data: { id, nombre, descripcion, categoria, imagen, tamanio, precio } }) {
@@ -14,25 +20,32 @@ export default function ProductLayout({ data, data: { id, nombre, descripcion, c
   const { orderList } = useSelector(state => state.order)
   const dispatch = useDispatch()
 
-  const product = orderList.find((item) => item.id == id)
-
+  useEffect(() => {
+dispatch(calculateSubTotal())
+dispatch(calculateTotalQuantity())
+  }, [orderList, dispatch])
 
   const productQuantity = (id) => {
     const pre = orderList.find(item => item.id == id)
     return pre?.cantidad ? pre.cantidad : 0
-
   }
 
-  const increaseCart = (data) => {
-    dispatch(addProductList(data));
+  const incrementCartEmpanada = (data) => {
+    dispatch(addProductEmpanada(data))
+  }
+  const incrementCartPizza = (data) => {
+    dispatch(addProductPizza(data));
   };
 
-  const decreaseCart = (data) => {
-    dispatch(decreaseProductList(data));
+  const decrementCart = (data) => {
+    dispatch(decrementProduct(data));
   };
   const removeFromCart = (data) => {
-    dispatch(removeProductList(data));
+    dispatch(removeProduct(data));
   };
+
+
+
 
   return (
     <div className="font-poppins min-h-screen  mx-auto w-full  sm:w-1/2 md:w-2/5 lg:w-1/3">
@@ -76,7 +89,7 @@ export default function ProductLayout({ data, data: { id, nombre, descripcion, c
             {categoria == "pizzas" ? (
 
               <div className=" flex flex-col gap-y-2 pt-5 justify-evenly">
-                <PizzaInfo data={data} incrementCart={increaseCart} decrementCart={decreaseCart} />
+                <PizzaInfo data={data} incrementCart={incrementCartPizza} decrementCart={decrementCart} cart={orderList} />
               </div>
 
             ) : categoria == "empanadas" ? (
@@ -90,10 +103,10 @@ export default function ProductLayout({ data, data: { id, nombre, descripcion, c
                 </div>
                 <div className="w-auto rounded-3xl border  px-3 text-end space-x-4 text-base">
                   <button type="button"
-                    onClick={() => decreaseCart({id, nombre, categoria, tamanio, precio })}>-</button>
+                    onClick={() => decrementCart({id, nombre, categoria, tamanio, precio })}>-</button>
                   <span>{productQuantity(id)}</span>
                   <button type="button"
-                    onClick={() => increaseCart({id, nombre, categoria, tamanio, precio })}>+</button>
+                    onClick={() => incrementCartEmpanada({id, nombre, categoria, tamanio, precio })}>+</button>
                 </div>
               </div>
 

@@ -10,7 +10,7 @@ export const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
-    addProductList: (state, action) => {
+    addProductPizza: (state, action) => {
 
       if(action.payload.categoria == "pizzas") {
         const productIndex = state.orderList.findIndex((item) => item.tamanio === action.payload.tamanio)
@@ -18,18 +18,20 @@ export const orderSlice = createSlice({
                 state.orderList[productIndex].cantidad += 1 :
                       state.orderList.push({ ...action.payload, cantidad: 1 })
       }
-
-      // const productIndex = state.orderList.findIndex((item) => item.id === action.payload.id)
-      
-      //     if(productIndex >= 0) {
-      //       state.orderList[productIndex].cantidad += 1
-      //     } else {
-      //       const tempProduct = { ...action.payload, cantidad: 1 }
-      //       state.orderList.push(tempProduct)
-      //     }
     },
+    addProductEmpanada: (state, action) => {
+      const productIndex = state.orderList.findIndex((item) => item.id === action.payload.id)
+      
+        if(productIndex >= 0) {
+          state.orderList[productIndex].cantidad += 1
+        } else {
+          const tempProduct = { ...action.payload, cantidad: 1 }
+          state.orderList.push(tempProduct)
+        }
+
+},
     
-    decreaseProductList: (state, action) => {
+    decrementProduct: (state, action) => {
       const productIndex = state.orderList.findIndex(
                            (item) => item.id === action.payload.id)
       
@@ -43,7 +45,7 @@ export const orderSlice = createSlice({
       }
     },
 
-    removeProductList: (state, action) => {
+    removeProduct: (state, action) => {
       state.orderList = state.orderList.filter(
                              product => product.id !== action.payload.id)
     },
@@ -79,14 +81,15 @@ export const orderSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
-  addProductList, 
-  removeProductList, 
-  decreaseProductList, 
+  addProductPizza,
+  addProductEmpanada,
+  decrementProduct, 
+  removeProduct: removeProductList, 
   calculateSubTotal, 
   calculateTotalQuantity 
 } = orderSlice.actions
 
-export const selectOrderist = (state) => state.order.orderList
-export const selectTotalQuantity = (state) => state.order.totalQuantity
-export const selectTotalAmount = (state) => state.order.totalAmount
+export const selectOrderist = (state) => state.orderList
+export const selectTotalQuantity = (state) => state.totalQuantity
+export const selectTotalAmount = (state) => state.totalAmount
 export default orderSlice.reducer

@@ -1,8 +1,15 @@
 import React from 'react'
 import ButtonDownUp from './buttonDownUp'
+import { v4 as uuidv4 } from 'uuid'
+export default function PizzaInfo({ data: { id, nombre, tamanio: { Gigante, Mediana, Chica }, categoria }, incrementCart, decrementCart, cart }) {
 
-export default function PizzaInfo({ data: { id, nombre, tamanio: { Gigante, Mediana, Chica }, categoria }, incrementCart, decrementCart }) {
+    const idGenerator = uuidv4()
 
+    const productQuantity = (tamanio) => {
+        const pre = cart.find(item => item.tamanio == tamanio)
+        return pre?.cantidad ? pre.cantidad : 0   
+      }
+    
 
     return (
         <>
@@ -15,10 +22,10 @@ export default function PizzaInfo({ data: { id, nombre, tamanio: { Gigante, Medi
                 </div>
                 <div className="font-roboto w-auto rounded-3xl border  px-3 text-end space-x-4 text-normal">
                     <button type="button"
-                        onClick={() => decrementCart({ id, nombre, tamanio: 'gigante' , precio: Gigante.precio, categoria })}>-</button>
-                    <span>0</span>
+                        onClick={() => decrementCart({ idGenerator, nombre, categoria, tamanio: 'gigante' , precio: Gigante.precio})}>-</button>
+                    <span>{productQuantity('gigante')}</span>
                     <button type="button"
-                        onClick={() => incrementCart({ id, nombre, tamanio: 'gigante', precio: Gigante.precio, categoria })}>+</button>
+                        onClick={() => incrementCart({ idGenerator, nombre, categoria, tamanio: 'gigante', precio: Gigante.precio})}>+</button>
                 </div>
             </div>
             <div className="flex justify-between items-center">
@@ -31,10 +38,10 @@ export default function PizzaInfo({ data: { id, nombre, tamanio: { Gigante, Medi
                 </div>
                 <div className="font-roboto w-auto rounded-3xl border  px-3 text-end space-x-4 text-normal">
                     <button type="button"
-                        onClick={() => decrementCart({ id, nombre, tamanio: 'mediana' , precio: Mediana.precio, categoria })}>-</button>
-                    <span>0</span>
+                        onClick={() => decrementCart({ idGenerator, nombre, categoria, tamanio: 'mediana' , precio: Mediana.precio })}>-</button>
+                    <span>{productQuantity('mediana')}</span>
                     <button type="button"
-                        onClick={() => incrementCart({ id, nombre, tamanio: 'mediana' , precio: Mediana.precio, categoria })}>+</button>
+                        onClick={() => incrementCart({ idGenerator, nombre, categoria, tamanio: 'mediana' , precio: Mediana.precio })}>+</button>
                 </div>
             </div>
             <div className="flex justify-between items-center">
@@ -46,10 +53,10 @@ export default function PizzaInfo({ data: { id, nombre, tamanio: { Gigante, Medi
                 </div>
                 <div className="font-roboto w-auto rounded-3xl border  px-3 text-end space-x-4 text-normal">
                     <button type="button"
-                        onClick={() => decrementCart({ id, nombre, tamanio: 'chica' , precio: Chica.precio, categoria })}>-</button>
-                    <span>0</span>
+                        onClick={() => decrementCart({ idGenerator, nombre, categoria, tamanio: 'chica' , precio: Chica.precio })}>-</button>
+                    <span>{productQuantity('chica')}</span>
                     <button type="button"
-                        onClick={() => incrementCart({ id, nombre, tamanio: 'chica' , precio: Chica.precio, categoria })}>+</button>
+                        onClick={() => incrementCart({ idGenerator, nombre, categoria, tamanio: 'chica' , precio: Chica.precio })}>+</button>
                 </div>
             </div>
 
