@@ -1,26 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  direccion: "",
-  telefono: "",
-}
+	direccion: '',
+	telefono: '',
+};
 
 export const userSlice = createSlice({
-  name: 'user',
-  initialState,
-  reducers: {
-    setUser: (state, action) => {
-      state.direccion = action.payload.direccion,
-      state.telefono = action.payload.telefono
-    },
-    unsetUser: (state) => {
-        state.direccion = "",
-        state.telefono = ""
-    },
-  },
-})
+	name: 'user',
+	initialState,
+	reducers: {
+		setUser: (state, action) => {
+			(state.direccion = action.payload.direccion), (state.telefono = action.payload.telefono);
+		},
+		unsetUser: state => {
+			(state.direccion = ''), (state.telefono = '');
+		},
+	},
+});
 
 // Action creators are generated for each case reducer function
-export const { setUser, unsetUser } = userSlice.actions
+export const { setUser, unsetUser } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

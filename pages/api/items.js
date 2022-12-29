@@ -237,8 +237,9 @@ export default function handler(req, res)
         "id": 23,
         "nombre": "Promo empanadas",
         "descripcion": "12 empanadas a elección",
+        "cantidadMaxima": 12,
         "categoria": "promociones",
-        "imagen": "	https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/066b2bedc1d9b8e909f718c0cf7a93b9/Promo_Docena.png",
+        "imagen": "https://cdn.discordapp.com/attachments/1030161496568774781/1030176772790169710/Docena.jpg",
         "tamanio": "Grande",
         "precio": 2600
       },
@@ -246,8 +247,9 @@ export default function handler(req, res)
         "id": 24,
         "nombre": "Promo XL empanadas",
         "descripcion": "18 empanadas a elección",
+        "cantidadMaxima": 18,
         "categoria": "promociones",
-        "imagen": "	https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/066b2bedc1d9b8e909f718c0cf7a93b9/Promo_Docena.png",
+        "imagen": "	https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/8b401131be66ac23de662a0f92d6f59e/Promo_Pack_18_empanadas.png",
         "tamanio": "Grande",
         "precio": 3850
       },
@@ -286,6 +288,7 @@ export default function handler(req, res)
         "nombre": "Combo 4",
         "descripcion": "Combo 1 o 2 + 6 empanadas",
         "categoria": "promociones",
+        "cantidadMaxima": 6,
         "imagen": "https://live.staticflickr.com/65535/49084418862_9fdf0824bf_m.jpg",
         "tamanio": "Gigante",
         "precio": 3000
@@ -295,6 +298,7 @@ export default function handler(req, res)
         "nombre": "Combo 5",
         "descripcion": "Combo 1 o 2 + 12 empanadas",
         "categoria": "promociones",
+        "cantidadMaxima": 12,
         "imagen": "https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
         "tamanio": "Gigante",
         "precio": 4100
@@ -304,6 +308,7 @@ export default function handler(req, res)
         "nombre": "Combo 6",
         "descripcion": "Combo 3 + 12 empanadas",
         "categoria": "promociones",
+        "cantidadMaxima": 12,
         "imagen": "https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
         "tamanio": "Gigante",
         "precio": 4400
