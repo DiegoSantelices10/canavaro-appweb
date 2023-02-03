@@ -1,19 +1,110 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function Promotion({
-	products,
-	incrementCart,
-	decrementCart,
-	quantity,
-	cantMax,
-	name,
-}) {
+import {
+	addProductPromo,
+	addProductEmpanada,
+	decrementProduct,
+	decrementProductPromo,
+} from 'store/reducers/orderSlice';
+
+export default function Promotion({ products, cantMax, data, quantity }) {
 	const [quantityDemanded, setQuantityDemanded] = useState(cantMax);
+	const [combo, setCombo] = useState('1');
+	const { order } = useSelector(state => state.order);
+	const dispatch = useDispatch();
+
+	const addItems = value => {
+		dispatch(addProductPromo(value));
+	};
+	const decrementItems = value => {
+		dispatch(decrementProductPromo(value));
+	};
+
+	const addProductItems = value => {
+		dispatch(addProductEmpanada(value));
+	};
+
+	const decrementProductItems = value => {
+		dispatch(decrementProduct(value));
+	};
+
+	const productQuantity = id => {
+		const pre = order?.find(item => item.id === id);
+		return pre?.cantidad ? pre.cantidad : 0;
+	};
+	const onChangeValue = e => {
+		setCombo(e.target.value);
+		console.log(e.target.value);
+	};
 	return (
 		<div>
-			{name !== 'Combo 1' && name !== 'Combo 2' && (
+			{data.nombre == 'Combo 3' || data.nombre == 'Combo 2' || data.nombre == 'Combo 1' ? (
+				<div className="flex justify-between py-2  my-2 ">
+					<div className="w-1/2 font-medium">
+						<h2>{data.nombre}</h2>
+					</div>
+					<div className="w-auto   px-3 text-end space-x-4 text-base">
+						<button
+							type="button"
+							className="text-red-500 down"
+							onClick={e => {
+								decrementProductItems(data);
+								setQuantityDemanded(quantityDemanded + 1);
+							}}
+						>
+							-
+						</button>
+						<span className="font-normal">{quantity(data.id)}</span>
+						<button
+							type="button"
+							className="text-green-500 up"
+							onClick={e => {
+								addProductItems(data);
+								setQuantityDemanded(quantityDemanded - 1);
+							}}
+						>
+							+
+						</button>
+					</div>
+				</div>
+			) : (
+				<div>
+					<h1>Selecciona una pizza!</h1>
+					<div className="p-4 flex gap-2 justify-start items-center">
+						<input
+							id="1"
+							type="radio"
+							value="1"
+							name="combo"
+							onChange={onChangeValue}
+							checked={combo === '1'}
+						/>
+						<div>
+							<h3>{products.promociones[2].nombre}</h3>
+							<h4 className="text-gray-400 font-normal">{products.promociones[2].descripcion}</h4>
+						</div>
+					</div>
+					<div className="p-4 flex gap-2 justify-start items-center">
+						<input
+							id="2"
+							type="radio"
+							value="2"
+							name="combo"
+							onChange={onChangeValue}
+							checked={combo === '2'}
+						/>
+						<div>
+							<h3>{products.promociones[3].nombre}</h3>
+							<h4 className="text-gray-400 font-normal">{products.promociones[3].descripcion}</h4>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{data.nombre !== 'Combo 1' && data.nombre !== 'Combo 2' && data.nombre !== 'Combo 3' && (
 				<>
 					{quantityDemanded < 1 ? (
 						<div className="bg-green-500 w-auto p-2">
@@ -26,30 +117,29 @@ export default function Promotion({
 							</p>
 						</div>
 					)}
-
-					{products.empanadas?.map(item => {
+					{products.empanadas?.map(({ id, nombre }) => {
 						return (
-							<div key={item.id} className="flex justify-between py-2  my-2 ">
+							<div key={id} className="flex justify-between py-2  my-2 ">
 								<div className="w-1/2 font-medium">
-									<h2>{item.nombre}</h2>
+									<h2>{nombre}</h2>
 								</div>
 								<div className="w-auto   px-3 text-end space-x-4 text-base">
 									<button
 										type="button"
-										className="text-red-500"
-										onClick={() => {
-											decrementCart(item);
+										className="text-red-500 down"
+										onClick={e => {
+											decrementItems({ id, nombre });
 											setQuantityDemanded(quantityDemanded + 1);
 										}}
 									>
 										-
 									</button>
-									<span className="font-normal">{quantity(item.id)}</span>
+									<span className="font-normal">{productQuantity(id)}</span>
 									<button
 										type="button"
-										className="text-green-500"
-										onClick={() => {
-											incrementCart(item);
+										className="text-green-500 up"
+										onClick={e => {
+											addItems({ id, nombre });
 											setQuantityDemanded(quantityDemanded - 1);
 										}}
 									>

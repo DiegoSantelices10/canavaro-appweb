@@ -5,7 +5,7 @@ import { convertToPath } from 'lib/items';
 
 export default function Card({ data: { id, nombre, imagen, descripcion } }) {
 	return (
-		<div className=" rounded-md mb-4 p-3 shadow-md bg-white">
+		<div className=" rounded-md  p-3 shadow bg-white">
 			<div className="flex justify-between items-center gap-x-2">
 				<div className="w-full self-start">
 					<Link href={`/products/${convertToPath(nombre)}`}>

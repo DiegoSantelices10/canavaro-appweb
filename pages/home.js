@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { productsList } from 'store/reducers/productSlice';
+import React, { useState } from 'react';
 import CardPromotion from 'components/cardPromotion';
 import Card from 'components/card';
 import Layout from 'components/layout';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { wrapper } from 'store/app/store';
+import { getProducts } from 'services/fetchData';
+import { setProductData } from 'store/reducers/productSlice';
 
 export default function Home() {
 	const [renderProducts, setRenderProductos] = useState('pizzas');
 	const { direccion } = useSelector(state => state.user);
 	const { products } = useSelector(state => state.product);
-
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(productsList());
-	}, []);
 
 	const renderStore = renderProductos => {
 		return products[`${renderProductos}`]?.map(data => <Card key={data.id} data={data} />);
@@ -26,8 +22,8 @@ export default function Home() {
 
 	return (
 		<Layout title={direccion}>
-			<div className="container p-4 mt-16 mx-auto w-full bg-zinc-50 rounded-t-3xl">
-				<h1 className="text-sm font-bold text-gray-800">Promociones</h1>
+			<div className=" p-4 mt-14 mx-auto w-full bg-zinc-50 ">
+				<h1 className="text-sm font-bold text-gray-800 py-2">Promociones</h1>
 				<hr className="pb-5" />
 				<div className="flex overflow-x-scroll flexp   space-x-6 w-full pt-1 pb-3 pl-1">
 					<style jsx>
@@ -78,13 +74,18 @@ export default function Home() {
 				</div>
 
 				<div>
-					<h1 className="text-sm font-bold text-gray-800">
+					<h1 className="text-sm font-bold text-gray-800 py-2">
 						{renderProducts[0].toUpperCase() + renderProducts.substring(1)}
 					</h1>
-					<hr className="pb-5" />
-					<div>{renderStore(renderProducts)}</div>
+					<hr className="py-2" />
+					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-2">{renderStore(renderProducts)}</div>
 				</div>
 			</div>
 		</Layout>
 	);
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+	const res = await getProducts();
+	store.dispatch(setProductData(res));
+});

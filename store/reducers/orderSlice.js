@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	orderList: [],
+	order: [],
 	totalQuantity: 0,
 	totalAmount: 0,
 };
@@ -12,9 +13,7 @@ export const orderSlice = createSlice({
 	reducers: {
 		addProductPizza: (state, action) => {
 			if (action.payload.categoria == 'pizzas') {
-				const productIndex = state.orderList.findIndex(
-					item => item.tamanio === action.payload.tamanio
-				);
+				const productIndex = state.orderList.findIndex(item => item.tamanio === action.payload.tamanio);
 				productIndex >= 0
 					? (state.orderList[productIndex].cantidad += 1)
 					: state.orderList.push({ ...action.payload, cantidad: 1 });
@@ -22,7 +21,6 @@ export const orderSlice = createSlice({
 		},
 		addProductEmpanada: (state, action) => {
 			const productIndex = state.orderList.findIndex(item => item.id === action.payload.id);
-
 			if (productIndex >= 0) {
 				state.orderList[productIndex].cantidad += 1;
 			} else {
@@ -30,10 +28,27 @@ export const orderSlice = createSlice({
 				state.orderList.push(tempProduct);
 			}
 		},
+		addProductPromo: (state, action) => {
+			const productIndex = state.order.findIndex(item => item.id === action.payload.id);
+			if (productIndex >= 0) {
+				state.order[productIndex].cantidad += 1;
+			} else {
+				const tempProduct = { ...action.payload, cantidad: 1 };
+				state.order.push(tempProduct);
+			}
+		},
+		decrementProductPromo: (state, action) => {
+			const productIndex = state.order.findIndex(item => item.id === action.payload.id);
+			if (state.order[productIndex].cantidad > 1) {
+				state.order[productIndex].cantidad -= 1;
+			} else if (state.order[productIndex].cantidad === 1) {
+				const newList = state.order.filter(item => item.id !== action.payload.id);
 
+				state.order = newList;
+			}
+		},
 		decrementProduct: (state, action) => {
 			const productIndex = state.orderList.findIndex(item => item.id === action.payload.id);
-
 			if (state.orderList[productIndex].cantidad > 1) {
 				state.orderList[productIndex].cantidad -= 1;
 			} else if (state.orderList[productIndex].cantidad === 1) {
@@ -79,13 +94,16 @@ export const orderSlice = createSlice({
 export const {
 	addProductPizza,
 	addProductEmpanada,
+	addProductPromo,
+	decrementProductPromo,
 	decrementProduct,
-	removeProduct: removeProductList,
+	removeProduct,
 	calculateSubTotal,
 	calculateTotalQuantity,
 } = orderSlice.actions;
 
-export const selectOrderist = state => state.orderList;
+export const selectOrder = state => state.order;
+export const selectOrderList = state => state.orderList;
 export const selectTotalQuantity = state => state.totalQuantity;
 export const selectTotalAmount = state => state.totalAmount;
 export default orderSlice.reducer;

@@ -48,20 +48,23 @@ export default function ProductLayout({
 		dispatch(removeProduct(data));
 	};
 
+	const addCartPromo = value => {
+		dispatch(addProductEmpanada(value, precio));
+	};
 	return (
 		<div className="font-poppins min-h-screen  mx-auto w-full  sm:w-1/2 md:w-2/5 lg:w-1/3">
 			<div className="relative overflow-hidden h-auto  mx-auto  ">
 				<div className=" overflow-hidden w-auto">
 					<Image
-						src={imagen}
+						src={imagen || ''}
 						layout="responsive"
 						width={100}
 						height={40}
 						objectFit="cover"
 						objectPosition="center"
-						alt={nombre}
+						alt={nombre || 'img'}
 					/>
-					<Link href="/home" passHref>
+					<Link href="/home">
 						<a>
 							<FiChevronsLeft
 								className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
@@ -131,7 +134,7 @@ export default function ProductLayout({
 							</div>
 						) : (
 							<Promotion
-								name={nombre}
+								data={data}
 								products={products}
 								incrementCart={incrementCartEmpanada}
 								decrementCart={decrementCart}
@@ -150,16 +153,15 @@ export default function ProductLayout({
 
 			{categoria == 'promociones' ? (
 				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 lg:w-1/3">
-					<Link href="/cart">
-						<a
-							className="flex justify-center gap-3 w-full bg-red-600 p-3  
+					<button
+						className="flex justify-center gap-3 w-full bg-red-600 p-3  
                     rounded-3xl font-poppins mx-auto hover:bg-red-500 hover:-translate-y-1 
                     transition-all duration-500 text-white text-base font-semibold "
-						>
-							Agregar al Carrito
-							<FiShoppingCart size={23} />{' '}
-						</a>
-					</Link>
+						onClick={() => incrementCartEmpanada(items)}
+					>
+						Agregar al Carrito
+						<FiShoppingCart size={23} />{' '}
+					</button>
 				</div>
 			) : (
 				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 lg:w-1/3">
@@ -179,12 +181,12 @@ export default function ProductLayout({
 	);
 }
 
-export async function getServerSideProps() {
-	const res = await getProducts();
+// export async function getServerSideProps() {
+// 	const res = await getProducts();
 
-	return {
-		props: {
-			products: res,
-		},
-	};
-}
+// 	return {
+// 		props: {
+// 			products: res,
+// 		},
+// 	};
+// }

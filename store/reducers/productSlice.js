@@ -1,25 +1,29 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getProducts } from 'services/fetchData';
+import { createSlice } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
 const initialState = {
 	products: [],
 };
 
-export const productsList = createAsyncThunk('products', async (body, thunkAPI) => {
-	const response = await getProducts();
-	return response;
-});
-
 export const productSlice = createSlice({
 	name: 'product',
 	initialState,
-	extraReducers: builder => {
-		builder.addCase(productsList.fulfilled, (state, { payload }) => {
+	reducers: {
+		setProductData: (state, { payload }) => {
 			state.products = payload;
-		});
+		},
+	},
+
+	extraReducers: {
+		[HYDRATE]: (state, action) => {
+			return {
+				...state,
+				...action.payload.product,
+			};
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { addProduct } = productSlice.actions;
+export const { setProductData } = productSlice.actions;
 
 export default productSlice.reducer;
