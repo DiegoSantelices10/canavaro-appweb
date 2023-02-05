@@ -52,7 +52,7 @@ export default function ProductLayout({
 		dispatch(addProductEmpanada(value, precio));
 	};
 	return (
-		<div className="font-poppins min-h-screen  mx-auto w-full  sm:w-1/2 md:w-2/5 lg:w-1/3">
+		<div className="font-poppins min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
 			<div className="relative overflow-hidden h-auto  mx-auto  ">
 				<div className=" overflow-hidden w-auto">
 					<Image
@@ -66,23 +66,20 @@ export default function ProductLayout({
 					/>
 					<Link href="/home">
 						<a>
-							<FiChevronsLeft
-								className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
-								size={30}
-							/>
+							<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
 						</a>
 					</Link>
 				</div>
 			</div>
 
-			<div className="grid grid-col-3 bg-slate-100 content-between pt-1   w-full sm:w-1/2 md:w-2/5  lg:w-auto  h-auto   height-pro">
+			<div className=" bg-slate-100 content-between pt-1 w-full    h-auto   height-pro">
 				<style jsx>{`
 					.height-pro {
 						height: -webkit-fill-available;
 					}
 				`}</style>
 
-				<div className="flex flex-col tracking-wide">
+				<div className="flex flex-col tracking-wide w-full">
 					<div className="w-full bg-white p-3 py-5 ">
 						<h1 className="font-bold text-base text-gray-800">{nombre}</h1>
 						<p className="font-roboto font-normal text-sm py-1 text-gray-400">{descripcion}</p>
@@ -107,8 +104,7 @@ export default function ProductLayout({
 							<div className="flex gap-y-2 py-2 justify-between items-center">
 								<div className="w-auto">
 									<h2 className="font-semibold text-normal text-gray-800">
-										Empanada{' '}
-										<span className="text-xs font-normal font-roboto text-gray-400">x unidad</span>
+										Empanada <span className="text-xs font-normal font-roboto text-gray-400">x unidad</span>
 									</h2>
 								</div>
 								<div className="w-1/3 font-medium text-base pl-1">{<h2>$ {precio}</h2>}</div>
@@ -124,9 +120,7 @@ export default function ProductLayout({
 									<button
 										type="button"
 										className="text-green-500"
-										onClick={() =>
-											incrementCartEmpanada({ id, nombre, categoria, tamanio, precio })
-										}
+										onClick={() => incrementCartEmpanada({ id, nombre, categoria, tamanio, precio })}
 									>
 										+
 									</button>
@@ -152,7 +146,7 @@ export default function ProductLayout({
 			</div>
 
 			{categoria == 'promociones' ? (
-				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 lg:w-1/3">
+				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 sm:w-4/5 md:w-3/5 lg:w-2/5">
 					<button
 						className="flex justify-center gap-3 w-full bg-red-600 p-3  
                     rounded-3xl font-poppins mx-auto hover:bg-red-500 hover:-translate-y-1 

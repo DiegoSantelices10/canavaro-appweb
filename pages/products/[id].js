@@ -1,7 +1,7 @@
 import { getItemData, getPathsFromTitle } from 'lib/items';
 import React, { useEffect } from 'react';
 import ProductLayout from 'components/productLayout';
-
+import { getProducts } from 'services/fetchData';
 export default function Product({ productInfo: { data }, id }) {
 	return (
 		<div className="min-h-screen ">
@@ -23,8 +23,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const id = params.id;
+	const products = await getProducts();
 
-	const obj = await getItemData(id);
+	const obj = await getItemData(id, products);
 	const productInfo = Object.assign({}, obj);
 	return {
 		props: {

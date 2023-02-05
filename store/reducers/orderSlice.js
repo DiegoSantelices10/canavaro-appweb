@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	orderList: [],
-	order: [],
+	orderPromo: [],
 	totalQuantity: 0,
 	totalAmount: 0,
 };
@@ -29,22 +29,22 @@ export const orderSlice = createSlice({
 			}
 		},
 		addProductPromo: (state, action) => {
-			const productIndex = state.order.findIndex(item => item.id === action.payload.id);
+			const productIndex = state.orderPromo.findIndex(item => item.id === action.payload.id);
 			if (productIndex >= 0) {
-				state.order[productIndex].cantidad += 1;
+				state.orderPromo[productIndex].cantidad += 1;
 			} else {
 				const tempProduct = { ...action.payload, cantidad: 1 };
-				state.order.push(tempProduct);
+				state.orderPromo.push(tempProduct);
 			}
 		},
 		decrementProductPromo: (state, action) => {
-			const productIndex = state.order.findIndex(item => item.id === action.payload.id);
-			if (state.order[productIndex].cantidad > 1) {
-				state.order[productIndex].cantidad -= 1;
+			const productIndex = state.orderPromo.findIndex(item => item.id === action.payload.id);
+			if (state.orderPromo[productIndex].cantidad > 1) {
+				state.orderPromo[productIndex].cantidad -= 1;
 			} else if (state.order[productIndex].cantidad === 1) {
-				const newList = state.order.filter(item => item.id !== action.payload.id);
+				const newList = state.orderPromo.filter(item => item.id !== action.payload.id);
 
-				state.order = newList;
+				state.orderPromo = newList;
 			}
 		},
 		decrementProduct: (state, action) => {

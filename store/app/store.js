@@ -5,7 +5,7 @@ import orderReducer from 'store/reducers/orderSlice';
 import userReducer from 'store/reducers/userSlice';
 import productReducer from 'store/reducers/productSlice';
 
-const makeStore = () =>
+export const makeStore = () =>
 	configureStore({
 		reducer: {
 			product: productReducer,
