@@ -13,10 +13,9 @@ import {
 export default function Promotion({ cantMax, data, quantity }) {
 	const [quantityDemanded, setQuantityDemanded] = useState(cantMax);
 
-	const [promotions, setPromotions] = useState('');
-	const [quantityPromo, setQuantityPromo] = useState('');
+	const [promotions, setPromotions] = useState('Combo 1');
 
-	const [combo, setCombo] = useState('1');
+	const [combo, setCombo] = useState('');
 	const { orderPromo } = useSelector(state => state.order);
 	const { products } = useSelector(state => state.product);
 
@@ -26,7 +25,6 @@ export default function Promotion({ cantMax, data, quantity }) {
 		setPromotions(promociones);
 		const res = productQuantityPromo();
 		setQuantityDemanded(quantityDemanded - res);
-		console.log('resultado final', res);
 	}, []);
 	const dispatch = useDispatch();
 
@@ -61,21 +59,36 @@ export default function Promotion({ cantMax, data, quantity }) {
 	};
 	const onChangeValue = e => {
 		setCombo(e.target.value);
-		console.log(e.target.value);
+		const pre = promociones?.find(item => item.nombre === e.target.value);
+		console.log(pre);
 	};
 	return (
 		<div>
 			{data.nombre == 'Combo 4' || data.nombre == 'Combo 5' ? (
 				<>
 					<div className="p-4 flex gap-2 justify-start items-center">
-						<input id="1" type="radio" value="1" name="combo" onChange={onChangeValue} checked={combo === '1'} />
+						<input
+							id="1"
+							type="radio"
+							value="Combo 1"
+							name="combo"
+							onChange={onChangeValue}
+							checked={combo === 'Combo 1'}
+						/>
 						<div>
 							<h3>{promotions && promotions[2].nombre}</h3>
 							<h4 className="text-gray-400 font-normal">{promotions && promotions[2].descripcion}</h4>
 						</div>
 					</div>
 					<div className="p-4 flex gap-2 justify-start items-center">
-						<input id="2" type="radio" value="2" name="combo" onChange={onChangeValue} checked={combo === '2'} />
+						<input
+							id="2"
+							type="radio"
+							value="Combo 2"
+							name="combo"
+							onChange={onChangeValue}
+							checked={combo === 'Combo 2'}
+						/>
 						<div>
 							<h3>{promotions && promotions[3].nombre}</h3>
 							<h4 className="text-gray-400 font-normal">{promotions && promotions[3].descripcion}</h4>
@@ -166,52 +179,6 @@ export default function Promotion({ cantMax, data, quantity }) {
 					}
 				</div>
 			)}
-
-			{/* {data.nombre !== 'Combo 1' && data.nombre !== 'Combo 2' && data.nombre !== 'Combo 3' && (
-				<>
-					{quantityDemanded < 1 ? (
-						<div className="bg-green-500 w-auto p-2">
-							<p className="text-white text-center">¡ Tu docena esta completa !</p>
-						</div>
-					) : (
-						<div className="bg-red-500 w-auto p-2">
-							<p className="text-white text-center">Selecciona {quantityDemanded} empanadas para completar la promo</p>
-						</div>
-					)}
-					{products.empanadas?.map(({ id, nombre }) => {
-						return (
-							<div key={id} className="flex justify-between py-2  my-2 ">
-								<div className="w-1/2 font-medium">
-									<h2>{nombre}</h2>
-								</div>
-								<div className="w-auto   px-3 text-end space-x-4 text-base">
-									<button
-										type="button"
-										className="text-red-500 down"
-										onClick={e => {
-											decrementItems({ id, nombre });
-											setQuantityDemanded(quantityDemanded + 1);
-										}}
-									>
-										-
-									</button>
-									<span className="font-normal">{productQuantity(id)}</span>
-									<button
-										type="button"
-										className="text-green-500 up"
-										onClick={e => {
-											addItems({ id, nombre });
-											setQuantityDemanded(quantityDemanded - 1);
-										}}
-									>
-										+
-									</button>
-								</div>
-							</div>
-						);
-					})}
-				</>
-			)} */}
 		</div>
 	);
 }

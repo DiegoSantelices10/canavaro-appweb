@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import PizzaInfo from './pizzaInfo';
 import { FiShoppingCart, FiChevronsLeft } from 'react-icons/fi';
-import { getProducts } from 'services/fetchData';
 import Promotion from './promotion';
 
 import {
@@ -12,16 +12,21 @@ import {
 	decrementProduct,
 	calculateSubTotal,
 	calculateTotalQuantity,
+	addPromoOrderList,
+	clearOrderPromo,
 } from 'store/reducers/orderSlice';
 
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 export default function ProductLayout({
 	data,
-	data: { id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
+	data: { id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio, cantidad },
 }) {
-	const { products } = useSelector(state => state.product);
+	const { orderPromo } = useSelector(state => state.order);
 	const { orderList } = useSelector(state => state.order);
+
+	const router = useRouter();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -49,7 +54,24 @@ export default function ProductLayout({
 	};
 
 	const addCartPromo = value => {
-		dispatch(addProductEmpanada(value, precio));
+		const promo = {
+			id,
+			nombre,
+			productos: { ...value },
+			descripcion,
+			categoria,
+			cantidadMaxima,
+			precio,
+			cantidad: 1,
+		};
+		dispatch(addPromoOrderList(promo));
+
+		Swal.fire({
+			icon: 'success',
+			title: '¡El pedido fue ingresado con exito!',
+		});
+		dispatch(clearOrderPromo());
+		router.push('/home');
 	};
 	return (
 		<div className="font-poppins min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
@@ -127,14 +149,7 @@ export default function ProductLayout({
 								</div>
 							</div>
 						) : (
-							<Promotion
-								data={data}
-								products={products}
-								incrementCart={incrementCartEmpanada}
-								decrementCart={decrementCart}
-								quantity={productQuantity}
-								cantMax={cantidadMaxima}
-							/>
+							<Promotion data={data} quantity={productQuantity} cantMax={cantidadMaxima} />
 						)}
 					</div>
 				</div>
@@ -145,20 +160,8 @@ export default function ProductLayout({
 				</div>
 			</div>
 
-			{categoria == 'promociones' ? (
+			{data.nombre == 'Combo 3' || data.nombre == 'Combo 2' || data.nombre == 'Combo 1' ? (
 				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 sm:w-4/5 md:w-3/5 lg:w-2/5">
-					<button
-						className="flex justify-center gap-3 w-full bg-red-600 p-3  
-                    rounded-3xl font-poppins mx-auto hover:bg-red-500 hover:-translate-y-1 
-                    transition-all duration-500 text-white text-base font-semibold "
-						onClick={() => incrementCartEmpanada(items)}
-					>
-						Agregar al Carrito
-						<FiShoppingCart size={23} />{' '}
-					</button>
-				</div>
-			) : (
-				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 lg:w-1/3">
 					<Link href="/cart">
 						<a
 							className="flex justify-center gap-3 w-full bg-red-600 p-3  
@@ -169,6 +172,20 @@ export default function ProductLayout({
 							<FiShoppingCart size={23} />{' '}
 						</a>
 					</Link>
+				</div>
+			) : (
+				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 lg:w-1/3">
+					<button
+						className="flex justify-center gap-3 w-full bg-red-600 p-3  
+                    rounded-3xl font-poppins mx-auto hover:bg-red-500 hover:-translate-y-1 
+                    transition-all duration-500 text-white text-base font-semibold "
+						onClick={() => {
+							addCartPromo(orderPromo);
+						}}
+					>
+						Agregar al Carrito
+						<FiShoppingCart size={23} />{' '}
+					</button>
 				</div>
 			)}
 		</div>

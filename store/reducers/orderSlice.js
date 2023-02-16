@@ -28,6 +28,10 @@ export const orderSlice = createSlice({
 				state.orderList.push(tempProduct);
 			}
 		},
+		addPromoOrderList: (state, action) => {
+			state.orderList.push(action.payload);
+		},
+
 		addProductPromo: (state, action) => {
 			const productIndex = state.orderPromo.findIndex(item => item.id === action.payload.id);
 			if (productIndex >= 0) {
@@ -41,9 +45,8 @@ export const orderSlice = createSlice({
 			const productIndex = state.orderPromo.findIndex(item => item.id === action.payload.id);
 			if (state.orderPromo[productIndex].cantidad > 1) {
 				state.orderPromo[productIndex].cantidad -= 1;
-			} else if (state.order[productIndex].cantidad === 1) {
+			} else if (state.orderPromo[productIndex].cantidad === 1) {
 				const newList = state.orderPromo.filter(item => item.id !== action.payload.id);
-
 				state.orderPromo = newList;
 			}
 		},
@@ -53,11 +56,12 @@ export const orderSlice = createSlice({
 				state.orderList[productIndex].cantidad -= 1;
 			} else if (state.orderList[productIndex].cantidad === 1) {
 				const newList = state.orderList.filter(item => item.id !== action.payload.id);
-
 				state.orderList = newList;
 			}
 		},
-
+		clearOrderPromo: (state, action) => {
+			state.orderPromo = [];
+		},
 		removeProduct: (state, action) => {
 			state.orderList = state.orderList.filter(product => product.id !== action.payload.id);
 		},
@@ -100,6 +104,8 @@ export const {
 	removeProduct,
 	calculateSubTotal,
 	calculateTotalQuantity,
+	addPromoOrderList,
+	clearOrderPromo,
 } = orderSlice.actions;
 
 export const selectOrder = state => state.order;
