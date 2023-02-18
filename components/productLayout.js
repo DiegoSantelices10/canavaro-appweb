@@ -52,19 +52,41 @@ export default function ProductLayout({
 	const removeFromCart = data => {
 		dispatch(removeProduct(data));
 	};
+	const returnHome = () => {
+		if (categoria === 'promociones') {
+			Swal.fire({
+				title: 'Estas seguro que deseas salir?',
+				showDenyButton: true,
+				confirmButtonText: 'Descartar',
+			}).then(result => {
+				if (result.isConfirmed) {
+					dispatch(clearOrderPromo());
+					router.push('/home');
+				}
+			});
+		}
+	};
 
 	const addCartPromo = value => {
-		const promo = {
-			id,
-			nombre,
-			productos: { ...value },
-			descripcion,
-			categoria,
-			cantidadMaxima,
-			precio,
-			cantidad: 1,
-		};
-		dispatch(addPromoOrderList(promo));
+		const res = value.some(element => element.id === 25 || element.id === 26 || element.id === 27);
+		console.log(res);
+		if (res) {
+			dispatch(addPromoOrderList(...value));
+		} else {
+			console.log('entro');
+			const promo = {
+				id,
+				nombre,
+				productos: { ...value },
+				descripcion,
+				imagen,
+				categoria,
+				cantidadMaxima,
+				precio,
+				cantidad: 1,
+			};
+			dispatch(addPromoOrderList(promo));
+		}
 
 		Swal.fire({
 			icon: 'success',
@@ -86,11 +108,9 @@ export default function ProductLayout({
 						objectPosition="center"
 						alt={nombre || 'img'}
 					/>
-					<Link href="/home">
-						<a>
-							<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
-						</a>
-					</Link>
+					<button onClick={returnHome}>
+						<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+					</button>
 				</div>
 			</div>
 
@@ -134,7 +154,7 @@ export default function ProductLayout({
 									<button
 										type="button"
 										className="text-red-500"
-										onClick={() => decrementCart({ id, nombre, categoria, tamanio, precio })}
+										onClick={() => decrementCart({ id, nombre, categoria, tamanio, precio, imagen })}
 									>
 										-
 									</button>
@@ -142,7 +162,7 @@ export default function ProductLayout({
 									<button
 										type="button"
 										className="text-green-500"
-										onClick={() => incrementCartEmpanada({ id, nombre, categoria, tamanio, precio })}
+										onClick={() => incrementCartEmpanada({ id, nombre, categoria, tamanio, precio, imagen })}
 									>
 										+
 									</button>
@@ -160,25 +180,11 @@ export default function ProductLayout({
 				</div>
 			</div>
 
-			{data.nombre == 'Combo 3' || data.nombre == 'Combo 2' || data.nombre == 'Combo 1' ? (
-				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 sm:w-4/5 md:w-3/5 lg:w-2/5">
-					<Link href="/cart">
-						<a
-							className="flex justify-center gap-3 w-full bg-red-600 p-3  
-                  rounded-3xl font-poppins mx-auto hover:bg-red-500 hover:-translate-y-1 
-                  transition-all duration-500 text-white text-base font-semibold "
-						>
-							Ver Carrito
-							<FiShoppingCart size={23} />{' '}
-						</a>
-					</Link>
-				</div>
-			) : (
-				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 lg:w-1/3">
+			{data.categoria === 'promociones' ? (
+				<div className="font-poppins w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 sm:w-4/5 md:w-3/5 lg:w-2/5">
 					<button
-						className="flex justify-center gap-3 w-full bg-red-600 p-3  
-                    rounded-3xl font-poppins mx-auto hover:bg-red-500 hover:-translate-y-1 
-                    transition-all duration-500 text-white text-base font-semibold "
+						className="flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 
+						transition-all duration-500 text-white text-base font-semibold "
 						onClick={() => {
 							addCartPromo(orderPromo);
 						}}
@@ -186,6 +192,18 @@ export default function ProductLayout({
 						Agregar al Carrito
 						<FiShoppingCart size={23} />{' '}
 					</button>
+				</div>
+			) : (
+				<div className="w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 lg:w-1/3">
+					<Link href="/cart">
+						<a
+							className="flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 
+                  					   transition-all duration-500 text-white text-base font-semibold "
+						>
+							Ver Carrito
+							<FiShoppingCart size={23} />{' '}
+						</a>
+					</Link>
 				</div>
 			)}
 		</div>

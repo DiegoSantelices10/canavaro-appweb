@@ -3,54 +3,34 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-	addProductPromo,
-	addProductEmpanada,
-	decrementProduct,
-	decrementProductPromo,
-} from 'store/reducers/orderSlice';
+import { addProductPromo, decrementProductPromo, setQuantityDemanded } from 'store/reducers/orderSlice';
 
 export default function Promotion({ cantMax, data, quantity }) {
-	const [quantityDemanded, setQuantityDemanded] = useState(cantMax);
-
+	const [combo, setCombo] = useState('');
 	const [promotions, setPromotions] = useState('Combo 1');
 
-	const [combo, setCombo] = useState('');
-	const { orderPromo } = useSelector(state => state.order);
+	const dispatch = useDispatch();
+
+	const { orderPromo, quantityDemanded } = useSelector(state => state.order);
 	const { products } = useSelector(state => state.product);
 
 	const { promociones } = products;
 
 	useEffect(() => {
 		setPromotions(promociones);
-		const res = productQuantityPromo();
-		setQuantityDemanded(quantityDemanded - res);
+		dispatch(setQuantityDemanded(cantMax));
 	}, []);
-	const dispatch = useDispatch();
 
 	const addItems = value => {
 		dispatch(addProductPromo(value));
 	};
+
 	const decrementItems = value => {
 		dispatch(decrementProductPromo(value));
 	};
 
-	const addProductItems = value => {
-		dispatch(addProductEmpanada(value));
-	};
-
-	const decrementProductItems = value => {
-		dispatch(decrementProduct(value));
-	};
-
-	const productQuantityPromo = () => {
-		const array = [];
-		orderPromo.map(item => {
-			const { cantidad } = item;
-			return array.push(cantidad);
-		});
-		const totalQuantity = array.reduce((a, b) => a + b, 0);
-		return totalQuantity;
+	const setQuantity = value => {
+		dispatch(setQuantityDemanded(value));
 	};
 
 	const productQuantity = id => {
@@ -109,19 +89,19 @@ export default function Promotion({ cantMax, data, quantity }) {
 							type="button"
 							className="text-red-500 down"
 							onClick={e => {
-								decrementProductItems(data);
-								setQuantityDemanded(quantityDemanded + 1);
+								decrementItems(data);
+								setQuantity(quantityDemanded + 1);
 							}}
 						>
 							-
 						</button>
-						<span className="font-normal">{quantity(data.id)}</span>
+						<span className="font-normal">{productQuantity(data.id)}</span>
 						<button
 							type="button"
 							className="text-green-500 up"
 							onClick={e => {
-								addProductItems(data);
-								setQuantityDemanded(quantityDemanded - 1);
+								addItems(data);
+								setQuantity(quantityDemanded - 1);
 							}}
 						>
 							+
@@ -154,8 +134,8 @@ export default function Promotion({ cantMax, data, quantity }) {
 												type="button"
 												className="text-red-500 down"
 												onClick={e => {
+													setQuantity(quantityDemanded + 1);
 													decrementItems({ id, nombre });
-													setQuantityDemanded(quantityDemanded + 1);
 												}}
 											>
 												-
@@ -163,10 +143,10 @@ export default function Promotion({ cantMax, data, quantity }) {
 											<span className="font-normal">{productQuantity(id)}</span>
 											<button
 												type="button"
-												className="text-green-500 up"
+												className={quantityDemanded < 1 ? `invisible` : `text-green-500`}
 												onClick={e => {
+													setQuantity(quantityDemanded - 1);
 													addItems({ id, nombre });
-													setQuantityDemanded(quantityDemanded - 1);
 												}}
 											>
 												+

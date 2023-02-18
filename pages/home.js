@@ -25,7 +25,7 @@ export default function Home() {
 			<div className=" p-4 mt-14 mx-auto w-full bg-zinc-50 ">
 				<h1 className="text-sm font-bold text-gray-800 py-2">Promociones</h1>
 				<hr className="pb-5" />
-				<div className="flex overflow-x-scroll flexp   space-x-6 w-full pt-1 pb-3 pl-1">
+				<div className="flex overflow-x-scroll flexp   space-x-6 w-full pt-1 pb-4 pl-1">
 					<style jsx>
 						{`
 							.flexp::-webkit-scrollbar-thumb {
@@ -34,7 +34,7 @@ export default function Home() {
 							}
 
 							.flexp::-webkit-scrollbar {
-								height: 4px;
+								height: 5px;
 							}
 						`}
 					</style>

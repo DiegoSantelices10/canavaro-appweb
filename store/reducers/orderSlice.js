@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	orderList: [],
 	orderPromo: [],
+	promoCompleted: false,
+	quantityDemanded: 0,
 	totalQuantity: 0,
 	totalAmount: 0,
 };
@@ -11,6 +13,10 @@ export const orderSlice = createSlice({
 	name: 'order',
 	initialState,
 	reducers: {
+		setQuantityDemanded: (state, action) => {
+			state.quantityDemanded = action.payload;
+		},
+		completedPromo: (state, action) => {},
 		addProductPizza: (state, action) => {
 			if (action.payload.categoria == 'pizzas') {
 				const productIndex = state.orderList.findIndex(item => item.tamanio === action.payload.tamanio);
@@ -29,6 +35,7 @@ export const orderSlice = createSlice({
 			}
 		},
 		addPromoOrderList: (state, action) => {
+			console.log('redux', action.payload);
 			state.orderList.push(action.payload);
 		},
 
@@ -106,6 +113,8 @@ export const {
 	calculateTotalQuantity,
 	addPromoOrderList,
 	clearOrderPromo,
+	completedPromo,
+	setQuantityDemanded,
 } = orderSlice.actions;
 
 export const selectOrder = state => state.order;
