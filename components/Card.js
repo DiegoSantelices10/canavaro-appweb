@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { convertToPath } from 'lib/items';
 
-export default function Card({ data: { id, nombre, imagen, descripcion } }) {
+const Card = ({ data: { nombre, imagen, descripcion } }) => {
 	return (
 		<div className=" rounded-md  p-3 shadow bg-white">
 			<div className="flex justify-between items-center gap-x-2">
@@ -17,4 +17,6 @@ export default function Card({ data: { id, nombre, imagen, descripcion } }) {
 			</div>
 		</div>
 	);
-}
+};
+
+export default Card;
