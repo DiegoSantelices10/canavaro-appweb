@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import CardPromotion from 'components/cardPromotion';
-import Card from 'components/card';
+
 import Layout from 'components/layout';
 import { useSelector } from 'react-redux';
 import { wrapper } from 'store/app/store';
 import { getProducts } from 'services/fetchData';
 import { setProductData } from 'store/reducers/productSlice';
+import Card from 'components/Card';
 
 export default function Home() {
 	const [renderProducts, setRenderProductos] = useState('pizzas');
