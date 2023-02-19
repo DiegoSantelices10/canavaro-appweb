@@ -1,6 +1,4 @@
 import React from 'react';
-import Layout from 'components/layout';
-import { Card } from 'components/card';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiChevronsLeft } from 'react-icons/fi';
