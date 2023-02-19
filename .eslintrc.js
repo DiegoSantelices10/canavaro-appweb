@@ -4,12 +4,7 @@ module.exports = {
 		es2021: true,
 	},
 
-	extends: [
-		'plugin:react/recommended',
-		'plugin:react/jsx-runtime',
-		'standard',
-		'eslint-config-prettier',
-	],
+	extends: ['plugin:react/recommended', 'plugin:react/jsx-runtime', 'standard', 'eslint-config-prettier'],
 	overrides: [],
 	parserOptions: {
 		ecmaVersion: 'latest',
@@ -17,6 +12,6 @@ module.exports = {
 	},
 	plugins: ['react'],
 	rules: {
-		'no-unused-vars': 'wran',
+		'no-unused-vars': 'warn',
 	},
 };
