@@ -12,12 +12,12 @@ export default function Home() {
 	const { direccion } = useSelector(state => state.user);
 	const { products } = useSelector(state => state.product);
 
-	const renderStore = renderProductos => {
-		return products[`${renderProductos}`]?.map(data => <Card key={data.id} data={data} />);
-	};
-
 	const renderPromotions = () => {
 		return products[`promociones`]?.map(data => <CardPromotion key={data.id} data={data} />);
+	};
+
+	const renderStore = renderProductos => {
+		return products[`${renderProductos}`]?.map(data => <Card key={data.id} data={data} />);
 	};
 
 	return (
