@@ -4,7 +4,7 @@ import CardPromotion from 'components/cardPromotion';
 import Layout from 'components/layout';
 import { useSelector } from 'react-redux';
 import { wrapper } from 'store/app/store';
-import { getProducts } from 'services/fetchData';
+import getProducts from 'services/fetchData';
 import { setProductData } from 'store/reducers/productSlice';
 import Card from 'components/Card';
 

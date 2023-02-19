@@ -1,5 +1,8 @@
-export async function getProducts() {
-	const res = await fetch(process.env.API_URL + '/api/items');
-	const products = await res.json();
-	return products;
-}
+import axios from 'axios';
+
+const getProducts = async () => {
+	const products = await axios.get(process.env.API_URL + '/api/items');
+	return products.data;
+};
+
+export default getProducts;
