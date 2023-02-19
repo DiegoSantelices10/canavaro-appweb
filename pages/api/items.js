@@ -253,7 +253,7 @@ export default function handler(req, res) {
 				descripcion: '12 empanadas a elección',
 				cantidadMaxima: 12,
 				categoria: 'promociones',
-				imagen: 'https://cdn.discordapp.com/attachments/1030161496568774781/1030176772790169710/Docena.jpg',
+				imagen: 'https://cdn.discordapp.com/attachments/1072242342200877147/1072248326461862038/miniatura_docena.jpg',
 				tamanio: 'Grande',
 				precio: 2600,
 			},
