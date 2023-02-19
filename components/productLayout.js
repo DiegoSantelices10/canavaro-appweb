@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/prop-types */
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -35,7 +37,7 @@ export default function ProductLayout({
 	}, [orderList, dispatch]);
 
 	const productQuantity = id => {
-		const pre = orderList.find(item => item.id == id);
+		const pre = orderList.find(item => item.id === id);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 
@@ -49,9 +51,7 @@ export default function ProductLayout({
 	const decrementCart = data => {
 		dispatch(decrementProduct(data));
 	};
-	const removeFromCart = data => {
-		dispatch(removeProduct(data));
-	};
+
 	const returnHome = () => {
 		if (categoria === 'promociones') {
 			Swal.fire({
@@ -125,7 +125,7 @@ export default function ProductLayout({
 					<div className="w-full bg-white p-3 py-5 ">
 						<h1 className="font-bold text-base text-gray-800">{nombre}</h1>
 						<p className="font-roboto font-normal text-sm py-1 text-gray-400">{descripcion}</p>
-						{categoria == 'promociones' ? (
+						{categoria === 'promociones' ? (
 							<p className="font-roboto font-normal  text-sm text-gray-400">$ {precio}</p>
 						) : (
 							''
@@ -133,7 +133,7 @@ export default function ProductLayout({
 					</div>
 
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
-						{categoria == 'pizzas' ? (
+						{categoria === 'pizzas' ? (
 							<div className=" flex flex-col gap-y-2 pt-5 justify-evenly">
 								<PizzaInfo
 									data={data}
@@ -142,7 +142,7 @@ export default function ProductLayout({
 									cart={orderList}
 								/>
 							</div>
-						) : categoria == 'empanadas' ? (
+						) : categoria === 'empanadas' ? (
 							<div className="flex gap-y-2 py-2 justify-between items-center">
 								<div className="w-auto">
 									<h2 className="font-semibold text-normal text-gray-800">

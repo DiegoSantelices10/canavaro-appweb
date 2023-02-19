@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addProductPromo, decrementProductPromo, setQuantityDemanded } from 'store/reducers/orderSlice';
@@ -44,7 +44,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 	};
 	return (
 		<div>
-			{data.nombre == 'Combo 4' || data.nombre == 'Combo 5' ? (
+			{data.nombre === 'Combo 4' || data.nombre === 'Combo 5' ? (
 				<>
 					<div className="p-4 flex gap-2 justify-start items-center">
 						<input
@@ -79,7 +79,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 				<></>
 			)}
 
-			{data.nombre == 'Combo 3' || data.nombre == 'Combo 2' || data.nombre == 'Combo 1' ? (
+			{data.nombre === 'Combo 3' || data.nombre === 'Combo 2' || data.nombre === 'Combo 1' ? (
 				<div className="flex justify-between py-2  my-2 ">
 					<div className="w-1/2 font-medium">
 						<h2>{data.nombre}</h2>

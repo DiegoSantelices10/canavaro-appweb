@@ -1,9 +1,8 @@
-import React from 'react';
-import ButtonDownUp from './buttonDownUp';
+/* eslint-disable react/prop-types */
 import { v4 as uuidv4 } from 'uuid';
+
 export default function PizzaInfo({
 	data: {
-		id,
 		nombre,
 		tamanio: { Gigante, Mediana, Chica },
 		categoria,
@@ -15,7 +14,7 @@ export default function PizzaInfo({
 	const idGenerator = uuidv4();
 
 	const productQuantity = tamanio => {
-		const pre = cart.find(item => item.tamanio == tamanio);
+		const pre = cart.find(item => item.tamanio === tamanio);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 

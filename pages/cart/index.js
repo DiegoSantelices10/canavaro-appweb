@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiChevronsLeft } from 'react-icons/fi';
@@ -21,22 +20,13 @@ export default function Cart() {
 							<button
 								onClick={() => {}}
 								className={
-									'retiro' !== 'delivery'
-										? 'w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3'
-										: 'w-1/2 font-medium bg-gray-300 text-white rounded-md'
+									'w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3'
 								}
 							>
 								<MdOutlineDeliveryDining size={20} />
 								Delivery
 							</button>
-							<button
-								onClick={() => {}}
-								className={
-									'retiro' !== 'retiro'
-										? 'w-1/2 rounded-md font-normal'
-										: 'w-1/2 font-light bg-slate-800 p-3 text-white rounded-md'
-								}
-							>
+							<button onClick={() => {}} className={'w-1/2 font-light bg-slate-800 p-3 text-white rounded-md'}>
 								Retiro
 							</button>
 						</div>

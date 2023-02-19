@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Provider } from 'react-redux';
 import { wrapper } from 'store/app/store';
 import 'styles/globals.css';

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/no-unknown-property */
+import { useState } from 'react';
 import CardPromotion from 'components/cardPromotion';
 
 import Layout from 'components/layout';
@@ -14,7 +15,8 @@ export default function Home() {
 	const { products } = useSelector(state => state.product);
 
 	const renderPromotions = () => {
-		return products[`promociones`]?.map(data => <CardPromotion key={data.id} data={data} />);
+		// eslint-disable-next-line dot-notation
+		return products['promociones']?.map(data => <CardPromotion key={data.id} data={data} />);
 	};
 
 	const renderStore = renderProductos => {

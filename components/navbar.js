@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { FiShoppingCart } from 'react-icons/fi';
 import Link from 'next/link';
 

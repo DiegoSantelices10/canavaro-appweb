@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import Image from 'next/image';
 import Link from 'next/link';
 import { convertToPath } from 'lib/items';
