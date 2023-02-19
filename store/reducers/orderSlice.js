@@ -16,9 +16,8 @@ export const orderSlice = createSlice({
 		setQuantityDemanded: (state, action) => {
 			state.quantityDemanded = action.payload;
 		},
-		completedPromo: (state, action) => {},
 		addProductPizza: (state, action) => {
-			if (action.payload.categoria == 'pizzas') {
+			if (action.payload.categoria === 'pizzas') {
 				const productIndex = state.orderList.findIndex(item => item.tamanio === action.payload.tamanio);
 				productIndex >= 0
 					? (state.orderList[productIndex].cantidad += 1)
@@ -35,7 +34,6 @@ export const orderSlice = createSlice({
 			}
 		},
 		addPromoOrderList: (state, action) => {
-			console.log('redux', action.payload);
 			state.orderList.push(action.payload);
 		},
 
@@ -113,7 +111,6 @@ export const {
 	calculateTotalQuantity,
 	addPromoOrderList,
 	clearOrderPromo,
-	completedPromo,
 	setQuantityDemanded,
 } = orderSlice.actions;
 

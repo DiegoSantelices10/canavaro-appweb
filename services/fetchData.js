@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 const getProducts = async () => {
-	const products = await axios.get(process.env.API_URL + '/api/items');
-	return products.data;
+	const { data } = await axios.get(process.env.API_URL + '/api/items');
+	const res = data
+	return res;
 };
 
 export default getProducts;

@@ -40,7 +40,6 @@ export default function Promotion({ cantMax, data, quantity }) {
 	const onChangeValue = e => {
 		setCombo(e.target.value);
 		const pre = promociones?.find(item => item.nombre === e.target.value);
-		console.log(pre);
 	};
 	return (
 		<div>

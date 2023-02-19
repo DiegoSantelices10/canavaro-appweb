@@ -69,11 +69,9 @@ export default function ProductLayout({
 
 	const addCartPromo = value => {
 		const res = value.some(element => element.id === 25 || element.id === 26 || element.id === 27);
-		console.log(res);
 		if (res) {
 			dispatch(addPromoOrderList(...value));
 		} else {
-			console.log('entro');
 			const promo = {
 				id,
 				nombre,
