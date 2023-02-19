@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { getItemData, getPathsFromTitle } from 'lib/items';
 import ProductLayout from 'components/productLayout';
-import { getProducts } from 'services/fetchData';
+import getProducts from 'services/fetchData';
 export default function Product({ productInfo: { data }, id }) {
 	return (
 		<div className="min-h-screen ">
