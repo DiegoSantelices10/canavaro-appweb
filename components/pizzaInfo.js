@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default function PizzaInfo({
 	data: {
 		nombre,
-		tamanio: { Gigante, Mediana, Chica },
+		precio: { gigante, mediana, chica },
 		categoria,
 	},
 	incrementCart,
@@ -24,7 +24,7 @@ export default function PizzaInfo({
 				<div className="w-1/3 font-medium">
 					<h2>Gigante</h2>
 				</div>
-				<div className="w-1/3 font-medium text-center ">{<h2>$ {Gigante.precio}</h2>}</div>
+				<div className="w-1/3 font-medium text-center ">{<h2>$ {gigante}</h2>}</div>
 				<div className="font-roboto w-auto   px-3 text-end space-x-4 text-base">
 					<button
 						type="button"
@@ -35,7 +35,7 @@ export default function PizzaInfo({
 								nombre,
 								categoria,
 								tamanio: 'gigante',
-								precio: Gigante.precio,
+								precio: gigante,
 							})
 						}
 					>
@@ -51,7 +51,7 @@ export default function PizzaInfo({
 								nombre,
 								categoria,
 								tamanio: 'gigante',
-								precio: Gigante.precio,
+								precio: gigante,
 							})
 						}
 					>
@@ -63,7 +63,7 @@ export default function PizzaInfo({
 				<div className="w-1/3 font-medium">
 					<h2>Mediana</h2>
 				</div>
-				<div className="w-1/3 font-medium text-center ">{<h2>$ {Mediana.precio}</h2>}</div>
+				<div className="w-1/3 font-medium text-center ">{<h2>$ {mediana}</h2>}</div>
 				<div className="font-roboto w-auto   px-3 text-end space-x-4 text-base">
 					<button
 						type="button"
@@ -74,7 +74,7 @@ export default function PizzaInfo({
 								nombre,
 								categoria,
 								tamanio: 'mediana',
-								precio: Mediana.precio,
+								precio: mediana,
 							})
 						}
 					>
@@ -90,7 +90,7 @@ export default function PizzaInfo({
 								nombre,
 								categoria,
 								tamanio: 'mediana',
-								precio: Mediana.precio,
+								precio: mediana,
 							})
 						}
 					>
@@ -102,7 +102,7 @@ export default function PizzaInfo({
 				<div className="w-1/3 font-medium">
 					<h2>Chica</h2>
 				</div>
-				<div className="w-1/3 font-medium text-center ">{<h2>$ {Chica.precio}</h2>}</div>
+				<div className="w-1/3 font-medium text-center ">{<h2>$ {chica}</h2>}</div>
 				<div className="font-roboto w-auto  px-3 text-end space-x-4 text-base">
 					<button
 						type="button"
@@ -113,7 +113,7 @@ export default function PizzaInfo({
 								nombre,
 								categoria,
 								tamanio: 'chica',
-								precio: Chica.precio,
+								precio: chica,
 							})
 						}
 					>
@@ -129,7 +129,7 @@ export default function PizzaInfo({
 								nombre,
 								categoria,
 								tamanio: 'chica',
-								precio: Chica.precio,
+								precio: chica,
 							})
 						}
 					>
