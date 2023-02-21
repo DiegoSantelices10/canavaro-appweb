@@ -1,19 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+/* eslint-disable no-unused-expressions */
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	direccion: '',
-	telefono: '',
+	direccion: "",
+	telefono: "",
 };
 
 export const userSlice = createSlice({
-	name: 'user',
+	name: "user",
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
-			(state.direccion = action.payload.direccion), (state.telefono = action.payload.telefono);
+			state.direccion = action.payload.direccion;
+			state.telefono = action.payload.telefono;
 		},
-		unsetUser: state => {
-			(state.direccion = ''), (state.telefono = '');
+		unsetUser: (state, action) => {
+			state.direccion = "";
+			state.telefono = "";
 		},
 	},
 });
