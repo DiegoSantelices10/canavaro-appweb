@@ -11,7 +11,7 @@ import Card from "components/Card";
 
 export default function Home() {
 	const [renderProducts, setRenderProductos] = useState("pizzas");
-	const { direccion } = useSelector(state => state.user);
+	const { nombre } = useSelector(state => state.user);
 	const { products } = useSelector(state => state.product);
 
 	const renderPromotions = () => {
@@ -24,7 +24,7 @@ export default function Home() {
 	};
 
 	return (
-		<Layout title={direccion}>
+		<Layout title={nombre}>
 			<div className=" p-4 mt-14 mx-auto w-full bg-zinc-50 ">
 				<h1 className="text-sm font-bold text-gray-800 py-2">Promociones</h1>
 				<hr className="pb-5" />

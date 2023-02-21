@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { useFormik } from 'formik';
-import { useRouter } from 'next/router';
-import { FaChevronRight, FaFacebook } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import { setUser } from 'store/reducers/userSlice';
+import Image from "next/image";
+import { useFormik } from "formik";
+import { useRouter } from "next/router";
+import { FaChevronRight, FaFacebook } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { setUser } from "store/reducers/userSlice";
 
 export default function Login() {
 	const router = useRouter();
@@ -11,17 +11,15 @@ export default function Login() {
 
 	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: {
-			direccion: '',
-			telefono: '',
+			nombre: "",
 		},
 		onSubmit: async function (values) {
 			dispatch(
 				setUser({
-					direccion: values.direccion,
-					telefono: values.telefono,
+					nombre: values.nombre,
 				})
 			);
-			router.push('/home');
+			router.push("/home");
 		},
 	});
 
@@ -44,32 +42,22 @@ export default function Login() {
 						</div>
 					</div>
 					<div className="w-auto mx-auto pt-10 pb-4">
-						<h1 className="font-bold text-3xl"> ¡Bienvenido!</h1>
+						<h1 className="font-bold text-3xl">¡Bienvenido!</h1>
 					</div>
 					<form className="flex flex-col gap-3 " onSubmit={handleSubmit}>
 						<div>
 							<input
-								id="direccion"
+								id="nombre"
 								className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
-								placeholder="Introduce tu dirección"
+								placeholder="Introduce tu nombre"
 								type="text"
-								name="direccion"
+								name="nombre"
 								onChange={handleChange}
-								value={values.direccion}
+								value={values.nombre}
 							/>
 						</div>
-						<div>
-							<input
-								id="telefono"
-								className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
-								placeholder="Introduce tu teléfono"
-								type="text"
-								name="telefono"
-								onChange={handleChange}
-								value={values.telefono}
-							/>
-						</div>
-						<div className="flex" style={{ justifyContent: 'flex-end' }}>
+
+						<div className="flex" style={{ justifyContent: "flex-end" }}>
 							<button
 								type="submit"
 								className=" w-auto text-right  p-2 rounded-3xl hover:bg-black hover:text-white hover:-translate-y-1 transition-all duration-500  

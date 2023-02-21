@@ -2,8 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	direccion: "",
-	telefono: "",
+	nombre: "",
 };
 
 export const userSlice = createSlice({
@@ -11,12 +10,10 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
-			state.direccion = action.payload.direccion;
-			state.telefono = action.payload.telefono;
+			state.nombre = action.payload.nombre;
 		},
 		unsetUser: (state, action) => {
-			state.direccion = "";
-			state.telefono = "";
+			state.nombre = "";
 		},
 	},
 });
