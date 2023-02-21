@@ -5,7 +5,7 @@ import CardPromotion from "components/cardPromotion";
 import Layout from "components/layout";
 import { useSelector } from "react-redux";
 import { wrapper } from "store/app/store";
-import getProducts from "services/fetchData";
+import { getProducts } from "services/fetchData";
 import { setProductData } from "store/reducers/productSlice";
 import Card from "components/Card";
 
@@ -88,7 +88,6 @@ export default function Home() {
 	);
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-	const res = await getProducts();
-	store.dispatch(setProductData(res));
+export const getServerSideProps = wrapper.getServerSideProps(store => () => {
+	store.dispatch(setProductData(getProducts));
 });
