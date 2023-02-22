@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unknown-property */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CardPromotion from "components/cardPromotion";
 
 import Layout from "components/layout";
-import { useSelector } from "react-redux";
-import { wrapper } from "store/app/store";
+import { useSelector, useDispatch } from "react-redux";
+// import { wrapper } from "store/app/store";
 import { getProducts } from "services/fetchData";
 import { setProductData } from "store/reducers/productSlice";
 import Card from "components/Card";
@@ -14,6 +14,7 @@ export default function Home() {
 	const { nombre } = useSelector(state => state.user);
 	const { products } = useSelector(state => state.product);
 
+	const dispatch = useDispatch();
 	const renderPromotions = () => {
 		// eslint-disable-next-line dot-notation
 		return products["promociones"]?.map(data => <CardPromotion key={data.id} data={data} />);
@@ -22,6 +23,9 @@ export default function Home() {
 	const renderStore = renderProductos => {
 		return products[`${renderProductos}`]?.map(data => <Card key={data.id} data={data} />);
 	};
+	useEffect(() => {
+		dispatch(setProductData(getProducts));
+	}, []);
 
 	return (
 		<Layout title={nombre}>
@@ -88,7 +92,7 @@ export default function Home() {
 	);
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-	const res = getProducts;
-	store.dispatch(setProductData(res));
-});
+// export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+// 	const res = getProducts;
+// 	store.dispatch(setProductData(res));
+// });
