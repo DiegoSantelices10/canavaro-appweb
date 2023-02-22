@@ -88,7 +88,7 @@ export default function Home() {
 	);
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => () => {
-	const pro = getProducts;
-	store.dispatch(setProductData(pro));
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+	const res = getProducts;
+	store.dispatch(setProductData(res));
 });
