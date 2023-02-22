@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	nombre: "",
+	telefono: "",
 };
 
 export const userSlice = createSlice({
@@ -11,14 +12,12 @@ export const userSlice = createSlice({
 	reducers: {
 		setUser: (state, action) => {
 			state.nombre = action.payload.nombre;
-		},
-		unsetUser: (state, action) => {
-			state.nombre = "";
+			state.telefono = action.payload.telefono;
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, unsetUser } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

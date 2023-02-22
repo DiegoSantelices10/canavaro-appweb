@@ -12,11 +12,13 @@ export default function Login() {
 	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: {
 			nombre: "",
+			telefono:""
 		},
 		onSubmit: async function (values) {
 			dispatch(
 				setUser({
 					nombre: values.nombre,
+					telefono: values.telefono
 				})
 			);
 			router.push("/home");
@@ -54,6 +56,17 @@ export default function Login() {
 								name="nombre"
 								onChange={handleChange}
 								value={values.nombre}
+							/>
+						</div>
+						<div>
+							<input
+								id="telefono"
+								className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+								placeholder="Introduce tu telefono"
+								type="text"
+								name="telefono"
+								onChange={handleChange}
+								value={values.telefono}
 							/>
 						</div>
 
