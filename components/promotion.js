@@ -1,13 +1,13 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addProductPromo, decrementProductPromo, setQuantityDemanded } from 'store/reducers/orderSlice';
+import { addProductPromo, decrementProductPromo, setQuantityDemanded } from "store/reducers/orderSlice";
 
 export default function Promotion({ cantMax, data, quantity }) {
-	const [combo, setCombo] = useState('');
-	const [promotions, setPromotions] = useState('Combo 1');
+	const [combo, setCombo] = useState("");
+	const [promotions, setPromotions] = useState("Combo 1");
 
 	const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 	};
 	return (
 		<div>
-			{data.nombre === 'Combo 4' || data.nombre === 'Combo 5' ? (
+			{data.nombre === "Combo 4" || data.nombre === "Combo 5" ? (
 				<>
 					<div className="p-4 flex gap-2 justify-start items-center">
 						<input
@@ -52,7 +52,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 							value="Combo 1"
 							name="combo"
 							onChange={onChangeValue}
-							checked={combo === 'Combo 1'}
+							checked={combo === "Combo 1"}
 						/>
 						<div>
 							<h3>{promotions && promotions[2].nombre}</h3>
@@ -66,7 +66,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 							value="Combo 2"
 							name="combo"
 							onChange={onChangeValue}
-							checked={combo === 'Combo 2'}
+							checked={combo === "Combo 2"}
 						/>
 						<div>
 							<h3>{promotions && promotions[3].nombre}</h3>
@@ -78,7 +78,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 				<></>
 			)}
 
-			{data.nombre === 'Combo 3' || data.nombre === 'Combo 2' || data.nombre === 'Combo 1' ? (
+			{data.nombre === "Combo 3" || data.nombre === "Combo 2" || data.nombre === "Combo 1" ? (
 				<div className="flex justify-between py-2  my-2 ">
 					<div className="w-1/2 font-medium">
 						<h2>{data.nombre}</h2>
@@ -122,6 +122,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 									</p>
 								</div>
 							)}
+
 							{products.empanadas?.map(({ id, nombre }) => {
 								return (
 									<div key={id} className="flex justify-between py-2  my-2 ">

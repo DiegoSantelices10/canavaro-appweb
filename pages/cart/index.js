@@ -1,13 +1,21 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { FiChevronsLeft } from 'react-icons/fi';
-import { MdOutlineDeliveryDining } from 'react-icons/md';
+import Link from "next/link";
+import Image from "next/image";
+import { FiChevronsLeft, FiEdit } from "react-icons/fi";
+import { MdOutlineDeliveryDining } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 export default function Cart() {
+	const { orderList } = useSelector(state => state.order);
+
+	useEffect(() => {
+		console.log(orderList);
+	}, []);
+
 	return (
-		<div className="font-poppins mx-auto w-full h-full  rounded-t-3xl py-10">
+		<div className="font-poppins mx-auto w-full h-full  rounded-t-3xl py-5">
 			<div className="px-3">
 				<div className="flex items-center gap-3 py-4">
-					<Link href={'/home'}>
+					<Link href={"/home"}>
 						<a>
 							<FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
 						</a>
@@ -20,13 +28,13 @@ export default function Cart() {
 							<button
 								onClick={() => {}}
 								className={
-									'w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3'
+									"w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
 								}
 							>
 								<MdOutlineDeliveryDining size={20} />
 								Delivery
 							</button>
-							<button onClick={() => {}} className={'w-1/2 font-light bg-slate-800 p-3 text-white rounded-md'}>
+							<button onClick={() => {}} className="w-1/2 font-light bg-slate-800 p-3 text-white rounded-md">
 								Retiro
 							</button>
 						</div>
@@ -48,15 +56,7 @@ export default function Cart() {
 							<p className="text-gray-400 text-xs">Muzzarella con salsa</p>
 							<p className="font-semibold text-sm text-gray-800">$2500</p>
 						</div>
-
-						<Image
-							className="rounded-md"
-							src="/images/logoig.png"
-							priority={true}
-							width={140}
-							height={140}
-							alt="logo"
-						/>
+						<FiEdit size={30} className="text-red-700" />
 					</div>
 				</div>
 
@@ -68,14 +68,7 @@ export default function Cart() {
 							<p className="font-semibold text-sm text-gray-800">$2500</p>
 						</div>
 
-						<Image
-							className="rounded-md"
-							src="/images/logoig.png"
-							priority={true}
-							width={140}
-							height={140}
-							alt="logo"
-						/>
+						<FiEdit size={30} className="text-red-700" />
 					</div>
 				</div>
 			</div>
@@ -85,7 +78,7 @@ export default function Cart() {
 			<div className="fixed bottom-1 w-full">
 				<div className="flex justify-between items-center p-3">
 					<p className="font-semibold">Subtotal</p>
-					<h3 className="text-2xl mr-2">$13500</h3>
+					<h3 className="text-xl mr-2">$13500</h3>
 				</div>
 				<div className="px-3 w-full">
 					<button className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600">

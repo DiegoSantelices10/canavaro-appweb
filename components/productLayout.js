@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
-import { useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import PizzaInfo from './pizzaInfo';
-import { FiShoppingCart, FiChevronsLeft } from 'react-icons/fi';
-import Promotion from './promotion';
+import { useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import PizzaInfo from "./pizzaInfo";
+import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
+import Promotion from "./promotion";
 
 import {
 	addProductPizza,
@@ -16,10 +16,10 @@ import {
 	calculateTotalQuantity,
 	addPromoOrderList,
 	clearOrderPromo,
-} from 'store/reducers/orderSlice';
+} from "store/reducers/orderSlice";
 
-import { useDispatch, useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function ProductLayout({
 	data,
@@ -53,17 +53,19 @@ export default function ProductLayout({
 	};
 
 	const returnHome = () => {
-		if (categoria === 'promociones') {
+		if (categoria === "promociones") {
 			Swal.fire({
-				title: 'Estas seguro que deseas salir?',
+				title: "Estas seguro que deseas salir?",
 				showDenyButton: true,
-				confirmButtonText: 'Descartar',
+				confirmButtonText: "Descartar",
 			}).then(result => {
 				if (result.isConfirmed) {
 					dispatch(clearOrderPromo());
-					router.push('/home');
+					router.push("/home");
 				}
 			});
+		} else {
+			router.push("/home");
 		}
 	};
 
@@ -86,25 +88,21 @@ export default function ProductLayout({
 			dispatch(addPromoOrderList(promo));
 		}
 
-		Swal.fire({
-			icon: 'success',
-			title: '¡El pedido fue ingresado con exito!',
-		});
 		dispatch(clearOrderPromo());
-		router.push('/home');
+		router.push("/home");
 	};
 	return (
 		<div className="font-poppins min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
 			<div className="relative overflow-hidden h-auto  mx-auto  ">
 				<div className=" overflow-hidden w-auto">
 					<Image
-						src={imagen || ''}
+						src={imagen || ""}
 						layout="responsive"
 						width={100}
 						height={40}
 						objectFit="cover"
 						objectPosition="center"
-						alt={nombre || 'img'}
+						alt={nombre || "img"}
 					/>
 					<button onClick={returnHome}>
 						<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
@@ -123,15 +121,15 @@ export default function ProductLayout({
 					<div className="w-full bg-white p-3 py-5 ">
 						<h1 className="font-bold text-base text-gray-800">{nombre}</h1>
 						<p className="font-roboto font-normal text-sm py-1 text-gray-400">{descripcion}</p>
-						{categoria === 'promociones' ? (
+						{categoria === "promociones" ? (
 							<p className="font-roboto font-normal  text-sm text-gray-400">$ {precio}</p>
 						) : (
-							''
+							""
 						)}
 					</div>
 
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
-						{categoria === 'pizzas' ? (
+						{categoria === "pizzas" ? (
 							<div className=" flex flex-col gap-y-2 pt-5 justify-evenly">
 								<PizzaInfo
 									data={data}
@@ -140,7 +138,7 @@ export default function ProductLayout({
 									cart={orderList}
 								/>
 							</div>
-						) : categoria === 'empanadas' ? (
+						) : categoria === "empanadas" ? (
 							<div className="flex gap-y-2 py-2 justify-between items-center">
 								<div className="w-auto">
 									<h2 className="font-semibold text-normal text-gray-800">
@@ -178,7 +176,7 @@ export default function ProductLayout({
 				</div>
 			</div>
 
-			{data.categoria === 'promociones' ? (
+			{data.categoria === "promociones" ? (
 				<div className="font-poppins w-full fixed bottom-0 p-4 border-t-2 bg-slate-50 sm:w-4/5 md:w-3/5 lg:w-2/5">
 					<button
 						className="flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 
@@ -188,7 +186,7 @@ export default function ProductLayout({
 						}}
 					>
 						Agregar al Carrito
-						<FiShoppingCart size={23} />{' '}
+						<FiShoppingCart size={23} />{" "}
 					</button>
 				</div>
 			) : (
@@ -199,7 +197,7 @@ export default function ProductLayout({
                   					   transition-all duration-500 text-white text-base font-semibold "
 						>
 							Ver Carrito
-							<FiShoppingCart size={23} />{' '}
+							<FiShoppingCart size={23} />{" "}
 						</a>
 					</Link>
 				</div>
