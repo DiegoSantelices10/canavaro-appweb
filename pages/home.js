@@ -29,10 +29,10 @@ export default function Home() {
 
 	return (
 		<Layout title={nombre}>
-			<div className=" p-4 mt-14 mx-auto w-full bg-zinc-50 ">
-				<h1 className="text-sm font-bold text-gray-800 py-2">Promociones</h1>
-				<hr className="pb-5" />
-				<div className="flex overflow-x-scroll flexp   space-x-6 w-full pt-1 pb-4 pl-1">
+			<div className="py-4 mt-14 mx-auto w-full ">
+				<h1 className="text-sm font-bold text-gray-800 px-3 pb-1">Promociones</h1>
+				<hr className="pb-3" />
+				<div className="flex overflow-x-scroll flexp   space-x-6 w-full p-3">
 					<style jsx>
 						{`
 							.flexp::-webkit-scrollbar-thumb {
@@ -47,7 +47,7 @@ export default function Home() {
 					</style>
 					{renderPromotions()}
 				</div>
-				<div className="flex justify-center items-center w-full gap-3 py-6 text-sm f">
+				<div className="flex justify-center items-center w-full gap-3 py-6 text-sm ">
 					<button
 						onClick={() => setRenderProductos("pizzas")}
 						className={
@@ -81,11 +81,11 @@ export default function Home() {
 				</div>
 
 				<div>
-					<h1 className="text-sm font-bold text-gray-800 py-2">
+					<h1 className="text-sm font-bold text-gray-800 px-3 pb-1">
 						{renderProducts[0].toUpperCase() + renderProducts.substring(1)}
 					</h1>
-					<hr className="py-2" />
-					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-2">{renderStore(renderProducts)}</div>
+					<hr className="pb-3" />
+					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1">{renderStore(renderProducts)}</div>
 				</div>
 			</div>
 		</Layout>

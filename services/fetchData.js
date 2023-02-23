@@ -279,7 +279,7 @@ export const getProducts = {
 		{
 			"id": 25,
 			"nombre": "Combo 1",
-			"gustos": "de 2 gusto",
+			"gustos": "Pizza de 2 gustos",
 			"descripcion": "Jamón - Napolitana",
 			"categoria": "promociones",
 			"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
@@ -289,7 +289,7 @@ export const getProducts = {
 		{
 			"id": 26,
 			"nombre": "Combo 2",
-			"gustos": "de 4 gusto",
+			"gustos": "Pizza de 4 gustos",
 			"descripcion": "Muzzarella - Napolitana - Jamón - Fugazzeta",
 			"categoria": "promociones",
 			"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",

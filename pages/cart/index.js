@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import { FiChevronsLeft, FiEdit } from "react-icons/fi";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 export default function Cart() {
 	const { orderList } = useSelector(state => state.order);
 
@@ -49,7 +49,7 @@ export default function Cart() {
 				<hr className="py-1 bg-gray-200" />
 			</div>
 			<div>
-				<div className="mb-2 p-3 shadow-sm bg-white">
+				<div className="mb-2 p-3  bg-white">
 					<div className="flex justify-between items-center gap-x-2">
 						<div className="w-full self-start">
 							<a className="font-semibold text-sm text-gray-800">Muzzarella</a>
@@ -59,8 +59,8 @@ export default function Cart() {
 						<FiEdit size={30} className="text-red-700" />
 					</div>
 				</div>
-
-				<div className="mb-2 p-3 shadow-sm bg-white">
+				<hr />
+				<div className="mb-2 p-3  bg-white">
 					<div className="flex justify-between items-center gap-x-2">
 						<div className="w-full self-start">
 							<a className="font-semibold text-sm text-gray-800">Muzzarella</a>
@@ -71,14 +71,13 @@ export default function Cart() {
 						<FiEdit size={30} className="text-red-700" />
 					</div>
 				</div>
+				<hr />
 			</div>
-			<div className="py-4 w-full">
-				<hr className="py-1 bg-gray-200" />
-			</div>
+
 			<div className="fixed bottom-1 w-full">
 				<div className="flex justify-between items-center p-3">
 					<p className="font-semibold">Subtotal</p>
-					<h3 className="text-xl mr-2">$13500</h3>
+					<h3 className="text-xl">$13500</h3>
 				</div>
 				<div className="px-3 w-full">
 					<button className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600">
