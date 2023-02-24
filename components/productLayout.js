@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -23,10 +23,11 @@ import Swal from "sweetalert2";
 
 export default function ProductLayout({
 	data,
-	data: { id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio, cantidad },
+	data: { id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
 }) {
 	const { orderPromo } = useSelector(state => state.order);
 	const { orderList } = useSelector(state => state.order);
+	const [selectCombo, setSelectCombo] = useState({});
 
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -77,7 +78,7 @@ export default function ProductLayout({
 			const promo = {
 				id,
 				nombre,
-				productos: { ...value },
+				productos: [selectCombo, ...value],
 				descripcion,
 				imagen,
 				categoria,
@@ -165,7 +166,12 @@ export default function ProductLayout({
 								</div>
 							</div>
 						) : (
-							<Promotion data={data} quantity={productQuantity} cantMax={cantidadMaxima} />
+							<Promotion
+								setSelectCombo={setSelectCombo}
+								data={data}
+								quantity={productQuantity}
+								cantMax={cantidadMaxima}
+							/>
 						)}
 					</div>
 				</div>

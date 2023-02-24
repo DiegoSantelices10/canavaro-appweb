@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addProductPromo, decrementProductPromo, setQuantityDemanded } from "store/reducers/orderSlice";
 
-export default function Promotion({ cantMax, data, quantity }) {
-	const [combo, setCombo] = useState("");
-	const [promotions, setPromotions] = useState("Combo 1");
+export default function Promotion({ cantMax, data, setSelectCombo }) {
+	const [select, setSelect] = useState("");
+	const [promotions, setPromotions] = useState("");
 
 	const dispatch = useDispatch();
 
@@ -38,8 +38,12 @@ export default function Promotion({ cantMax, data, quantity }) {
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 	const onChangeValue = e => {
-		setCombo(e.target.value);
-		// const pre = promociones?.find(item => item.nombre === e.target.value);
+		setSelect(e.target.value);
+		const { id, nombre, descripcion } = promociones?.find(item => item.nombre === e.target.value);
+		const res = { id, nombre, descripcion };
+		setSelectCombo(res);
+
+		// const res = orderPromo?.find(item => item.id === pre.id);
 	};
 	return (
 		<div>
@@ -52,7 +56,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 							value="Combo 1"
 							name="combo"
 							onChange={onChangeValue}
-							checked={combo === "Combo 1"}
+							checked={select === "Combo 1"}
 						/>
 						<div>
 							<h3>{promotions && promotions[2].nombre}</h3>
@@ -66,7 +70,7 @@ export default function Promotion({ cantMax, data, quantity }) {
 							value="Combo 2"
 							name="combo"
 							onChange={onChangeValue}
-							checked={combo === "Combo 2"}
+							checked={select === "Combo 2"}
 						/>
 						<div>
 							<h3>{promotions && promotions[3].nombre}</h3>
@@ -74,6 +78,8 @@ export default function Promotion({ cantMax, data, quantity }) {
 						</div>
 					</div>
 				</>
+			) : data.nombre === "Combo 6" ? (
+				setSelectCombo(promotions[4])
 			) : (
 				<></>
 			)}
