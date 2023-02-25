@@ -169,7 +169,7 @@ export default function ProductLayout({
 				</div>
 			</div>
 
-			<div className=" w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
+			<div className="bg-white w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
 				<button
 					className="flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 
 						transition-all duration-500 text-white text-base font-semibold "
