@@ -264,6 +264,7 @@ export const getProducts = {
 			"imagen": "https://cdn.discordapp.com/attachments/1072242342200877147/1072248326461862038/miniatura_docena.jpg",
 			"tamanio": "Grande",
 			"precio": 2600,
+			"addProducts": true,
 		},
 		{
 			"id": 24,
@@ -275,6 +276,7 @@ export const getProducts = {
 				"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/8b401131be66ac23de662a0f92d6f59e/Promo_Pack_18_empanadas.png",
 			"tamanio": "Grande",
 			"precio": 3850,
+			"addProducts": true,
 		},
 		{
 			"id": 25,
@@ -285,6 +287,7 @@ export const getProducts = {
 			"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
 			"tamanio": "gigante",
 			"precio": 1880,
+			"addProducts": false,
 		},
 		{
 			"id": 26,
@@ -295,6 +298,7 @@ export const getProducts = {
 			"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
 			"tamanio": "gigante",
 			"precio": 1880,
+			"addProducts": false,
 		},
 		{
 			"id": 27,
@@ -305,6 +309,7 @@ export const getProducts = {
 			"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
 			"tamanio": "gigante",
 			"precio": 2180,
+			"addProducts": false,
 		},
 		{
 			"id": 28,
@@ -315,6 +320,7 @@ export const getProducts = {
 			"imagen": "https://live.staticflickr.com/65535/49084418862_9fdf0824bf_m.jpg",
 			"tamanio": "gigante",
 			"precio": 3000,
+			"addProducts": true,
 		},
 		{
 			"id": 29,
@@ -326,6 +332,7 @@ export const getProducts = {
 				"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
 			"tamanio": "gigante",
 			"precio": 4100,
+			"addProducts": true,
 		},
 		{
 			"id": 30,
@@ -337,6 +344,7 @@ export const getProducts = {
 				"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
 			"tamanio": "gigante",
 			"precio": 4400,
+			"addProducts": true,
 		},
 	],
 };

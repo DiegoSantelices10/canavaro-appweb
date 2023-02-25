@@ -73,8 +73,13 @@ export default function Cart() {
 						<div className="mb-2 p-3  bg-white">
 							<div className="flex justify-between items-center gap-x-2">
 								<div className="w-full self-start">
-									<a className="font-semibold text-sm text-gray-800">{item.nombre}</a>
-									<p className="text-gray-400 text-xs">{item.descripcion}</p>
+									<a className="font-semibold text-sm text-gray-800">
+										{item.nombre}
+										<span className="text-gray-400 font-light"> x {item.cantidad}</span>
+									</a>
+									<p className="text-gray-400 text-xs">
+										{item.descripcion || item.tamanio.charAt(0).toUpperCase() + item.tamanio.slice(1)}
+									</p>
 									<p className="font-semibold text-sm text-gray-800">$ {item.precio * item.cantidad}</p>
 								</div>
 								<FiEdit size={30} className="text-red-700" />
@@ -85,10 +90,10 @@ export default function Cart() {
 				);
 			})}
 
-			<div className="fixed bottom-1 w-full">
+			<div className="fixed bottom-1 w-full bg-white">
 				<div className="flex justify-between items-center p-3">
 					<p className="font-semibold">Subtotal</p>
-					<h3 className="text-xl">{totalAmount}</h3>
+					<h3 className="text-xl">$ {totalAmount}</h3>
 				</div>
 				<div className="px-3 w-full">
 					<button className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600">

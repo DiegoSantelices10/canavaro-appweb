@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	orderList: [],
@@ -10,27 +10,27 @@ const initialState = {
 };
 
 export const orderSlice = createSlice({
-	name: 'order',
+	name: "order",
 	initialState,
 	reducers: {
 		setQuantityDemanded: (state, action) => {
 			state.quantityDemanded = action.payload;
 		},
 		addProductPizza: (state, action) => {
-			if (action.payload.categoria === 'pizzas') {
-				const productIndex = state.orderList.findIndex(item => item.tamanio === action.payload.tamanio);
+			if (action.payload.categoria === "pizzas") {
+				const productIndex = state.orderPromo.findIndex(item => item.tamanio === action.payload.tamanio);
 				productIndex >= 0
-					? (state.orderList[productIndex].cantidad += 1)
-					: state.orderList.push({ ...action.payload, cantidad: 1 });
+					? (state.orderPromo[productIndex].cantidad += 1)
+					: state.orderPromo.push({ ...action.payload, cantidad: 1 });
 			}
 		},
 		addProductEmpanada: (state, action) => {
-			const productIndex = state.orderList.findIndex(item => item.id === action.payload.id);
+			const productIndex = state.orderPromo.findIndex(item => item.id === action.payload.id);
 			if (productIndex >= 0) {
-				state.orderList[productIndex].cantidad += 1;
+				state.orderPromo[productIndex].cantidad += 1;
 			} else {
 				const tempProduct = { ...action.payload, cantidad: 1 };
-				state.orderList.push(tempProduct);
+				state.orderPromo.push(tempProduct);
 			}
 		},
 		addPromoOrderList: (state, action) => {
@@ -56,19 +56,19 @@ export const orderSlice = createSlice({
 			}
 		},
 		decrementProduct: (state, action) => {
-			const productIndex = state.orderList.findIndex(item => item.id === action.payload.id);
-			if (state.orderList[productIndex].cantidad > 1) {
-				state.orderList[productIndex].cantidad -= 1;
-			} else if (state.orderList[productIndex].cantidad === 1) {
-				const newList = state.orderList.filter(item => item.id !== action.payload.id);
-				state.orderList = newList;
+			const productIndex = state.orderPromo.findIndex(item => item.id === action.payload.id);
+			if (state.orderPromo[productIndex].cantidad > 1) {
+				state.orderPromo[productIndex].cantidad -= 1;
+			} else if (state.orderPromo[productIndex].cantidad === 1) {
+				const newList = state.orderPromo.filter(item => item.id !== action.payload.id);
+				state.orderPromo = newList;
 			}
 		},
 		clearOrderPromo: (state, action) => {
 			state.orderPromo = [];
 		},
 		removeProduct: (state, action) => {
-			state.orderList = state.orderList.filter(product => product.id !== action.payload.id);
+			state.orderPromo = state.orderPromo.filter(product => product.id !== action.payload.id);
 		},
 
 		calculateSubTotal: (state, action) => {

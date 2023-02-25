@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export default function PizzaInfo({
 	data: {
@@ -34,14 +34,14 @@ export default function PizzaInfo({
 								idGenerator,
 								nombre,
 								categoria,
-								tamanio: 'gigante',
+								tamanio: "gigante",
 								precio: gigante,
 							})
 						}
 					>
 						-
 					</button>
-					<span className="font-normal">{productQuantity('gigante')}</span>
+					<span className="font-normal">{productQuantity("gigante")}</span>
 					<button
 						type="button"
 						className="text-green-500"
@@ -50,7 +50,7 @@ export default function PizzaInfo({
 								idGenerator,
 								nombre,
 								categoria,
-								tamanio: 'gigante',
+								tamanio: "gigante",
 								precio: gigante,
 							})
 						}
@@ -73,14 +73,14 @@ export default function PizzaInfo({
 								idGenerator,
 								nombre,
 								categoria,
-								tamanio: 'mediana',
+								tamanio: "mediana",
 								precio: mediana,
 							})
 						}
 					>
 						-
 					</button>
-					<span className="font-normal">{productQuantity('mediana')}</span>
+					<span className="font-normal">{productQuantity("mediana")}</span>
 					<button
 						type="button"
 						className="text-green-500"
@@ -89,7 +89,7 @@ export default function PizzaInfo({
 								idGenerator,
 								nombre,
 								categoria,
-								tamanio: 'mediana',
+								tamanio: "mediana",
 								precio: mediana,
 							})
 						}
@@ -112,14 +112,14 @@ export default function PizzaInfo({
 								idGenerator,
 								nombre,
 								categoria,
-								tamanio: 'chica',
+								tamanio: "chica",
 								precio: chica,
 							})
 						}
 					>
 						-
 					</button>
-					<span className="font-normal">{productQuantity('chica')}</span>
+					<span className="font-normal">{productQuantity("chica")}</span>
 					<button
 						type="button"
 						className="text-green-500"
@@ -128,7 +128,7 @@ export default function PizzaInfo({
 								idGenerator,
 								nombre,
 								categoria,
-								tamanio: 'chica',
+								tamanio: "chica",
 								precio: chica,
 							})
 						}

@@ -30,7 +30,7 @@ export default function Home() {
 	return (
 		<Layout title={nombre}>
 			<div className="py-4 mt-14 mx-auto w-full ">
-				<h1 className="text-sm font-bold text-gray-800 px-3 pb-1">Promociones</h1>
+				<h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">Promociones</h1>
 				<hr className="pb-3" />
 				<div className="flex overflow-x-scroll flexp   space-x-6 w-full p-3">
 					<style jsx>
@@ -52,8 +52,8 @@ export default function Home() {
 						onClick={() => setRenderProductos("pizzas")}
 						className={
 							renderProducts !== "pizzas"
-								? "w-32 rounded-3xl font-medium"
-								: "w-32 font-medium bg-gray-300 text-white rounded-3xl"
+								? "w-32 rounded-3xl font-medium text-gray-400"
+								: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
 						}
 					>
 						Pizzas
@@ -62,8 +62,8 @@ export default function Home() {
 						onClick={() => setRenderProductos("empanadas")}
 						className={
 							renderProducts !== "empanadas"
-								? "w-32 rounded-3xl font-medium"
-								: "w-32 font-medium bg-gray-300 text-white rounded-3xl"
+								? "w-32 rounded-3xl font-medium text-gray-400"
+								: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
 						}
 					>
 						Empanadas
@@ -72,8 +72,8 @@ export default function Home() {
 						onClick={() => setRenderProductos("promociones")}
 						className={
 							renderProducts !== "promociones"
-								? "w-32 rounded-3xl font-medium"
-								: "w-32 font-medium bg-gray-300 text-white rounded-3xl"
+								? "w-32 rounded-3xl font-medium text-gray-400"
+								: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
 						}
 					>
 						Promociones
@@ -81,7 +81,7 @@ export default function Home() {
 				</div>
 
 				<div>
-					<h1 className="text-sm font-bold text-gray-800 px-3 pb-1">
+					<h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">
 						{renderProducts[0].toUpperCase() + renderProducts.substring(1)}
 					</h1>
 					<hr className="pb-3" />
