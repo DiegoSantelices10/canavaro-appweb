@@ -16,13 +16,16 @@ export default function Cart() {
 		setOrder(orderList);
 	}, [orderList]);
 
-	useEffect(() => {
-		const setDispatch = setTimeout(() => {
-			dispatch(addAddress(address));
-		}, 3000);
-		return () => clearTimeout(setDispatch);
-	}, [address]);
+	// useEffect(() => {
+	// 	const setDispatch = setTimeout(() => {
+	// 		dispatch(addAddress(address));
+	// 	}, 2000);
+	// 	return () => clearTimeout(setDispatch);
+	// }, [address]);
 
+	const addressSet = () => {
+		dispatch(addAddress(address));
+	};
 	return (
 		<div className="font-poppins mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
@@ -107,7 +110,9 @@ export default function Cart() {
 						<h3 className="text-xl">$ {totalAmount}</h3>
 					</div>
 					<Link href="/checkout">
-						<a className="text-center rounded-md w-auto p-4 text-white font-bold bg-red-600">Continuar el pago</a>
+						<a onClick={addressSet} className="text-center rounded-md w-auto p-4 text-white font-bold bg-red-600">
+							Continuar el pago
+						</a>
 					</Link>
 				</div>
 			</div>
