@@ -2,11 +2,15 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
+
 import PizzaInfo from "./pizzaInfo";
-import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import Promotion from "./promotion";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 
 import {
 	addProductPizza,
@@ -84,7 +88,15 @@ export default function ProductLayout({
 				cantidad: 1,
 			};
 			dispatch(addPromoOrderList(promo));
+			toast("Producto agregado al carrito", {
+				position: toast.POSITION.TOP_RIGHT,
+				theme: "dark",
+			});
 		} else {
+			toast("Producto agregado al carrito", {
+				position: toast.POSITION.TOP_RIGHT,
+				theme: "dark",
+			});
 			value.map(item => dispatch(addPromoOrderList(item)));
 		}
 

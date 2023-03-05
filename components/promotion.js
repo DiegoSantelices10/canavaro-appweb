@@ -119,7 +119,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 						<>
 							{quantityDemanded < 1 ? (
 								<div className="bg-green-500 w-auto p-2">
-									<p className="text-white text-center">¡ Tu docena esta completa !</p>
+									<p className="text-white text-center">¡ Se completo la cantidad requerida !</p>
 								</div>
 							) : (
 								<div className="bg-red-500 w-auto p-2">

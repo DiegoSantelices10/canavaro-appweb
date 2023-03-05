@@ -12,16 +12,19 @@ export default function Login() {
 	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: {
 			nombre: "",
-			telefono:""
+			telefono: "",
 		},
 		onSubmit: async function (values) {
 			dispatch(
 				setUser({
 					nombre: values.nombre,
-					telefono: values.telefono
+					telefono: values.telefono,
 				})
 			);
-			router.push("/home");
+			router.push("/welcomeLogo");
+			setTimeout(() => {
+				router.push("/home");
+			}, 3000);
 		},
 	});
 

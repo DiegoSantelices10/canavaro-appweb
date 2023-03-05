@@ -7,12 +7,16 @@ const initialState = {
 	quantityDemanded: 0,
 	totalQuantity: 0,
 	totalAmount: 0,
+	checkout: [],
 };
 
 export const orderSlice = createSlice({
 	name: "order",
 	initialState,
 	reducers: {
+		setCheckout: (state, action) => {
+			state.checkout = action.payload;
+		},
 		setQuantityDemanded: (state, action) => {
 			state.quantityDemanded = action.payload;
 		},
@@ -112,6 +116,7 @@ export const {
 	addPromoOrderList,
 	clearOrderPromo,
 	setQuantityDemanded,
+	setCheckout,
 } = orderSlice.actions;
 
 export const selectOrder = state => state.order;

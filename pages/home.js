@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "services/fetchData";
 import { setProductData } from "store/reducers/productSlice";
 import Card from "components/Card";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
 	const [renderProducts, setRenderProductos] = useState("pizzas");
@@ -29,6 +30,7 @@ export default function Home() {
 
 	return (
 		<Layout title={nombre}>
+			<ToastContainer />
 			<div className="py-4 mt-14 mx-auto w-full ">
 				<h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">Promociones</h1>
 				<hr className="pb-3" />

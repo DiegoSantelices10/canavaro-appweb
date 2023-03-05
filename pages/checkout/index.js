@@ -1,12 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setCheckout } from "store/reducers/orderSlice";
 
 export default function Checkout() {
-	const { direccion } = useSelector(state => state.user);
+	const { direccion, nombre, telefono } = useSelector(state => state.user);
+	const { totalAmount, orderList } = useSelector(state => state.order);
+
+	const [orderToMake, setOrderToMake] = useState({});
 	const [type, setType] = useState("efectivo");
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (direccion === !null) {
+			setOrderToMake({
+				nombre,
+				telefono,
+				enviar: direccion,
+				orderList,
+				totalAmount,
+			});
+		} else {
+			setOrderToMake({
+				nombre,
+				telefono,
+				enviar: "Retira por local",
+				orderList,
+				totalAmount,
+			});
+		}
+	}, []);
+
+	const confirmedOrder = () => {
+		dispatch(setCheckout(orderToMake));
+	};
 
 	return (
 		<div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
@@ -23,15 +53,24 @@ export default function Checkout() {
 
 			<div className="p-3 py-5">
 				<div>
-					<h2 className="font-nunito font-extrabold text-base">Direccion de entrega</h2>
-					<p> {direccion}</p>
-				</div>
-				<div className="py-2">
-					<input
-						type="text"
-						className="border border-slate-300 rounded-md w-full p-2"
-						placeholder="Instrucciones de entrega"
-					/>
+					{direccion ? (
+						<>
+							<h2 className="font-nunito font-extrabold text-base">Direccion de envio</h2>
+							<p>{direccion} </p>
+							<div className="py-2">
+								<input
+									type="text"
+									className="border border-slate-300 rounded-md w-full p-2"
+									placeholder="Instrucciones de entrega"
+								/>
+							</div>
+						</>
+					) : (
+						<>
+							<h2 className="font-nunito font-extrabold text-base">Retira por local</h2>
+							<p>Nombre: {nombre} </p>
+						</>
+					)}
 				</div>
 			</div>
 			<hr />
@@ -96,11 +135,14 @@ export default function Checkout() {
 			<div className="fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
 				<div className="flex justify-between items-center p-3">
 					<p className="font-semibold">Subtotal</p>
-					<h3 className="text-xl">$ 3400</h3>
+					<h3 className="text-xl">$ {totalAmount}</h3>
 				</div>
 
 				<div className="px-3 w-full">
-					<button className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600">
+					<button
+						onClick={confirmedOrder}
+						className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600"
+					>
 						Confirmar pedido
 					</button>
 				</div>
