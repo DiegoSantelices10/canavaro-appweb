@@ -89,12 +89,10 @@ export default function ProductLayout({
 			};
 			dispatch(addPromoOrderList(promo));
 			toast("Producto agregado al carrito", {
-				position: toast.POSITION.TOP_RIGHT,
 				theme: "dark",
 			});
 		} else {
 			toast("Producto agregado al carrito", {
-				position: toast.POSITION.TOP_RIGHT,
 				theme: "dark",
 			});
 			value.map(item => dispatch(addPromoOrderList(item)));

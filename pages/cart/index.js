@@ -70,7 +70,7 @@ export default function Cart() {
 									onChange={e => setAddress(e.target.value)}
 									type="text"
 									className="border border-slate-300 rounded-md w-full p-2"
-									placeholder="Ingresa tu direccion"
+									placeholder="Ingresa tu direccion, Barrio"
 								/>
 							)}
 							<h1 className="font-light">Te llega en</h1>

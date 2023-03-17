@@ -10,6 +10,9 @@ import { setProductData } from "store/reducers/productSlice";
 import Card from "components/Card";
 import { ToastContainer } from "react-toastify";
 
+import { TbPlayerTrackNext } from "react-icons/tb";
+import Link from "next/link";
+
 export default function Home() {
 	const [renderProducts, setRenderProductos] = useState("pizzas");
 	const { nombre } = useSelector(state => state.user);
@@ -48,6 +51,17 @@ export default function Home() {
 						`}
 					</style>
 					{renderPromotions()}
+				</div>
+				<div className="pt-5">
+					<Link href={"/pizzaFree"}>
+						<a>
+							<div className="w-full bg-red-500 p-2 flex items-center justify-between">
+								<TbPlayerTrackNext className="text-white" size={25} />
+								<p className="text-white font-nunito italic font-black">¡ ARMA TU PIZZA COMO QUIERAS !</p>
+								<TbPlayerTrackNext className="text-white" size={25} />
+							</div>
+						</a>
+					</Link>
 				</div>
 				<div className="flex justify-center items-center w-full gap-3 py-6 text-sm ">
 					<button

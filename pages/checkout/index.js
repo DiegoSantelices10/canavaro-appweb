@@ -11,16 +11,19 @@ export default function Checkout() {
 
 	const [orderToMake, setOrderToMake] = useState({});
 	const [type, setType] = useState("efectivo");
+	const [instructions, setInstructions] = useState("efectivo");
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (direccion === !null) {
+		if (direccion !== "") {
 			setOrderToMake({
 				nombre,
 				telefono,
 				enviar: direccion,
+				comentarios: instructions,
 				orderList,
+				medioDePago: type,
 				totalAmount,
 			});
 		} else {
@@ -29,13 +32,18 @@ export default function Checkout() {
 				telefono,
 				enviar: "Retira por local",
 				orderList,
+				medioDePago: type,
 				totalAmount,
 			});
 		}
-	}, []);
+	}, [type]);
 
 	const confirmedOrder = () => {
 		dispatch(setCheckout(orderToMake));
+	};
+
+	const handleChange = e => {
+		setInstructions(e.target.value);
 	};
 
 	return (
@@ -59,6 +67,7 @@ export default function Checkout() {
 							<p>{direccion} </p>
 							<div className="py-2">
 								<input
+									onChange={handleChange}
 									type="text"
 									className="border border-slate-300 rounded-md w-full p-2"
 									placeholder="Instrucciones de entrega"
@@ -92,16 +101,6 @@ export default function Checkout() {
 							}
 						>
 							Efectivo
-						</button>
-						<button
-							onClick={() => setType("tarjeta")}
-							className={
-								type === "tarjeta"
-									? "w-1/3 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
-									: "w-1/3 rounded-md   text-slate-500 border border-slate-300 font-light p-3"
-							}
-						>
-							Tarjeta
 						</button>
 						<button
 							onClick={() => setType("mercadoPago")}
