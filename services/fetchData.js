@@ -22,6 +22,7 @@ export const getProducts = {
 				"mediana": 1280,
 				"chica": 1100,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 2,
@@ -34,6 +35,7 @@ export const getProducts = {
 				"mediana": 1700,
 				"chica": 1500,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 3,
@@ -46,6 +48,7 @@ export const getProducts = {
 				"mediana": 1500,
 				"chica": 1200,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 4,
@@ -58,6 +61,7 @@ export const getProducts = {
 				"mediana": 1900,
 				"chica": 1500,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 5,
@@ -70,6 +74,7 @@ export const getProducts = {
 				"mediana": 1800,
 				"chica": 1300,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 6,
@@ -82,6 +87,7 @@ export const getProducts = {
 				"mediana": 1700,
 				"chica": 1300,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 7,
@@ -94,6 +100,7 @@ export const getProducts = {
 				"mediana": 1590,
 				"chica": 1299,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 8,
@@ -106,6 +113,7 @@ export const getProducts = {
 				"mediana": 1900,
 				"chica": 1500,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 9,
@@ -118,6 +126,7 @@ export const getProducts = {
 				"mediana": 1800,
 				"chica": 1400,
 			},
+			"selectedValues": [],
 		},
 		{
 			"id": 10,
@@ -130,6 +139,7 @@ export const getProducts = {
 				"mediana": 1500,
 				"chica": 1300,
 			},
+			"selectedValues": [],
 		},
 	],
 	"empanadas": [
