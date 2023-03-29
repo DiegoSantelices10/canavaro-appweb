@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useFormik } from "formik";
+import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 import { FaChevronRight, FaFacebook } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -8,25 +8,6 @@ import { setUser } from "store/reducers/userSlice";
 export default function Login() {
 	const router = useRouter();
 	const dispatch = useDispatch();
-
-	const { handleSubmit, handleChange, values } = useFormik({
-		initialValues: {
-			nombre: "",
-			telefono: "",
-		},
-		onSubmit: async function (values) {
-			dispatch(
-				setUser({
-					nombre: values.nombre,
-					telefono: values.telefono,
-				})
-			);
-			router.push("/welcomeLogo");
-			setTimeout(() => {
-				router.push("/home");
-			}, 3000);
-		},
-	});
 
 	return (
 		<div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 font-poppins">
@@ -49,40 +30,62 @@ export default function Login() {
 					<div className="w-auto mx-auto pt-10 pb-4">
 						<h1 className="font-bold text-3xl">¡Bienvenido!</h1>
 					</div>
-					<form className="flex flex-col gap-3 " onSubmit={handleSubmit}>
-						<div>
-							<input
-								id="nombre"
-								className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
-								placeholder="Introduce tu nombre"
-								type="text"
-								name="nombre"
-								onChange={handleChange}
-								value={values.nombre}
-							/>
-						</div>
-						<div>
-							<input
-								id="telefono"
-								className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
-								placeholder="Introduce tu telefono"
-								type="text"
-								name="telefono"
-								onChange={handleChange}
-								value={values.telefono}
-							/>
-						</div>
-
-						<div className="flex" style={{ justifyContent: "flex-end" }}>
-							<button
-								type="submit"
-								className=" w-auto text-right  p-2 rounded-3xl hover:bg-black hover:text-white hover:-translate-y-1 transition-all duration-500  
+					<div className="flex flex-col gap-3">
+						<Formik
+							initialValues={{
+								nombre: "",
+								telefono: "",
+							}}
+							onSubmit={values => {
+								dispatch(
+									setUser({
+										nombre: values.nombre,
+										telefono: values.telefono,
+									})
+								);
+								router.push("/welcomeLogo");
+								setTimeout(() => {
+									router.push("/home");
+								}, 3000);
+							}}
+						>
+							{({ values, handleChange }) => (
+								<Form>
+									<div>
+										<input
+											id="nombre"
+											className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+											placeholder="Introduce tu nombre"
+											type="text"
+											name="nombre"
+											onChange={handleChange}
+											value={values.nombre}
+										/>
+									</div>
+									<div>
+										<input
+											id="telefono"
+											className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+											placeholder="Introduce tu telefono"
+											type="text"
+											name="telefono"
+											onChange={handleChange}
+											value={values.telefono}
+										/>
+									</div>
+									<div className="flex" style={{ justifyContent: "flex-end" }}>
+										<button
+											type="submit"
+											className=" w-auto text-right  p-2 rounded-3xl hover:bg-black hover:text-white hover:-translate-y-1 transition-all duration-500  
 						 font-semibold mt-3"
-							>
-								<FaChevronRight size={30} />
-							</button>
-						</div>
-					</form>
+										>
+											<FaChevronRight size={30} />
+										</button>
+									</div>
+								</Form>
+							)}
+						</Formik>
+					</div>
 					<div
 						className="flex items-center my-6 before:flex-1 mt-16
 					  before:border-t before:border-gray-300 

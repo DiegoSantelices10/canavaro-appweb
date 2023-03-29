@@ -9,7 +9,7 @@ import {
 } from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Index() {
 	const [select, setSelect] = useState("gigante");
@@ -20,29 +20,31 @@ export default function Index() {
 	const dispatch = useDispatch();
 	const router = useRouter();
 
+	useEffect(() => {
+		console.log(radioSelect);
+	}, [radioSelect]);
+
 	const onChangeValue = e => {
 		const value = e.target.value;
 		setSelect(value);
 	};
 
-	const handleChangeRadioButton = (item, value) => {
-		if (item) {
-			radioSelect[item.id] = { "fraccion": value, ...item };
-			setRadioSelect({ ...radioSelect });
+	const handleChangeRadioButton = (item, index, value) => {
+		console.log("entro");
+		const res = radioSelect.find(product => product.id === item.id);
+		if (res) {
+			res.fraccion = value;
+			const updatedArray = radioSelect.map(obj => (obj.id === item.id ? res : obj));
+			setRadioSelect([...updatedArray]);
+		} else {
+			setRadioSelect([...radioSelect, { "fraccion": value, ...item }]);
 		}
 	};
-	const setQuantity = value => {
-		dispatch(setQuantityDemanded(value));
-	};
 
-	const addItems = value => {
-		dispatch(addProductPromo(value));
+	const clearFraction = id => {
+		const res = radioSelect.filter(pro => pro.id !== id);
+		setRadioSelect([...res]);
 	};
-
-	const decrementItems = value => {
-		dispatch(decrementProductPromo(value));
-	};
-
 	const returnHome = () => {
 		Swal.fire({
 			title: "Estas seguro que deseas salir?",
@@ -54,6 +56,18 @@ export default function Index() {
 				router.push("/home");
 			}
 		});
+	};
+
+	const buttonClear = id => {
+		const res = radioSelect.find(pro => pro.id === id);
+
+		if (res) {
+			return (
+				<button onClick={() => clearFraction(id)} className="text-gray-400 text-xs font-semibold">
+					Deshacer
+				</button>
+			);
+		}
 	};
 	return (
 		<div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
@@ -125,46 +139,31 @@ export default function Index() {
 					</div>
 
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
-						{products.pizzas?.map(item => (
-							<div key={item.id} className="flex justify-between items-start py-2  my-2 ">
+						{products.pizzas?.map((item, index) => (
+							<div key={item.id} className="flex justify-between items-center py-2  my-2 ">
 								<h2>{item.nombre}</h2>
 								<div className="w-auto   px-3 text-end space-x-4 text-base">
-									<div className="flex w-full justify-around gap-5">
-										<div className="grid content-center">
+									<div className="flex w-full justify-around items-center gap-5">
+										{buttonClear(item.id)}
+										<div className="flex items-center gap-x-1">
+											<h3 className="text-gray-400 text-sm">1/4</h3>
 											<input
 												type="radio"
 												value="cuarto"
-												name={`opcion-${item.id}`}
-												checked={radioSelect[item.id]?.fraccion === "cuarto"}
-												onChange={() => handleChangeRadioButton(item, "cuarto")}
+												name={`opcion-${index}`}
+												checked={radioSelect.forEach(item => item?.fraccion === "cuarto")}
+												onChange={() => handleChangeRadioButton(item, index, "cuarto")}
 											/>
-											<div>
-												<h3>Cuarto</h3>
-											</div>
 										</div>
-										<div className="grid content-center">
+										<div className="flex items-center gap-x-1">
+											<h3 className="text-gray-400 text-sm">1/2</h3>
 											<input
 												type="radio"
 												value="mediana"
-												name={`opcion-${item.id}`}
-												checked={radioSelect[item.id]?.fraccion === "mediana"}
-												onChange={() => handleChangeRadioButton(item, "mediana")}
+												name={`opcion-${index}`}
+												checked={radioSelect.forEach(item => item?.fraccion === "mediana")}
+												onChange={() => handleChangeRadioButton(item, index, "mediana")}
 											/>
-											<div>
-												<h3>Mediana</h3>
-											</div>
-										</div>
-										<div className="grid content-center">
-											<input
-												type="radio"
-												value="entera"
-												name={`opcion-${item.id}`}
-												checked={radioSelect[item.id]?.fraccion === "entera"}
-												onChange={() => handleChangeRadioButton(item, "entera")}
-											/>
-											<div>
-												<h3>Entera</h3>
-											</div>
 										</div>
 									</div>
 								</div>
