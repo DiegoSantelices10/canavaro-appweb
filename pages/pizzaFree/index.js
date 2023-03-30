@@ -9,41 +9,33 @@ import {
 } from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Index() {
 	const [select, setSelect] = useState("gigante");
 	const [radioSelect, setRadioSelect] = useState([]);
 	const { products } = useSelector(state => state.product);
-	// const { quantityDemanded } = useSelector(state => state.order);
 
 	const dispatch = useDispatch();
 	const router = useRouter();
-
-	useEffect(() => {
-		console.log(radioSelect);
-	}, [radioSelect]);
 
 	const onChangeValue = e => {
 		const value = e.target.value;
 		setSelect(value);
 	};
 
-	const handleChangeRadioButton = (item, index, value) => {
-		console.log("entro");
-		const res = radioSelect.find(product => product.id === item.id);
-		if (res) {
-			res.fraccion = value;
-			const updatedArray = radioSelect.map(obj => (obj.id === item.id ? res : obj));
-			setRadioSelect([...updatedArray]);
-		} else {
-			setRadioSelect([...radioSelect, { "fraccion": value, ...item }]);
-		}
+	const handleChangeRadioButton = (item, value) => {
+		radioSelect[item.id] = { "fraccion": value, ...item };
+		setRadioSelect({ ...radioSelect });
 	};
 
 	const clearFraction = id => {
-		const res = radioSelect.filter(pro => pro.id !== id);
-		setRadioSelect([...res]);
+		const res = Object.values(radioSelect)?.filter(pro => pro.id !== id);
+		const response = res.reduce((acc, user) => {
+			acc[user.id] = user;
+			return acc;
+		}, {});
+		setRadioSelect(response);
 	};
 	const returnHome = () => {
 		Swal.fire({
@@ -58,17 +50,6 @@ export default function Index() {
 		});
 	};
 
-	const buttonClear = id => {
-		const res = radioSelect.find(pro => pro.id === id);
-
-		if (res) {
-			return (
-				<button onClick={() => clearFraction(id)} className="text-gray-400 text-xs font-semibold">
-					Deshacer
-				</button>
-			);
-		}
-	};
 	return (
 		<div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
 			<div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
@@ -144,15 +125,19 @@ export default function Index() {
 								<h2>{item.nombre}</h2>
 								<div className="w-auto   px-3 text-end space-x-4 text-base">
 									<div className="flex w-full justify-around items-center gap-5">
-										{buttonClear(item.id)}
+										{radioSelect[item.id]?.fraccion && (
+											<button onClick={() => clearFraction(item.id)} className="text-gray-400 text-xs font-semibold">
+												Deshacer
+											</button>
+										)}
 										<div className="flex items-center gap-x-1">
 											<h3 className="text-gray-400 text-sm">1/4</h3>
 											<input
 												type="radio"
 												value="cuarto"
-												name={`opcion-${index}`}
-												checked={radioSelect.forEach(item => item?.fraccion === "cuarto")}
-												onChange={() => handleChangeRadioButton(item, index, "cuarto")}
+												name={item.nombre}
+												checked={radioSelect[item.id]?.fraccion === "cuarto"}
+												onChange={() => handleChangeRadioButton(item, "cuarto")}
 											/>
 										</div>
 										<div className="flex items-center gap-x-1">
@@ -160,9 +145,9 @@ export default function Index() {
 											<input
 												type="radio"
 												value="mediana"
-												name={`opcion-${index}`}
-												checked={radioSelect.forEach(item => item?.fraccion === "mediana")}
-												onChange={() => handleChangeRadioButton(item, index, "mediana")}
+												name={item.nombre}
+												checked={radioSelect[item.id]?.fraccion === "mediana"}
+												onChange={() => handleChangeRadioButton(item, "mediana")}
 											/>
 										</div>
 									</div>
