@@ -1,23 +1,23 @@
 import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	clearOrderPromo,
-	setQuantityDemanded,
-	addProductPromo,
-	decrementProductPromo,
-} from "store/reducers/orderSlice";
+import { clearOrderPromo } from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Index() {
 	const [select, setSelect] = useState("gigante");
 	const [radioSelect, setRadioSelect] = useState([]);
+	const [total, setTotal] = useState(0);
 	const { products } = useSelector(state => state.product);
 
 	const dispatch = useDispatch();
 	const router = useRouter();
+
+	useEffect(() => {
+		console.log(total);
+	}, [radioSelect]);
 
 	const onChangeValue = e => {
 		const value = e.target.value;
@@ -25,11 +25,18 @@ export default function Index() {
 	};
 
 	const handleChangeRadioButton = (item, value) => {
+		if (value === "cuarto") setTotal(total + 1);
+		if (value === "mediana") setTotal(total + 2);
+
 		radioSelect[item.id] = { "fraccion": value, ...item };
 		setRadioSelect({ ...radioSelect });
 	};
 
 	const clearFraction = id => {
+		const result = Object.values(radioSelect)?.find(prod => prod.id === id);
+		if (result.fraccion === "cuarto") setTotal(total - 1);
+		if (result.fraccion === "mediana") setTotal(total - 2);
+
 		const res = Object.values(radioSelect)?.filter(pro => pro.id !== id);
 		const response = res.reduce((acc, user) => {
 			acc[user.id] = user;
@@ -48,6 +55,15 @@ export default function Index() {
 				router.push("/home");
 			}
 		});
+	};
+
+	const productTotal = () => {
+		if (total === 0) return <h1>Selecciona como armar tu pizza</h1>;
+		if (total === 1) return <h1>Te falta 3/4 de pizza para completar la promo</h1>;
+		if (total === 2) return <h1>Te falta 1/2 de pizza para completar la promo</h1>;
+		if (total === 3) return <h1>Te falta 1/4 de pizza para completar la promo</h1>;
+		if (total === 4) return <h1>¡ Completaste la promo correctamente !</h1>;
+		if (total > 4) return <h1>Completa la cantidad correctamente</h1>;
 	};
 
 	return (
@@ -84,9 +100,7 @@ export default function Index() {
 								onChange={onChangeValue}
 								checked={select === "chica"}
 							/>
-							<div>
-								<h3>Chica</h3>
-							</div>
+							<h3 className="font-semibold text-sm">Chica</h3>
 						</div>
 						<div className="grid content-center">
 							<input
@@ -97,9 +111,7 @@ export default function Index() {
 								onChange={onChangeValue}
 								checked={select === "mediana"}
 							/>
-							<div>
-								<h3>Mediana</h3>
-							</div>
+							<h3 className="font-semibold text-sm">Mediana</h3>
 						</div>
 						<div className="grid content-center">
 							<input
@@ -110,15 +122,21 @@ export default function Index() {
 								onChange={onChangeValue}
 								checked={select === "gigante"}
 							/>
-							<div>
-								<h3>Gigante</h3>
-							</div>
+							<h3 className="font-semibold text-sm">Gigante</h3>
 						</div>
 					</div>
 					<div className="text-center font-poppins py-2 text-gray-400 text-sm">
 						<p>puedes elegir hasta {select === "gigante" ? "4" : "2"} gustos</p>
 					</div>
-
+					<div
+						className={
+							total === 4
+								? "bg-green-500  w-full text-white p-2 mt-2 text-center font-medium"
+								: "bg-red-500 w-full text-white p-2 mt-2 text-center font-medium"
+						}
+					>
+						{productTotal()}
+					</div>
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
 						{products.pizzas?.map((item, index) => (
 							<div key={item.id} className="flex justify-between items-center py-2  my-2 ">
@@ -130,16 +148,19 @@ export default function Index() {
 												Deshacer
 											</button>
 										)}
-										<div className="flex items-center gap-x-1">
-											<h3 className="text-gray-400 text-sm">1/4</h3>
-											<input
-												type="radio"
-												value="cuarto"
-												name={item.nombre}
-												checked={radioSelect[item.id]?.fraccion === "cuarto"}
-												onChange={() => handleChangeRadioButton(item, "cuarto")}
-											/>
-										</div>
+										{select === "gigante" && (
+											<div className="flex items-center gap-x-1">
+												<h3 className="text-gray-400 text-sm">1/4</h3>
+												<input
+													type="radio"
+													value="cuarto"
+													name={item.nombre}
+													checked={radioSelect[item.id]?.fraccion === "cuarto"}
+													onChange={() => handleChangeRadioButton(item, "cuarto")}
+												/>
+											</div>
+										)}
+
 										<div className="flex items-center gap-x-1">
 											<h3 className="text-gray-400 text-sm">1/2</h3>
 											<input
