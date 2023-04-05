@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { clearOrderPromo } from "store/reducers/orderSlice";
+import { addProductPromo, clearOrderPromo } from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ export default function Index() {
 	const router = useRouter();
 
 	useEffect(() => {
-		console.log(total);
+		console.log(radioSelect);
 	}, [radioSelect]);
 
 	const onChangeValue = e => {
@@ -25,10 +25,12 @@ export default function Index() {
 	};
 
 	const handleChangeRadioButton = (item, value) => {
+		const { id, nombre, precio } = value;
+
 		if (value === "cuarto") setTotal(total + 1);
 		if (value === "mediana") setTotal(total + 2);
 
-		radioSelect[item.id] = { "fraccion": value, ...item };
+		radioSelect[id] = { id, nombre, precio, "fraccion": value };
 		setRadioSelect({ ...radioSelect });
 	};
 

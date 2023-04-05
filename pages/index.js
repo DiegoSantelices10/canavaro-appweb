@@ -51,7 +51,7 @@ export default function Login() {
 						>
 							{({ values, handleChange }) => (
 								<Form>
-									<div>
+									<div className="mb-3">
 										<input
 											id="nombre"
 											className="shadow w-full bg-slate-50 font-light text-sm  text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
