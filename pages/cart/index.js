@@ -88,10 +88,10 @@ export default function Cart() {
 								<div className="w-full self-start">
 									<a className="font-bold  text-gray-800">
 										{item.nombre}
-										<span className="text-gray-400 font-light"> x {item.cantidad}</span>
+										<span className="text-gray-400 font-light"> x {item.descripcion ? item.cantidad : item.cant}</span>
 									</a>
 									<p className="text-gray-400 text-sm">
-										{item.descripcion || item.tamanio.charAt(0).toUpperCase() + item.tamanio.slice(1)}
+										{item?.descripcion || item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) || ""}
 									</p>
 									<p className="font-semibold text-sm text-gray-800">$ {item.precio * item.cantidad}</p>
 								</div>

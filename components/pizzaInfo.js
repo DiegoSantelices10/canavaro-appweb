@@ -31,7 +31,7 @@ export default function PizzaInfo({
 						className="text-red-500"
 						onClick={() =>
 							decrementCart({
-								idGenerator,
+								id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "gigante",
@@ -47,7 +47,7 @@ export default function PizzaInfo({
 						className="text-green-500"
 						onClick={() =>
 							incrementCart({
-								idGenerator,
+								id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "gigante",

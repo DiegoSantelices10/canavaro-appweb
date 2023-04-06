@@ -133,8 +133,8 @@ export default function Checkout() {
 
 			<div className="fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
 				<div className="flex justify-between items-center p-3">
-					<p className="font-semibold">Subtotal</p>
-					<h3 className="text-xl">$ {totalAmount}</h3>
+					<p className="text-lg font-semibold">Subtotal</p>
+					<h3 className="text-xl font-bold">$ {totalAmount}</h3>
 				</div>
 
 				<div className="px-3 w-full">

@@ -5,7 +5,7 @@ import { convertToPath } from "lib/items";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
-const Card = ({ data, data: { nombre, imagen, descripcion, categoria, precio } }) => {
+const Card = ({ data, data: { id, nombre, imagen, descripcion, categoria, precio } }) => {
 	const { orderPromo } = useSelector(state => state.order);
 
 	const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Card = ({ data, data: { nombre, imagen, descripcion, categoria, precio } }
 									type="button"
 									className="text-red-500 down"
 									onClick={e => {
-										decrementItems(data);
+										decrementItems({ id, nombre, precio });
 									}}
 								>
 									-
@@ -48,7 +48,7 @@ const Card = ({ data, data: { nombre, imagen, descripcion, categoria, precio } }
 									type="button"
 									className="text-green-500 up"
 									onClick={e => {
-										addItems(data);
+										addItems({ id, nombre, precio });
 									}}
 								>
 									+
