@@ -57,7 +57,7 @@ const Card = ({ data, data: { id, nombre, imagen, descripcion, categoria, precio
 						</div>
 					</div>
 				) : (
-					<Link href={`/products/${convertToPath(nombre)}`}>
+					<Link href={`/order/products/${convertToPath(nombre)}`}>
 						<a>
 							<div className="flex justify-between items-center gap-x-2">
 								<Image className="rounded-md" src={imagen} width={140} height={140} alt={nombre} />

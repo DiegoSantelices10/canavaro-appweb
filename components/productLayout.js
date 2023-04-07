@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import PizzaInfo from "./pizzaInfo";
 import Promotion from "./promotion";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
@@ -66,11 +66,11 @@ export default function ProductLayout({
 			}).then(result => {
 				if (result.isConfirmed) {
 					dispatch(clearOrderPromo());
-					router.push("/home");
+					router.push("/order/home");
 				}
 			});
 		} else {
-			router.push("/home");
+			router.push("/order/home");
 		}
 	};
 
@@ -99,7 +99,7 @@ export default function ProductLayout({
 		}
 
 		dispatch(clearOrderPromo());
-		router.push("/home");
+		router.push("/order/home");
 	};
 	return (
 		<div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">

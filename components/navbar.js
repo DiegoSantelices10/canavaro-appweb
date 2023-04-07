@@ -10,7 +10,7 @@ export default function Navbar({ nombre }) {
 					Hola <span className="font-medium">{nombre}</span>
 				</div>
 				<div className="p-1 rounded-md bg-red-500 w-32 px-2">
-					<Link href="/cart">
+					<Link href="/order/cart">
 						<a className="flex justify-around items-center">
 							<p className=" text-white p-1 font-nunito font-bold">Tu carrito</p>
 							<FiShoppingCart className="text-white" size={20} />

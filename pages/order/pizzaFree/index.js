@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductPromo, clearOrderPromo } from "store/reducers/orderSlice";
+import {  clearOrderPromo } from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -54,7 +54,7 @@ export default function Index() {
 		}).then(result => {
 			if (result.isConfirmed) {
 				dispatch(clearOrderPromo());
-				router.push("/home");
+				router.push("/order/home");
 			}
 		});
 	};

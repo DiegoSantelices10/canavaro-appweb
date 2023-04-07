@@ -1,7 +1,6 @@
-/* eslint-disable react/no-unknown-property */
+
 import { useState, useEffect } from "react";
 import CardPromotion from "components/cardPromotion";
-
 import Layout from "components/layout";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "services/fetchData";
@@ -122,7 +121,7 @@ export default function Home() {
 					{renderPromotions()}
 				</div>
 				<div className="pt-5">
-					<Link href={"/pizzaFree"}>
+					<Link href={"/order/pizzaFree"}>
 						<a>
 							<div className="w-full bg-red-500 p-2 flex items-center justify-between">
 								<TbPlayerTrackNext className="text-white" size={25} />
@@ -180,13 +179,14 @@ export default function Home() {
 									   w-full md:w-1/2 lg:w-1/2 p-3 bg-red-500 hover:bg-red-600 hover:-translate-y-1 
 									   transition-all duration-500 text-white text-base font-semibold "
 						>
+						Agregar al Carrito
+							
 							<div className="flex items-center gap-x-5 text-white font-semibold">
+								<p className="font-semibold text-xl">$ {totalPrice}</p>
 								<div className=" h-10 w-10 rounded-full bg-white flex justify-center items-center">
 									<p className="text-red-500 text-lg font-bold">{totalCant}</p>
 								</div>
-								<p className="font-semibold text-xl">$ {totalPrice}</p>
 							</div>
-							Agregar al Carrito
 						</button>
 					</div>
 				)}
@@ -194,8 +194,3 @@ export default function Home() {
 		</Layout>
 	);
 }
-
-// export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-// 	const res = getProducts;
-// 	store.dispatch(setProductData(res));
-// });

@@ -22,7 +22,7 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen, gus
 				</div>
 			</div>
 			<div className="bg-white h-12 rounded-b-md px-2 pt-1">
-				<Link href={`/products/${convertToPath(nombre)}`}>
+				<Link href={`/order/products/${convertToPath(nombre)}`}>
 					<a className="font-bold text-sm text-gray-800">{nombre}</a>
 				</Link>
 

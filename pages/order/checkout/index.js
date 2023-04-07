@@ -50,7 +50,7 @@ export default function Checkout() {
 		<div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
 				<div className="flex items-center gap-3 py-4">
-					<Link href={"/cart"}>
+					<Link href={"/order/cart"}>
 						<a>
 							<FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
 						</a>

@@ -16,12 +16,6 @@ export default function Cart() {
 		setOrder(orderList);
 	}, [orderList]);
 
-	// useEffect(() => {
-	// 	const setDispatch = setTimeout(() => {
-	// 		dispatch(addAddress(address));
-	// 	}, 2000);
-	// 	return () => clearTimeout(setDispatch);
-	// }, [address]);
 
 	const addressSet = () => {
 		dispatch(addAddress(address));
@@ -30,7 +24,7 @@ export default function Cart() {
 		<div className="font-poppins mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
 				<div className="flex items-center gap-3 py-4">
-					<Link href={"/home"}>
+					<Link href={"/order/home"}>
 						<a>
 							<FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
 						</a>
@@ -109,7 +103,7 @@ export default function Cart() {
 						<p className="font-extrabold text-xl">Subtotal</p>
 						<h3 className="text-xl">$ {totalAmount}</h3>
 					</div>
-					<Link href="/checkout">
+					<Link href="/order/checkout">
 						<a onClick={addressSet} className="text-center rounded-md w-auto p-4 text-white font-bold bg-red-600">
 							Continuar el pago
 						</a>
