@@ -12,7 +12,7 @@ function HeroHome() {
 					<div className="text-center pb-12 md:pb-16">
 						<h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4 text-gray-50">
 							Pizzeria
-							<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 pl-2">
+							<span className="bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-red-600 pl-2">
 								Canavaro
 							</span>
 						</h1>
@@ -22,7 +22,7 @@ function HeroHome() {
 							</p>
 							<div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
 								<div>
-									<Link href={"/"}>
+									<Link href={"/order/login"}>
 										<a className="btn font-bold text-lg bg-white  w-full mb-4 sm:w-auto sm:mb-0">Hace tu pedido</a>
 									</Link>
 								</div>
