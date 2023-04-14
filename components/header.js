@@ -54,37 +54,39 @@ function Header() {
 										<line x1="6" y1="6" x2="18" y2="18" />
 									</svg>
 								</div>
-								<ul className="flex flex-col items-center justify-between min-h-[250px]">
-									<li className="border-b border-gray-400 my-4 uppercase">
-										<Link to="home" smooth={true} offset={50} duration={500}>
-											Home
-										</Link>
-									</li>
-									<li className="border-b border-gray-400 my-4 uppercase">
-										<Link to="pizzas" smooth={true} offset={50} duration={500}>
-											Pizzas
-										</Link>
-									</li>
-									<li className="border-b border-gray-400 my-4 uppercase">
-										<Link to="empanadas" smooth={true} offset={50} duration={500}>
-											Empanadas
-										</Link>
-									</li>
-									<li className="border-b border-gray-400 my-4 uppercase">
-										<Link to="combos" smooth={true} offset={50} duration={500}>
-											Nuestros combos
-										</Link>
-									</li>
-									<div
-										className={`p-2 rounded-md 
+								<div className="flex flex-col justify-start text-center">
+									<ul>
+										<li className=" my-4 uppercase">
+											<Link to="home" smooth={true} offset={0} duration={500}>
+												<button onClick={() => setIsNavOpen(false)}>Home</button>
+											</Link>
+										</li>
+										<li className=" my-4 uppercase">
+											<Link to="pizzas" smooth={true} offset={-80} duration={500}>
+												<button onClick={() => setIsNavOpen(false)}>Pizzas</button>
+											</Link>
+										</li>
+										<li className=" my-4 uppercase">
+											<Link to="empanadas" smooth={true} offset={-80} duration={500}>
+												<button onClick={() => setIsNavOpen(false)}>Empanadas</button>
+											</Link>
+										</li>
+										<li className=" my-4 uppercase">
+											<Link to="combos" smooth={true} offset={-80} duration={500}>
+												<button onClick={() => setIsNavOpen(false)}>Nuestros Combos</button>
+											</Link>
+										</li>
+										<div
+											className={`p-2 rounded-md 
 										bg-gray-900 w-auto px-5 hover:bg-white text-white hover:text-gray-900  hover:-translate-y-1
 											transition-all duration-500`}
-									>
-										<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
-											<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
-										</button>
-									</div>
-								</ul>
+										>
+											<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
+												<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
+											</button>
+										</div>
+									</ul>
+								</div>
 							</div>
 						</section>
 
