@@ -10,7 +10,7 @@ function HeroHome() {
 				<div className="pt-32 pb-12 md:pt-40 md:pb-20">
 					{/* Section header */}
 					<div className="text-center pb-12 md:pb-16 w-auto">
-						<div className="text-6xl text-center sm:text-6xl md:text-8xl lg:text-8xl block w-full sm:block md:block lg:flex lg:justify-center lg:items-center gap-3">
+						<div className="text-6xl text-center sm:text-6xl md:text-8xl lg:text-8xl flex w-full  lg:flex lg:justify-center lg:items-center gap-3">
 							<h1 className=" w-auto  font-extrabold leading-tighter tracking-tighter  text-gray-50">Pizzeria</h1>
 							<h1 className="w-auto  font-extrabold text-gray-50 pl-2">Canavaro</h1>
 						</div>
