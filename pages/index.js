@@ -1,27 +1,19 @@
 import React from "react";
 import Header from "components/header";
-import HeroHome from "components/heroHome";
-// import FeaturesHome from "components/featuresHome";
-// import FeaturesBlocks from "components/featuresBlocks";
-// import Testimonials from "components/testimonials";
-// import Newsletter from "components/newSletter";
-// import Footer from "components/footer";
-
+import HomeFront from "components/homeFront";
+import SectionPizza from "components/sectionPizzas";
+import SectionEmpanadas from "components/sectionEmpanadas";
+import SectionCombos from "components/sectionCombos";
 export default function index() {
 	return (
 		<div className="flex flex-col min-h-screen overflow-hidden bg-slate-900">
-			<Header />
 			<main className="flex-grow bg-slate-900">
-				{/*  Page sections */}
-				<HeroHome />
-				{/* <FeaturesHome />
-				<FeaturesBlocks />
-				<Testimonials />
-				<Newsletter /> */}
+				<Header />
+				<HomeFront />
+				<SectionPizza />
+				<SectionEmpanadas />
+				<SectionCombos />
 			</main>
-
-			{/*  Site footer */}
-			{/* <Footer /> */}
 		</div>
 	);
 }

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-scroll";
+
+import { useRouter } from "next/router";
 
 function Header() {
 	const [top, setTop] = useState(true);
 	const [isNavOpen, setIsNavOpen] = useState(false);
-
+	const router = useRouter();
 	// detect whether user has scrolled the page down by 10px
 	useEffect(() => {
 		const scrollHandler = () => {
@@ -22,18 +24,13 @@ function Header() {
 		>
 			<div className="max-w-6xl mx-auto px-5 sm:px-6">
 				<div className="flex items-center justify-between h-16 md:h-20">
-					{/* Site branding */}
 					<div
 						className={`flex-shrink-0 mr-4 ${
 							!top ? "text-gray-800" : "text-white"
 						} font-extrabold font-nunito tracking-wider  text-xl`}
 					>
-						{/* Logo */}
 						<h1>CANAVARO</h1>
 					</div>
-
-					{/* Site navigation */}
-
 					<nav className="flex flex-grow font-nunito justify-end">
 						<section className="MOBILE-MENU block sm:block md:hidden lg:hidden">
 							<div className="HAMBURGER-ICON space-y-2" onClick={() => setIsNavOpen(prev => !prev)}>
@@ -59,18 +56,23 @@ function Header() {
 								</div>
 								<ul className="flex flex-col items-center justify-between min-h-[250px]">
 									<li className="border-b border-gray-400 my-4 uppercase">
-										<Link href="/about">
-											<a>Pizzas</a>
+										<Link to="home" smooth={true} offset={50} duration={500}>
+											Home
 										</Link>
 									</li>
 									<li className="border-b border-gray-400 my-4 uppercase">
-										<Link href="/about">
-											<a>Empanadas</a>
+										<Link to="pizzas" smooth={true} offset={50} duration={500}>
+											Pizzas
 										</Link>
 									</li>
 									<li className="border-b border-gray-400 my-4 uppercase">
-										<Link href="/about">
-											<a>Nuestros combos</a>
+										<Link to="empanadas" smooth={true} offset={50} duration={500}>
+											Empanadas
+										</Link>
+									</li>
+									<li className="border-b border-gray-400 my-4 uppercase">
+										<Link to="combos" smooth={true} offset={50} duration={500}>
+											Nuestros combos
 										</Link>
 									</li>
 									<div
@@ -78,11 +80,9 @@ function Header() {
 										bg-gray-900 w-auto px-5 hover:bg-white text-white hover:text-gray-900  hover:-translate-y-1
 											transition-all duration-500`}
 									>
-										<Link href={"/order/login"}>
-											<a className="flex justify-around items-center">
-												<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
-											</a>
-										</Link>
+										<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
+											<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
+										</button>
 									</div>
 								</ul>
 							</div>
@@ -91,35 +91,52 @@ function Header() {
 						<div>
 							<ul className="DESKTOP-MENU hidden sm:hidden md:flex lg:flex  md:flex-grow justify-end gap-4 flex-wrap items-center">
 								<li>
-									<a
-										href="#"
-										className={`${
-											!top ? "text-gray-800" : "text-white"
-										} font-medium   p-2 block items-center transition duration-150 ease-in-out`}
-										aria-current="page"
-									>
-										Pizzas
-									</a>
+									<Link to="home" spy={true} smooth={true} offset={0} duration={500}>
+										<button
+											className={`${
+												!top ? "text-gray-800" : "text-white"
+											} font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
+											Home
+										</button>
+									</Link>
 								</li>
 								<li>
-									<a
-										href="#"
-										className={`${
-											!top ? "text-gray-800" : "text-white"
-										} font-medium   p-2 block items-center transition duration-150 ease-in-out`}
-									>
-										Empanadas
-									</a>
+									<Link to="pizzas" spy={true} smooth={true} offset={-80} duration={500}>
+										<button
+											className={`${
+												!top ? "text-gray-800" : "text-white"
+											} pointer-events-auto font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
+											Pizzas
+										</button>
+									</Link>
 								</li>
 								<li>
-									<a
-										href="#"
-										className={`${
-											!top ? "text-gray-800" : "text-white"
-										} block font-medium   p-2  items-center transition duration-150 ease-in-out`}
-									>
-										Promociones
-									</a>
+									<Link to="empanadas" spy={true} smooth={true} offset={-80} duration={500}>
+										<button
+											className={`${
+												!top ? "text-gray-800" : "text-white"
+											} font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
+											Empanadas
+										</button>
+									</Link>
+								</li>
+								<li>
+									<Link to="combos" spy={true} smooth={true} offset={-80} duration={500}>
+										<button
+											className={`${
+												!top ? "text-gray-800" : "text-white"
+											} font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
+											Combos
+										</button>
+									</Link>
 								</li>
 								<div
 									className={`p-1 rounded-md ${
@@ -127,11 +144,9 @@ function Header() {
 									} bg-white w-auto px-2 hover:bg-red-500 hover:text-gray-50  hover:-translate-y-1
 											transition-all duration-500`}
 								>
-									<Link href={"/order/login"}>
-										<a className="flex justify-around items-center">
-											<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
-										</a>
-									</Link>
+									<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
+										<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
+									</button>
 								</div>
 							</ul>
 						</div>
