@@ -82,7 +82,7 @@ function Header() {
 											transition-all duration-500`}
 										>
 											<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
-												<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
+												<p className="p-1 font-nunito font-bold">HAC&Eacute; TU PEDIDO</p>
 											</button>
 										</div>
 									</ul>
