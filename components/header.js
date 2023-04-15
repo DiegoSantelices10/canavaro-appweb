@@ -34,15 +34,15 @@ function Header() {
 					<nav className="flex flex-grow font-nunito justify-end">
 						<section className="MOBILE-MENU block sm:block md:hidden lg:hidden">
 							<div className="HAMBURGER-ICON space-y-2" onClick={() => setIsNavOpen(prev => !prev)}>
-								<span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>{" "}
-								<span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-								<span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+								<span className={`block h-0.5 w-8 animate-pulse	${!top ? "bg-gray-900" : "bg-white"} `}></span>{" "}
+								<span className={`block h-0.5 w-8 animate-pulse ${!top ? "bg-gray-900" : "bg-white"}`}></span>
+								<span className={`block h-0.5 w-8 animate-pulse ${!top ? "bg-gray-900" : "bg-white"}`}></span>
 							</div>
 
 							<div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
 								<div className="absolute top-0 right-0 px-8 py-8" onClick={() => setIsNavOpen(false)}>
 									<svg
-										className="h-8 w-8 text-gray-600"
+										className="h-8 w-8 text-gray-200"
 										viewBox="0 0 24 24"
 										fill="none"
 										stroke="currentColor"
@@ -54,37 +54,36 @@ function Header() {
 										<line x1="6" y1="6" x2="18" y2="18" />
 									</svg>
 								</div>
-								<div className="flex flex-col justify-start text-center">
-									<ul>
+								<div className="mt-5">
+									<ul className="flex flex-col justify-start text-center gap-x-3">
 										<li className=" my-4 uppercase">
 											<Link to="home" smooth={true} offset={0} duration={500}>
 												<button onClick={() => setIsNavOpen(false)}>Home</button>
 											</Link>
 										</li>
 										<li className=" my-4 uppercase">
-											<Link to="pizzas" smooth={true} offset={-80} duration={500}>
+											<Link to="pizzas" smooth={true} offset={-65} duration={500}>
 												<button onClick={() => setIsNavOpen(false)}>Pizzas</button>
 											</Link>
 										</li>
 										<li className=" my-4 uppercase">
-											<Link to="empanadas" smooth={true} offset={-80} duration={500}>
+											<Link to="empanadas" smooth={true} offset={-65} duration={500}>
 												<button onClick={() => setIsNavOpen(false)}>Empanadas</button>
 											</Link>
 										</li>
 										<li className=" my-4 uppercase">
-											<Link to="combos" smooth={true} offset={-80} duration={500}>
+											<Link to="combos" smooth={true} offset={-65} duration={500}>
 												<button onClick={() => setIsNavOpen(false)}>Nuestros Combos</button>
 											</Link>
 										</li>
-										<div
-											className={`p-2 rounded-md 
-										bg-gray-900 w-auto px-5 hover:bg-white text-white hover:text-gray-900  hover:-translate-y-1
+
+										<button
+											onClick={() => router.push("/order/login")}
+											className={`p-4 rounded-md font-bold font-nunito text-base w-auto mx-auto px-6   bg-gray-900 text-white mt-5 hover:bg-white   hover:-translate-y-1
 											transition-all duration-500`}
 										>
-											<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
-												<p className="p-1 font-nunito font-bold">HAC&Eacute; TU PEDIDO</p>
-											</button>
-										</div>
+											HAC&Eacute; TU PEDIDO
+										</button>
 									</ul>
 								</div>
 							</div>
@@ -141,13 +140,13 @@ function Header() {
 									</Link>
 								</li>
 								<div
-									className={`p-1 rounded-md ${
+									className={`p-4 rounded-md ${
 										!top && "bg-gray-900 text-white"
-									} bg-white w-auto px-2 hover:bg-red-500 hover:text-gray-50  hover:-translate-y-1
+									} bg-white w-auto px-6 hover:bg-gray-900 hover:text-gray-50  hover:-translate-y-1
 											transition-all duration-500`}
 								>
 									<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
-										<p className="  p-1 font-nunito font-bold">Hace tu pedido</p>
+										<p className="text-base font-nunito font-bold">HAC&Eacute; TU PEDIDO</p>
 									</button>
 								</div>
 							</ul>
@@ -161,14 +160,14 @@ function Header() {
          display: block;
          position: absolute;
          width: 100%;
-         height: 100vh;
+         height: 70vh;
          top: 0;
          left: 0;
          background: white;
          z-index: 10;
          display: flex;
          flex-direction: column;
-         justify-content: space-evenly;
+         justify-content: center;
          align-items: center;
 		       }    `}</style>
 				</div>

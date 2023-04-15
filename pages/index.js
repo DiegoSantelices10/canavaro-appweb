@@ -6,8 +6,8 @@ import SectionEmpanadas from "components/sectionEmpanadas";
 import SectionCombos from "components/sectionCombos";
 export default function index() {
 	return (
-		<div className="flex flex-col min-h-screen overflow-hidden bg-slate-900">
-			<main className="flex-grow  bg-black">
+		<div className="flex flex-col min-h-screen overflow-hidden bg-gray-900">
+			<main className="font-nunito">
 				<Header />
 				<HomeFront />
 				<SectionPizza />
