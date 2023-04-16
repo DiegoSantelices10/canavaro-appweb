@@ -1,10 +1,17 @@
 import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import {  clearOrderPromo } from "store/reducers/orderSlice";
+import {
+	addPromoOrderList,
+	calculateSubTotal,
+	calculateTotalQuantity,
+	clearOrderPromo,
+} from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
+import { v4 as uuidv4 } from "uuid";
 
 export default function Index() {
 	const [select, setSelect] = useState("gigante");
@@ -15,9 +22,16 @@ export default function Index() {
 	const dispatch = useDispatch();
 	const router = useRouter();
 
+	const idGenerator = uuidv4();
+
 	useEffect(() => {
-		console.log(radioSelect);
+		checkSuma(radioSelect);
 	}, [radioSelect]);
+
+	useEffect(() => {
+		dispatch(calculateSubTotal());
+		dispatch(calculateTotalQuantity());
+	}, []);
 
 	const onChangeValue = e => {
 		const value = e.target.value;
@@ -25,11 +39,7 @@ export default function Index() {
 	};
 
 	const handleChangeRadioButton = (item, value) => {
-		const { id, nombre, precio } = value;
-
-		if (value === "cuarto") setTotal(total + 1);
-		if (value === "mediana") setTotal(total + 2);
-
+		const { id, nombre, precio } = item;
 		radioSelect[id] = { id, nombre, precio, "fraccion": value };
 		setRadioSelect({ ...radioSelect });
 	};
@@ -59,13 +69,46 @@ export default function Index() {
 		});
 	};
 
+	const checkSuma = radioArray => {
+		const sumaFracciones = Object.values(radioArray).reduce((total, fracc) => {
+			const fracciones = fracc.fraccion;
+			const [numerador, denominador] = fracciones.split("/");
+			const valorDecimal = parseInt(numerador) / parseInt(denominador);
+			return total + valorDecimal;
+		}, 0);
+		setTotal(sumaFracciones);
+	};
+
 	const productTotal = () => {
 		if (total === 0) return <h1>Selecciona como armar tu pizza</h1>;
-		if (total === 1) return <h1>Te falta 3/4 de pizza para completar la promo</h1>;
-		if (total === 2) return <h1>Te falta 1/2 de pizza para completar la promo</h1>;
-		if (total === 3) return <h1>Te falta 1/4 de pizza para completar la promo</h1>;
-		if (total === 4) return <h1>¡ Completaste la promo correctamente !</h1>;
-		if (total > 4) return <h1>Completa la cantidad correctamente</h1>;
+		if (total === 0.25) return <h1>Te falta 3/4 de pizza para completar la promo</h1>;
+		if (total === 0.5) return <h1>Te falta 1/2 de pizza para completar la promo</h1>;
+		if (total === 0.75) return <h1>Te falta 1/4 de pizza para completar la promo</h1>;
+		if (total === 1) return <h1>¡ Completaste la promo correctamente !</h1>;
+		if (total > 1) return <h1>Completa la cantidad correctamente</h1>;
+	};
+	const addCartPromo = (value, tamanio) => {
+		let total = 0;
+		let cantidad = 0;
+		Object.values(value).forEach(objeto => {
+			total += objeto.precio[tamanio];
+			cantidad++;
+		});
+
+		const promedio = total / cantidad;
+
+		const promo = {
+			id: idGenerator,
+			nombre: "Arma tu pizza",
+			productos: { ...value },
+			descripcion: `Pizza ${select}`,
+			categoria: "pizzas",
+			precio: promedio,
+			cantidad: 1,
+		};
+		dispatch(addPromoOrderList(promo));
+
+		setRadioSelect([]);
 	};
 
 	return (
@@ -93,7 +136,7 @@ export default function Index() {
 					</div>
 					<hr className="pb-3" />
 					<div className="flex w-full justify-around">
-						<div className="grid content-center">
+						<div className="grid content-center gap-2">
 							<input
 								id="chica"
 								type="radio"
@@ -101,10 +144,11 @@ export default function Index() {
 								name="chica"
 								onChange={onChangeValue}
 								checked={select === "chica"}
+								className="mx-auto"
 							/>
 							<h3 className="font-semibold text-sm">Chica</h3>
 						</div>
-						<div className="grid content-center">
+						<div className="grid content-center gap-2">
 							<input
 								id="mediana"
 								type="radio"
@@ -112,10 +156,11 @@ export default function Index() {
 								name="mediana"
 								onChange={onChangeValue}
 								checked={select === "mediana"}
+								className="mx-auto"
 							/>
-							<h3 className="font-semibold text-sm">Mediana</h3>
+							<h3 className="font-semibold text-center text-sm">Mediana</h3>
 						</div>
-						<div className="grid content-center">
+						<div className="grid content-center gap-2">
 							<input
 								id="gigante"
 								type="radio"
@@ -123,6 +168,7 @@ export default function Index() {
 								name="gigante"
 								onChange={onChangeValue}
 								checked={select === "gigante"}
+								className="mx-auto"
 							/>
 							<h3 className="font-semibold text-sm">Gigante</h3>
 						</div>
@@ -132,7 +178,7 @@ export default function Index() {
 					</div>
 					<div
 						className={
-							total === 4
+							total === 1
 								? "bg-green-500  w-full text-white p-2 mt-2 text-center font-medium"
 								: "bg-red-500 w-full text-white p-2 mt-2 text-center font-medium"
 						}
@@ -155,10 +201,10 @@ export default function Index() {
 												<h3 className="text-gray-400 text-sm">1/4</h3>
 												<input
 													type="radio"
-													value="cuarto"
+													value="1/4"
 													name={item.nombre}
-													checked={radioSelect[item.id]?.fraccion === "cuarto"}
-													onChange={() => handleChangeRadioButton(item, "cuarto")}
+													checked={radioSelect[item.id]?.fraccion === "1/4"}
+													onChange={() => handleChangeRadioButton(item, "1/4")}
 												/>
 											</div>
 										)}
@@ -167,10 +213,10 @@ export default function Index() {
 											<h3 className="text-gray-400 text-sm">1/2</h3>
 											<input
 												type="radio"
-												value="mediana"
+												value="1/2"
 												name={item.nombre}
-												checked={radioSelect[item.id]?.fraccion === "mediana"}
-												onChange={() => handleChangeRadioButton(item, "mediana")}
+												checked={radioSelect[item.id]?.fraccion === "1/2"}
+												onChange={() => handleChangeRadioButton(item, "1/2")}
 											/>
 										</div>
 									</div>
@@ -190,9 +236,9 @@ export default function Index() {
 				<button
 					className="flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 
 						transition-all duration-500 text-white text-base font-semibold "
-					// onClick={() => {
-					// 	addCartPromo(orderPromo);
-					// }}
+					onClick={() => {
+						addCartPromo(radioSelect, select);
+					}}
 				>
 					Agregar al Carrito
 					<FiShoppingCart size={23} />{" "}

@@ -42,8 +42,6 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 		const { id, nombre, descripcion } = promociones?.find(item => item.nombre === e.target.value);
 		const res = { id, nombre, descripcion };
 		setSelectCombo(res);
-
-		// const res = orderPromo?.find(item => item.id === pre.id);
 	};
 	return (
 		<div>
