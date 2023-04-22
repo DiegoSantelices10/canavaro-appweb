@@ -77,7 +77,7 @@ export default function Login() {
 										<button
 											type="submit"
 											className=" w-auto text-right  p-2 rounded-3xl hover:bg-black hover:text-white hover:-translate-y-1 transition-all duration-500  
-						 font-semibold mt-3"
+													 font-semibold mt-3"
 										>
 											<FaChevronRight size={30} />
 										</button>

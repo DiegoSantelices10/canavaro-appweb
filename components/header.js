@@ -19,7 +19,7 @@ function Header() {
 	return (
 		<header
 			className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
-				!top && "bg-white backdrop-blur-sm shadow-lg"
+				!top && "bg-white bg-opacity-70 backdrop-blur-sm shadow-lg"
 			}`}
 		>
 			<div className="max-w-6xl mx-auto px-5 sm:px-6">

@@ -1,10 +1,8 @@
-
 import { useState, useEffect } from "react";
 import CardPromotion from "components/cardPromotion";
 import Layout from "components/layout";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "services/fetchData";
-import { setProductData } from "store/reducers/productSlice";
+
 import Card from "components/Card";
 import { ToastContainer } from "react-toastify";
 
@@ -39,9 +37,6 @@ export default function Home() {
 	const renderStore = renderProductos => {
 		return products[`${renderProductos}`]?.map(data => <Card key={data.id} data={data} />);
 	};
-	useEffect(() => {
-		dispatch(setProductData(getProducts));
-	}, []);
 
 	useEffect(() => {
 		calculateEmpanadas();
@@ -179,8 +174,7 @@ export default function Home() {
 									   w-full md:w-1/2 lg:w-1/2 p-3 bg-red-500 hover:bg-red-600 hover:-translate-y-1 
 									   transition-all duration-500 text-white text-base font-semibold "
 						>
-						Agregar al Carrito
-							
+							Agregar al Carrito
 							<div className="flex items-center gap-x-5 text-white font-semibold">
 								<p className="font-semibold text-xl">$ {totalPrice}</p>
 								<div className=" h-10 w-10 rounded-full bg-white flex justify-center items-center">
