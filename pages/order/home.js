@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "components/Card";
 import { ToastContainer } from "react-toastify";
 
-import { TbPlayerTrackNext } from "react-icons/tb";
 import Link from "next/link";
 import {
 	addPromoOrderList,
@@ -14,7 +13,10 @@ import {
 	calculateTotalQuantity,
 	clearOrderPromo,
 } from "store/reducers/orderSlice";
+
 import { v4 as uuidv4 } from "uuid";
+import { setProductData } from "store/reducers/productSlice";
+import { getProducts } from "services/fetchData";
 
 export default function Home() {
 	const [renderProducts, setRenderProductos] = useState("pizzas");
@@ -42,11 +44,16 @@ export default function Home() {
 		calculateEmpanadas();
 	}, [orderPromo]);
 
+	useEffect(() => {
+		if (products.length < 1) dispatch(setProductData(getProducts));
+	}, []);
+
 	const calculateEmpanadas = () => {
 		const requiredQuantity = 12;
 		let priceU;
 		const array = [];
 		let cantidadTotal = 0;
+
 		orderPromo.map(item => {
 			const { precio, cantidad } = item;
 			priceU = precio;
@@ -115,48 +122,76 @@ export default function Home() {
 					</style>
 					{renderPromotions()}
 				</div>
-				<div className="pt-5">
+				<div className="my-5">
 					<Link href={"/order/pizzaFree"}>
-						<a>
-							<div className="w-full bg-red-500 p-2 flex items-center justify-between">
-								<TbPlayerTrackNext className="text-white" size={25} />
-								<p className="text-white font-nunito italic font-black">¡ ARMA TU PIZZA COMO QUIERAS !</p>
-								<TbPlayerTrackNext className="text-white" size={25} />
-							</div>
-						</a>
+						<div className="w-full bg-red-500 p-2 flex items-center justify-between">
+							<p className="text-white font-nunito  font-extrabold">¡ ARMA TU PIZZA COMO QUIERAS !</p>
+							<a className="rounded-md font-bold bg-white p-2 text-xs px-3">INGRESA AQUI</a>
+						</div>
 					</Link>
 				</div>
-				<div className="flex justify-center items-center w-full gap-3 py-6 text-sm ">
-					<button
-						onClick={() => setRenderProductos("pizzas")}
-						className={
-							renderProducts !== "pizzas"
-								? "w-32 rounded-3xl font-medium text-gray-400"
-								: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
-						}
-					>
-						Pizzas
-					</button>
-					<button
-						onClick={() => setRenderProductos("empanadas")}
-						className={
-							renderProducts !== "empanadas"
-								? "w-32 rounded-3xl font-medium text-gray-400"
-								: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
-						}
-					>
-						Empanadas
-					</button>
-					<button
-						onClick={() => setRenderProductos("promociones")}
-						className={
-							renderProducts !== "promociones"
-								? "w-32 rounded-3xl font-medium text-gray-400"
-								: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
-						}
-					>
-						Promociones
-					</button>
+				<div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
+					<style jsx>
+						{`
+							.flexp::-webkit-scrollbar-thumb {
+								background: #ffffff;
+								border-radius: 20px;
+							}
+
+							.flexp::-webkit-scrollbar {
+								height: 0px;
+							}
+						`}
+					</style>
+
+					<div>
+						<button
+							onClick={() => setRenderProductos("pizzas")}
+							className={
+								renderProducts !== "pizzas"
+									? "w-32 rounded-3xl font-semibold text-gray-400"
+									: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
+							}
+						>
+							Pizzas
+						</button>
+					</div>
+					<div>
+						<button
+							onClick={() => setRenderProductos("empanadas")}
+							className={
+								renderProducts !== "empanadas"
+									? "w-52 rounded-3xl font-semibold text-gray-400"
+									: "w-52 font-bold bg-gray-300 text-white rounded-3xl"
+							}
+						>
+							Canastitas & Empanadas
+						</button>
+					</div>
+					<div>
+						<button
+							onClick={() => setRenderProductos("promociones")}
+							className={
+								renderProducts !== "promociones"
+									? "w-32 rounded-3xl font-semibold text-gray-400"
+									: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
+							}
+						>
+							Promociones
+						</button>
+					</div>
+					<div>
+						<button
+							onClick={() => setRenderProductos("bebidas")}
+							className={
+								renderProducts !== "bebidas"
+									? "w-32 rounded-3xl font-semibold text-gray-400"
+									: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
+							}
+						>
+							Bebidas
+						</button>
+					</div>
 				</div>
 
 				<div>

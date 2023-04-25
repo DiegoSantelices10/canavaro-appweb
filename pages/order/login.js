@@ -10,7 +10,7 @@ export default function Login() {
 	const dispatch = useDispatch();
 
 	return (
-		<div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 font-poppins">
+		<div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
 			<div className="h-full w-full lg:w-4/5 md:w-4/5 sm:w-4/5 flex items-center justify-center lg:justify-between mx-auto">
 				<div className="w-2/5 text-center hidden lg:block text-white">
 					<div className="mx-auto ">
@@ -28,7 +28,7 @@ export default function Login() {
 						</div>
 					</div>
 					<div className="w-auto mx-auto pt-10 pb-4">
-						<h1 className="font-bold text-3xl">¡Bienvenido!</h1>
+						<h1 className="font-extrabold text-3xl font-nunito">¡Bienvenido!</h1>
 					</div>
 					<div className="flex flex-col gap-3">
 						<Formik
@@ -54,7 +54,7 @@ export default function Login() {
 									<div className="mb-3">
 										<input
 											id="nombre"
-											className="shadow w-full bg-slate-50 font-light text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+											className="shadow w-full font-nunito font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
 											placeholder="Introduce tu nombre"
 											type="text"
 											name="nombre"
@@ -65,7 +65,7 @@ export default function Login() {
 									<div>
 										<input
 											id="telefono"
-											className="shadow w-full bg-slate-50 font-light text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+											className="shadow w-full font-nunito bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
 											placeholder="Introduce tu telefono"
 											type="text"
 											name="telefono"
@@ -92,7 +92,7 @@ export default function Login() {
 					  before:mt-0.5 after:flex-1 after:border-t 
 					  after:border-gray-300 after:mt-0.5"
 					>
-						<p className="text-center text-xs text-slate-400 mx-4 mb-0">Nuestras redes</p>
+						<p className="text-center text-xs text-slate-400 mx-4 mb-0 font-nunito">Nuestras redes</p>
 					</div>
 					<div className="text-center mx-auto flex w-full gap-2">
 						<div className="flex items-center justify-center w-1/2 h-12 rounded-xl shadow  text-center bg-slate-50">
@@ -106,7 +106,7 @@ export default function Login() {
 							</a>
 						</div>
 					</div>
-					<h1 className="font-light pt-4 text-center text-base font-poppins text-gray-400">Pelliza 1794 - Olivos</h1>
+					<h1 className="font-light pt-4 text-center text-base font-nunito text-gray-400">Pelliza 1794 - Olivos</h1>
 				</div>
 			</div>
 		</div>

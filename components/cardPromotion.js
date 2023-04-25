@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { convertToPath } from "lib/items";
 
-export default function CardPromotion({ data: { nombre, descripcion, imagen, gustos } }) {
+export default function CardPromotion({ data: { nombre, descripcion, imagen, gustos, precio } }) {
 	return (
 		<div className=" border-x border-b rounded-md ">
 			<div className="relative bg-white  rounded-t-md w-60 h-32 ">

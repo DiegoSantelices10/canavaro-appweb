@@ -9,7 +9,7 @@ export default function sectionPizza() {
 	const { pizzas } = products;
 
 	return (
-		<Element name="pizzas" className="p-3  w-full h-screen element font-nunito">
+		<Element name="pizzas" className="p-3  w-full  element font-nunito">
 			<h1 className="text-center  p-1 text-2xl font-extrabold">Nuestras Pizzas</h1>
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
@@ -32,7 +32,7 @@ export default function sectionPizza() {
 				</div>
 			</div>
 			<div
-				className="bg-black p-3 bg-opacity-80 w-full text-white grid grid-cols-2 gap-2 content-center py-7
+				className="bg-black p-3 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center py-7
 			"
 			>
 				{pizzas?.map(producto => {

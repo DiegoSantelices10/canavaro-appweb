@@ -4,6 +4,7 @@ import HomeFront from "components/sections/homeFront";
 import SectionPizza from "components/sections/sectionPizzas";
 import SectionEmpanadas from "components/sections/sectionEmpanadas";
 import SectionCombos from "components/sections/sectionCombos";
+import Footer from "components/sections/footer";
 import { useDispatch } from "react-redux";
 import { setProductData } from "store/reducers/productSlice";
 import { getProducts } from "services/fetchData";
@@ -30,6 +31,7 @@ export default function index() {
 				<SectionPizza />
 				<SectionEmpanadas />
 				<SectionCombos />
+				<Footer />
 			</main>
 		</div>
 	);
