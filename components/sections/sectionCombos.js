@@ -40,17 +40,17 @@ export default function sectionCombos() {
 				<div>
 					<h1 className="col-span-2 font-bold text-lg text-center">Combo 4</h1>
 					<p className="text-white text-center">Combo 1 o Combo 2</p>
-					<p className="text-white text-center">6 Empanadas</p>
+					<p className="text-white text-center">más 6 Empanadas</p>
 				</div>
 				<div>
 					<h1 className="col-span-2 font-bold text-lg text-center">Combo 5</h1>
 					<p className="text-white text-center">Combo 1 o Combo 2</p>
-					<p className="text-white text-center">12 Empanadas</p>
+					<p className="text-white text-center">más 12 Empanadas</p>
 				</div>
 				<div>
 					<h1 className="col-span-2 font-bold text-lg text-center">Combo 6</h1>
 					<p className="text-white text-center">Combo 3</p>
-					<p className="text-white text-center">12 Empanadas</p>
+					<p className="text-white text-center">más 12 Empanadas</p>
 				</div>
 			</div>
 		</Element>
