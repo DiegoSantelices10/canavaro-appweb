@@ -10,7 +10,7 @@ function HomeFront() {
 				<div className="absolute inset-0 bg-black bg-opacity-30 h-3/5"> </div>
 				<style jsx>{`
 					.bg-image {
-						background-image: url(http://www.pizzazeta.com/wp-content/uploads/2019/11/inicio1.jpg);
+						background-image: url(/images/fondofront.jpg);
 						background-size: cover;
 						background-position: center center;
 						width: 100%;
