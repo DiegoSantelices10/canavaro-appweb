@@ -95,20 +95,26 @@ export default function Index() {
 			cantidad++;
 		});
 
+		const newList = Object.values(value).map(({ precio, ...resto }) => resto);
+
 		const promedio = total / cantidad;
+
+		const totalRedondeado = Math.ceil(promedio / 100) * 100;
 
 		const promo = {
 			id: idGenerator,
 			nombre: "Arma tu pizza",
-			productos: { ...value },
+			productos: { ...newList },
 			descripcion: `Pizza ${select}`,
 			categoria: "pizzas",
-			precio: promedio,
+			precio: totalRedondeado,
 			cantidad: 1,
 		};
 		dispatch(addPromoOrderList(promo));
-
+		dispatch(calculateSubTotal());
+		dispatch(calculateTotalQuantity());
 		setRadioSelect([]);
+		router.push("/order/home");
 	};
 
 	return (

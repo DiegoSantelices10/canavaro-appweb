@@ -19,7 +19,7 @@ import { setProductData } from "store/reducers/productSlice";
 import { getProducts } from "services/fetchData";
 
 export default function Home() {
-	const [renderProducts, setRenderProductos] = useState("pizzas");
+	const [renderProducts, setRenderProductos] = useState("empanadas");
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [totalCant, setTotalCant] = useState(0);
 	const [docenaPrice, setDocenaPrice] = useState(0);
@@ -123,12 +123,12 @@ export default function Home() {
 					{renderPromotions()}
 				</div>
 				<div className="my-5">
-					<Link href={"/order/pizzaFree"}>
-						<div className="w-full bg-red-500 p-2 flex items-center justify-between">
-							<p className="text-white font-nunito  font-extrabold">¡ ARMA TU PIZZA COMO QUIERAS !</p>
+					<div className="w-full bg-red-500 p-2 flex items-center justify-between">
+						<p className="text-white font-nunito  font-extrabold">¡ ARMA TU PIZZA COMO QUIERAS !</p>
+						<Link href={"/order/pizzaFree"}>
 							<a className="rounded-md font-bold bg-white p-2 text-xs px-3">INGRESA AQUI</a>
-						</div>
-					</Link>
+						</Link>
+					</div>
 				</div>
 				<div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
 					<style jsx>
@@ -143,19 +143,6 @@ export default function Home() {
 							}
 						`}
 					</style>
-
-					<div>
-						<button
-							onClick={() => setRenderProductos("pizzas")}
-							className={
-								renderProducts !== "pizzas"
-									? "w-32 rounded-3xl font-semibold text-gray-400"
-									: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
-							}
-						>
-							Pizzas
-						</button>
-					</div>
 					<div>
 						<button
 							onClick={() => setRenderProductos("empanadas")}
@@ -168,6 +155,19 @@ export default function Home() {
 							Canastitas & Empanadas
 						</button>
 					</div>
+					<div>
+						<button
+							onClick={() => setRenderProductos("pizzas")}
+							className={
+								renderProducts !== "pizzas"
+									? "w-32 rounded-3xl font-semibold text-gray-400"
+									: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
+							}
+						>
+							Pizzas
+						</button>
+					</div>
+
 					<div>
 						<button
 							onClick={() => setRenderProductos("promociones")}
@@ -203,20 +203,24 @@ export default function Home() {
 				</div>
 				{renderProducts === "empanadas" && (
 					<div className="bg-white w-full fixed bottom-0 p-3  sm:w-4/5 md:w-4/5 lg:w-3/5">
-						<button
-							onClick={() => addCartPromo(orderPromo)}
+						<div
 							className="flex justify-between items-center gap-3 mx-auto text-center rounded-md 
-									   w-full md:w-1/2 lg:w-1/2 p-3 bg-red-500 hover:bg-red-600 hover:-translate-y-1 
-									   transition-all duration-500 text-white text-base font-semibold "
+									   w-full md:w-1/2 lg:w-1/2 p-3 bg-red-500 text-white text-base font-semibold "
 						>
-							Agregar al Carrito
+							<button
+								onClick={() => addCartPromo(orderPromo)}
+								className="p-3 font-bold bg-slate-50 rounded-md text-black text-xs hover:-translate-y-1 
+								transition-all duration-500"
+							>
+								AGREGAR AL CARRITO
+							</button>
 							<div className="flex items-center gap-x-5 text-white font-semibold">
 								<p className="font-semibold text-xl">$ {totalPrice}</p>
 								<div className=" h-10 w-10 rounded-full bg-white flex justify-center items-center">
 									<p className="text-red-500 text-lg font-bold">{totalCant}</p>
 								</div>
 							</div>
-						</button>
+						</div>
 					</div>
 				)}
 			</div>
