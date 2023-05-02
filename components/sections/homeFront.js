@@ -38,7 +38,7 @@ function HomeFront() {
 					</div>
 
 					<div className="w-full h-20 flex items-center">
-						<Link href={"order/login"}>
+						<Link href={"/order/login"}>
 							<a
 								className={`p-4 rounded-md font-bold font-nunito text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
 											transition-all duration-500`}

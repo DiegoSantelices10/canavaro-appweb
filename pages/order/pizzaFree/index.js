@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
 	addPromoOrderList,
 	calculateSubTotal,
@@ -114,6 +115,9 @@ export default function Index() {
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
 		setRadioSelect([]);
+		toast("Producto agregado al carrito", {
+			theme: "dark",
+		});
 		router.push("/order/home");
 	};
 

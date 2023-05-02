@@ -74,6 +74,11 @@ export const orderSlice = createSlice({
 		removeProduct: (state, action) => {
 			state.orderPromo = state.orderPromo.filter(product => product.id !== action.payload.id);
 		},
+		removeItemCart: (state, action) => {
+			console.log("remove id store", action.payload);
+
+			state.orderList = state.orderList.filter(product => product.id !== action.payload);
+		},
 
 		calculateSubTotal: (state, action) => {
 			const array = [];
@@ -117,6 +122,7 @@ export const {
 	clearOrderPromo,
 	setQuantityDemanded,
 	setCheckout,
+	removeItemCart,
 } = orderSlice.actions;
 
 export const selectOrder = state => state.order;

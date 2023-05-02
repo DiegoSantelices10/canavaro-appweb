@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { FiChevronsLeft, FiEdit } from "react-icons/fi";
-import { MdOutlineDeliveryDining, MdOutlineEmojiPeople } from "react-icons/md";
+import { FiChevronsLeft } from "react-icons/fi";
+import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addAddress } from "store/reducers/userSlice";
+import { calculateSubTotal, calculateTotalQuantity, removeItemCart } from "store/reducers/orderSlice";
 
 export default function Cart() {
 	const { orderList, totalAmount } = useSelector(state => state.order);
@@ -14,12 +15,19 @@ export default function Cart() {
 
 	useEffect(() => {
 		setOrder(orderList);
+		dispatch(calculateSubTotal());
+		dispatch(calculateTotalQuantity());
 	}, [orderList]);
-
 
 	const addressSet = () => {
 		dispatch(addAddress(address));
 	};
+
+	const deleteItem = id => {
+		console.log("id front", id);
+		dispatch(removeItemCart(id));
+	};
+
 	return (
 		<div className="font-poppins mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
@@ -89,7 +97,9 @@ export default function Cart() {
 									</p>
 									<p className="font-semibold text-sm text-gray-800">$ {item.precio * item.cantidad}</p>
 								</div>
-								<FiEdit size={30} className="text-red-700" />
+								<button onClick={() => deleteItem(item.id)}>
+									<MdDeleteOutline size={30} className="text-red-700" />
+								</button>
 							</div>
 						</div>
 						<hr />

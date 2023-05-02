@@ -1,9 +1,23 @@
 import Image from "next/image";
 import { Element } from "react-scroll";
+import Modal from "components/modal";
+import { useState } from "react";
 
 export default function sectionEmpanadas() {
+	const [showModal, setShowModal] = useState(false);
+
+	const handleOpenModal = () => {
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setShowModal(false);
+	};
 	return (
 		<Element name="empanadas" className="p-3 w-full  element font-nunito">
+			<Modal show={showModal} handleClose={handleCloseModal}>
+				<p className="text-lg font-semibold">Contenido del modal</p>
+			</Modal>
 			<h1 className="text-center p-3 text-2xl font-extrabold">Empanadas y Canastitas</h1>
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between">
@@ -17,9 +31,14 @@ export default function sectionEmpanadas() {
 					</div>
 				</div>
 			</div>
-			<div className="bg-black p-3 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center py-7">
+			<div className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center ">
+				<p className="italic col-span-2 text-white text-center text-xs py-3">
+					* Hacer click sobre el titulo para ver descripcion.
+				</p>
 				<h1 className="col-span-2 font-bold text-lg text-center">Canastitas</h1>
-				<p className="text-white text-center">Panceta y Cheddar</p>
+				<p onClick={handleOpenModal} className="cursor-pointer text-white text-center">
+					Panceta y Cheddar
+				</p>
 				<p className="text-white text-center">Panceta y Provolone</p>
 				<p className="text-white text-center">Jamon y Muzzarella</p>
 				<p className="text-white text-center">Provolone</p>

@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import Modal from "components/modal";
 
 export default function sectionPizza() {
 	const { products } = useSelector(state => state.product);
-
 	const { pizzas } = products;
+
+	const [showModal, setShowModal] = useState(false);
+
+	const handleOpenModal = () => {
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setShowModal(false);
+	};
 
 	return (
 		<Element name="pizzas" className="p-3  w-full  element font-nunito">
+			<Modal show={showModal} handleClose={handleCloseModal}>
+				<p className="text-lg font-semibold">Contenido del modal</p>
+			</Modal>
 			<h1 className="text-center  p-1 text-2xl font-extrabold">Nuestras Pizzas</h1>
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
@@ -32,13 +45,18 @@ export default function sectionPizza() {
 				</div>
 			</div>
 			<div
-				className="bg-black p-3 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center py-7
-			"
+				className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto 
+							text-white grid grid-cols-2 gap-2 content-center "
 			>
+				<p className="italic col-span-2 text-white text-center text-xs py-3">
+					* Hacer click sobre el titulo para ver descripcion.
+				</p>
 				{pizzas?.map(producto => {
 					return (
 						<div key={producto.id}>
-							<p className="text-white text-center">{producto.nombre}</p>
+							<p onClick={handleOpenModal} className=" cursor-pointer text-white text-center">
+								{producto.nombre}
+							</p>
 						</div>
 					);
 				})}

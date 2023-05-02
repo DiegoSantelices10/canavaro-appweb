@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Card from "components/Card";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Link from "next/link";
 import {

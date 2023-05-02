@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { Provider } from 'react-redux';
-import { wrapper } from 'store/app/store';
-import 'styles/globals.css';
+import { Provider } from "react-redux";
+import { wrapper } from "store/app/store";
+import "styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, ...rest }) {
 	const { store, props } = wrapper.useWrappedStore(rest);

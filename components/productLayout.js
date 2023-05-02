@@ -8,7 +8,6 @@ import PizzaInfo from "./pizzaInfo";
 import Promotion from "./promotion";
 
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 
