@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { getItemData, getPathsFromTitle } from "lib/items";
+import { getItemData, getPathsFromTitle } from "libs/items";
 import ProductLayout from "components/productLayout";
 import { getProducts } from "services/fetchData";
 export default function Product({ productInfo: { data }, id }) {

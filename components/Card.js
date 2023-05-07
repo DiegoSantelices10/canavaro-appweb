@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Image from "next/image";
 import Link from "next/link";
-import { convertToPath } from "lib/items";
+import { convertToPath } from "libs/items";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 

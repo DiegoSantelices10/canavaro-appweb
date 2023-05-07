@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Image from "next/image";
 import Link from "next/link";
-import { convertToPath } from "lib/items";
+import { convertToPath } from "libs/items";
 
 export default function CardPromotion({ data: { nombre, descripcion, imagen, gustos, precio } }) {
 	return (

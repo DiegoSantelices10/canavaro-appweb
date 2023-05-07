@@ -357,13 +357,4 @@ export const getProducts = {
 			"addProducts": true,
 		},
 	],
-	"armaTuPizza": [
-		{
-			"id": 31,
-			"nombre": "ArmaTuPizza",
-			"descripcion": "Elegi los gustos que quieras",
-			"categoria": "arma tu pizza",
-			"imagen": "https://live.staticflickr.com/65535/49084210156_bf589452e3_m.jpg",
-		},
-	],
 };
