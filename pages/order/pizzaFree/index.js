@@ -196,43 +196,45 @@ export default function Index() {
 						{productTotal()}
 					</div>
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
-						{products.pizzas?.map((item, index) => (
-							<div key={item.id} className="flex justify-between items-center py-2  my-2 ">
-								<h2>{item.nombre}</h2>
-								<div className="w-auto   px-3 text-end space-x-4 text-base">
-									<div className="flex w-full justify-around items-center gap-5">
-										{radioSelect[item.id]?.fraccion && (
-											<button onClick={() => clearFraction(item.id)} className="text-gray-400 text-xs font-semibold">
-												Deshacer
-											</button>
-										)}
-										{select === "gigante" && (
+						{products
+							?.filter(item => item.categorias === "pizzas")
+							.map((item, index) => (
+								<div key={item.id} className="flex justify-between items-center py-2  my-2 ">
+									<h2>{item.nombre}</h2>
+									<div className="w-auto   px-3 text-end space-x-4 text-base">
+										<div className="flex w-full justify-around items-center gap-5">
+											{radioSelect[item.id]?.fraccion && (
+												<button onClick={() => clearFraction(item.id)} className="text-gray-400 text-xs font-semibold">
+													Deshacer
+												</button>
+											)}
+											{select === "gigante" && (
+												<div className="flex items-center gap-x-1">
+													<h3 className="text-gray-400 text-sm">1/4</h3>
+													<input
+														type="radio"
+														value="1/4"
+														name={item.nombre}
+														checked={radioSelect[item.id]?.fraccion === "1/4"}
+														onChange={() => handleChangeRadioButton(item, "1/4")}
+													/>
+												</div>
+											)}
+
 											<div className="flex items-center gap-x-1">
-												<h3 className="text-gray-400 text-sm">1/4</h3>
+												<h3 className="text-gray-400 text-sm">1/2</h3>
 												<input
 													type="radio"
-													value="1/4"
+													value="1/2"
 													name={item.nombre}
-													checked={radioSelect[item.id]?.fraccion === "1/4"}
-													onChange={() => handleChangeRadioButton(item, "1/4")}
+													checked={radioSelect[item.id]?.fraccion === "1/2"}
+													onChange={() => handleChangeRadioButton(item, "1/2")}
 												/>
 											</div>
-										)}
-
-										<div className="flex items-center gap-x-1">
-											<h3 className="text-gray-400 text-sm">1/2</h3>
-											<input
-												type="radio"
-												value="1/2"
-												name={item.nombre}
-												checked={radioSelect[item.id]?.fraccion === "1/2"}
-												onChange={() => handleChangeRadioButton(item, "1/2")}
-											/>
 										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							))}
 					</div>
 				</div>
 

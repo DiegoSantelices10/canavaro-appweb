@@ -14,11 +14,10 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 	const { orderPromo, quantityDemanded } = useSelector(state => state.order);
 	const { products } = useSelector(state => state.product);
 
-	const { promociones } = products;
-
 	useEffect(() => {
-		setPromotions(promociones);
+		setPromotions(products?.filter(item => item.categoria === "promociones"));
 		dispatch(setQuantityDemanded(cantMax));
+		console.log("data", data);
 	}, []);
 
 	const addItems = value => {
@@ -39,7 +38,9 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 	};
 	const onChangeValue = e => {
 		setSelect(e.target.value);
-		const { id, nombre, descripcion } = promociones?.find(item => item.nombre === e.target.value);
+		const { id, nombre, descripcion } = products
+			?.filter(item => item.categoria === "promociones")
+			.find(item => item.nombre === e.target.value);
 		const res = { id, nombre, descripcion };
 		setSelectCombo(res);
 	};
@@ -82,7 +83,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 				<></>
 			)}
 
-			{data.nombre === "Combo 3" || data.nombre === "Combo 2" || data.nombre === "Combo 1" ? (
+			{!data.addEmpanadas ? (
 				<div className="flex justify-between py-2  my-2 ">
 					<div className="w-1/2 font-medium">
 						<h2>{data.nombre}</h2>
@@ -127,38 +128,40 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 								</div>
 							)}
 
-							{products.empanadas?.map(({ id, nombre }) => {
-								return (
-									<div key={id} className="flex justify-between py-2  my-2 ">
-										<div className="w-1/2 font-medium">
-											<h2>{nombre}</h2>
+							{products
+								?.filter(item => item.categoria === "empanadas")
+								.map(({ id, nombre }) => {
+									return (
+										<div key={id} className="flex justify-between py-2  my-2 ">
+											<div className="w-1/2 font-medium">
+												<h2>{nombre}</h2>
+											</div>
+											<div className="w-auto   px-3 text-end space-x-4 text-base">
+												<button
+													type="button"
+													className="text-red-500 down"
+													onClick={e => {
+														setQuantity(quantityDemanded + 1);
+														decrementItems({ id, nombre });
+													}}
+												>
+													-
+												</button>
+												<span className="font-normal">{productQuantity(id)}</span>
+												<button
+													type="button"
+													className={quantityDemanded < 1 ? `invisible` : `text-green-500`}
+													onClick={e => {
+														setQuantity(quantityDemanded - 1);
+														addItems({ id, nombre });
+													}}
+												>
+													+
+												</button>
+											</div>
 										</div>
-										<div className="w-auto   px-3 text-end space-x-4 text-base">
-											<button
-												type="button"
-												className="text-red-500 down"
-												onClick={e => {
-													setQuantity(quantityDemanded + 1);
-													decrementItems({ id, nombre });
-												}}
-											>
-												-
-											</button>
-											<span className="font-normal">{productQuantity(id)}</span>
-											<button
-												type="button"
-												className={quantityDemanded < 1 ? `invisible` : `text-green-500`}
-												onClick={e => {
-													setQuantity(quantityDemanded - 1);
-													addItems({ id, nombre });
-												}}
-											>
-												+
-											</button>
-										</div>
-									</div>
-								);
-							})}
+									);
+								})}
 						</>
 					}
 				</div>

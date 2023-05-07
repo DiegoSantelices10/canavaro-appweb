@@ -1,17 +1,13 @@
 export async function getPathsFromTitle(items) {
-	return Object.values(items).map(item =>
-		item.map(product => ({
-			params: {
-				id: convertToPath(product.nombre),
-			},
-		}))
-	);
+	return items.map(product => ({
+		params: {
+			id: convertToPath(product.nombre),
+		},
+	}));
 }
 
 export async function getItemData(id, products) {
-	const product = Object.values(products)
-		.map(item => item.find(e => convertToPath(e.nombre) === id))
-		.filter(i => i !== undefined);
+	const product = products.find(e => convertToPath(e.nombre) === id);
 	return {
 		id,
 		data: product,

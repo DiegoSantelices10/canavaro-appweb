@@ -7,12 +7,12 @@ import SectionCombos from "components/sections/sectionCombos";
 import Footer from "components/sections/footer";
 import { useDispatch } from "react-redux";
 import { setProductData } from "store/reducers/productSlice";
-import { getProducts } from "services/fetchData";
+import { productos } from "services/fetchData";
 export default function index() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(setProductData(getProducts));
+		dispatch(setProductData(productos));
 	}, []);
 	return (
 		<div className="bg-image flex flex-col min-h-screen overflow-hidden ">

@@ -6,7 +6,6 @@ import Modal from "components/modal";
 
 export default function sectionPizza() {
 	const { products } = useSelector(state => state.product);
-	const { pizzas } = products;
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -51,15 +50,17 @@ export default function sectionPizza() {
 				<p className="italic col-span-2 text-white text-center text-xs py-3">
 					* Hacer click sobre el titulo para ver descripcion.
 				</p>
-				{pizzas?.map(producto => {
-					return (
-						<div key={producto.id}>
-							<p onClick={handleOpenModal} className=" cursor-pointer text-white text-center">
-								{producto.nombre}
-							</p>
-						</div>
-					);
-				})}
+				{products
+					?.filter(item => item.categoria === "pizzas")
+					.map(producto => {
+						return (
+							<div key={producto.id}>
+								<p onClick={handleOpenModal} className=" cursor-pointer text-white text-center">
+									{producto.nombre}
+								</p>
+							</div>
+						);
+					})}
 				<p className="text-white text-center">Muzzarella con Albahaca</p>
 				<p className="text-white text-center">Muzzarella con Provenzal</p>
 				<p className="text-white text-center">Muzzarella Doble</p>

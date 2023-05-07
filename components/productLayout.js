@@ -74,7 +74,8 @@ export default function ProductLayout({
 	};
 
 	const addCartPromo = value => {
-		if (addProducts === true) {
+		if (data.addEmpanadas) {
+			console.log("entro");
 			const promo = {
 				id,
 				nombre,
