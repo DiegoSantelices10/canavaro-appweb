@@ -18,7 +18,7 @@ export default function Index() {
 	const [select, setSelect] = useState("gigante");
 	const [radioSelect, setRadioSelect] = useState([]);
 	const [total, setTotal] = useState(0);
-	const { products } = useSelector(state => state.product);
+	const {products} = useSelector(state => state.product)
 
 	const dispatch = useDispatch();
 	const router = useRouter();
@@ -34,6 +34,8 @@ export default function Index() {
 		dispatch(calculateTotalQuantity());
 	}, []);
 
+	products.filter(item=>item.categoria === "pizzas").map(item=> console.log(item))
+	console.log("hola");
 	const onChangeValue = e => {
 		const value = e.target.value;
 		setSelect(value);
@@ -196,9 +198,9 @@ export default function Index() {
 						{productTotal()}
 					</div>
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
-						{products
-							?.filter(item => item.categorias === "pizzas")
-							.map((item, index) => (
+						{products.filter(item=>item.categoria === "pizzas")
+							.map((item) => {
+								return(
 								<div key={item.id} className="flex justify-between items-center py-2  my-2 ">
 									<h2>{item.nombre}</h2>
 									<div className="w-auto   px-3 text-end space-x-4 text-base">
@@ -234,7 +236,7 @@ export default function Index() {
 										</div>
 									</div>
 								</div>
-							))}
+							)})}
 					</div>
 				</div>
 

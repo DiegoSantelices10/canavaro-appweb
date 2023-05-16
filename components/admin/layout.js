@@ -6,7 +6,7 @@ const Layout = ({ children }) => (
 		<Head>
 			<title>D&amp;P</title>
 		</Head>
-		<main className="h-screen fixed bg-slate-50 font-sans w-full">
+		<main className="h-screen  bg-slate-50 font-sans w-full">
 			<AccessMenu />
 			{children}
 		</main>

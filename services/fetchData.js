@@ -137,7 +137,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/44a4bf9e7d787ba034e8a2781f13ab48/jamon_y_queso.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -147,7 +146,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/41be50161209cb17119d5e6c663ed141/cuatro_quesos.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -157,7 +155,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/52bcf7fad1b9fcf455c87758f9a8665f/salchicha3.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -167,7 +164,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/6be027176731a5976db5c8af7acbe9ed/choclo.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -177,7 +173,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/02d69229d55ed4219768b6f49c44ab4b/calabaza.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -187,7 +182,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/6aee5e961d0161c8036be698c53c5f2d/provolone.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -197,7 +191,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/53b0e793401d347e0896f0f629f3cbd3/pollo.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -207,7 +200,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/0c3d2abc6a162dc634ab0b0361ea7bba/jamon_y_roque.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -217,7 +209,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/e1fe55840a702b0895b0e2aab33f3d51/jamon_y_tomate.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -227,7 +218,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/2b3a6bf78bdaaaee0663371c1b2e3c58/aceituna.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -237,7 +227,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/2e84de791da45b9b21cef468e732ec97/jamon_y_huevo2.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -247,7 +236,6 @@ export const productos = [
 		"categoria": "empanadas",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/60673d5397d4314e5b5ad443/e73ab2ef5091c7f45ee8dcf016d23642/carne_cuchillo.jpg",
-		"tamanio": "Grande",
 		"precio": 360,
 	},
 	{
@@ -257,7 +245,6 @@ export const productos = [
 		"cantidadMaxima": 12,
 		"categoria": "promociones",
 		"imagen": "https://cdn.discordapp.com/attachments/1072242342200877147/1072248326461862038/miniatura_docena.jpg",
-		"tamanio": "Grande",
 		"precio": 2600,
 		"addEmpanadas": true,
 	},
@@ -269,7 +256,6 @@ export const productos = [
 		"categoria": "promociones",
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/8b401131be66ac23de662a0f92d6f59e/Promo_Pack_18_empanadas.png",
-		"tamanio": "Grande",
 		"precio": 3850,
 		"addEmpanadas": true,
 	},
@@ -280,7 +266,6 @@ export const productos = [
 		"descripcion": "Jamón - Napolitana",
 		"categoria": "promociones",
 		"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
-		"tamanio": "gigante",
 		"precio": 1880,
 		"addEmpanadas": false,
 	},
@@ -291,7 +276,6 @@ export const productos = [
 		"descripcion": "Muzzarella - Napolitana - Jamón - Fugazzeta",
 		"categoria": "promociones",
 		"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
-		"tamanio": "gigante",
 		"precio": 1880,
 		"addEmpanadas": false,
 	},
@@ -302,7 +286,6 @@ export const productos = [
 		"descripcion": "Calabresa - Fuga de la casa - Jamón y Morron - Super Napolitana",
 		"categoria": "promociones",
 		"imagen": "https://live.staticflickr.com/65535/49084418322_0b46e97696_m.jpg",
-		"tamanio": "gigante",
 		"precio": 2180,
 		"addEmpanadas": false,
 	},
@@ -313,7 +296,6 @@ export const productos = [
 		"categoria": "promociones",
 		"cantidadMaxima": 6,
 		"imagen": "https://live.staticflickr.com/65535/49084418862_9fdf0824bf_m.jpg",
-		"tamanio": "gigante",
 		"precio": 3000,
 		"addEmpanadas": true,
 	},
@@ -325,7 +307,6 @@ export const productos = [
 		"cantidadMaxima": 12,
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
-		"tamanio": "gigante",
 		"precio": 4100,
 		"addEmpanadas": true,
 	},
@@ -337,7 +318,6 @@ export const productos = [
 		"cantidadMaxima": 12,
 		"imagen":
 			"https://trello-attachments.s3.amazonaws.com/5bf725780020b2756689dca0/609e8327a9b6524178f65b8b/a77e93aa1f9ed408b6ff5c00f67e6a87/Promo_familia.png",
-		"tamanio": "gigante",
 		"precio": 4400,
 		"addEmpanadas": true,
 	},

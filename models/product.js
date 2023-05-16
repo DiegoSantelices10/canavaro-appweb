@@ -1,6 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
-const productSchema = new Schema(
+const productoSchema = new Schema(
 	{
 		nombre: {
 			type: String,
@@ -8,12 +8,6 @@ const productSchema = new Schema(
 			unique: true,
 			trim: true,
 			maxlength: [40, "El maximo es de 40 caracteres"],
-		},
-		precio: {
-			type: Number,
-			required: [true, "El campo es requerido."],
-			trim: true,
-			maxlength: [10, "El maximo es de 40 caracteres"],
 		},
 		descripcion: {
 			type: String,
@@ -27,6 +21,30 @@ const productSchema = new Schema(
 			trim: true,
 			maxlength: [40, "El maximo es de 40 caracteres"],
 		},
+		precio: {
+			type: Schema.Types.Mixed,
+			required: true,
+		},
+		addEmpanadas: {
+			type: String,
+			validate: {
+				validator: function (value) {
+					// Validar que addEmpanadas sea requerido solo para la categoría "Promoción"
+					return this.categoria !== "promociones" || (this.categoria === "promociones" && typeof value === "string");
+				},
+				message: "El campo addEmpanadas es requerido para la categoría Promoción.",
+			},
+		},
+		cantidadMaxima: {
+			type: Number,
+			validate: {
+				validator: function (value) {
+					// Validar que addEmpanadas sea requerido solo para la categoría "Promoción"
+					return this.categoria !== "promociones" || (this.categoria === "promociones" && typeof value === "number");
+				},
+				message: "El campo addEmpanadas es requerido para la categoría Promoción.",
+			},
+		},
 		imagen: {
 			url: String,
 			public_id: String,
@@ -38,4 +56,6 @@ const productSchema = new Schema(
 	}
 );
 
-export default models.product || model("product", productSchema);
+export default models.Producto || model("Producto", productoSchema);
+
+// export default models.empanadas || model("empanadas", empanadasSchema);

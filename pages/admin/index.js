@@ -1,8 +1,34 @@
 // import { getSession } from "next-auth/react";
 import Layout from "components/admin/layout";
+import Modal from "components/modal";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductData } from "store/reducers/productSlice";
+import { productos } from "services/fetchData";
+
 export default function Home() {
+	
+	const [showModal, setShowModal] = useState(false);
+	const dispatch = useDispatch();
+	const {products} = useSelector(state => state.product);
+
+
+	useEffect(() => {
+		if (products.length < 1) dispatch(setProductData(productos));
+	}, []);
+
+	const handleOpenModal = () => {
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setShowModal(false);
+	};
 	return (
 		<Layout>
+				<Modal show={showModal} handleClose={handleCloseModal}>
+					<p className="text-lg font-semibold">Contenido del modal</p>
+				</Modal>
 			<div className="h-auto p-0 md:px-10">
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
@@ -16,7 +42,7 @@ export default function Home() {
 								</div>
 							</div>
 							<div className="flex justify-end gap-3 w-full">
-								<button
+								<button onClick={handleOpenModal}
 									className="px-4 py-2 w-1/2 rounded-md text-xs font-medium  
                                  shadow focus:outline-none focus:ring transition 
                                  text-slate-500  hover:bg-blue-100 

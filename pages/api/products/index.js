@@ -1,22 +1,21 @@
 import dbConnect from "utils/mongoose";
-import Product from "models/product";
+import Producto from "models/product";
 import { uploadImage } from "libs/cloudinary";
 dbConnect();
 
 export default async function handler(req, res) {
 	const { method, body } = req;
-
 	switch (method) {
 		case "GET":
 			try {
-				const products = await Product.find();
+				const products = await Producto.find();
 				return res.status(200).json(products);
 			} catch (error) {
 				return res.status(400).json({ msg: error.message });
 			}
 		case "POST":
 			try {
-				const { nombre, precio, descripcion, categoria, imagen } = body;
+				const { id, nombre, descripcion, categoria, imagen, precio, addEmpanadas, cantidadMaxima } = body;
 				let imageCloud;
 				if (imagen) {
 					const result = await uploadImage(imagen);
@@ -25,16 +24,30 @@ export default async function handler(req, res) {
 						public_id: result.public_id,
 					};
 				}
+				let newProduct = null;
+				if (categoria === "promociones") {
+					newProduct = new Producto({
+						id,
+						nombre,
+						descripcion,
+						categoria,
+						imagen: imageCloud,
+						cantidadMaxima,
+						precio,
+						addEmpanadas,
+					});
+				} else {
+					newProduct = new Producto({
+						id,
+						nombre,
+						descripcion,
+						categoria,
+						imagen: imageCloud,
+						precio,
+					});
+				}
 
-				const newProduct = new Product({
-					nombre,
-					precio,
-					descripcion,
-					categoria,
-					imagen: imageCloud,
-				});
-
-				console.log(newProduct);
+				console.log("producto nuevo!", newProduct);
 
 				await newProduct.save();
 				return res.status(200).json(newProduct);
