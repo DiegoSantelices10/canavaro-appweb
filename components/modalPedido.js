@@ -24,27 +24,39 @@ const Modal = ({ handleClose, show, pedido }) => {
 						<div className="font-extrabold text-left text-lg font-nunito">
 							<h2>
 								Nombre Cliente:{" "}
-								<span className="font-normal text-base">{pedido?.cliente}</span>
+								<span className="font-bold text-gray-500 text-base">
+									{pedido?.cliente}
+								</span>
 							</h2>
 							<h2>
 								Direccion:{" "}
-								<span className="font-normal text-base">{pedido?.direccion}</span>
+								<span className="font-bold text-gray-500 text-base">
+									{pedido?.direccion}
+								</span>
 							</h2>
 							<h2>
 								Tipo de envio:{" "}
-								<span className="font-normal text-base">{pedido?.tipoEnvio}</span>
+								<span className="font-bold text-gray-500 text-base">
+									{pedido?.tipoEnvio}
+								</span>
 							</h2>
 							<h2>
 								Medio de pago:{" "}
-								<span className="font-normal text-base">{pedido?.medioPago}</span>
+								<span className="font-bold text-gray-500 text-base">
+									{pedido?.medioPago}
+								</span>
 							</h2>
 							<h2>
 								Tiempo de demora:{" "}
-								<span className="font-normal text-base">{pedido?.tiempoDemora}</span>
+								<span className="font-bold text-gray-500 text-base">
+									{pedido?.tiempoDemora}
+								</span>
 							</h2>
 							<h2>
 								Hora pedido:{" "}
-								<span className="font-normal text-base">{pedido?.horaPedido}</span>
+								<span className="font-bold text-gray-500 text-base">
+									{pedido?.horaPedido}
+								</span>
 							</h2>
 							<div className="border-t-2 border-gray-300 my-3"></div>
 							<>
@@ -59,9 +71,9 @@ const Modal = ({ handleClose, show, pedido }) => {
 												return (
 													<div key={item?.id}>
 														<div className="flex justify-between items-center font-nunito">
-															<p className="font-normal text-base">
+															<p className="font-semibold text-gray-500 text-base">
 																{item?.nombre + " "}{" "}
-																<span className="text-gray-400 text-sm font-normal">
+																<span className="font-semibold text-gray-500 text-base">
 																	{categoria === "pizzas" && item.tamanio}
 																</span>
 																<span className="text-gray-400 text-sm font-normal">

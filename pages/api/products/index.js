@@ -15,7 +15,17 @@ export default async function handler(req, res) {
 			}
 		case "POST":
 			try {
-				const { id, nombre, descripcion, categoria, imagen, precio, addEmpanadas, cantidadMaxima } = body;
+				const {
+					id,
+					nombre,
+					descripcion,
+					categoria,
+					imagen,
+					precio,
+					precioPizza,
+					addEmpanadas,
+					cantidadMaxima,
+				} = body;
 				let imageCloud;
 				if (imagen) {
 					const result = await uploadImage(imagen);
@@ -36,7 +46,18 @@ export default async function handler(req, res) {
 						precio,
 						addEmpanadas,
 					});
-				} else {
+				}
+				if (categoria === "pizzas") {
+					newProduct = new Producto({
+						id,
+						nombre,
+						descripcion,
+						categoria,
+						imagen: imageCloud,
+						precio: precioPizza,
+					});
+				}
+				if (categoria === "empanadas") {
 					newProduct = new Producto({
 						id,
 						nombre,

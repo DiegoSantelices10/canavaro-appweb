@@ -5,15 +5,14 @@ const productoSchema = new Schema(
 		nombre: {
 			type: String,
 			required: [true, "El campo es requerido."],
-			unique: true,
 			trim: true,
-			maxlength: [40, "El maximo es de 40 caracteres"],
+			maxlength: [120, "El maximo es de 40 caracteres"],
 		},
 		descripcion: {
 			type: String,
 			required: [true, "El campo es requerido."],
 			trim: true,
-			maxlength: [100, "El maximo es de 40 caracteres"],
+			maxlength: [150, "El maximo es de 40 caracteres"],
 		},
 		categoria: {
 			type: String,
@@ -22,7 +21,7 @@ const productoSchema = new Schema(
 			maxlength: [40, "El maximo es de 40 caracteres"],
 		},
 		precio: {
-			type: Schema.Types.Mixed,
+			type: Number,
 			required: true,
 		},
 		addEmpanadas: {
@@ -30,7 +29,10 @@ const productoSchema = new Schema(
 			validate: {
 				validator: function (value) {
 					// Validar que addEmpanadas sea requerido solo para la categoría "Promoción"
-					return this.categoria !== "promociones" || (this.categoria === "promociones" && typeof value === "string");
+					return (
+						this.categoria !== "promociones" ||
+						(this.categoria === "promociones" && typeof value === "string")
+					);
 				},
 				message: "El campo addEmpanadas es requerido para la categoría Promoción.",
 			},
@@ -40,7 +42,10 @@ const productoSchema = new Schema(
 			validate: {
 				validator: function (value) {
 					// Validar que addEmpanadas sea requerido solo para la categoría "Promoción"
-					return this.categoria !== "promociones" || (this.categoria === "promociones" && typeof value === "number");
+					return (
+						this.categoria !== "promociones" ||
+						(this.categoria === "promociones" && typeof value === "number")
+					);
 				},
 				message: "El campo addEmpanadas es requerido para la categoría Promoción.",
 			},

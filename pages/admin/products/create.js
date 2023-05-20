@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
+import Swal from "sweetalert2";
+
 export default function Create() {
 	const [renderProducts, setRenderProductos] = useState("empanadas");
 
@@ -79,41 +81,42 @@ export default function Create() {
 					initialValues={{
 						nombre: "",
 						descripcion: "",
-						precio:
-							renderProducts === "pizzas"
-								? {
-										gigante: "",
-										mediana: "",
-										chica: "",
-								  }
-								: "",
+						precio: "",
+						precioPizza: {
+							gigante: "",
+							mediana: "",
+							chica: "",
+						},
 						categoria: "",
 						imagen: "",
 						cantidadMaxima: "",
 						addEmpanadas: "",
 					}}
 					onSubmit={(values, { resetForm }) => {
+						console.log(values);
 						axios.post("http://localhost:3000/api/products", values).then(res => {
 							console.log(res);
+							if (res.status === 200) {
+								Swal.fire({
+									icon: "success",
+									text: "¡Se guardo correctamente!",
+								});
+							}
 						});
 
 						resetForm();
 					}}
 				>
-					{({ values, errors, handleChange, handleBlur, touched, setFieldValue }) => (
+					{({ setFieldValue, values, handleChange }) => (
 						<Form>
 							<div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 ">
 								<div className="w-full mx-auto">
 									<label className="block  text-sm  text-slate-400">
 										Nombre del producto
 									</label>
-									<input
+									<Field
 										id="nombre"
 										name="nombre"
-										type="text"
-										onBlur={handleBlur}
-										onChange={handleChange}
-										value={values.nombre}
 										className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 									/>
@@ -121,13 +124,9 @@ export default function Create() {
 
 								<div className=" w-full mx-auto">
 									<label className="block  text-sm  text-slate-400">Categoria</label>
-									<input
+									<Field
 										id="categoria"
 										name="categoria"
-										type="text"
-										onBlur={handleBlur}
-										onChange={handleChange}
-										value={values.categoria}
 										className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 									/>
@@ -135,13 +134,9 @@ export default function Create() {
 
 								<div className=" w-full mx-auto md:col-start-1 md:col-end-3">
 									<label className="block text-sm  text-slate-400">Descripcion</label>
-									<input
+									<Field
 										id="descripcion"
 										name="descripcion"
-										type="text"
-										onBlur={handleBlur}
-										onChange={handleChange}
-										value={values.descripcion}
 										className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 									/>
@@ -153,13 +148,11 @@ export default function Create() {
 											<label className="block  text-sm  text-slate-400">
 												¿Con empanadas? Si / No
 											</label>
-											<input
+											<Field
 												id="addEmpanadas"
 												name="addEmpanadas"
-												type="text"
-												onBlur={handleBlur}
-												onChange={handleChange}
 												value={values.addEmpanadas}
+												onChange={handleChange}
 												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
 														  rounded-md shadow   focus:border-gray-200"
 											/>
@@ -168,48 +161,48 @@ export default function Create() {
 											<label className="block  text-sm  text-slate-400">
 												Si es SI, ingresa la cantidad de empanadas
 											</label>
-											<input
+											<Field
 												id="cantidadMaxima"
 												name="cantidadMaxima"
-												type="text"
-												onBlur={handleBlur}
-												onChange={handleChange}
 												value={values.cantidadMaxima}
+												onChange={handleChange}
 												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
 														  rounded-md shadow   focus:border-gray-200"
 											/>
 										</div>
-									</>
-								)}
-								{renderProducts !== "pizzas" ? (
-									<>
 										<div className=" w-full mx-auto">
 											<label className="block  text-sm  text-slate-400">Precio</label>
-											<input
+											<Field
 												id="precio"
 												name="precio"
-												type="text"
-												onBlur={handleBlur}
-												onChange={handleChange}
-												value={values.precio}
 												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 											/>
 										</div>
 									</>
-								) : (
+								)}
+								{renderProducts === "empanadas" && (
+									<>
+										<div className=" w-full mx-auto">
+											<label className="block  text-sm  text-slate-400">Precio</label>
+											<Field
+												id="precio"
+												name="precio"
+												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+                  									rounded-md shadow   focus:border-gray-200"
+											/>
+										</div>
+									</>
+								)}
+								{renderProducts === "pizzas" && (
 									<>
 										<div className=" w-full mx-auto">
 											<label className="block  text-sm  text-slate-400">
 												Precio gigante
 											</label>
-											<input
-												id="precio.gigante"
-												name="precio.gigante"
-												type="text"
-												onBlur={handleBlur}
-												onChange={handleChange}
-												value={values.precio.gigante}
+											<Field
+												id="precioPizza.gigante"
+												name="precioPizza.gigante"
 												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
 											  rounded-md shadow   focus:border-gray-200"
 											/>
@@ -218,13 +211,9 @@ export default function Create() {
 											<label className="block  text-sm  text-slate-400">
 												Precio mediana
 											</label>
-											<input
-												id="precio.mediana"
-												name="precio.mediana"
-												type="text"
-												onBlur={handleBlur}
-												onChange={handleChange}
-												value={values.precio.mediana}
+											<Field
+												id="precioPizza.mediana"
+												name="precioPizza.mediana"
 												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 											/>
@@ -233,19 +222,16 @@ export default function Create() {
 											<label className="block  text-sm  text-slate-400">
 												Precio chica
 											</label>
-											<input
-												id="precio.chica"
-												name="precio.chica"
-												type="text"
-												onBlur={handleBlur}
-												onChange={handleChange}
-												value={values.precio.chica}
+											<Field
+												id="precioPizza.chica"
+												name="precioPizza.chica"
 												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 											/>
 										</div>
 									</>
 								)}
+
 								<div className=" w-full mx-auto">
 									<label className="block  text-sm  text-slate-400">Cargar Imagen</label>
 									<input

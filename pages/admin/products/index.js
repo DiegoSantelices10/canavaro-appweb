@@ -2,7 +2,7 @@ import Layout from "components/admin/layout";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaRegEdit } from "react-icons/fa";
 import useResize from "hooks/useResize";
 
 export default function Products() {
@@ -28,10 +28,9 @@ export default function Products() {
 					</h1>
 
 					<button
-						className="w-64 h-12 col-start-2
+						className="w-64 h-12 col-start-2 font-nunito font-semibold
                              rounded-md  text-sm 
-                             border text-white bg-gradient-to-r 
-                           from-cyan-500 to-indigo-500 "
+                             border text-white bg-red-500 "
 						type="button"
 						onClick={() => {
 							router.push("/admin/products/create");
@@ -61,12 +60,11 @@ export default function Products() {
 					</div>
 				</form>
 			</div>
-			{isPhone && <p>hola soy movil</p>}
 			<div className="w-full lg:w-11/12 mx-auto h-auto">
 				<div className="w-full mx-auto">
 					<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 						<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-							<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+							<thead className="">
 								<tr>
 									<th scope="col" className="px-6 py-3">
 										Nombre
@@ -79,48 +77,42 @@ export default function Products() {
 											<th scope="col" className="px-6 py-3">
 												Descripcion
 											</th>
-											<th scope="col" className="px-6 py-3">
-												Precio
-											</th>
 										</>
 									)}
-
+									<th scope="col" className="px-6 py-3">
+										Precio
+									</th>
 									<th scope="col" className="px-6 py-3">
 										<span className="sr-only">Edit</span>
 									</th>
 								</tr>
 							</thead>
-							<tbody>
-								{products.map(producto => {
+							<tbody className="text-gray-800 font-nunito">
+								{products.map((producto, index) => {
 									return (
 										<tr
 											key={producto.id}
-											className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 
-												     		hover:bg-gray-50 dark:hover:bg-gray-600"
+											className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
 										>
-											<th
-												scope="row"
-												className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
-											>
+											<th scope="row" className="px-6 py-4   ">
 												{producto.nombre}
 											</th>
-											<td className="px-6 py-4">{producto.categoria}</td>
+											<td className="px-6 py-4 font-bold">{producto.categoria}</td>
 
 											{isPhone && (
 												<>
 													<td className="px-6 py-4">{producto.descripcion}</td>
-													<td className="px-6 py-4">
-														{producto.categoria !== "pizzas" && "$" + producto.precio}
-													</td>
 												</>
 											)}
-
+											<td className="px-6 py-4">
+												{producto.categoria !== "pizzas" && "$" + producto.precio}
+											</td>
 											<td className="px-6 py-4 text-right">
 												<a
 													href="#"
 													className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
 												>
-													Edit
+													<FaRegEdit size={25} className="text-gray-800" />
 												</a>
 											</td>
 										</tr>

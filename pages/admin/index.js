@@ -5,10 +5,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductData } from "store/reducers/productSlice";
 import { productos, pedidos } from "services/fetchData";
+import Button from "components/buttonDemora";
 
 export default function Home() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
+
+	const [demoraDomicilio, setDemoraDomicilio] = useState("25-35min");
+	const [demoraLocal, setDemoraLocal] = useState("10-15min");
+
 	const dispatch = useDispatch();
 	const { products } = useSelector(state => state.product);
 
@@ -25,6 +30,16 @@ export default function Home() {
 		setCurrentPedido(null);
 		setShowModal(false);
 	};
+
+	const tiempoDemoraDomicilio = [
+		"25-35min",
+		"35-45min",
+		"45-55min",
+		"55-105min",
+		"105-115min",
+	];
+	const tiempoDemoraLocal = ["10-15min", "15-20min", "20-25min", "25-30min", "30-35min"];
+
 	return (
 		<Layout>
 			{currentPedido && (
@@ -34,7 +49,36 @@ export default function Home() {
 					pedido={currentPedido}
 				/>
 			)}
-			<div className="h-auto p-0 md:px-10">
+			<div className="h-auto p-0 md:px-2">
+				<div className=" w-full block md:flex p-2">
+					<div className="w-full md:w-1/2 text-center">
+						<h1 className="font-semibold my-5">Demora domicilio</h1>
+						<div className="flex gap-1 md:gap-4 justify-center">
+							{tiempoDemoraDomicilio.map(tiempo => (
+								<Button
+									key={tiempo}
+									setDemora={setDemoraDomicilio}
+									demora={demoraDomicilio}
+									time={tiempo}
+								/>
+							))}
+						</div>
+					</div>
+					<div className="w-full md:w-1/2 text-center">
+						<h1 className="font-semibold my-5">Demora por local</h1>
+						<div className="flex gap-3 justify-center">
+							{tiempoDemoraLocal.map(tiempo => (
+								<Button
+									key={tiempo}
+									setDemora={setDemoraLocal}
+									demora={demoraLocal}
+									time={tiempo}
+								/>
+							))}
+						</div>
+					</div>
+				</div>
+
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
 						{pedidos.map(item => (
@@ -66,8 +110,8 @@ export default function Home() {
 									<button
 										className="px-4 py-2 w-1/2 rounded-md text-xs font-medium border shadow
                                  focus:outline-none focus:ring transition text-white 
-                               bg-blue-500  hover:bg-blue-600 
-                               hover:border-white active:bg-blue-700 focus:ring-blue-300"
+                               bg-red-500  hover:bg-red-600 
+                               hover:border-white "
 										type="submit"
 									>
 										Liberar

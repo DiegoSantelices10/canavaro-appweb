@@ -4,9 +4,9 @@ import Head from "next/head";
 const Layout = ({ children }) => (
 	<div className="h-screen w-full">
 		<Head>
-			<title>D&amp;P</title>
+			<title>Pizzeria Canavaro</title>
 		</Head>
-		<main className="h-screen  bg-slate-50 font-sans w-full">
+		<main className="max-h-max  bg-slate-50 font-sans w-full">
 			<AccessMenu />
 			{children}
 		</main>

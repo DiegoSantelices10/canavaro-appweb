@@ -329,7 +329,7 @@ export const productos = [
 	},
 	{
 		"id": 25,
-		"nombre": "Combo 1",
+		"nombre": "Combo 1 - Pizza de dos gustos",
 		"gustos": "Pizza de 2 gustos",
 		"descripcion": "Jamón - Napolitana",
 		"categoria": "promociones",
