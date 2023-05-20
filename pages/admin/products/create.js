@@ -8,8 +8,10 @@ export default function Create() {
 
 	return (
 		<Layout>
-			<div className="w-full lg:w-3/5 h-auto p-10 ">
-				<h1 className=" text-3xl font-poppins font-extrabold text-zinc-800 my-4">¡Ingresa un producto nuevo!</h1>
+			<div className="w-full lg:w-3/5 h-auto p-2 md:p-10">
+				<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
+					¡Ingresa un producto nuevo!
+				</h1>
 				<div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
 					<style jsx>
 						{`
@@ -100,9 +102,11 @@ export default function Create() {
 				>
 					{({ values, errors, handleChange, handleBlur, touched, setFieldValue }) => (
 						<Form>
-							<div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4">
+							<div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 ">
 								<div className="w-full mx-auto">
-									<label className="block  text-sm  text-slate-400">Nombre del producto</label>
+									<label className="block  text-sm  text-slate-400">
+										Nombre del producto
+									</label>
 									<input
 										id="nombre"
 										name="nombre"
@@ -146,7 +150,9 @@ export default function Create() {
 								{renderProducts === "promociones" && (
 									<>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">¿Con empanadas? Si / No</label>
+											<label className="block  text-sm  text-slate-400">
+												¿Con empanadas? Si / No
+											</label>
 											<input
 												id="addEmpanadas"
 												name="addEmpanadas"
@@ -160,7 +166,7 @@ export default function Create() {
 										</div>
 										<div className=" w-full mx-auto">
 											<label className="block  text-sm  text-slate-400">
-												Si es si, ingresa la cantidad de empanadas
+												Si es SI, ingresa la cantidad de empanadas
 											</label>
 											<input
 												id="cantidadMaxima"
@@ -194,7 +200,9 @@ export default function Create() {
 								) : (
 									<>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">Precio gigante</label>
+											<label className="block  text-sm  text-slate-400">
+												Precio gigante
+											</label>
 											<input
 												id="precio.gigante"
 												name="precio.gigante"
@@ -207,7 +215,9 @@ export default function Create() {
 											/>
 										</div>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">Precio mediana</label>
+											<label className="block  text-sm  text-slate-400">
+												Precio mediana
+											</label>
 											<input
 												id="precio.mediana"
 												name="precio.mediana"
@@ -220,7 +230,9 @@ export default function Create() {
 											/>
 										</div>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">Precio chica</label>
+											<label className="block  text-sm  text-slate-400">
+												Precio chica
+											</label>
 											<input
 												id="precio.chica"
 												name="precio.chica"
