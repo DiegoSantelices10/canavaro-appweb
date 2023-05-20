@@ -9,6 +9,73 @@
 
 // export default getProducts;
 
+export const pedidos = [
+	{
+		"id": 1,
+		"cliente": "Leonel Messi",
+		"direccion": "Av. maipu 3627 4°A, Olivos",
+		"tipoEnvio": "Envio a domicilio",
+		"medioPago": "Efectivo",
+		"tiempoDemora": "45 - 55min.",
+		"horaPedido": "21:54hs.",
+		"precioTotal": 7300,
+		"productos": [
+			{
+				"nombre": "Muzzarella",
+				"tamanio": "gigante",
+				"categoria": "pizzas",
+				"cantidad": 2,
+				"precio": 4400,
+			},
+
+			{
+				"nombre": "Combo 1",
+				"tamanio": "gigante",
+				"categoria": "promociones",
+				"cantidad": 1,
+				"precio": 2900,
+			},
+		],
+	},
+
+	{
+		"id": 2,
+		"cliente": "Martin Palermo",
+		"direccion": "Gutierrez 2458, Olivos",
+		"tipoEnvio": "Retira por local",
+		"medioPago": "Mercado Pago",
+		"tiempoDemora": "25 - 35min.",
+		"horaPedido": "22:28hs.",
+		"precioTotal": 2400,
+		"productos": [
+			{
+				"nombre": "muzzarella y jamon",
+				"cantidad": 3,
+				"categoria": "empanadas",
+				"precio": 600,
+			},
+			{
+				"nombre": "fugazzeta",
+				"categoria": "empanadas",
+				"cantidad": 3,
+				"precio": 600,
+			},
+			{
+				"nombre": "panceta y cheddar",
+				"categoria": "empanadas",
+				"cantidad": 3,
+				"precio": 600,
+			},
+			{
+				"nombre": "carne cuchillo",
+				"categoria": "empanadas",
+				"cantidad": 3,
+				"precio": 600,
+			},
+		],
+	},
+];
+
 export const productos = [
 	{
 		"id": 1,
@@ -244,7 +311,8 @@ export const productos = [
 		"descripcion": "12 empanadas a elección",
 		"cantidadMaxima": 12,
 		"categoria": "promociones",
-		"imagen": "https://cdn.discordapp.com/attachments/1072242342200877147/1072248326461862038/miniatura_docena.jpg",
+		"imagen":
+			"https://cdn.discordapp.com/attachments/1072242342200877147/1072248326461862038/miniatura_docena.jpg",
 		"precio": 2600,
 		"addEmpanadas": true,
 	},

@@ -40,7 +40,9 @@ export default function Home() {
 	};
 
 	const renderStore = renderProductos => {
-		return products?.filter(item => item.categoria === renderProductos).map(data => <Card key={data.id} data={data} />);
+		return products
+			?.filter(item => item.categoria === renderProductos)
+			.map(data => <Card key={data.id} data={data} />);
 	};
 
 	useEffect(() => {
@@ -72,7 +74,8 @@ export default function Home() {
 
 		if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
-		if (cantidadTotal === requiredQuantity && cantidadTotal % requiredQuantity === 0) setDocenaPrice(totalPrice);
+		if (cantidadTotal === requiredQuantity && cantidadTotal % requiredQuantity === 0)
+			setDocenaPrice(totalPrice);
 
 		if (cantidadTotal > requiredQuantity && cantidadTotal % requiredQuantity !== 0) {
 			const cociente = Math.floor(cantidadTotal / requiredQuantity);
@@ -127,9 +130,13 @@ export default function Home() {
 				</div>
 				<div className="my-5">
 					<div className="w-full bg-red-500 p-2 flex items-center justify-between">
-						<p className="text-white font-nunito  font-extrabold">¡ ARMA TU PIZZA COMO QUIERAS !</p>
+						<p className="text-white font-nunito  font-extrabold">
+							¡ ARMA TU PIZZA COMO QUIERAS !
+						</p>
 						<Link href={"/order/pizzaFree"}>
-							<a className="rounded-md font-bold bg-white p-2 text-xs px-3">INGRESA AQUI</a>
+							<a className="rounded-md font-bold bg-white p-2 text-xs px-3">
+								INGRESA AQUI
+							</a>
 						</Link>
 					</div>
 				</div>
@@ -202,7 +209,9 @@ export default function Home() {
 						{renderProducts[0].toUpperCase() + renderProducts.substring(1)}
 					</h1>
 					<hr className="pb-3" />
-					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1">{renderStore(renderProducts)}</div>
+					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">
+						{renderStore(renderProducts)}
+					</div>
 				</div>
 				{renderProducts === "empanadas" && (
 					<div className="bg-white w-full fixed bottom-0 p-3  sm:w-4/5 md:w-4/5 lg:w-3/5">

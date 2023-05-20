@@ -1,67 +1,80 @@
 // import { getSession } from "next-auth/react";
 import Layout from "components/admin/layout";
-import Modal from "components/modal";
+import ModalPedido from "components/modalPedido";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductData } from "store/reducers/productSlice";
-import { productos } from "services/fetchData";
+import { productos, pedidos } from "services/fetchData";
 
 export default function Home() {
-	
 	const [showModal, setShowModal] = useState(false);
+	const [currentPedido, setCurrentPedido] = useState(null);
 	const dispatch = useDispatch();
-	const {products} = useSelector(state => state.product);
-
+	const { products } = useSelector(state => state.product);
 
 	useEffect(() => {
 		if (products.length < 1) dispatch(setProductData(productos));
 	}, []);
 
-	const handleOpenModal = () => {
+	const handleOpenModal = pedido => {
+		setCurrentPedido(pedido);
 		setShowModal(true);
 	};
 
 	const handleCloseModal = () => {
+		setCurrentPedido(null);
 		setShowModal(false);
 	};
 	return (
 		<Layout>
-				<Modal show={showModal} handleClose={handleCloseModal}>
-					<p className="text-lg font-semibold">Contenido del modal</p>
-				</Modal>
+			{currentPedido && (
+				<ModalPedido
+					show={showModal}
+					handleClose={handleCloseModal}
+					pedido={currentPedido}
+				/>
+			)}
 			<div className="h-auto p-0 md:px-10">
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
-						<div className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2">
-							<div className="w-full text-sm">
-								<h2 className="text-right">#0001</h2>
-								<div className="text-left text-xs py-3 font-medium">
-									<h5>Porcion Brownie</h5>
-									<h5>Torta coco c/ddl</h5>
-									<h5>Smoothie frutilla x2</h5>
+						{pedidos.map(item => (
+							<div
+								key={item.id}
+								className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2"
+							>
+								<div className="w-full text-sm">
+									<h2 className="text-right">{item?.id}</h2>
+									<div className="text-left py-3 font-medium">
+										<h5 className="text-sm">{item?.direccion}</h5>
+										<h5 className="font-normal">{item?.cliente}</h5>
+										<h5 className="font-normal text-xs text-gray-400">
+											{item?.tipoEnvio}
+										</h5>
+									</div>
 								</div>
-							</div>
-							<div className="flex justify-end gap-3 w-full">
-								<button onClick={handleOpenModal}
-									className="px-4 py-2 w-1/2 rounded-md text-xs font-medium  
+								<div className="flex justify-end gap-3 w-full">
+									<button
+										onClick={() => handleOpenModal(item)}
+										className="px-4 py-2 w-1/2 rounded-md text-xs font-medium  
                                  shadow focus:outline-none focus:ring transition 
                                  text-slate-500  hover:bg-blue-100 
                                  active:bg-blue-200 focus:ring-blue-300"
-									type="submit"
-								>
-									Ver descripcion
-								</button>
-								<button
-									className="px-4 py-2 w-1/2 rounded-md text-xs font-medium border shadow
+										type="submit"
+									>
+										Ver descripcion
+									</button>
+									<button
+										className="px-4 py-2 w-1/2 rounded-md text-xs font-medium border shadow
                                  focus:outline-none focus:ring transition text-white 
                                bg-blue-500  hover:bg-blue-600 
                                hover:border-white active:bg-blue-700 focus:ring-blue-300"
-									type="submit"
-								>
-									Liberar
-								</button>
+										type="submit"
+									>
+										Liberar
+									</button>
+								</div>
 							</div>
-						</div>
+						))}
 					</div>
 				</div>
 			</div>

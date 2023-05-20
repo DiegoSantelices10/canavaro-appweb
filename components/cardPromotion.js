@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { convertToPath } from "libs/items";
 
-export default function CardPromotion({ data: { nombre, descripcion, imagen, gustos, precio } }) {
+export default function CardPromotion({
+	data: { nombre, descripcion, imagen, gustos, precio },
+}) {
 	return (
-		<div className=" border-x border-b rounded-md ">
+		<div className="  rounded-md ">
 			<div className="relative bg-white  rounded-t-md w-60 h-32 ">
 				<div className="w-full">
 					<Image
@@ -16,7 +18,7 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen, gus
 						height={115}
 						objectFit="cover"
 						objectPosition="center"
-						className="rounded-t-md "
+						className="rounded-md "
 						alt={nombre}
 					/>
 				</div>
