@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const getProducts = async () => {
-	const dev = process.env.NODE_ENV !== "production";
-	const { DEV_URL, PROD_URL } = process.env;
-	const result = await axios.get(`${dev ? DEV_URL : PROD_URL}/api/products`);
-	return result.data;
+const getProducts = async baseUrl => {
+	const result = await axios.get(`http://${baseUrl}/api/products`);
+
+	const convert = result.data;
+	return convert;
 };
 
 export default getProducts;

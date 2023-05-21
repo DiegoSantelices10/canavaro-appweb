@@ -17,6 +17,7 @@ export default function index() {
 
 	const [currentProducto, setCurrentProducto] = useState(null);
 
+<<<<<<< HEAD
 	// useEffect(() => {
 	// 	(async () => {
 	// 		const result = await axios.get("/api/products");
@@ -25,6 +26,16 @@ export default function index() {
 	// 		localStorage.setItem("products", JSON.stringify(result.data));
 	// 	})();
 	// });
+=======
+	useEffect(() => {
+		(async () => {
+			const res = await axios.get("/api/products/");
+			console.log("respuesta", res);
+		})();
+
+		localStorage.setItem("products", JSON.stringify(state));
+	});
+>>>>>>> parent of ed5ad7b (creamos URL en base production)
 
 	const handleOpenModal = producto => {
 		setCurrentProducto(producto);
@@ -74,9 +85,16 @@ export default function index() {
 	);
 }
 
+<<<<<<< HEAD
 export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
 	const state = await getProducts();
 
+=======
+export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
+	const baseUrl = context.req.headers.host;
+	console.log(context.req.headers);
+	const state = await getProducts(baseUrl);
+>>>>>>> parent of ed5ad7b (creamos URL en base production)
 	store.dispatch(setProductData(state));
 	return {
 		props: {
