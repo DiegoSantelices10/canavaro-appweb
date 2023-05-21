@@ -1,13 +1,13 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const getProducts = async () => {
-// 	const result = await axios.get(process.env.API_URL + "/api/items");
-// 	console.dir(result, { depth: null });
-// 	const convert = result.data;
-// 	return convert;
-// };
+const getProducts = async () => {
+	const result = await axios.get(process.env.API_URL + "/api/products/");
 
-// export default getProducts;
+	const convert = result.data;
+	return convert;
+};
+
+export default getProducts;
 
 export const pedidos = [
 	{

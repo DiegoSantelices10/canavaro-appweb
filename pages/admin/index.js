@@ -1,10 +1,10 @@
 // import { getSession } from "next-auth/react";
 import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setProductData } from "store/reducers/productSlice";
-import { productos, pedidos } from "services/fetchData";
+import { useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { setProductData } from "store/reducers/productSlice";
+import { pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
 
 export default function Home() {
@@ -14,12 +14,12 @@ export default function Home() {
 	const [demoraDomicilio, setDemoraDomicilio] = useState("25-35min");
 	const [demoraLocal, setDemoraLocal] = useState("10-15min");
 
-	const dispatch = useDispatch();
-	const { products } = useSelector(state => state.product);
+	// const dispatch = useDispatch();
+	// const { products } = useSelector(state => state.product);
 
-	useEffect(() => {
-		if (products.length < 1) dispatch(setProductData(productos));
-	}, []);
+	// useEffect(() => {
+	// 	if (products.length < 1) dispatch(setProductData(productos));
+	// }, []);
 
 	const handleOpenModal = pedido => {
 		setCurrentPedido(pedido);
@@ -81,7 +81,7 @@ export default function Home() {
 
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
-						{pedidos.map(item => (
+						{pedidos?.map(item => (
 							<div
 								key={item.id}
 								className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2"

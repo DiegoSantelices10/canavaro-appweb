@@ -27,7 +27,13 @@ const Card = ({ data, data: { id, nombre, imagen, descripcion, categoria, precio
 			<div className="p-3 bg-white">
 				{categoria === "empanadas" ? (
 					<div className="flex justify-between items-center gap-x-2">
-						<Image className="rounded-md" src={imagen} width={140} height={140} alt={nombre} />
+						<Image
+							className="rounded-md"
+							src={imagen?.url}
+							width={140}
+							height={140}
+							alt={nombre}
+						/>
 						<div className="relative w-full h-24 self-start">
 							<h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
 							<p className="text-gray-400 text-xs">{descripcion}</p>
@@ -60,11 +66,19 @@ const Card = ({ data, data: { id, nombre, imagen, descripcion, categoria, precio
 					<Link href={`/order/products/${convertToPath(nombre)}`}>
 						<a>
 							<div className="flex justify-between items-center gap-x-2">
-								<Image className="rounded-md" src={imagen} width={140} height={140} alt={nombre} />
+								<Image
+									className="rounded-md"
+									src={imagen?.url}
+									width={140}
+									height={140}
+									alt={nombre}
+								/>
 								<div className="w-full self-start">
 									<h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
 									<p className="text-gray-400 text-xs">{descripcion}</p>
-									{categoria === "promociones" && <p className="text-gray-400 text-xs py-1">$ {precio}</p>}
+									{categoria === "promociones" && (
+										<p className="text-gray-400 text-xs py-1">$ {precio}</p>
+									)}
 								</div>
 							</div>
 						</a>

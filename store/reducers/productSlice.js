@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { HYDRATE } from 'next-redux-wrapper';
+import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
 	products: [],
 };
 
 export const productSlice = createSlice({
-	name: 'product',
+	name: "product",
 	initialState,
 	reducers: {
 		setProductData: (state, { payload }) => {

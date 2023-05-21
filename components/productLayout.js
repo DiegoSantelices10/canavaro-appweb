@@ -26,7 +26,7 @@ import Swal from "sweetalert2";
 
 export default function ProductLayout({
 	data,
-	data: { id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio, addProducts },
+	data: { id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
 }) {
 	const { orderPromo } = useSelector(state => state.order);
 	const { orderList } = useSelector(state => state.order);
@@ -81,7 +81,7 @@ export default function ProductLayout({
 				nombre,
 				productos: [selectCombo, ...value],
 				descripcion,
-				imagen,
+				imagen: imagen?.url,
 				categoria,
 				cantidadMaxima,
 				precio,
@@ -105,7 +105,7 @@ export default function ProductLayout({
 		<div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
 			<div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
 				<Image
-					src={imagen || ""}
+					src={imagen?.url}
 					layout="responsive"
 					width={80}
 					height={40}
@@ -114,7 +114,10 @@ export default function ProductLayout({
 					alt={nombre || "img"}
 				/>
 				<button onClick={returnHome}>
-					<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+					<FiChevronsLeft
+						className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+						size={30}
+					/>
 				</button>
 			</div>
 
@@ -123,7 +126,11 @@ export default function ProductLayout({
 					<div className="w-full bg-white p-3">
 						<h1 className="font-bold text-lg text-gray-800">{nombre}</h1>
 						<p className=" font-normal text-sm  text-gray-400">{descripcion}</p>
-						{categoria === "promociones" ? <p className=" font-normal  text-sm text-gray-400">$ {precio}</p> : ""}
+						{categoria === "promociones" ? (
+							<p className=" font-normal  text-sm text-gray-400">$ {precio}</p>
+						) : (
+							""
+						)}
 					</div>
 					<hr className="pb-3" />
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
@@ -140,15 +147,20 @@ export default function ProductLayout({
 							<div className="flex gap-y-2 py-2 justify-between items-center">
 								<div className="w-auto">
 									<h2 className="font-semibold text-normal text-gray-800">
-										Empanada <span className="text-xs font-normal  text-gray-400">x unidad</span>
+										Empanada{" "}
+										<span className="text-xs font-normal  text-gray-400">x unidad</span>
 									</h2>
 								</div>
-								<div className="w-1/3 font-medium text-base pl-1">{<h2>$ {precio}</h2>}</div>
+								<div className="w-1/3 font-medium text-base pl-1">
+									{<h2>$ {precio}</h2>}
+								</div>
 								<div className="w-auto   px-3 text-end space-x-4 text-base">
 									<button
 										type="button"
 										className="text-red-500"
-										onClick={() => decrementCart({ id, nombre, categoria, tamanio, precio })}
+										onClick={() =>
+											decrementCart({ id, nombre, categoria, tamanio, precio })
+										}
 									>
 										-
 									</button>
@@ -156,7 +168,9 @@ export default function ProductLayout({
 									<button
 										type="button"
 										className="text-green-500"
-										onClick={() => incrementCartEmpanada({ id, nombre, categoria, tamanio, precio })}
+										onClick={() =>
+											incrementCartEmpanada({ id, nombre, categoria, tamanio, precio })
+										}
 									>
 										+
 									</button>
