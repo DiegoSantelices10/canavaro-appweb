@@ -5,7 +5,10 @@ import { convertToPath } from "libs/items";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
-const Card = ({ data, data: { id, nombre, imagen, descripcion, categoria, precio } }) => {
+const Card = ({
+	data,
+	data: { _id, nombre, imagen, descripcion, categoria, precio },
+}) => {
 	const { orderPromo } = useSelector(state => state.order);
 
 	const dispatch = useDispatch();
@@ -18,8 +21,8 @@ const Card = ({ data, data: { id, nombre, imagen, descripcion, categoria, precio
 		dispatch(decrementProductPromo(value));
 	};
 
-	const productQuantity = id => {
-		const pre = orderPromo?.find(item => item.id === id);
+	const productQuantity = _id => {
+		const pre = orderPromo?.find(item => item._id === _id);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 	return (
@@ -44,17 +47,17 @@ const Card = ({ data, data: { id, nombre, imagen, descripcion, categoria, precio
 									type="button"
 									className="text-red-500 down"
 									onClick={e => {
-										decrementItems({ id, nombre, precio });
+										decrementItems({ _id, nombre, precio });
 									}}
 								>
 									-
 								</button>
-								<span className="font-normal">{productQuantity(data.id)}</span>
+								<span className="font-normal">{productQuantity(data._id)}</span>
 								<button
 									type="button"
 									className="text-green-500 up"
 									onClick={e => {
-										addItems({ id, nombre, precio });
+										addItems({ _id, nombre, precio });
 									}}
 								>
 									+

@@ -5,15 +5,13 @@ import SectionPizza from "components/sections/sectionPizzas";
 import SectionEmpanadas from "components/sections/sectionEmpanadas";
 import SectionCombos from "components/sections/sectionCombos";
 import Footer from "components/sections/footer";
-import { useDispatch } from "react-redux";
 import { setProductData } from "store/reducers/productSlice";
-import { productos } from "services/fetchData";
-export default function index() {
-	const dispatch = useDispatch();
-
+import { wrapper } from "store/app/store";
+import getProducts from "services/fetchData";
+export default function index({ data: state }) {
 	useEffect(() => {
-		dispatch(setProductData(productos));
-	}, []);
+		localStorage.setItem("products", JSON.stringify(state));
+	});
 	return (
 		<div className="bg-image flex flex-col min-h-screen overflow-hidden ">
 			<div className="absolute inset-0 h-full"> </div>
@@ -36,3 +34,14 @@ export default function index() {
 		</div>
 	);
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+	const state = await getProducts();
+	store.dispatch(setProductData(state));
+	return {
+		props: {
+			// Pasa el estado hidratado como prop al componente de Next.js
+			data: state,
+		},
+	};
+});

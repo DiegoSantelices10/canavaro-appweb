@@ -18,7 +18,7 @@ export default function Index() {
 	const [select, setSelect] = useState("gigante");
 	const [radioSelect, setRadioSelect] = useState([]);
 	const [total, setTotal] = useState(0);
-	const {products} = useSelector(state => state.product)
+	const { products } = useSelector(state => state.product);
 
 	const dispatch = useDispatch();
 	const router = useRouter();
@@ -34,27 +34,25 @@ export default function Index() {
 		dispatch(calculateTotalQuantity());
 	}, []);
 
-	products.filter(item=>item.categoria === "pizzas").map(item=> console.log(item))
-	console.log("hola");
 	const onChangeValue = e => {
 		const value = e.target.value;
 		setSelect(value);
 	};
 
 	const handleChangeRadioButton = (item, value) => {
-		const { id, nombre, precio } = item;
-		radioSelect[id] = { id, nombre, precio, "fraccion": value };
+		const { _id, nombre, precio } = item;
+		radioSelect[_id] = { _id, nombre, precio, "fraccion": value };
 		setRadioSelect({ ...radioSelect });
 	};
 
-	const clearFraction = id => {
-		const result = Object.values(radioSelect)?.find(prod => prod.id === id);
+	const clearFraction = _id => {
+		const result = Object.values(radioSelect)?.find(prod => prod._id === _id);
 		if (result.fraccion === "cuarto") setTotal(total - 1);
 		if (result.fraccion === "mediana") setTotal(total - 2);
 
-		const res = Object.values(radioSelect)?.filter(pro => pro.id !== id);
+		const res = Object.values(radioSelect)?.filter(pro => pro._id !== _id);
 		const response = res.reduce((acc, user) => {
-			acc[user.id] = user;
+			acc[user._id] = user;
 			return acc;
 		}, {});
 		setRadioSelect(response);
@@ -105,7 +103,7 @@ export default function Index() {
 		const totalRedondeado = Math.ceil(promedio / 100) * 100;
 
 		const promo = {
-			id: idGenerator,
+			_id: idGenerator,
 			nombre: "Arma tu pizza",
 			productos: { ...newList },
 			descripcion: `Pizza ${select}`,
@@ -136,7 +134,10 @@ export default function Index() {
 					alt={"img"}
 				/>
 				<button onClick={returnHome}>
-					<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+					<FiChevronsLeft
+						className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+						size={30}
+					/>
 				</button>
 			</div>
 
@@ -144,7 +145,9 @@ export default function Index() {
 				<div className="flex flex-col  w-full">
 					<div className="w-full bg-white p-3">
 						<h1 className="font-bold text-lg text-gray-800">Arma tu pizza</h1>
-						<p className=" font-normal text-sm  text-gray-400">Elegi los gustos que quieras</p>
+						<p className=" font-normal text-sm  text-gray-400">
+							Elegi los gustos que quieras
+						</p>
 					</div>
 					<hr className="pb-3" />
 					<div className="flex w-full justify-around">
@@ -198,45 +201,53 @@ export default function Index() {
 						{productTotal()}
 					</div>
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
-						{products.filter(item=>item.categoria === "pizzas")
-							.map((item) => {
-								return(
-								<div key={item.id} className="flex justify-between items-center py-2  my-2 ">
-									<h2>{item.nombre}</h2>
-									<div className="w-auto   px-3 text-end space-x-4 text-base">
-										<div className="flex w-full justify-around items-center gap-5">
-											{radioSelect[item.id]?.fraccion && (
-												<button onClick={() => clearFraction(item.id)} className="text-gray-400 text-xs font-semibold">
-													Deshacer
-												</button>
-											)}
-											{select === "gigante" && (
+						{products
+							.filter(item => item.categoria === "pizzas")
+							.map(item => {
+								return (
+									<div
+										key={item._id}
+										className="flex justify-between items-center py-2  my-2 "
+									>
+										<h2>{item.nombre}</h2>
+										<div className="w-auto   px-3 text-end space-x-4 text-base">
+											<div className="flex w-full justify-around items-center gap-5">
+												{radioSelect[item._id]?.fraccion && (
+													<button
+														onClick={() => clearFraction(item._id)}
+														className="text-gray-400 text-xs font-semibold"
+													>
+														Deshacer
+													</button>
+												)}
+												{select === "gigante" && (
+													<div className="flex items-center gap-x-1">
+														<h3 className="text-gray-400 text-sm">1/4</h3>
+														<input
+															type="radio"
+															value="1/4"
+															name={item.nombre}
+															checked={radioSelect[item._id]?.fraccion === "1/4"}
+															onChange={() => handleChangeRadioButton(item, "1/4")}
+														/>
+													</div>
+												)}
+
 												<div className="flex items-center gap-x-1">
-													<h3 className="text-gray-400 text-sm">1/4</h3>
+													<h3 className="text-gray-400 text-sm">1/2</h3>
 													<input
 														type="radio"
-														value="1/4"
+														value="1/2"
 														name={item.nombre}
-														checked={radioSelect[item.id]?.fraccion === "1/4"}
-														onChange={() => handleChangeRadioButton(item, "1/4")}
+														checked={radioSelect[item._id]?.fraccion === "1/2"}
+														onChange={() => handleChangeRadioButton(item, "1/2")}
 													/>
 												</div>
-											)}
-
-											<div className="flex items-center gap-x-1">
-												<h3 className="text-gray-400 text-sm">1/2</h3>
-												<input
-													type="radio"
-													value="1/2"
-													name={item.nombre}
-													checked={radioSelect[item.id]?.fraccion === "1/2"}
-													onChange={() => handleChangeRadioButton(item, "1/2")}
-												/>
 											</div>
 										</div>
 									</div>
-								</div>
-							)})}
+								);
+							})}
 					</div>
 				</div>
 

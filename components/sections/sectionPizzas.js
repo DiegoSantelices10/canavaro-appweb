@@ -54,8 +54,11 @@ export default function sectionPizza() {
 					?.filter(item => item.categoria === "pizzas")
 					.map(producto => {
 						return (
-							<div key={producto.id}>
-								<p onClick={handleOpenModal} className=" cursor-pointer text-white text-center">
+							<div key={producto._id}>
+								<p
+									onClick={handleOpenModal}
+									className=" cursor-pointer text-white text-center"
+								>
 									{producto.nombre}
 								</p>
 							</div>

@@ -26,7 +26,7 @@ import Swal from "sweetalert2";
 
 export default function ProductLayout({
 	data,
-	data: { id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
+	data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
 }) {
 	const { orderPromo } = useSelector(state => state.order);
 	const { orderList } = useSelector(state => state.order);
@@ -40,8 +40,9 @@ export default function ProductLayout({
 		dispatch(calculateTotalQuantity());
 	}, [orderList, dispatch]);
 
-	const productQuantity = id => {
-		const pre = orderPromo.find(item => item.id === id);
+	const productQuantity = _id => {
+		console.log("id de incremento", _id);
+		const pre = orderPromo.find(item => item._id === _id);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 
@@ -75,9 +76,8 @@ export default function ProductLayout({
 
 	const addCartPromo = value => {
 		if (data.addEmpanadas) {
-			console.log("entro");
 			const promo = {
-				id,
+				_id,
 				nombre,
 				productos: [selectCombo, ...value],
 				descripcion,
@@ -159,17 +159,23 @@ export default function ProductLayout({
 										type="button"
 										className="text-red-500"
 										onClick={() =>
-											decrementCart({ id, nombre, categoria, tamanio, precio })
+											decrementCart({ _id, nombre, categoria, tamanio, precio })
 										}
 									>
 										-
 									</button>
-									<span className="font-normal">{productQuantity(id)}</span>
+									<span className="font-normal">{productQuantity(_id)}</span>
 									<button
 										type="button"
 										className="text-green-500"
 										onClick={() =>
-											incrementCartEmpanada({ id, nombre, categoria, tamanio, precio })
+											incrementCartEmpanada({
+												_id,
+												nombre,
+												categoria,
+												tamanio,
+												precio,
+											})
 										}
 									>
 										+

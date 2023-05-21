@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addProductPromo, decrementProductPromo, setQuantityDemanded } from "store/reducers/orderSlice";
+import {
+	addProductPromo,
+	decrementProductPromo,
+	setQuantityDemanded,
+} from "store/reducers/orderSlice";
 
 export default function Promotion({ cantMax, data, setSelectCombo }) {
 	const [select, setSelect] = useState("");
@@ -17,10 +21,10 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 	useEffect(() => {
 		setPromotions(products?.filter(item => item.categoria === "promociones"));
 		dispatch(setQuantityDemanded(cantMax));
-		console.log("data", data);
 	}, []);
 
 	const addItems = value => {
+		console.log("idddd", value);
 		dispatch(addProductPromo(value));
 	};
 
@@ -32,16 +36,16 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 		dispatch(setQuantityDemanded(value));
 	};
 
-	const productQuantity = id => {
-		const pre = orderPromo?.find(item => item.id === id);
+	const productQuantity = _id => {
+		const pre = orderPromo?.find(item => item._id === _id);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 	const onChangeValue = e => {
 		setSelect(e.target.value);
-		const { id, nombre, descripcion } = products
+		const { _id, nombre, descripcion } = products
 			?.filter(item => item.categoria === "promociones")
 			.find(item => item.nombre === e.target.value);
-		const res = { id, nombre, descripcion };
+		const res = { _id, nombre, descripcion };
 		setSelectCombo(res);
 	};
 	return (
@@ -59,7 +63,9 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 						/>
 						<div>
 							<h3>{promotions && promotions[2].nombre}</h3>
-							<h4 className="text-gray-400 font-normal">{promotions && promotions[2].descripcion}</h4>
+							<h4 className="text-gray-400 font-normal">
+								{promotions && promotions[2].descripcion}
+							</h4>
 						</div>
 					</div>
 					<div className="p-4 flex gap-2 justify-start items-center">
@@ -73,7 +79,9 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 						/>
 						<div>
 							<h3>{promotions && promotions[3].nombre}</h3>
-							<h4 className="text-gray-400 font-normal">{promotions && promotions[3].descripcion}</h4>
+							<h4 className="text-gray-400 font-normal">
+								{promotions && promotions[3].descripcion}
+							</h4>
 						</div>
 					</div>
 				</>
@@ -99,7 +107,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 						>
 							-
 						</button>
-						<span className="font-normal">{productQuantity(data.id)}</span>
+						<span className="font-normal">{productQuantity(data._id)}</span>
 						<button
 							type="button"
 							className="text-green-500 up"
@@ -118,7 +126,9 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 						<>
 							{quantityDemanded < 1 ? (
 								<div className="bg-green-500 w-auto p-2">
-									<p className="text-white text-center">¡ Se completo la cantidad requerida !</p>
+									<p className="text-white text-center">
+										¡ Se completo la cantidad requerida !
+									</p>
 								</div>
 							) : (
 								<div className="bg-red-500 w-auto p-2">
@@ -130,9 +140,9 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 
 							{products
 								?.filter(item => item.categoria === "empanadas")
-								.map(({ id, nombre }) => {
+								.map(({ _id, nombre }) => {
 									return (
-										<div key={id} className="flex justify-between py-2  my-2 ">
+										<div key={_id} className="flex justify-between py-2  my-2 ">
 											<div className="w-1/2 font-medium">
 												<h2>{nombre}</h2>
 											</div>
@@ -142,18 +152,20 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 													className="text-red-500 down"
 													onClick={e => {
 														setQuantity(quantityDemanded + 1);
-														decrementItems({ id, nombre });
+														decrementItems({ _id, nombre });
 													}}
 												>
 													-
 												</button>
-												<span className="font-normal">{productQuantity(id)}</span>
+												<span className="font-normal">{productQuantity(_id)}</span>
 												<button
 													type="button"
-													className={quantityDemanded < 1 ? `invisible` : `text-green-500`}
+													className={
+														quantityDemanded < 1 ? `invisible` : `text-green-500`
+													}
 													onClick={e => {
 														setQuantity(quantityDemanded - 1);
-														addItems({ id, nombre });
+														addItems({ _id, nombre });
 													}}
 												>
 													+

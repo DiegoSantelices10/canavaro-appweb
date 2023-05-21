@@ -22,8 +22,23 @@ const productoSchema = new Schema(
 		},
 		precio: {
 			type: Number,
-			required: true,
+			required: [true, "El campo es requerido."],
 		},
+		precioPizza: {
+			gigante: {
+				type: Number,
+				required: [true, "El campo es requerido."],
+			},
+			mediana: {
+				type: Number,
+				required: [true, "El campo es requerido."],
+			},
+			chica: {
+				type: Number,
+				required: [true, "El campo es requerido."],
+			},
+		},
+
 		addEmpanadas: {
 			type: String,
 			validate: {

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import CardPromotion from "components/cardPromotion";
 import Layout from "components/layout";
 import { useSelector, useDispatch } from "react-redux";
-import { wrapper } from "store/app/store";
 import Card from "components/Card";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +16,6 @@ import {
 
 import { v4 as uuidv4 } from "uuid";
 import { setProductData } from "store/reducers/productSlice";
-import getProducts from "services/fetchData";
 
 export default function Home() {
 	const [renderProducts, setRenderProductos] = useState("empanadas");
@@ -49,9 +47,10 @@ export default function Home() {
 		calculateEmpanadas();
 	}, [orderPromo]);
 
-	// useEffect(() => {
-	// 	if (products.length < 1) dispatch(setProductData(productos));
-	// }, []);
+	useEffect(() => {
+		const res = JSON.parse(localStorage.getItem("products"));
+		if (products.length < 1) dispatch(setProductData(res));
+	}, []);
 
 	const calculateEmpanadas = () => {
 		const requiredQuantity = 12;
@@ -239,8 +238,3 @@ export default function Home() {
 		</Layout>
 	);
 }
-
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-	const res = await getProducts();
-	store.dispatch(setProductData(res));
-});

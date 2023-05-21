@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export default function PizzaInfo({
 	data: {
 		nombre,
-		precio: { gigante, mediana, chica },
+		precioPizza: { gigante, mediana, chica },
 		categoria,
 	},
 	incrementCart,
@@ -31,7 +31,7 @@ export default function PizzaInfo({
 						className="text-red-500"
 						onClick={() =>
 							decrementCart({
-								id: idGenerator,
+								_id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "gigante",
@@ -47,7 +47,7 @@ export default function PizzaInfo({
 						className="text-green-500"
 						onClick={() =>
 							incrementCart({
-								id: idGenerator,
+								_id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "gigante",
@@ -70,7 +70,7 @@ export default function PizzaInfo({
 						className="text-red-500"
 						onClick={() =>
 							decrementCart({
-								idGenerator,
+								_id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "mediana",
@@ -86,7 +86,7 @@ export default function PizzaInfo({
 						className="text-green-500"
 						onClick={() =>
 							incrementCart({
-								idGenerator,
+								_id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "mediana",
@@ -109,7 +109,7 @@ export default function PizzaInfo({
 						className="text-red-500"
 						onClick={() =>
 							decrementCart({
-								idGenerator,
+								_id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "chica",
@@ -125,7 +125,7 @@ export default function PizzaInfo({
 						className="text-green-500"
 						onClick={() =>
 							incrementCart({
-								idGenerator,
+								_id: idGenerator,
 								nombre,
 								categoria,
 								tamanio: "chica",
