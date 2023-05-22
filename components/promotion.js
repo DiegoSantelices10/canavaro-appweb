@@ -24,7 +24,6 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 	}, []);
 
 	const addItems = value => {
-		console.log("idddd", value);
 		dispatch(addProductPromo(value));
 	};
 
@@ -41,6 +40,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 	const onChangeValue = e => {
+		console.log("????????????????????????????????", e.target.value);
 		setSelect(e.target.value);
 		const { _id, nombre, descripcion } = products
 			?.filter(item => item.categoria === "promociones")
@@ -91,7 +91,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 				<></>
 			)}
 
-			{!data.addEmpanadas ? (
+			{data.addEmpanadas === "no" ? (
 				<div className="flex justify-between py-2  my-2 ">
 					<div className="w-1/2 font-medium">
 						<h2>{data.nombre}</h2>

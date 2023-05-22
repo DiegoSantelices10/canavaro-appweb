@@ -40,8 +40,8 @@ export default function Index() {
 	};
 
 	const handleChangeRadioButton = (item, value) => {
-		const { _id, nombre, precio } = item;
-		radioSelect[_id] = { _id, nombre, precio, "fraccion": value };
+		const { _id, nombre, precioPizza } = item;
+		radioSelect[_id] = { _id, nombre, precioPizza, "fraccion": value };
 		setRadioSelect({ ...radioSelect });
 	};
 
@@ -89,14 +89,15 @@ export default function Index() {
 		if (total > 1) return <h1>Completa la cantidad correctamente</h1>;
 	};
 	const addCartPromo = (value, tamanio) => {
+		console.log("values", value);
 		let total = 0;
 		let cantidad = 0;
 		Object.values(value).forEach(objeto => {
-			total += objeto.precio[tamanio];
+			total += objeto.precioPizza[tamanio];
 			cantidad++;
 		});
 
-		const newList = Object.values(value).map(({ precio, ...resto }) => resto);
+		const newList = Object.values(value).map(({ precioPizza, ...resto }) => resto);
 
 		const promedio = total / cantidad;
 

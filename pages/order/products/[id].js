@@ -10,6 +10,13 @@ export default function Product({ productInfo: { data } }) {
 		</div>
 	);
 }
+export function getDatosFromLocalStorage() {
+	if (typeof window !== "undefined") {
+		const datos = localStorage.getItem("datos");
+		return datos ? JSON.parse(datos) : [];
+	}
+	return [];
+}
 
 export async function getStaticPaths() {
 	const productos = await getProducts();
@@ -22,7 +29,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const productos = await getProducts();
-
 	const id = params.id;
 	const obj = await getItemData(id, productos);
 	const productInfo = Object.assign({}, obj);

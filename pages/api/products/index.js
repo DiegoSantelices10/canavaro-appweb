@@ -9,7 +9,6 @@ export default async function handler(req, res) {
 		case "GET":
 			try {
 				const products = await Producto.find();
-				console.log("====== API =======", products);
 				return res.status(200).json(products);
 			} catch (error) {
 				return res.status(400).json({ msg: error.message });
@@ -68,8 +67,6 @@ export default async function handler(req, res) {
 						precio,
 					});
 				}
-
-				console.log("producto nuevo!", newProduct);
 
 				await newProduct.save();
 				return res.status(200).json(newProduct);

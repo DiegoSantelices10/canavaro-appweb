@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
+import { configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
 
-import orderReducer from 'store/reducers/orderSlice';
-import userReducer from 'store/reducers/userSlice';
-import productReducer from 'store/reducers/productSlice';
+import orderReducer from "store/reducers/orderSlice";
+import userReducer from "store/reducers/userSlice";
+import productReducer from "store/reducers/productSlice";
 
 export const makeStore = () =>
 	configureStore({
@@ -12,7 +12,7 @@ export const makeStore = () =>
 			order: orderReducer,
 			user: userReducer,
 		},
-		devTools: true,
+		devTools: false,
 	});
 
-export const wrapper = createWrapper(makeStore, { debug: false });
+export const wrapper = createWrapper(makeStore, { debug: true });

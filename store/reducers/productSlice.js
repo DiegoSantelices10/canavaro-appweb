@@ -12,7 +12,7 @@ export const productSlice = createSlice({
 			state.products = payload;
 		},
 		getProductsData: (state, { payload }) => {
-			return state.products;
+			return state;
 		},
 	},
 
