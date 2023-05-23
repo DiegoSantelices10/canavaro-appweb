@@ -49,8 +49,11 @@ export default function Home() {
 	}, [orderPromo]);
 
 	useEffect(() => {
-		const res = JSON.parse(localStorage.getItem("products"));
-		if (products.length < 1) dispatch(setProductData(res));
+		const res = JSON.parse(localStorage.getItem("productos"));
+		if (products?.length <= 0) {
+			console.log("entro");
+			dispatch(setProductData(res));
+		}
 	}, []);
 
 	const calculateEmpanadas = () => {

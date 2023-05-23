@@ -10,6 +10,7 @@ export const productSlice = createSlice({
 	reducers: {
 		setProductData: (state, { payload }) => {
 			state.products = payload;
+			localStorage.setItem("productos", JSON.stringify(payload));
 		},
 		getProductsData: (state, { payload }) => {
 			return state;

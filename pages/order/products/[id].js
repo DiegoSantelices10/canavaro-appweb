@@ -2,6 +2,7 @@
 import { getItemData, getPathsFromTitle } from "libs/items";
 import ProductLayout from "components/productLayout";
 import getProducts from "services/fetchData";
+import { store } from "store/app/store";
 
 export default function Product({ productInfo: { data } }) {
 	return (
@@ -10,16 +11,10 @@ export default function Product({ productInfo: { data } }) {
 		</div>
 	);
 }
-export function getDatosFromLocalStorage() {
-	if (typeof window !== "undefined") {
-		const datos = localStorage.getItem("datos");
-		return datos ? JSON.parse(datos) : [];
-	}
-	return [];
-}
 
 export async function getStaticPaths() {
 	const productos = await getProducts();
+	console.log(store.getState());
 	const res = await getPathsFromTitle(productos);
 	return {
 		paths: res,

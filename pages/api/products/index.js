@@ -16,9 +16,9 @@ const handler = async (req, res) => {
 		await runMiddleware(req, res, cors);
 		switch (method) {
 			case "GET":
-				const products = await Producto.find();
+				const products = await Producto.find({});
 
-				res.status(200).json(products);
+				return res.status(200).json(products);
 			case "POST":
 				const {
 					id,

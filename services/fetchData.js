@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const getProducts = async baseUrl => {
-	const result = await axios.get(`http://${baseUrl}/api/products`);
+const getProducts = async () => {
+	const result = await axios.get(`/api/products`, {
+		"context-type": "text",
+	});
 
 	const convert = result.data;
 	return convert;
