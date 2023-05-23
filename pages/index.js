@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/no-unknown-property */
+import React, { useState } from "react";
 import Header from "components/header";
 import HomeFront from "components/sections/homeFront";
 import SectionPizza from "components/sections/sectionPizzas";
@@ -6,17 +7,24 @@ import SectionEmpanadas from "components/sections/sectionEmpanadas";
 import SectionCombos from "components/sections/sectionCombos";
 import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
+
+// import axios from "axios";
 import { wrapper } from "store/app/store";
 import getProducts from "services/fetchData";
 
-export default function index({ data: state }) {
+export default function index() {
 	const [showModal, setShowModal] = useState(false);
 
 	const [currentProducto, setCurrentProducto] = useState(null);
 
-	useEffect(() => {
-		localStorage.setItem("products", JSON.stringify(state));
-	});
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const result = await axios.get("/api/products");
+	// 		// const res = JSON.parse(result.request.response);
+	// 		// console.log(res);
+	// 		localStorage.setItem("products", JSON.stringify(result.data));
+	// 	})();
+	// });
 
 	const handleOpenModal = producto => {
 		setCurrentProducto(producto);
@@ -68,6 +76,7 @@ export default function index({ data: state }) {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
 	const state = await getProducts();
+
 	store.dispatch(setProductData(state));
 	return {
 		props: {

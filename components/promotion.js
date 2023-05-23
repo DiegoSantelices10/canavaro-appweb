@@ -40,13 +40,15 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 	const onChangeValue = e => {
-		console.log("????????????????????????????????", e.target.value);
 		setSelect(e.target.value);
-		const { _id, nombre, descripcion } = products
-			?.filter(item => item.categoria === "promociones")
-			.find(item => item.nombre === e.target.value);
-		const res = { _id, nombre, descripcion };
-		setSelectCombo(res);
+		if (products !== null) {
+			const { _id, nombre, descripcion } =
+				products
+					.filter(item => item.categoria === "promociones")
+					.find(item => item.nombre === e.target.value) || {};
+			const res = { _id, nombre, descripcion };
+			setSelectCombo(res);
+		}
 	};
 	return (
 		<div>

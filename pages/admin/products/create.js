@@ -1,9 +1,9 @@
+/* eslint-disable react/no-unknown-property */
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
-import Swal from "sweetalert2";
 
 export default function Create() {
 	const [renderProducts, setRenderProductos] = useState("empanadas");
@@ -93,16 +93,7 @@ export default function Create() {
 						addEmpanadas: "",
 					}}
 					onSubmit={(values, { resetForm }) => {
-						console.log(values);
-						axios.post("/api/products", values).then(res => {
-							console.log(res);
-							if (res.status === 200) {
-								Swal.fire({
-									icon: "success",
-									text: "¡Se guardo correctamente!",
-								});
-							}
-						});
+						axios.post("/api/products", values);
 
 						resetForm();
 					}}

@@ -3,7 +3,7 @@ import { Element } from "react-scroll";
 import Modal from "components/modal";
 import { useState } from "react";
 
-export default function sectionEmpanadas() {
+export default function SectionEmpanadas() {
 	const [showModal, setShowModal] = useState(false);
 
 	const handleOpenModal = () => {
@@ -22,12 +22,17 @@ export default function sectionEmpanadas() {
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between">
 					<div className="h-24 flex justify-center items-center">
-						<Image src={"/images/empanada.png"} width={90} height={75} />
+						<Image src={"/images/empanada.png"} width={90} height={75} alt="empanadas" />
 					</div>
 				</div>
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
 					<div className="h-24  flex justify-center items-center ">
-						<Image src={"/images/canastita.png"} width={90} height={90} />
+						<Image
+							src={"/images/canastita.png"}
+							width={90}
+							height={90}
+							alt="canastitas"
+						/>
 					</div>
 				</div>
 			</div>

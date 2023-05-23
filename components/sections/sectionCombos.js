@@ -7,17 +7,22 @@ export default function sectionCombos() {
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between">
 					<div className="h-24 flex justify-center items-center">
-						<Image src={"/images/empanada.png"} width={90} height={75} />
+						<Image src={"/images/empanada.png"} width={90} height={75} alt="empanada" />
 					</div>
 				</div>
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
 					<div className="h-24  flex justify-center items-center ">
-						<Image src={"/images/pizza-vector-negro.png"} width={70} height={70} />
+						<Image
+							src={"/images/pizza-vector-negro.png"}
+							width={70}
+							height={70}
+							alt="pizza"
+						/>
 					</div>
 				</div>
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
 					<div className="h-24  flex justify-center items-center ">
-						<Image src={"/images/canastita.png"} width={90} height={90} />
+						<Image src={"/images/canastita.png"} width={90} height={90} alt="canastita" />
 					</div>
 				</div>
 			</div>

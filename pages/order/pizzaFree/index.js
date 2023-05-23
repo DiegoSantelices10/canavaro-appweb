@@ -32,7 +32,7 @@ export default function Index() {
 	useEffect(() => {
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
-	}, []);
+	}, [dispatch]);
 
 	const onChangeValue = e => {
 		const value = e.target.value;

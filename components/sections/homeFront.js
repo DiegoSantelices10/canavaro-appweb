@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import Link from "next/link";
 import { Element } from "react-scroll";
 import Image from "next/image";
@@ -23,7 +24,9 @@ function HomeFront() {
 							<Image src="/images/logocanavaro.png" width={150} height={150} alt="logo" />
 						</div>
 						<div>
-							<p className="text-xl font-extrabold text-gray-200 ">¡Todo lo que necesitas en un solo lugar!</p>
+							<p className="text-xl font-extrabold text-gray-200 ">
+								¡Todo lo que necesitas en un solo lugar!
+							</p>
 							<p className="text-gray-200 font-medium text-base">Pelliza 1794 - Olivos</p>
 						</div>
 					</div>

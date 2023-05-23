@@ -25,7 +25,7 @@ export default function Cart() {
 		setOrder(orderList);
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
-	}, [orderList]);
+	}, [dispatch, orderList]);
 
 	const addressSet = () => {
 		dispatch(addAddress(address));

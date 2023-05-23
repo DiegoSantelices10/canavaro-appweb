@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import Modal from "components/modal";
 
-export default function sectionPizza({
+export default function SectionPizza({
 	handleOpen,
 	handleClose,
 	showModal,
@@ -62,20 +63,21 @@ export default function sectionPizza({
 				<p className="italic col-span-2 text-white text-center text-xs py-3">
 					* Hacer click sobre el titulo para ver descripcion.
 				</p>
-				{products
-					?.filter(item => item.categoria === "pizzas")
-					.map(producto => {
-						return (
-							<div key={producto._id}>
-								<p
-									onClick={() => handleOpen(producto)}
-									className=" cursor-pointer text-white text-center"
-								>
-									{producto.nombre}
-								</p>
-							</div>
-						);
-					})}
+				{products !== null &&
+					products
+						.filter(item => item.categoria === "pizzas")
+						.map(producto => {
+							return (
+								<div key={producto._id}>
+									<p
+										onClick={() => handleOpen(producto)}
+										className=" cursor-pointer text-white text-center"
+									>
+										{producto.nombre}
+									</p>
+								</div>
+							);
+						})}
 			</div>
 		</Element>
 	);

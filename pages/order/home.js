@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useState, useEffect } from "react";
 import CardPromotion from "components/cardPromotion";
 import Layout from "components/layout";

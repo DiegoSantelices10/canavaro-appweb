@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 /* eslint-disable no-case-declarations */
 import dbConnect from "utils/mongoose";
 import Producto from "models/product";
@@ -17,7 +18,7 @@ const handler = async (req, res) => {
 			case "GET":
 				const products = await Producto.find();
 
-				return await res.status(200).json(products);
+				res.status(200).json(products);
 			case "POST":
 				const {
 					id,
@@ -74,13 +75,12 @@ const handler = async (req, res) => {
 				}
 
 				await newProduct.save();
-				return await res.status(200).json(newProduct);
-
-			default:
-				return await res.status(400).json({ msg: "el metodo no es soportado" });
+				return res.status(201).json({
+					message: "product registered",
+				});
 		}
 	} catch (error) {
-		return await res.status(400).json({ msg: "el metodo no es soportado" });
+		return await res.status(400).json({ msg: error.toString() });
 	}
 };
 

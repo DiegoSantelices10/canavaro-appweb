@@ -52,7 +52,10 @@ export default function Checkout() {
 				<div className="flex items-center gap-3 py-4">
 					<Link href={"/order/cart"}>
 						<a>
-							<FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+							<FiChevronsLeft
+								className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+								size={30}
+							/>
 						</a>
 					</Link>
 					<h2 className="font-poppins font-extrabold text-lg">Tu pedido</h2>
@@ -124,7 +127,7 @@ export default function Checkout() {
 						)}
 						{type === "mercadoPago" && (
 							<div className="flex justify-center w-full">
-								<Image src="/images/logoMP.jpg" width={100} height={100} />
+								<Image src="/images/logoMP.jpg" width={100} height={100} alt="logoMP" />
 							</div>
 						)}
 					</div>
