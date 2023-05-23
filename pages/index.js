@@ -8,7 +8,6 @@ import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
 import getProducts from "services/fetchData";
-import axios from "axios";
 
 export default function index({ data: state }) {
 	const [showModal, setShowModal] = useState(false);
