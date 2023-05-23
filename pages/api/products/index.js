@@ -15,8 +15,9 @@ const handler = async (req, res) => {
 		await runMiddleware(req, res, cors);
 		switch (method) {
 			case "GET":
-				const products = await Producto.find({});
-				return res.status(200).json(products);
+				const products = await Producto.find();
+
+				return await res.status(200).json(products);
 			case "POST":
 				const {
 					id,
@@ -73,13 +74,13 @@ const handler = async (req, res) => {
 				}
 
 				await newProduct.save();
-				return res.status(200).json(newProduct);
+				return await res.status(200).json(newProduct);
 
 			default:
-				return res.status(400).json({ msg: "el metodo no es soportado" });
+				return await res.status(400).json({ msg: "el metodo no es soportado" });
 		}
 	} catch (error) {
-		return res.status(400).json({ msg: "el metodo no es soportado" });
+		return await res.status(400).json({ msg: "el metodo no es soportado" });
 	}
 };
 
