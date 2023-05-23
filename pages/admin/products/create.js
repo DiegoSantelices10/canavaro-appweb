@@ -94,7 +94,7 @@ export default function Create() {
 					}}
 					onSubmit={(values, { resetForm }) => {
 						console.log(values);
-						axios.post("http://localhost:3000/api/products", values).then(res => {
+						axios.post("/api/products", values).then(res => {
 							console.log(res);
 							if (res.status === 200) {
 								Swal.fire({

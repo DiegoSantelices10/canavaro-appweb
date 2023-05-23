@@ -1,21 +1,23 @@
+/* eslint-disable no-case-declarations */
 import dbConnect from "utils/mongoose";
 import Producto from "models/product";
 import { uploadImage } from "libs/cloudinary";
-dbConnect();
+import { runMiddleware } from "middleware/runMiddleware";
+import Cors from "cors";
 
-export default async function handler(req, res) {
+const cors = Cors({
+	methods: ["POST", "GET"],
+});
+
+const handler = async (req, res) => {
 	const { method, body } = req;
-	switch (method) {
-		case "GET":
-			try {
+	try {
+		await runMiddleware(req, res, cors);
+		switch (method) {
+			case "GET":
 				const products = await Producto.find({});
-
 				return res.status(200).json(products);
-			} catch (error) {
-				return res.status(400).json({ msg: error.message });
-			}
-		case "POST":
-			try {
+			case "POST":
 				const {
 					id,
 					nombre,
@@ -71,10 +73,13 @@ export default async function handler(req, res) {
 
 				await newProduct.save();
 				return res.status(200).json(newProduct);
-			} catch (error) {
-				return res.status(400).json({ msg: error.message });
-			}
-		default:
-			return res.status(400).json({ msg: "el metodo no es soportado" });
+
+			default:
+				return res.status(400).json({ msg: "el metodo no es soportado" });
+		}
+	} catch (error) {
+		return res.status(400).json({ msg: error.message });
 	}
-}
+};
+
+export default dbConnect(handler);
