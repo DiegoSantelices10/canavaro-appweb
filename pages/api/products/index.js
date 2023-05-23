@@ -29,6 +29,7 @@ const handler = async (req, res) => {
 					addEmpanadas,
 					cantidadMaxima,
 				} = body;
+
 				let imageCloud;
 				if (imagen) {
 					const result = await uploadImage(imagen);
@@ -78,7 +79,7 @@ const handler = async (req, res) => {
 				return res.status(400).json({ msg: "el metodo no es soportado" });
 		}
 	} catch (error) {
-		return res.status(400).json({ msg: error.message });
+		return res.status(400).json({ msg: "el metodo no es soportado" });
 	}
 };
 
