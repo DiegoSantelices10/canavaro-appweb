@@ -25,15 +25,14 @@ const Modal = ({ handleClose, showModal, children }) => {
 						<div className="relative overflow-hidden h-full   mx-auto  ">
 							{showModal && (
 								<Image
-									src={imagen?.url}
+									src={imagen.url}
 									layout="responsive"
 									width={60}
-									relative
 									height={60}
 									objectFit="cover"
 									objectPosition="center"
 									className="rounded-md"
-									alt={nombre || "img"}
+									alt={nombre}
 								/>
 							)}
 

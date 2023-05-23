@@ -8,12 +8,19 @@ import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
 import getProducts from "services/fetchData";
+import axios from "axios";
 
 export default function index({ data: state }) {
 	const [showModal, setShowModal] = useState(false);
+
 	const [currentProducto, setCurrentProducto] = useState(null);
 
 	useEffect(() => {
+		(async () => {
+			const res = await axios.get("/api/products/");
+			console.log("respuesta", res);
+		})();
+
 		localStorage.setItem("products", JSON.stringify(state));
 	});
 
@@ -65,8 +72,10 @@ export default function index({ data: state }) {
 	);
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-	const state = await getProducts();
+export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
+	const baseUrl = context.req.headers.host;
+	console.log(context.req.headers);
+	const state = await getProducts(baseUrl);
 	store.dispatch(setProductData(state));
 	return {
 		props: {

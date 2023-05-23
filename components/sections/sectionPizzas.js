@@ -14,7 +14,7 @@ export default function sectionPizza({
 
 	return (
 		<Element name="pizzas" className="p-3  w-full  element font-nunito">
-			{currentProducto && (
+			{currentProducto !== null && (
 				<Modal showModal={showModal} handleClose={handleClose}>
 					{currentProducto}
 				</Modal>
@@ -23,19 +23,34 @@ export default function sectionPizza({
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
 					<div className="h-24  flex justify-center items-center ">
-						<Image src={"/images/pizza-vector-negro.png"} width={60} height={60} />
+						<Image
+							src={"/images/pizza-vector-negro.png"}
+							width={60}
+							height={60}
+							alt="gigante"
+						/>
 					</div>
 					<p className="font-bold text-lg">Gigante</p>
 				</div>
 				<div className="text-center h-28 w-auto flex flex-col justify-between">
 					<div className="h-24 flex justify-center items-center">
-						<Image src={"/images/pizza-vector-negro.png"} width={55} height={55} />
+						<Image
+							src={"/images/pizza-vector-negro.png"}
+							width={55}
+							height={55}
+							alt="mediana"
+						/>
 					</div>
 					<p className="font-bold text-lg">Mediana</p>
 				</div>
 				<div className="text-center h-28 w-auto flex flex-col justify-between">
 					<div className="h-24 flex justify-center items-center">
-						<Image src={"/images/pizza-vector-negro.png"} width={50} height={50} />
+						<Image
+							src={"/images/pizza-vector-negro.png"}
+							width={50}
+							height={50}
+							alt="chica"
+						/>
 					</div>
 					<p className="font-bold text-lg">Chica</p>
 				</div>

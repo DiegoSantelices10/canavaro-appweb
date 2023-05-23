@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const getProducts = async () => {
-	const result = await axios.get(process.env.API_URL + "/api/products/");
+const getProducts = async baseUrl => {
+	const result = await axios.get(`http://${baseUrl}/api/products`);
 
 	const convert = result.data;
 	return convert;
