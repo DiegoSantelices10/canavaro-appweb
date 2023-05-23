@@ -8,7 +8,8 @@ export default async function handler(req, res) {
 	switch (method) {
 		case "GET":
 			try {
-				const products = await Producto.find();
+				const products = await Producto.find({});
+
 				return res.status(200).json(products);
 			} catch (error) {
 				return res.status(400).json({ msg: error.message });

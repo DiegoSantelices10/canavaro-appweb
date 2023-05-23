@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import Modal from "components/modal";
 
-export default function sectionPizza() {
+export default function sectionPizza({
+	handleOpen,
+	handleClose,
+	showModal,
+	currentProducto,
+}) {
 	const { products } = useSelector(state => state.product);
-
-	const [showModal, setShowModal] = useState(false);
-
-	const handleOpenModal = () => {
-		setShowModal(true);
-	};
-
-	const handleCloseModal = () => {
-		setShowModal(false);
-	};
 
 	return (
 		<Element name="pizzas" className="p-3  w-full  element font-nunito">
-			<Modal show={showModal} handleClose={handleCloseModal}>
-				<p className="text-lg font-semibold">Contenido del modal</p>
-			</Modal>
+			{currentProducto && (
+				<Modal showModal={showModal} handleClose={handleClose}>
+					{currentProducto}
+				</Modal>
+			)}
 			<h1 className="text-center  p-1 text-2xl font-extrabold">Nuestras Pizzas</h1>
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
@@ -56,7 +53,7 @@ export default function sectionPizza() {
 						return (
 							<div key={producto._id}>
 								<p
-									onClick={handleOpenModal}
+									onClick={() => handleOpen(producto)}
 									className=" cursor-pointer text-white text-center"
 								>
 									{producto.nombre}
@@ -64,26 +61,6 @@ export default function sectionPizza() {
 							</div>
 						);
 					})}
-				<p className="text-white text-center">Muzzarella con Albahaca</p>
-				<p className="text-white text-center">Muzzarella con Provenzal</p>
-				<p className="text-white text-center">Muzzarella Doble</p>
-				<p className="text-white text-center">Muzzarella con Huevo</p>
-				<p className="text-white text-center">Muzzarella con Anchoas</p>
-				<p className="text-white text-center">Napolitana con Jamon</p>
-				<p className="text-white text-center">Super Napolitana</p>
-				<p className="text-white text-center">Jamon y Huevo</p>
-				<p className="text-white text-center">Jamon y Anana</p>
-				<p className="text-white text-center">Roquefort y Jamon</p>
-				<p className="text-white text-center">Calabresa</p>
-				<p className="text-white text-center">Palmitos</p>
-				<p className="text-white text-center">Palmitos con Jamon</p>
-				<p className="text-white text-center">Palmitos Canavaro</p>
-				<p className="text-white text-center">Panceta y Provolone</p>
-				<p className="text-white text-center">Panceta con Huevo</p>
-				<p className="text-white text-center">Panceta con Cheddar</p>
-				<p className="text-white text-center">Crudo y Rucula</p>
-				<p className="text-white text-center">4 Quesos</p>
-				<p className="text-white text-center">Vegetariana</p>
 			</div>
 		</Element>
 	);

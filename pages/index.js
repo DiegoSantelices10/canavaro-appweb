@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "components/header";
 import HomeFront from "components/sections/homeFront";
 import SectionPizza from "components/sections/sectionPizzas";
@@ -8,10 +8,25 @@ import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
 import getProducts from "services/fetchData";
+
 export default function index({ data: state }) {
+	const [showModal, setShowModal] = useState(false);
+	const [currentProducto, setCurrentProducto] = useState(null);
+
 	useEffect(() => {
 		localStorage.setItem("products", JSON.stringify(state));
 	});
+
+	const handleOpenModal = producto => {
+		setCurrentProducto(producto);
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setCurrentProducto(null);
+		setShowModal(false);
+	};
+
 	return (
 		<div className="bg-image flex flex-col min-h-screen overflow-hidden ">
 			<div className="absolute inset-0 h-full"> </div>
@@ -26,9 +41,24 @@ export default function index({ data: state }) {
 			<main className="font-nunito">
 				<Header />
 				<HomeFront />
-				<SectionPizza />
-				<SectionEmpanadas />
-				<SectionCombos />
+				<SectionPizza
+					handleOpen={handleOpenModal}
+					handleClose={handleCloseModal}
+					showModal={showModal}
+					currentProducto={currentProducto}
+				/>
+				<SectionEmpanadas
+					handleOpen={handleOpenModal}
+					handleClose={handleCloseModal}
+					showModal={showModal}
+					currentProducto={currentProducto}
+				/>
+				<SectionCombos
+					handleOpen={handleOpenModal}
+					handleClose={handleCloseModal}
+					showModal={showModal}
+					currentProducto={currentProducto}
+				/>
 				<Footer />
 			</main>
 		</div>
