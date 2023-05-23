@@ -7,7 +7,6 @@ function Header() {
 	const [top, setTop] = useState(true);
 	const [isNavOpen, setIsNavOpen] = useState(false);
 	const router = useRouter();
-	// detect whether user has scrolled the page down by 10px
 	useEffect(() => {
 		const scrollHandler = () => {
 			window.pageYOffset > 10 ? setTop(false) : setTop(true);
