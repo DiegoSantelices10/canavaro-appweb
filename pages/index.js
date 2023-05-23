@@ -16,11 +16,6 @@ export default function index({ data: state }) {
 	const [currentProducto, setCurrentProducto] = useState(null);
 
 	useEffect(() => {
-		(async () => {
-			const res = await axios.get("/api/products/");
-			console.log("respuesta", res);
-		})();
-
 		localStorage.setItem("products", JSON.stringify(state));
 	});
 
@@ -72,10 +67,8 @@ export default function index({ data: state }) {
 	);
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
-	const baseUrl = context.req.headers.host;
-	console.log(context.req.headers);
-	const state = await getProducts(baseUrl);
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+	const state = await getProducts();
 	store.dispatch(setProductData(state));
 	return {
 		props: {
