@@ -10,5 +10,5 @@ export const store = configureStore({
 		order: orderReducer,
 		user: userReducer,
 	},
-	devTools: false,
+	devTools: true,
 });

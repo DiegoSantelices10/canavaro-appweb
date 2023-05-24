@@ -1,12 +1,8 @@
 import axios from "axios";
 
 const getProducts = async () => {
-	const result = await axios.get(`/api/products`, {
-		"context-type": "text",
-	});
-
-	const convert = result.data;
-	return convert;
+	const result = await axios.get(`${process.env.DEV_URL}/api/products`);
+	return result.data;
 };
 
 export default getProducts;

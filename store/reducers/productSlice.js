@@ -1,8 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
 const initialState = {
 	products: [],
 };
+
+export const getProductos = createAsyncThunk("product/get", async (userId, thunkAPI) => {
+	const response = await axios.get("/api/products");
+	return response.data;
+});
 
 export const productSlice = createSlice({
 	name: "product",
@@ -16,14 +22,12 @@ export const productSlice = createSlice({
 			return state;
 		},
 	},
-
-	extraReducers: {
-		[HYDRATE]: (state, action) => {
-			return {
-				...state,
-				...action.payload.product,
-			};
-		},
+	extraReducers: builder => {
+		// Add reducers for additional action types here, and handle loading state as needed
+		builder.addCase(getProductos.fulfilled, (state, action) => {
+			// Add user to the state array
+			state.products = action.payload;
+		});
 	},
 });
 

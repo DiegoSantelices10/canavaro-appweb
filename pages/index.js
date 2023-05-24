@@ -6,9 +6,8 @@ import SectionPizza from "components/sections/sectionPizzas";
 import SectionEmpanadas from "components/sections/sectionEmpanadas";
 import SectionCombos from "components/sections/sectionCombos";
 import Footer from "components/sections/footer";
-import { setProductData } from "store/reducers/productSlice";
+import { getProductos } from "store/reducers/productSlice";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 
 export default function index() {
 	const [showModal, setShowModal] = useState(false);
@@ -21,10 +20,7 @@ export default function index() {
 		setShowModal(true);
 	};
 	useEffect(() => {
-		(async () => {
-			const result = await axios.get("/api/products");
-			dispatch(setProductData(result.data));
-		})();
+		dispatch(getProductos());
 	});
 	const handleCloseModal = () => {
 		setCurrentProducto(null);

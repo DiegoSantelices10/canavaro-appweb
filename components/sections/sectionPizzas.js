@@ -63,21 +63,20 @@ export default function SectionPizza({
 				<p className="italic col-span-2 text-white text-center text-xs py-3">
 					* Hacer click sobre el titulo para ver descripcion.
 				</p>
-				{products !== null &&
-					products
-						.filter(item => item.categoria === "pizzas")
-						.map(producto => {
-							return (
-								<div key={producto._id}>
-									<p
-										onClick={() => handleOpen(producto)}
-										className=" cursor-pointer text-white text-center"
-									>
-										{producto.nombre}
-									</p>
-								</div>
-							);
-						})}
+				{products
+					?.filter(item => item.categoria === "pizzas")
+					.map(producto => {
+						return (
+							<div key={producto._id}>
+								<p
+									onClick={() => handleOpen(producto)}
+									className=" cursor-pointer text-white text-center"
+								>
+									{producto.nombre}
+								</p>
+							</div>
+						);
+					})}
 			</div>
 		</Element>
 	);
