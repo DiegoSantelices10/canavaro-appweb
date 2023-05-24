@@ -41,29 +41,29 @@ export default function index() {
 			<main className="font-nunito">
 				<Header />
 				<HomeFront />
-				<SectionPizza
-					handleOpen={handleOpenModal}
-					handleClose={handleCloseModal}
-					showModal={showModal}
-					currentProducto={currentProducto}
-				/>
-				<SectionEmpanadas
-					handleOpen={handleOpenModal}
-					handleClose={handleCloseModal}
-					showModal={showModal}
-					currentProducto={currentProducto}
-				/>
-				<SectionCombos
-					handleOpen={handleOpenModal}
-					handleClose={handleCloseModal}
-					showModal={showModal}
-					currentProducto={currentProducto}
-				/>
+				<SectionPizza handleOpen={handleOpenModal} handleClose={handleCloseModal} showModal={showModal} currentProducto={currentProducto} />
+				<SectionEmpanadas handleOpen={handleOpenModal} handleClose={handleCloseModal} showModal={showModal} currentProducto={currentProducto} />
+				<SectionCombos handleOpen={handleOpenModal} handleClose={handleCloseModal} showModal={showModal} currentProducto={currentProducto} />
 				<Footer />
 			</main>
 		</div>
 	);
 }
+
+// export const getServerSideProps = async () => {
+// 	const { DEV_URL, PROD_URL } = process.env;
+
+// 	const respuesta = await axios.get(
+// 		`${process.env.NODE_ENV === "development" ? DEV_URL : PROD_URL}` + "/api/products"
+// 	);
+
+// 	return {
+// 		props: {
+// 			// Pasa el estado hidratado como prop al componente de Next.js
+// 			data: respuesta.data,
+// 		},
+// 	};
+// };
 
 // export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
 // 	const state = await getProducts();

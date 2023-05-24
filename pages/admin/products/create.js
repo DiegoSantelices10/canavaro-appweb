@@ -11,9 +11,7 @@ export default function Create() {
 	return (
 		<Layout>
 			<div className="w-full lg:w-3/5 h-auto p-2 md:p-10">
-				<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
-					¡Ingresa un producto nuevo!
-				</h1>
+				<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">¡Ingresa un producto nuevo!</h1>
 				<div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
 					<style jsx>
 						{`
@@ -92,8 +90,14 @@ export default function Create() {
 						cantidadMaxima: "",
 						addEmpanadas: "",
 					}}
-					onSubmit={(values, { resetForm }) => {
-						axios.post("/api/products", values);
+					onSubmit={async (values, { resetForm }) => {
+						await axios
+							.post("/api/products", values, {
+								headers: {
+									"Content-Type": "application/json",
+								},
+							})
+							.then(res => console.log(res));
 
 						resetForm();
 					}}
@@ -102,9 +106,7 @@ export default function Create() {
 						<Form>
 							<div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 ">
 								<div className="w-full mx-auto">
-									<label className="block  text-sm  text-slate-400">
-										Nombre del producto
-									</label>
+									<label className="block  text-sm  text-slate-400">Nombre del producto</label>
 									<Field
 										id="nombre"
 										name="nombre"
@@ -136,9 +138,7 @@ export default function Create() {
 								{renderProducts === "promociones" && (
 									<>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">
-												¿Con empanadas? Si / No
-											</label>
+											<label className="block  text-sm  text-slate-400">¿Con empanadas? Si / No</label>
 											<Field
 												id="addEmpanadas"
 												name="addEmpanadas"
@@ -149,9 +149,7 @@ export default function Create() {
 											/>
 										</div>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">
-												Si es SI, ingresa la cantidad de empanadas
-											</label>
+											<label className="block  text-sm  text-slate-400">Si es SI, ingresa la cantidad de empanadas</label>
 											<Field
 												id="cantidadMaxima"
 												name="cantidadMaxima"
@@ -188,9 +186,7 @@ export default function Create() {
 								{renderProducts === "pizzas" && (
 									<>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">
-												Precio gigante
-											</label>
+											<label className="block  text-sm  text-slate-400">Precio gigante</label>
 											<Field
 												id="precioPizza.gigante"
 												name="precioPizza.gigante"
@@ -199,9 +195,7 @@ export default function Create() {
 											/>
 										</div>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">
-												Precio mediana
-											</label>
+											<label className="block  text-sm  text-slate-400">Precio mediana</label>
 											<Field
 												id="precioPizza.mediana"
 												name="precioPizza.mediana"
@@ -210,9 +204,7 @@ export default function Create() {
 											/>
 										</div>
 										<div className=" w-full mx-auto">
-											<label className="block  text-sm  text-slate-400">
-												Precio chica
-											</label>
+											<label className="block  text-sm  text-slate-400">Precio chica</label>
 											<Field
 												id="precioPizza.chica"
 												name="precioPizza.chica"

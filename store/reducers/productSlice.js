@@ -7,6 +7,7 @@ const initialState = {
 
 export const getProductos = createAsyncThunk("product/get", async (userId, thunkAPI) => {
 	const response = await axios.get("/api/products");
+	console.log("lo que recupero", response);
 	return response.data;
 });
 

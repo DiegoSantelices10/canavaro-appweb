@@ -2,6 +2,7 @@
 import { getItemData, getPathsFromTitle } from "libs/items";
 import ProductLayout from "components/productLayout";
 import getProducts from "services/fetchData";
+
 export default function Product({ productInfo: { data } }) {
 	return (
 		<div className="min-h-screen ">
@@ -12,6 +13,7 @@ export default function Product({ productInfo: { data } }) {
 
 export async function getStaticPaths() {
 	const productos = await getProducts();
+
 	const res = await getPathsFromTitle(productos);
 	return {
 		paths: res,

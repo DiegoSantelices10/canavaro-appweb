@@ -8,12 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Link from "next/link";
-import {
-	addPromoOrderList,
-	calculateSubTotal,
-	calculateTotalQuantity,
-	clearOrderPromo,
-} from "store/reducers/orderSlice";
+import { addPromoOrderList, calculateSubTotal, calculateTotalQuantity, clearOrderPromo } from "store/reducers/orderSlice";
 
 import { v4 as uuidv4 } from "uuid";
 import { setProductData } from "store/reducers/productSlice";
@@ -33,19 +28,17 @@ export default function Home() {
 	const dispatch = useDispatch();
 	const renderPromotions = () => {
 		// eslint-disable-next-line dot-notation
-		return products
-			?.filter(item => item.categoria === "promociones")
-			.map(data => <CardPromotion key={data._id} data={data} />);
+		return products?.filter(item => item.categoria === "promociones").map(data => <CardPromotion key={data._id} data={data} />);
 	};
 
 	const renderStore = renderProductos => {
-		return products
-			?.filter(item => item.categoria === renderProductos)
-			.map(data => <Card key={data._id} data={data} />);
+		return products?.filter(item => item.categoria === renderProductos).map(data => <Card key={data._id} data={data} />);
 	};
 
 	useEffect(() => {
-		calculateEmpanadas();
+		if (orderPromo !== null) {
+			calculateEmpanadas();
+		}
 	}, [orderPromo]);
 
 	useEffect(() => {
@@ -77,8 +70,7 @@ export default function Home() {
 
 		if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
-		if (cantidadTotal === requiredQuantity && cantidadTotal % requiredQuantity === 0)
-			setDocenaPrice(totalPrice);
+		if (cantidadTotal === requiredQuantity && cantidadTotal % requiredQuantity === 0) setDocenaPrice(totalPrice);
 
 		if (cantidadTotal > requiredQuantity && cantidadTotal % requiredQuantity !== 0) {
 			const cociente = Math.floor(cantidadTotal / requiredQuantity);
@@ -133,13 +125,9 @@ export default function Home() {
 				</div>
 				<div className="my-5">
 					<div className="w-full bg-red-500 p-2 flex items-center justify-between">
-						<p className="text-white font-nunito  font-extrabold">
-							¡ ARMA TU PIZZA COMO QUIERAS !
-						</p>
+						<p className="text-white font-nunito  font-extrabold">¡ ARMA TU PIZZA COMO QUIERAS !</p>
 						<Link href={"/order/pizzaFree"}>
-							<a className="rounded-md font-bold bg-white p-2 text-xs px-3">
-								INGRESA AQUI
-							</a>
+							<a className="rounded-md font-bold bg-white p-2 text-xs px-3">INGRESA AQUI</a>
 						</Link>
 					</div>
 				</div>
@@ -160,9 +148,7 @@ export default function Home() {
 						<button
 							onClick={() => setRenderProductos("empanadas")}
 							className={
-								renderProducts !== "empanadas"
-									? "w-52 rounded-3xl font-semibold text-gray-400"
-									: "w-52 font-bold bg-gray-300 text-white rounded-3xl"
+								renderProducts !== "empanadas" ? "w-52 rounded-3xl font-semibold text-gray-400" : "w-52 font-bold bg-gray-300 text-white rounded-3xl"
 							}
 						>
 							Canastitas & Empanadas
@@ -172,9 +158,7 @@ export default function Home() {
 						<button
 							onClick={() => setRenderProductos("pizzas")}
 							className={
-								renderProducts !== "pizzas"
-									? "w-32 rounded-3xl font-semibold text-gray-400"
-									: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
+								renderProducts !== "pizzas" ? "w-32 rounded-3xl font-semibold text-gray-400" : "w-32 font-bold bg-gray-300 text-white rounded-3xl"
 							}
 						>
 							Pizzas
@@ -197,9 +181,7 @@ export default function Home() {
 						<button
 							onClick={() => setRenderProductos("bebidas")}
 							className={
-								renderProducts !== "bebidas"
-									? "w-32 rounded-3xl font-semibold text-gray-400"
-									: "w-32 font-bold bg-gray-300 text-white rounded-3xl"
+								renderProducts !== "bebidas" ? "w-32 rounded-3xl font-semibold text-gray-400" : "w-32 font-bold bg-gray-300 text-white rounded-3xl"
 							}
 						>
 							Bebidas
@@ -208,13 +190,9 @@ export default function Home() {
 				</div>
 
 				<div>
-					<h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">
-						{renderProducts[0].toUpperCase() + renderProducts.substring(1)}
-					</h1>
+					<h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">{renderProducts[0].toUpperCase() + renderProducts.substring(1)}</h1>
 					<hr className="pb-3" />
-					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">
-						{renderStore(renderProducts)}
-					</div>
+					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">{renderStore(renderProducts)}</div>
 				</div>
 				{renderProducts === "empanadas" && (
 					<div className="bg-white w-full fixed bottom-0 p-3  sm:w-4/5 md:w-4/5 lg:w-3/5">

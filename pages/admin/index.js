@@ -31,49 +31,27 @@ export default function Home() {
 		setShowModal(false);
 	};
 
-	const tiempoDemoraDomicilio = [
-		"25-35min",
-		"35-45min",
-		"45-55min",
-		"55-105min",
-		"105-115min",
-	];
+	const tiempoDemoraDomicilio = ["25-35min", "35-45min", "45-55min", "55-105min", "105-115min"];
 	const tiempoDemoraLocal = ["10-15min", "15-20min", "20-25min", "25-30min", "30-35min"];
 
 	return (
 		<Layout>
-			{currentPedido && (
-				<ModalPedido
-					show={showModal}
-					handleClose={handleCloseModal}
-					pedido={currentPedido}
-				/>
-			)}
+			{currentPedido && <ModalPedido key={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />}
 			<div className="h-auto p-0 md:px-2">
 				<div className=" w-full block md:flex p-2">
 					<div className="w-full md:w-1/2 text-center">
 						<h1 className="font-semibold my-5">Demora domicilio</h1>
 						<div className="flex gap-1 md:gap-4 justify-center">
-							{tiempoDemoraDomicilio.map(tiempo => (
-								<Button
-									key={tiempo}
-									setDemora={setDemoraDomicilio}
-									demora={demoraDomicilio}
-									time={tiempo}
-								/>
+							{tiempoDemoraDomicilio.map((tiempo, index) => (
+								<Button key={index} setDemora={setDemoraDomicilio} demora={demoraDomicilio} time={tiempo} />
 							))}
 						</div>
 					</div>
 					<div className="w-full md:w-1/2 text-center">
 						<h1 className="font-semibold my-5">Demora por local</h1>
 						<div className="flex gap-3 justify-center">
-							{tiempoDemoraLocal.map(tiempo => (
-								<Button
-									key={tiempo}
-									setDemora={setDemoraLocal}
-									demora={demoraLocal}
-									time={tiempo}
-								/>
+							{tiempoDemoraLocal.map((tiempo, index) => (
+								<Button key={index} setDemora={setDemoraLocal} demora={demoraLocal} time={tiempo} />
 							))}
 						</div>
 					</div>
@@ -82,18 +60,13 @@ export default function Home() {
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
 						{pedidos?.map(item => (
-							<div
-								key={item.id}
-								className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2"
-							>
+							<div key={item._id} className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2">
 								<div className="w-full text-sm">
-									<h2 className="text-right">{item?.id}</h2>
+									<h2 className="text-right">{item?._id}</h2>
 									<div className="text-left py-3 font-medium">
 										<h5 className="text-sm">{item?.direccion}</h5>
 										<h5 className="font-normal">{item?.cliente}</h5>
-										<h5 className="font-normal text-xs text-gray-400">
-											{item?.tipoEnvio}
-										</h5>
+										<h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
 									</div>
 								</div>
 								<div className="flex justify-end gap-3 w-full">

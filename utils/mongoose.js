@@ -12,12 +12,9 @@ const dbConnect = handler => async (req, res) => {
 
 	try {
 		const db = await connect(MONGODB_URI);
-		console.log(db.connection.db.databaseName);
 		isConnected = db.connections[0].readyState;
 		return handler(req, res);
 	} catch (error) {
-		// Manejo de errores de conexión
-		console.error("Error al conectar a la base de datos:", error);
 		return res.status(500).json({ error: "Error al conectar a la base de datos" });
 	}
 };
