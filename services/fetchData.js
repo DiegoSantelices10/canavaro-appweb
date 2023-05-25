@@ -1,6 +1,8 @@
 const getProducts = async () => {
+	const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
+
 	try {
-		const response = await fetch("http://localhost:3000/api/products");
+		const response = await fetch(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products`);
 		if (!response.ok) {
 			throw new Error("Error al obtener los productos");
 		}

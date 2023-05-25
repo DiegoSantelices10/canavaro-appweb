@@ -22,7 +22,7 @@ export default function Home() {
 		setShowModal(false);
 	};
 
-	const tiempoDemoraDomicilio = ["25-35min", "35-45min", "45-55min", "55-105min", "105-115min"];
+	const tiempoDemoraDomicilio = ["35-45min", "45-55min", "55-65min", "65-75min", "75-85min"];
 	const tiempoDemoraLocal = ["10-15min", "15-20min", "20-25min", "25-30min", "30-35min"];
 
 	return (
