@@ -1,12 +1,8 @@
 /* eslint-disable react/prop-types */
 import Image from "next/image";
 import Link from "next/link";
-import { convertToPath } from "libs/items";
 
-export default function CardPromotion({
-	data,
-	data: { nombre, descripcion, imagen, precio },
-}) {
+export default function CardPromotion({ data: { _id, nombre, descripcion, imagen } }) {
 	return (
 		<div className="  rounded-md ">
 			<div className="relative bg-white  rounded-t-md w-60 h-32 ">
@@ -24,7 +20,7 @@ export default function CardPromotion({
 				</div>
 			</div>
 			<div className="bg-white h-12 rounded-b-md px-2 pt-1">
-				<Link href={`/order/products/${convertToPath(nombre)}`}>
+				<Link href={`/order/products/${_id}`}>
 					<a className="font-bold text-sm text-gray-800">{nombre}</a>
 				</Link>
 

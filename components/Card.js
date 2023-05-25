@@ -1,14 +1,10 @@
 /* eslint-disable react/prop-types */
 import Image from "next/image";
 import Link from "next/link";
-import { convertToPath } from "libs/items";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
-const Card = ({
-	data,
-	data: { _id, nombre, imagen, descripcion, categoria, precio },
-}) => {
+const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, precio } }) => {
 	const { orderPromo } = useSelector(state => state.order);
 
 	const dispatch = useDispatch();
@@ -30,13 +26,7 @@ const Card = ({
 			<div className="p-3 bg-white">
 				{categoria === "empanadas" ? (
 					<div className="flex justify-between items-center gap-x-2">
-						<Image
-							className="rounded-md"
-							src={imagen?.url}
-							width={140}
-							height={140}
-							alt={nombre}
-						/>
+						<Image className="rounded-md" src={imagen?.url} width={140} height={140} alt={nombre} />
 						<div className="relative w-full h-24 self-start">
 							<h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
 							<p className="text-gray-400 text-xs">{descripcion}</p>
@@ -66,22 +56,14 @@ const Card = ({
 						</div>
 					</div>
 				) : (
-					<Link href={`/order/products/${convertToPath(nombre)}`}>
+					<Link href={`/order/products/${_id}`}>
 						<a>
 							<div className="flex justify-between items-center gap-x-2">
-								<Image
-									className="rounded-md"
-									src={imagen?.url}
-									width={140}
-									height={140}
-									alt={nombre}
-								/>
+								<Image className="rounded-md" src={imagen?.url} width={140} height={140} alt={nombre} />
 								<div className="w-full self-start">
 									<h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
 									<p className="text-gray-400 text-xs">{descripcion}</p>
-									{categoria === "promociones" && (
-										<p className="text-gray-400 text-xs py-1">$ {precio}</p>
-									)}
+									{categoria === "promociones" && <p className="text-gray-400 text-xs py-1">$ {precio}</p>}
 								</div>
 							</div>
 						</a>

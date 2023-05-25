@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { getItemData, getPathsFromTitle } from "libs/items";
+
 import ProductLayout from "components/productLayout";
 import getProducts from "services/fetchData";
 
-export default function Product({ productInfo: { data } }) {
+export default function Product({ data }) {
+	console.log(data);
 	return (
 		<div className="min-h-screen ">
 			<ProductLayout key={data._id} data={data} />
@@ -11,26 +12,14 @@ export default function Product({ productInfo: { data } }) {
 	);
 }
 
-export async function getStaticPaths() {
+export async function getServerSideProps({ query }) {
 	const productos = await getProducts();
-	const res = await getPathsFromTitle(productos);
-	return {
-		paths: res,
-		fallback: false,
-	};
-}
-
-export async function getStaticProps({ params }) {
-	const productos = await getProducts();
-	console.log("Propss", productos);
-
-	const id = params.id;
-	const obj = await getItemData(id, productos);
-	const productInfo = Object.assign({}, obj);
+	const id = query.id;
+	const data = productos.find(item => item._id === id);
 	return {
 		props: {
 			id,
-			productInfo,
+			data,
 		},
 	};
 }

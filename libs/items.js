@@ -7,7 +7,7 @@ export async function getPathsFromTitle(items) {
 }
 
 export async function getItemData(id, products) {
-	const product = products?.find(e => convertToPath(e.nombre) === id);
+	const product = products?.find(e => e.id === id);
 	return {
 		id,
 		data: product,

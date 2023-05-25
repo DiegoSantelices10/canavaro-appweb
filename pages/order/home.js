@@ -44,7 +44,6 @@ export default function Home() {
 	useEffect(() => {
 		const res = JSON.parse(localStorage.getItem("productos"));
 		if (products?.length <= 0) {
-			console.log("entro");
 			dispatch(setProductData(res));
 		}
 	}, []);
