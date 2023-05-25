@@ -1,6 +1,6 @@
 const getProducts = async () => {
 	try {
-		const response = await fetch("https://canavaro-appweb.vercel.app/api/products");
+		const response = await fetch("http://localhost:3000/api/products");
 		if (!response.ok) {
 			throw new Error("Error al obtener los productos");
 		}
