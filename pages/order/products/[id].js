@@ -13,7 +13,6 @@ export default function Product({ productInfo: { data } }) {
 
 export async function getStaticPaths() {
 	const productos = await getProducts();
-
 	const res = await getPathsFromTitle(productos);
 	return {
 		paths: res,
@@ -23,6 +22,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const productos = await getProducts();
+	console.log("Propss", productos);
+
 	const id = params.id;
 	const obj = await getItemData(id, productos);
 	const productInfo = Object.assign({}, obj);

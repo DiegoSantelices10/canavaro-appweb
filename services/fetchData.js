@@ -1,9 +1,15 @@
 const getProducts = async () => {
-	const { DEV_URL } = process.env;
-
-	const response = await fetch(`${DEV_URL}/api/products`);
-	const data = await response.json();
-	return data;
+	try {
+		const response = await fetch("https://canavaro-appweb.vercel.app/api/products");
+		if (!response.ok) {
+			throw new Error("Error al obtener los productos");
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
 };
 
 export default getProducts;
