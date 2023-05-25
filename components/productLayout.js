@@ -13,21 +13,17 @@ import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 
 import {
 	addProductPizza,
-	addProductEmpanada,
-	decrementProduct,
 	calculateSubTotal,
 	calculateTotalQuantity,
 	addPromoOrderList,
 	clearOrderPromo,
+	decrementProductPizza,
 } from "store/reducers/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-export default function ProductLayout({
-	data,
-	data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
-}) {
+export default function ProductLayout({ data, data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio } }) {
 	const { orderPromo } = useSelector(state => state.order);
 	const { orderList } = useSelector(state => state.order);
 	const [selectCombo, setSelectCombo] = useState({});
@@ -41,37 +37,30 @@ export default function ProductLayout({
 	}, [orderList, dispatch]);
 
 	const productQuantity = _id => {
-		console.log("id de incremento", _id);
 		const pre = orderPromo.find(item => item._id === _id);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 
-	const incrementCartEmpanada = data => {
-		dispatch(addProductEmpanada(data));
-	};
 	const incrementCartPizza = data => {
 		dispatch(addProductPizza(data));
 	};
 
-	const decrementCart = data => {
-		dispatch(decrementProduct(data));
+	const decrementCartPizza = data => {
+		dispatch(decrementProductPizza(data));
 	};
 
 	const returnHome = () => {
-		if (categoria === "promociones") {
-			Swal.fire({
-				title: "Estas seguro que deseas salir?",
-				showDenyButton: true,
-				confirmButtonText: "Descartar",
-			}).then(result => {
-				if (result.isConfirmed) {
-					dispatch(clearOrderPromo());
-					router.push("/order/home");
-				}
-			});
-		} else {
-			router.push("/order/home");
-		}
+		Swal.fire({
+			title: "Estas seguro que deseas salir?",
+			text: "Los datos no seran guardados.",
+			showDenyButton: true,
+			confirmButtonText: "Aceptar",
+		}).then(result => {
+			if (result.isConfirmed) {
+				dispatch(clearOrderPromo());
+				router.push("/order/home");
+			}
+		});
 	};
 
 	const addCartPromo = value => {
@@ -109,15 +98,13 @@ export default function ProductLayout({
 					layout="responsive"
 					width={80}
 					height={40}
+					priority={true}
 					objectFit="cover"
 					objectPosition="center"
 					alt={nombre || "img"}
 				/>
 				<button onClick={returnHome}>
-					<FiChevronsLeft
-						className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
-						size={30}
-					/>
+					<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
 				</button>
 			</div>
 
@@ -126,69 +113,16 @@ export default function ProductLayout({
 					<div className="w-full bg-white p-3">
 						<h1 className="font-bold text-lg text-gray-800">{nombre}</h1>
 						<p className=" font-normal text-sm  text-gray-400">{descripcion}</p>
-						{categoria === "promociones" ? (
-							<p className=" font-normal  text-sm text-gray-400">$ {precio}</p>
-						) : (
-							""
-						)}
+						{categoria === "promociones" ? <p className=" font-normal  text-sm text-gray-400">$ {precio}</p> : ""}
 					</div>
 					<hr className="pb-3" />
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
 						{categoria === "pizzas" ? (
 							<div className=" flex flex-col gap-y-2  justify-evenly">
-								<PizzaInfo
-									data={data}
-									incrementCart={incrementCartPizza}
-									decrementCart={decrementCart}
-									cart={orderPromo}
-								/>
-							</div>
-						) : categoria === "empanadas" ? (
-							<div className="flex gap-y-2 py-2 justify-between items-center">
-								<div className="w-auto">
-									<h2 className="font-semibold text-normal text-gray-800">
-										Empanada{" "}
-										<span className="text-xs font-normal  text-gray-400">x unidad</span>
-									</h2>
-								</div>
-								<div className="w-1/3 font-medium text-base pl-1">
-									{<h2>$ {precio}</h2>}
-								</div>
-								<div className="w-auto   px-3 text-end space-x-4 text-base">
-									<button
-										type="button"
-										className="text-red-500"
-										onClick={() =>
-											decrementCart({ _id, nombre, categoria, tamanio, precio })
-										}
-									>
-										-
-									</button>
-									<span className="font-normal">{productQuantity(_id)}</span>
-									<button
-										type="button"
-										className="text-green-500"
-										onClick={() =>
-											incrementCartEmpanada({
-												_id,
-												nombre,
-												categoria,
-												tamanio,
-												precio,
-											})
-										}
-									>
-										+
-									</button>
-								</div>
+								<PizzaInfo data={data} incrementCart={incrementCartPizza} decrementCart={decrementCartPizza} cart={orderPromo} />
 							</div>
 						) : (
-							<Promotion
-								setSelectCombo={setSelectCombo}
-								data={data}
-								quantity={productQuantity}
-								cantMax={cantidadMaxima}
-							/>
+							<Promotion setSelectCombo={setSelectCombo} data={data} quantity={productQuantity} cantMax={cantidadMaxima} />
 						)}
 					</div>
 				</div>
@@ -214,13 +148,3 @@ export default function ProductLayout({
 		</div>
 	);
 }
-
-// export async function getServerSideProps() {
-// 	const res = await getProducts();
-
-// 	return {
-// 		props: {
-// 			products: res,
-// 		},
-// 	};
-// }

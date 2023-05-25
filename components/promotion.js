@@ -3,11 +3,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-	addProductPromo,
-	decrementProductPromo,
-	setQuantityDemanded,
-} from "store/reducers/orderSlice";
+import { addProductPromo, decrementProductPromo, setQuantityDemanded } from "store/reducers/orderSlice";
 
 export default function Promotion({ cantMax, data, setSelectCombo }) {
 	const [select, setSelect] = useState("");
@@ -43,47 +39,30 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 		setSelect(e.target.value);
 		if (products !== null) {
 			const { _id, nombre, descripcion } =
-				products
-					.filter(item => item.categoria === "promociones")
-					.find(item => item.nombre === e.target.value) || {};
+				products.filter(item => item.categoria === "promociones").find(item => item.nombre === e.target.value) || {};
 			const res = { _id, nombre, descripcion };
 			setSelectCombo(res);
 		}
+	};
+	const quantityZero = _id => {
+		return orderPromo?.find(item => item._id === _id);
 	};
 	return (
 		<div>
 			{data.nombre === "Combo 4" || data.nombre === "Combo 5" ? (
 				<>
 					<div className="p-4 flex gap-2 justify-start items-center">
-						<input
-							id="1"
-							type="radio"
-							value="Combo 1"
-							name="combo"
-							onChange={onChangeValue}
-							checked={select === "Combo 1"}
-						/>
+						<input id="1" type="radio" value="Combo 1" name="combo" onChange={onChangeValue} checked={select === "Combo 1"} />
 						<div>
 							<h3>{promotions && promotions[2].nombre}</h3>
-							<h4 className="text-gray-400 font-normal">
-								{promotions && promotions[2].descripcion}
-							</h4>
+							<h4 className="text-gray-400 font-normal">{promotions && promotions[2].descripcion}</h4>
 						</div>
 					</div>
 					<div className="p-4 flex gap-2 justify-start items-center">
-						<input
-							id="2"
-							type="radio"
-							value="Combo 2"
-							name="combo"
-							onChange={onChangeValue}
-							checked={select === "Combo 2"}
-						/>
+						<input id="2" type="radio" value="Combo 2" name="combo" onChange={onChangeValue} checked={select === "Combo 2"} />
 						<div>
 							<h3>{promotions && promotions[3].nombre}</h3>
-							<h4 className="text-gray-400 font-normal">
-								{promotions && promotions[3].descripcion}
-							</h4>
+							<h4 className="text-gray-400 font-normal">{promotions && promotions[3].descripcion}</h4>
 						</div>
 					</div>
 				</>
@@ -101,7 +80,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 					<div className="w-auto   px-3 text-end space-x-4 text-base">
 						<button
 							type="button"
-							className="text-red-500 down"
+							className={orderPromo.length < 1 ? "invisible" : "text-red-500 down "}
 							onClick={e => {
 								decrementItems(data);
 								setQuantity(quantityDemanded + 1);
@@ -128,15 +107,11 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 						<>
 							{quantityDemanded < 1 ? (
 								<div className="bg-green-500 w-auto p-2">
-									<p className="text-white text-center">
-										¡ Se completo la cantidad requerida !
-									</p>
+									<p className="text-white text-center">¡ Se completo la cantidad requerida !</p>
 								</div>
 							) : (
 								<div className="bg-red-500 w-auto p-2">
-									<p className="text-white text-center">
-										Selecciona {quantityDemanded} empanadas para completar la promo
-									</p>
+									<p className="text-white text-center">Selecciona {quantityDemanded} empanadas para completar la promo</p>
 								</div>
 							)}
 
@@ -151,7 +126,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 											<div className="w-auto   px-3 text-end space-x-4 text-base">
 												<button
 													type="button"
-													className="text-red-500 down"
+													className={quantityZero(_id) ? "text-red-500 down " : "invisible"}
 													onClick={e => {
 														setQuantity(quantityDemanded + 1);
 														decrementItems({ _id, nombre });
@@ -162,9 +137,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 												<span className="font-normal">{productQuantity(_id)}</span>
 												<button
 													type="button"
-													className={
-														quantityDemanded < 1 ? `invisible` : `text-green-500`
-													}
+													className={quantityDemanded < 1 ? `invisible` : `text-green-500`}
 													onClick={e => {
 														setQuantity(quantityDemanded - 1);
 														addItems({ _id, nombre });

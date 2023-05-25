@@ -1,5 +1,5 @@
+/* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
-import { v4 as uuidv4 } from "uuid";
 
 export default function PizzaInfo({
 	data: {
@@ -11,13 +11,13 @@ export default function PizzaInfo({
 	decrementCart,
 	cart,
 }) {
-	const idGenerator = uuidv4();
-
 	const productQuantity = tamanio => {
 		const pre = cart.find(item => item.tamanio === tamanio);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
-
+	const quantityZero = tamanio => {
+		return cart.find(item => item.tamanio === tamanio);
+	};
 	return (
 		<>
 			<div className="flex justify-between items-center">
@@ -28,10 +28,10 @@ export default function PizzaInfo({
 				<div className="font-roboto w-auto   px-3 text-end space-x-4 text-base">
 					<button
 						type="button"
-						className="text-red-500"
+						className={quantityZero("gigante") ? "text-red-500 down " : "invisible"}
 						onClick={() =>
 							decrementCart({
-								_id: idGenerator,
+								_id: nombre + "gigante",
 								nombre,
 								categoria,
 								tamanio: "gigante",
@@ -47,7 +47,7 @@ export default function PizzaInfo({
 						className="text-green-500"
 						onClick={() =>
 							incrementCart({
-								_id: idGenerator,
+								_id: nombre + "gigante",
 								nombre,
 								categoria,
 								tamanio: "gigante",
@@ -67,10 +67,10 @@ export default function PizzaInfo({
 				<div className="font-roboto w-auto   px-3 text-end space-x-4 text-base">
 					<button
 						type="button"
-						className="text-red-500"
+						className={quantityZero("mediana") ? "text-red-500 down " : "invisible"}
 						onClick={() =>
 							decrementCart({
-								_id: idGenerator,
+								_id: nombre + "mediana",
 								nombre,
 								categoria,
 								tamanio: "mediana",
@@ -86,7 +86,7 @@ export default function PizzaInfo({
 						className="text-green-500"
 						onClick={() =>
 							incrementCart({
-								_id: idGenerator,
+								_id: nombre + "mediana",
 								nombre,
 								categoria,
 								tamanio: "mediana",
@@ -106,10 +106,10 @@ export default function PizzaInfo({
 				<div className="font-roboto w-auto  px-3 text-end space-x-4 text-base">
 					<button
 						type="button"
-						className="text-red-500"
+						className={quantityZero("chica") ? "text-red-500 down " : "invisible"}
 						onClick={() =>
 							decrementCart({
-								_id: idGenerator,
+								_id: nombre + "chica",
 								nombre,
 								categoria,
 								tamanio: "chica",
@@ -125,7 +125,7 @@ export default function PizzaInfo({
 						className="text-green-500"
 						onClick={() =>
 							incrementCart({
-								_id: idGenerator,
+								_id: nombre + "chica",
 								nombre,
 								categoria,
 								tamanio: "chica",
