@@ -1,9 +1,7 @@
-// import { getSession } from "next-auth/react";
 import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
 import { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setProductData } from "store/reducers/productSlice";
+
 import { pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
 
@@ -13,13 +11,6 @@ export default function Home() {
 
 	const [demoraDomicilio, setDemoraDomicilio] = useState("25-35min");
 	const [demoraLocal, setDemoraLocal] = useState("10-15min");
-
-	// const dispatch = useDispatch();
-	// const { products } = useSelector(state => state.product);
-
-	// useEffect(() => {
-	// 	if (products.length < 1) dispatch(setProductData(productos));
-	// }, []);
 
 	const handleOpenModal = pedido => {
 		setCurrentPedido(pedido);
@@ -98,22 +89,3 @@ export default function Home() {
 		</Layout>
 	);
 }
-
-// export const getServerSideProps = async (context) => {
-//   const session = await getSession(context);
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {
-//       session,
-//     },
-//   };
-// };

@@ -49,30 +49,3 @@ export default function index() {
 		</div>
 	);
 }
-
-// export const getServerSideProps = async () => {
-// 	const { DEV_URL, PROD_URL } = process.env;
-
-// 	const respuesta = await axios.get(
-// 		`${process.env.NODE_ENV === "development" ? DEV_URL : PROD_URL}` + "/api/products"
-// 	);
-
-// 	return {
-// 		props: {
-// 			// Pasa el estado hidratado como prop al componente de Next.js
-// 			data: respuesta.data,
-// 		},
-// 	};
-// };
-
-// export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-// 	const state = await getProducts();
-
-// 	store.dispatch(setProductData(state));
-// 	return {
-// 		props: {
-// 			// Pasa el estado hidratado como prop al componente de Next.js
-// 			data: state,
-// 		},
-// 	};
-// });

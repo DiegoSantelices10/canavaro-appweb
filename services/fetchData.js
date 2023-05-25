@@ -1,10 +1,9 @@
-import axios from "axios";
-
 const getProducts = async () => {
-	const { PROD_URL } = process.env;
+	const { DEV_URL } = process.env;
 
-	const result = await axios.get(`${PROD_URL}/api/products`).then(res => res.json());
-	return result.data;
+	const response = await fetch(`${DEV_URL}/api/products`);
+	const data = await response.json();
+	return data;
 };
 
 export default getProducts;

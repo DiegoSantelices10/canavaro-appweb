@@ -15,7 +15,7 @@ const dbConnect = handler => async (req, res) => {
 		isConnected = db.connections[0].readyState;
 		return handler(req, res);
 	} catch (error) {
-		return res.status(500).json({ error: "Error al conectar a la base de datos" });
+		return Promise.reject(error);
 	}
 };
 
