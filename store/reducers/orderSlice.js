@@ -22,12 +22,18 @@ export const orderSlice = createSlice({
 		},
 		addProductPizza: (state, action) => {
 			if (action.payload.categoria === "pizzas") {
-				const productIndex = state.orderPromo.findIndex(item => item.tamanio === action.payload.tamanio);
-				productIndex >= 0 ? (state.orderPromo[productIndex].cantidad += 1) : state.orderPromo.push({ ...action.payload, cantidad: 1 });
+				const productIndex = state.orderPromo.findIndex(
+					item => item.tamanio === action.payload.tamanio
+				);
+				productIndex >= 0
+					? (state.orderPromo[productIndex].cantidad += 1)
+					: state.orderPromo.push({ ...action.payload, cantidad: 1 });
 			}
 		},
 		addProductEmpanada: (state, action) => {
-			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
+			const productIndex = state.orderPromo.findIndex(
+				item => item._id === action.payload._id
+			);
 			if (productIndex >= 0) {
 				state.orderPromo[productIndex].cantidad += 1;
 			} else {
@@ -40,7 +46,9 @@ export const orderSlice = createSlice({
 		},
 
 		addProductPromo: (state, action) => {
-			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
+			const productIndex = state.orderPromo.findIndex(
+				item => item._id === action.payload._id
+			);
 			if (productIndex >= 0) {
 				state.orderPromo[productIndex].cantidad += 1;
 			} else {
@@ -49,7 +57,9 @@ export const orderSlice = createSlice({
 			}
 		},
 		decrementProductPromo: (state, action) => {
-			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
+			const productIndex = state.orderPromo.findIndex(
+				item => item._id === action.payload._id
+			);
 			if (state.orderPromo[productIndex].cantidad > 1) {
 				state.orderPromo[productIndex].cantidad -= 1;
 			} else if (state.orderPromo[productIndex].cantidad === 1) {
@@ -57,8 +67,10 @@ export const orderSlice = createSlice({
 				state.orderPromo = newList;
 			}
 		},
-		decrementProductPizza: (state, action) => {
-			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
+		decrementProduct: (state, action) => {
+			const productIndex = state.orderPromo.findIndex(
+				item => item._id === action.payload._id
+			);
 			if (state.orderPromo[productIndex].cantidad > 1) {
 				state.orderPromo[productIndex].cantidad -= 1;
 			} else if (state.orderPromo[productIndex].cantidad === 1) {
@@ -70,7 +82,9 @@ export const orderSlice = createSlice({
 			state.orderPromo = [];
 		},
 		removeProduct: (state, action) => {
-			state.orderPromo = state.orderPromo.filter(product => product._id !== action.payload._id);
+			state.orderPromo = state.orderPromo.filter(
+				product => product._id !== action.payload._id
+			);
 		},
 		removeItemCart: (state, action) => {
 			console.log("remove id store", action.payload);
@@ -112,7 +126,7 @@ export const {
 	addProductEmpanada,
 	addProductPromo,
 	decrementProductPromo,
-	decrementProductPizza,
+	decrementProduct,
 	removeProduct,
 	calculateSubTotal,
 	calculateTotalQuantity,

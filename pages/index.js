@@ -6,23 +6,21 @@ import SectionPizza from "components/sections/sectionPizzas";
 import SectionEmpanadas from "components/sections/sectionEmpanadas";
 import SectionCombos from "components/sections/sectionCombos";
 import Footer from "components/sections/footer";
-import { setProductData } from "store/reducers/productSlice";
+import { getProductos } from "store/reducers/productSlice";
+import { useDispatch } from "react-redux";
 
-import { wrapper } from "store/app/store";
-import getProducts from "services/fetchData";
-
-export default function index({ state }) {
+export default function index() {
 	const [showModal, setShowModal] = useState(false);
 
 	const [currentProducto, setCurrentProducto] = useState(null);
+	const dispatch = useDispatch();
 
 	const handleOpenModal = producto => {
-		console.log("handle", producto);
 		setCurrentProducto(producto);
 		setShowModal(true);
 	};
 	useEffect(() => {
-		localStorage.setItem("productos", JSON.stringify(state));
+		dispatch(getProductos());
 	});
 	const handleCloseModal = () => {
 		setCurrentProducto(null);
@@ -51,14 +49,3 @@ export default function index({ state }) {
 		</div>
 	);
 }
-
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-	const state = await getProducts();
-	store.dispatch(setProductData(state));
-	return {
-		props: {
-			// Pasa el estado hidratado como prop al componente de Next.js
-			state,
-		},
-	};
-});

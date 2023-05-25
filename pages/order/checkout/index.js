@@ -8,12 +8,10 @@ import { setCheckout } from "store/reducers/orderSlice";
 export default function Checkout() {
 	const { direccion, nombre, telefono } = useSelector(state => state.user);
 	const { totalAmount, orderList } = useSelector(state => state.order);
-	const { checkout } = useSelector(state => state.order);
 
 	const [orderToMake, setOrderToMake] = useState({});
 	const [type, setType] = useState("efectivo");
-	const [instructions, setInstructions] = useState("");
-	const [pagaCon, setPagaCon] = useState("");
+	const [instructions, setInstructions] = useState("efectivo");
 
 	const dispatch = useDispatch();
 
@@ -22,9 +20,8 @@ export default function Checkout() {
 			setOrderToMake({
 				nombre,
 				telefono,
-				domicilio: direccion,
+				enviar: direccion,
 				comentarios: instructions,
-				pagaCon,
 				orderList,
 				medioDePago: type,
 				totalAmount,
@@ -46,22 +43,19 @@ export default function Checkout() {
 	};
 
 	const handleChange = e => {
-		console.log("comentarios:", e.target.value);
 		setInstructions(e.target.value);
 	};
 
-	const handleChangeMedioPago = e => {
-		console.log("paga con:", e.target.value);
-		setPagaCon(e.target.value);
-	};
-	console.log(checkout);
 	return (
 		<div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
 				<div className="flex items-center gap-3 py-4">
 					<Link href={"/order/cart"}>
 						<a>
-							<FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+							<FiChevronsLeft
+								className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+								size={30}
+							/>
 						</a>
 					</Link>
 					<h2 className="font-poppins font-extrabold text-lg">Tu pedido</h2>
@@ -76,8 +70,6 @@ export default function Checkout() {
 							<p>{direccion} </p>
 							<div className="py-2">
 								<input
-									id="comentarios"
-									name="comentarios"
 									onChange={handleChange}
 									type="text"
 									className="border border-slate-300 rounded-md w-full p-2"
@@ -129,9 +121,8 @@ export default function Checkout() {
 							<input
 								id="efectivo"
 								type="text"
-								onChange={handleChangeMedioPago}
 								className="border border-slate-300 rounded-md w-full p-2"
-								placeholder="¿¿Con cuanto vas a pagar?"
+								placeholder="Cuanto de cambio ?"
 							/>
 						)}
 						{type === "mercadoPago" && (
@@ -150,7 +141,10 @@ export default function Checkout() {
 				</div>
 
 				<div className="px-3 w-full">
-					<button onClick={confirmedOrder} className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600">
+					<button
+						onClick={confirmedOrder}
+						className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600"
+					>
 						Confirmar pedido
 					</button>
 				</div>

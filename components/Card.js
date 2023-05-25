@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { convertToPath } from "libs/items";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,10 +21,6 @@ const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, preci
 		const pre = orderPromo?.find(item => item._id === _id);
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
-
-	const quantityZero = _id => {
-		return orderPromo?.find(item => item._id === _id);
-	};
 	return (
 		<div>
 			<div className="p-3 bg-white">
@@ -40,7 +35,7 @@ const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, preci
 							<div className="absolute bottom-0 right-0 w-auto px-3 text-end  space-x-4 text-base">
 								<button
 									type="button"
-									className={quantityZero(_id) ? "text-red-500 down " : "invisible"}
+									className="text-red-500 down"
 									onClick={e => {
 										decrementItems({ _id, nombre, precio });
 									}}
@@ -61,7 +56,7 @@ const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, preci
 						</div>
 					</div>
 				) : (
-					<Link href={`/order/products/${convertToPath(nombre)}`}>
+					<Link href={`/order/products/${_id}`}>
 						<a>
 							<div className="flex justify-between items-center gap-x-2">
 								<Image className="rounded-md" src={imagen?.url} width={140} height={140} alt={nombre} />

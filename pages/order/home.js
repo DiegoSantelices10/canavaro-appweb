@@ -4,7 +4,7 @@ import CardPromotion from "components/cardPromotion";
 import Layout from "components/layout";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "components/Card";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Link from "next/link";
@@ -42,8 +42,8 @@ export default function Home() {
 	}, [orderPromo]);
 
 	useEffect(() => {
+		const res = JSON.parse(localStorage.getItem("productos"));
 		if (products?.length <= 0) {
-			const res = JSON.parse(localStorage.getItem("productos"));
 			dispatch(setProductData(res));
 		}
 	}, []);
@@ -85,10 +85,9 @@ export default function Home() {
 			setTotalPrice(totalRedondeado);
 		}
 	};
-
 	const addCartPromo = value => {
 		const result = {
-			_id: idGenerator,
+			id: idGenerator,
 			nombre: "Empanadas a eleccion",
 			products: { ...value },
 			cantidad: 1,
@@ -97,9 +96,6 @@ export default function Home() {
 		};
 		setTotalCant(0);
 		dispatch(addPromoOrderList(result));
-		toast("Producto agregado al carrito", {
-			theme: "dark",
-		});
 		dispatch(clearOrderPromo());
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
