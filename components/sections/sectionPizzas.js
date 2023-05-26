@@ -1,17 +1,29 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import Modal from "components/modal";
 
-export default function SectionPizza({ handleOpen, handleClose, showModal, currentProducto }) {
+export default function SectionPizza() {
+	const [showModal, setShowModal] = useState(false);
+	const [currentProducto, setCurrentProducto] = useState({});
+
 	const { products } = useSelector(state => state.product);
 
+	const handleOpenModal = producto => {
+		setCurrentProducto(producto);
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setCurrentProducto(null);
+		setShowModal(false);
+	};
 	return (
 		<Element name="pizzas" className="p-3  w-full  element font-nunito">
 			{currentProducto !== null && (
-				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleClose}>
+				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
 					{currentProducto}
 				</Modal>
 			)}
@@ -45,8 +57,11 @@ export default function SectionPizza({ handleOpen, handleClose, showModal, curre
 					?.filter(item => item.categoria === "pizzas")
 					.map(producto => {
 						return (
-							<div key={producto._id}>
-								<p onClick={() => handleOpen(producto)} className=" cursor-pointer text-white text-center">
+							<div key={producto._id} className="w-auto">
+								<p
+									onClick={() => handleOpenModal(producto)}
+									className=" cursor-pointer text-white text-center w-1/2 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+								>
 									{producto.nombre}
 								</p>
 							</div>

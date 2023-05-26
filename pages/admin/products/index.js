@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { FaSearch, FaRegEdit } from "react-icons/fa";
 import useResize from "hooks/useResize";
+import { wrapper } from "store/app/store";
+import getProducts from "services/fetchData";
+import { setProductData } from "store/reducers/productSlice";
 
 export default function Products() {
 	const router = useRouter();
@@ -39,10 +42,7 @@ export default function Products() {
 						Producto Nuevo
 					</button>
 				</div>
-				<form
-					onSubmit={handleSubmit}
-					className="flex w-full md:w-1/2 items-center gap-x-2 px-2"
-				>
+				<form onSubmit={handleSubmit} className="flex w-full md:w-1/2 items-center gap-x-2 px-2">
 					<div
 						className="flex  justify-between items-center w-full h-12 px-3 py-2 text-sm leading-tight text-gray-700 border-0 
                          rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -90,10 +90,7 @@ export default function Products() {
 							<tbody className="text-gray-800 font-nunito">
 								{products.map((producto, index) => {
 									return (
-										<tr
-											key={producto.id}
-											className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
-										>
+										<tr key={producto._id} className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}>
 											<th scope="row" className="px-6 py-4   ">
 												{producto.nombre}
 											</th>
@@ -104,14 +101,9 @@ export default function Products() {
 													<td className="px-6 py-4">{producto.descripcion}</td>
 												</>
 											)}
-											<td className="px-6 py-4">
-												{producto.categoria !== "pizzas" && "$" + producto.precio}
-											</td>
+											<td className="px-6 py-4">{producto.categoria !== "pizzas" && "$" + producto.precio}</td>
 											<td className="px-6 py-4 text-right">
-												<a
-													href="#"
-													className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-												>
+												<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
 													<FaRegEdit size={25} className="text-gray-800" />
 												</a>
 											</td>
@@ -126,3 +118,13 @@ export default function Products() {
 		</Layout>
 	);
 }
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+	const state = await getProducts();
+	store.dispatch(setProductData(state));
+	return {
+		props: {
+			// Pasa el estado hidratado como prop al componente de Next.js
+			state,
+		},
+	};
+});

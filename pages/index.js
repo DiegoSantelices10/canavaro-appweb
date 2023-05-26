@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "components/header";
 import HomeFront from "components/sections/homeFront";
 import SectionPizza from "components/sections/sectionPizzas";
@@ -12,22 +12,9 @@ import { wrapper } from "store/app/store";
 import getProducts from "services/fetchData";
 
 export default function index({ state }) {
-	const [showModal, setShowModal] = useState(false);
-
-	const [currentProducto, setCurrentProducto] = useState(null);
-
-	const handleOpenModal = producto => {
-		console.log("handle", producto);
-		setCurrentProducto(producto);
-		setShowModal(true);
-	};
 	useEffect(() => {
 		localStorage.setItem("productos", JSON.stringify(state));
 	});
-	const handleCloseModal = () => {
-		setCurrentProducto(null);
-		setShowModal(false);
-	};
 
 	return (
 		<div className="bg-image flex flex-col min-h-screen overflow-hidden ">
@@ -43,9 +30,9 @@ export default function index({ state }) {
 			<main className="font-nunito">
 				<Header />
 				<HomeFront />
-				<SectionPizza handleOpen={handleOpenModal} handleClose={handleCloseModal} showModal={showModal} currentProducto={currentProducto} />
-				<SectionEmpanadas handleOpen={handleOpenModal} handleClose={handleCloseModal} showModal={showModal} currentProducto={currentProducto} />
-				<SectionCombos handleOpen={handleOpenModal} handleClose={handleCloseModal} showModal={showModal} currentProducto={currentProducto} />
+				<SectionPizza />
+				<SectionEmpanadas />
+				<SectionCombos />
 				<Footer />
 			</main>
 		</div>

@@ -59,6 +59,9 @@ const productoSchema = new Schema(
 			url: String,
 			public_id: String,
 		},
+		cerrada: {
+			type: String,
+		},
 	},
 	{
 		timestamp: true,
