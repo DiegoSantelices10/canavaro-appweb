@@ -24,8 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 export default function ProductLayout({ data, data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio } }) {
-	const { orderPromo } = useSelector(state => state.order);
-	const { orderList } = useSelector(state => state.order);
+	const { orderPromo, orderList, quantityDemanded } = useSelector(state => state.order);
 	const [selectCombo, setSelectCombo] = useState({});
 
 	const comentarioRef = useRef();
@@ -42,6 +41,17 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 		return pre?.cantidad ? pre.cantidad : 0;
 	};
 
+	const result = () => {
+		if (data.addEmpanadas) {
+			if (quantityDemanded < 1 && orderPromo.length > 0) {
+				return true;
+			}
+		} else {
+			if (orderPromo.length > 0) {
+				return true;
+			}
+		}
+	};
 	const incrementCartPizza = data => {
 		dispatch(addProductPizza(data));
 	};
@@ -65,7 +75,7 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 	};
 
 	const addCartPromo = value => {
-		if (data.addEmpanadas) {
+		if (data.addEmpanadas === "si") {
 			const promo = {
 				_id,
 				nombre,
@@ -79,11 +89,13 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 				cantidad: 1,
 			};
 			dispatch(addPromoOrderList(promo));
-			toast("Producto agregado al carrito", {
+			toast.error("Se agrego al carrito!", {
+				icon: false,
 				theme: "dark",
 			});
 		} else {
-			toast("Producto agregado al carrito", {
+			toast.error("Se agrego al carrito!", {
+				icon: false,
 				theme: "dark",
 			});
 			value.map(item => dispatch(addPromoOrderList({ ...item, comentarios: comentarioRef.current.value })));
@@ -108,7 +120,7 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 						<p className=" font-normal text-sm  text-gray-400">{descripcion}</p>
 						{categoria === "promociones" ? <p className=" font-normal  text-sm text-gray-400">$ {precio}</p> : ""}
 					</div>
-					<hr className="pb-3" />
+					<hr />
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
 						{categoria === "pizzas" ? (
 							<div className=" flex flex-col gap-y-2  justify-evenly">
@@ -131,7 +143,7 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 			<div className="bg-white w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
 				<button
 					className={`${
-						orderPromo.length > 0
+						result() > 0
 							? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
 							: "invisible"
 					} `}

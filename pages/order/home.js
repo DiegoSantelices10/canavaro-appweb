@@ -97,7 +97,8 @@ export default function Home() {
 		};
 		setTotalCant(0);
 		dispatch(addPromoOrderList(result));
-		toast("Producto agregado al carrito", {
+		toast.error("Se agrego al carrito!", {
+			icon: false,
 			theme: "dark",
 		});
 		dispatch(clearOrderPromo());

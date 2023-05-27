@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 import { FaChevronRight, FaFacebook } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { setUser } from "store/reducers/userSlice";
+import { setAuth } from "store/reducers/authSlice";
 
 export default function Login() {
 	const router = useRouter();
@@ -39,9 +39,9 @@ export default function Login() {
 							}}
 							onSubmit={values => {
 								dispatch(
-									setUser({
+									setAuth({
 										nombre: values.nombre,
-										password: values.paswword,
+										password: values.password,
 									})
 								);
 								router.push("/welcomeLogo");

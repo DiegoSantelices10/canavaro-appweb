@@ -68,6 +68,9 @@ export const orderSlice = createSlice({
 		clearOrderPromo: (state, action) => {
 			state.orderPromo = [];
 		},
+		clearOrderList: (state, action) => {
+			state.orderList = [];
+		},
 		removeProduct: (state, action) => {
 			state.orderPromo = state.orderPromo.filter(product => product._id !== action.payload._id);
 		},
@@ -120,6 +123,7 @@ export const {
 	setQuantityDemanded,
 	setCheckout,
 	removeItemCart,
+	clearOrderList,
 } = orderSlice.actions;
 
 export const selectOrder = state => state.order;

@@ -11,7 +11,6 @@ export default function CardPromotion({ data: { _id, nombre, descripcion, imagen
 					<Image
 						src={imagen?.url}
 						layout="responsive"
-						priority
 						width={220}
 						height={115}
 						objectFit="cover"

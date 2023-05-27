@@ -4,6 +4,7 @@ import orderReducer from "store/reducers/orderSlice";
 import userReducer from "store/reducers/userSlice";
 import productReducer from "store/reducers/productSlice";
 import saleSlice from "store/reducers/saleSlice";
+import authSlice from "store/reducers/authSlice";
 
 export const makeStore = () =>
 	configureStore({
@@ -12,6 +13,7 @@ export const makeStore = () =>
 			order: orderReducer,
 			user: userReducer,
 			sale: saleSlice,
+			auth: authSlice,
 		},
 		devTools: true,
 	});

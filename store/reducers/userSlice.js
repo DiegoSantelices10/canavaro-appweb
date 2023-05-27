@@ -19,10 +19,15 @@ export const userSlice = createSlice({
 		addAddress: (state, action) => {
 			state.direccion = action.payload;
 		},
+		clearUser: (state, action) => {
+			state.nombre = "";
+			state.telefono = "";
+			state.direccion = "";
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, addAddress } = userSlice.actions;
+export const { setUser, addAddress, clearUser } = userSlice.actions;
 
 export default userSlice.reducer;

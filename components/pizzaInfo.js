@@ -18,6 +18,10 @@ export default function PizzaInfo({
 	const quantityZero = tamanio => {
 		return cart.find(item => item.tamanio === tamanio);
 	};
+
+	const removeSpaces = str => {
+		return str.replace(/\s/g, "");
+	};
 	return (
 		<>
 			<div className="flex justify-between items-center">
@@ -31,7 +35,7 @@ export default function PizzaInfo({
 						className={quantityZero("gigante") ? "text-red-500 down " : "invisible"}
 						onClick={() =>
 							decrementCart({
-								_id: nombre + "gigante",
+								_id: removeSpaces(nombre) + "gigante",
 								nombre,
 								categoria,
 								tamanio: "gigante",

@@ -13,7 +13,6 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 	}));
 
 	const { productos } = pedido;
-	console.log(productos);
 
 	return (
 		<div className={showHideClassName}>

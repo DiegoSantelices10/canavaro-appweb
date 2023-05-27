@@ -63,7 +63,7 @@ export default function SectionEmpanadas() {
 					?.filter(item => item.categoria === "empanadas")
 					.map(producto => {
 						return (
-							producto.cerrada === "si" && (
+							producto.formato === "empanada" && (
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}

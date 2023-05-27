@@ -1,17 +1,23 @@
 import Layout from "components/admin/layout";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaSearch, FaRegEdit } from "react-icons/fa";
-import useResize from "hooks/useResize";
-import { wrapper } from "store/app/store";
-import getProducts from "services/fetchData";
+import Link from "next/link";
+import { useEffect } from "react";
 import { setProductData } from "store/reducers/productSlice";
 
 export default function Products() {
 	const router = useRouter();
-	const { isPhone } = useResize();
 	const { products } = useSelector(state => state.product);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (products.length < 1) {
+			console.log("entro");
+			dispatch(setProductData(JSON.parse(localStorage.getItem("productos"))));
+		}
+	});
+
 	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: {
 			query: "",
@@ -36,7 +42,7 @@ export default function Products() {
                              border text-white bg-red-500 "
 						type="button"
 						onClick={() => {
-							router.push("/admin/products/create");
+							router.push("/admin/products/0");
 						}}
 					>
 						Producto Nuevo
@@ -72,13 +78,6 @@ export default function Products() {
 									<th scope="col" className="px-6 py-3">
 										Categoria
 									</th>
-									{isPhone && (
-										<>
-											<th scope="col" className="px-6 py-3">
-												Descripcion
-											</th>
-										</>
-									)}
 									<th scope="col" className="px-6 py-3">
 										Precio
 									</th>
@@ -95,17 +94,13 @@ export default function Products() {
 												{producto.nombre}
 											</th>
 											<td className="px-6 py-4 font-bold">{producto.categoria}</td>
-
-											{isPhone && (
-												<>
-													<td className="px-6 py-4">{producto.descripcion}</td>
-												</>
-											)}
 											<td className="px-6 py-4">{producto.categoria !== "pizzas" && "$" + producto.precio}</td>
 											<td className="px-6 py-4 text-right">
-												<a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-													<FaRegEdit size={25} className="text-gray-800" />
-												</a>
+												<Link href={`/admin/products/${producto._id}`}>
+													<a className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+														<FaRegEdit size={25} className="text-gray-800" />
+													</a>
+												</Link>
 											</td>
 										</tr>
 									);
@@ -118,13 +113,3 @@ export default function Products() {
 		</Layout>
 	);
 }
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-	const state = await getProducts();
-	store.dispatch(setProductData(state));
-	return {
-		props: {
-			// Pasa el estado hidratado como prop al componente de Next.js
-			state,
-		},
-	};
-});

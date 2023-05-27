@@ -48,7 +48,7 @@ export default function SectionZona() {
 					</div>
 				</div>
 				<div className="rounded-md py-5 md:pr-5 md:py-0  mx-auto flex justify-center">
-					<Image className="rounded-md mx-auto" src={"/images/mapanuevocobertura.png"} width={700} height={500} alt="zona" />
+					<Image className="rounded-md mx-auto" src="/images/mapanuevocobertura.png" width={700} height={500} alt="zona" />
 				</div>
 			</div>
 		</Element>

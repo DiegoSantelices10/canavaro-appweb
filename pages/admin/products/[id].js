@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
-import axios from "axios";
+// import axios from "axios";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
 
@@ -85,21 +85,21 @@ export default function Create() {
 							mediana: "",
 							chica: "",
 						},
-						categoria: "",
+						categoria: renderProducts,
 						imagen: "",
 						cantidadMaxima: "",
 						addEmpanadas: "",
 						formato: "",
 					}}
 					onSubmit={async (values, { resetForm }) => {
-						await axios
-							.post("/api/products", values, {
-								headers: {
-									"Content-Type": "application/json",
-								},
-							})
-							.then(res => console.log(res));
-
+						// await axios
+						// 	.post("/api/products", values, {
+						// 		headers: {
+						// 			"Content-Type": "application/json",
+						// 		},
+						// 	})
+						// 	.then(res => console.log(res));
+						console.log("values", { ...values, categoria: renderProducts });
 						resetForm();
 					}}
 				>
@@ -118,7 +118,7 @@ export default function Create() {
 									</label>
 								</div>
 
-								<div className=" w-full mx-auto">
+								<div className=" hidden w-full mx-auto">
 									<label className="block  text-sm  text-slate-400">
 										Categoria
 										<Field
@@ -130,7 +130,7 @@ export default function Create() {
 									</label>
 								</div>
 
-								<div className=" w-full mx-auto md:col-start-1 md:col-end-3">
+								<div className=" w-full mx-auto ">
 									<label className="block text-sm  text-slate-400">
 										Descripcion
 										<Field
@@ -202,11 +202,11 @@ export default function Create() {
 												className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 											>
 												<label>
-													<Field type="radio" name="formato" value="no" className="mx-5" />
+													<Field type="radio" name="formato" value="canastita" className="mx-5" />
 													Canastita
 												</label>
 												<label>
-													<Field type="radio" name="formato" value="si" className="mx-5" />
+													<Field type="radio" name="formato" value="empanada" className="mx-5" />
 													Empanada
 												</label>
 											</div>

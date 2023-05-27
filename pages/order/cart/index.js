@@ -2,16 +2,15 @@ import Link from "next/link";
 import { FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState, useRef } from "react";
-import { addAddress } from "store/reducers/userSlice";
+import { useEffect, useState } from "react";
 import { calculateSubTotal, calculateTotalQuantity, removeItemCart } from "store/reducers/orderSlice";
+import { addAddress } from "store/reducers/userSlice";
 
 export default function Cart() {
 	const { orderList, totalAmount } = useSelector(state => state.order);
 	const [order, setOrder] = useState([]);
 	const [type, setType] = useState("delivery");
 
-	const direccionRef = useRef();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -20,12 +19,15 @@ export default function Cart() {
 		dispatch(calculateTotalQuantity());
 	}, [dispatch, orderList]);
 
-	const addressSet = () => {
-		dispatch(addAddress(direccionRef.current.value));
-	};
-
+	useEffect(() => {
+		dispatch(addAddress(""));
+	}, []);
 	const deleteItem = _id => {
 		dispatch(removeItemCart(_id));
+	};
+
+	const handleChange = e => {
+		dispatch(addAddress(e.target.value));
 	};
 	return (
 		<div className="font-poppins mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
@@ -68,7 +70,8 @@ export default function Cart() {
 							{type !== "delivery" && (
 								<input
 									id="address"
-									ref={direccionRef}
+									name="address"
+									onChange={handleChange}
 									type="text"
 									className="border border-slate-300 rounded-md w-full p-2"
 									placeholder="Ingresa tu direccion, Barrio"
@@ -81,9 +84,9 @@ export default function Cart() {
 				</div>
 			</div>
 			<div className="mb-20">
-				{order.map(item => {
+				{order.map((item, index) => {
 					return (
-						<div key={item._id} className="font-nunito">
+						<div key={index} className="font-nunito">
 							<div className="mb-2 p-3  bg-white">
 								<div className="flex justify-between items-center gap-x-2">
 									<div className="w-full self-start">
@@ -113,9 +116,7 @@ export default function Cart() {
 						<h3 className="text-xl">$ {totalAmount}</h3>
 					</div>
 					<Link href="/order/checkout">
-						<a onClick={addressSet} className="text-center rounded-md w-auto p-4 text-white font-bold bg-red-600">
-							Continuar el pago
-						</a>
+						<a className="text-center rounded-md w-auto p-4 text-white font-bold bg-red-600">Continuar el pago</a>
 					</Link>
 				</div>
 			</div>

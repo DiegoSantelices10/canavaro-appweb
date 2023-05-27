@@ -1,18 +1,18 @@
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { setCheckout } from "store/reducers/orderSlice";
+import { clearOrderList, setCheckout } from "store/reducers/orderSlice";
+import { clearUser } from "store/reducers/userSlice";
 
 export default function Checkout() {
 	const { direccion, nombre, telefono } = useSelector(state => state.user);
 	const { totalAmount, orderList } = useSelector(state => state.order);
-	const { checkout } = useSelector(state => state.order);
 
 	const dispatch = useDispatch();
-
-	console.log(checkout);
+	const router = useRouter();
 	return (
 		<div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
@@ -29,7 +29,7 @@ export default function Checkout() {
 			<Formik
 				initialValues={{
 					cliente: nombre || "",
-					domicilio: direccion || "",
+					domicilio: direccion || "Retira por local",
 					telefono: telefono || "",
 					productos: orderList || {},
 					comentarios: "",
@@ -39,7 +39,9 @@ export default function Checkout() {
 				}}
 				onSubmit={values => {
 					dispatch(setCheckout(values));
-					console.log("pedido exitoso", values);
+					dispatch(clearUser());
+					dispatch(clearOrderList());
+					router.push("/order/home");
 				}}
 			>
 				{({ values }) => {
@@ -47,16 +49,10 @@ export default function Checkout() {
 						<Form>
 							<div className="p-3 py-5">
 								<div>
-									{direccion ? (
+									{direccion.length > 0 ? (
 										<>
 											<h2 className="font-nunito font-extrabold text-base">Direccion de envio</h2>
 											<p>{direccion} </p>
-											<Field
-												id="comentarios"
-												name="comentarios"
-												className="border border-slate-300 rounded-md w-full p-2"
-												placeholder="Instrucciones de entrega"
-											/>
 										</>
 									) : (
 										<>
@@ -72,6 +68,10 @@ export default function Checkout() {
 								<p className="px-1"> 45 - 55 min</p>
 							</div>
 							<hr />
+							<div className="p-3 py-5">
+								<h2 className="font-nunito font-extrabold text-base pb-1">Comentarios adicionales</h2>
+								<Field id="comentarios" name="comentarios" className="border border-slate-300 rounded-md w-full p-2" />
+							</div>
 							<div className="p-3 py-5">
 								<h2 className="font-nunito font-extrabold text-base">Medio de pago</h2>
 								<div>

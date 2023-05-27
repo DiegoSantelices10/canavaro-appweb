@@ -1,11 +1,15 @@
+/* eslint-disable react/prop-types */
 import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { pedidos } from "services/fetchData";
+import getProducts, { pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
 
-export default function Home() {
+import { wrapper } from "store/app/store";
+import { setProductData } from "store/reducers/productSlice";
+
+export default function Home({ state }) {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
 
@@ -21,6 +25,10 @@ export default function Home() {
 		setCurrentPedido(null);
 		setShowModal(false);
 	};
+
+	useEffect(() => {
+		localStorage.setItem("productos", JSON.stringify(state));
+	}, []);
 
 	const tiempoDemoraDomicilio = ["35-45min", "45-55min", "55-65min", "65-75min", "75-85min"];
 	const tiempoDemoraLocal = ["10-15min", "15-20min", "20-25min", "25-30min", "30-35min"];
@@ -89,3 +97,13 @@ export default function Home() {
 		</Layout>
 	);
 }
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+	const state = await getProducts();
+	store.dispatch(setProductData(state));
+	return {
+		props: {
+			// Pasa el estado hidratado como prop al componente de Next.js
+			state,
+		},
+	};
+});

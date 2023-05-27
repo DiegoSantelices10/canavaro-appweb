@@ -7,7 +7,6 @@ import { addProductPromo, decrementProductPromo, setQuantityDemanded } from "sto
 
 export default function Promotion({ cantMax, data, setSelectCombo }) {
 	const [select, setSelect] = useState("");
-	const [promotions, setPromotions] = useState("");
 
 	const dispatch = useDispatch();
 
@@ -15,7 +14,6 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 	const { products } = useSelector(state => state.product);
 
 	useEffect(() => {
-		setPromotions(products?.filter(item => item.categoria === "promociones"));
 		dispatch(setQuantityDemanded(cantMax));
 	}, []);
 
@@ -49,27 +47,35 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 	};
 	return (
 		<div>
-			{data.nombre === "Combo 4" || data.nombre === "Combo 5" ? (
+			{(data.nombre === "Combo 4" || data.nombre === "Combo 5") && (
 				<>
-					<div className="p-4 flex gap-2 justify-start items-center">
+					<div className="p-2 flex gap-2 justify-start items-center">
 						<input id="1" type="radio" value="Combo 1" name="combo" onChange={onChangeValue} checked={select === "Combo 1"} />
-						<div>
-							<h3>{promotions && promotions[2].nombre}</h3>
-							<h4 className="text-gray-400 font-normal">{promotions && promotions[2].descripcion}</h4>
-						</div>
+						{products
+							?.filter(item => item.nombre.includes("Combo 1"))
+							.map(producto => {
+								return (
+									<div key={producto._id}>
+										<h3>{producto.nombre}</h3>
+										<h4 className="text-gray-400 font-normal">{producto.descripcion}</h4>
+									</div>
+								);
+							})}
 					</div>
 					<div className="p-4 flex gap-2 justify-start items-center">
 						<input id="2" type="radio" value="Combo 2" name="combo" onChange={onChangeValue} checked={select === "Combo 2"} />
-						<div>
-							<h3>{promotions && promotions[3].nombre}</h3>
-							<h4 className="text-gray-400 font-normal">{promotions && promotions[3].descripcion}</h4>
-						</div>
+						{products
+							?.filter(item => item.nombre.includes("Combo 2"))
+							.map(producto => {
+								return (
+									<div key={producto._id}>
+										<h3>{producto.nombre}</h3>
+										<h4 className="text-gray-400 font-normal">{producto.descripcion}</h4>
+									</div>
+								);
+							})}
 					</div>
 				</>
-			) : data.nombre === "Combo 6" ? (
-				setSelectCombo(promotions[4])
-			) : (
-				<></>
 			)}
 
 			{data.addEmpanadas === "no" ? (
