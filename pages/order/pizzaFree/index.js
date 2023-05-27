@@ -84,7 +84,6 @@ export default function Index() {
 		if (total > 1) return <h1>Completa la cantidad correctamente</h1>;
 	};
 	const addCartPromo = (value, tamanio) => {
-		console.log("values", value);
 		let total = 0;
 		let cantidad = 0;
 		Object.values(value).forEach(objeto => {
@@ -101,7 +100,6 @@ export default function Index() {
 		const concatenatedString = Object.values(newList)
 			.map(product => `${product.fraccion} ${product.nombre} `)
 			.join(", ");
-		console.log(concatenatedString);
 
 		const promo = {
 			_id: idGenerator,
@@ -233,8 +231,11 @@ export default function Index() {
 
 			<div className="bg-white w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
 				<button
-					className="flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 
-						transition-all duration-500 text-white text-base font-semibold "
+					className={`${
+						total === 1
+							? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
+							: "invisible"
+					}`}
 					onClick={() => {
 						addCartPromo(radioSelect, select);
 					}}

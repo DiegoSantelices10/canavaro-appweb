@@ -5,6 +5,7 @@ import HomeFront from "components/sections/homeFront";
 import SectionPizza from "components/sections/sectionPizzas";
 import SectionEmpanadas from "components/sections/sectionEmpanadas";
 import SectionCombos from "components/sections/sectionCombos";
+import SectionZona from "components/sections/sectionZona";
 import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
 
@@ -33,6 +34,7 @@ export default function index({ state }) {
 				<SectionPizza />
 				<SectionEmpanadas />
 				<SectionCombos />
+				<SectionZona />
 				<Footer />
 			</main>
 		</div>

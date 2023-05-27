@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -28,6 +28,7 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 	const { orderList } = useSelector(state => state.order);
 	const [selectCombo, setSelectCombo] = useState({});
 
+	const comentarioRef = useRef();
 	const router = useRouter();
 	const dispatch = useDispatch();
 
@@ -72,6 +73,7 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 				descripcion,
 				imagen: imagen?.url,
 				categoria,
+				comentarios: comentarioRef.current.value,
 				cantidadMaxima,
 				precio,
 				cantidad: 1,
@@ -84,7 +86,7 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 			toast("Producto agregado al carrito", {
 				theme: "dark",
 			});
-			value.map(item => dispatch(addPromoOrderList(item)));
+			value.map(item => dispatch(addPromoOrderList({ ...item, comentarios: comentarioRef.current.value })));
 		}
 
 		dispatch(clearOrderPromo());
@@ -93,16 +95,7 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 	return (
 		<div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
 			<div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
-				<Image
-					src={imagen?.url}
-					layout="responsive"
-					width={80}
-					height={40}
-					priority={true}
-					objectFit="cover"
-					objectPosition="center"
-					alt={nombre || "img"}
-				/>
+				<Image src={imagen?.url} layout="responsive" width={80} height={40} objectFit="cover" objectPosition="center" alt={nombre || "img"} />
 				<button onClick={returnHome}>
 					<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
 				</button>
@@ -128,15 +121,20 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 				</div>
 
 				<div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
-					<h1 className="pb-1">Comentarios</h1>
-					<input type="text" className="border border-gray-300 rounded-md w-full p-2" />
+					<label className="pb-1">
+						Comentarios
+						<input id="comentarios" name="comentarios" type="text" ref={comentarioRef} className="border border-gray-300 rounded-md w-full p-2" />
+					</label>
 				</div>
 			</div>
 
 			<div className="bg-white w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
 				<button
-					className="flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 
-						transition-all duration-500 text-white text-base font-semibold "
+					className={`${
+						orderPromo.length > 0
+							? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:bg-red-500 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
+							: "invisible"
+					} `}
 					onClick={() => {
 						addCartPromo(orderPromo);
 					}}

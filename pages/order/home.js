@@ -205,11 +205,15 @@ export default function Home() {
 						>
 							<button
 								onClick={() => addCartPromo(orderPromo)}
-								className="p-3 font-bold bg-slate-50 rounded-md text-black text-xs hover:-translate-y-1 
-								transition-all duration-500"
+								className={`${
+									orderPromo.length < 1
+										? "invisible"
+										: "p-3 font-bold bg-slate-50 rounded-md text-black text-xs hover:-translate-y-1 transition-all duration-500"
+								}`}
 							>
 								AGREGAR AL CARRITO
 							</button>
+
 							<div className="flex items-center gap-x-5 text-white font-semibold">
 								<p className="font-semibold text-xl">$ {totalPrice}</p>
 								<div className=" h-10 w-10 rounded-full bg-white flex justify-center items-center">

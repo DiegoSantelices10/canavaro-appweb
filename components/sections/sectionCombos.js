@@ -1,8 +1,30 @@
+import Modal from "components/modal";
 import Image from "next/image";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Element } from "react-scroll";
 export default function sectionCombos() {
+	const [showModal, setShowModal] = useState(false);
+	const [currentProducto, setCurrentProducto] = useState({});
+	const { products } = useSelector(state => state.product);
+
+	const handleOpenModal = producto => {
+		setCurrentProducto(producto);
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setCurrentProducto(null);
+		setShowModal(false);
+	};
+
 	return (
 		<Element name="combos" className="p-3 w-full  element">
+			{currentProducto !== null && (
+				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
+					{currentProducto}
+				</Modal>
+			)}
 			<h1 className="text-center p-3 text-2xl font-extrabold">Nuestros Combos</h1>
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between">
@@ -12,12 +34,7 @@ export default function sectionCombos() {
 				</div>
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
 					<div className="h-24  flex justify-center items-center ">
-						<Image
-							src={"/images/pizza-vector-negro.png"}
-							width={70}
-							height={70}
-							alt="pizza"
-						/>
+						<Image src={"/images/pizza-vector-negro.png"} width={70} height={70} alt="pizza" />
 					</div>
 				</div>
 				<div className="text-center h-28 w-auto flex flex-col justify-between ">
@@ -26,37 +43,24 @@ export default function sectionCombos() {
 					</div>
 				</div>
 			</div>
-			<div className="bg-black bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid lg:grid-cols-3 gap-5 content-center py-7">
-				<div>
-					<h1 className="col-span-2 font-bold text-xl text-center">Combo 1</h1>
-					<p className="text-white text-center">1/2 Jamon</p>
-					<p className="text-white text-center">1/2 Napolitana</p>
-				</div>
-				<div>
-					<h1 className="col-span-2 font-bold text-xl text-center">Combo 2</h1>
-					<p className="text-white text-center">1/4 Jamon - 1/4 Napolitana</p>
-					<p className="text-white text-center">1/4 Muzzarella - 1/4 Fugazzeta</p>
-				</div>
-				<div>
-					<h1 className="col-span-2 font-bold text-xl text-center">Combo 3</h1>
-					<p className="text-white text-center">1/4 Jamon y morron - 1/4 Super Napo</p>
-					<p className="text-white text-center">1/4 Fuga de la casa - 1/4 Calabresa</p>
-				</div>
-				<div>
-					<h1 className="col-span-2 font-bold text-xl text-center">Combo 4</h1>
-					<p className="text-white text-center">Combo 1 o Combo 2</p>
-					<p className="text-white text-center">más 6 Empanadas</p>
-				</div>
-				<div>
-					<h1 className="col-span-2 font-bold text-xl text-center">Combo 5</h1>
-					<p className="text-white text-center">Combo 1 o Combo 2</p>
-					<p className="text-white text-center">más 12 Empanadas</p>
-				</div>
-				<div>
-					<h1 className="col-span-2 font-bold text-xl text-center">Combo 6</h1>
-					<p className="text-white text-center">Combo 3</p>
-					<p className="text-white text-center">más 12 Empanadas</p>
-				</div>
+			<div className="bg-black bg-opacity-80 w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-8 ">
+				<p className="italic col-span-3 text-white text-center text-xs py-4">* Hacer click sobre el titulo para ver descripcion.</p>
+
+				{products
+					?.filter(item => item.nombre.includes("Combo"))
+					.map(producto => {
+						return (
+							<div key={producto._id} className="text-center my-2">
+								<p
+									onClick={() => handleOpenModal(producto)}
+									className="col-span-3 text-xl font-bold cursor-pointer text-white text-center w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+								>
+									{producto.nombre}
+								</p>
+								<p className="text-sm px-5">{producto.descripcion}</p>
+							</div>
+						);
+					})}
 			</div>
 		</Element>
 	);

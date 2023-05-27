@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { addAddress } from "store/reducers/userSlice";
 import { calculateSubTotal, calculateTotalQuantity, removeItemCart } from "store/reducers/orderSlice";
 
@@ -10,7 +10,8 @@ export default function Cart() {
 	const { orderList, totalAmount } = useSelector(state => state.order);
 	const [order, setOrder] = useState([]);
 	const [type, setType] = useState("delivery");
-	const [address, setAddress] = useState("");
+
+	const direccionRef = useRef();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -20,7 +21,7 @@ export default function Cart() {
 	}, [dispatch, orderList]);
 
 	const addressSet = () => {
-		dispatch(addAddress(address));
+		dispatch(addAddress(direccionRef.current.value));
 	};
 
 	const deleteItem = _id => {
@@ -67,7 +68,7 @@ export default function Cart() {
 							{type !== "delivery" && (
 								<input
 									id="address"
-									onChange={e => setAddress(e.target.value)}
+									ref={direccionRef}
 									type="text"
 									className="border border-slate-300 rounded-md w-full p-2"
 									placeholder="Ingresa tu direccion, Barrio"

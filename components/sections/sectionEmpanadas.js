@@ -18,7 +18,6 @@ export default function SectionEmpanadas() {
 		setCurrentProducto(null);
 		setShowModal(false);
 	};
-	console.log(products);
 	return (
 		<Element name="empanadas" className="p-3 w-full  element font-nunito">
 			{currentProducto !== null && (
@@ -39,9 +38,9 @@ export default function SectionEmpanadas() {
 					</div>
 				</div>
 			</div>
-			<div className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center ">
-				<p className="italic col-span-2 text-white text-center text-xs py-3">* Hacer click sobre el titulo para ver descripcion.</p>
-				<h1 className="col-span-2 font-bold text-lg text-center">Canastitas</h1>
+			<div className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center py-8">
+				<p className="italic col-span-2 text-white text-center text-xs py-4">* Hacer click sobre el titulo para ver descripcion.</p>
+				<h1 className="col-span-2 font-bold text-xl text-center">Canastitas</h1>
 				{products
 					?.filter(item => item.categoria === "empanadas")
 					.map(producto => {
@@ -50,7 +49,7 @@ export default function SectionEmpanadas() {
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer text-white text-center w-1/2 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										className=" cursor-pointer text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 									>
 										{producto.nombre}
 									</p>
@@ -59,7 +58,7 @@ export default function SectionEmpanadas() {
 						);
 					})}
 
-				<h1 className="col-span-2 font-bold text-lg text-center">Empanadas</h1>
+				<h1 className="col-span-2 font-bold text-xl text-center">Empanadas</h1>
 				{products
 					?.filter(item => item.categoria === "empanadas")
 					.map(producto => {
@@ -68,7 +67,7 @@ export default function SectionEmpanadas() {
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer text-white text-center w-1/2 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										className=" cursor-pointer text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 									>
 										{producto.nombre}
 									</p>

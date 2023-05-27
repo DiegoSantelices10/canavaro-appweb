@@ -1,13 +1,19 @@
 import Image from "next/image";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRouter } from "next/router";
 import { FaChevronRight, FaFacebook } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/reducers/userSlice";
+import * as Yup from "yup";
 
 export default function Login() {
 	const router = useRouter();
 	const dispatch = useDispatch();
+
+	const LoginSchema = Yup.object().shape({
+		nombre: Yup.string().min(2, "Muy corto").max(50, "Too Long!").required("Ingresa tu nombre, por favor"),
+		telefono: Yup.number().typeError("Debe ser un valor numérico").required("Ingresa tu telefono, por favor"),
+	});
 
 	return (
 		<div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
@@ -48,30 +54,35 @@ export default function Login() {
 									router.push("/order/home");
 								}, 3000);
 							}}
+							validationSchema={LoginSchema}
 						>
-							{({ values, handleChange }) => (
+							{() => (
 								<Form>
 									<div className="mb-3">
-										<input
+										<Field
 											id="nombre"
 											className="shadow w-full font-nunito font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
 											placeholder="Introduce tu nombre"
-											type="text"
 											name="nombre"
-											onChange={handleChange}
-											value={values.nombre}
 										/>
+										<ErrorMessage name="nombre">
+											{msg => {
+												return <div className="text-red-500 font-medium text-sm">{msg}</div>;
+											}}
+										</ErrorMessage>
 									</div>
 									<div>
-										<input
+										<Field
 											id="telefono"
 											className="shadow w-full font-nunito bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
 											placeholder="Introduce tu telefono"
-											type="text"
 											name="telefono"
-											onChange={handleChange}
-											value={values.telefono}
 										/>
+										<ErrorMessage name="telefono">
+											{msg => {
+												return <div className="text-red-500 font-medium text-sm">{msg}</div>;
+											}}
+										</ErrorMessage>
 									</div>
 									<div className="flex" style={{ justifyContent: "flex-end" }}>
 										<button

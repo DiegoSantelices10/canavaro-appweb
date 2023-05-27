@@ -22,3 +22,17 @@
 [x-cloak=""] {
 	display: none;
 }
+@keyframes slide-in-left {
+	from {
+	  transform: translateX(-100%);
+	}
+	to {
+	  transform: translateX(0);
+	}
+  }
+  
+  .animate-slide-in-left {
+	animation-name: slide-in-left;
+	animation-duration: 0.5s;
+  }
+  

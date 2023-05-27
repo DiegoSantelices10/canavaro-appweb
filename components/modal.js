@@ -39,8 +39,16 @@ const Modal = ({ handleClose, showModal, producto }) => {
 							<h2 className="text-xl">{producto?.nombre}</h2>
 							<p className="font-light  text-sm text-gray-300 pb-3">{producto?.descripcion}</p>
 							<div className="flex w-full justify-between font-normal gap-1">
-								<p>Chica $ {producto?.precioPizza?.chica}</p> |<p>Mediana $ {producto?.precioPizza?.mediana}</p> |
-								<p>Gigante $ {producto?.precioPizza?.gigante}</p>
+								{!producto.precio ? (
+									<>
+										<p>Chica $ {producto?.precioPizza?.chica}</p> |<p>Mediana $ {producto?.precioPizza?.mediana}</p> |
+										<p>Gigante $ {producto?.precioPizza?.gigante}</p>
+									</>
+								) : (
+									<>
+										<p>$ {producto?.precio}</p>
+									</>
+								)}
 							</div>
 						</div>
 					</div>

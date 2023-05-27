@@ -3,6 +3,7 @@ import { createWrapper } from "next-redux-wrapper";
 import orderReducer from "store/reducers/orderSlice";
 import userReducer from "store/reducers/userSlice";
 import productReducer from "store/reducers/productSlice";
+import saleSlice from "store/reducers/saleSlice";
 
 export const makeStore = () =>
 	configureStore({
@@ -10,6 +11,7 @@ export const makeStore = () =>
 			product: productReducer,
 			order: orderReducer,
 			user: userReducer,
+			sale: saleSlice,
 		},
 		devTools: true,
 	});
