@@ -1,12 +1,27 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 // import axios from "axios";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 export default function Create() {
 	const [renderProducts, setRenderProductos] = useState("empanadas");
+	const [productRender, setProductRender] = useState({});
+	const { products } = useSelector(state => state.product);
+	const router = useRouter();
+	const { id } = router.query;
+
+	useEffect(() => {
+		if (id !== "0") {
+			const result = products?.find(item => item._id === id);
+			setProductRender(result);
+			setRenderProductos(result?.categoria);
+		}
+	}, []);
 
 	return (
 		<Layout>
@@ -27,7 +42,7 @@ export default function Create() {
 					</style>
 					<div>
 						<button
-							onClick={() => setRenderProductos("empanadas")}
+							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "empanadas"}`)}
 							className={
 								renderProducts !== "empanadas"
 									? "w-52 rounded-3xl font-semibold text-gray-400"
@@ -39,7 +54,7 @@ export default function Create() {
 					</div>
 					<div>
 						<button
-							onClick={() => setRenderProductos("pizzas")}
+							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "pizzas"}`)}
 							className={
 								renderProducts !== "pizzas"
 									? "w-32 rounded-3xl font-semibold text-gray-400"
@@ -52,7 +67,7 @@ export default function Create() {
 
 					<div>
 						<button
-							onClick={() => setRenderProductos("promociones")}
+							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "promociones"}`)}
 							className={
 								renderProducts !== "promociones"
 									? "w-32 rounded-3xl font-semibold text-gray-400"
@@ -64,7 +79,7 @@ export default function Create() {
 					</div>
 					<div>
 						<button
-							onClick={() => setRenderProductos("bebidas")}
+							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "bebidas"}`)}
 							className={
 								renderProducts !== "bebidas"
 									? "w-32 rounded-3xl font-semibold text-gray-400"
@@ -77,19 +92,19 @@ export default function Create() {
 				</div>
 				<Formik
 					initialValues={{
-						nombre: "",
-						descripcion: "",
-						precio: "",
+						nombre: productRender?.nombre || "",
+						descripcion: productRender?.descripcion || "",
+						precio: productRender?.precio || "",
 						precioPizza: {
-							gigante: "",
-							mediana: "",
-							chica: "",
+							gigante: productRender?.precioPizza?.gigante || "",
+							mediana: productRender?.precioPizza?.mediana || "",
+							chica: productRender?.precioPizza?.chica || "",
 						},
 						categoria: renderProducts,
-						imagen: "",
-						cantidadMaxima: "",
-						addEmpanadas: "",
-						formato: "",
+						imagen: productRender?.imagen || "",
+						cantidadMaxima: productRender?.cantidadMaxima || "",
+						addEmpanadas: productRender?.addEmpanadas || "",
+						formato: productRender?.formato || "",
 					}}
 					onSubmit={async (values, { resetForm }) => {
 						// await axios
@@ -102,6 +117,7 @@ export default function Create() {
 						console.log("values", { ...values, categoria: renderProducts });
 						resetForm();
 					}}
+					enableReinitialize
 				>
 					{({ setFieldValue, values, handleChange }) => (
 						<Form>
@@ -112,7 +128,7 @@ export default function Create() {
 										<Field
 											id="nombre"
 											name="nombre"
-											className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+											className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 										/>
 									</label>
@@ -124,7 +140,7 @@ export default function Create() {
 										<Field
 											id="categoria"
 											name="categoria"
-											className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+											className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 										/>
 									</label>
@@ -136,7 +152,7 @@ export default function Create() {
 										<Field
 											id="descripcion"
 											name="descripcion"
-											className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+											className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 										/>
 									</label>
@@ -149,7 +165,7 @@ export default function Create() {
 											<Field
 												id="precio"
 												name="precio"
-												className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+												className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
 											  rounded-md shadow   focus:border-gray-200"
 											/>
 										</label>
@@ -163,7 +179,7 @@ export default function Create() {
 											<div
 												role="group"
 												aria-labelledby="my-radio-group"
-												className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
+												className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 											>
 												<label>
 													<Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
@@ -184,7 +200,7 @@ export default function Create() {
 														name="cantidadMaxima"
 														value={values.cantidadMaxima}
 														onChange={handleChange}
-														className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+														className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
 													  rounded-md shadow   focus:border-gray-200"
 													/>
 												</label>
@@ -221,7 +237,7 @@ export default function Create() {
 												<Field
 													id="precioPizza.gigante"
 													name="precioPizza.gigante"
-													className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+													className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
 											  rounded-md shadow   focus:border-gray-200"
 												/>
 											</label>
@@ -232,7 +248,7 @@ export default function Create() {
 												<Field
 													id="precioPizza.mediana"
 													name="precioPizza.mediana"
-													className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+													className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 												/>
 											</label>
@@ -243,7 +259,7 @@ export default function Create() {
 												<Field
 													id="precioPizza.chica"
 													name="precioPizza.chica"
-													className="w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+													className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
 												/>
 											</label>
@@ -280,3 +296,17 @@ export default function Create() {
 		</Layout>
 	);
 }
+// export async function getServerSideProps({ query }) {
+// 	const id = query.id;
+// 	let producto;
+// 	if (id !== 0) {
+// 		producto = await getProductId(id);
+// 	} else {
+// 		producto = {};
+// 	}
+// 	return {
+// 		props: {
+// 			producto,
+// 		},
+// 	};
+// }

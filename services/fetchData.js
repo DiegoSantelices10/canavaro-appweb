@@ -1,4 +1,6 @@
-const getProducts = async () => {
+import axios from "axios";
+
+export const getProducts = async () => {
 	const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
 
 	try {
@@ -14,7 +16,16 @@ const getProducts = async () => {
 	}
 };
 
-export default getProducts;
+export const getProductId = async id => {
+	try {
+		const response = await axios.get(`/api/products/${id}`);
+		console.log(response);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
 
 export const pedidos = [
 	{

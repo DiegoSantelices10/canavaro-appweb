@@ -3,7 +3,7 @@ import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
 import { useEffect, useState } from "react";
 
-import getProducts, { pedidos } from "services/fetchData";
+import { getProducts, pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
 
 import { wrapper } from "store/app/store";

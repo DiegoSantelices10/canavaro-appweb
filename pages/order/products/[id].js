@@ -2,7 +2,7 @@
 
 import ProductLayout from "components/productLayout";
 import { convertToPath } from "libs/items";
-import getProducts from "services/fetchData";
+import { getProducts } from "services/fetchData";
 
 export default function Product({ data }) {
 	return (
@@ -15,7 +15,7 @@ export default function Product({ data }) {
 export async function getServerSideProps({ query }) {
 	const productos = await getProducts();
 	const id = query.id;
-	const data = productos.find(item => convertToPath(item.nombre) === id);
+	const data = await productos.find(item => convertToPath(item.nombre) === id);
 	return {
 		props: {
 			id,

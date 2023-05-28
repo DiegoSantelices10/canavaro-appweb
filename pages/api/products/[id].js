@@ -3,8 +3,9 @@
 import dbConnect from "utils/mongoose";
 import { runMiddleware } from "middleware/runMiddleware";
 import Cors from "cors";
-import { getProducts } from "./controllers/getProducts";
-import { createProduct } from "./controllers/createProduct";
+import { getProductId } from "./controllers/getProducts";
+import { updateProduct } from "./controllers/updateProduct";
+import { deleteProduct } from "./controllers/deleteProduct";
 const cors = Cors({
 	methods: ["POST", "GET"],
 });
@@ -15,10 +16,13 @@ const handler = async (req, res) => {
 		await runMiddleware(req, res, cors);
 		switch (method) {
 			case "GET":
-				await getProducts(req, res);
+				await getProductId(req, res);
 				break;
-			case "POST":
-				await createProduct(req, res);
+			case "PUT":
+				await updateProduct(req, res);
+				break;
+			case "DELETE":
+				await deleteProduct(req, res);
 				break;
 		}
 	} catch (error) {

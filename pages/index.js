@@ -10,7 +10,7 @@ import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
 
 import { wrapper } from "store/app/store";
-import getProducts from "services/fetchData";
+import { getProducts } from "services/fetchData";
 
 export default function index({ state }) {
 	useEffect(() => {
