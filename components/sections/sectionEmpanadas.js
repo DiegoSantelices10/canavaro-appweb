@@ -25,7 +25,7 @@ export default function SectionEmpanadas() {
 					{currentProducto}
 				</Modal>
 			)}
-			<h1 className="text-center p-3 text-2xl font-extrabold">Empanadas y Canastitas</h1>
+			<h1 className="text-center p-3 text-2xl lg:text-3xl font-extrabold">Empanadas y Canastitas</h1>
 			<div className="flex justify-center h-32 items-center w-full gap-10">
 				<div className="text-center h-28 w-auto flex flex-col justify-between">
 					<div className="h-24 flex justify-center items-center">
@@ -38,14 +38,14 @@ export default function SectionEmpanadas() {
 					</div>
 				</div>
 			</div>
-			<div className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center py-8">
-				<p className="italic col-span-2 text-white text-center text-xs py-4">* Hacer click sobre el titulo para ver descripcion.</p>
+			<div className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
+				<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
 				<h1 className="col-span-2 font-bold text-xl text-center">Canastitas</h1>
 				{products
 					?.filter(item => item.categoria === "empanadas")
 					.map(producto => {
 						return (
-							!producto.cerrada && (
+							producto.formato === "canastita" && (
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}

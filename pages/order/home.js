@@ -112,7 +112,7 @@ export default function Home() {
 			<div className="py-4 mt-14 mx-auto w-full ">
 				<h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">Promociones</h1>
 				<hr className="pb-3" />
-				<div className="flex overflow-x-scroll flexp   space-x-6 w-full p-3">
+				<div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-3">
 					<style jsx>
 						{`
 							.flexp::-webkit-scrollbar-thumb {

@@ -41,8 +41,9 @@ const Modal = ({ handleClose, showModal, producto }) => {
 							<div className="flex w-full justify-between font-normal gap-1">
 								{!producto.precio ? (
 									<>
-										<p>Chica $ {producto?.precioPizza?.chica}</p> |<p>Mediana $ {producto?.precioPizza?.mediana}</p> |
-										<p>Gigante $ {producto?.precioPizza?.gigante}</p>
+										<p> {`${producto?.precioPizza?.chica ? "Chica $ " + producto.precioPizza.chica : ""}`}</p> |
+										<p>{`${producto?.precioPizza?.mediana ? "Mediana $ " + producto.precioPizza.mediana : ""}`}</p> |
+										<p>{`${producto?.precioPizza?.gigante ? "Gigante $ " + producto.precioPizza.gigante : ""}`}</p>
 									</>
 								) : (
 									<>

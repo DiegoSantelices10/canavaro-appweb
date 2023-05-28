@@ -1,29 +1,46 @@
 import Layout from "components/admin/layout";
-import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSearch, FaRegEdit } from "react-icons/fa";
 import Link from "next/link";
-import { useEffect } from "react";
 import { setProductData } from "store/reducers/productSlice";
+import { getProductsFront } from "services/fetchData";
+import { useEffect, useState } from "react";
 
 export default function Products() {
-	const router = useRouter();
+	const [renderProductos, setRenderProductos] = useState([]);
+	const [inputValue, setInputValue] = useState("");
 	const { products } = useSelector(state => state.product);
+	const router = useRouter();
 	const dispatch = useDispatch();
-	useEffect(() => {
-		if (products.length < 1) {
-			console.log("entro");
-			dispatch(setProductData(JSON.parse(localStorage.getItem("productos"))));
-		}
-	});
 
-	const { handleSubmit, handleChange, values } = useFormik({
-		initialValues: {
-			query: "",
-		},
-		onSubmit: async function (values) {},
-	});
+	useEffect(() => {
+		(async () => {
+			const res = await getProductsFront();
+			setRenderProductos(res);
+			dispatch(setProductData(res));
+		})();
+	}, []);
+
+	useEffect(() => {
+		const delayDebounceFn = setTimeout(() => {
+			// Aquí puedes realizar la búsqueda en el listado con el valor de inputValue
+			const resultado = renderProductos?.filter(item => item.nombre.includes(inputValue));
+			if (inputValue === "") {
+				setRenderProductos(products);
+			} else {
+				setRenderProductos(resultado);
+			}
+		}, 1000); // Establece el tiempo de espera deseado en milisegundos (500 ms en este ejemplo)
+
+		return () => {
+			clearTimeout(delayDebounceFn);
+		};
+	}, [inputValue]);
+
+	const handleChangeSearch = e => {
+		setInputValue(e.target.value);
+	};
 
 	return (
 		<Layout>
@@ -42,13 +59,13 @@ export default function Products() {
                              border text-white bg-red-500 "
 						type="button"
 						onClick={() => {
-							router.push("/admin/products/0");
+							router.push("/admin/products/create");
 						}}
 					>
 						Producto Nuevo
 					</button>
 				</div>
-				<form onSubmit={handleSubmit} className="flex w-full md:w-1/2 items-center gap-x-2 px-2">
+				<div className="flex w-full md:w-1/2 items-center gap-x-2 px-2">
 					<div
 						className="flex  justify-between items-center w-full h-12 px-3 py-2 text-sm leading-tight text-gray-700 border-0 
                          rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -58,13 +75,12 @@ export default function Products() {
 							name="query"
 							type="text"
 							placeholder="¿Que Desea Buscar?"
-							onChange={handleChange}
-							value={values.query}
+							onChange={handleChangeSearch}
 							className="w-full border-0 bg-gray-50 focus:outline-none focus:ring-0"
 						/>
 						<FaSearch size={20} />
 					</div>
-				</form>
+				</div>
 			</div>
 			<div className="w-full lg:w-11/12 mx-auto h-auto">
 				<div className="w-full mx-auto">
@@ -87,7 +103,7 @@ export default function Products() {
 								</tr>
 							</thead>
 							<tbody className="text-gray-800 font-nunito">
-								{products.map((producto, index) => {
+								{renderProductos?.map((producto, index) => {
 									return (
 										<tr key={producto._id} className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}>
 											<th scope="row" className="px-6 py-4   ">

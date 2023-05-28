@@ -3,18 +3,23 @@ import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
 import { useEffect, useState } from "react";
 
-import { getProducts, pedidos } from "services/fetchData";
+import { pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
-
-import { wrapper } from "store/app/store";
-import { setProductData } from "store/reducers/productSlice";
-
-export default function Home({ state }) {
+import { useDispatch } from "react-redux";
+import { setSaleData } from "store/reducers/saleSlice";
+export default function Home() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
+	const [renderSale, setRenderSale] = useState([]);
 
-	const [demoraDomicilio, setDemoraDomicilio] = useState("25-35min");
+	const [demoraDomicilio, setDemoraDomicilio] = useState("35-45min");
 	const [demoraLocal, setDemoraLocal] = useState("10-15min");
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		setRenderSale(pedidos);
+		dispatch(setSaleData(pedidos));
+	}, []);
 
 	const handleOpenModal = pedido => {
 		setCurrentPedido(pedido);
@@ -25,10 +30,6 @@ export default function Home({ state }) {
 		setCurrentPedido(null);
 		setShowModal(false);
 	};
-
-	useEffect(() => {
-		localStorage.setItem("productos", JSON.stringify(state));
-	}, []);
 
 	const tiempoDemoraDomicilio = ["35-45min", "45-55min", "55-65min", "65-75min", "75-85min"];
 	const tiempoDemoraLocal = ["10-15min", "15-20min", "20-25min", "25-30min", "30-35min"];
@@ -58,7 +59,7 @@ export default function Home({ state }) {
 
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
-						{pedidos?.map(item => (
+						{renderSale?.map(item => (
 							<div key={item._id} className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2">
 								<div className="w-full text-sm">
 									<h2 className="text-right">{item?._id}</h2>
@@ -97,13 +98,3 @@ export default function Home({ state }) {
 		</Layout>
 	);
 }
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
-	const state = await getProducts();
-	store.dispatch(setProductData(state));
-	return {
-		props: {
-			// Pasa el estado hidratado como prop al componente de Next.js
-			state,
-		},
-	};
-});

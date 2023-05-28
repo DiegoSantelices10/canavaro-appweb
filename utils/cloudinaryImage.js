@@ -1,8 +1,9 @@
 import Swal from "sweetalert2";
+import Resizer from "react-image-file-resizer";
+
 const cloudinaryImage = (value, setField) => {
 	const file = value?.files[0];
 
-	const reader = new FileReader();
 	const extensions = /(jpe?g|png)$/i;
 	if (!extensions.test(file.type)) {
 		Swal.fire({
@@ -13,11 +14,19 @@ const cloudinaryImage = (value, setField) => {
 		return;
 	}
 
-	reader.onload = () => {
-		const codeBase64 = reader.result;
-		setField("imagen", codeBase64);
-	};
-	reader.readAsDataURL(file);
+	Resizer.imageFileResizer(
+		file,
+		540, // Nuevo ancho de la imagen
+		540, // Nueva altura de la imagen
+		"JPEG", // Formato de salida de la imagen (puedes cambiarlo según tus necesidades)
+		70, // Calidad de compresión (0-100)
+		0, // Rotación de la imagen (en grados, 0-360)
+		base64 => {
+			// El resultado es la imagen redimensionada y comprimida en formato base64
+			setField("imagen", base64);
+		},
+		"base64" // Tipo de salida ('blob' o 'base64')
+	);
 };
 
 export default cloudinaryImage;

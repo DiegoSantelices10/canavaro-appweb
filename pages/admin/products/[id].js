@@ -7,6 +7,8 @@ import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { updateProduct } from "services/fetchData";
+import Swal from "sweetalert2";
 
 export default function Create() {
 	const [renderProducts, setRenderProductos] = useState("empanadas");
@@ -16,15 +18,50 @@ export default function Create() {
 	const { id } = router.query;
 
 	useEffect(() => {
-		if (id !== "0") {
+		if (id) {
 			const result = products?.find(item => item._id === id);
 			setProductRender(result);
 			setRenderProductos(result?.categoria);
 		}
 	}, []);
 
-	const FileExtension = filename => {
-		return /[.]/.exec(filename) ? /[^.]+$/.exec(filename)[0] : undefined;
+	const modelProducto = value => {
+		const { nombre, descripcion, categoria, imagen, cantidadMaxima, precio, precioPizza, addEmpanadas, addPizzas, tamanio, formato } = value;
+		let model;
+		if (value.categoria === "promociones") {
+			model = {
+				nombre,
+				descripcion,
+				categoria,
+				imagen,
+				cantidadMaxima,
+				precio,
+				addEmpanadas,
+				addPizzas,
+				tamanio,
+			};
+		}
+		if (categoria === "pizzas") {
+			model = {
+				nombre,
+				descripcion,
+				categoria,
+				imagen,
+				precioPizza,
+			};
+		}
+		if (categoria === "empanadas") {
+			model = {
+				nombre,
+				descripcion,
+				categoria,
+				imagen,
+				precio,
+				formato,
+			};
+		}
+
+		return model;
 	};
 	return (
 		<Layout>
@@ -108,20 +145,67 @@ export default function Create() {
 						cantidadMaxima: productRender?.cantidadMaxima || "",
 						addEmpanadas: productRender?.addEmpanadas || "",
 						formato: productRender?.formato || "",
+						addPizzas: productRender?.addPizzas || "",
+						tamanio: productRender?.tamanio || "",
 					}}
 					onSubmit={async (values, { resetForm }) => {
-						const result = FileExtension(values.imagen.url);
-						// await axios
-						// 	.post("/api/products", values, {
-						// 		headers: {
-						// 			"Content-Type": "application/json",
-						// 		},
-						// 	})
-						// 	.then(res => console.log(res));
-						console.log("imagen", result);
-
-						console.log("values", { ...values, categoria: renderProducts });
-						resetForm();
+						if (values.imagen.public_id) {
+							const model = modelProducto({ ...values, imagen: "" });
+							await updateProduct(id, model)
+								.then(res => {
+									if (res.success) {
+										Swal.fire({
+											title: "Actualizacion Exitosa!",
+											confirmButtonColor: "#3085d6",
+											showClass: {
+												popup: "animate__animated animate__fadeInDown",
+											},
+											hideClass: {
+												popup: "animate__animated animate__fadeOutUp",
+											},
+										});
+										resetForm();
+										router.push("list");
+									}
+								})
+								.catch(error => {
+									if (error) {
+										Swal.fire({
+											icon: "error",
+											title: "Oops...",
+											text: "Something went wrong!",
+										});
+									}
+								});
+						} else {
+							const model = modelProducto(values);
+							await updateProduct(id, model)
+								.then(res => {
+									if (res.success) {
+										Swal.fire({
+											title: "Acutalizacion Exitosa!",
+											confirmButtonColor: "#3085d6",
+											showClass: {
+												popup: "animate__animated animate__fadeInDown",
+											},
+											hideClass: {
+												popup: "animate__animated animate__fadeOutUp",
+											},
+										});
+										resetForm();
+										router.push("list");
+									}
+								})
+								.catch(error => {
+									if (error) {
+										Swal.fire({
+											icon: "error",
+											title: "Oops...",
+											text: "Something went wrong!",
+										});
+									}
+								});
+						}
 					}}
 					enableReinitialize
 				>
@@ -178,42 +262,6 @@ export default function Create() {
 									</div>
 								)}
 
-								{renderProducts === "promociones" && (
-									<>
-										<div className=" w-full mx-auto">
-											<p className="block  text-sm  text-slate-400">¿La promo cuenta con empanadas?</p>
-											<div
-												role="group"
-												aria-labelledby="my-radio-group"
-												className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
-											>
-												<label>
-													<Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
-													Si
-												</label>
-												<label>
-													<Field type="radio" name="addEmpanadas" value="no" className="mx-5" />
-													No
-												</label>
-											</div>
-										</div>
-										{values.addEmpanadas === "si" && (
-											<div className=" w-full mx-auto">
-												<label className="block  text-sm  text-slate-400">
-													Ingresa la cantidad de empanadas
-													<Field
-														id="cantidadMaxima"
-														name="cantidadMaxima"
-														value={values.cantidadMaxima}
-														onChange={handleChange}
-														className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													  rounded-md shadow   focus:border-gray-200"
-													/>
-												</label>
-											</div>
-										)}
-									</>
-								)}
 								{renderProducts === "empanadas" && (
 									<>
 										<div className=" w-full mx-auto">
@@ -286,6 +334,78 @@ export default function Create() {
 									</label>
 								</div>
 
+								{renderProducts === "promociones" && (
+									<>
+										<div className="w-full mx-auto">
+											<div className=" w-full mx-auto">
+												<p className="block  text-sm  text-slate-400">¿La promo cuenta con empanadas?</p>
+												<div
+													role="group"
+													aria-labelledby="my-radio-group"
+													className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
+												>
+													<label>
+														<Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
+														Si
+													</label>
+													<label>
+														<Field type="radio" name="addEmpanadas" value="no" className="mx-5" />
+														No
+													</label>
+												</div>
+											</div>
+											{values.addEmpanadas === "si" && (
+												<div className=" w-full mx-auto">
+													<label className="block  text-sm  text-slate-400">
+														Ingresa la cantidad de empanadas
+														<Field
+															id="cantidadMaxima"
+															name="cantidadMaxima"
+															value={values.cantidadMaxima}
+															onChange={handleChange}
+															className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+													  rounded-md shadow   focus:border-gray-200"
+														/>
+													</label>
+												</div>
+											)}
+										</div>
+										<div className="w-full mx-auto">
+											<div className=" w-full mx-auto">
+												<p className="block  text-sm  text-slate-400">¿La promo cuenta con Pizza?</p>
+												<div
+													role="group"
+													aria-labelledby="my-radio-group"
+													className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
+												>
+													<label>
+														<Field type="radio" name="addPizzas" value="si" className="mx-5" />
+														Si
+													</label>
+													<label>
+														<Field type="radio" name="addPizzas" value="no" className="mx-5" />
+														No
+													</label>
+												</div>
+											</div>
+											{values.addPizzas === "si" && (
+												<div className=" w-full mx-auto">
+													<label className="block  text-sm  text-slate-400">
+														Ingresa el tamaño de la pizza
+														<Field
+															id="tamanio"
+															name="tamanio"
+															value={values.tamanio}
+															className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+													  rounded-md shadow   focus:border-gray-200"
+														/>
+													</label>
+												</div>
+											)}
+										</div>
+									</>
+								)}
+
 								<button
 									className="w-48 h-12 my-4 col-start-2
                        						 rounded-md  text-sm 
@@ -302,17 +422,3 @@ export default function Create() {
 		</Layout>
 	);
 }
-// export async function getServerSideProps({ query }) {
-// 	const id = query.id;
-// 	let producto;
-// 	if (id !== 0) {
-// 		producto = await getProductId(id);
-// 	} else {
-// 		producto = {};
-// 	}
-// 	return {
-// 		props: {
-// 			producto,
-// 		},
-// 	};
-// }

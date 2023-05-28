@@ -8,7 +8,7 @@ export const saleSlice = createSlice({
 	initialState,
 	reducers: {
 		setSaleData: (state, { payload }) => {
-			state.products = payload;
+			state.sales = payload;
 		},
 	},
 });

@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function CardPromotion({ data: { _id, nombre, descripcion, imagen } }) {
 	return (
 		<div className="  rounded-md ">
-			<div className="relative bg-white  rounded-t-md w-60 h-32 ">
+			<div className="relative bg-white  rounded-t-md w-72 h-36 ">
 				<div className="w-full">
 					<Image
 						src={imagen?.url}
@@ -20,7 +20,7 @@ export default function CardPromotion({ data: { _id, nombre, descripcion, imagen
 					/>
 				</div>
 			</div>
-			<div className="bg-white h-12 rounded-b-md px-2 pt-1">
+			<div className="bg-white h-16 rounded-b-md px-2 pt-2">
 				<Link href={`/order/products/${convertToPath(nombre)}`}>
 					<a className="font-bold text-sm text-gray-800">{nombre}</a>
 				</Link>

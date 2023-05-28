@@ -24,7 +24,7 @@ export default function menu() {
 					</button>
 				</Link>
 
-				<Link href="/admin/sales" passHref>
+				<Link href="/admin/sales/list" passHref>
 					<button className="bg-white mx-auto rounded-2xl   shadow-md p-2  h-auto w-32 lg:w-36">
 						<div>
 							<Image src="/images/salesblack.png" width={60} height={60} alt="salesblack" />

@@ -12,12 +12,12 @@ export default function SectionZona() {
 				<div className="md:w-1/2 text-center grid grid-cols-1 gap-5">
 					<div>
 						<h1 className="font-bold font-nunito text-lg">Horarios de atencion</h1>
-						<p>De Martes a Domingo, Lunes Cerrado</p>
+						<p>De Martes a Domingo</p>
 						<p>De 19 a 23hs.</p>
 					</div>
 					<div>
 						<h1 className="font-bold  text-lg">Direccion del local</h1>
-						<p>Pelliza 1794, Esquina D. F. Sarmiento</p>
+						<p>Mariano Pelliza 1794, Esquina D. F. Sarmiento</p>
 						<p>Zona Olivos</p>
 					</div>
 
@@ -34,12 +34,12 @@ export default function SectionZona() {
 					<div>
 						<h1 className="font-bold  text-lg">Nuestras Redes</h1>
 						<div className="text-center mx-auto flex w-full gap-2 justify-center">
-							<div className="flex items-center justify-center w-1/4 h-12 rounded-md shadow  text-center bg-slate-200 ">
+							<div className="flex items-center justify-center w-1/4 h-12 rounded-md shadow  text-center bg-white ">
 								<a href="https://facebook.com/Canavaro-289165874501296/">
 									<FaFacebook className="text-blue-700" size={30} />
 								</a>
 							</div>
-							<div className="flex justify-center items-center w-1/4 h-12 rounded-md shadow bg-slate-200 ">
+							<div className="flex justify-center items-center w-1/4 h-12 rounded-md shadow bg-white ">
 								<a className="flex items-center justify-center" href="https://facebook.com/Canavaro-289165874501296/">
 									<Image src="/images/logoig.png" width={30} height={30} alt="logo" />
 								</a>
@@ -47,8 +47,8 @@ export default function SectionZona() {
 						</div>
 					</div>
 				</div>
-				<div className="rounded-md py-5 md:pr-5 md:py-0  mx-auto flex justify-center">
-					<Image className="rounded-md mx-auto" src="/images/mapanuevocobertura.jpg" width={700} height={500} alt="zona" />
+				<div className="rounded-md py-5 md:pr-5 md:py-0  mx-auto flex justify-center w-auto h-4/5 my-auto">
+					<Image className="rounded-md mx-auto" src="/images/mapanuevocobertura.jpg" width={600} height={400} alt="zona" />
 				</div>
 			</div>
 		</Element>

@@ -59,7 +59,13 @@ const productoSchema = new Schema(
 			url: String,
 			public_id: String,
 		},
-		cerrada: {
+		formato: {
+			type: String,
+		},
+		addPizzas: {
+			type: String,
+		},
+		tamanio: {
 			type: String,
 		},
 	},

@@ -1,10 +1,22 @@
+import { uploadImage } from "libs/cloudinary";
 import Producto from "models/product";
 
 export const updateProduct = async (req, res) => {
 	const { id } = req.query;
-	console.log(req.query);
+
+	const { imagen } = req.body;
+
 	try {
-		const products = await Producto.findByIdAndUpdate(id, req.body, {
+		let imageCloud;
+		if (imagen) {
+			const result = await uploadImage(imagen);
+			imageCloud = {
+				url: result.secure_url,
+				public_id: result.public_id,
+			};
+		}
+		const producto = { ...req.body, imagen: imageCloud };
+		const products = await Producto.findByIdAndUpdate(id, producto, {
 			new: true,
 			runValidators: true,
 		});
