@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 
 export default function Products() {
 	const [renderProductos, setRenderProductos] = useState([]);
-	const [inputValue, setInputValue] = useState("");
 	const { products } = useSelector(state => state.product);
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -22,11 +21,11 @@ export default function Products() {
 		})();
 	}, []);
 
-	useEffect(() => {
+	const handleChangeSearch = e => {
 		const delayDebounceFn = setTimeout(() => {
 			// Aquí puedes realizar la búsqueda en el listado con el valor de inputValue
-			const resultado = renderProductos?.filter(item => item.nombre.includes(inputValue));
-			if (inputValue === "") {
+			const resultado = renderProductos?.filter(item => item.nombre.includes(e.target.value));
+			if (e.target.value === "") {
 				setRenderProductos(products);
 			} else {
 				setRenderProductos(resultado);
@@ -36,10 +35,6 @@ export default function Products() {
 		return () => {
 			clearTimeout(delayDebounceFn);
 		};
-	}, [inputValue]);
-
-	const handleChangeSearch = e => {
-		setInputValue(e.target.value);
 	};
 
 	return (

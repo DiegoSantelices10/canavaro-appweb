@@ -18,6 +18,7 @@ export default function Home() {
 
 	useEffect(() => {
 		setRenderSale(pedidos);
+		localStorage.setItem("sales", JSON.stringify(pedidos));
 		dispatch(setSaleData(pedidos));
 	}, []);
 
