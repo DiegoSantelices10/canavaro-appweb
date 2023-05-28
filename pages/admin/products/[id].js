@@ -23,6 +23,9 @@ export default function Create() {
 		}
 	}, []);
 
+	const FileExtension = filename => {
+		return /[.]/.exec(filename) ? /[^.]+$/.exec(filename)[0] : undefined;
+	};
 	return (
 		<Layout>
 			<div className="w-full lg:w-3/5 h-auto p-2 md:p-10">
@@ -107,6 +110,7 @@ export default function Create() {
 						formato: productRender?.formato || "",
 					}}
 					onSubmit={async (values, { resetForm }) => {
+						const result = FileExtension(values.imagen.url);
 						// await axios
 						// 	.post("/api/products", values, {
 						// 		headers: {
@@ -114,6 +118,8 @@ export default function Create() {
 						// 		},
 						// 	})
 						// 	.then(res => console.log(res));
+						console.log("imagen", result);
+
 						console.log("values", { ...values, categoria: renderProducts });
 						resetForm();
 					}}
