@@ -114,7 +114,8 @@ export default function Index() {
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
 		setRadioSelect([]);
-		toast("Producto agregado al carrito", {
+		toast.error("Se agrego al carrito!", {
+			icon: false,
 			theme: "dark",
 		});
 		router.push("/order/home");

@@ -49,6 +49,7 @@ export default function Login() {
 										telefono: values.telefono,
 									})
 								);
+								localStorage.setItem("user", JSON.stringify(values));
 								router.push("/welcomeLogo");
 								setTimeout(() => {
 									router.push("/order/home");

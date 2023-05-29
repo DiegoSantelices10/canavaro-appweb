@@ -75,7 +75,7 @@ export default function Create() {
 	return (
 		<Layout>
 			<div className="w-full lg:w-3/5 h-auto p-2 md:p-10">
-				<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">¡Ingresa un producto nuevo!</h1>
+				<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">¡Actualiza el producto!</h1>
 				<div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
 					<style jsx>
 						{`
@@ -164,14 +164,10 @@ export default function Create() {
 								.then(res => {
 									if (res.success) {
 										Swal.fire({
-											title: "Actualizacion Exitosa!",
+											icon: "success",
+
+											title: "Actualización Exitosa!",
 											confirmButtonColor: "#3085d6",
-											showClass: {
-												popup: "animate__animated animate__fadeInDown",
-											},
-											hideClass: {
-												popup: "animate__animated animate__fadeOutUp",
-											},
 										});
 										resetForm();
 										router.push("list");
@@ -421,7 +417,7 @@ export default function Create() {
                        						 border text-white bg-red-500 font-semibold font-nunito"
 									type="submit"
 								>
-									Agregar Producto
+									Actualizar Producto
 								</button>
 							</div>
 						</Form>

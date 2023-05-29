@@ -8,16 +8,20 @@ export default function CardPromotion({ data: { _id, nombre, descripcion, imagen
 		<div className="  rounded-md ">
 			<div className="relative bg-white  rounded-t-md w-72 h-36 ">
 				<div className="w-full">
-					<Image
-						src={imagen?.url}
-						layout="responsive"
-						width={220}
-						height={115}
-						objectFit="cover"
-						objectPosition="center"
-						className="rounded-md "
-						alt={nombre}
-					/>
+					<Link href={`/order/products/${convertToPath(nombre)}`}>
+						<a className="font-bold text-sm text-gray-800">
+							<Image
+								src={imagen?.url}
+								layout="responsive"
+								width={220}
+								height={115}
+								objectFit="cover"
+								objectPosition="center"
+								className="rounded-md "
+								alt={nombre}
+							/>
+						</a>
+					</Link>
 				</div>
 			</div>
 			<div className="bg-white h-16 rounded-b-md px-2 pt-2">

@@ -22,15 +22,16 @@ export default function Products() {
 	}, []);
 
 	const handleChangeSearch = e => {
+		const minus = e.target.value;
 		const delayDebounceFn = setTimeout(() => {
 			// Aquí puedes realizar la búsqueda en el listado con el valor de inputValue
-			const resultado = renderProductos?.filter(item => item.nombre.includes(e.target.value));
+			const resultado = renderProductos?.filter(item => item.nombre.toLowerCase().includes(minus.toLowerCase()));
 			if (e.target.value === "") {
 				setRenderProductos(products);
 			} else {
 				setRenderProductos(resultado);
 			}
-		}, 1000); // Establece el tiempo de espera deseado en milisegundos (500 ms en este ejemplo)
+		}, 500); // Establece el tiempo de espera deseado en milisegundos (500 ms en este ejemplo)
 
 		return () => {
 			clearTimeout(delayDebounceFn);
