@@ -60,6 +60,15 @@ export default function Create() {
 				formato,
 			};
 		}
+		if (categoria === "bebidas") {
+			model = {
+				nombre,
+				descripcion,
+				categoria,
+				imagen,
+				precio,
+			};
+		}
 
 		return model;
 	};

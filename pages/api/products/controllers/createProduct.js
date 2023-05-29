@@ -45,6 +45,15 @@ export const createProduct = async (req, res) => {
 				formato,
 			});
 		}
+		if (categoria === "bebidas") {
+			newProduct = new Producto({
+				nombre,
+				descripcion,
+				categoria,
+				imagen: imageCloud,
+				precio,
+			});
+		}
 
 		await newProduct.save();
 		return res.status(201).json({
