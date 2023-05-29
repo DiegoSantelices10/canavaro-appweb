@@ -21,7 +21,7 @@ export default function SectionPizza() {
 		setShowModal(false);
 	};
 	return (
-		<Element name="pizzas" className="p-3 mt-10  w-full  element font-nunito">
+		<Element name="pizzas" className="p-3 mt-3  w-full  element font-nunito">
 			{currentProducto !== null && (
 				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
 					{currentProducto}

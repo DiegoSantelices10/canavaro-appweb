@@ -41,7 +41,7 @@ export default function Checkout() {
 					dispatch(setCheckout(values));
 					dispatch(clearUser());
 					dispatch(clearOrderList());
-					router.push("/order/home");
+					router.push("checkout/successful");
 				}}
 			>
 				{({ values }) => {

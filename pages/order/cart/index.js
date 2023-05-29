@@ -9,7 +9,7 @@ import { addAddress } from "store/reducers/userSlice";
 export default function Cart() {
 	const { orderList, totalAmount } = useSelector(state => state.order);
 	const [order, setOrder] = useState([]);
-	const [type, setType] = useState("delivery");
+	const [type, setType] = useState("retiro");
 
 	const dispatch = useDispatch();
 

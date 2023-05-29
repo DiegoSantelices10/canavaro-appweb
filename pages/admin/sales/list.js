@@ -9,7 +9,6 @@ export default function Sales() {
 
 	useEffect(() => {
 		if (sales) {
-			console.log("vacio");
 			const salesLocal = JSON.parse(localStorage.getItem("sales"));
 			dispatch(setSaleData(salesLocal));
 		}
