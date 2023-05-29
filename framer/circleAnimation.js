@@ -61,7 +61,7 @@ const CircleAnimation = () => {
 			>
 				<motion.div variants={textVariants}>
 					<CheckCircleOutlined style={{ fontSize: "64px", color: "red" }} />
-					<h2 className="text-black font-poppins text-xl font-bold w-full">Tu pedido se ha realizado con éxito! </h2>
+					<h2 className="text-black font-poppins text-xl font-bold w-full">Tu pedido fue realizado con éxito! </h2>
 					<h3 className="text-black font-poppins text-xl font-bold">Muchas gracias!</h3>
 				</motion.div>
 			</motion.div>
