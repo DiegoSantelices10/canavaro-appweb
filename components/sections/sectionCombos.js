@@ -53,10 +53,11 @@ export default function sectionCombos() {
 							<div key={producto._id} className="text-center my-10">
 								<p
 									onClick={() => handleOpenModal(producto)}
-									className="w-1/2 col-span-3 md:text-2xl text-xl font-bold cursor-pointer text-white text-center  md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+									className="w-1/2 col-span-3 md:text-3xl text-xl font-bold cursor-pointer text-white text-center  md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 								>
 									{producto.nombre}
 								</p>
+								<p className="text-sm ">Pizza {producto.tamanio.charAt(0).toUpperCase() + producto.tamanio.slice(1)}</p>
 								<p className="text-sm lg:text-md px-8">{producto.descripcion}</p>
 							</div>
 						);

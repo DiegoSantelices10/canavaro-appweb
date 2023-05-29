@@ -49,7 +49,7 @@ export default function SectionEmpanadas() {
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										className=" cursor-pointer font-semibold text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 									>
 										{producto.nombre}
 									</p>
@@ -67,7 +67,7 @@ export default function SectionEmpanadas() {
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										className="font-semibold cursor-pointer text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 									>
 										{producto.nombre}
 									</p>

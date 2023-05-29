@@ -3,7 +3,7 @@ import { convertToPath } from "libs/items";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CardPromotion({ data: { _id, nombre, descripcion, imagen } }) {
+export default function CardPromotion({ data: { _id, nombre, descripcion, imagen, tamanio } }) {
 	return (
 		<div className="  rounded-md ">
 			<div className="relative bg-white  rounded-t-md w-72 h-36 ">
@@ -26,7 +26,10 @@ export default function CardPromotion({ data: { _id, nombre, descripcion, imagen
 			</div>
 			<div className="bg-white h-16 rounded-b-md px-2 pt-2">
 				<Link href={`/order/products/${convertToPath(nombre)}`}>
-					<a className="font-bold text-sm text-gray-800">{nombre}</a>
+					<a className="font-bold text-sm text-gray-800">
+						{nombre}
+						<span className="text-xs text-gray-400 font-normal ml-4">{`${tamanio ? "pizza " + tamanio : ""}`}</span>
+					</a>
 				</Link>
 
 				<p className=" text-gray-400 text-xs ">{descripcion}</p>
