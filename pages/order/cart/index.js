@@ -110,13 +110,15 @@ export default function Cart() {
 				})}
 			</div>
 			<div className="font-nunito fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
-				<div className="flex justify-between items-center p-3">
+				<div className="flex justify-between items-center p-3 font-poppins">
 					<div>
-						<p className="font-extrabold text-xl">Subtotal</p>
+						<p className="font-bold text-xl">Subtotal</p>
 						<h3 className="text-xl">$ {totalAmount}</h3>
 					</div>
 					<Link href="/order/checkout">
-						<a className="text-center rounded-md w-auto p-4 text-white font-bold bg-red-600">Continuar el pago</a>
+						<a className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-red-600 hover:bg-red-500 hover:-translate-y-1 transition-all duration-500">
+							Continuar el pago
+						</a>
 					</Link>
 				</div>
 			</div>

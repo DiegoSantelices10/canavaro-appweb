@@ -29,7 +29,7 @@ const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, preci
 	return (
 		<div>
 			<div className="p-3 bg-white">
-				{categoria === "empanadas" ? (
+				{categoria === "empanadas" || categoria === "bebidas" ? (
 					<div className="flex justify-between items-center gap-x-2">
 						<Image className="rounded-md" src={imagen?.url} width={140} height={140} alt={nombre} />
 						<div className="relative w-full h-24 self-start">
@@ -42,7 +42,7 @@ const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, preci
 									type="button"
 									className={quantityZero(_id) ? "text-red-500 down " : "invisible"}
 									onClick={e => {
-										decrementItems({ _id, nombre, precio });
+										decrementItems({ _id, nombre, precio, categoria });
 									}}
 								>
 									-
@@ -52,7 +52,7 @@ const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, preci
 									type="button"
 									className="text-green-500 up"
 									onClick={e => {
-										addItems({ _id, nombre, precio });
+										addItems({ _id, nombre, precio, categoria });
 									}}
 								>
 									+

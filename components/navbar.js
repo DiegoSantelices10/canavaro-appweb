@@ -9,9 +9,9 @@ export default function Navbar({ nombre }) {
 				<div className="font-poppins font-semibold">
 					Hola <span className="font-medium">{nombre}</span>
 				</div>
-				<div className="p-1 rounded-md bg-red-500 w-32 px-2">
+				<div className="p-1 rounded-md bg-red-500 w-32 px-2 hover:-translate-y-1 transition-all duration-500">
 					<Link href={"/order/cart"}>
-						<a className="flex justify-around items-center">
+						<a className="flex justify-around items-center ">
 							<p className=" text-white p-1 font-nunito font-bold">Tu carrito</p>
 							<FiShoppingCart className="text-white" size={20} />
 						</a>

@@ -33,7 +33,7 @@ export default function Checkout() {
 					telefono: telefono || "",
 					productos: orderList || {},
 					comentarios: "",
-					medioDePago: "",
+					medioDePago: "efectivo" || "",
 					pagaCon: "",
 					total: totalAmount || "",
 				}}
@@ -108,13 +108,16 @@ export default function Checkout() {
 							</div>
 
 							<div className="fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
-								<div className="flex justify-between items-center p-3">
+								<div className="flex justify-between items-center p-3 font-poppins">
 									<p className="text-lg font-semibold">Subtotal</p>
-									<h3 className="text-xl font-bold">$ {totalAmount}</h3>
+									<h3 className="text-xl ">$ {totalAmount}</h3>
 								</div>
 
 								<div className="px-3 w-full">
-									<button type="submit" className="text-center rounded-md w-full p-4 text-white font-semibold bg-red-600">
+									<button
+										type="submit"
+										className="text-center rounded-md w-full p-4 text-white font-bold bg-red-600 hover:bg-red-500 hover:-translate-y-1 transition-all duration-500"
+									>
 										Confirmar pedido
 									</button>
 								</div>

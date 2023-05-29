@@ -87,6 +87,22 @@ export default function Home() {
 	};
 
 	const addCartPromo = value => {
+		const res = value.find(item => item.categoria === "bebidas");
+
+		if (res) {
+			console.log("entro");
+			setTotalCant(0);
+			value.map(item => dispatch(addPromoOrderList({ ...item })));
+
+			toast.error("Se agrego al carrito!", {
+				icon: false,
+				theme: "dark",
+			});
+			dispatch(clearOrderPromo());
+			dispatch(calculateSubTotal());
+			dispatch(calculateTotalQuantity());
+			return;
+		}
 		const result = {
 			_id: idGenerator,
 			nombre: "Empanadas a eleccion",
@@ -104,6 +120,12 @@ export default function Home() {
 		dispatch(clearOrderPromo());
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
+	};
+	const clearTotal = () => {
+		dispatch(clearOrderPromo());
+
+		setTotalCant(0);
+		setTotalPrice(0);
 	};
 
 	return (
@@ -150,7 +172,10 @@ export default function Home() {
 					</style>
 					<div>
 						<button
-							onClick={() => setRenderProductos("empanadas")}
+							onClick={() => {
+								setRenderProductos("empanadas");
+								clearTotal();
+							}}
 							className={
 								renderProducts !== "empanadas" ? "w-52 rounded-3xl font-semibold text-gray-400" : "w-52 font-bold bg-gray-300 text-white rounded-3xl"
 							}
@@ -183,7 +208,10 @@ export default function Home() {
 					</div>
 					<div>
 						<button
-							onClick={() => setRenderProductos("bebidas")}
+							onClick={() => {
+								setRenderProductos("bebidas");
+								clearTotal();
+							}}
 							className={
 								renderProducts !== "bebidas" ? "w-32 rounded-3xl font-semibold text-gray-400" : "w-32 font-bold bg-gray-300 text-white rounded-3xl"
 							}
@@ -198,7 +226,7 @@ export default function Home() {
 					<hr className="pb-3" />
 					<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">{renderStore(renderProducts)}</div>
 				</div>
-				{renderProducts === "empanadas" && (
+				{(renderProducts === "empanadas" || renderProducts === "bebidas") && (
 					<div className="bg-white w-full fixed bottom-0 p-3  sm:w-4/5 md:w-4/5 lg:w-3/5">
 						<div
 							className="flex justify-between items-center gap-3 mx-auto text-center rounded-md 
