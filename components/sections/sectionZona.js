@@ -5,7 +5,7 @@ import { Element } from "react-scroll";
 
 export default function SectionZona() {
 	return (
-		<Element name="zonaCobertura" className="p-3 w-full  element font-nunito">
+		<Element name="zonaCobertura" className=" w-full  element font-nunito">
 			<h1 className="text-center p-3 text-2xl font-extrabold">Contacto</h1>
 
 			<div className="bg-black p-4 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white md:flex md:justify-between  gap-2 content-center py-10 ">
