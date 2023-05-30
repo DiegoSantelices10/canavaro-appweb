@@ -7,6 +7,7 @@ import { pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
 import { useDispatch } from "react-redux";
 import { setSaleData } from "store/reducers/saleSlice";
+import axios from "axios";
 export default function Home() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
@@ -22,6 +23,14 @@ export default function Home() {
 		dispatch(setSaleData(pedidos));
 	}, []);
 
+	useEffect(() => {
+		(async () => {
+			await axios.get("/api/delay").then(res => {
+				console.log(res);
+			});
+		})();
+	}, []);
+
 	const handleOpenModal = pedido => {
 		setCurrentPedido(pedido);
 		setShowModal(true);
@@ -30,6 +39,12 @@ export default function Home() {
 	const handleCloseModal = () => {
 		setCurrentPedido(null);
 		setShowModal(false);
+	};
+
+	const handlePutTime = async () => {
+		// axios.put(`/api/delay/${id}`, { tipoEnvio: "local", demora: demoraLocal }).then(res => {
+		// 	console.log(res);
+		// });
 	};
 
 	const tiempoDemoraDomicilio = ["35-45min", "45-55min", "55-65min", "65-75min", "75-85min"];
@@ -44,7 +59,7 @@ export default function Home() {
 						<h1 className="font-semibold my-5">Demora domicilio</h1>
 						<div className="flex gap-1 md:gap-4 justify-center">
 							{tiempoDemoraDomicilio.map((tiempo, index) => (
-								<Button key={index} setDemora={setDemoraDomicilio} demora={demoraDomicilio} time={tiempo} />
+								<Button key={index} setDemora={setDemoraDomicilio} demora={demoraDomicilio} time={tiempo} handlePutTime={handlePutTime} />
 							))}
 						</div>
 					</div>

@@ -21,7 +21,7 @@ export default function SectionPizza() {
 		setShowModal(false);
 	};
 	return (
-		<Element name="pizzas" className="p-3 mt-3  w-full  element font-nunito">
+		<Element name="pizzas" className=" mt-3  w-full  element font-nunito">
 			{currentProducto !== null && (
 				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
 					{currentProducto}
@@ -49,8 +49,8 @@ export default function SectionPizza() {
 				</div>
 			</div>
 			<div
-				className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto 
-							text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4 "
+				className="bg-black p-1 bg-opacity-80 w-full lg:w-4/5 mx-auto 
+							text-white grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
 			>
 				<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
 				{products
@@ -60,10 +60,11 @@ export default function SectionPizza() {
 							<div key={producto._id} className="w-auto">
 								<p
 									onClick={() => handleOpenModal(producto)}
-									className=" cursor-pointer text-white text-center font-semibold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+									className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 								>
 									{producto.nombre}
 								</p>
+								<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
 							</div>
 						);
 					})}

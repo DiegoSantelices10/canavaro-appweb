@@ -3,27 +3,29 @@
 import dbConnect from "utils/mongoose";
 import { runMiddleware } from "middleware/runMiddleware";
 import Cors from "cors";
-import { getProductId } from "./controllers/getProducts";
-import { updateProduct } from "./controllers/updateProduct";
-import { deleteProduct } from "./controllers/deleteProduct";
+import { getDelayTime } from "./controllers/getDelay";
+import Delay from "models/delay";
 const cors = Cors({
-	methods: ["PUT", "GET", "DELETE"],
+	methods: ["GET", "POST"],
 });
 
 const handler = async (req, res) => {
 	const { method } = req;
 	try {
 		await runMiddleware(req, res, cors);
-		switch (method) {
-			case "GET":
-				await getProductId(req, res);
-				break;
-			case "PUT":
-				await updateProduct(req, res);
-				break;
-			case "DELETE":
-				await deleteProduct(req, res);
-				break;
+		if (method === "GET") {
+			await getDelayTime(req, res);
+		}
+
+		if (method === "POST") {
+			const newDelay = new Delay({
+				tipoEnvio: req.body.tipoEnvio,
+				demora: req.body.demora,
+			});
+			newDelay.save();
+			return res.status(201).json({
+				message: "ok",
+			});
 		}
 	} catch (error) {
 		return await res.status(500).json({ error });

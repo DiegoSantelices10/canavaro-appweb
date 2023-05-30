@@ -19,7 +19,7 @@ export default function SectionEmpanadas() {
 		setShowModal(false);
 	};
 	return (
-		<Element name="empanadas" className="p-3 w-full  element font-nunito">
+		<Element name="empanadas" className=" w-full  element font-nunito">
 			{currentProducto !== null && (
 				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
 					{currentProducto}
@@ -38,7 +38,7 @@ export default function SectionEmpanadas() {
 					</div>
 				</div>
 			</div>
-			<div className="bg-black p-2 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
+			<div className="bg-black p-1 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
 				<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
 				<h1 className="col-span-2 font-bold text-xl text-center">Canastitas</h1>
 				{products
@@ -49,10 +49,11 @@ export default function SectionEmpanadas() {
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer font-semibold text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 									>
 										{producto.nombre}
 									</p>
+									<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
 								</div>
 							)
 						);
@@ -67,10 +68,11 @@ export default function SectionEmpanadas() {
 								<div key={producto._id} className="w-auto">
 									<p
 										onClick={() => handleOpenModal(producto)}
-										className="font-semibold cursor-pointer text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
 									>
 										{producto.nombre}
 									</p>
+									<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
 								</div>
 							)
 						);
