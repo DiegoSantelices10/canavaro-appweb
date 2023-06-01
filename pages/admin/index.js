@@ -15,7 +15,7 @@ export default function Home() {
 
 	const [demoraDomicilio, setDemoraDomicilio] = useState("");
 	const [demoraLocal, setDemoraLocal] = useState("");
-	const [data, setData] = useState([]);
+	// const [data, setData] = useState([]);
 
 	const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ export default function Home() {
 	useEffect(() => {
 		(async () => {
 			const res = await axios.get("/api/delay");
-			setData(res.data);
+			//	setData(res.data);
 			res?.data.forEach(item => {
 				if (item.tipoEnvio === "domicilio") {
 					setDemoraDomicilio(item.demora);
