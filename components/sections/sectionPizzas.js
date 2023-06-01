@@ -59,7 +59,7 @@ export default function SectionPizza() {
 				</div>
 
 				<div
-					className="relative z-10 bg-black  bg-opacity-80 w-full lg:w-4/5 mx-auto 
+					className="relative z-10 bg-black p-2  bg-opacity-80 w-full lg:w-4/5 mx-auto 
 							text-white grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
 				>
 					<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
