@@ -129,9 +129,7 @@ function Header() {
 									</Link>
 								</li>
 								<div
-									className={`p-3 rounded-md ${
-										top ? "bg-gray-900 w-auto text-white px-4 border-2 " : "bg-white w-auto px-4 hover:bg-gray-900 hover:text-gray-50"
-									}   hover:-translate-y-1
+									className={`p-3 bg-gray-50 w-auto px-4 hover:bg-gray-900 hover:text-gray-50 hover:-translate-y-1
 											transition-all duration-500 rounded-xl`}
 								>
 									<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">

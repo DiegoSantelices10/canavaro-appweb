@@ -14,7 +14,7 @@ export default function Navbar({ nombre }) {
 
 	console.log(userData);
 	return (
-		<nav className="w-full bg-white   mx-auto fixed h-[8%]  top-0  z-50  ">
+		<nav className="w-full bg-white   mx-auto fixed h-[7%]  top-0 py-8  z-50  ">
 			<div className="w-full flex justify-between px-3  items-center sm:w-4/5 md:w-4/5 lg:w-3/5 mx-auto  h-full ">
 				<div className="font-poppins font-semibold">
 					Hola <span className="font-medium">{userData?.nombre}</span>

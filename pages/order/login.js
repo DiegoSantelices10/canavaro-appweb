@@ -16,7 +16,7 @@ export default function Login() {
 	});
 
 	return (
-		<div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
+		<div className="min-h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
 			<div className="h-full w-full lg:w-4/5 md:w-4/5 sm:w-4/5 flex items-center justify-center lg:justify-between mx-auto">
 				<div className="w-2/5 text-center hidden lg:block text-white">
 					<div className="mx-auto ">
@@ -25,8 +25,8 @@ export default function Login() {
 				</div>
 
 				<div
-					className="grid content-center rounded-md shadow-lg bg-white lg:w-1/2 w-full h-full p-10 
-								 lg:h-auto  md:h-auto sm:h-auto"
+					className="grid content-center rounded-md shadow-lg bg-white lg:w-1/2 w-full min-h-screen p-10 
+								 lg:h-full  md:h-auto sm:h-auto"
 				>
 					<div className="w-full text-center lg:hidden block text-white">
 						<div className="mx-auto ">
