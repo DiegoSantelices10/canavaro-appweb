@@ -7,7 +7,7 @@ import { pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
 import { useDispatch } from "react-redux";
 import { setSaleData } from "store/reducers/saleSlice";
-// import axios from "axios";
+import axios from "axios";
 export default function Home() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
@@ -23,13 +23,20 @@ export default function Home() {
 		dispatch(setSaleData(pedidos));
 	}, []);
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		await axios.get("/api/delay").then(res => {
-	// 			console.log(res);
-	// 		});
-	// 	})();
-	// }, []);
+	useEffect(() => {
+		(async () => {
+			await axios.get("/api/delay").then(res => {
+				res.forEach(element => {
+					if (element.tipoEnvio === "domicilio") {
+						setDemoraDomicilio(element.demora);
+					}
+					if (element.tipoEnvio === "local") {
+						setDemoraLocal(element.demora);
+					}
+				});
+			});
+		})();
+	}, []);
 
 	const handleOpenModal = pedido => {
 		setCurrentPedido(pedido);
