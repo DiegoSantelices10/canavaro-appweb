@@ -19,64 +19,75 @@ export default function SectionEmpanadas() {
 		setShowModal(false);
 	};
 	return (
-		<Element name="empanadas" className=" w-full  element font-nunito">
-			{currentProducto !== null && (
-				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
-					{currentProducto}
-				</Modal>
-			)}
-			<h1 className="text-center p-3 text-2xl lg:text-3xl font-extrabold">Empanadas y Canastitas</h1>
-			<div className="flex justify-center h-32 items-center w-full gap-10">
-				<div className="text-center h-28 w-auto flex flex-col justify-between">
-					<div className="h-24 flex justify-center items-center">
-						<Image src={"/images/empanada.png"} width={90} height={75} alt="empanadas" />
-					</div>
-				</div>
-				<div className="text-center h-28 w-auto flex flex-col justify-between ">
-					<div className="h-24  flex justify-center items-center ">
-						<Image src={"/images/canastita.png"} width={90} height={90} alt="canastitas" />
-					</div>
-				</div>
-			</div>
-			<div className="bg-black p-1 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
-				<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
-				<h1 className="col-span-2 font-bold text-xl text-center">Canastitas</h1>
-				{products
-					?.filter(item => item.categoria === "empanadas")
-					.map(producto => {
-						return (
-							producto.formato === "canastita" && (
-								<div key={producto._id} className="w-auto">
-									<p
-										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
-									>
-										{producto.nombre}
-									</p>
-									<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
-								</div>
-							)
-						);
-					})}
+		<Element name="empanadas" className=" w-full  relative element font-nunito">
+			<div className="bg-image font-nunito w-full h-full mx-auto py-10 bg-cover bg-center ">
+				<div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
 
-				<h1 className="col-span-2 font-bold text-xl text-center">Empanadas</h1>
-				{products
-					?.filter(item => item.categoria === "empanadas")
-					.map(producto => {
-						return (
-							producto.formato === "empanada" && (
-								<div key={producto._id} className="w-auto">
-									<p
-										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
-									>
-										{producto.nombre}
-									</p>
-									<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
-								</div>
-							)
-						);
-					})}
+				<style jsx>{`
+					.bg-image {
+						background-image: url(/images/empanadas.png);
+					}
+				`}</style>
+				{currentProducto !== null && (
+					<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
+						{currentProducto}
+					</Modal>
+				)}
+				<h1 className=" relative z-10 text-center p-3 text-2xl lg:text-3xl font-extrabold text-gray-200">Empanadas & Canastitas</h1>
+
+				<div className="flex justify-center h-32 items-center w-full gap-10">
+					<div className="text-center h-28 w-auto flex flex-col justify-between">
+						<div className="h-24 flex justify-center items-center">
+							<Image src={"/images/empanadaBlanca.png"} width={90} height={75} alt="empanadas" />
+						</div>
+					</div>
+					<div className="text-center h-28 w-auto flex flex-col justify-between ">
+						<div className="h-24  flex justify-center items-center ">
+							<Image src={"/images/canastitaBlanca.png"} width={90} height={90} alt="canastitas" />
+						</div>
+					</div>
+				</div>
+
+				<div className="relative z-10 bg-black p-1 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
+					<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
+					<h1 className="col-span-2 font-bold text-2xl text-center">Canastitas</h1>
+					{products
+						?.filter(item => item.categoria === "empanadas")
+						.map(producto => {
+							return (
+								producto.formato === "canastita" && (
+									<div key={producto._id} className="w-auto">
+										<p
+											onClick={() => handleOpenModal(producto)}
+											className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										>
+											{producto.nombre}
+										</p>
+										<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+									</div>
+								)
+							);
+						})}
+
+					<h1 className="col-span-2 font-bold text-2xl text-center">Empanadas</h1>
+					{products
+						?.filter(item => item.categoria === "empanadas")
+						.map(producto => {
+							return (
+								producto.formato === "empanada" && (
+									<div key={producto._id} className="w-auto">
+										<p
+											onClick={() => handleOpenModal(producto)}
+											className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+										>
+											{producto.nombre}
+										</p>
+										<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+									</div>
+								)
+							);
+						})}
+				</div>
 			</div>
 		</Element>
 	);

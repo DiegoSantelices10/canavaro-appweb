@@ -20,7 +20,6 @@ export default function index({ state }) {
 
 	return (
 		<div className="bg-image flex flex-col min-h-screen overflow-hidden ">
-			<div className="absolute inset-0 h-full"> </div>
 			<style jsx>{`
 				.bg-image {
 					background-image: url(/images/textura-papel.jpg);

@@ -21,53 +21,64 @@ export default function SectionPizza() {
 		setShowModal(false);
 	};
 	return (
-		<Element name="pizzas" className=" mt-3  w-full  element font-nunito">
-			{currentProducto !== null && (
-				<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
-					{currentProducto}
-				</Modal>
-			)}
-			<h1 className="text-center  p-1 text-2xl lg:text-3xl font-extrabold">Nuestras Pizzas</h1>
-			<div className="flex justify-center h-32 items-center w-full gap-10">
-				<div className="text-center h-28 w-auto flex flex-col justify-between ">
-					<div className="h-24  flex justify-center items-center ">
-						<Image src={"/images/pizza-vector-negro.png"} width={60} height={60} alt="gigante" />
+		<Element name="pizzas" className="w-full relative  element font-nunito">
+			<div className="bg-image font-nunito w-auto h-full mx-auto py-10 bg-cover bg-center  ">
+				<div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
+
+				<style jsx>{`
+					.bg-image {
+						background-image: url(/images/fondoFront.jpg);
+					}
+				`}</style>
+				{currentProducto !== null && (
+					<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
+						{currentProducto}
+					</Modal>
+				)}
+				<h1 className="relative z-10 text-center text-gray-200  text-2xl lg:text-3xl font-extrabold">Nuestras Pizzas</h1>
+
+				<div className="relative z-10 flex justify-center h-32 items-center w-full gap-10">
+					<div className="text-center h-28 w-auto flex flex-col justify-between ">
+						<div className="h-24  flex justify-center items-center ">
+							<Image src={"/images/pizza-vector.png"} width={60} height={60} alt="gigante" />
+						</div>
+						<p className="font-bold text-gray-200 text-lg">Gigante</p>
 					</div>
-					<p className="font-bold text-lg">Gigante</p>
-				</div>
-				<div className="text-center h-28 w-auto flex flex-col justify-between">
-					<div className="h-24 flex justify-center items-center">
-						<Image src={"/images/pizza-vector-negro.png"} width={55} height={55} alt="mediana" />
+					<div className="text-center h-28 w-auto flex flex-col justify-between">
+						<div className="h-24 flex justify-center items-center">
+							<Image src={"/images/pizza-vector.png"} width={55} height={55} alt="mediana" />
+						</div>
+						<p className="font-bold text-lg text-gray-200">Mediana</p>
 					</div>
-					<p className="font-bold text-lg">Mediana</p>
-				</div>
-				<div className="text-center h-28 w-auto flex flex-col justify-between">
-					<div className="h-24 flex justify-center items-center">
-						<Image src={"/images/pizza-vector-negro.png"} width={50} height={50} alt="chica" />
+					<div className="text-center h-28 w-auto flex flex-col justify-between">
+						<div className="h-24 flex justify-center items-center">
+							<Image src={"/images/pizza-vector.png"} width={50} height={50} alt="chica" />
+						</div>
+						<p className="font-bold text-gray-200 text-lg">Chica</p>
 					</div>
-					<p className="font-bold text-lg">Chica</p>
 				</div>
-			</div>
-			<div
-				className="bg-black p-1 bg-opacity-80 w-full lg:w-4/5 mx-auto 
+
+				<div
+					className="relative z-10 bg-black  bg-opacity-80 w-full lg:w-4/5 mx-auto 
 							text-white grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
-			>
-				<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
-				{products
-					?.filter(item => item.categoria === "pizzas")
-					.map(producto => {
-						return (
-							<div key={producto._id} className="w-auto">
-								<p
-									onClick={() => handleOpenModal(producto)}
-									className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
-								>
-									{producto.nombre}
-								</p>
-								<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
-							</div>
-						);
-					})}
+				>
+					<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
+					{products
+						?.filter(item => item.categoria === "pizzas")
+						.map(producto => {
+							return (
+								<div key={producto._id} className="w-auto">
+									<p
+										onClick={() => handleOpenModal(producto)}
+										className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+									>
+										{producto.nombre}
+									</p>
+									<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+								</div>
+							);
+						})}
+				</div>
 			</div>
 		</Element>
 	);

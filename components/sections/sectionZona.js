@@ -5,11 +5,11 @@ import { Element } from "react-scroll";
 
 export default function SectionZona() {
 	return (
-		<Element name="zonaCobertura" className=" w-full  element font-nunito">
-			<h1 className="text-center p-3 text-2xl font-extrabold">Contacto</h1>
+		<Element name="zonaCobertura" className=" w-full h-full element font-nunito">
+			<h1 className="text-center p-3 pt-10 text-3xl font-extrabold">Contacto</h1>
 
-			<div className="bg-black p-4 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white md:flex md:justify-between  gap-2 content-center py-10 ">
-				<div className="md:w-1/2 text-center grid grid-cols-1 gap-5">
+			<div className="bg-black p-4 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white md:flex md:justify-between  gap-5 content-center py-5 ">
+				<div className="md:w-1/2 text-center grid grid-cols-1 gap-10">
 					<div>
 						<h1 className="font-bold font-nunito text-lg">Horarios de atencion</h1>
 						<p>De Martes a Domingo</p>
