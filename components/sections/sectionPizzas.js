@@ -22,7 +22,7 @@ export default function SectionPizza() {
 	};
 	return (
 		<Element name="pizzas" className="w-full relative  element font-nunito">
-			<div className="bg-image font-nunito w-auto h-full mx-auto py-10 bg-cover bg-center  ">
+			<div className="bg-image font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
 				<div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
 
 				<style jsx>{`
@@ -59,7 +59,7 @@ export default function SectionPizza() {
 				</div>
 
 				<div
-					className="relative z-10 bg-black p-2  bg-opacity-80 w-full lg:w-4/5 mx-auto 
+					className="relative z-10 bg-black p-2 h-full  bg-opacity-80 w-full lg:w-4/5 mx-auto 
 							text-white grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
 				>
 					<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
