@@ -27,7 +27,7 @@ export default function SectionPizza() {
 
 				<style jsx>{`
 					.bg-image {
-						background-image: url(/images/fondoFront.jpg);
+						background-image: url(/images/fondofront.jpg);
 					}
 				`}</style>
 				{currentProducto !== null && (
