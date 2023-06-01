@@ -19,15 +19,7 @@ export default function index({ state }) {
 	});
 
 	return (
-		<div className="bg-image flex flex-col min-h-screen overflow-hidden ">
-			<style jsx>{`
-				.bg-image {
-					background-image: url(/images/textura-papel.jpg);
-					background-size: cover;
-					background-position: center center;
-					width: 100%;
-				}
-			`}</style>
+		<div className=" flex flex-col min-h-screen overflow-hidden bg-neutral-900 ">
 			<main className="font-nunito">
 				<Header />
 				<HomeFront />

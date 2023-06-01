@@ -5,31 +5,31 @@ import { Element } from "react-scroll";
 
 export default function SectionZona() {
 	return (
-		<Element name="zonaCobertura" className=" w-full h-full element font-nunito">
-			<h1 className="text-center p-3 pt-10 text-3xl font-extrabold">Contacto</h1>
+		<Element name="zonaCobertura" className=" w-full h-full element font-nunito py-5">
+			<h1 className="text-center text-gray-200 p-3 pt-10 text-3xl font-extrabold">Contacto</h1>
 
-			<div className="bg-black p-4 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white md:flex md:justify-between  gap-5 content-center py-5 ">
+			<div className=" w-full lg:w-4/5 mx-auto text-white md:flex md:justify-between  gap-5 content-center py-5 ">
 				<div className="md:w-1/2 text-center grid grid-cols-1 gap-10">
 					<div>
 						<h1 className="font-bold font-nunito text-lg">Horarios de atencion</h1>
-						<p>De Martes a Domingo</p>
-						<p>De 19 a 23hs.</p>
+						<p className="font-light">De Martes a Domingo</p>
+						<p className="font-light">De 19 a 23hs.</p>
 					</div>
 					<div>
 						<h1 className="font-bold  text-lg">Direccion del local</h1>
-						<p>Mariano Pelliza 1794, Esquina D. F. Sarmiento</p>
-						<p>Zona Olivos</p>
+						<p className="font-light">Mariano Pelliza 1794, Esquina D. F. Sarmiento</p>
+						<p className="font-light">Zona Olivos</p>
 					</div>
 
 					<div>
 						<h1 className="font-bold  text-lg">Telefonos de Contacto</h1>
-						<p>4711 3259</p>
-						<p>11 2714 5669</p>
+						<p className="font-light">4711 3259</p>
+						<p className="font-light">11 2714 5669</p>
 					</div>
 					<div>
 						<h1 className="font-bold  text-lg">Zona de Cobertura</h1>
-						<p>Vicente Lopez - Florida - Olivos - La Lucila</p>
-						<p>Acassuso - Martinez - Munro</p>
+						<p className="font-light">Vicente Lopez - Florida - Olivos - La Lucila</p>
+						<p className="font-light">Acassuso - Martinez - Munro</p>
 					</div>
 					<div>
 						<h1 className="font-bold  text-lg">Nuestras Redes</h1>
