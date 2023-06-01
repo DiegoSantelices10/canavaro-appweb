@@ -51,7 +51,7 @@ export default function sectionCombos() {
 						</div>
 					</div>
 				</div>
-				<div className="relative z-10 bg-black h-full bg-opacity-80 w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-2 pt-4 ">
+				<div className="relative z-10 bg-black h-full bg-opacity-70 w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-2 pt-4 ">
 					<p className="italic col-span-3 text-white text-center text-xs pb-2">* Hacer click sobre el titulo para ver descripcion.</p>
 
 					{products

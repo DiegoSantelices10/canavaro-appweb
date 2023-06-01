@@ -48,7 +48,7 @@ export default function SectionEmpanadas() {
 					</div>
 				</div>
 
-				<div className="relative z-10 bg-black h-full p-1 bg-opacity-80 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
+				<div className="relative z-10 bg-black h-full p-1 bg-opacity-70 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
 					<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
 					<h1 className="col-span-2 font-bold text-2xl text-center">Canastitas</h1>
 					{products

@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-export default function Button({ demora, setDemora, time, handlePutTime }) {
+export default function Button({ demora, setDemora, time }) {
 	return (
 		<div>
 			<button
 				onClick={() => {
 					setDemora(time);
-					handlePutTime();
 				}}
 				className={
 					demora !== time

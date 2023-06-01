@@ -13,8 +13,10 @@ export default function Home() {
 	const [currentPedido, setCurrentPedido] = useState(null);
 	const [renderSale, setRenderSale] = useState([]);
 
-	const [demoraDomicilio, setDemoraDomicilio] = useState("35-45min");
-	const [demoraLocal, setDemoraLocal] = useState("10-15min");
+	const [demoraDomicilio, setDemoraDomicilio] = useState("");
+	const [demoraLocal, setDemoraLocal] = useState("");
+	const [data, setData] = useState([]);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -25,15 +27,15 @@ export default function Home() {
 
 	useEffect(() => {
 		(async () => {
-			await axios.get("/api/delay").then(res => {
-				res.forEach(element => {
-					if (element.tipoEnvio === "domicilio") {
-						setDemoraDomicilio(element.demora);
-					}
-					if (element.tipoEnvio === "local") {
-						setDemoraLocal(element.demora);
-					}
-				});
+			const res = await axios.get("/api/delay");
+			setData(res.data);
+			res?.data.forEach(item => {
+				if (item.tipoEnvio === "domicilio") {
+					setDemoraDomicilio(item.demora);
+				}
+				if (item.tipoEnvio === "local") {
+					setDemoraLocal(item.demora);
+				}
 			});
 		})();
 	}, []);
@@ -48,11 +50,12 @@ export default function Home() {
 		setShowModal(false);
 	};
 
-	const handlePutTime = async () => {
-		// axios.put(`/api/delay/${id}`, { tipoEnvio: "local", demora: demoraLocal }).then(res => {
-		// 	console.log(res);
-		// });
-	};
+	// const handlePutTime = async e => {
+	// 	console.log(e);
+	// 	// axios.put(`/api/delay/${id}`, { tipoEnvio: "local", demora: demoraLocal }).then(res => {
+	// 	// 	console.log(res);
+	// 	// });
+	// };
 
 	const tiempoDemoraDomicilio = ["35-45min", "45-55min", "55-65min", "65-75min", "75-85min"];
 	const tiempoDemoraLocal = ["10-15min", "15-20min", "20-25min", "25-30min", "30-35min"];
@@ -66,7 +69,7 @@ export default function Home() {
 						<h1 className="font-semibold my-5">Demora domicilio</h1>
 						<div className="flex gap-1 md:gap-4 justify-center">
 							{tiempoDemoraDomicilio.map((tiempo, index) => (
-								<Button key={index} setDemora={setDemoraDomicilio} demora={demoraDomicilio} time={tiempo} handlePutTime={handlePutTime} />
+								<Button key={index} setDemora={setDemoraDomicilio} demora={demoraDomicilio} time={tiempo} />
 							))}
 						</div>
 					</div>
