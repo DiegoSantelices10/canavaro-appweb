@@ -19,7 +19,7 @@ function HomeFront() {
 				<div className="relative text-center h-full">
 					<div className="absolute inset-1 flex flex-col justify-center gap-7">
 						<div className="mx-auto ">
-							<Image src="/images/logocanavaro.png" width={180} height={180} alt="logo" />
+							<Image src="/images/logocanavaro.png" width={150} height={150} alt="logo" />
 							<p className="text-xl font-extrabold text-gray-200 ">¡Todo lo que necesitas en un solo lugar!</p>
 							<p className="text-gray-200 font-medium text-base">Pelliza 1794 - Olivos</p>
 						</div>
