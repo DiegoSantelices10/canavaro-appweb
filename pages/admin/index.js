@@ -12,10 +12,9 @@ export default function Home() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
 	const [renderSale, setRenderSale] = useState([]);
-
-	const [demoraDomicilio, setDemoraDomicilio] = useState("");
-	const [demoraLocal, setDemoraLocal] = useState("");
-	// const [data, setData] = useState([]);
+	const [data, setData] = useState(null);
+	const [selectedDomicilio, setSelectedDomicilio] = useState({});
+	const [selectedLocal, setSelectedLocal] = useState({});
 
 	const dispatch = useDispatch();
 
@@ -23,20 +22,13 @@ export default function Home() {
 		setRenderSale(pedidos);
 		localStorage.setItem("sales", JSON.stringify(pedidos));
 		dispatch(setSaleData(pedidos));
-	}, []);
-
-	useEffect(() => {
 		(async () => {
 			const res = await axios.get("/api/delay");
-			//	setData(res.data);
-			res?.data.forEach(item => {
-				if (item.tipoEnvio === "domicilio") {
-					setDemoraDomicilio(item.demora);
-				}
-				if (item.tipoEnvio === "local") {
-					setDemoraLocal(item.demora);
-				}
-			});
+			const local = res.data.find(item => item.tipo === "localActual");
+			setSelectedLocal({ ...local, demora: local.demoraActual });
+			const domicilio = res.data.find(item => item.tipo === "domicilioActual");
+			setSelectedDomicilio({ ...domicilio, demora: domicilio.demoraActual });
+			setData(res.data);
 		})();
 	}, []);
 
@@ -50,35 +42,41 @@ export default function Home() {
 		setShowModal(false);
 	};
 
-	// const handlePutTime = async e => {
-	// 	console.log(e);
-	// 	// axios.put(`/api/delay/${id}`, { tipoEnvio: "local", demora: demoraLocal }).then(res => {
-	// 	// 	console.log(res);
-	// 	// });
-	// };
-
-	const tiempoDemoraDomicilio = ["35-45min", "45-55min", "55-65min", "65-75min", "75-85min"];
-	const tiempoDemoraLocal = ["10-15min", "15-20min", "20-25min", "25-30min", "30-35min"];
+	const handlePutTime = async value => {
+		if (value.tipoEnvio === "local") {
+			const local = data.find(item => item.tipo === "localActual");
+			setSelectedLocal(value);
+			await axios.put(`/api/delay/${local._id}`, { demoraActual: value.demora });
+		} else {
+			const domicilio = data.find(item => item.tipo === "domicilioActual");
+			setSelectedDomicilio(value);
+			await axios.put(`/api/delay/${domicilio._id}`, { demoraActual: value.demora });
+		}
+	};
 
 	return (
 		<Layout>
 			{currentPedido && <ModalPedido key={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />}
 			<div className="h-auto p-0 md:px-2">
-				<div className=" w-full block md:flex p-2">
+				<div className=" w-full block md:flex gap-1 p-2">
 					<div className="w-full md:w-1/2 text-center">
-						<h1 className="font-semibold my-5">Demora domicilio</h1>
-						<div className="flex gap-1 md:gap-4 justify-center">
-							{tiempoDemoraDomicilio.map((tiempo, index) => (
-								<Button key={index} setDemora={setDemoraDomicilio} demora={demoraDomicilio} time={tiempo} />
-							))}
+						<h1 className="font-bold font-poppins my-5">Demora domicilio</h1>
+						<div className="flex gap-3  justify-center">
+							{data
+								?.filter(item => item.tipoEnvio === "domicilio")
+								.map(item => (
+									<Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
+								))}
 						</div>
 					</div>
 					<div className="w-full md:w-1/2 text-center">
-						<h1 className="font-semibold my-5">Demora por local</h1>
+						<h1 className="font-bold font-poppins my-5">Demora por local</h1>
 						<div className="flex gap-3 justify-center">
-							{tiempoDemoraLocal.map((tiempo, index) => (
-								<Button key={index} setDemora={setDemoraLocal} demora={demoraLocal} time={tiempo} />
-							))}
+							{data
+								?.filter(item => item.tipoEnvio === "local")
+								.map(item => (
+									<Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
+								))}
 						</div>
 					</div>
 				</div>

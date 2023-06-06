@@ -3,7 +3,6 @@ import Producto from "models/product";
 
 export const updateProduct = async (req, res) => {
 	const { id } = req.query;
-
 	const { imagen } = req.body;
 
 	try {

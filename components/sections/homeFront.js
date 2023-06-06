@@ -12,7 +12,7 @@ function HomeFront() {
 
 				<style jsx>{`
 					.bg-image {
-						background-image: url(/images/FugazzetaPorcion.jpg);
+						background-image: url(/images/fondofront.jpg);
 					}
 				`}</style>
 

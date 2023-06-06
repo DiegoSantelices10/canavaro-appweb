@@ -68,6 +68,9 @@ const productoSchema = new Schema(
 		tamanio: {
 			type: String,
 		},
+		available: {
+			type: Boolean,
+		},
 	},
 	{
 		timestamp: true,

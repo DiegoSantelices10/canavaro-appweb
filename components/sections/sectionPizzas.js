@@ -27,7 +27,7 @@ export default function SectionPizza() {
 
 				<style jsx>{`
 					.bg-image {
-						background-image: url(/images/fondofront.jpg);
+						background-image: url(/images/FugazzetaPorcion.jpg);
 					}
 				`}</style>
 				{currentProducto !== null && (

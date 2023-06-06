@@ -24,6 +24,7 @@ export const createProduct = async (req, res) => {
 				addEmpanadas,
 				addPizzas,
 				tamanio,
+				available: true,
 			});
 		}
 		if (categoria === "pizzas") {
@@ -33,6 +34,7 @@ export const createProduct = async (req, res) => {
 				categoria,
 				imagen: imageCloud,
 				precioPizza,
+				available: true,
 			});
 		}
 		if (categoria === "empanadas") {
@@ -43,6 +45,7 @@ export const createProduct = async (req, res) => {
 				imagen: imageCloud,
 				precio,
 				formato,
+				available: true,
 			});
 		}
 		if (categoria === "bebidas") {
@@ -52,6 +55,7 @@ export const createProduct = async (req, res) => {
 				categoria,
 				imagen: imageCloud,
 				precio,
+				available: true,
 			});
 		}
 

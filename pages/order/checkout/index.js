@@ -2,17 +2,32 @@ import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { clearOrderList, setCheckout } from "store/reducers/orderSlice";
 import { clearUser } from "store/reducers/userSlice";
 
 export default function Checkout() {
-	const { direccion, nombre, telefono } = useSelector(state => state.user);
+	const user = useSelector(state => state.user);
 	const { totalAmount, orderList } = useSelector(state => state.order);
+	const [userLocal, setUserLocal] = useState({});
 
 	const dispatch = useDispatch();
 	const router = useRouter();
+
+	useEffect(() => {
+		console.log(user.direccion);
+		if (user.nombre === "") {
+			const us = JSON.parse(localStorage.getItem("user"));
+			console.log("user", us);
+			setUserLocal(us);
+		} else {
+			setUserLocal(user);
+		}
+	}, []);
+	console.log(userLocal);
+
 	return (
 		<div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
@@ -28,9 +43,9 @@ export default function Checkout() {
 
 			<Formik
 				initialValues={{
-					cliente: nombre || "",
-					domicilio: direccion || "Retira por local",
-					telefono: telefono || "",
+					cliente: user?.nombre || userLocal.nombre,
+					domicilio: user?.direccion || "Retira por local",
+					telefono: user?.telefono || userLocal.telefono,
 					productos: orderList || {},
 					comentarios: "",
 					medioDePago: "efectivo" || "",
@@ -50,15 +65,15 @@ export default function Checkout() {
 							<Form>
 								<div className="p-3 py-5">
 									<div>
-										{direccion.length > 0 ? (
+										{user.direccion !== "" ? (
 											<>
 												<h2 className="font-nunito font-extrabold text-base">Direccion de envio</h2>
-												<p>{direccion} </p>
+												<p>{user.direccion} </p>
 											</>
 										) : (
 											<>
 												<h2 className="font-nunito font-extrabold text-base">Retira por local</h2>
-												<p>Nombre: {nombre} </p>
+												<p>Nombre: {userLocal.nombre} </p>
 											</>
 										)}
 									</div>

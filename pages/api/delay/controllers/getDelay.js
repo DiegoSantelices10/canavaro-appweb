@@ -10,3 +10,15 @@ export const getDelayTime = async (req, res) => {
 		});
 	}
 };
+
+export const getDelayId = async (req, res) => {
+	const { id } = req.query;
+	try {
+		const delay = await Delay.findById({ _id: id });
+		return res.status(200).json(delay);
+	} catch (error) {
+		return res.status(404).json({
+			success: false,
+		});
+	}
+};

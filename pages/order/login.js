@@ -16,18 +16,15 @@ export default function Login() {
 	});
 
 	return (
-		<div className="min-h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
-			<div className="h-full w-full lg:w-4/5 md:w-4/5 sm:w-4/5 flex items-center justify-center lg:justify-between mx-auto">
+		<div className="h-full bg-gradient-to-r from-neutral-900 to-neutral-800 ">
+			<div className=" w-full lg:w-4/5 md:w-4/5 sm:w-4/5 flex items-center justify-center lg:justify-between mx-auto">
 				<div className="w-2/5 text-center hidden lg:block text-white">
 					<div className="mx-auto ">
 						<Image src="/images/logocanavaro.png" width={230} height={230} alt="logo" />
 					</div>
 				</div>
 
-				<div
-					className="grid content-center rounded-md shadow-lg bg-white lg:w-1/2 w-full min-h-screen p-10 
-								 lg:h-full  md:h-auto sm:h-auto"
-				>
+				<div className="grid content-center  bg-slate-50 lg:w-1/2 w-full min-h-screen sm:h-full p-10 lg:h-auto  md:h-auto ">
 					<div className="w-full text-center lg:hidden block text-white">
 						<div className="mx-auto ">
 							<Image src="/images/logocanavaro.png" width={170} height={170} alt="logo" />

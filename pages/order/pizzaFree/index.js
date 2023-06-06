@@ -226,7 +226,7 @@ export default function Index() {
 
 				<div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
 					<h1 className="pb-1">Comentarios</h1>
-					<input type="text" className="border border-gray-300 rounded-md w-full p-2" />
+					<input id="comentarios" type="text" className="border border-gray-300 rounded-md w-full p-2" />
 				</div>
 			</div>
 

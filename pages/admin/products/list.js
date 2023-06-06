@@ -2,10 +2,12 @@ import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSearch, FaRegEdit } from "react-icons/fa";
-import Link from "next/link";
 import { setProductData } from "store/reducers/productSlice";
 import { getProductsFront } from "services/fetchData";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import axios from "axios";
 
 export default function Products() {
 	const [renderProductos, setRenderProductos] = useState([]);
@@ -36,6 +38,23 @@ export default function Products() {
 		return () => {
 			clearTimeout(delayDebounceFn);
 		};
+	};
+	const handleCheckboxChange = async (id, availableCurrent) => {
+		console.log(!availableCurrent);
+		const updatedProductos = renderProductos.map(producto => {
+			if (producto._id === id) {
+				return { ...producto, available: !producto.available };
+			}
+			return producto;
+		});
+		setRenderProductos(updatedProductos);
+
+		try {
+			const response = await axios.put(`/api/products/${id}`, { available: !availableCurrent });
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -78,50 +97,41 @@ export default function Products() {
 					</div>
 				</div>
 			</div>
-			<div className="w-full lg:w-11/12 mx-auto h-auto">
-				<div className="w-full mx-auto">
-					<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-						<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-							<thead className="">
-								<tr>
-									<th scope="col" className="px-6 py-3">
-										Nombre
-									</th>
-									<th scope="col" className="px-6 py-3">
-										Categoria
-									</th>
-									<th scope="col" className="px-6 py-3">
-										Precio
-									</th>
-									<th scope="col" className="px-6 py-3">
-										<span className="sr-only">Edit</span>
-									</th>
-								</tr>
-							</thead>
-							<tbody className="text-gray-800 font-nunito">
-								{renderProductos?.map((producto, index) => {
-									return (
-										<tr key={producto._id} className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}>
-											<th scope="row" className="px-6 py-4   ">
-												{producto.nombre}
-											</th>
-											<td className="px-6 py-4 font-bold">{producto.categoria}</td>
-											<td className="px-6 py-4">{producto.categoria !== "pizzas" && "$" + producto.precio}</td>
-											<td className="px-6 py-4 text-right">
-												<Link href={`/admin/products/${producto._id}`}>
-													<a className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-														<FaRegEdit size={25} className="text-gray-800" />
-													</a>
-												</Link>
-											</td>
-										</tr>
-									);
-								})}
-							</tbody>
-						</table>
-					</div>
-				</div>
+			<div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
+				{renderProductos.map(({ _id, nombre, descripcion, imagen, available }) => {
+					return (
+						<div key={_id}>
+							<div className="flex justify-between items-center gap-x-2 relative ">
+								<Image className="rounded-md" src={imagen?.url} width={140} height={140} alt={nombre} />
+								<div className="relative w-full h-24 self-start">
+									<h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
+									<p className="text-gray-400 text-xs">{descripcion}</p>
+									<div className="absolute bottom-0">
+										<label className="inline-flex items-center cursor-pointer">
+											<input
+												id={nombre}
+												type="checkbox"
+												className="sr-only peer"
+												checked={available}
+												onChange={() => handleCheckboxChange(_id, available)}
+											/>
+											<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+										</label>
+									</div>
+								</div>
+								<div className="flex absolute bottom-2 right-3 gap-3">
+									<Link href={`/admin/products/${_id}`}>
+										<a>
+											<FaRegEdit size={25} className="text-gray-800" />
+										</a>
+									</Link>
+								</div>
+							</div>
+						</div>
+					);
+				})}
 			</div>
+			<hr />
 		</Layout>
 	);
 }

@@ -45,6 +45,8 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 	const quantityZero = _id => {
 		return orderPromo?.find(item => item._id === _id);
 	};
+
+	console.log(orderPromo);
 	return (
 		<div>
 			{(data.nombre === "Combo 4" || data.nombre === "Combo 5") && (
@@ -62,7 +64,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 								);
 							})}
 					</div>
-					<div className="p-4 flex gap-2 justify-start items-center">
+					<div className="p-2 flex gap-2 justify-start items-center">
 						<input id="2" type="radio" value="Combo 2" name="combo" onChange={onChangeValue} checked={select === "Combo 2"} />
 						{products
 							?.filter(item => item.nombre.includes("Combo 2"))
@@ -79,36 +81,40 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 			)}
 
 			{data.addEmpanadas === "no" ? (
-				<div className="flex justify-between py-2  my-2 ">
+				<div className="flex justify-between items-center ">
 					<div className="w-1/2 font-medium">
 						<h2>{data.nombre}</h2>
 					</div>
-					<div className="w-auto   px-3 text-end space-x-4 text-base">
-						<button
-							type="button"
-							className={orderPromo.length < 1 ? "invisible" : "text-red-500 down "}
-							onClick={e => {
-								decrementItems(data);
-								setQuantity(quantityDemanded + 1);
-							}}
-						>
-							-
-						</button>
-						<span className="font-normal">{productQuantity(data._id)}</span>
-						<button
-							type="button"
-							className="text-green-500 up"
-							onClick={e => {
-								addItems(data);
-								setQuantity(quantityDemanded - 1);
-							}}
-						>
-							+
-						</button>
+					<div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
+						<div className={orderPromo.length >= 1 ? "rounded-full  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50" : "invisible"}>
+							<button
+								type="button"
+								className="text-red-500 text-2xl "
+								onClick={e => {
+									decrementItems(data);
+									setQuantity(quantityDemanded + 1);
+								}}
+							>
+								-
+							</button>
+						</div>
+						<span className="font-normal text-xl  h-6">{productQuantity(data._id)}</span>
+						<div className="rounded-full  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
+							<button
+								type="button"
+								className="text-green-500 font-normal text-2xl"
+								onClick={e => {
+									addItems(data);
+									setQuantity(quantityDemanded - 1);
+								}}
+							>
+								+
+							</button>
+						</div>
 					</div>
 				</div>
 			) : (
-				<div>
+				<div className="mt-4">
 					{
 						<>
 							{quantityDemanded < 1 ? (
@@ -125,32 +131,37 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 								?.filter(item => item.categoria === "empanadas")
 								.map(({ _id, nombre }) => {
 									return (
-										<div key={_id} className="flex justify-between py-2  my-2 ">
+										<div key={_id} className="flex justify-between items-center my-2  ">
 											<div className="w-1/2 font-medium">
 												<h2>{nombre}</h2>
 											</div>
-											<div className="w-auto   px-3 text-end space-x-4 text-base">
-												<button
-													type="button"
-													className={quantityZero(_id) ? "text-red-500 down " : "invisible"}
-													onClick={e => {
-														setQuantity(quantityDemanded + 1);
-														decrementItems({ _id, nombre });
-													}}
-												>
-													-
-												</button>
-												<span className="font-normal">{productQuantity(_id)}</span>
-												<button
-													type="button"
-													className={quantityDemanded < 1 ? `invisible` : `text-green-500`}
-													onClick={e => {
-														setQuantity(quantityDemanded - 1);
-														addItems({ _id, nombre });
-													}}
-												>
-													+
-												</button>
+											<div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
+												<div className={quantityZero(_id) ? "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50" : "invisible"}>
+													<button
+														type="button"
+														className="text-red-500 text-3xl"
+														onClick={e => {
+															setQuantity(quantityDemanded + 1);
+															decrementItems({ _id, nombre });
+														}}
+													>
+														-
+													</button>
+												</div>
+
+												<span className="font-normal text-xl  h-6">{productQuantity(_id)}</span>
+												<div className={quantityDemanded < 1 ? `invisible` : "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"}>
+													<button
+														type="button"
+														className="text-green-500 font-normal text-3xl"
+														onClick={e => {
+															setQuantity(quantityDemanded - 1);
+															addItems({ _id, nombre });
+														}}
+													>
+														+
+													</button>
+												</div>
 											</div>
 										</div>
 									);

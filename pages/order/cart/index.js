@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Link from "next/link";
 import { FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
@@ -5,11 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { calculateSubTotal, calculateTotalQuantity, removeItemCart } from "store/reducers/orderSlice";
 import { addAddress } from "store/reducers/userSlice";
+import axios from "axios";
 
-export default function Cart() {
+export default function Cart({ data }) {
 	const { orderList, totalAmount } = useSelector(state => state.order);
 	const [order, setOrder] = useState([]);
-	const [type, setType] = useState("retiro");
+	const [type, setType] = useState("domicilioActual");
+	const [tipoDemora, setTipoDemora] = useState(null);
 
 	const dispatch = useDispatch();
 
@@ -20,6 +23,9 @@ export default function Cart() {
 	}, [dispatch, orderList]);
 
 	useEffect(() => {
+		const demo = data?.filter(item => item.tipo);
+		setTipoDemora(demo);
+
 		dispatch(addAddress(""));
 	}, []);
 	const deleteItem = _id => {
@@ -28,6 +34,13 @@ export default function Cart() {
 
 	const handleChange = e => {
 		dispatch(addAddress(e.target.value));
+	};
+
+	const handleChangeType = type => {
+		if (tipoDemora !== null) {
+			const { demoraActual } = tipoDemora.find(item => item.tipo === type);
+			return demoraActual;
+		}
 	};
 	return (
 		<div className="font-poppins mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
@@ -44,9 +57,9 @@ export default function Cart() {
 					<div className="px-2 rounded-lg border-2 border-gray-200">
 						<div className="flex justify-center  w-full gap-3 py-3 text-sm ">
 							<button
-								onClick={() => setType("retiro")}
+								onClick={() => setType("domicilioActual")}
 								className={
-									type === "retiro"
+									type === "domicilioActual"
 										? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
 										: "w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
 								}
@@ -55,9 +68,9 @@ export default function Cart() {
 								Delivery
 							</button>
 							<button
-								onClick={() => setType("delivery")}
+								onClick={() => setType("localActual")}
 								className={
-									type === "delivery"
+									type === "localActual"
 										? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
 										: "w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
 								}
@@ -67,7 +80,7 @@ export default function Cart() {
 							</button>
 						</div>
 						<div className="flex flex-col justify-center items-center gap-2">
-							{type !== "delivery" && (
+							{type === "domicilioActual" && (
 								<input
 									id="address"
 									name="address"
@@ -78,7 +91,7 @@ export default function Cart() {
 								/>
 							)}
 							<h1 className="font-light">Te llega en</h1>
-							<strong>45 - 60 min</strong>
+							<strong>{handleChangeType(type)}</strong>
 						</div>
 					</div>
 				</div>
@@ -125,3 +138,16 @@ export default function Cart() {
 		</div>
 	);
 }
+
+export const getServerSideProps = async () => {
+	const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
+
+	const { data } = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}` + "/api/delay");
+	// console.log("data", data);
+	return {
+		props: {
+			// Pasa el estado hidratado como prop al componente de Next.js
+			data,
+		},
+	};
+};

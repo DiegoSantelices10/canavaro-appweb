@@ -54,14 +54,18 @@ export default function Home() {
 		const array = [];
 		let cantidadTotal = 0;
 
-		orderPromo.map(item => {
-			const { precio, cantidad } = item;
-			priceU = precio;
-			const listItemAmount = precio * cantidad;
-			cantidadTotal = cantidadTotal + cantidad;
-			setTotalCant(cantidadTotal);
-			return array.push(listItemAmount);
-		});
+		if (orderPromo.length > 0) {
+			orderPromo.map(({ cantidad, precio }) => {
+				priceU = precio;
+				const listItemAmount = precio * cantidad;
+				cantidadTotal = cantidadTotal + cantidad;
+				console.log("es cero?", cantidadTotal);
+				setTotalCant(cantidadTotal);
+				return array.push(listItemAmount);
+			});
+		} else {
+			setTotalCant(0);
+		}
 
 		const totalAmount = array.reduce((a, b) => {
 			return a + b;
@@ -90,7 +94,6 @@ export default function Home() {
 		const res = value.find(item => item.categoria === "bebidas");
 
 		if (res) {
-			console.log("entro");
 			setTotalCant(0);
 			value.map(item => dispatch(addPromoOrderList({ ...item })));
 
@@ -230,7 +233,7 @@ export default function Home() {
 					<div className="bg-white w-full fixed bottom-0 p-3  sm:w-4/5 md:w-4/5 lg:w-3/5">
 						<div
 							className="flex justify-between items-center gap-3 mx-auto text-center rounded-md 
-									   w-full md:w-1/2 lg:w-1/2 p-3 bg-red-500 text-white text-base font-semibold "
+									   w-full md:w-1/2 lg:w-3/5 p-3 bg-red-500 text-white text-base font-semibold "
 						>
 							<button
 								onClick={() => addCartPromo(orderPromo)}

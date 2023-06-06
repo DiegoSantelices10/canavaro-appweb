@@ -37,26 +37,32 @@ const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, preci
 							<p className="text-gray-400 text-xs">{descripcion}</p>
 							<p className="text-gray-400 text-xs py-1">$ {precio}</p>
 
-							<div className="absolute bottom-0 right-0 w-auto px-3 text-end  space-x-4 text-base">
-								<button
-									type="button"
-									className={quantityZero(_id) ? "text-red-500 down " : "invisible"}
-									onClick={e => {
-										decrementItems({ _id, nombre, precio, categoria });
-									}}
-								>
-									-
-								</button>
-								<span className="font-normal">{productQuantity(data._id)}</span>
-								<button
-									type="button"
-									className="text-green-500 up"
-									onClick={e => {
-										addItems({ _id, nombre, precio, categoria });
-									}}
-								>
-									+
-								</button>
+							<div className="absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
+								<div className={quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"}>
+									<button
+										type="button"
+										className="text-red-500 text-3xl "
+										onClick={e => {
+											decrementItems({ _id, nombre, precio, categoria });
+										}}
+									>
+										-
+									</button>
+								</div>
+
+								<span className="font-normal text-xl  h-6">{productQuantity(_id)}</span>
+
+								<div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
+									<button
+										type="button"
+										className="text-green-500 text-3xl"
+										onClick={e => {
+											addItems({ _id, nombre, precio, categoria });
+										}}
+									>
+										+
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
