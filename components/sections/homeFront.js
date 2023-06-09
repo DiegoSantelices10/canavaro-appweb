@@ -16,14 +16,14 @@ function HomeFront() {
 					}
 				`}</style>
 
-				<div className="relative text-center h-full">
-					<div className=" flex flex-col justify-center items-center min-h-screen gap-7">
-						<div className="mx-auto mt-20 ">
-							<motion.div
-								initial={{ opacity: 0, y: -100 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.5 }}
-							>
+				<motion.div
+					initial={{ opacity: 0, y: -100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 1.5 }}
+				>
+					<div className="relative text-center h-full">
+						<div className=" flex flex-col justify-center items-center min-h-screen gap-7">
+							<div className="mx-auto mt-20 ">
 								<Image
 									src="/images/logocanavaro.png"
 									width={150}
@@ -36,32 +36,34 @@ function HomeFront() {
 								<p className="text-gray-200 font-medium text-base">
 									Pelliza 1794 - Olivos
 								</p>
-							</motion.div>
-						</div>
-
-						<div className="w-full h-auto p-3 mx-auto flex flex-col justify-center items-center gap-1   text-center">
-							<MdOutlineDeliveryDining size={60} className="text-white" />
-
-							<div className="text-2xl font-extrabold text-gray-200">
-								<h1>Hac&eacute; tu pedido.</h1>
-								<h2>¡Nosotros te lo llevamos!</h2>
-								<p className="text-base font-medium">De martes a domingo de 19 a 23hs.</p>
 							</div>
 
-							<div className="w-full h-20 flex items-center">
-								<Link href={"/order/login"}>
-									<a
-										className={`p-5 rounded-xl  font-bold font-poppins px-7 text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
-											transition-all duration-500`}
-									>
-										HAC&Eacute; TU PEDIDO
-									</a>
-								</Link>
+							<div className="w-full h-auto p-3 mx-auto flex flex-col justify-center items-center gap-1   text-center">
+								<MdOutlineDeliveryDining size={60} className="text-white" />
+
+								<div className="text-2xl font-extrabold text-gray-200">
+									<h1>Hac&eacute; tu pedido.</h1>
+									<h2>¡Nosotros te lo llevamos!</h2>
+									<p className="text-base font-medium">
+										De martes a domingo de 19 a 23hs.
+									</p>
+								</div>
+
+								<div className="w-full h-20 flex items-center">
+									<Link href={"/order/login"}>
+										<a
+											className={`p-5 rounded-xl  font-bold font-poppins px-7 text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
+										transition-all duration-500`}
+										>
+											HAC&Eacute; TU PEDIDO
+										</a>
+									</Link>
+								</div>
+								<h1 className="text-lg text-gray-200">Delivery & Take Away</h1>
 							</div>
-							<h1 className="text-lg text-gray-200">Delivery & Take Away</h1>
 						</div>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</Element>
 	);
