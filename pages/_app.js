@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import "styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/router";
 
 function MyApp({ Component, router, ...rest }) {
 	const { store, props } = wrapper.useWrappedStore(rest);
