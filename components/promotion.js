@@ -46,7 +46,6 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 		return orderPromo?.find(item => item._id === _id);
 	};
 
-	console.log(orderPromo);
 	return (
 		<div>
 			{(data.nombre === "Combo 4" || data.nombre === "Combo 5") && (

@@ -4,7 +4,7 @@ import { FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { calculateSubTotal, calculateTotalQuantity, removeItemCart } from "store/reducers/orderSlice";
+import { calculateSubTotal, calculateTotalQuantity, removeItemCart, setDemora } from "store/reducers/orderSlice";
 import { addAddress } from "store/reducers/userSlice";
 import axios from "axios";
 
@@ -39,6 +39,7 @@ export default function Cart({ data }) {
 	const handleChangeType = type => {
 		if (tipoDemora !== null) {
 			const { demoraActual } = tipoDemora.find(item => item.tipo === type);
+			dispatch(setDemora(demoraActual));
 			return demoraActual;
 		}
 	};

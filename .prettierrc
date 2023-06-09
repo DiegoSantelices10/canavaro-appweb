@@ -4,6 +4,6 @@
 	"singleQuote": false,
 	"jsxSingleQuote": false,
 	"arrowParens": "avoid",
-	"printWidth": 150,
+	"printWidth": 90,
 	"quoteProps": "preserve"
 }

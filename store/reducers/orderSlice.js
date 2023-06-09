@@ -6,6 +6,7 @@ const initialState = {
 	quantityDemanded: 0,
 	totalQuantity: 0,
 	totalAmount: 0,
+	demora: "",
 	checkout: [],
 };
 
@@ -13,6 +14,9 @@ export const orderSlice = createSlice({
 	name: "order",
 	initialState,
 	reducers: {
+		setDemora: (state, action) => {
+			state.demora = action.payload;
+		},
 		setCheckout: (state, action) => {
 			state.checkout = action.payload;
 		},
@@ -116,6 +120,7 @@ export const {
 	decrementProductPromo,
 	decrementProductPizza,
 	removeProduct,
+	setDemora,
 	calculateSubTotal,
 	calculateTotalQuantity,
 	addPromoOrderList,
@@ -126,8 +131,4 @@ export const {
 	clearOrderList,
 } = orderSlice.actions;
 
-export const selectOrder = state => state.order;
-export const selectOrderList = state => state.orderList;
-export const selectTotalQuantity = state => state.totalQuantity;
-export const selectTotalAmount = state => state.totalAmount;
 export default orderSlice.reducer;

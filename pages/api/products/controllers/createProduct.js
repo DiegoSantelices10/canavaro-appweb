@@ -59,7 +59,14 @@ export const createProduct = async (req, res) => {
 			});
 		}
 
-		await newProduct.save();
+		await newProduct
+			.save()
+			.then(() => {
+				console.log("Se creo el producto correctamente");
+			})
+			.catch(error => {
+				console.error("Error al crear el producto:", error);
+			});
 		return res.status(201).json({
 			message: "ok",
 		});

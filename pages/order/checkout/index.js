@@ -1,7 +1,8 @@
+import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,23 +11,20 @@ import { clearUser } from "store/reducers/userSlice";
 
 export default function Checkout() {
 	const user = useSelector(state => state.user);
-	const { totalAmount, orderList } = useSelector(state => state.order);
+	const { totalAmount, orderList, demora } = useSelector(state => state.order);
 	const [userLocal, setUserLocal] = useState({});
 
 	const dispatch = useDispatch();
-	const router = useRouter();
+	// const router = useRouter();
 
 	useEffect(() => {
-		console.log(user.direccion);
 		if (user.nombre === "") {
 			const us = JSON.parse(localStorage.getItem("user"));
-			console.log("user", us);
 			setUserLocal(us);
 		} else {
 			setUserLocal(user);
 		}
 	}, []);
-	console.log(userLocal);
 
 	return (
 		<div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
@@ -49,14 +47,18 @@ export default function Checkout() {
 					productos: orderList || {},
 					comentarios: "",
 					medioDePago: "efectivo" || "",
-					pagaCon: "",
+					pagaCon: 0,
 					total: totalAmount || "",
 				}}
-				onSubmit={values => {
+				onSubmit={async values => {
+					console.log(values);
+					const res = await axios.post("/api/sales", values);
+					console.log(res);
+
 					dispatch(setCheckout(values));
 					dispatch(clearUser());
 					dispatch(clearOrderList());
-					router.push("checkout/successful");
+					// router.push("checkout/successful");
 				}}
 			>
 				{({ values }) => {
@@ -81,7 +83,7 @@ export default function Checkout() {
 								<hr />
 								<div className="p-3 py-5">
 									<h2 className="font-nunito font-extrabold text-base">Tiempo de entrega</h2>
-									<p className="px-1"> 45 - 55 min</p>
+									<p className="px-1">{demora}</p>
 								</div>
 								<hr />
 								<div className="p-3 py-5">

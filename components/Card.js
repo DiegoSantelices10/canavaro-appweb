@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
-const Card = ({ data, data: { _id, nombre, imagen, descripcion, categoria, precio } }) => {
+const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } }) => {
 	const { orderPromo } = useSelector(state => state.order);
 
 	const dispatch = useDispatch();

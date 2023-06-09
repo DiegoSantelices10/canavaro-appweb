@@ -59,7 +59,6 @@ export default function Home() {
 				priceU = precio;
 				const listItemAmount = precio * cantidad;
 				cantidadTotal = cantidadTotal + cantidad;
-				console.log("es cero?", cantidadTotal);
 				setTotalCant(cantidadTotal);
 				return array.push(listItemAmount);
 			});

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
-
+import { motion } from "framer-motion";
 function HomeFront() {
 	return (
 		<Element name="home" className="relative element">
@@ -19,9 +19,24 @@ function HomeFront() {
 				<div className="relative text-center h-full">
 					<div className=" flex flex-col justify-center items-center min-h-screen gap-7">
 						<div className="mx-auto mt-20 ">
-							<Image src="/images/logocanavaro.png" width={150} height={150} alt="logo" />
-							<p className="text-xl font-extrabold text-gray-200 ">¡Todo lo que necesitas en un solo lugar!</p>
-							<p className="text-gray-200 font-medium text-base">Pelliza 1794 - Olivos</p>
+							<motion.div
+								initial={{ opacity: 0, y: -100 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5 }}
+							>
+								<Image
+									src="/images/logocanavaro.png"
+									width={150}
+									height={150}
+									alt="logo"
+								/>
+								<p className="text-xl font-extrabold text-gray-200">
+									¡Todo lo que necesitas en un solo lugar!
+								</p>
+								<p className="text-gray-200 font-medium text-base">
+									Pelliza 1794 - Olivos
+								</p>
+							</motion.div>
 						</div>
 
 						<div className="w-full h-auto p-3 mx-auto flex flex-col justify-center items-center gap-1   text-center">

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { addPromoOrderList, calculateSubTotal, calculateTotalQuantity, clearOrderPromo } from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,7 +17,7 @@ export default function Index() {
 
 	const dispatch = useDispatch();
 	const router = useRouter();
-
+	const comentariosRef = useRef();
 	const idGenerator = uuidv4();
 
 	useEffect(() => {
@@ -104,9 +104,9 @@ export default function Index() {
 		const promo = {
 			_id: idGenerator,
 			nombre: `Pizza ${select}`,
-			productos: { ...newList },
 			descripcion: concatenatedString,
 			categoria: "pizzas",
+			comentarios: comentariosRef.current.value,
 			precio: totalRedondeado,
 			cantidad: 1,
 		};
@@ -226,7 +226,7 @@ export default function Index() {
 
 				<div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
 					<h1 className="pb-1">Comentarios</h1>
-					<input id="comentarios" type="text" className="border border-gray-300 rounded-md w-full p-2" />
+					<input ref={comentariosRef} id="comentarios" name="comentarios" type="text" className="border border-gray-300 rounded-md w-full p-2" />
 				</div>
 			</div>
 
