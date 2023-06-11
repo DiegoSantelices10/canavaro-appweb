@@ -8,6 +8,8 @@ import Button from "components/buttonDemora";
 import { useDispatch } from "react-redux";
 import { setSaleData } from "store/reducers/saleSlice";
 import axios from "axios";
+import Pusher from "pusher-js";
+
 export default function Home() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
@@ -15,6 +17,7 @@ export default function Home() {
 	const [data, setData] = useState(null);
 	const [selectedDomicilio, setSelectedDomicilio] = useState({});
 	const [selectedLocal, setSelectedLocal] = useState({});
+	// const [chats, setChats] = useState([]);
 
 	const dispatch = useDispatch();
 
@@ -32,11 +35,24 @@ export default function Home() {
 		})();
 	}, []);
 
+	useEffect(() => {
+		const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {
+			cluster: "us2",
+			authEndpoint: "/api/pusher/auth",
+			useTLS: true,
+		});
+
+		const channel = pusher.subscribe("private-pizzeria");
+		channel.bind("canavaro", data => {
+			alert(JSON.stringify(data));
+			// setChats([...chats, data.message]);
+		});
+	}, []);
+
 	const handleOpenModal = pedido => {
 		setCurrentPedido(pedido);
 		setShowModal(true);
 	};
-
 	const handleCloseModal = () => {
 		setCurrentPedido(null);
 		setShowModal(false);
@@ -56,7 +72,14 @@ export default function Home() {
 
 	return (
 		<Layout>
-			{currentPedido && <ModalPedido key={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />}
+			{currentPedido && (
+				<ModalPedido
+					key={currentPedido._id}
+					show={showModal}
+					handleClose={handleCloseModal}
+					pedido={currentPedido}
+				/>
+			)}
 			<div className="h-auto p-0 md:px-2">
 				<div className=" w-full block md:flex gap-1 p-2">
 					<div className="w-full md:w-1/2 text-center">
@@ -65,7 +88,12 @@ export default function Home() {
 							{data
 								?.filter(item => item.tipoEnvio === "domicilio")
 								.map(item => (
-									<Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
+									<Button
+										handlePutTime={handlePutTime}
+										key={item._id}
+										data={item}
+										selected={selectedDomicilio}
+									/>
 								))}
 						</div>
 					</div>
@@ -75,7 +103,12 @@ export default function Home() {
 							{data
 								?.filter(item => item.tipoEnvio === "local")
 								.map(item => (
-									<Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
+									<Button
+										handlePutTime={handlePutTime}
+										key={item._id}
+										data={item}
+										selected={selectedLocal}
+									/>
 								))}
 						</div>
 					</div>
@@ -84,13 +117,18 @@ export default function Home() {
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
 						{renderSale?.map(item => (
-							<div key={item._id} className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2">
+							<div
+								key={item._id}
+								className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2"
+							>
 								<div className="w-full text-sm">
 									<h2 className="text-right">{item?._id}</h2>
 									<div className="text-left py-3 font-medium">
 										<h5 className="text-sm">{item?.direccion}</h5>
 										<h5 className="font-normal">{item?.cliente}</h5>
-										<h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
+										<h5 className="font-normal text-xs text-gray-400">
+											{item?.tipoEnvio}
+										</h5>
 									</div>
 								</div>
 								<div className="flex justify-end gap-3 w-full">

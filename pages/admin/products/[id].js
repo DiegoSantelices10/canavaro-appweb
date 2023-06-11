@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { updateProduct } from "services/fetchData";
 import Swal from "sweetalert2";
 
-export default function Create() {
+export default function Update() {
 	const [renderProducts, setRenderProductos] = useState("empanadas");
 	const [productRender, setProductRender] = useState({});
 	const { products } = useSelector(state => state.product);
@@ -26,7 +26,19 @@ export default function Create() {
 	}, []);
 
 	const modelProducto = value => {
-		const { nombre, descripcion, categoria, imagen, cantidadMaxima, precio, precioPizza, addEmpanadas, addPizzas, tamanio, formato } = value;
+		const {
+			nombre,
+			descripcion,
+			categoria,
+			imagen,
+			cantidadMaxima,
+			precio,
+			precioPizza,
+			addEmpanadas,
+			addPizzas,
+			tamanio,
+			formato,
+		} = value;
 		let model;
 		if (value.categoria === "promociones") {
 			model = {
@@ -75,7 +87,9 @@ export default function Create() {
 	return (
 		<Layout>
 			<div className="w-full lg:w-3/5 h-auto p-2 md:p-10">
-				<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">¡Actualiza el producto!</h1>
+				<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
+					¡Actualiza el producto!
+				</h1>
 				<div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
 					<style jsx>
 						{`
@@ -91,7 +105,9 @@ export default function Create() {
 					</style>
 					<div>
 						<button
-							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "empanadas"}`)}
+							onClick={() =>
+								setRenderProductos(`${id !== "0" ? renderProducts : "empanadas"}`)
+							}
 							className={
 								renderProducts !== "empanadas"
 									? "w-52 rounded-3xl font-semibold text-gray-400"
@@ -103,7 +119,9 @@ export default function Create() {
 					</div>
 					<div>
 						<button
-							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "pizzas"}`)}
+							onClick={() =>
+								setRenderProductos(`${id !== "0" ? renderProducts : "pizzas"}`)
+							}
 							className={
 								renderProducts !== "pizzas"
 									? "w-32 rounded-3xl font-semibold text-gray-400"
@@ -116,7 +134,9 @@ export default function Create() {
 
 					<div>
 						<button
-							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "promociones"}`)}
+							onClick={() =>
+								setRenderProductos(`${id !== "0" ? renderProducts : "promociones"}`)
+							}
 							className={
 								renderProducts !== "promociones"
 									? "w-32 rounded-3xl font-semibold text-gray-400"
@@ -128,7 +148,9 @@ export default function Create() {
 					</div>
 					<div>
 						<button
-							onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "bebidas"}`)}
+							onClick={() =>
+								setRenderProductos(`${id !== "0" ? renderProducts : "bebidas"}`)
+							}
 							className={
 								renderProducts !== "bebidas"
 									? "w-32 rounded-3xl font-semibold text-gray-400"
@@ -166,7 +188,7 @@ export default function Create() {
 										Swal.fire({
 											icon: "success",
 
-											title: "Actualización Exitosa!",
+											title: "Actualizacion Exitosa!",
 											confirmButtonColor: "#3085d6",
 										});
 										resetForm();
@@ -277,11 +299,21 @@ export default function Create() {
 												className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 											>
 												<label>
-													<Field type="radio" name="formato" value="canastita" className="mx-5" />
+													<Field
+														type="radio"
+														name="formato"
+														value="canastita"
+														className="mx-5"
+													/>
 													Canastita
 												</label>
 												<label>
-													<Field type="radio" name="formato" value="empanada" className="mx-5" />
+													<Field
+														type="radio"
+														name="formato"
+														value="empanada"
+														className="mx-5"
+													/>
 													Empanada
 												</label>
 											</div>
@@ -343,18 +375,30 @@ export default function Create() {
 									<>
 										<div className="w-full mx-auto">
 											<div className=" w-full mx-auto">
-												<p className="block  text-sm  text-slate-400">¿La promo cuenta con empanadas?</p>
+												<p className="block  text-sm  text-slate-400">
+													¿La promo cuenta con empanadas?
+												</p>
 												<div
 													role="group"
 													aria-labelledby="my-radio-group"
 													className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 												>
 													<label>
-														<Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
+														<Field
+															type="radio"
+															name="addEmpanadas"
+															value="si"
+															className="mx-5"
+														/>
 														Si
 													</label>
 													<label>
-														<Field type="radio" name="addEmpanadas" value="no" className="mx-5" />
+														<Field
+															type="radio"
+															name="addEmpanadas"
+															value="no"
+															className="mx-5"
+														/>
 														No
 													</label>
 												</div>
@@ -377,18 +421,30 @@ export default function Create() {
 										</div>
 										<div className="w-full mx-auto">
 											<div className=" w-full mx-auto">
-												<p className="block  text-sm  text-slate-400">¿La promo cuenta con Pizza?</p>
+												<p className="block  text-sm  text-slate-400">
+													¿La promo cuenta con Pizza?
+												</p>
 												<div
 													role="group"
 													aria-labelledby="my-radio-group"
 													className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 												>
 													<label>
-														<Field type="radio" name="addPizzas" value="si" className="mx-5" />
+														<Field
+															type="radio"
+															name="addPizzas"
+															value="si"
+															className="mx-5"
+														/>
 														Si
 													</label>
 													<label>
-														<Field type="radio" name="addPizzas" value="no" className="mx-5" />
+														<Field
+															type="radio"
+															name="addPizzas"
+															value="no"
+															className="mx-5"
+														/>
 														No
 													</label>
 												</div>

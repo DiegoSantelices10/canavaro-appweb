@@ -32,7 +32,10 @@ export default function Checkout() {
 				<div className="flex items-center gap-3 py-4">
 					<Link href={"/order/cart"}>
 						<a>
-							<FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+							<FiChevronsLeft
+								className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+								size={30}
+							/>
 						</a>
 					</Link>
 					<h2 className="font-poppins font-extrabold text-lg">Tu pedido</h2>
@@ -51,10 +54,14 @@ export default function Checkout() {
 					total: totalAmount || "",
 				}}
 				onSubmit={async values => {
-					console.log(values);
-					const res = await axios.post("/api/sales", values);
-					console.log(res);
+					console.log("pedido", values);
+					const res = await axios.post("/api/pusher", { message: values });
 
+					if (res.status === 200) {
+						await axios.post("/api/sales/", values).then(res => {
+							console.log(res);
+						});
+					}
 					dispatch(setCheckout(values));
 					dispatch(clearUser());
 					dispatch(clearOrderList());
@@ -69,12 +76,16 @@ export default function Checkout() {
 									<div>
 										{user.direccion !== "" ? (
 											<>
-												<h2 className="font-nunito font-extrabold text-base">Direccion de envio</h2>
+												<h2 className="font-nunito font-extrabold text-base">
+													Direccion de envio
+												</h2>
 												<p>{user.direccion} </p>
 											</>
 										) : (
 											<>
-												<h2 className="font-nunito font-extrabold text-base">Retira por local</h2>
+												<h2 className="font-nunito font-extrabold text-base">
+													Retira por local
+												</h2>
 												<p>Nombre: {userLocal.nombre} </p>
 											</>
 										)}
@@ -82,13 +93,21 @@ export default function Checkout() {
 								</div>
 								<hr />
 								<div className="p-3 py-5">
-									<h2 className="font-nunito font-extrabold text-base">Tiempo de entrega</h2>
+									<h2 className="font-nunito font-extrabold text-base">
+										Tiempo de entrega
+									</h2>
 									<p className="px-1">{demora}</p>
 								</div>
 								<hr />
 								<div className="p-3 py-5">
-									<h2 className="font-nunito font-extrabold text-base pb-1">Comentarios adicionales</h2>
-									<Field id="comentarios" name="comentarios" className="border border-slate-300 rounded-md w-full p-2" />
+									<h2 className="font-nunito font-extrabold text-base pb-1">
+										Comentarios adicionales
+									</h2>
+									<Field
+										id="comentarios"
+										name="comentarios"
+										className="border border-slate-300 rounded-md w-full p-2"
+									/>
 								</div>
 								<div className="p-3 py-5 h-full">
 									<h2 className="font-nunito font-extrabold text-base">Medio de pago</h2>
@@ -99,11 +118,21 @@ export default function Checkout() {
 											className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 										>
 											<label>
-												<Field type="radio" name="medioDePago" value="efectivo" className="mx-5 p-2 rounded-md" />
+												<Field
+													type="radio"
+													name="medioDePago"
+													value="efectivo"
+													className="mx-5 p-2 rounded-md"
+												/>
 												Efectivo
 											</label>
 											<label className="">
-												<Field type="radio" name="medioDePago" value="mercadoPago" className="mx-5 p-2 rounded-md" />
+												<Field
+													type="radio"
+													name="medioDePago"
+													value="mercadoPago"
+													className="mx-5 p-2 rounded-md"
+												/>
 												Mercado Pago
 											</label>
 										</div>
@@ -118,7 +147,12 @@ export default function Checkout() {
 											)}
 											{values.medioDePago === "mercadoPago" && (
 												<div className="flex justify-center w-full">
-													<Image src="/images/logoMP.jpg" width={100} height={100} alt="logoMP" />
+													<Image
+														src="/images/logoMP.jpg"
+														width={100}
+														height={100}
+														alt="logoMP"
+													/>
 												</div>
 											)}
 										</div>

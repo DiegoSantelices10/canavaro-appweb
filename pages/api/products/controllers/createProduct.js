@@ -2,7 +2,19 @@ import { uploadImage } from "libs/cloudinary";
 import Producto from "models/product";
 
 export const createProduct = async (req, res) => {
-	const { nombre, descripcion, categoria, imagen, precio, precioPizza, addEmpanadas, cantidadMaxima, formato, addPizzas, tamanio } = req.body;
+	const {
+		nombre,
+		descripcion,
+		categoria,
+		imagen,
+		precio,
+		precioPizza,
+		addEmpanadas,
+		cantidadMaxima,
+		formato,
+		addPizzas,
+		tamanio,
+	} = req.body;
 	try {
 		let imageCloud;
 		if (imagen) {
@@ -63,13 +75,11 @@ export const createProduct = async (req, res) => {
 			.save()
 			.then(() => {
 				console.log("Se creo el producto correctamente");
+				return res.status(201).json({ message: "ok" });
 			})
 			.catch(error => {
-				console.error("Error al crear el producto:", error);
+				alert("Error al crear el producto:", error);
 			});
-		return res.status(201).json({
-			message: "ok",
-		});
 	} catch (error) {
 		return res.status(400).json({
 			success: false,

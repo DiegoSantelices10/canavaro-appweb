@@ -27,13 +27,15 @@ export default function Products() {
 		const minus = e.target.value;
 		const delayDebounceFn = setTimeout(() => {
 			// Aquí puedes realizar la búsqueda en el listado con el valor de inputValue
-			const resultado = renderProductos?.filter(item => item.nombre.toLowerCase().includes(minus.toLowerCase()));
+			const resultado = renderProductos?.filter(item =>
+				item.nombre.toLowerCase().includes(minus.toLowerCase())
+			);
 			if (e.target.value === "") {
 				setRenderProductos(products);
 			} else {
 				setRenderProductos(resultado);
 			}
-		}, 500); // Establece el tiempo de espera deseado en milisegundos (500 ms en este ejemplo)
+		}, 1000); // Establece el tiempo de espera deseado en milisegundos (500 ms en este ejemplo)
 
 		return () => {
 			clearTimeout(delayDebounceFn);
@@ -50,7 +52,9 @@ export default function Products() {
 		setRenderProductos(updatedProductos);
 
 		try {
-			const response = await axios.put(`/api/products/${id}`, { available: !availableCurrent });
+			const response = await axios.put(`/api/products/${id}`, {
+				available: !availableCurrent,
+			});
 			console.log(response);
 		} catch (error) {
 			console.log(error);
@@ -98,38 +102,47 @@ export default function Products() {
 				</div>
 			</div>
 			<div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
-				{renderProductos.map(({ _id, nombre, descripcion, imagen, available }) => {
-					return (
-						<div key={_id}>
-							<div className="flex justify-between items-center gap-x-2 relative ">
-								<Image className="rounded-md" src={imagen?.url} width={140} height={140} alt={nombre} />
-								<div className="relative w-full h-24 self-start">
-									<h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
-									<p className="text-gray-400 text-xs">{descripcion}</p>
-									<div className="absolute bottom-0">
-										<label className="inline-flex items-center cursor-pointer">
-											<input
-												id={nombre}
-												type="checkbox"
-												className="sr-only peer"
-												checked={available}
-												onChange={() => handleCheckboxChange(_id, available)}
-											/>
-											<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-										</label>
+				{renderProductos.map(
+					({ _id, nombre, descripcion, imagen, available, categoria }) => {
+						return (
+							<div key={_id}>
+								<div className="flex justify-between items-center gap-x-2 relative ">
+									<Image
+										className="rounded-md"
+										src={imagen?.url || "/images/logocanavaro.png"}
+										width={140}
+										height={140}
+										alt={nombre}
+									/>
+									<div className="relative w-full h-28 py-1 self-start">
+										<h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
+										<p className="text-gray-400 text-xs">{descripcion}</p>
+										<h4 className="text-gray-700 text-xs ">{categoria}</h4>
+										<div className="absolute bottom-0">
+											<label className="inline-flex items-center cursor-pointer">
+												<input
+													id={_id}
+													type="checkbox"
+													className="sr-only peer"
+													checked={available}
+													onChange={() => handleCheckboxChange(_id, available)}
+												/>
+												<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+											</label>
+										</div>
+									</div>
+									<div className="flex absolute bottom-2 right-3 gap-3">
+										<Link href={`/admin/products/${_id}`}>
+											<a>
+												<FaRegEdit size={25} className="text-gray-800" />
+											</a>
+										</Link>
 									</div>
 								</div>
-								<div className="flex absolute bottom-2 right-3 gap-3">
-									<Link href={`/admin/products/${_id}`}>
-										<a>
-											<FaRegEdit size={25} className="text-gray-800" />
-										</a>
-									</Link>
-								</div>
 							</div>
-						</div>
-					);
-				})}
+						);
+					}
+				)}
 			</div>
 			<hr />
 		</Layout>

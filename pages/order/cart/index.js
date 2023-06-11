@@ -1,10 +1,19 @@
 /* eslint-disable react/prop-types */
 import Link from "next/link";
 import { FiChevronsLeft } from "react-icons/fi";
-import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
+import {
+	MdOutlineDeliveryDining,
+	MdOutlineEmojiPeople,
+	MdDeleteOutline,
+} from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { calculateSubTotal, calculateTotalQuantity, removeItemCart, setDemora } from "store/reducers/orderSlice";
+import {
+	calculateSubTotal,
+	calculateTotalQuantity,
+	removeItemCart,
+	setDemora,
+} from "store/reducers/orderSlice";
 import { addAddress } from "store/reducers/userSlice";
 import axios from "axios";
 
@@ -20,7 +29,7 @@ export default function Cart({ data }) {
 		setOrder(orderList);
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
-	}, [dispatch, orderList]);
+	}, [orderList]);
 
 	useEffect(() => {
 		const demo = data?.filter(item => item.tipo);
@@ -43,13 +52,21 @@ export default function Cart({ data }) {
 			return demoraActual;
 		}
 	};
+
+	const handleType = value => {
+		setType(value);
+	};
+
 	return (
 		<div className="font-poppins mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
 			<div className="px-3">
 				<div className="flex items-center gap-3 py-4">
 					<Link href={"/order/home"}>
 						<a>
-							<FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+							<FiChevronsLeft
+								className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+								size={30}
+							/>
 						</a>
 					</Link>
 					<h2 className="font-poppins font-extrabold text-lg">Tu pedido</h2>
@@ -58,7 +75,7 @@ export default function Cart({ data }) {
 					<div className="px-2 rounded-lg border-2 border-gray-200">
 						<div className="flex justify-center  w-full gap-3 py-3 text-sm ">
 							<button
-								onClick={() => setType("domicilioActual")}
+								onClick={() => handleType("domicilioActual")}
 								className={
 									type === "domicilioActual"
 										? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
@@ -69,7 +86,7 @@ export default function Cart({ data }) {
 								Delivery
 							</button>
 							<button
-								onClick={() => setType("localActual")}
+								onClick={() => handleType("localActual")}
 								className={
 									type === "localActual"
 										? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
@@ -106,12 +123,20 @@ export default function Cart({ data }) {
 									<div className="w-full self-start">
 										<a className="font-bold  text-gray-800">
 											{item.nombre}
-											<span className="text-gray-400 font-light"> x {item.cant ? item.cant : item.cantidad}</span>
+											<span className="text-gray-400 font-light">
+												{" "}
+												x {item.cant ? item.cant : item.cantidad}
+											</span>
 										</a>
 										<p className="text-gray-400 text-sm">
-											{item?.descripcion || item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) || ""}
+											{item?.descripcion ||
+												item?.tamanio?.charAt(0).toUpperCase() +
+													item?.tamanio?.slice(1) ||
+												""}
 										</p>
-										<p className="font-semibold text-sm text-gray-800">$ {item.precio * item.cantidad}</p>
+										<p className="font-semibold text-sm text-gray-800">
+											$ {item.precio * item.cantidad}
+										</p>
 									</div>
 									<button onClick={() => deleteItem(item._id)}>
 										<MdDeleteOutline size={30} className="text-red-700" />
@@ -143,7 +168,9 @@ export default function Cart({ data }) {
 export const getServerSideProps = async () => {
 	const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
 
-	const { data } = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}` + "/api/delay");
+	const { data } = await axios.get(
+		`${NODE_ENV === "production" ? PROD_URL : DEV_URL}` + "/api/delay"
+	);
 	// console.log("data", data);
 	return {
 		props: {

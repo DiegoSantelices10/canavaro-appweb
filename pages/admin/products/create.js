@@ -14,7 +14,9 @@ export default function Create() {
 		<Layout>
 			<section className="w-full bg-white">
 				<div className="w-full lg:w-3/5 p-2 md:p-10">
-					<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">¡Ingresa un producto nuevo!</h1>
+					<h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
+						¡Ingresa un producto nuevo!
+					</h1>
 					<div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
 						<style jsx>
 							{`
@@ -99,6 +101,7 @@ export default function Create() {
 						onSubmit={async (values, { resetForm }) => {
 							await createProduct(values)
 								.then(res => {
+									console.log(res);
 									if (res.message === "ok") {
 										Swal.fire({
 											icon: "success",
@@ -185,11 +188,21 @@ export default function Create() {
 													className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 												>
 													<label>
-														<Field type="radio" name="formato" value="canastita" className="mx-5" />
+														<Field
+															type="radio"
+															name="formato"
+															value="canastita"
+															className="mx-5"
+														/>
 														Canastita
 													</label>
 													<label>
-														<Field type="radio" name="formato" value="empanada" className="mx-5" />
+														<Field
+															type="radio"
+															name="formato"
+															value="empanada"
+															className="mx-5"
+														/>
 														Empanada
 													</label>
 												</div>
@@ -250,18 +263,30 @@ export default function Create() {
 										<>
 											<div className="w-full mx-auto">
 												<div className=" w-full mx-auto">
-													<p className="block  text-sm  text-slate-400">¿La promo cuenta con empanadas?</p>
+													<p className="block  text-sm  text-slate-400">
+														¿La promo cuenta con empanadas?
+													</p>
 													<div
 														role="group"
 														aria-labelledby="my-radio-group"
 														className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 													>
 														<label>
-															<Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
+															<Field
+																type="radio"
+																name="addEmpanadas"
+																value="si"
+																className="mx-5"
+															/>
 															Si
 														</label>
 														<label>
-															<Field type="radio" name="addEmpanadas" value="no" className="mx-5" />
+															<Field
+																type="radio"
+																name="addEmpanadas"
+																value="no"
+																className="mx-5"
+															/>
 															No
 														</label>
 													</div>
@@ -284,18 +309,30 @@ export default function Create() {
 											</div>
 											<div className="w-full mx-auto">
 												<div className=" w-full mx-auto">
-													<p className="block  text-sm  text-slate-400">¿La promo cuenta con Pizza?</p>
+													<p className="block  text-sm  text-slate-400">
+														¿La promo cuenta con Pizza?
+													</p>
 													<div
 														role="group"
 														aria-labelledby="my-radio-group"
 														className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
 													>
 														<label>
-															<Field type="radio" name="addPizzas" value="si" className="mx-5" />
+															<Field
+																type="radio"
+																name="addPizzas"
+																value="si"
+																className="mx-5"
+															/>
 															Si
 														</label>
 														<label>
-															<Field type="radio" name="addPizzas" value="no" className="mx-5" />
+															<Field
+																type="radio"
+																name="addPizzas"
+																value="no"
+																className="mx-5"
+															/>
 															No
 														</label>
 													</div>

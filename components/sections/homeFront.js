@@ -4,15 +4,24 @@ import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { motion } from "framer-motion";
+import useResize from "hooks/useResize";
 function HomeFront() {
+	const { isPhone } = useResize();
 	return (
 		<Element name="home" className="relative element">
-			<div className="bg-image font-nunito w-full min-h-screen mx-auto bg-cover bg-center ">
+			<div
+				className={`${
+					isPhone ? "bg-imagepc" : "bg-imagemovil"
+				} font-nunito w-full min-h-screen mx-auto bg-cover bg-center`}
+			>
 				<div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
 
 				<style jsx>{`
-					.bg-image {
-						background-image: url(/images/fondofront.jpg);
+					.bg-imagepc {
+						background-image: url(/images/fugazzetaPorcion.jpg);
+					}
+					.bg-imagemovil {
+						background-image: url(/images/fondoprincipal.jpg);
 					}
 				`}</style>
 
