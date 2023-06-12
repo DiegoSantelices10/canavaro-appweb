@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
 import { useEffect, useState } from "react";
@@ -44,7 +43,7 @@ export default function Home() {
 
 		const channel = pusher.subscribe("private-pizzeria");
 		channel.bind("canavaro", data => {
-			alert(JSON.stringify(data));
+			console.log(data);
 			// setChats([...chats, data.message]);
 		});
 	}, []);

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unknown-property */
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";

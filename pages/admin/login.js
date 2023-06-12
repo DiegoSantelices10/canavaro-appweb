@@ -28,8 +28,12 @@ export default function Login() {
 						</div>
 					</div>
 					<div className="w-auto mx-auto pt-10 pb-4">
-						<h1 className="font-extrabold text-center text-3xl font-nunito">¡Bienvenido!</h1>
-						<h3 className="font-medium text-lg font-nunito">Escribe tus credenciales para ingresar al sistema</h3>
+						<h1 className="font-extrabold text-center text-3xl font-nunito">
+							¡Bienvenido!
+						</h1>
+						<h3 className="font-medium text-lg font-nunito">
+							Escribe tus credenciales para ingresar al sistema
+						</h3>
 					</div>
 					<div className="flex flex-col gap-3">
 						<Formik
@@ -93,7 +97,9 @@ export default function Login() {
 					  before:mt-0.5 after:flex-1 after:border-t 
 					  after:border-gray-300 after:mt-0.5"
 					>
-						<p className="text-center text-xs text-slate-400 mx-4 mb-0 font-nunito">Nuestras redes</p>
+						<p className="text-center text-xs text-slate-400 mx-4 mb-0 font-nunito">
+							Nuestras redes
+						</p>
 					</div>
 					<div className="text-center mx-auto flex w-full gap-2">
 						<div className="flex items-center justify-center w-1/2 h-12 rounded-xl shadow  text-center bg-slate-50">
@@ -102,12 +108,17 @@ export default function Login() {
 							</a>
 						</div>
 						<div className="flex justify-center items-center w-1/2 h-12 rounded-xl shadow bg-slate-50">
-							<a className="flex items-center" href="https://facebook.com/Canavaro-289165874501296/">
+							<a
+								className="flex items-center"
+								href="https://facebook.com/Canavaro-289165874501296/"
+							>
 								<Image src="/images/logoig.png" width={30} height={30} alt="logo" />
 							</a>
 						</div>
 					</div>
-					<h1 className="font-light pt-4 text-center text-base font-nunito text-gray-400">Pelliza 1794 - Olivos</h1>
+					<h1 className="font-light pt-4 text-center text-base font-nunito text-gray-400">
+						Pelliza 1794 - Olivos
+					</h1>
 				</div>
 			</div>
 		</div>
