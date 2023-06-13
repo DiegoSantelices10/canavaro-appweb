@@ -19,14 +19,12 @@ import axios from "axios";
 
 export default function Cart({ data }) {
 	const { orderList, totalAmount } = useSelector(state => state.order);
-	const [order, setOrder] = useState([]);
 	const [type, setType] = useState("domicilioActual");
 	const [tipoDemora, setTipoDemora] = useState(null);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setOrder(orderList);
 		dispatch(calculateSubTotal());
 		dispatch(calculateTotalQuantity());
 	}, [orderList]);
@@ -34,9 +32,9 @@ export default function Cart({ data }) {
 	useEffect(() => {
 		const demo = data?.filter(item => item.tipo);
 		setTipoDemora(demo);
-
 		dispatch(addAddress(""));
 	}, []);
+
 	const deleteItem = _id => {
 		dispatch(removeItemCart(_id));
 	};
@@ -115,7 +113,7 @@ export default function Cart({ data }) {
 				</div>
 			</div>
 			<div className="mb-20">
-				{order.map((item, index) => {
+				{orderList.map((item, index) => {
 					return (
 						<div key={index} className="font-nunito">
 							<div className="mb-2 p-3  bg-white">

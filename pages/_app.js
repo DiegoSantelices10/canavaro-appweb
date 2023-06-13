@@ -16,7 +16,7 @@ function MyApp({ Component, router, ...rest }) {
 				animate="animateState"
 				exit="exitState"
 				transition={{
-					duration: 1.75,
+					duration: 1.25,
 				}}
 				variants={{
 					initialState: {

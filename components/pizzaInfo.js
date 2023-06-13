@@ -24,121 +24,156 @@ export default function PizzaInfo({
 	};
 	return (
 		<>
-			<div className="flex justify-between items-center">
-				<div className="w-1/3 font-medium">
+			<div className=" grid grid-cols-3 items-center justify-between w-full mb-3">
+				<div className="text-lg font-medium">
 					<h2>Gigante</h2>
 				</div>
-				<div className="w-1/3 font-medium text-center ">{<h2>$ {gigante}</h2>}</div>
-				<div className="font-roboto w-auto   px-3 text-end space-x-4 text-base">
-					<button
-						type="button"
-						className={quantityZero("gigante") ? "text-red-500 down " : "invisible"}
-						onClick={() =>
-							decrementCart({
-								_id: removeSpaces(nombre) + "gigante",
-								nombre,
-								categoria,
-								tamanio: "gigante",
-								precio: gigante,
-							})
+				<div className="font-medium text-lg flex items-center text-center ">
+					{<h2>$ {gigante}</h2>}
+				</div>
+				<div className=" flex items-center justify-end bottom-0 right-0 w-auto   text-end gap-3 text-base">
+					<div
+						className={
+							quantityZero("gigante")
+								? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50"
+								: "invisible"
 						}
 					>
-						-
-					</button>
-					<span className="font-normal">{productQuantity("gigante")}</span>
-					<button
-						type="button"
-						className="text-green-500"
-						onClick={() =>
-							incrementCart({
-								_id: nombre + "gigante",
-								nombre,
-								categoria,
-								tamanio: "gigante",
-								precio: gigante,
-							})
-						}
-					>
-						+
-					</button>
+						<button
+							type="button"
+							className="text-red-500 text-3xl "
+							onClick={() =>
+								decrementCart({
+									_id: removeSpaces(nombre) + "gigante",
+									nombre,
+									categoria,
+									tamanio: "gigante",
+									precio: gigante,
+								})
+							}
+						>
+							-
+						</button>
+					</div>
+
+					<span className="font-normal text-xl  h-6">{productQuantity("gigante")}</span>
+					<div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
+						<button
+							type="button"
+							className="text-green-500 text-3xl"
+							onClick={() =>
+								incrementCart({
+									_id: nombre + "gigante",
+									nombre,
+									categoria,
+									tamanio: "gigante",
+									precio: gigante,
+								})
+							}
+						>
+							+
+						</button>
+					</div>
 				</div>
 			</div>
-			<div className="flex justify-between items-center">
-				<div className="w-1/3 font-medium">
+			<div className=" grid grid-cols-3 justify-between items-center mb-3">
+				<div className="text-lg font-medium">
 					<h2>Mediana</h2>
 				</div>
-				<div className="w-1/3 font-medium text-center ">{<h2>$ {mediana}</h2>}</div>
-				<div className="font-roboto w-auto   px-3 text-end space-x-4 text-base">
-					<button
-						type="button"
-						className={quantityZero("mediana") ? "text-red-500 down " : "invisible"}
-						onClick={() =>
-							decrementCart({
-								_id: nombre + "mediana",
-								nombre,
-								categoria,
-								tamanio: "mediana",
-								precio: mediana,
-							})
+				<div className="text-lg font-medium  ">{<h2>$ {mediana}</h2>}</div>
+				<div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
+					<div
+						className={
+							quantityZero("mediana")
+								? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50"
+								: "invisible"
 						}
 					>
-						-
-					</button>
-					<span className="font-normal">{productQuantity("mediana")}</span>
-					<button
-						type="button"
-						className="text-green-500"
-						onClick={() =>
-							incrementCart({
-								_id: nombre + "mediana",
-								nombre,
-								categoria,
-								tamanio: "mediana",
-								precio: mediana,
-							})
-						}
-					>
-						+
-					</button>
+						<button
+							type="button"
+							className="text-red-500 text-3xl "
+							onClick={() =>
+								decrementCart({
+									_id: removeSpaces(nombre) + "mediana",
+									nombre,
+									categoria,
+									tamanio: "mediana",
+									precio: mediana,
+								})
+							}
+						>
+							-
+						</button>
+					</div>
+
+					<span className="font-normal text-xl  h-6">{productQuantity("mediana")}</span>
+					<div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
+						<button
+							type="button"
+							className="text-green-500 text-3xl"
+							onClick={() =>
+								incrementCart({
+									_id: nombre + "mediana",
+									nombre,
+									categoria,
+									tamanio: "mediana",
+									precio: mediana,
+								})
+							}
+						>
+							+
+						</button>
+					</div>
 				</div>
 			</div>
-			<div className="flex justify-between items-center">
-				<div className="w-1/3 font-medium">
+			<div className=" grid grid-cols-3 justify-between items-center mb-3">
+				<div className="text-lg font-medium">
 					<h2>Chica</h2>
 				</div>
-				<div className="w-1/3 font-medium text-center ">{<h2>$ {chica}</h2>}</div>
-				<div className="font-roboto w-auto  px-3 text-end space-x-4 text-base">
-					<button
-						type="button"
-						className={quantityZero("chica") ? "text-red-500 down " : "invisible"}
-						onClick={() =>
-							decrementCart({
-								_id: nombre + "chica",
-								nombre,
-								categoria,
-								tamanio: "chica",
-								precio: chica,
-							})
+				<div className="text-lg font-medium  ">{<h2>$ {chica}</h2>}</div>
+				<div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
+					<div
+						className={
+							quantityZero("chica")
+								? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50"
+								: "invisible"
 						}
 					>
-						-
-					</button>
-					<span className="font-normal">{productQuantity("chica")}</span>
-					<button
-						type="button"
-						className="text-green-500"
-						onClick={() =>
-							incrementCart({
-								_id: nombre + "chica",
-								nombre,
-								categoria,
-								tamanio: "chica",
-								precio: chica,
-							})
-						}
-					>
-						+
-					</button>
+						<button
+							type="button"
+							className="text-red-500 text-3xl "
+							onClick={() =>
+								decrementCart({
+									_id: removeSpaces(nombre) + "chica",
+									nombre,
+									categoria,
+									tamanio: "chica",
+									precio: chica,
+								})
+							}
+						>
+							-
+						</button>
+					</div>
+
+					<span className="font-normal text-xl  h-6">{productQuantity("chica")}</span>
+					<div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
+						<button
+							type="button"
+							className="text-green-500 text-3xl"
+							onClick={() =>
+								incrementCart({
+									_id: nombre + "chica",
+									nombre,
+									categoria,
+									tamanio: "chica",
+									precio: chica,
+								})
+							}
+						>
+							+
+						</button>
+					</div>
 				</div>
 			</div>
 		</>

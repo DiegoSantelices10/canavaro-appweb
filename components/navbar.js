@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-export default function Navbar({ nombre }) {
+export default function Navbar() {
 	const { orderList } = useSelector(state => state.order);
 	const [userData, setUserData] = useState({});
+
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem("user"));
 		setUserData(user);

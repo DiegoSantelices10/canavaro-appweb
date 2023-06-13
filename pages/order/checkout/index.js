@@ -2,7 +2,7 @@ import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ export default function Checkout() {
 	const [userLocal, setUserLocal] = useState({});
 
 	const dispatch = useDispatch();
-	// const router = useRouter();
+	const router = useRouter();
 
 	useEffect(() => {
 		if (user.nombre === "") {
@@ -45,7 +45,7 @@ export default function Checkout() {
 			<Formik
 				initialValues={{
 					cliente: user?.nombre || userLocal.nombre,
-					domicilio: user?.direccion || "Retira por local",
+					domicilio: user?.direccion || "",
 					telefono: user?.telefono || userLocal.telefono,
 					productos: orderList || {},
 					comentarios: "",
@@ -54,18 +54,18 @@ export default function Checkout() {
 					total: totalAmount || "",
 				}}
 				onSubmit={async values => {
-					console.log("pedido", values);
 					const res = await axios.post("/api/pusher", { message: values });
 
 					if (res.status === 200) {
 						await axios.post("/api/sales/", values).then(res => {
-							console.log(res);
+							if (res.status === 201) {
+								dispatch(setCheckout(values));
+								dispatch(clearUser());
+								dispatch(clearOrderList());
+								router.push("checkout/successful");
+							}
 						});
 					}
-					dispatch(setCheckout(values));
-					dispatch(clearUser());
-					dispatch(clearOrderList());
-					// router.push("checkout/successful");
 				}}
 			>
 				{({ values }) => {

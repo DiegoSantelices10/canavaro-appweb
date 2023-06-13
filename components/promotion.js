@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addProductPromo, decrementProductPromo, setQuantityDemanded } from "store/reducers/orderSlice";
+import {
+	addProductPromo,
+	decrementProductPromo,
+	setQuantityDemanded,
+} from "store/reducers/orderSlice";
 
 export default function Promotion({ cantMax, data, setSelectCombo }) {
 	const [select, setSelect] = useState("");
@@ -37,7 +41,9 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 		setSelect(e.target.value);
 		if (products !== null) {
 			const { _id, nombre, descripcion } =
-				products.filter(item => item.categoria === "promociones").find(item => item.nombre === e.target.value) || {};
+				products
+					.filter(item => item.categoria === "promociones")
+					.find(item => item.nombre === e.target.value) || {};
 			const res = { _id, nombre, descripcion };
 			setSelectCombo(res);
 		}
@@ -51,7 +57,14 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 			{(data.nombre === "Combo 4" || data.nombre === "Combo 5") && (
 				<>
 					<div className="p-2 flex gap-2 justify-start items-center">
-						<input id="1" type="radio" value="Combo 1" name="combo" onChange={onChangeValue} checked={select === "Combo 1"} />
+						<input
+							id="1"
+							type="radio"
+							value="Combo 1"
+							name="combo"
+							onChange={onChangeValue}
+							checked={select === "Combo 1"}
+						/>
 						{products
 							?.filter(item => item.nombre.includes("Combo 1"))
 							.map(producto => {
@@ -64,7 +77,14 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 							})}
 					</div>
 					<div className="p-2 flex gap-2 justify-start items-center">
-						<input id="2" type="radio" value="Combo 2" name="combo" onChange={onChangeValue} checked={select === "Combo 2"} />
+						<input
+							id="2"
+							type="radio"
+							value="Combo 2"
+							name="combo"
+							onChange={onChangeValue}
+							checked={select === "Combo 2"}
+						/>
 						{products
 							?.filter(item => item.nombre.includes("Combo 2"))
 							.map(producto => {
@@ -81,11 +101,17 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 
 			{data.addEmpanadas === "no" ? (
 				<div className="flex justify-between items-center ">
-					<div className="w-1/2 font-medium">
+					<div className="text-lg font-medium">
 						<h2>{data.nombre}</h2>
 					</div>
 					<div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
-						<div className={orderPromo.length >= 1 ? "rounded-full  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50" : "invisible"}>
+						<div
+							className={
+								orderPromo.length >= 1
+									? "rounded-full  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50"
+									: "invisible"
+							}
+						>
 							<button
 								type="button"
 								className="text-red-500 text-2xl "
@@ -118,11 +144,15 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 						<>
 							{quantityDemanded < 1 ? (
 								<div className="bg-green-500 w-auto p-2">
-									<p className="text-white text-center">¡ Se completo la cantidad requerida !</p>
+									<p className="text-white text-center">
+										¡ Se completo la cantidad requerida !
+									</p>
 								</div>
 							) : (
 								<div className="bg-red-500 w-auto p-2">
-									<p className="text-white text-center">Selecciona {quantityDemanded} empanadas para completar la promo</p>
+									<p className="text-white text-center">
+										Selecciona {quantityDemanded} empanadas para completar la promo
+									</p>
 								</div>
 							)}
 
@@ -130,12 +160,18 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 								?.filter(item => item.categoria === "empanadas")
 								.map(({ _id, nombre }) => {
 									return (
-										<div key={_id} className="flex justify-between items-center my-2  ">
+										<div key={_id} className="flex justify-between items-center my-6  ">
 											<div className="w-1/2 font-medium">
 												<h2>{nombre}</h2>
 											</div>
 											<div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
-												<div className={quantityZero(_id) ? "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50" : "invisible"}>
+												<div
+													className={
+														quantityZero(_id)
+															? "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+															: "invisible"
+													}
+												>
 													<button
 														type="button"
 														className="text-red-500 text-3xl"
@@ -148,8 +184,16 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 													</button>
 												</div>
 
-												<span className="font-normal text-xl  h-6">{productQuantity(_id)}</span>
-												<div className={quantityDemanded < 1 ? `invisible` : "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"}>
+												<span className="font-normal text-xl  h-6">
+													{productQuantity(_id)}
+												</span>
+												<div
+													className={
+														quantityDemanded < 1
+															? `invisible`
+															: "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+													}
+												>
 													<button
 														type="button"
 														className="text-green-500 font-normal text-3xl"
