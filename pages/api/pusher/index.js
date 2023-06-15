@@ -10,7 +10,7 @@ export const pusher = new Pusher({
 });
 
 export default async function handler(req, res) {
-	const { message } = req.body;
+	const message = req.body;
 
 	const response = await pusher.trigger("private-pizzeria", "canavaro", {
 		message,

@@ -1,5 +1,4 @@
 import { model, models, Schema } from "mongoose";
-
 const saleSchema = new Schema(
 	{
 		cliente: {
@@ -33,10 +32,18 @@ const saleSchema = new Schema(
 		pagaCon: {
 			type: Number,
 		},
-		total: {
-			url: Number,
+		tipoEnvio: {
+			type: String,
 		},
-		createdAt: { type: Date, default: Date.now },
+		total: {
+			type: Number,
+		},
+		creado: {
+			type: String,
+		},
+		liberado: {
+			type: Boolean,
+		},
 	},
 	{
 		timestamp: true,

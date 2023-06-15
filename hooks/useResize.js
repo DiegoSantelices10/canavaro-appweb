@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 export default function useRisize() {
 	const isClient = typeof window === "object";
@@ -6,10 +6,13 @@ export default function useRisize() {
 	// eslint-disable-next-line no-unneeded-ternary
 	const [isPhone, setIsPhone] = useState(!!(isClient && window?.innerWidth > 600));
 
-	const handleResize = () => {
-		if (isClient && window.innerWidth > 600) setIsPhone(true);
-		else setIsPhone(false);
-	};
+	const handleResize = useCallback(() => {
+		if (isClient && window.innerWidth > 600) {
+			setIsPhone(true);
+		} else {
+			setIsPhone(false);
+		}
+	}, [isClient]);
 
 	useEffect(() => {
 		handleResize();

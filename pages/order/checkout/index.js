@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { clearOrderList, setCheckout } from "store/reducers/orderSlice";
-import { clearUser } from "store/reducers/userSlice";
-
+import moment from "moment-timezone";
 export default function Checkout() {
 	const user = useSelector(state => state.user);
 	const { totalAmount, orderList, demora } = useSelector(state => state.order);
@@ -54,17 +53,58 @@ export default function Checkout() {
 					total: totalAmount || "",
 				}}
 				onSubmit={async values => {
-					const res = await axios.post("/api/pusher", { message: values });
+					const hora = moment
+						.tz("America/Argentina/Buenos_Aires")
+						.format("HH:mm DD-MM-YYYY");
 
-					if (res.status === 200) {
-						await axios.post("/api/sales/", values).then(res => {
-							if (res.status === 201) {
-								dispatch(setCheckout(values));
-								dispatch(clearUser());
-								dispatch(clearOrderList());
-								router.push("checkout/successful");
-							}
+					if (values.domicilio !== "") {
+						const res = await axios.post("/api/pusher", {
+							...values,
+							tipoEnvio: "Envio a domicilio",
+							creado: hora,
+							liberado: false,
 						});
+
+						if (res.status === 200) {
+							await axios
+								.post("/api/sales/", {
+									...values,
+									tipoEnvio: "Envio a domicilio",
+									creado: hora,
+									liberado: false,
+								})
+								.then(res => {
+									if (res.status === 201) {
+										dispatch(setCheckout(values));
+										dispatch(clearOrderList());
+										router.push("checkout/successful");
+									}
+								});
+						}
+					} else {
+						const res = await axios.post("/api/pusher", {
+							...values,
+							tipoEnvio: "Retira por local",
+							creado: hora,
+							liberado: false,
+						});
+
+						if (res.status === 200) {
+							await axios
+								.post("/api/sales/", {
+									...values,
+									tipoEnvio: "Retira por local",
+									creado: hora,
+									liberado: false,
+								})
+								.then(res => {
+									if (res.status === 201) {
+										dispatch(setCheckout(values));
+										dispatch(clearOrderList());
+										router.push("checkout/successful");
+									}
+								});
+						}
 					}
 				}}
 			>
@@ -94,7 +134,7 @@ export default function Checkout() {
 								<hr />
 								<div className="p-3 py-5">
 									<h2 className="font-nunito font-extrabold text-base">
-										Tiempo de entrega
+										{user.direccion !== "" ? "Tiempo de entrega" : "Retiralo en"}
 									</h2>
 									<p className="px-1">{demora}</p>
 								</div>

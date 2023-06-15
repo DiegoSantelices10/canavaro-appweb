@@ -16,12 +16,10 @@ export default function Home() {
 	const [data, setData] = useState(null);
 	const [selectedDomicilio, setSelectedDomicilio] = useState({});
 	const [selectedLocal, setSelectedLocal] = useState({});
-	// const [chats, setChats] = useState([]);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setRenderSale(pedidos);
 		localStorage.setItem("sales", JSON.stringify(pedidos));
 		dispatch(setSaleData(pedidos));
 		(async () => {
@@ -35,6 +33,15 @@ export default function Home() {
 	}, []);
 
 	useEffect(() => {
+		(async () => {
+			const res = await axios.get("/api/sales");
+			const pedidos = res.data.filter(item => item.liberado !== true);
+			console.log(pedidos);
+			setRenderSale(pedidos);
+		})();
+	}, []);
+
+	useEffect(() => {
 		const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {
 			cluster: "us2",
 			authEndpoint: "/api/pusher/auth",
@@ -43,8 +50,7 @@ export default function Home() {
 
 		const channel = pusher.subscribe("private-pizzeria");
 		channel.bind("canavaro", data => {
-			console.log(data);
-			// setChats([...chats, data.message]);
+			setRenderSale(prevRenderSale => [...prevRenderSale, data.message]);
 		});
 	}, []);
 
@@ -69,11 +75,19 @@ export default function Home() {
 		}
 	};
 
+	const separarNumero = numero => {
+		const segmento1 = numero.substring(0, 2);
+		const segmento2 = numero.substring(2, 6);
+		const segmento3 = numero.substring(6, 10);
+
+		return `${segmento1} ${segmento2} ${segmento3}`;
+	};
+
 	return (
 		<Layout>
 			{currentPedido && (
 				<ModalPedido
-					key={currentPedido._id}
+					id={currentPedido._id}
 					show={showModal}
 					handleClose={handleCloseModal}
 					pedido={currentPedido}
@@ -115,44 +129,52 @@ export default function Home() {
 
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
-						{renderSale?.map(item => (
-							<div
-								key={item._id}
-								className="w-full md:w-72 bg-white rounded- shadow-md p-3 border-2"
-							>
-								<div className="w-full text-sm">
-									<h2 className="text-right">{item?._id}</h2>
-									<div className="text-left py-3 font-medium">
-										<h5 className="text-sm">{item?.direccion}</h5>
-										<h5 className="font-normal">{item?.cliente}</h5>
-										<h5 className="font-normal text-xs text-gray-400">
-											{item?.tipoEnvio}
-										</h5>
+						{renderSale.length > 0 ? (
+							renderSale?.map((item, index) => (
+								<div
+									key={index}
+									className="w-full  md:w-72 bg-white rounded h-auto shadow-md p-3 border-2"
+								>
+									<div className="w-full text-sm">
+										<h2 className="text-right">{index}</h2>
+										<div className="text-left py-3 font-medium">
+											<h5 className="font-semibold">{item?.cliente}</h5>
+											<h5 className="text-sm font-normal">
+												{item?.domicilio || separarNumero(item?.telefono)}
+											</h5>
+											<h5 className="font-normal text-xs text-gray-400">
+												{item?.tipoEnvio}
+											</h5>
+										</div>
+									</div>
+									<div className="flex justify-end  gap-3 w-full">
+										<button
+											onClick={() => handleOpenModal(item)}
+											className="px-4 py-2 w-auto rounded-md text-xs font-medium  
+														shadow focus:outline-none focus:ring transition 
+														text-slate-500  hover:bg-blue-100 
+														active:bg-blue-200 focus:ring-blue-300"
+											type="submit"
+										>
+											Ver descripcion
+										</button>
+										<button
+											className="px-4 py-2 w-auto rounded-md text-xs font-medium border shadow
+												focus:outline-none focus:ring transition text-white 
+											bg-red-500  hover:bg-red-600 
+											hover:border-white "
+											type="submit"
+										>
+											Liberar
+										</button>
 									</div>
 								</div>
-								<div className="flex justify-end gap-3 w-full">
-									<button
-										onClick={() => handleOpenModal(item)}
-										className="px-4 py-2 w-1/2 rounded-md text-xs font-medium  
-                                 shadow focus:outline-none focus:ring transition 
-                                 text-slate-500  hover:bg-blue-100 
-                                 active:bg-blue-200 focus:ring-blue-300"
-										type="submit"
-									>
-										Ver descripcion
-									</button>
-									<button
-										className="px-4 py-2 w-1/2 rounded-md text-xs font-medium border shadow
-                                 focus:outline-none focus:ring transition text-white 
-                               bg-red-500  hover:bg-red-600 
-                               hover:border-white "
-										type="submit"
-									>
-										Liberar
-									</button>
-								</div>
-							</div>
-						))}
+							))
+						) : (
+							<p className="text-center w-full font-semibold font-poppins">
+								No Hay pedidos
+							</p>
+						)}
 					</div>
 				</div>
 			</div>

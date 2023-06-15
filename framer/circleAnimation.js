@@ -1,4 +1,4 @@
-import { CheckCircleOutlined } from "@ant-design/icons";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 
 const CircleAnimation = () => {
@@ -30,8 +30,13 @@ const CircleAnimation = () => {
 			}}
 		>
 			<motion.div
-				initial={{ width: "100vw", height: "100vw", borderRadius: "50%", backgroundColor: "red" }}
-				animate={{ width: 0, height: 0, borderRadius: "50%", backgroundColor: "red" }}
+				initial={{
+					width: "100vw",
+					height: "100vw",
+					borderRadius: "50%",
+					backgroundColor: "#5EEF7B",
+				}}
+				animate={{ width: 0, height: 0, borderRadius: "50%", backgroundColor: "#5EEF7B" }}
 				transition={{ duration: 1 }}
 				style={{
 					position: "absolute",
@@ -60,8 +65,16 @@ const CircleAnimation = () => {
 				}}
 			>
 				<motion.div variants={textVariants}>
-					<CheckCircleOutlined style={{ fontSize: "64px", color: "red" }} />
-					<h2 className="text-black font-poppins text-xl font-bold w-full">Tu pedido fue realizado con éxito! </h2>
+					<BsFillCheckCircleFill
+						style={{
+							fontSize: "60px",
+							color: "#5EEF7B",
+							margin: "auto",
+						}}
+					/>
+					<h2 className="text-black font-poppins text-xl font-bold w-full mt-5">
+						Tu pedido fue realizado con éxito!{" "}
+					</h2>
 					<h3 className="text-black font-poppins text-xl font-bold">Muchas gracias!</h3>
 				</motion.div>
 			</motion.div>

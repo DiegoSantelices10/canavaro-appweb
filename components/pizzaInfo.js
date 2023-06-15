@@ -63,7 +63,7 @@ export default function PizzaInfo({
 							className="text-green-500 text-3xl"
 							onClick={() =>
 								incrementCart({
-									_id: nombre + "gigante",
+									_id: removeSpaces(nombre) + "gigante",
 									nombre,
 									categoria,
 									tamanio: "gigante",
@@ -113,7 +113,7 @@ export default function PizzaInfo({
 							className="text-green-500 text-3xl"
 							onClick={() =>
 								incrementCart({
-									_id: nombre + "mediana",
+									_id: removeSpaces(nombre) + "mediana",
 									nombre,
 									categoria,
 									tamanio: "mediana",
@@ -163,7 +163,7 @@ export default function PizzaInfo({
 							className="text-green-500 text-3xl"
 							onClick={() =>
 								incrementCart({
-									_id: nombre + "chica",
+									_id: removeSpaces(nombre) + "chica",
 									nombre,
 									categoria,
 									tamanio: "chica",

@@ -14,7 +14,6 @@ import { getProducts } from "services/fetchData";
 
 export default function index({ state }) {
 	useEffect(() => {
-		console.log("productos", state);
 		localStorage.setItem("productos", JSON.stringify(state));
 	});
 

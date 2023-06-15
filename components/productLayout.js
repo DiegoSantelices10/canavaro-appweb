@@ -23,9 +23,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-export default function ProductLayout({ data, data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio } }) {
+export default function ProductLayout({
+	data,
+	data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
+}) {
 	const { orderPromo, orderList, quantityDemanded } = useSelector(state => state.order);
-	const [selectCombo, setSelectCombo] = useState({});
+	const [selectCombo, setSelectCombo] = useState("");
 
 	const comentarioRef = useRef();
 	const router = useRouter();
@@ -76,29 +79,49 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 
 	const addCartPromo = value => {
 		if (data.addEmpanadas === "si") {
-			const promo = {
-				_id,
-				nombre,
-				productos: [selectCombo, ...value],
-				descripcion,
-				imagen: imagen?.url,
-				categoria,
-				comentarios: comentarioRef.current.value,
-				cantidadMaxima,
-				precio,
-				cantidad: 1,
-			};
-			dispatch(addPromoOrderList(promo));
-			toast.error("Se agrego al carrito!", {
-				icon: false,
-				theme: "dark",
-			});
+			if (selectCombo) {
+				const promo = {
+					_id,
+					nombre,
+					products: [selectCombo, ...value],
+					imagen: imagen?.url,
+					categoria,
+					comentarios: comentarioRef.current.value,
+					cantidadMaxima,
+					precio,
+					cantidad: 1,
+				};
+				dispatch(addPromoOrderList(promo));
+				toast.error("Se agrego al carrito!", {
+					icon: false,
+					theme: "dark",
+				});
+			} else {
+				const promo = {
+					_id,
+					nombre,
+					products: [...value],
+					imagen: imagen?.url,
+					categoria,
+					comentarios: comentarioRef.current.value,
+					cantidadMaxima,
+					precio,
+					cantidad: 1,
+				};
+				dispatch(addPromoOrderList(promo));
+				toast.error("Se agrego al carrito!", {
+					icon: false,
+					theme: "dark",
+				});
+			}
 		} else {
 			toast.error("Se agrego al carrito!", {
 				icon: false,
 				theme: "dark",
 			});
-			value.map(item => dispatch(addPromoOrderList({ ...item, comentarios: comentarioRef.current.value })));
+			value.map(item =>
+				dispatch(addPromoOrderList({ ...item, comentarios: comentarioRef.current.value }))
+			);
 		}
 
 		dispatch(clearOrderPromo());
@@ -107,9 +130,20 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 	return (
 		<div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
 			<div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
-				<Image src={imagen?.url} layout="responsive" width={80} height={40} objectFit="cover" objectPosition="center" alt={nombre || "img"} />
+				<Image
+					src={imagen?.url}
+					layout="responsive"
+					width={80}
+					height={40}
+					objectFit="cover"
+					objectPosition="center"
+					alt={nombre || "img"}
+				/>
 				<button onClick={returnHome}>
-					<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+					<FiChevronsLeft
+						className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+						size={30}
+					/>
 				</button>
 			</div>
 
@@ -118,16 +152,30 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 					<div className="w-full bg-white p-3">
 						<h1 className="font-bold text-lg text-gray-800">{nombre}</h1>
 						<p className=" font-normal text-sm  text-gray-400">{descripcion}</p>
-						{categoria === "promociones" ? <p className=" font-normal  text-sm text-gray-400">$ {precio}</p> : ""}
+						{categoria === "promociones" ? (
+							<p className=" font-normal  text-sm text-gray-400">$ {precio}</p>
+						) : (
+							""
+						)}
 					</div>
 					<hr />
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
 						{categoria === "pizzas" ? (
 							<div className=" flex flex-col gap-y-2  justify-evenly">
-								<PizzaInfo data={data} incrementCart={incrementCartPizza} decrementCart={decrementCartPizza} cart={orderPromo} />
+								<PizzaInfo
+									data={data}
+									incrementCart={incrementCartPizza}
+									decrementCart={decrementCartPizza}
+									cart={orderPromo}
+								/>
 							</div>
 						) : (
-							<Promotion setSelectCombo={setSelectCombo} data={data} quantity={productQuantity} cantMax={cantidadMaxima} />
+							<Promotion
+								setSelectCombo={setSelectCombo}
+								data={data}
+								quantity={productQuantity}
+								cantMax={cantidadMaxima}
+							/>
 						)}
 					</div>
 				</div>
@@ -135,7 +183,13 @@ export default function ProductLayout({ data, data: { _id, nombre, descripcion, 
 				<div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
 					<label className="pb-1">
 						Comentarios
-						<input id="comentarios" name="comentarios" type="text" ref={comentarioRef} className="border border-gray-300 rounded-md w-full p-2" />
+						<input
+							id="comentarios"
+							name="comentarios"
+							type="text"
+							ref={comentarioRef}
+							className="border border-gray-300 rounded-md w-full p-2"
+						/>
 					</label>
 				</div>
 			</div>

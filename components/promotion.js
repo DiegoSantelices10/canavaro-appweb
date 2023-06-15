@@ -157,7 +157,9 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 							)}
 
 							{products
-								?.filter(item => item.categoria === "empanadas")
+								?.filter(
+									item => item.categoria === "empanadas" && item.available === true
+								)
 								.map(({ _id, nombre }) => {
 									return (
 										<div key={_id} className="flex justify-between items-center my-6  ">

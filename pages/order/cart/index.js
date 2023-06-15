@@ -106,7 +106,9 @@ export default function Cart({ data }) {
 									placeholder="Ingresa tu direccion, Barrio"
 								/>
 							)}
-							<h1 className="font-light">Te llega en</h1>
+							<h1 className="font-light">
+								{type === "domicilioActual" ? "Te llega en" : "Retiralo en"}
+							</h1>
 							<strong>{handleChangeType(type)}</strong>
 						</div>
 					</div>

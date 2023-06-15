@@ -13,30 +13,47 @@ const handler = async (req, res) => {
 	try {
 		await runMiddleware(req, res, cors);
 		if (method === "POST") {
-			console.log("entro back");
-			const { cliente, direccion, telefono, productos, comentarios, medioDePago, pagaCon, total } = req.body;
-
-			const newSale = new Venta({
+			const {
 				cliente,
-				direccion,
+				domicilio,
 				telefono,
 				productos,
 				comentarios,
 				medioDePago,
+				tipoEnvio,
 				pagaCon,
 				total,
+				creado,
+			} = req.body;
+
+			const newSale = new Venta({
+				cliente,
+				domicilio,
+				telefono,
+				productos,
+				tipoEnvio,
+				comentarios,
+				medioDePago,
+				pagaCon,
+				total,
+				creado,
 			});
 			await newSale
 				.save()
-				.then(() => {
-					console.log("Venta guardada correctamente");
+				.then(response => {
+					console.log(response);
+					return res.status(201).json({
+						message: "ok",
+					});
 				})
 				.catch(error => {
 					console.error("Error al guardar la venta:", error);
 				});
-			return res.status(201).json({
-				message: "ok",
-			});
+		}
+
+		if (method === "GET") {
+			const sales = await Venta.find();
+			return res.status(200).json(sales);
 		}
 	} catch (error) {
 		return await res.status(500).json({ error });

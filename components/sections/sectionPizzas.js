@@ -89,7 +89,7 @@ export default function SectionPizza() {
 					</p>
 					{products
 						?.filter(item => item.categoria === "pizzas")
-						.sort((a, b) => a.nombre.localeCompare(b.nombre))
+						?.sort((a, b) => a.nombre.localeCompare(b.nombre))
 						.map(producto => {
 							return (
 								<div key={producto._id} className="w-auto">

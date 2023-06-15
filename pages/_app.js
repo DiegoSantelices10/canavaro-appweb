@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, router, ...rest }) {
 	const { store, props } = wrapper.useWrappedStore(rest);
+
 	return (
 		<AnimatePresence>
 			<motion.div
