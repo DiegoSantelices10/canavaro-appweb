@@ -100,6 +100,7 @@ export default function Home() {
 	};
 
 	const addCartPromo = value => {
+		console.log(value);
 		const res = value.find(item => item.categoria === "bebidas");
 
 		if (res) {
@@ -115,6 +116,7 @@ export default function Home() {
 			dispatch(calculateTotalQuantity());
 			return;
 		}
+
 		const result = {
 			_id: idGenerator,
 			nombre: "Empanadas a eleccion",

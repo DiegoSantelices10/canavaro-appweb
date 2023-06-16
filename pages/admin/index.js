@@ -1,7 +1,7 @@
 import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
 import { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
 import { pedidos } from "services/fetchData";
 import Button from "components/buttonDemora";
 import { useDispatch } from "react-redux";
@@ -36,7 +36,6 @@ export default function Home() {
 		(async () => {
 			const res = await axios.get("/api/sales");
 			const pedidos = res.data.filter(item => item.liberado !== true);
-			console.log(pedidos);
 			setRenderSale(pedidos);
 		})();
 	}, []);
@@ -131,8 +130,11 @@ export default function Home() {
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
 						{renderSale.length > 0 ? (
 							renderSale?.map((item, index) => (
-								<div
+								<motion.div
 									key={index}
+									initial={{ opacity: 0, y: -10 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: -10 }}
 									className="w-full  md:w-72 bg-white rounded h-auto shadow-md p-3 border-2"
 								>
 									<div className="w-full text-sm">
@@ -168,7 +170,7 @@ export default function Home() {
 											Liberar
 										</button>
 									</div>
-								</div>
+								</motion.div>
 							))
 						) : (
 							<p className="text-center w-full font-semibold font-poppins">

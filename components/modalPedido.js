@@ -98,7 +98,12 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 																	x {item?.cant || item?.cantidad}
 																</span>
 															</p>
-															<p>$ {item?.precio}</p>
+															<p>
+																${" "}
+																{item.categoria === "bebidas"
+																	? item.precio * item.cantidad
+																	: item?.precio}
+															</p>
 														</div>
 														{item.products &&
 															item.products.map(producto => (
