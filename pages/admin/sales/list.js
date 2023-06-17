@@ -8,17 +8,18 @@ export default function Sales() {
 	const [totalSale, setTotalSale] = useState("");
 
 	useEffect(() => {
-		if (sales) {
+		if (!sales) {
+			console.log("entro vacio");
 			const salesLocal = JSON.parse(localStorage.getItem("sales"));
 			dispatch(setSaleData(salesLocal));
 		}
 
-		const total = sales.reduce((accumulator, pedido) => accumulator + pedido.precioTotal, 0);
+		const total = sales.reduce((accumulator, pedido) => accumulator + pedido.total, 0);
 		setTotalSale(total);
 	}, []);
 
 	useEffect(() => {
-		const total = sales.reduce((accumulator, pedido) => accumulator + pedido.precioTotal, 0);
+		const total = sales.reduce((accumulator, pedido) => accumulator + pedido.total, 0);
 		setTotalSale(total);
 	}, [sales]);
 
@@ -37,10 +38,10 @@ export default function Sales() {
 					<div className="w-full lg:w-11/12 mx-auto h-auto mt-4 ">
 						<div className="w-full mx-auto">
 							<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-								<table className="w-full text-left text-sm  text-gray-500 dark:text-gray-400">
+								<table className="w-full text-left text-sm  text-gray-500 dark:text-gray-400 ">
 									<thead>
 										<tr>
-											<th scope="col" className="pl-2 py-3">
+											<th scope="col" className="pl-4 py-3">
 												Cliente
 											</th>
 											<th scope="col" className="pl-2 py-3">
@@ -57,13 +58,16 @@ export default function Sales() {
 									<tbody className="text-gray-800 font-nunito">
 										{sales?.map((pedido, index) => {
 											return (
-												<tr key={pedido._id} className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}>
-													<th scope="row" className="pl-2 py-4 w-auto  ">
+												<tr
+													key={pedido._id}
+													className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
+												>
+													<th scope="row" className="pl-4 py-4 w-auto  ">
 														{pedido.cliente}
 													</th>
 													<td className="pl-2 py-4 font-bold">{pedido.tipoEnvio}</td>
-													<td className="pl-2 py-4">{pedido.horaPedido}</td>
-													<td className="pl-2 py-4 ">$ {pedido.precioTotal}</td>
+													<td className="pl-2 py-4">{pedido.creado}</td>
+													<td className="pl-2 py-4 ">$ {pedido.total}</td>
 												</tr>
 											);
 										})}

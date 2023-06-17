@@ -10,10 +10,13 @@ export const saleSlice = createSlice({
 		setSaleData: (state, { payload }) => {
 			state.sales = payload;
 		},
+		addSale: (state, { payload }) => {
+			state.sales.push(payload);
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setSaleData } = saleSlice.actions;
+export const { setSaleData, addSale } = saleSlice.actions;
 
 export default saleSlice.reducer;

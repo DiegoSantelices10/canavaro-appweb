@@ -44,6 +44,7 @@ const handler = async (req, res) => {
 					console.log(response);
 					return res.status(201).json({
 						message: "ok",
+						response,
 					});
 				})
 				.catch(error => {

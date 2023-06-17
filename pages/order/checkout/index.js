@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { clearOrderList, setCheckout } from "store/reducers/orderSlice";
+import { clearOrderList } from "store/reducers/orderSlice";
 import moment from "moment-timezone";
 export default function Checkout() {
 	const user = useSelector(state => state.user);
@@ -58,52 +58,33 @@ export default function Checkout() {
 						.format("HH:mm DD-MM-YYYY");
 
 					if (values.domicilio !== "") {
-						const res = await axios.post("/api/pusher", {
+						const res = await axios.post("/api/sales/", {
 							...values,
 							tipoEnvio: "Envio a domicilio",
 							creado: hora,
 							liberado: false,
 						});
-
-						if (res.status === 200) {
-							await axios
-								.post("/api/sales/", {
-									...values,
-									tipoEnvio: "Envio a domicilio",
-									creado: hora,
-									liberado: false,
-								})
-								.then(res => {
-									if (res.status === 201) {
-										dispatch(setCheckout(values));
-										dispatch(clearOrderList());
-										router.push("checkout/successful");
-									}
-								});
+						if (res.data.message === "ok") {
+							const response = await axios.post("/api/pusher", res.data.response);
+							if (response.status === 200) {
+								dispatch(clearOrderList());
+								router.push("checkout/successful");
+							}
 						}
 					} else {
-						const res = await axios.post("/api/pusher", {
+						const res = await axios.post("/api/sales/", {
 							...values,
 							tipoEnvio: "Retira por local",
 							creado: hora,
 							liberado: false,
 						});
-
-						if (res.status === 200) {
-							await axios
-								.post("/api/sales/", {
-									...values,
-									tipoEnvio: "Retira por local",
-									creado: hora,
-									liberado: false,
-								})
-								.then(res => {
-									if (res.status === 201) {
-										dispatch(setCheckout(values));
-										dispatch(clearOrderList());
-										router.push("checkout/successful");
-									}
-								});
+						console.log("pedido neuvo", res.data);
+						if (res.data.message === "ok") {
+							const response = await axios.post("/api/pusher", res.data.response);
+							if (response.status === 200) {
+								dispatch(clearOrderList());
+								router.push("checkout/successful");
+							}
 						}
 					}
 				}}
