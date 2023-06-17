@@ -49,7 +49,6 @@ export default function Home() {
 
 		const channel = pusher.subscribe("private-pizzeria");
 		channel.bind("canavaro", data => {
-			console.log("pusher", data.message);
 			dispatch(addSale(data.message));
 		});
 		return () => {
@@ -86,7 +85,9 @@ export default function Home() {
 		return `${segmento1} ${segmento2} ${segmento3}`;
 	};
 
-	const handleDelete = tel => {};
+	const handleDelete = async id => {
+		await axios.put(`/api/sales/${id}`, { liberado: true }).then(res => console.log(res));
+	};
 	return (
 		<Layout>
 			{currentPedido && (
@@ -131,7 +132,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="w-full bg-white min-h-screen  mx-auto text-center p-4 rounded-md ">
+				<div className="w-full bg-white min-h-screen  mx-auto text-center p-2 mt-10 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
 						{sales?.length > 0 ? (
 							sales.map((item, index) => (

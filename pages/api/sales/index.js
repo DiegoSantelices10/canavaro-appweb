@@ -41,7 +41,6 @@ const handler = async (req, res) => {
 			await newSale
 				.save()
 				.then(response => {
-					console.log(response);
 					return res.status(201).json({
 						message: "ok",
 						response,

@@ -100,7 +100,6 @@ export default function Home() {
 	};
 
 	const addCartPromo = value => {
-		console.log(value);
 		const res = value.find(item => item.categoria === "bebidas");
 
 		if (res) {
