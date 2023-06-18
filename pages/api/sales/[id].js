@@ -19,10 +19,12 @@ const handler = async (req, res) => {
 				runValidators: true,
 			});
 
-			return res.status(200).json({
-				success: true,
-				data: sale,
-			});
+			if (sale) {
+				return res.status(200).json({
+					success: true,
+					data: sale,
+				});
+			}
 		}
 	} catch (error) {
 		return await res.status(500).json({ error });

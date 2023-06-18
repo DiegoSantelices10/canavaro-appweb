@@ -53,9 +53,7 @@ export default function Checkout() {
 					total: totalAmount || "",
 				}}
 				onSubmit={async values => {
-					const hora = moment
-						.tz("America/Argentina/Buenos_Aires")
-						.format("HH:mm DD-MM-YYYY");
+					const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm");
 
 					if (values.domicilio !== "") {
 						const res = await axios.post("/api/sales/", {
@@ -78,7 +76,6 @@ export default function Checkout() {
 							creado: hora,
 							liberado: false,
 						});
-						console.log("pedido neuvo", res.data);
 						if (res.data.message === "ok") {
 							const response = await axios.post("/api/pusher", res.data.response);
 							if (response.status === 200) {
@@ -147,7 +144,7 @@ export default function Checkout() {
 												/>
 												Efectivo
 											</label>
-											<label className="">
+											<label>
 												<Field
 													type="radio"
 													name="medioDePago"
@@ -162,7 +159,7 @@ export default function Checkout() {
 												<Field
 													id="pagaCon"
 													name="pagaCon"
-													className="border border-slate-300 rounded-md w-full p-2"
+													className="border border-slate-300 rounded-md w-1/2 p-2"
 													placeholder="¿Con cuanto vas a pagar?"
 												/>
 											)}

@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Button from "components/buttonDemora";
 import { useDispatch, useSelector } from "react-redux";
-import { addSale, setSaleData } from "store/reducers/saleSlice";
+import {
+	addSale,
+	setRenderSaleData,
+	setSaleData,
+	updateSale,
+} from "store/reducers/saleSlice";
 import axios from "axios";
 import Pusher from "pusher-js";
+import Swal from "sweetalert2";
 
 export default function Home() {
 	const [showModal, setShowModal] = useState(false);
@@ -14,7 +20,7 @@ export default function Home() {
 	const [data, setData] = useState(null);
 	const [selectedDomicilio, setSelectedDomicilio] = useState({});
 	const [selectedLocal, setSelectedLocal] = useState({});
-	const { sales } = useSelector(state => state.sale);
+	const { renderSales } = useSelector(state => state.sale);
 
 	const dispatch = useDispatch();
 
@@ -32,10 +38,11 @@ export default function Home() {
 	useEffect(() => {
 		(async () => {
 			const res = await axios.get("/api/sales");
+			dispatch(setSaleData(res.data));
 			const pedidos = res.data.filter(item => item.liberado !== true);
 			if (pedidos.length > 0) {
 				localStorage.setItem("sales", JSON.stringify(pedidos));
-				dispatch(setSaleData(pedidos));
+				dispatch(setRenderSaleData(pedidos));
 			}
 		})();
 	}, []);
@@ -86,7 +93,16 @@ export default function Home() {
 	};
 
 	const handleDelete = async id => {
-		await axios.put(`/api/sales/${id}`, { liberado: true }).then(res => console.log(res));
+		const res = await axios.put(`/api/sales/${id}`, { liberado: true });
+		if (res.status === 200) {
+			Swal.fire({
+				icon: "success",
+				title: "¡Pedido liberado!",
+				showConfirmButton: false,
+				timer: 1500,
+			});
+			dispatch(updateSale(id));
+		}
 	};
 	return (
 		<Layout>
@@ -134,8 +150,8 @@ export default function Home() {
 
 				<div className="w-full bg-white min-h-screen  mx-auto text-center p-2 mt-10 rounded-md ">
 					<div className="flex flex-wrap justify-start gap-4 mx-auto">
-						{sales?.length > 0 ? (
-							sales.map((item, index) => (
+						{renderSales?.length > 0 ? (
+							renderSales.map((item, index) => (
 								<motion.div
 									key={index}
 									initial={{ opacity: 0, y: -10 }}
