@@ -35,12 +35,14 @@ export default function Home() {
 		// eslint-disable-next-line dot-notation
 		return products
 			?.filter(item => item.categoria === "promociones" && item.available === true)
+			?.sort((a, b) => a.nombre.localeCompare(b.nombre))
 			.map(data => <CardPromotion key={data._id} data={data} />);
 	};
 
 	const renderStore = renderProductos => {
 		return products
 			?.filter(item => item.categoria === renderProductos && item.available === true)
+			?.sort((a, b) => a.nombre.localeCompare(b.nombre))
 			.map(data => <Card key={data._id} data={data} />);
 	};
 

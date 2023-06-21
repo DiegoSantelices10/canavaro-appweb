@@ -3,7 +3,7 @@ import { Element } from "react-scroll";
 import Modal from "components/modal";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
+import { motion } from "framer-motion";
 export default function SectionEmpanadas() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentProducto, setCurrentProducto] = useState({});
@@ -29,41 +29,72 @@ export default function SectionEmpanadas() {
 					}
 				`}</style>
 				{currentProducto !== null && (
-					<Modal key={currentProducto._id} showModal={showModal} handleClose={handleCloseModal} producto={currentProducto}>
+					<Modal
+						key={currentProducto._id}
+						showModal={showModal}
+						handleClose={handleCloseModal}
+						producto={currentProducto}
+					>
 						{currentProducto}
 					</Modal>
 				)}
-				<h1 className=" relative z-10 text-center p-3 text-2xl lg:text-3xl font-extrabold text-gray-200">Empanadas & Canastitas</h1>
+				<h1 className=" relative z-10 text-center p-3 text-2xl lg:text-3xl font-extrabold text-gray-200">
+					Empanadas & Canastitas
+				</h1>
 
 				<div className="flex justify-center h-28 items-center w-full gap-10">
 					<div className="text-center h-28 w-auto flex flex-col justify-between">
 						<div className="h-24 flex justify-center items-center">
-							<Image src={"/images/empanadaBlanca.png"} width={90} height={75} alt="empanadas" />
+							<Image
+								src={"/images/empanadaBlanca.png"}
+								width={90}
+								height={75}
+								alt="empanadas"
+							/>
 						</div>
 					</div>
 					<div className="text-center h-28 w-auto flex flex-col justify-between ">
 						<div className="h-24  flex justify-center items-center ">
-							<Image src={"/images/canastitaBlanca.png"} width={90} height={90} alt="canastitas" />
+							<Image
+								src={"/images/canastitaBlanca.png"}
+								width={90}
+								height={90}
+								alt="canastitas"
+							/>
 						</div>
 					</div>
 				</div>
 
 				<div className="relative z-10 bg-black h-full p-1 bg-opacity-70 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
-					<p className="italic col-span-2 text-white text-center text-xs pb-4">* Hacer click sobre el titulo para ver descripcion.</p>
+					<p className="italic col-span-2 text-white text-center text-xs pb-4">
+						* Hacer click sobre el titulo para ver descripcion.
+					</p>
 					<h1 className="col-span-2 font-bold text-2xl text-center">Canastitas</h1>
 					{products
 						?.filter(item => item.categoria === "empanadas")
+						?.sort((a, b) => a.nombre.localeCompare(b.nombre))
 						.map(producto => {
 							return (
 								producto.formato === "canastita" && (
-									<div key={producto._id} className="w-auto">
-										<p
-											onClick={() => handleOpenModal(producto)}
-											className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+									<div key={producto._id}>
+										<motion.div
+											initial={{ opacity: 0 }}
+											whileInView={{ opacity: 1 }}
+											transition={{ duration: 1.5 }}
+											viewport={{ once: true }}
 										>
-											{producto.nombre}
-										</p>
-										<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+											<div className="w-auto py-2">
+												<p
+													onClick={() => handleOpenModal(producto)}
+													className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+												>
+													{producto.nombre}
+												</p>
+												<p className="font-normal text-xs text-gray-300 text-center">
+													{producto.descripcion}
+												</p>
+											</div>
+										</motion.div>
 									</div>
 								)
 							);
@@ -72,17 +103,29 @@ export default function SectionEmpanadas() {
 					<h1 className="col-span-2 font-bold text-2xl text-center">Empanadas</h1>
 					{products
 						?.filter(item => item.categoria === "empanadas")
+						?.sort((a, b) => a.nombre.localeCompare(b.nombre))
 						.map(producto => {
 							return (
 								producto.formato === "empanada" && (
-									<div key={producto._id} className="w-auto">
-										<p
-											onClick={() => handleOpenModal(producto)}
-											className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+									<div key={producto._id}>
+										<motion.div
+											initial={{ opacity: 0 }}
+											whileInView={{ opacity: 1 }}
+											transition={{ duration: 1.5 }}
+											viewport={{ once: true }}
 										>
-											{producto.nombre}
-										</p>
-										<p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+											<div className="w-auto">
+												<p
+													onClick={() => handleOpenModal(producto)}
+													className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+												>
+													{producto.nombre}
+												</p>
+												<p className="font-normal text-xs text-gray-300 text-center">
+													{producto.descripcion}
+												</p>
+											</div>
+										</motion.div>
 									</div>
 								)
 							);

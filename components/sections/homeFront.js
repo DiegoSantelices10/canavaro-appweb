@@ -10,20 +10,16 @@ function HomeFront() {
 	return (
 		<Element name="home" className="relative element">
 			<div
-				className={`${
-					isPhone ? "bg-imagepc" : "bg-imagemovil"
-				} font-nunito w-full min-h-screen mx-auto bg-cover bg-center`}
+				style={{
+					"backgroundImage": ` ${
+						isPhone
+							? "url(/images/fugazzetaPorcion.jpg)"
+							: "url(/images/fondoprincipal.jpg)"
+					} `,
+				}}
+				className={` font-nunito w-full min-h-screen mx-auto bg-cover bg-center`}
 			>
 				<div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
-
-				<style jsx>{`
-					.bg-imagepc {
-						background-image: url(/images/fugazzetaPorcion.jpg);
-					}
-					.bg-imagemovil {
-						background-image: url(/images/fondoprincipal.jpg);
-					}
-				`}</style>
 
 				<motion.div
 					initial={{ opacity: 0, y: -100 }}

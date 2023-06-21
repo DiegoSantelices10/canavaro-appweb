@@ -19,6 +19,7 @@ export default function Products() {
 	useEffect(() => {
 		(async () => {
 			const res = await getProductsFront();
+
 			const categories = [...new Set(res.map(producto => producto.categoria))];
 			setCategorias(categories);
 			setRenderProductos(res);
@@ -45,7 +46,6 @@ export default function Products() {
 		};
 	};
 	const handleCheckboxChange = async (id, availableCurrent) => {
-		console.log(!availableCurrent);
 		const updatedProductos = renderProductos.map(producto => {
 			if (producto._id === id) {
 				return { ...producto, available: !producto.available };
@@ -67,6 +67,7 @@ export default function Products() {
 	const handleCategoryChange = event => {
 		const cat = event.target.value;
 		const res = products.filter(products => products.categoria === cat);
+		res.sort((a, b) => a.nombre.localeCompare(b.nombre));
 		setRenderProductos(res);
 	};
 
@@ -75,7 +76,7 @@ export default function Products() {
 			<div className="md:flex grid grid-rows-1 px-3 gap-4  w-full lg:w-11/12 mx-auto items-center gap-x-4 justify-between py-4 h-auto">
 				<div className="flex w-full md:w-1/3 items-center gap-x-2 ">
 					<div
-						className="flex  justify-between items-center w-full h-12 px-3 py-2 text-sm leading-tight text-gray-700 border-0 
+						className="flex  justify-between items-center w-full h-12  pr-3 py-2 text-sm leading-tight text-gray-700 border-0 
                          rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
 					>
 						<input
@@ -92,9 +93,11 @@ export default function Products() {
 				<div className="md:w-1/3 h-12">
 					<select
 						onChange={handleCategoryChange}
-						className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
 					>
-						<option value="">Selecciona una categoria</option>
+						<option className="text-gray-200" value="">
+							Selecciona una categoria
+						</option>
 						{categorias.map(item => (
 							<option key={item} value={item}>
 								{item}

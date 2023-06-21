@@ -6,15 +6,14 @@ export const pusher = new Pusher({
 	secret: process.env.SECRET,
 	cluster: process.env.CLUSTER,
 	useTLS: true,
-	privateChannelPrefix: "private-",
 });
 
 export default async function handler(req, res) {
 	const message = req.body;
 
-	const response = await pusher.trigger("private-pizzeria", "canavaro", {
+	const response = await pusher.trigger("pizzeria", "canavaro", {
 		message,
 	});
-
+	console.log("mensaje back", message);
 	res.json({ message: "completed" }, response);
 }

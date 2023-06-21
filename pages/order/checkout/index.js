@@ -159,7 +159,7 @@ export default function Checkout() {
 												<Field
 													id="pagaCon"
 													name="pagaCon"
-													className="border border-slate-300 rounded-md w-1/2 p-2"
+													className="border border-slate-300 rounded-md w-full p-2"
 													placeholder="¿Con cuanto vas a pagar?"
 												/>
 											)}

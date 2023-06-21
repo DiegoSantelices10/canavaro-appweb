@@ -2,7 +2,12 @@ import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { addPromoOrderList, calculateSubTotal, calculateTotalQuantity, clearOrderPromo } from "store/reducers/orderSlice";
+import {
+	addPromoOrderList,
+	calculateSubTotal,
+	calculateTotalQuantity,
+	clearOrderPromo,
+} from "store/reducers/orderSlice";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
@@ -124,9 +129,20 @@ export default function Index() {
 	return (
 		<div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
 			<div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
-				<Image src={"/images/descarga.jpeg"} layout="responsive" width={80} height={40} objectFit="cover" objectPosition="center" alt={"img"} />
+				<Image
+					src={"/images/descarga.jpeg"}
+					layout="responsive"
+					width={80}
+					height={40}
+					objectFit="cover"
+					objectPosition="center"
+					alt={"img"}
+				/>
 				<button onClick={returnHome}>
-					<FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+					<FiChevronsLeft
+						className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+						size={30}
+					/>
 				</button>
 			</div>
 
@@ -134,12 +150,22 @@ export default function Index() {
 				<div className="flex flex-col  w-full">
 					<div className="w-full bg-white p-3">
 						<h1 className="font-bold text-lg text-gray-800">Arma tu pizza</h1>
-						<p className=" font-normal text-sm  text-gray-400">Elegi los gustos que quieras</p>
+						<p className=" font-normal text-sm  text-gray-400">
+							Elegi los gustos que quieras
+						</p>
 					</div>
 					<hr className="pb-3" />
 					<div className="flex w-full justify-around">
 						<div className="grid content-center gap-2">
-							<input id="chica" type="radio" value="chica" name="chica" onChange={onChangeValue} checked={select === "chica"} className="mx-auto" />
+							<input
+								id="chica"
+								type="radio"
+								value="chica"
+								name="chica"
+								onChange={onChangeValue}
+								checked={select === "chica"}
+								className="mx-auto"
+							/>
 							<h3 className="font-semibold text-sm">Chica</h3>
 						</div>
 						<div className="grid content-center gap-2">
@@ -182,14 +208,22 @@ export default function Index() {
 					<div className="text-sm font-semibold text-left bg-white p-3 my-1">
 						{products
 							.filter(item => item.categoria === "pizzas")
+							?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+
 							.map(item => {
 								return (
-									<div key={item._id} className="flex justify-between items-center py-2  my-2 ">
+									<div
+										key={item._id}
+										className="flex justify-between items-center py-2  my-2 "
+									>
 										<h2>{item.nombre}</h2>
 										<div className="w-auto   px-3 text-end space-x-4 text-base">
 											<div className="flex w-full justify-around items-center gap-5">
 												{radioSelect[item._id]?.fraccion && (
-													<button onClick={() => clearFraction(item._id)} className="text-gray-400 text-xs font-semibold">
+													<button
+														onClick={() => clearFraction(item._id)}
+														className="text-gray-400 text-xs font-semibold"
+													>
 														Deshacer
 													</button>
 												)}
@@ -226,7 +260,13 @@ export default function Index() {
 
 				<div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
 					<h1 className="pb-1">Comentarios</h1>
-					<input ref={comentariosRef} id="comentarios" name="comentarios" type="text" className="border border-gray-300 rounded-md w-full p-2" />
+					<input
+						ref={comentariosRef}
+						id="comentarios"
+						name="comentarios"
+						type="text"
+						className="border border-gray-300 rounded-md w-full p-2"
+					/>
 				</div>
 			</div>
 

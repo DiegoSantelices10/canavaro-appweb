@@ -12,13 +12,13 @@ import {
 } from "store/reducers/saleSlice";
 import axios from "axios";
 import Pusher from "pusher-js";
-import Swal from "sweetalert2";
 
 export default function Home() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentPedido, setCurrentPedido] = useState(null);
 	const [data, setData] = useState(null);
 	const [selectedDomicilio, setSelectedDomicilio] = useState({});
+
 	const [selectedLocal, setSelectedLocal] = useState({});
 	const { renderSales } = useSelector(state => state.sale);
 
@@ -38,8 +38,10 @@ export default function Home() {
 	useEffect(() => {
 		(async () => {
 			const res = await axios.get("/api/sales");
+			console.log(res);
 			dispatch(setSaleData(res.data));
 			const pedidos = res.data.filter(item => item.liberado !== true);
+
 			if (pedidos.length > 0) {
 				localStorage.setItem("sales", JSON.stringify(pedidos));
 				dispatch(setRenderSaleData(pedidos));
@@ -50,19 +52,17 @@ export default function Home() {
 	useEffect(() => {
 		const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {
 			cluster: "us2",
-			authEndpoint: "/api/pusher/auth",
-			useTLS: true,
 		});
 
-		const channel = pusher.subscribe("private-pizzeria");
+		const channel = pusher.subscribe("pizzeria");
 		channel.bind("canavaro", data => {
 			dispatch(addSale(data.message));
 		});
 		return () => {
-			// Cuando el componente se desmonta, debes desuscribirte del canal
-			channel.unsubscribe();
+			pusher.unsubscribe("pizzeria");
 		};
 	}, []);
+
 	const handleOpenModal = pedido => {
 		setCurrentPedido(pedido);
 		setShowModal(true);
@@ -95,12 +95,6 @@ export default function Home() {
 	const handleDelete = async id => {
 		const res = await axios.put(`/api/sales/${id}`, { liberado: true });
 		if (res.status === 200) {
-			Swal.fire({
-				icon: "success",
-				title: "¡Pedido liberado!",
-				showConfirmButton: false,
-				timer: 1500,
-			});
 			dispatch(updateSale(id));
 		}
 	};

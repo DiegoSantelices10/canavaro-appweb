@@ -23,19 +23,27 @@ function Header() {
 		>
 			<div className="w-full sm:w-full md:w-full lg:w-11/12 mx-auto  sm:px-6">
 				<div className="flex items-center justify-between px-3 h-16 md:h-20">
-					<div className={`flex-shrink-0 mr-4 text-white font-extrabold font-nunito tracking-wider  text-xl`}>
+					<div
+						className={`flex-shrink-0 mr-4 text-white font-extrabold font-nunito tracking-wider  text-xl`}
+					>
 						<h1>CANAVARO</h1>
 					</div>
 					<nav className="flex flex-grow font-nunito justify-end">
 						<section className="MOBILE-MENU block sm:block  md:block lg:hidden">
-							<div className="HAMBURGER-ICON space-y-2" onClick={() => setIsNavOpen(prev => !prev)}>
+							<div
+								className="HAMBURGER-ICON space-y-2"
+								onClick={() => setIsNavOpen(prev => !prev)}
+							>
 								<span className={`block h-0.5 w-8 animate-pulse	bg-white `}></span>
 								<span className={`block h-0.5 w-8 animate-pulse bg-white`}></span>
 								<span className={`block h-0.5 w-8 animate-pulse bg-white`}></span>
 							</div>
 
 							<div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
-								<div className="absolute top-0 right-0 px-8 py-8" onClick={() => setIsNavOpen(false)}>
+								<div
+									className="absolute top-0 right-0 px-8 py-8"
+									onClick={() => setIsNavOpen(false)}
+								>
 									<svg
 										className="h-8 w-8 "
 										viewBox="0 0 24 24"
@@ -68,7 +76,9 @@ function Header() {
 										</li>
 										<li className=" my-4 uppercase">
 											<Link to="combos" smooth={true} offset={-65} duration={500}>
-												<button onClick={() => setIsNavOpen(false)}>Nuestros Combos</button>
+												<button onClick={() => setIsNavOpen(false)}>
+													Nuestros Combos
+												</button>
 											</Link>
 										</li>
 										<li className=" my-4 uppercase">
@@ -78,7 +88,7 @@ function Header() {
 										</li>
 										<button
 											onClick={() => router.push("/order/login")}
-											className={`p-4 rounded-md font-bold font-nunito text-base w-auto mx-auto px-6   hover:bg-gray-900 hover:text-white mt-5 bg-white   hover:-translate-y-1
+											className={`p-4 rounded-md font-bold font-nunito text-base w-auto mx-auto px-6   bg-gray-900 text-white mt-5 hover:bg-white hover:text-neutral-900   hover:-translate-y-1
 											transition-all duration-500`}
 										>
 											HAC&Eacute; TU PEDIDO
@@ -92,7 +102,10 @@ function Header() {
 							<ul className="DESKTOP-MENU hidden md:hidden   lg:flex  md:flex-grow justify-end gap-4 flex-wrap items-center">
 								<li>
 									<Link to="home" spy={true} smooth={true} offset={0} duration={500}>
-										<button className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`} aria-current="page">
+										<button
+											className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
 											Home
 										</button>
 									</Link>
@@ -108,22 +121,43 @@ function Header() {
 									</Link>
 								</li>
 								<li>
-									<Link to="empanadas" spy={true} smooth={true} offset={-80} duration={500}>
-										<button className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`} aria-current="page">
+									<Link
+										to="empanadas"
+										spy={true}
+										smooth={true}
+										offset={-80}
+										duration={500}
+									>
+										<button
+											className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
 											Empanadas
 										</button>
 									</Link>
 								</li>
 								<li>
 									<Link to="combos" spy={true} smooth={true} offset={-80} duration={500}>
-										<button className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`} aria-current="page">
+										<button
+											className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
 											Combos
 										</button>
 									</Link>
 								</li>
 								<li>
-									<Link to="zonaCobertura" spy={true} smooth={true} offset={-80} duration={500}>
-										<button className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`} aria-current="page">
+									<Link
+										to="zonaCobertura"
+										spy={true}
+										smooth={true}
+										offset={-80}
+										duration={500}
+									>
+										<button
+											className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`}
+											aria-current="page"
+										>
 											Contacto
 										</button>
 									</Link>
@@ -132,8 +166,13 @@ function Header() {
 									className={`p-3 bg-gray-50 w-auto px-4 hover:bg-gray-900 hover:text-gray-50 hover:-translate-y-1
 											transition-all duration-500 rounded-xl`}
 								>
-									<button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
-										<p className="text-base font-poppins font-bold">HAC&Eacute; TU PEDIDO</p>
+									<button
+										onClick={() => router.push("/order/login")}
+										className="flex justify-around items-center"
+									>
+										<p className="text-base font-poppins font-bold">
+											HAC&Eacute; TU PEDIDO
+										</p>
 									</button>
 								</div>
 							</ul>

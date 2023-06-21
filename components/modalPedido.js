@@ -75,6 +75,12 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 									{pedido?.creado}
 								</span>
 							</h2>
+							<h2>
+								Comentarios:{" "}
+								<span className="font-bold text-gray-500 text-base">
+									{pedido?.comentarios}
+								</span>
+							</h2>
 							<div className="border-t-2 border-gray-300 my-3"></div>
 							<>
 								<h3>Pedido:</h3>
@@ -118,6 +124,9 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 															))}
 														<p className="font-semibold text-gray-500 text-xs w-11/12">
 															{item.descripcion}
+														</p>
+														<p className="font-semibold text-gray-500 text-xs w-11/12">
+															{item.comentarios}
 														</p>
 													</div>
 												);

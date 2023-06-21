@@ -4,7 +4,7 @@ import { Element } from "react-scroll";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import Modal from "components/modal";
-
+import { motion } from "framer-motion";
 export default function SectionPizza() {
 	const [showModal, setShowModal] = useState(false);
 	const [currentProducto, setCurrentProducto] = useState({});
@@ -92,16 +92,25 @@ export default function SectionPizza() {
 						?.sort((a, b) => a.nombre.localeCompare(b.nombre))
 						.map(producto => {
 							return (
-								<div key={producto._id} className="w-auto">
-									<p
-										onClick={() => handleOpenModal(producto)}
-										className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+								<div key={producto._id}>
+									<motion.div
+										initial={{ opacity: 0 }}
+										whileInView={{ opacity: 1 }}
+										transition={{ duration: 1.5 }}
+										viewport={{ once: true }}
 									>
-										{producto.nombre}
-									</p>
-									<p className="font-normal text-xs text-gray-300 text-center">
-										{producto.descripcion}
-									</p>
+										<div className="w-auto py-2">
+											<p
+												onClick={() => handleOpenModal(producto)}
+												className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+											>
+												{producto.nombre}
+											</p>
+											<p className="font-normal text-xs text-gray-300 text-center">
+												{producto.descripcion}
+											</p>
+										</div>
+									</motion.div>
 								</div>
 							);
 						})}

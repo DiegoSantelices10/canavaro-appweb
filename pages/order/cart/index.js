@@ -18,9 +18,8 @@ import { addAddress } from "store/reducers/userSlice";
 import axios from "axios";
 
 export default function Cart({ data }) {
-	const { orderList, totalAmount } = useSelector(state => state.order);
+	const { orderList, totalAmount, demora } = useSelector(state => state.order);
 	const [type, setType] = useState("domicilioActual");
-	const [tipoDemora, setTipoDemora] = useState(null);
 
 	const dispatch = useDispatch();
 
@@ -30,29 +29,19 @@ export default function Cart({ data }) {
 	}, [orderList]);
 
 	useEffect(() => {
-		const demo = data?.filter(item => item.tipo);
-		setTipoDemora(demo);
+		const { demoraActual } = data.find(item => item?.tipo === type);
+		dispatch(setDemora(demoraActual));
+	}, [type]);
+
+	useEffect(() => {
 		dispatch(addAddress(""));
 	}, []);
-
 	const deleteItem = _id => {
 		dispatch(removeItemCart(_id));
 	};
 
 	const handleChange = e => {
 		dispatch(addAddress(e.target.value));
-	};
-
-	const handleChangeType = type => {
-		if (tipoDemora !== null) {
-			const { demoraActual } = tipoDemora.find(item => item.tipo === type);
-			dispatch(setDemora(demoraActual));
-			return demoraActual;
-		}
-	};
-
-	const handleType = value => {
-		setType(value);
 	};
 
 	return (
@@ -73,7 +62,9 @@ export default function Cart({ data }) {
 					<div className="px-2 rounded-lg border-2 border-gray-200">
 						<div className="flex justify-center  w-full gap-3 py-3 text-sm ">
 							<button
-								onClick={() => handleType("domicilioActual")}
+								onClick={() => {
+									setType("domicilioActual");
+								}}
 								className={
 									type === "domicilioActual"
 										? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
@@ -84,7 +75,9 @@ export default function Cart({ data }) {
 								Delivery
 							</button>
 							<button
-								onClick={() => handleType("localActual")}
+								onClick={() => {
+									setType("localActual");
+								}}
 								className={
 									type === "localActual"
 										? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
@@ -109,7 +102,7 @@ export default function Cart({ data }) {
 							<h1 className="font-light">
 								{type === "domicilioActual" ? "Te llega en" : "Retiralo en"}
 							</h1>
-							<strong>{handleChangeType(type)}</strong>
+							<strong>{demora}</strong>
 						</div>
 					</div>
 				</div>
