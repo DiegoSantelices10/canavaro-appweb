@@ -45,6 +45,7 @@ export default function Products() {
 			clearTimeout(delayDebounceFn);
 		};
 	};
+
 	const handleCheckboxChange = async (id, availableCurrent) => {
 		const updatedProductos = renderProductos.map(producto => {
 			if (producto._id === id) {

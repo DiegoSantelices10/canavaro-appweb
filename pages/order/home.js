@@ -24,7 +24,6 @@ export default function Home() {
 	const [totalCant, setTotalCant] = useState(0);
 	const [docenaPrice, setDocenaPrice] = useState(0);
 
-	const { nombre } = useSelector(state => state.user);
 	const { products } = useSelector(state => state.product);
 	const { orderPromo } = useSelector(state => state.order);
 
@@ -144,7 +143,7 @@ export default function Home() {
 	};
 
 	return (
-		<Layout title={nombre}>
+		<Layout>
 			<ToastContainer />
 			<div className="py-4 mt-14 mx-auto w-full ">
 				<h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">Promociones</h1>

@@ -30,6 +30,7 @@ function HomeFront() {
 						<div className=" flex flex-col justify-center items-center min-h-screen gap-7">
 							<div className="mx-auto mt-20 ">
 								<Image
+									priority
 									src="/images/logocanavaro.png"
 									width={150}
 									height={150}
@@ -55,7 +56,7 @@ function HomeFront() {
 								</div>
 
 								<div className="w-full h-20 flex items-center">
-									<Link href={"/order/login"}>
+									<Link href={"/welcomeLogo"}>
 										<a
 											className={`p-5 rounded-xl  font-bold font-poppins px-7 text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
 										transition-all duration-500`}

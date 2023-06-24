@@ -3,7 +3,6 @@ import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { clearOrderList } from "store/reducers/orderSlice";
@@ -11,19 +10,9 @@ import moment from "moment-timezone";
 export default function Checkout() {
 	const user = useSelector(state => state.user);
 	const { totalAmount, orderList, demora } = useSelector(state => state.order);
-	const [userLocal, setUserLocal] = useState({});
 
 	const dispatch = useDispatch();
 	const router = useRouter();
-
-	useEffect(() => {
-		if (user.nombre === "") {
-			const us = JSON.parse(localStorage.getItem("user"));
-			setUserLocal(us);
-		} else {
-			setUserLocal(user);
-		}
-	}, []);
 
 	return (
 		<div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
@@ -43,9 +32,9 @@ export default function Checkout() {
 
 			<Formik
 				initialValues={{
-					cliente: user?.nombre || userLocal.nombre,
+					cliente: user?.nombre || "",
 					domicilio: user?.direccion || "",
-					telefono: user?.telefono || userLocal.telefono,
+					telefono: user?.telefono || "",
 					productos: orderList || {},
 					comentarios: "",
 					medioDePago: "efectivo" || "",
@@ -104,7 +93,7 @@ export default function Checkout() {
 												<h2 className="font-nunito font-extrabold text-base">
 													Retira por local
 												</h2>
-												<p>Nombre: {userLocal.nombre} </p>
+												<p>Nombre: {user.nombre} </p>
 											</>
 										)}
 									</div>
