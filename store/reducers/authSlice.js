@@ -2,24 +2,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	nombre: "",
-	password: "",
+  username: "",
+  token: "",
 };
 
 export const authSlice = createSlice({
-	name: "auth",
-	initialState,
-	reducers: {
-		setAuth: (state, action) => {
-			state.nombre = action.payload.nombre;
-			state.password = action.payload.password;
-		},
+  name: "auth",
+  initialState,
+  reducers: {
+    setAuth: (state, action) => {
+      state.username = action.payload.username;
+      state.token = action.payload.token;
+    },
 
-		clearAuth: (state, action) => {
-			state.nombre = "";
-			state.password = "";
-		},
-	},
+    clearAuth: (state, action) => {
+      state.username = "";
+      state.token = "";
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
