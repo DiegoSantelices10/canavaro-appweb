@@ -56,6 +56,11 @@ export default function Home() {
       sound.play();
       dispatch(addSale(data.message));
     });
+
+    channel.bind("pedido-liberado", data => {
+      dispatch(updateSale(data.id.id));
+    });
+
     return () => {
       pusher.unsubscribe("pizzeria");
     };
@@ -93,7 +98,10 @@ export default function Home() {
   const handleDelete = async id => {
     const res = await axios.put(`/api/sales/${id}`, { liberado: true });
     if (res.status === 200) {
-      dispatch(updateSale(id));
+      const response = await axios.post("api/pusher/released", { id });
+      if (response.status === 200) {
+        console.log("pedidos liberado con exito!");
+      }
     }
   };
   return (

@@ -29,7 +29,7 @@ export default function menu() {
   return (
     <div className="w-full px-2">
       <div className="w-full flex justify-end p-3 ">
-        <button onClick={signOut} className="font-poppins rounded-md shadow p-3 font-semibold">
+        <button onClick={signOut} className=" rounded-md shadow p-3 font-semibold">
           <AiOutlineLogout size={30} />
         </button>
       </div>
@@ -45,7 +45,7 @@ export default function menu() {
           >
             <div>
               <Image src="/images/pedidosblack.png" width={35} height={35} alt="pedidoblack" />
-              <p className="font-bold text-base lg:text-lg">Pedidos</p>
+              <p className="font-bold text-base font-nunito lg:text-lg">Pedidos</p>
             </div>
           </button>
         </Link>
@@ -58,7 +58,7 @@ export default function menu() {
           >
             <div>
               <Image src="/images/productsblack.png" width={35} height={35} alt="black" />
-              <p className="font-bold text-base lg:text-lg">Productos</p>
+              <p className="font-bold text-base font-nunito lg:text-lg">Productos</p>
             </div>
           </button>
         </Link>
@@ -71,7 +71,7 @@ export default function menu() {
           >
             <div>
               <Image src="/images/salesblack.png" width={35} height={35} alt="salesblack" />
-              <p className="font-bold text-base lg:text-lg">Ventas</p>
+              <p className="font-bold text-base font-nunito lg:text-lg">Ventas</p>
             </div>
           </button>
         </Link>
@@ -84,7 +84,7 @@ export default function menu() {
           >
             <div>
               <Image src="/images/settingsblack.png" width={35} height={35} alt="settingblack" />
-              <p className="font-bold text-base lg:text-lg">Ajustes</p>
+              <p className="font-bold text-base font-nunito lg:text-lg">Ajustes</p>
             </div>
           </button>
         </Link>
