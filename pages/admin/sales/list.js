@@ -8,9 +8,9 @@ export default function Sales() {
   const [totalSale, setTotalSale] = useState("");
 
   useEffect(() => {
-    if (!sales) {
-      console.log("entro vacio");
+    if (sales.length < 1) {
       const salesLocal = JSON.parse(localStorage.getItem("sales"));
+      console.log("Venta de storage", salesLocal);
       dispatch(setSaleData(salesLocal));
     }
 

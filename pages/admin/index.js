@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addSale, setRenderSaleData, setSaleData, updateSale } from "store/reducers/saleSlice";
 import axios from "axios";
 import Pusher from "pusher-js";
+import { Howl } from "howler";
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -17,6 +18,9 @@ export default function Home() {
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
   const dispatch = useDispatch();
+  const sound = new Howl({
+    src: ["/sound/notificacion.mp3"],
+  });
 
   useEffect(() => {
     (async () => {
@@ -32,11 +36,11 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const res = await axios.get("/api/sales");
+      localStorage.setItem("sales", JSON.stringify(res.data));
       dispatch(setSaleData(res.data));
       const pedidos = res.data.filter(item => item.liberado !== true);
 
       if (pedidos.length > 0) {
-        localStorage.setItem("sales", JSON.stringify(pedidos));
         dispatch(setRenderSaleData(pedidos));
       }
     })();
@@ -49,6 +53,7 @@ export default function Home() {
 
     const channel = pusher.subscribe("pizzeria");
     channel.bind("canavaro", data => {
+      sound.play();
       dispatch(addSale(data.message));
     });
     return () => {
