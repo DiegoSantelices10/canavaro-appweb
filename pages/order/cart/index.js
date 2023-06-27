@@ -78,7 +78,7 @@ export default function Cart({ data }) {
                       <FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
                     </a>
                   </Link>
-                  <h2 className="font-poppins font-extrabold text-lg">Tu pedido</h2>
+                  <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
                 </div>
                 <div>
                   <div className="px-2 rounded-lg border-2 border-gray-200">
@@ -90,8 +90,8 @@ export default function Cart({ data }) {
                         }}
                         className={
                           type === "domicilioActual"
-                            ? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
-                            : "w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
+                            ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
+                            : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
                         }
                       >
                         <MdOutlineDeliveryDining size={20} />
@@ -104,8 +104,8 @@ export default function Cart({ data }) {
                         }}
                         className={
                           type === "localActual"
-                            ? "w-1/2 rounded-md flex items-center justify-center gap-2 bg-slate-800 text-white font-light p-3"
-                            : "w-1/2 rounded-md flex items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
+                            ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
+                            : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
                         }
                       >
                         <MdOutlineEmojiPeople size={20} />
@@ -203,7 +203,7 @@ export default function Cart({ data }) {
                   </div>
                   <button
                     type="submit"
-                    className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-red-600 hover:bg-red-500 hover:-translate-y-1 transition-all duration-500"
+                    className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-sky-900 hover:bg-sky-800 hover:-translate-y-1 transition-all duration-500"
                   >
                     Continuar el pago
                   </button>

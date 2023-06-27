@@ -25,7 +25,7 @@ export default function Sales() {
 
   return (
     <Layout>
-      <div className="h-screen fixed w-full">
+      <div className="h-full  w-full">
         <div className="w-full lg:w-11/12 h-auto text-center py-5 mx-auto">
           <div className="w-full h-auto flex justify-center items-center">
             <div className="w-3/5 lg:w-1/2 font-bold bg-white rounded-md shadow p-5">

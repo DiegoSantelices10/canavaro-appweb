@@ -19,11 +19,11 @@ export default function Products() {
   useEffect(() => {
     (async () => {
       const res = await getProductsFront();
-
+      const order = res.sort((a, b) => a.nombre.localeCompare(b.nombre));
       const categories = [...new Set(res.map(producto => producto.categoria))];
       setCategorias(categories);
-      setRenderProductos(res);
-      dispatch(setProductData(res));
+      setRenderProductos(order);
+      dispatch(setProductData(order));
     })();
   }, []);
 

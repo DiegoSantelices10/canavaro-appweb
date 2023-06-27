@@ -125,8 +125,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full bg-white min-h-screen  mx-auto text-center p-2 mt-10 rounded-md ">
-          <div className="flex flex-wrap justify-start gap-4 mx-auto">
+        <div className="w-full bg-white   mx-auto text-center p-2 mt-10 rounded-md ">
+          <div className="flex flex-wrap justify-start gap-4 mx-auto font-roboto">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
                 <motion.div
