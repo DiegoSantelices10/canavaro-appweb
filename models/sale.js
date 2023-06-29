@@ -36,7 +36,10 @@ const saleSchema = new Schema(
     total: {
       type: Number,
     },
-    creado: {
+    hora: {
+      type: String,
+    },
+    fecha: {
       type: String,
     },
     liberado: {

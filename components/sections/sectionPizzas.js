@@ -5,117 +5,100 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import Modal from "components/modal";
 import { motion } from "framer-motion";
-export default function SectionPizza() {
-	const [showModal, setShowModal] = useState(false);
-	const [currentProducto, setCurrentProducto] = useState({});
+export default function SectionPizzas() {
+  const [showModal, setShowModal] = useState(false);
+  const [currentProducto, setCurrentProducto] = useState({});
 
-	const { products } = useSelector(state => state.product);
+  const { products } = useSelector(state => state.product);
 
-	const handleOpenModal = producto => {
-		setCurrentProducto(producto);
-		setShowModal(true);
-	};
+  const handleOpenModal = producto => {
+    setCurrentProducto(producto);
+    setShowModal(true);
+  };
 
-	const handleCloseModal = () => {
-		setCurrentProducto(null);
-		setShowModal(false);
-	};
-	return (
-		<Element name="pizzas" className="w-full relative  element font-nunito">
-			<div className="bg-image font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
-				<div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
+  const handleCloseModal = () => {
+    setCurrentProducto(null);
+    setShowModal(false);
+  };
+  return (
+    <Element name="pizzas" className="w-full relative  element font-nunito">
+      <div className="bg-image font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
+        <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
 
-				<style jsx>{`
-					.bg-image {
-						background-image: url(/images/FugazzetaPorcion.jpg);
-					}
-				`}</style>
-				{currentProducto !== null && (
-					<Modal
-						key={currentProducto._id}
-						showModal={showModal}
-						handleClose={handleCloseModal}
-						producto={currentProducto}
-					>
-						{currentProducto}
-					</Modal>
-				)}
-				<h1 className="relative z-10 text-center text-gray-200  text-2xl lg:text-3xl font-extrabold">
-					Nuestras Pizzas
-				</h1>
+        <style jsx>{`
+          .bg-image {
+            background-image: url(/images/FugazzetaPorcion.jpg);
+          }
+        `}</style>
+        {currentProducto !== null && (
+          <Modal
+            key={currentProducto._id}
+            showModal={showModal}
+            handleClose={handleCloseModal}
+            producto={currentProducto}
+          >
+            {currentProducto}
+          </Modal>
+        )}
+        <h1 className="relative z-10 text-center text-gray-200  text-2xl lg:text-3xl font-extrabold">
+          Nuestras Pizzas
+        </h1>
 
-				<div className="relative z-10 flex justify-center h-32 items-center w-full gap-10">
-					<div className="text-center h-28 w-auto flex flex-col justify-between ">
-						<div className="h-24  flex justify-center items-center ">
-							<Image
-								src={"/images/pizza-vector.png"}
-								width={60}
-								height={60}
-								alt="gigante"
-							/>
-						</div>
-						<p className="font-bold text-gray-200 text-lg">Gigante</p>
-					</div>
-					<div className="text-center h-28 w-auto flex flex-col justify-between">
-						<div className="h-24 flex justify-center items-center">
-							<Image
-								src={"/images/pizza-vector.png"}
-								width={55}
-								height={55}
-								alt="mediana"
-							/>
-						</div>
-						<p className="font-bold text-lg text-gray-200">Mediana</p>
-					</div>
-					<div className="text-center h-28 w-auto flex flex-col justify-between">
-						<div className="h-24 flex justify-center items-center">
-							<Image
-								src={"/images/pizza-vector.png"}
-								width={50}
-								height={50}
-								alt="chica"
-							/>
-						</div>
-						<p className="font-bold text-gray-200 text-lg">Chica</p>
-					</div>
-				</div>
+        <div className="relative z-10 flex justify-center h-32 items-center w-full gap-10">
+          <div className="text-center h-28 w-auto flex flex-col justify-between ">
+            <div className="h-24  flex justify-center items-center ">
+              <Image src={"/images/pizza-vector.png"} width={60} height={60} alt="gigante" />
+            </div>
+            <p className="font-bold text-gray-200 text-lg">Gigante</p>
+          </div>
+          <div className="text-center h-28 w-auto flex flex-col justify-between">
+            <div className="h-24 flex justify-center items-center">
+              <Image src={"/images/pizza-vector.png"} width={55} height={55} alt="mediana" />
+            </div>
+            <p className="font-bold text-lg text-gray-200">Mediana</p>
+          </div>
+          <div className="text-center h-28 w-auto flex flex-col justify-between">
+            <div className="h-24 flex justify-center items-center">
+              <Image src={"/images/pizza-vector.png"} width={50} height={50} alt="chica" />
+            </div>
+            <p className="font-bold text-gray-200 text-lg">Chica</p>
+          </div>
+        </div>
 
-				<div
-					className="relative z-10 bg-black p-2 h-full  bg-opacity-70 w-full lg:w-4/5 mx-auto 
+        <div
+          className="relative z-10 bg-black p-2 h-full  bg-opacity-70 w-full lg:w-4/5 mx-auto 
 							text-white grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
-				>
-					<p className="italic col-span-2 text-white text-center text-xs pb-4">
-						* Hacer click sobre el titulo para ver descripcion.
-					</p>
-					{products
-						?.filter(item => item.categoria === "pizzas")
-						?.sort((a, b) => a.nombre.localeCompare(b.nombre))
-						.map(producto => {
-							return (
-								<div key={producto._id}>
-									<motion.div
-										initial={{ opacity: 0 }}
-										whileInView={{ opacity: 1 }}
-										transition={{ duration: 1.5 }}
-										viewport={{ once: true }}
-									>
-										<div className="w-auto py-2">
-											<p
-												onClick={() => handleOpenModal(producto)}
-												className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
-											>
-												{producto.nombre}
-											</p>
-											<p className="font-normal text-xs text-gray-300 text-center">
-												{producto.descripcion}
-											</p>
-										</div>
-									</motion.div>
-								</div>
-							);
-						})}
-				</div>
-			</div>
-		</Element>
-	);
+        >
+          <p className="italic col-span-2 text-white text-center text-xs pb-4">
+            * Hacer click sobre el titulo para ver descripcion.
+          </p>
+          {products
+            ?.filter(item => item.categoria === "pizzas")
+            ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            .map(producto => {
+              return (
+                <div key={producto._id}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 1.5 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="w-auto py-2">
+                      <p
+                        onClick={() => handleOpenModal(producto)}
+                        className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+                      >
+                        {producto.nombre}
+                      </p>
+                      <p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    </Element>
+  );
 }

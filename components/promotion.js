@@ -5,7 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addProductPromo, decrementProductPromo, setQuantityDemanded } from "store/reducers/orderSlice";
 
-export default function Promotion({ cantMax, data, setSelectCombo }) {
+export default function Promotion({
+  cantMax,
+
+  data: { _id, nombre, categoria, descripcion, precio, addEmpanadas },
+  setSelectCombo,
+}) {
   const [select, setSelect] = useState("");
 
   const dispatch = useDispatch();
@@ -48,7 +53,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
 
   return (
     <div>
-      {(data.nombre === "Combo 4" || data.nombre === "Combo 5") && (
+      {(nombre === "Combo 4" || nombre === "Combo 5") && (
         <>
           <div className="font nunito p-1 flex gap-2 justify-start items-center">
             <input
@@ -93,16 +98,16 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
         </>
       )}
 
-      {data.addEmpanadas === "no" ? (
+      {addEmpanadas === "no" ? (
         <div className="flex justify-between items-center ">
           <div className="text-lg font-medium">
-            <h2>{data.nombre}</h2>
+            <h2>{nombre}</h2>
           </div>
           <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
             <div
               className={
                 orderPromo.length >= 1
-                  ? "rounded-full  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50"
+                  ? "rounded-md  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50"
                   : "invisible"
               }
             >
@@ -110,20 +115,20 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
                 type="button"
                 className="text-red-500 text-2xl "
                 onClick={e => {
-                  decrementItems(data);
+                  decrementItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
                   setQuantity(quantityDemanded + 1);
                 }}
               >
                 -
               </button>
             </div>
-            <span className="font-normal text-xl  h-6">{productQuantity(data._id)}</span>
-            <div className="rounded-full  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
+            <span className="font-normal text-xl  h-6">{productQuantity(_id)}</span>
+            <div className="rounded-md  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 font-normal text-2xl"
+                className="text-sky-900 font-normal text-2xl"
                 onClick={e => {
-                  addItems(data);
+                  addItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
                   setQuantity(quantityDemanded - 1);
                 }}
               >
@@ -161,7 +166,7 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
                         <div
                           className={
                             quantityZero(_id)
-                              ? "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+                              ? "rounded-md w-8 h-8 grid content-center  shadow  bg-slate-50"
                               : "invisible"
                           }
                         >
@@ -182,12 +187,12 @@ export default function Promotion({ cantMax, data, setSelectCombo }) {
                           className={
                             quantityDemanded < 1
                               ? `invisible`
-                              : "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+                              : "rounded-md w-8 h-8 grid content-center  shadow  bg-slate-50"
                           }
                         >
                           <button
                             type="button"
-                            className="text-green-500 font-normal text-3xl"
+                            className="text-sky-900 font-normal text-3xl"
                             onClick={e => {
                               setQuantity(quantityDemanded - 1);
                               addItems({ _id, nombre });

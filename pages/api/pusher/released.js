@@ -14,6 +14,5 @@ export default async function handler(req, res) {
   const response = await pusher.trigger("pizzeria", "pedido-liberado", {
     id: message,
   });
-  console.log("mensaje update", response);
   res.json({ message: "completed" }, response);
 }

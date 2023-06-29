@@ -33,15 +33,12 @@ export default function menu() {
           <AiOutlineLogout size={30} />
         </button>
       </div>
-      <div
-        className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 font-roboto font-bold
-	                  content-center justify-center items-center w-full mx-auto h-auto "
-      >
+      <div className="flex font-nunito font-bold justify-start w-full lg:w-2/5 lg:pl-3  h-auto ">
         <Link href="/admin" passHref>
           <button
             className={`${
               selected === "/admin" ? "border-2 border-gray-300" : "bg-white"
-            } mx-auto rounded-2xl shadow-md p-2 h-auto w-24 lg:w-36`}
+            } mx-auto rounded-2xl shadow-md p-2 h-auto w-28 `}
           >
             <div>
               <Image src="/images/pedidosblack.png" width={35} height={35} alt="pedidoblack" />
@@ -54,7 +51,7 @@ export default function menu() {
           <button
             className={`${
               selected === "/admin/products/list" ? "border-2 border-gray-300" : "bg-white"
-            } mx-auto rounded-2xl shadow-md p-2 h-auto w-24 lg:w-36`}
+            } mx-auto rounded-2xl shadow-md p-2 h-auto w-28`}
           >
             <div>
               <Image src="/images/productsblack.png" width={35} height={35} alt="black" />
@@ -67,24 +64,11 @@ export default function menu() {
           <button
             className={`${
               selected === "/admin/sales/list" ? "border-2 border-gray-300" : "bg-white"
-            } mx-auto rounded-2xl shadow-md p-2 h-auto w-24 lg:w-36`}
+            } mx-auto rounded-2xl shadow-md p-2 h-auto w-28`}
           >
             <div>
               <Image src="/images/salesblack.png" width={35} height={35} alt="salesblack" />
               <p className="font-bold text-base font-nunito lg:text-lg">Ventas</p>
-            </div>
-          </button>
-        </Link>
-
-        <Link href="/admin/settings" passHref>
-          <button
-            className={`${
-              selected === "/admin/settings" ? "border-2 border-gray-300" : "bg-white"
-            } mx-auto rounded-2xl shadow-md p-2 h-auto w-24 lg:w-36`}
-          >
-            <div>
-              <Image src="/images/settingsblack.png" width={35} height={35} alt="settingblack" />
-              <p className="font-bold text-base font-nunito lg:text-lg">Ajustes</p>
             </div>
           </button>
         </Link>

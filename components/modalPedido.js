@@ -56,7 +56,10 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 Medio de pago: <span className="font-bold text-gray-500 text-base">{pedido?.medioDePago}</span>
               </h2>
               <h2>
-                Hora pedido: <span className="font-bold text-gray-500 text-base">{pedido?.creado}</span>
+                Fecha: <span className="font-bold text-gray-500 text-base">{pedido?.fecha}</span>
+              </h2>
+              <h2>
+                Hora: <span className="font-bold text-gray-500 text-base">{pedido?.hora}</span>
               </h2>
               {pedido?.comentarios && (
                 <h2>

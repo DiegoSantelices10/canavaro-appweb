@@ -72,10 +72,10 @@ export default function Products() {
 
   return (
     <Layout>
-      <div className="md:flex grid grid-rows-1 px-3 gap-4  w-full lg:w-11/12 mx-auto items-center gap-x-4 justify-between py-4 h-auto">
-        <div className="flex w-full md:w-1/3 items-center gap-x-2 ">
+      <div className="lg:flex grid grid-rows-1 px-2 lg:px-0 gap-4  w-full md:w-11/12 lg:w-11/12 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
+        <div className="flex w-full lg:w-1/3  items-center gap-x-2 ">
           <div
-            className="flex  justify-between items-center w-full h-12  pr-3 py-2 text-sm leading-tight text-gray-700 border-0 
+            className="flex  justify-between items-center w-full  h-12  pr-3 py-2 text-sm leading-tight text-gray-700 border-0 
                          rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
           >
             <input
@@ -89,7 +89,7 @@ export default function Products() {
             <FaSearch size={20} />
           </div>
         </div>
-        <div className="md:w-1/3 h-12">
+        <div className="w-full lg:w-1/3 h-12">
           <select
             onChange={handleCategoryChange}
             className="bg-gray-50 border h-12 border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
@@ -104,18 +104,18 @@ export default function Products() {
             ))}
           </select>
         </div>
-        <div className="flex w-full my-2 md:my-0 md:w-1/3 items-center justify-between ">
+        <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-between ">
           <h1
-            className="text-md lg:text-md font-poppins font-extrabold text-center
+            className="text-md lg:text-md font-nunito font-extrabold text-center
                        text-zinc-800 w-full "
           >
             ¡Ingresa un producto nuevo!
           </h1>
 
           <button
-            className="w-64 h-12 col-start-2 font-nunito font-semibold
+            className="w-64 h-12 col-start-2 font-nunito font-bold
                              rounded-md  text-sm 
-                             border text-white bg-red-500 "
+                             border text-white bg-sky-900"
             type="button"
             onClick={() => {
               router.push("/admin/products/create");
@@ -125,7 +125,8 @@ export default function Products() {
           </button>
         </div>
       </div>
-      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
+
+      <div className="w-full px-2 md:w-11/12 lg:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
         {renderProductos.map(({ _id, nombre, descripcion, imagen, available, categoria }) => {
           return (
             <div key={_id}>
@@ -137,7 +138,7 @@ export default function Products() {
                   height={140}
                   alt={nombre}
                 />
-                <div className="relative w-full h-28 py-1 self-start">
+                <div className="relative w-full font-nunito h-28 py-1 self-start">
                   <h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
                   <p className="text-gray-400 text-xs">{descripcion}</p>
                   <h4 className="text-gray-700 text-xs ">{categoria}</h4>

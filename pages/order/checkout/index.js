@@ -41,12 +41,17 @@ export default function Checkout() {
         }}
         onSubmit={async values => {
           const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm");
+          const fecha = moment.tz("America/Argentina/Buenos_Aires").format("DD/MM");
+
+          console.log(hora);
+          console.log(fecha);
 
           if (values.domicilio !== "") {
             const res = await axios.post("/api/sales/", {
               ...values,
               tipoEnvio: "Envio a domicilio",
-              creado: hora,
+              hora,
+              fecha,
               liberado: false,
             });
             if (res.data.message === "ok") {
@@ -61,7 +66,8 @@ export default function Checkout() {
             const res = await axios.post("/api/sales/", {
               ...values,
               tipoEnvio: "Retira por local",
-              creado: hora,
+              hora,
+              fecha,
               liberado: false,
             });
             if (res.data.message === "ok") {
@@ -147,9 +153,12 @@ export default function Checkout() {
                         />
                       )}
                       {values.medioDePago === "mercadoPago" && (
-                        <div className="flex justify-center w-full">
-                          <Image src="/images/logoMP.jpg" width={100} height={100} alt="logoMP" />
-                        </div>
+                        <>
+                          <div className="flex justify-center w-full">
+                            <Image src="/images/logoMP.jpg" width={100} height={100} alt="logoMP" />
+                          </div>
+                          <p className="font nunito font-semibold p-2">Mediante el sistema de pago con QR!</p>
+                        </>
                       )}
                     </div>
                   </div>
@@ -157,8 +166,8 @@ export default function Checkout() {
 
                 <div className="fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
                   <div className="flex justify-between items-center p-3 font-poppins">
-                    <p className="text-lg font-semibold">Subtotal</p>
-                    <h3 className="text-xl ">$ {totalAmount}</h3>
+                    <p className="text-xl font-bold">Total</p>
+                    <h3 className="text-2xl ">$ {totalAmount}</h3>
                   </div>
 
                   <div className="px-3 w-full">

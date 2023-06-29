@@ -34,7 +34,7 @@ export default function PizzaInfo({
           <div className=" flex items-center justify-end bottom-0 right-0 w-auto   text-end gap-3 text-base">
             <div
               className={
-                quantityZero("gigante") ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
+                quantityZero("gigante") ? "rounded-md w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
               }
             >
               <button
@@ -55,10 +55,10 @@ export default function PizzaInfo({
             </div>
 
             <span className="font-normal text-xl  h-6">{productQuantity("gigante")}</span>
-            <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
+            <div className="rounded-md w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 text-3xl"
+                className="text-sky-900 text-3xl"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "gigante",
@@ -84,7 +84,7 @@ export default function PizzaInfo({
           <div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
             <div
               className={
-                quantityZero("mediana") ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
+                quantityZero("mediana") ? "rounded-md w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
               }
             >
               <button
@@ -105,10 +105,10 @@ export default function PizzaInfo({
             </div>
 
             <span className="font-normal text-xl  h-6">{productQuantity("mediana")}</span>
-            <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
+            <div className="rounded-md w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 text-3xl"
+                className="text-sky-900 text-3xl"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "mediana",
@@ -134,7 +134,7 @@ export default function PizzaInfo({
           <div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
             <div
               className={
-                quantityZero("chica") ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
+                quantityZero("chica") ? "rounded-md w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
               }
             >
               <button
@@ -155,10 +155,10 @@ export default function PizzaInfo({
             </div>
 
             <span className="font-normal text-xl  h-6">{productQuantity("chica")}</span>
-            <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
+            <div className="rounded-md w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 text-3xl"
+                className="text-sky-900 text-3xl"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "chica",

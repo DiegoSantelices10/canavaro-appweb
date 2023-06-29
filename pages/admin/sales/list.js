@@ -47,8 +47,14 @@ export default function Sales() {
                       <th scope="col" className="pl-2 py-3">
                         Tipo envio
                       </th>
+                      <th scope="col" className="pl-2 py-3 w-1/4">
+                        Direccion
+                      </th>
                       <th scope="col" className="pl-2 py-3">
-                        Hora Pedido
+                        Fecha
+                      </th>
+                      <th scope="col" className="pl-2 py-3">
+                        Hora
                       </th>
                       <th scope="col" className="pl-2 py-3">
                         Precio
@@ -63,7 +69,9 @@ export default function Sales() {
                             {pedido.cliente}
                           </th>
                           <td className="pl-2 py-4 font-bold">{pedido.tipoEnvio}</td>
-                          <td className="pl-2 py-4">{pedido.creado}</td>
+                          <td className="pl-2 py-4 w-1/4">{pedido.domicilio}</td>
+                          <td className="pl-2 py-4">{pedido.fecha}</td>
+                          <td className="pl-2 py-4">{pedido.hora}</td>
                           <td className="pl-2 py-4 ">$ {pedido.total}</td>
                         </tr>
                       );
