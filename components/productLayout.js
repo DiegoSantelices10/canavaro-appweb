@@ -83,8 +83,8 @@ export default function ProductLayout({
         const promo = {
           _id,
           nombre,
+          descripcion,
           products: [selectCombo, ...value],
-          imagen: imagen?.url,
           categoria,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
@@ -100,8 +100,8 @@ export default function ProductLayout({
         const promo = {
           _id,
           nombre,
+          descripcion,
           products: [...value],
-          imagen: imagen?.url,
           categoria,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,

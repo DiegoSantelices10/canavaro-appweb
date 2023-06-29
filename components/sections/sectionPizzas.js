@@ -36,9 +36,7 @@ export default function SectionPizzas() {
             showModal={showModal}
             handleClose={handleCloseModal}
             producto={currentProducto}
-          >
-            {currentProducto}
-          </Modal>
+          ></Modal>
         )}
         <h1 className="relative z-10 text-center text-gray-200  text-2xl lg:text-3xl font-extrabold">
           Nuestras Pizzas

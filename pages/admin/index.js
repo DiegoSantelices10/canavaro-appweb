@@ -112,7 +112,7 @@ export default function Home() {
       <div className="h-auto p-0 md:px-2">
         <div className=" w-full block md:flex gap-1 p-2">
           <div className="w-full md:w-1/2 text-center">
-            <h1 className="font-bold font-poppins my-5">Demora domicilio</h1>
+            <h1 className="font-bold font-nunito text-lg my-5">Demora domicilio</h1>
             <div className="flex gap-3  justify-center">
               {data
                 ?.filter(item => item.tipoEnvio === "domicilio")
@@ -122,7 +122,7 @@ export default function Home() {
             </div>
           </div>
           <div className="w-full md:w-1/2 text-center">
-            <h1 className="font-bold font-poppins my-5">Demora por local</h1>
+            <h1 className="font-bold font-nunito text-lg my-5">Demora por local</h1>
             <div className="flex gap-3 justify-center">
               {data
                 ?.filter(item => item.tipoEnvio === "local")
@@ -133,7 +133,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full bg-white   mx-auto text-center p-2 mt-10 rounded-md ">
+        <div className="w-full bg-slate-50   mx-auto text-center p-2 mt-10 rounded-md ">
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-roboto">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
@@ -142,7 +142,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full  md:w-72 bg-white rounded h-auto shadow-md p-3 border-2"
+                  className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border-none"
                 >
                   <div className="w-full text-sm">
                     <h2 className="text-right">{index + 1}</h2>
@@ -167,7 +167,7 @@ export default function Home() {
                       onClick={() => handleDelete(item?._id)}
                       className="px-4 py-2 w-auto rounded-md text-xs font-medium border shadow
 												focus:outline-none focus:ring transition text-white 
-											bg-red-500  hover:bg-red-600 
+											bg-sky-800   
 											hover:border-white "
                       type="submit"
                     >

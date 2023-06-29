@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-
+import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 function Header() {
@@ -34,7 +34,13 @@ function Header() {
                 <span className={`block h-0.5 w-8 animate-pulse bg-white`}></span>
               </div>
 
-              <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
+              <motion.div
+                className={isNavOpen ? "showMenuNav" : "hideMenuNav"}
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                exit={{ opacity: 0, y: -50 }}
+              >
                 <div className="absolute top-0 right-0 px-8 py-8" onClick={() => setIsNavOpen(false)}>
                   <svg
                     className="h-8 w-8 "
@@ -85,11 +91,11 @@ function Header() {
                     </button>
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             </section>
 
             <div>
-              <ul className="DESKTOP-MENU hidden md:hidden   lg:flex  md:flex-grow justify-end gap-4 flex-wrap items-center">
+              <ul className="DESKTOP-MENU hidden md:hidden  lg:flex  md:flex-grow justify-end gap-4 flex-wrap items-center">
                 <li>
                   <Link to="home" spy={true} smooth={true} offset={0} duration={500}>
                     <button

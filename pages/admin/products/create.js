@@ -34,7 +34,7 @@ export default function Create() {
                 className={
                   renderProducts !== "empanadas"
                     ? "w-52 rounded-3xl font-semibold text-gray-400"
-                    : "w-52 p-1 font-semibold bg-red-500  text-white rounded-3xl"
+                    : "w-52 p-1 font-semibold bg-sky-900  text-white rounded-md"
                 }
               >
                 Canastitas & Empanadas
@@ -46,7 +46,7 @@ export default function Create() {
                 className={
                   renderProducts !== "pizzas"
                     ? "w-32 rounded-3xl font-semibold text-gray-400"
-                    : "w-32 p-1 font-semibold bg-red-500 text-white rounded-3xl"
+                    : "w-32 p-1 font-semibold bg-sky-900 text-white rounded-md"
                 }
               >
                 Pizzas
@@ -59,7 +59,7 @@ export default function Create() {
                 className={
                   renderProducts !== "promociones"
                     ? "w-32 rounded-3xl font-semibold text-gray-400"
-                    : "w-32 font-semibold p-1 bg-red-500 text-white rounded-3xl"
+                    : "w-32 font-semibold p-1 bg-sky-900 text-white rounded-md"
                 }
               >
                 Promociones
@@ -71,7 +71,7 @@ export default function Create() {
                 className={
                   renderProducts !== "bebidas"
                     ? "w-32 rounded-3xl font-semibold text-gray-400"
-                    : "w-32 font-semibold  p-1 text-white rounded-3xl bg-red-500"
+                    : "w-32 font-semibold  p-1 text-white rounded-md bg-sky-900"
                 }
               >
                 Bebidas
@@ -322,7 +322,7 @@ export default function Create() {
                   <button
                     className="w-48 h-12 my-4 col-start-2
                        						 rounded-md  text-sm 
-                       						 border text-white bg-red-500 font-semibold font-nunito"
+                       						 border text-white bg-sky-900 font-semibold font-nunito"
                     type="submit"
                   >
                     Agregar Producto

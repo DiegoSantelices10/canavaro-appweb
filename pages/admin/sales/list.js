@@ -25,17 +25,17 @@ export default function Sales() {
 
   return (
     <Layout>
-      <div className="h-full  w-full">
-        <div className="w-full lg:w-11/12 h-auto text-center py-5 mx-auto">
-          <div className="w-full h-auto flex justify-center items-center">
-            <div className="w-3/5 lg:w-1/2 font-bold bg-white rounded-md shadow p-5">
-              <h2>
-                VENTAS DEL DIA: $ <span>{totalSale}</span>
+      <div className="bg-slate-50 h-full w-full">
+        <div className="w-full lg:w-11/12 h-auto text-center  mx-auto">
+          <div className=" py-5 w-full h-auto flex justify-center lg:justify-start items-center">
+            <div className="w-1/2 lg:w-1/3 font-bold bg-white rounded-md shadow p-5">
+              <h2 className="font-normal font-nunito text-lg">
+                Ventas de hoy: <span className="font-nunito text-lg font-semibold">$ {totalSale}</span>
               </h2>
             </div>
           </div>
 
-          <div className="w-full lg:w-11/12 mx-auto h-auto mt-4 ">
+          <div className=" w-full lg:w-11/12 mx-auto h-full pt-5 ">
             <div className="w-full mx-auto">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-left text-sm  text-gray-500 dark:text-gray-400 ">
@@ -50,14 +50,12 @@ export default function Sales() {
                       <th scope="col" className="pl-2 py-3 w-1/4">
                         Direccion
                       </th>
-                      <th scope="col" className="pl-2 py-3">
-                        Fecha
-                      </th>
+
                       <th scope="col" className="pl-2 py-3">
                         Hora
                       </th>
                       <th scope="col" className="pl-2 py-3">
-                        Precio
+                        Total
                       </th>
                     </tr>
                   </thead>
@@ -70,7 +68,6 @@ export default function Sales() {
                           </th>
                           <td className="pl-2 py-4 font-bold">{pedido.tipoEnvio}</td>
                           <td className="pl-2 py-4 w-1/4">{pedido.domicilio}</td>
-                          <td className="pl-2 py-4">{pedido.fecha}</td>
                           <td className="pl-2 py-4">{pedido.hora}</td>
                           <td className="pl-2 py-4 ">$ {pedido.total}</td>
                         </tr>

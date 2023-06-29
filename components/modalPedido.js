@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-
 // eslint-disable-next-line react/prop-types
+import { motion } from "framer-motion";
+
 const ModalPedido = ({ handleClose, show, pedido }) => {
   const showHideClassName = show ? "fixed z-10 inset-0 overflow-y-auto w-full" : "hidden";
   let idIcrement = 1;
@@ -22,7 +22,13 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
     return `${segmento1} ${segmento2} ${segmento3}`;
   };
   return (
-    <div className={showHideClassName}>
+    <motion.div
+      className={showHideClassName}
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      exit={{ opacity: 0, y: -50 }}
+    >
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-nunito">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -91,16 +97,16 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                               </p>
                               <p>$ {item.categoria === "bebidas" ? item.precio * item.cantidad : item?.precio}</p>
                             </div>
+                            <p className="font-semibold text-gray-500 text-sm w-11/12">{item.descripcion}</p>
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
-                                  <p className="font-semibold text-gray-500 text-sm">
+                                  <p className="font-semibold text-gray-500 text-base">
                                     {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
                                   </p>
                                 </div>
                               ))}
-                            <p className="font-semibold text-gray-500 text-xs w-11/12">{item.descripcion}</p>
-                            <p className="font-semibold text-gray-500 text-xs w-11/12">{item.comentarios}</p>
+                            <p className="font-semibold text-gray-500 text-sm w-11/12">{item.comentarios}</p>
                           </div>
                         );
                       })}
@@ -132,7 +138,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

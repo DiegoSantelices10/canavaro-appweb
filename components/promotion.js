@@ -126,7 +126,7 @@ export default function Promotion({
             <div className="rounded-md  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-sky-900 font-normal text-2xl"
+                className="text-sky-900 font-normal text-3xl"
                 onClick={e => {
                   addItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
                   setQuantity(quantityDemanded - 1);

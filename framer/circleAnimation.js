@@ -95,7 +95,7 @@ const CircleAnimation = () => {
           />
           <h2 className="text-black font-poppins text-xl font-bold w-full mt-5">Tu pedido fue realizado con éxito! </h2>
           <h3 className="text-black font-poppins text-xl font-bold">Muchas gracias!</h3>
-          <p className="text-black font-bold font-nunito text-base py-2">
+          <p className="text-black  font-bold font-nunito text-base py-2">
             En {countdown} segundos se redirecciona a la pagina principal...
           </p>
         </motion.div>

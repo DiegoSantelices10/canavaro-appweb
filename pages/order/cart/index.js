@@ -11,10 +11,14 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { addAddress, setUser } from "store/reducers/userSlice";
 import axios from "axios";
 import * as Yup from "yup";
+import ModalDescripcion from "components/modalDescripcion";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora } = useSelector(state => state.order);
   const { nombre, direccion, telefono } = useSelector(state => state.user);
+
+  const [showModal, setShowModal] = useState(false);
+  const [currentProducto, setCurrentProducto] = useState(null);
 
   const [type, setType] = useState("domicilioActual");
   const router = useRouter();
@@ -35,6 +39,17 @@ export default function Cart({ data }) {
   }, []);
   const deleteItem = _id => {
     dispatch(removeItemCart(_id));
+  };
+
+  const handleOpenModal = producto => {
+    setCurrentProducto(producto);
+    console.log("entro");
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setCurrentProducto(null);
+    setShowModal(false);
   };
 
   const validationSchema = Yup.object().shape(
@@ -70,146 +85,167 @@ export default function Cart({ data }) {
       >
         {() => {
           return (
-            <Form>
-              <div className="px-3">
-                <div className="flex items-center gap-3 py-4">
-                  <Link href={"/order/home"}>
-                    <a>
-                      <FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
-                    </a>
-                  </Link>
-                  <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
-                </div>
-                <div>
-                  <div className="px-2 rounded-lg border-2 border-gray-200">
-                    <div className="flex justify-center  w-full gap-3 py-3 text-sm ">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setType("domicilioActual");
-                        }}
-                        className={
-                          type === "domicilioActual"
-                            ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
-                            : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
-                        }
-                      >
-                        <MdOutlineDeliveryDining size={20} />
-                        Delivery
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setType("localActual");
-                        }}
-                        className={
-                          type === "localActual"
-                            ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
-                            : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
-                        }
-                      >
-                        <MdOutlineEmojiPeople size={20} />
-                        Retiro
-                      </button>
-                    </div>
-                    <div className="flex flex-col justify-center items-center gap-2">
-                      {type === "domicilioActual" ? (
-                        <>
-                          <div className="w-full">
-                            <Field
-                              id="direccion"
-                              name="direccion"
-                              className="border border-slate-300 rounded-md w-full p-2"
-                              placeholder="Ingresa tu direccion, Barrio"
-                            />{" "}
-                            <ErrorMessage name="direccion">
-                              {msg => {
-                                return <div className="text-red-500 font-medium text-sm">{msg}</div>;
-                              }}
-                            </ErrorMessage>
-                          </div>
-                          <div className="w-full">
-                            <Field
-                              id="telefono"
-                              name="telefono"
-                              className="border border-slate-300 rounded-md w-full p-2"
-                              placeholder="Ingresa tu telefono"
-                            />
-                            <ErrorMessage name="telefono">
-                              {msg => {
-                                return <div className="text-red-500 font-medium text-sm">{msg}</div>;
-                              }}
-                            </ErrorMessage>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <Field
-                            id="nombre"
-                            name="nombre"
-                            className="border border-slate-300 rounded-md w-full p-2"
-                            placeholder="Ingresa tu nombre"
-                          />
-                          <ErrorMessage name="nombre">
-                            {msg => {
-                              return <div className="text-red-500 font-medium text-sm text-left">{msg}</div>;
-                            }}
-                          </ErrorMessage>
-                        </>
-                      )}
-
-                      <h1 className="font-light">{type === "domicilioActual" ? "Te llega en" : "Retiralo en"}</h1>
-                      <strong>{demora}</strong>
-                    </div>
+            <>
+              {currentProducto && (
+                <ModalDescripcion show={showModal} handleClose={handleCloseModal} pedido={currentProducto} />
+              )}
+              <Form>
+                <div className="px-3">
+                  <div className="flex items-center gap-3 py-4">
+                    <Link href={"/order/home"}>
+                      <a>
+                        <FiChevronsLeft
+                          className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+                          size={30}
+                        />
+                      </a>
+                    </Link>
+                    <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
                   </div>
-                </div>
-              </div>
-              <div className="mb-20">
-                {orderList.map((item, index) => {
-                  return (
-                    <div key={index} className="font-nunito">
-                      <div className="mb-2 p-3  bg-white">
-                        <div className="flex justify-between items-center gap-x-2">
-                          <div className="w-full self-start">
-                            <a className="font-bold  text-gray-800">
-                              {item.nombre}
-                              <span className="text-gray-400 font-light">
-                                {" "}
-                                x {item.cant ? item.cant : item.cantidad}
-                              </span>
-                            </a>
-                            <p className="text-gray-400 text-sm">
-                              {item?.descripcion ||
-                                item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) ||
-                                ""}
-                            </p>
-                            <p className="font-semibold text-sm text-gray-800">$ {item.precio * item.cantidad}</p>
-                          </div>
-                          <button type="button" onClick={() => deleteItem(item._id)}>
-                            <MdDeleteOutline size={30} className="text-red-700" />
-                          </button>
-                        </div>
-                      </div>
-                      <hr />
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="font-nunito fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
-                <div className="flex justify-between items-center p-3 font-poppins">
                   <div>
-                    <p className="font-bold text-xl">Subtotal</p>
-                    <h3 className="text-xl">$ {totalAmount}</h3>
+                    <div className="px-2 rounded-lg border-2 border-gray-200">
+                      <div className="flex justify-center  w-full gap-3 py-3 text-sm ">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setType("domicilioActual");
+                          }}
+                          className={
+                            type === "domicilioActual"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
+                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
+                          }
+                        >
+                          <MdOutlineDeliveryDining size={20} />
+                          Delivery
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setType("localActual");
+                          }}
+                          className={
+                            type === "localActual"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
+                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
+                          }
+                        >
+                          <MdOutlineEmojiPeople size={20} />
+                          Retiro
+                        </button>
+                      </div>
+                      <div className="flex flex-col justify-center items-center gap-2">
+                        {type === "domicilioActual" ? (
+                          <>
+                            <div className="w-full">
+                              <Field
+                                id="direccion"
+                                name="direccion"
+                                className="border border-slate-300 rounded-md w-full p-2"
+                                placeholder="Ingresa tu direccion, Barrio"
+                              />{" "}
+                              <ErrorMessage name="direccion">
+                                {msg => {
+                                  return <div className="text-red-500 font-medium text-sm">{msg}</div>;
+                                }}
+                              </ErrorMessage>
+                            </div>
+                            <div className="w-full">
+                              <Field
+                                id="telefono"
+                                name="telefono"
+                                className="border border-slate-300 rounded-md w-full p-2"
+                                placeholder="Ingresa tu telefono"
+                              />
+                              <ErrorMessage name="telefono">
+                                {msg => {
+                                  return <div className="text-red-500 font-medium text-sm">{msg}</div>;
+                                }}
+                              </ErrorMessage>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <Field
+                              id="nombre"
+                              name="nombre"
+                              className="border border-slate-300 rounded-md w-full p-2"
+                              placeholder="Ingresa tu nombre"
+                            />
+                            <ErrorMessage name="nombre">
+                              {msg => {
+                                return <div className="text-red-500 font-medium text-sm text-left">{msg}</div>;
+                              }}
+                            </ErrorMessage>
+                          </>
+                        )}
+
+                        <h1 className="font-light">{type === "domicilioActual" ? "Te llega en" : "Retiralo en"}</h1>
+                        <strong>{demora}</strong>
+                      </div>
+                    </div>
                   </div>
-                  <button
-                    type="submit"
-                    className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-sky-900 hover:bg-sky-800 hover:-translate-y-1 transition-all duration-500"
-                  >
-                    Continuar el pago
-                  </button>
                 </div>
-              </div>
-            </Form>
+                <div className="mb-20">
+                  {orderList.map((item, index) => {
+                    return (
+                      <div key={index} className="font-nunito">
+                        <div className="mb-2 p-3  bg-white">
+                          <div className="flex justify-between items-center gap-x-2">
+                            <div className=" flex self-start gap-4">
+                              <div className="w-full ">
+                                <a className="font-bold  text-gray-800">
+                                  {item.nombre}
+                                  <span className="text-gray-400 font-light">
+                                    {" "}
+                                    x {item.cant ? item.cant : item.cantidad}
+                                  </span>
+                                </a>
+                                <p className="text-gray-400 text-sm">
+                                  {item?.descripcion ||
+                                    item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) ||
+                                    ""}
+                                </p>
+                                <p className="font-semibold text-sm text-gray-800">$ {item.precio * item.cantidad}</p>
+                              </div>
+                              {item?.products && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleOpenModal(item)}
+                                  className="font-normal text-sm w-auto underline"
+                                  style={{ whiteSpace: "nowrap" }}
+                                >
+                                  Descripcion
+                                </button>
+                              )}
+                            </div>
+
+                            <button type="button" onClick={() => deleteItem(item._id)}>
+                              <MdDeleteOutline size={30} className="text-red-700" />
+                            </button>
+                          </div>
+                        </div>
+                        <hr />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="font-nunito fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
+                  <div className="flex justify-between items-center p-3 font-poppins">
+                    <div>
+                      <p className="font-bold text-xl">Subtotal</p>
+                      <h3 className="text-xl">$ {totalAmount}</h3>
+                    </div>
+                    <button
+                      type="submit"
+                      className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-sky-900 hover:bg-sky-800 hover:-translate-y-1 transition-all duration-500"
+                    >
+                      Continuar el pago
+                    </button>
+                  </div>
+                </div>
+              </Form>
+            </>
           );
         }}
       </Formik>
