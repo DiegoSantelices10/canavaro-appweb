@@ -27,7 +27,7 @@ export default function SectionPizzas() {
 
         <style jsx>{`
           .bg-image {
-            background-image: url(/images/FugazzetaPorcion.jpg);
+            background-image: url(/images/FugazzetaPorcion.webp);
           }
         `}</style>
         {currentProducto !== null && (
@@ -45,19 +45,19 @@ export default function SectionPizzas() {
         <div className="relative z-10 flex justify-center h-32 items-center w-full gap-10">
           <div className="text-center h-28 w-auto flex flex-col justify-between ">
             <div className="h-24  flex justify-center items-center ">
-              <Image src={"/images/pizza-vector.png"} width={60} height={60} alt="gigante" />
+              <Image priority={true} src={"/images/pizza-vector.webp"} width={60} height={60} alt="gigante" />
             </div>
             <p className="font-bold text-gray-200 text-lg">Gigante</p>
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between">
             <div className="h-24 flex justify-center items-center">
-              <Image src={"/images/pizza-vector.png"} width={55} height={55} alt="mediana" />
+              <Image priority={true} src={"/images/pizza-vector.webp"} width={55} height={55} alt="mediana" />
             </div>
             <p className="font-bold text-lg text-gray-200">Mediana</p>
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between">
             <div className="h-24 flex justify-center items-center">
-              <Image src={"/images/pizza-vector.png"} width={50} height={50} alt="chica" />
+              <Image priority={true} src={"/images/pizza-vector.webp"} width={50} height={50} alt="chica" />
             </div>
             <p className="font-bold text-gray-200 text-lg">Chica</p>
           </div>
