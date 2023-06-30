@@ -51,7 +51,7 @@ export default function sectionCombos() {
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between ">
             <div className="h-24  flex justify-center items-center ">
-              <Image src={"/images/pizza-vector.png"} width={70} height={70} alt="pizza" />
+              <Image src={"/images/pizza-vector.webp"} width={70} height={70} alt="pizza" />
             </div>
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between ">
