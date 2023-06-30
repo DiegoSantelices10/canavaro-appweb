@@ -196,7 +196,7 @@ export default function Home() {
               className={
                 renderProducts !== "empanadas"
                   ? "w-52  font-semibold text-gray-400"
-                  : "w-52 font-bold bg-white text-sky-900 shadow-md rounded-md tracking-wide"
+                  : "w-52 font-bold bg-white text-sky-900 shadow rounded-md tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -208,7 +208,7 @@ export default function Home() {
               className={
                 renderProducts !== "pizzas"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-bold bg-white text-sky-900 shadow-md rounded-md tracking-wide"
+                  : "w-32 font-bold bg-white text-sky-900 shadow rounded-md tracking-wide"
               }
             >
               Pizzas
@@ -221,7 +221,7 @@ export default function Home() {
               className={
                 renderProducts !== "promociones"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-bold  bg-white text-sky-900 shadow-md rounded-md tracking-wide"
+                  : "w-32 font-bold  bg-white text-sky-900 shadow rounded-md tracking-wide"
               }
             >
               Promociones
@@ -236,7 +236,7 @@ export default function Home() {
               className={
                 renderProducts !== "bebidas"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-bold  bg-white text-sky-900 shadow-md rounded-md tracking-wide"
+                  : "w-32 font-bold  bg-white text-sky-900 shadow rounded-md tracking-wide"
               }
             >
               Bebidas
