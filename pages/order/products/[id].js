@@ -21,7 +21,6 @@ export async function getServerSideProps({ query }) {
       (convertToPath(item.nombre) === id && item.categoria === "promociones")
   );
 
-  console.log(data);
   return {
     props: {
       id,

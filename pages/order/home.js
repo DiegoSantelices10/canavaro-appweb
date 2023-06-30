@@ -145,7 +145,7 @@ export default function Home() {
     <Layout>
       <ToastContainer />
       <div className="py-4 mt-14 mx-auto w-full ">
-        <h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">Promociones</h1>
+        <h1 className="text-lg  font-extrabold text-sky-950 px-3 pb-1">Promociones</h1>
         <hr className="pb-3" />
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-3">
           <style jsx>
@@ -164,9 +164,13 @@ export default function Home() {
         </div>
         <div className="my-4">
           <div className="w-full  p-3 flex items-center justify-between">
-            <p className="text-sky-900 font-nunito text-sm  font-extrabold">¡ ARMA TU PIZZA COMO QUIERAS !</p>
+            <p className="text-sky-950 text-center w-full font-poppins text-sm  font-bold">
+              ¡ ARMA TU PIZZA COMO QUIERAS !
+            </p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-bold w-auto bg-sky-900 text-white p-2 text-sm px-3">INGRESA AQUI</a>
+              <a className="rounded-md font-poppins font-semibold w-auto whitespace-nowrap bg-sky-900 text-white p-2 text-sm px-3">
+                INGRESA AQUI
+              </a>
             </Link>
           </div>
         </div>
@@ -241,7 +245,7 @@ export default function Home() {
         </div>
 
         <div>
-          <h1 className="text-lg  font-extrabold text-gray-800 px-3 pb-1">
+          <h1 className="text-lg  font-extrabold text-sky-950 px-3 pb-1">
             {renderProducts[0].toUpperCase() + renderProducts.substring(1)}
           </h1>
           <hr className="pb-3" />

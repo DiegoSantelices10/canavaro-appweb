@@ -51,7 +51,7 @@ export default function SectionZona() {
                       className="flex items-center justify-center"
                       href="https://facebook.com/Canavaro-289165874501296/"
                     >
-                      <Image src="/images/logoig.png" width={30} height={30} alt="logo" />
+                      <Image src="/images/logoig.webp" width={30} height={30} alt="logo" />
                     </a>
                   </div>
                 </div>

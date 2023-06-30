@@ -150,7 +150,7 @@ function Header() {
                   className={`p-3 bg-gray-50 w-auto px-4 hover:bg-gray-900 hover:text-gray-50 hover:-translate-y-1
 											transition-all duration-500 rounded-xl`}
                 >
-                  <button onClick={() => router.push("/order/login")} className="flex justify-around items-center">
+                  <button onClick={() => router.push("/welcomeLogo")} className="flex justify-around items-center">
                     <p className="text-base font-poppins font-bold">HAC&Eacute; TU PEDIDO</p>
                   </button>
                 </div>

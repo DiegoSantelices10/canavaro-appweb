@@ -61,9 +61,9 @@ export default function Home() {
       dispatch(updateSale(data.id.id));
     });
 
-    return () => {
-      pusher.unsubscribe("pizzeria");
-    };
+    // return () => {
+    //   pusher.unsubscribe("pizzeria");
+    // };
   }, []);
 
   const handleOpenModal = pedido => {

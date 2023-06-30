@@ -41,7 +41,7 @@ export default function menu() {
             } mx-auto rounded-2xl shadow-md p-2 h-auto w-28 `}
           >
             <div>
-              <Image src="/images/pedidosblack.png" width={35} height={35} alt="pedidoblack" />
+              <Image priority={true} src="/images/pedidosblack.webp" width={35} height={35} alt="pedidoblack" />
               <p className="font-bold text-base font-nunito lg:text-lg">Pedidos</p>
             </div>
           </button>
@@ -54,7 +54,7 @@ export default function menu() {
             } mx-auto rounded-2xl shadow-md p-2 h-auto w-28`}
           >
             <div>
-              <Image src="/images/productsblack.png" width={35} height={35} alt="black" />
+              <Image priority={true} src="/images/productsblack.webp" width={35} height={35} alt="black" />
               <p className="font-bold text-base font-nunito lg:text-lg">Productos</p>
             </div>
           </button>
@@ -67,7 +67,7 @@ export default function menu() {
             } mx-auto rounded-2xl shadow-md p-2 h-auto w-28`}
           >
             <div>
-              <Image src="/images/salesblack.png" width={35} height={35} alt="salesblack" />
+              <Image priority={true} src="/images/salesblack.webp" width={35} height={35} alt="salesblack" />
               <p className="font-bold text-base font-nunito lg:text-lg">Ventas</p>
             </div>
           </button>

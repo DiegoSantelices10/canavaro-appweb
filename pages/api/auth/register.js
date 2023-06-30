@@ -9,14 +9,12 @@ const handler = async (req, res) => {
       const { username, password } = req.body;
 
       const hashedPassword = await bcrypt.hash(password, 12);
-      console.log("haspass", hashedPassword);
       const userModel = new User({
         username,
         password: hashedPassword,
       });
 
       const savedUser = await userModel.save();
-      console.log(savedUser);
       if (savedUser) {
         return res.status(201).json({ message: "ok" });
       } else {

@@ -108,7 +108,7 @@ export default function Checkout() {
                   <p className="font-nunito px-1">{demora}</p>
                 </div>
                 <hr />
-                <div className="p-3 py-5">
+                <div className="p-3 ">
                   <h2 className="font-nunito font-extrabold text-base pb-1">Comentarios adicionales</h2>
                   <Field
                     id="comentarios"
@@ -116,7 +116,7 @@ export default function Checkout() {
                     className="border border-slate-300 rounded-md w-full p-2"
                   />
                 </div>
-                <div className="p-3 py-5 h-full">
+                <div className="p-3  h-full">
                   <h2 className="font-nunito font-extrabold text-base">Medio de pago</h2>
                   <div>
                     <div
@@ -155,9 +155,11 @@ export default function Checkout() {
                       {values.medioDePago === "mercadoPago" && (
                         <>
                           <div className="flex justify-center w-full">
-                            <Image src="/images/logoMP.jpg" width={100} height={100} alt="logoMP" />
+                            <Image src="/images/logoMP.webp" width={100} height={100} alt="logoMP" />
                           </div>
-                          <p className="font nunito font-semibold p-2">Mediante el sistema de pago con QR!</p>
+                          <p className="font-nunito text-center font-semibold p-2">
+                            Pagar con QR al momento de recibir el pedido!
+                          </p>
                         </>
                       )}
                     </div>

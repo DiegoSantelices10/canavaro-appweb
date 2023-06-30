@@ -19,7 +19,6 @@ export const saleSlice = createSlice({
       state.renderSales.push(payload);
     },
     updateSale: (state, { payload }) => {
-      console.log("id", payload);
       const newList = state.renderSales.filter(item => item._id !== payload);
       console.log(newList);
       state.renderSales = newList;
