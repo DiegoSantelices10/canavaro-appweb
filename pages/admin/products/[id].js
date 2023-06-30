@@ -6,23 +6,16 @@ import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import { updateProduct } from "services/fetchData";
+import { getProducts, updateProduct } from "services/fetchData";
 import Swal from "sweetalert2";
 
-export default function Update() {
+export default function Update({ data }) {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [productRender, setProductRender] = useState({});
-  const { products } = useSelector(state => state.product);
   const router = useRouter();
-  const { id } = router.query;
-
   useEffect(() => {
-    if (id) {
-      const result = products?.find(item => item._id === id);
-      setProductRender(result);
-      setRenderProductos(result?.categoria);
-    }
+    setProductRender(data);
+    setRenderProductos(data?.categoria);
   }, []);
 
   const modelProducto = value => {
@@ -90,7 +83,7 @@ export default function Update() {
         <h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
           ¡Actualiza el producto!
         </h1>
-        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
+        <div className="font-nunito flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
           <style jsx>
             {`
               .flexp::-webkit-scrollbar-thumb {
@@ -105,11 +98,11 @@ export default function Update() {
           </style>
           <div>
             <button
-              onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "empanadas"}`)}
+              onClick={() => setRenderProductos(`${data._id !== "0" ? renderProducts : "empanadas"}`)}
               className={
                 renderProducts !== "empanadas"
-                  ? "w-52 rounded-3xl font-semibold text-gray-400"
-                  : "w-52 p-1 font-semibold bg-red-500  text-white rounded-3xl"
+                  ? "w-52 rounded-md font-semibold text-gray-400"
+                  : "w-52 p-1 font-semibold bg-sky-800  text-white rounded-md"
               }
             >
               Canastitas & Empanadas
@@ -117,11 +110,11 @@ export default function Update() {
           </div>
           <div>
             <button
-              onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "pizzas"}`)}
+              onClick={() => setRenderProductos(`${data._id !== "0" ? renderProducts : "pizzas"}`)}
               className={
                 renderProducts !== "pizzas"
-                  ? "w-32 rounded-3xl font-semibold text-gray-400"
-                  : "w-32 p-1 font-semibold bg-red-500 text-white rounded-3xl"
+                  ? "w-32 rounded-md font-semibold text-gray-400"
+                  : "w-32 p-1 font-semibold bg-sky-800 text-white rounded-md"
               }
             >
               Pizzas
@@ -130,11 +123,11 @@ export default function Update() {
 
           <div>
             <button
-              onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "promociones"}`)}
+              onClick={() => setRenderProductos(`${data._id !== "0" ? renderProducts : "promociones"}`)}
               className={
                 renderProducts !== "promociones"
-                  ? "w-32 rounded-3xl font-semibold text-gray-400"
-                  : "w-32 font-semibold p-1 bg-red-500 text-white rounded-3xl"
+                  ? "w-32 rounded-md font-semibold text-gray-400"
+                  : "w-32 font-semibold p-1 bg-sky-800 text-white rounded-md"
               }
             >
               Promociones
@@ -142,11 +135,11 @@ export default function Update() {
           </div>
           <div>
             <button
-              onClick={() => setRenderProductos(`${id !== "0" ? renderProducts : "bebidas"}`)}
+              onClick={() => setRenderProductos(`${data._id !== "0" ? renderProducts : "bebidas"}`)}
               className={
                 renderProducts !== "bebidas"
-                  ? "w-32 rounded-3xl font-semibold text-gray-400"
-                  : "w-32 font-semibold  p-1 text-white rounded-3xl bg-red-500"
+                  ? "w-32 rounded-md font-semibold text-gray-400"
+                  : "w-32 font-semibold  p-1 text-white rounded-md bg-sky-800"
               }
             >
               Bebidas
@@ -174,7 +167,7 @@ export default function Update() {
           onSubmit={async (values, { resetForm }) => {
             if (values.imagen.public_id) {
               const model = modelProducto({ ...values, imagen: "" });
-              await updateProduct(id, model)
+              await updateProduct(data._id, model)
                 .then(res => {
                   if (res.success) {
                     Swal.fire({
@@ -198,7 +191,7 @@ export default function Update() {
                 });
             } else {
               const model = modelProducto(values);
-              await updateProduct(id, model)
+              await updateProduct(data._id, model)
                 .then(res => {
                   if (res.success) {
                     Swal.fire({
@@ -428,7 +421,7 @@ export default function Update() {
                 <button
                   className="w-48 h-12 my-4 col-start-2
                        						 rounded-md  text-sm 
-                       						 border text-white bg-red-500 font-semibold font-nunito"
+                       						 border text-white bg-sky-900 font-semibold font-nunito"
                   type="submit"
                 >
                   Actualizar Producto
@@ -443,7 +436,11 @@ export default function Update() {
 }
 
 export async function getServerSideProps(context) {
-  const { req, res } = context;
+  const productos = await getProducts();
+  const { req, res, query } = context;
+
+  const id = query.id;
+  const data = await productos.find(item => item._id === id);
 
   const token = req.headers.cookie?.includes("token") || req.cookies.token;
   if (!token) {
@@ -453,5 +450,5 @@ export async function getServerSideProps(context) {
     return { props: {} };
   }
 
-  return { props: {} };
+  return { props: { data } };
 }

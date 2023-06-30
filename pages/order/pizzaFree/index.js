@@ -130,7 +130,7 @@ export default function Index() {
     <div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
       <div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
         <Image
-          src={"/images/descarga.jpeg"}
+          src={"/images/pizzafree.webp"}
           layout="responsive"
           width={80}
           height={40}
@@ -202,7 +202,9 @@ export default function Index() {
           </div>
           <div className="text-sm font-semibold text-left bg-white p-3 my-1">
             {products
-              .filter(item => item.categoria === "pizzas" && item.nombre !== "Fugazzeta rellena")
+              .filter(
+                item => item.categoria === "pizzas" && item.nombre !== "Fugazzeta rellena" && item.available === true
+              )
               ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
 
               .map(item => {
