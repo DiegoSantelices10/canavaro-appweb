@@ -129,10 +129,10 @@ export default function Products() {
       <div className="w-full px-2 md:w-11/12 lg:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
         {renderProductos.map(({ _id, nombre, descripcion, imagen, available, categoria }) => {
           return (
-            <div key={_id}>
-              <div className=" flex justify-between items-center p-0  relative ">
+            <div key={_id} className="bg-white h-auto shadow-md rounded-md pl-1 border-none">
+              <div className="flex justify-between items-center p-0  relative ">
                 <Image
-                  className="rounded-xl"
+                  className="rounded-md"
                   src={imagen?.url || "/images/logocanavaro.png"}
                   width={140}
                   height={140}

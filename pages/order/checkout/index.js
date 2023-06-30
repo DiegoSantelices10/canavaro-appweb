@@ -158,7 +158,7 @@ export default function Checkout() {
                             <Image src="/images/logoMP.webp" width={100} height={100} alt="logoMP" />
                           </div>
                           <p className="font-nunito text-center font-semibold p-2">
-                            Pagar con QR al momento de recibir el pedido!
+                            Abonas con QR al momento de recibir el pedido!
                           </p>
                         </>
                       )}

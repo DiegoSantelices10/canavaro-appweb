@@ -164,11 +164,11 @@ export default function Home() {
         </div>
         <div className="my-4">
           <div className="w-full  p-3 flex items-center justify-between">
-            <p className="text-sky-950 text-center w-full font-poppins text-sm  font-bold">
+            <p className="text-sky-900 text-center w-full font-poppins text-sm  font-bold">
               ¡ ARMA TU PIZZA COMO QUIERAS !
             </p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-poppins font-semibold w-auto whitespace-nowrap bg-sky-900 text-white p-2 text-sm px-3">
+              <a className="rounded-md font-poppins font-semibold w-auto  bg-sky-900 hover:bg-white hover:text-sky-900 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
                 INGRESA AQUI
               </a>
             </Link>
@@ -196,7 +196,7 @@ export default function Home() {
               className={
                 renderProducts !== "empanadas"
                   ? "w-52  font-semibold text-gray-400"
-                  : "w-52 font-bold bg-sky-900 text-white rounded-md tracking-wide"
+                  : "w-52 font-bold bg-white text-sky-900 shadow-md rounded-md tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -208,7 +208,7 @@ export default function Home() {
               className={
                 renderProducts !== "pizzas"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-bold bg-sky-900 text-white rounded-md tracking-wide"
+                  : "w-32 font-bold bg-white text-sky-900 shadow-md rounded-md tracking-wide"
               }
             >
               Pizzas
@@ -221,7 +221,7 @@ export default function Home() {
               className={
                 renderProducts !== "promociones"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-bold bg-sky-900 text-white rounded-md tracking-wide"
+                  : "w-32 font-bold  bg-white text-sky-900 shadow-md rounded-md tracking-wide"
               }
             >
               Promociones
@@ -236,7 +236,7 @@ export default function Home() {
               className={
                 renderProducts !== "bebidas"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-bold bg-sky-900 text-white rounded-md tracking-wide"
+                  : "w-32 font-bold  bg-white text-sky-900 shadow-md rounded-md tracking-wide"
               }
             >
               Bebidas
