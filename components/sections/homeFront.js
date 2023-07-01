@@ -9,7 +9,7 @@ function HomeFront() {
     <Element name="home" className="relative element">
       <div
         style={{
-          "backgroundImage": "url(/images/fondoprincipal.webp)",
+          "backgroundImage": "url(/images/fondonuevo.webp)",
         }}
         className={` font-nunito w-full min-h-screen mx-auto bg-cover bg-center`}
       >

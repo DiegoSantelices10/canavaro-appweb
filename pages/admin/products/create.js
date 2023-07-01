@@ -14,6 +14,7 @@ export default function Create() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    return router.push("list");
   };
 
   return (
@@ -116,9 +117,8 @@ export default function Create() {
                       status: true,
                     });
                     setShowModal(true);
-                    resetForm();
-                    return router.push("list");
                   }
+                  resetForm();
                 })
                 .catch(() => {
                   setInfo({

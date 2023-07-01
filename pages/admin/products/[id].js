@@ -83,6 +83,7 @@ export default function Update({ data }) {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    return router.push("list");
   };
   return (
     <Layout>
@@ -185,9 +186,8 @@ export default function Update({ data }) {
                       status: true,
                     });
                     setShowModal(true);
-                    resetForm();
-                    return router.push("list");
                   }
+                  resetForm();
                 })
                 .catch(() => {
                   setInfo({
