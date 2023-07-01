@@ -31,7 +31,13 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
       <div className="p-3 bg-white">
         {categoria === "empanadas" || categoria === "bebidas" ? (
           <div className="flex justify-between items-center gap-x-2">
-            <Image className="rounded-xl" src={imagen?.url} width={140} height={140} alt={nombre} />
+            <Image
+              className="rounded-xl"
+              src={imagen?.url || "/images/logocanavaro.webp"}
+              width={140}
+              height={140}
+              alt={nombre}
+            />
             <div className="relative w-full h-24 self-start">
               <h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
               <p className="text-gray-400 text-xs">{descripcion}</p>

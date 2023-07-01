@@ -21,14 +21,15 @@ import {
 } from "store/reducers/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
-
+import ModalMessage from "./modalMessage";
 export default function ProductLayout({
   data,
   data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
 }) {
   const { orderPromo, orderList, quantityDemanded } = useSelector(state => state.order);
   const [selectCombo, setSelectCombo] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [info, setInfo] = useState({ title: "", description: "", status: true });
 
   const comentarioRef = useRef();
   const router = useRouter();
@@ -64,17 +65,12 @@ export default function ProductLayout({
   };
 
   const returnHome = () => {
-    Swal.fire({
+    setInfo({
       title: "Estas seguro que deseas salir?",
-      text: "Los datos no seran guardados.",
-      showDenyButton: true,
-      confirmButtonText: "Aceptar",
-    }).then(result => {
-      if (result.isConfirmed) {
-        dispatch(clearOrderPromo());
-        router.push("/order/home");
-      }
+      description: "Los datos no seran guardados al carrito",
+      status: false,
     });
+    setShowModal(true);
   };
 
   const addCartPromo = value => {
@@ -125,8 +121,19 @@ export default function ProductLayout({
     dispatch(clearOrderPromo());
     router.push("/order/home");
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    dispatch(clearOrderPromo());
+    router.push("/order/home");
+  };
+
   return (
     <div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
+      {showModal && (
+        <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
+      )}
+
       <div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
         <Image
           src={imagen?.url}
@@ -147,10 +154,8 @@ export default function ProductLayout({
           <div className="w-full bg-white p-3">
             <h1 className="font-bold text-lg font-nunito text-gray-800">{nombre}</h1>
             <p className=" font-normal text-sm  text-gray-400 font-nunito">{descripcion}</p>
-            {categoria === "promociones" ? (
+            {categoria === "promociones" && (
               <p className=" font-normal font-nunito text-sm text-gray-400">$ {precio}</p>
-            ) : (
-              ""
             )}
           </div>
           <hr />

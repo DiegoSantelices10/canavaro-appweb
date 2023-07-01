@@ -8,15 +8,17 @@ import {
   calculateTotalQuantity,
   clearOrderPromo,
 } from "store/reducers/orderSlice";
-import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 
 import { v4 as uuidv4 } from "uuid";
+import ModalMessage from "components/modalMessage";
 
 export default function Index() {
   const [select, setSelect] = useState("gigante");
   const [radioSelect, setRadioSelect] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [info, setInfo] = useState({ title: "", description: "", status: true });
   const [total, setTotal] = useState(0);
   const { products } = useSelector(state => state.product);
 
@@ -58,16 +60,12 @@ export default function Index() {
     setRadioSelect(response);
   };
   const returnHome = () => {
-    Swal.fire({
+    setInfo({
       title: "Estas seguro que deseas salir?",
-      showDenyButton: true,
-      confirmButtonText: "Descartar",
-    }).then(result => {
-      if (result.isConfirmed) {
-        dispatch(clearOrderPromo());
-        router.push("/order/home");
-      }
+      description: "Los datos no seran guardados al carrito",
+      status: false,
     });
+    setShowModal(true);
   };
 
   const checkSuma = radioArray => {
@@ -126,8 +124,18 @@ export default function Index() {
     });
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+    dispatch(clearOrderPromo());
+    router.push("/order/home");
+  };
+
   return (
     <div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
+      {showModal && (
+        <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
+      )}
+
       <div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
         <Image
           src={"/images/pizzafree.webp"}

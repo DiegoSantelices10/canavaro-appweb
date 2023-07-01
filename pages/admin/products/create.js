@@ -4,13 +4,23 @@ import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
 import { createProduct } from "services/fetchData";
 import { useRouter } from "next/router";
-import Swal from "sweetalert2";
+import ModalMessage from "components/modalMessage";
+
 export default function Create() {
   const [renderProducts, setRenderProductos] = useState("empanadas");
+  const [showModal, setShowModal] = useState(false);
+  const [info, setInfo] = useState({ title: "", description: "", status: true });
   const router = useRouter();
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <Layout>
-      <section className="w-full bg-white">
+      {showModal && <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} />}
+
+      <section className="w-full bg-slate-50">
         <div className="w-full lg:w-3/5 p-2 md:p-10">
           <h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
             ¡Ingresa un producto nuevo!
@@ -97,30 +107,26 @@ export default function Create() {
               tamanio: "",
             }}
             onSubmit={async (values, { resetForm }) => {
-              console.log(values);
               await createProduct(values)
                 .then(res => {
-                  console.log(res);
                   if (res.message === "ok") {
-                    Swal.fire({
-                      icon: "success",
-
-                      title: "Creacion Exitosa!",
-                      confirmButtonColor: "#3085d6",
+                    setInfo({
+                      title: "Creación exitosa",
+                      description: "Se guardaron los datos correctamente!",
+                      status: true,
                     });
+                    setShowModal(true);
+                    resetForm();
+                    return router.push("list");
                   }
-                  resetForm();
-                  return router.push("list");
                 })
-                .catch(error => {
-                  if (error) {
-                    console.log(error);
-                    Swal.fire({
-                      icon: "error",
-                      title: "Oops...",
-                      text: "Something went wrong!",
-                    });
-                  }
+                .catch(() => {
+                  setInfo({
+                    title: "Error en la carga",
+                    description: "No pudimos guardar los datos, intente nuevamente.",
+                    status: false,
+                  });
+                  setShowModal(true);
                 });
             }}
             enableReinitialize

@@ -11,7 +11,7 @@ export default function CardPromotion({ data: { _id, nombre, descripcion, imagen
           <Link href={`/order/products/${convertToPath(nombre)}`}>
             <a className="font-bold text-sm text-gray-800">
               <Image
-                src={imagen?.url}
+                src={imagen?.url || "/images/logocanavaro.webp"}
                 layout="responsive"
                 width={220}
                 height={130}
@@ -26,10 +26,7 @@ export default function CardPromotion({ data: { _id, nombre, descripcion, imagen
       </div>
       <div className="bg-white h-16 rounded-b-md px-2 pt-2">
         <Link href={`/order/products/${convertToPath(nombre)}`}>
-          <a className="font-bold text-base text-gray-800">
-            {nombre}
-            <span className="text-xs text-gray-400 font-normal ml-2">{`${tamanio ? "pizza " + tamanio : ""}`}</span>
-          </a>
+          <a className="font-bold text-base text-gray-800">{nombre}</a>
         </Link>
 
         <p className=" text-gray-400 text-xs font-medium ">{descripcion}</p>

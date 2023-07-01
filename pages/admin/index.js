@@ -87,14 +87,6 @@ export default function Home() {
     }
   };
 
-  const separarNumero = numero => {
-    const segmento1 = numero?.substring(0, 2);
-    const segmento2 = numero?.substring(2, 6);
-    const segmento3 = numero?.substring(6, 10);
-
-    return `${segmento1} ${segmento2} ${segmento3}`;
-  };
-
   const handleDelete = async id => {
     const res = await axios.put(`/api/sales/${id}`, { liberado: true });
     if (res.status === 200) {
@@ -148,7 +140,8 @@ export default function Home() {
                     <h2 className="text-right">{index + 1}</h2>
                     <div className="text-left py-3 font-medium">
                       <h5 className="font-semibold">{item?.cliente}</h5>
-                      <h5 className="text-sm font-normal">{item?.domicilio || separarNumero(item?.telefono)}</h5>
+                      <h5 className="text-sm font-semibold">{item?.domicilio}</h5>
+
                       <h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
                     </div>
                   </div>

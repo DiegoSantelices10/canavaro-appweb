@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line react/prop-types
 import { motion } from "framer-motion";
-
+import { AiOutlineClose } from "react-icons/ai";
 const ModalPedido = ({ handleClose, show, pedido }) => {
   const showHideClassName = show ? "fixed z-10 inset-0 overflow-y-auto w-full" : "hidden";
   let idIcrement = 1;
@@ -22,22 +22,28 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
     return `${segmento1} ${segmento2} ${segmento3}`;
   };
   return (
-    <motion.div
-      className={showHideClassName}
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      exit={{ opacity: 0, y: -50 }}
-    >
+    <div className={showHideClassName}>
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-nunito">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-          &#8203;
-        </span>
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden w-full shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+
+        <div className="inline-block align-bottom  rounded-lg text-left overflow-hidden w-full shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+          >
+            <div className="flex justify-end h-full w-full">
+              <button onClick={handleClose}>
+                <AiOutlineClose
+                  className=" text-slate-200 bg-sky-900 bg-opacity-40 rounded-full p-1 top-4 left-4"
+                  size={30}
+                />
+              </button>
+            </div>
             <div className="font-extrabold text-left text-lg font-nunito">
               {pedido?.cliente && (
                 <h2>
@@ -126,19 +132,10 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 </div>
               )}
             </div>
-          </div>
-
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button
-              onClick={handleClose}
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-            >
-              Close
-            </button>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

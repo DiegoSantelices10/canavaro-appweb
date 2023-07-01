@@ -8,10 +8,13 @@ import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
 import { getProducts, updateProduct } from "services/fetchData";
 import Swal from "sweetalert2";
+import ModalMessage from "components/modalMessage";
 
 export default function Update({ data }) {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [productRender, setProductRender] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [info, setInfo] = useState({ title: "", description: "", status: true });
   const router = useRouter();
   useEffect(() => {
     setProductRender(data);
@@ -77,8 +80,14 @@ export default function Update({ data }) {
 
     return model;
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <Layout>
+      {showModal && <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} />}
+
       <div className="w-full lg:w-3/5 h-auto p-2 md:p-10">
         <h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
           ¡Actualiza el producto!
@@ -170,24 +179,23 @@ export default function Update({ data }) {
               await updateProduct(data._id, model)
                 .then(res => {
                   if (res.success) {
-                    Swal.fire({
-                      icon: "success",
-
-                      title: "Actualizacion Exitosa!",
-                      confirmButtonColor: "#3085d6",
+                    setInfo({
+                      title: "Actualización exitosa",
+                      description: "Se guardaron los datos correctamente!",
+                      status: true,
                     });
+                    setShowModal(true);
                     resetForm();
-                    router.push("list");
+                    return router.push("list");
                   }
                 })
-                .catch(error => {
-                  if (error) {
-                    Swal.fire({
-                      icon: "error",
-                      title: "Oops...",
-                      text: "Something went wrong!",
-                    });
-                  }
+                .catch(() => {
+                  setInfo({
+                    title: "Error en la carga",
+                    description: "No pudimos guardar los datos, intente nuevamente.",
+                    status: false,
+                  });
+                  setShowModal(true);
                 });
             } else {
               const model = modelProducto(values);

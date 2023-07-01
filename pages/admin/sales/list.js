@@ -28,7 +28,7 @@ export default function Sales() {
         <div className="w-full lg:w-11/12 h-auto text-center  mx-auto">
           <div className=" py-5 w-full h-auto flex justify-center lg:justify-start items-center">
             <div className="w-1/2 lg:w-1/3 font-bold bg-white rounded-md shadow p-5">
-              <h2 className="font-normal font-nunito text-lg">
+              <h2 className="font-normal font-nunito text-lg whitespace-nowrap">
                 Ventas de hoy: <span className="font-nunito text-lg font-semibold">$ {totalSale}</span>
               </h2>
             </div>
