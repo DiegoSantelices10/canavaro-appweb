@@ -97,6 +97,7 @@ export default function Create() {
               tamanio: "",
             }}
             onSubmit={async (values, { resetForm }) => {
+              console.log(values);
               await createProduct(values)
                 .then(res => {
                   console.log(res);
@@ -113,6 +114,7 @@ export default function Create() {
                 })
                 .catch(error => {
                   if (error) {
+                    console.log(error);
                     Swal.fire({
                       icon: "error",
                       title: "Oops...",
