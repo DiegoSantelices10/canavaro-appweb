@@ -85,7 +85,7 @@ export default function SectionPizzas() {
                     <div className="w-auto py-2">
                       <p
                         onClick={() => handleOpenModal(producto)}
-                        className=" cursor-pointer text-white text-center font-roboto font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+                        className=" cursor-pointer text-white text-center font-nunito font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
                       >
                         {producto.nombre}
                       </p>

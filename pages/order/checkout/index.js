@@ -95,7 +95,7 @@ export default function Checkout() {
                     ) : (
                       <>
                         <h2 className="font-nunito font-extrabold text-base">Retira por local</h2>
-                        <p>Nombre: {user.nombre} </p>
+                        <p className="font-nunito">Nombre: {user.nombre} </p>
                       </>
                     )}
                   </div>
@@ -124,7 +124,7 @@ export default function Checkout() {
                       aria-labelledby="my-radio-group"
                       className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
                     >
-                      <label>
+                      <label className="font-nunito">
                         <Field
                           type="radio"
                           name="medioDePago"
@@ -133,13 +133,8 @@ export default function Checkout() {
                         />
                         Efectivo
                       </label>
-                      <label>
-                        <Field
-                          type="radio"
-                          name="medioDePago"
-                          value="mercadoPago"
-                          className="font-nunito mx-5 p-2 rounded-md"
-                        />
+                      <label className="font-nunito">
+                        <Field type="radio" name="medioDePago" value="mercadoPago" className="mx-5 p-2 rounded-md" />
                         Mercado Pago
                       </label>
                     </div>

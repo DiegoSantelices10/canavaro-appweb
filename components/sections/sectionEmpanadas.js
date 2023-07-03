@@ -20,7 +20,7 @@ export default function SectionEmpanadas() {
   };
   return (
     <Element name="empanadas" className=" w-full  relative element font-nunito">
-      <div className="bg-image font-nunito w-full h-full mx-auto pt-10 md:py-10 lg:py-10 bg-cover bg-center ">
+      <div className="bg-image  w-full h-full mx-auto pt-10 md:py-10 lg:py-10 bg-cover bg-center ">
         <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
 
         <style jsx>{`
@@ -76,7 +76,7 @@ export default function SectionEmpanadas() {
                       <div className="w-auto py-2">
                         <p
                           onClick={() => handleOpenModal(producto)}
-                          className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+                          className=" cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
                         >
                           {producto.nombre}
                         </p>
@@ -105,7 +105,7 @@ export default function SectionEmpanadas() {
                       <div className="w-auto">
                         <p
                           onClick={() => handleOpenModal(producto)}
-                          className=" cursor-pointer font-bold font-roboto text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+                          className=" cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
                         >
                           {producto.nombre}
                         </p>
