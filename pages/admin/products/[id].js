@@ -2,12 +2,10 @@
 /* eslint-disable react/no-unknown-property */
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
-// import axios from "axios";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
 import { getProducts, updateProduct } from "services/fetchData";
-import Swal from "sweetalert2";
 import ModalMessage from "components/modalMessage";
 
 export default function Update({ data }) {
@@ -16,6 +14,7 @@ export default function Update({ data }) {
   const [showModal, setShowModal] = useState(false);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
   const router = useRouter();
+
   useEffect(() => {
     setProductRender(data);
     setRenderProductos(data?.categoria);
@@ -85,6 +84,7 @@ export default function Update({ data }) {
     setShowModal(false);
     return router.push("list");
   };
+
   return (
     <Layout>
       {showModal && <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} />}
@@ -187,6 +187,7 @@ export default function Update({ data }) {
                     });
                     setShowModal(true);
                   }
+                  router.push("list");
                   resetForm();
                 })
                 .catch(() => {
@@ -202,28 +203,23 @@ export default function Update({ data }) {
               await updateProduct(data._id, model)
                 .then(res => {
                   if (res.success) {
-                    Swal.fire({
-                      title: "Acutalizacion Exitosa!",
-                      confirmButtonColor: "#3085d6",
-                      showClass: {
-                        popup: "animate__animated animate__fadeInDown",
-                      },
-                      hideClass: {
-                        popup: "animate__animated animate__fadeOutUp",
-                      },
+                    setInfo({
+                      title: "Actualización exitosa",
+                      description: "Se guardaron los datos correctamente!",
+                      status: true,
                     });
-                    resetForm();
-                    router.push("list");
+                    setShowModal(true);
                   }
+                  router.push("list");
+                  resetForm();
                 })
-                .catch(error => {
-                  if (error) {
-                    Swal.fire({
-                      icon: "error",
-                      title: "Oops...",
-                      text: "Something went wrong!",
-                    });
-                  }
+                .catch(() => {
+                  setInfo({
+                    title: "Error en la carga",
+                    description: "No pudimos guardar los datos, intente nuevamente.",
+                    status: false,
+                  });
+                  setShowModal(true);
                 });
             }
           }}
