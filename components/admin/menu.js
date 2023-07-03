@@ -42,7 +42,7 @@ export default function menu() {
           >
             <div>
               <Image priority={true} src="/images/pedidosblack.webp" width={35} height={35} alt="pedidoblack" />
-              <p className="font-bold text-base font-nunito lg:text-lg">Pedidos</p>
+              <p className="font-extrabold text-base font-nunito lg:text-lg">Pedidos</p>
             </div>
           </button>
         </Link>
@@ -55,7 +55,7 @@ export default function menu() {
           >
             <div>
               <Image priority={true} src="/images/productsblack.webp" width={35} height={35} alt="black" />
-              <p className="font-bold text-base font-nunito lg:text-lg">Productos</p>
+              <p className="font-extrabold text-base font-nunito lg:text-lg">Productos</p>
             </div>
           </button>
         </Link>
@@ -68,7 +68,7 @@ export default function menu() {
           >
             <div>
               <Image priority={true} src="/images/salesblack.webp" width={35} height={35} alt="salesblack" />
-              <p className="font-bold text-base font-nunito lg:text-lg">Ventas</p>
+              <p className="font-extrabold text-base font-nunito lg:text-lg">Ventas</p>
             </div>
           </button>
         </Link>
