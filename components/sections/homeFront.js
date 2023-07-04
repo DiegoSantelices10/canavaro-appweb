@@ -8,13 +8,7 @@ import { motion } from "framer-motion";
 function HomeFront() {
   return (
     <Element name="home" className="relative element">
-      <Image
-        src={"/images/fondonuevo.webp"}
-        layout="fill"
-        priority={false}
-        objectFit="cover"
-        objectPosition={"center"}
-      />
+      <Image src={"/images/fondonuevo.webp"} layout="fill" objectFit="cover" objectPosition={"center"} />
       <div className={` font-nunito w-full min-h-screen mx-auto `}>
         <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
 

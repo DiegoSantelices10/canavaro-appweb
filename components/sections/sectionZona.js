@@ -14,8 +14,8 @@ export default function SectionZona() {
           transition={{ duration: 1.5 }}
           viewport={{ once: true }}
         >
-          <div className=" w-full lg:w-4/5 mx-auto text-sky-950 md:flex md:justify-between  gap-5 content-center py-5 ">
-            <div className="md:w-1/2 text-center grid grid-cols-1 gap-10">
+          <div className=" w-full lg:w-4/5 mx-auto text-sky-950 md:flex md:justify-center  gap-5 content-center py-5 ">
+            <div className="md:w-1/2 text-center grid gap-10">
               <div>
                 <h1 className="font-bold font-nunito text-lg">Horarios de atencion</h1>
                 <p className="font-normal">De Martes a Domingo</p>
