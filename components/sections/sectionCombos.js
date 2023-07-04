@@ -1,14 +1,12 @@
 import Modal from "components/modal";
 import Image from "next/image";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 
-export default function sectionCombos() {
+export default function sectionCombos({ products }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState({});
-  const { products } = useSelector(state => state.product);
 
   const handleOpenModal = producto => {
     setCurrentProducto(producto);
@@ -22,14 +20,11 @@ export default function sectionCombos() {
 
   return (
     <Element name="combos" className=" w-full h-full relative  element">
-      <div className="bg-image font-nunito w-full h-full bg-cover pt-10 md:py-10 lg:py-10 ">
-        <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
+      <Image src={"/images/Combo3.webp"} loading="lazy" layout="fill" objectFit="cover" objectPosition={"center"} />
 
-        <style jsx>{`
-          .bg-image {
-            background-image: url(/images/Combo3.webp);
-          }
-        `}</style>
+      <div className=" font-nunito w-full h-full bg-cover pt-10 md:py-10 lg:py-10 ">
+        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
+
         {currentProducto !== null && (
           <Modal
             key={currentProducto._id}

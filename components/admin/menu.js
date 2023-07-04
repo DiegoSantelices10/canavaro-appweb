@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { AiOutlineLogout } from "react-icons/ai";
+import { logout } from "services/fetchData";
+
 export default function menu() {
   const [selected, setSelected] = useState("/admin");
   const router = useRouter();
@@ -14,16 +15,11 @@ export default function menu() {
   }, [selected]);
 
   const signOut = async () => {
-    await axios
-      .get("/api/auth/logout")
-      .then(res => {
-        if (res.data.message) {
-          router.push("/admin/auth/login");
-        }
-      })
-      .catch(error => {
-        console.log("Error", error);
-      });
+    const res = await logout();
+
+    if (res === "ok") {
+      return router.push("/admin/auth/login");
+    }
   };
 
   return (

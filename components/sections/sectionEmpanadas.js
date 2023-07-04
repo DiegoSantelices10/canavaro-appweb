@@ -1,13 +1,13 @@
+/* eslint-disable react/prop-types */
 import Image from "next/image";
 import { Element } from "react-scroll";
 import Modal from "components/modal";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-export default function SectionEmpanadas() {
+
+export default function SectionEmpanadas({ products }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState({});
-  const { products } = useSelector(state => state.product);
 
   const handleOpenModal = producto => {
     setCurrentProducto(producto);
@@ -20,14 +20,11 @@ export default function SectionEmpanadas() {
   };
   return (
     <Element name="empanadas" className=" w-full  relative element font-nunito">
-      <div className="bg-image  w-full h-full mx-auto pt-10 md:py-10 lg:py-10 bg-cover bg-center ">
-        <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
+      <Image src={"/images/empanadas.webp"} loading="lazy" layout="fill" objectFit="cover" objectPosition={"center"} />
 
-        <style jsx>{`
-          .bg-image {
-            background-image: url(/images/empanadas.webp);
-          }
-        `}</style>
+      <div className=" w-full h-full mx-auto pt-10 md:py-10 lg:py-10  ">
+        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
+
         {currentProducto !== null && (
           <Modal
             key={currentProducto._id}

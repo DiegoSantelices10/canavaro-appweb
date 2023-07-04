@@ -4,16 +4,19 @@ import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { motion } from "framer-motion";
+
 function HomeFront() {
   return (
     <Element name="home" className="relative element">
-      <div
-        style={{
-          "backgroundImage": "url(/images/fondonuevo.webp)",
-        }}
-        className={` font-nunito w-full min-h-screen mx-auto bg-cover bg-center`}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
+      <Image
+        src={"/images/fondonuevo.webp"}
+        layout="fill"
+        priority={false}
+        objectFit="cover"
+        objectPosition={"center"}
+      />
+      <div className={` font-nunito w-full min-h-screen mx-auto `}>
+        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
 
         <motion.div initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>
           <div className="relative text-center h-full">
@@ -30,7 +33,7 @@ function HomeFront() {
                 <div className="text-2xl font-extrabold text-gray-200">
                   <h1>Hac&eacute; tu pedido.</h1>
                   <h2>¡Nosotros te lo llevamos!</h2>
-                  <p className="text-base font-medium">De martes a domingo de 19 a 23hs.</p>
+                  <p className="text-base font-semibold">De martes a domingo de 19 a 23hs.</p>
                 </div>
 
                 <div className="w-full h-20 flex items-center">
@@ -43,7 +46,7 @@ function HomeFront() {
                     </a>
                   </Link>
                 </div>
-                <h1 className="text-lg text-gray-200">Delivery & Take Away</h1>
+                <h1 className="text-lg text-gray-200 font-semibold">Delivery & Take Away</h1>
               </div>
             </div>
           </div>

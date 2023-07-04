@@ -1,15 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Element } from "react-scroll";
 import Image from "next/image";
-import { useSelector } from "react-redux";
 import Modal from "components/modal";
 import { motion } from "framer-motion";
-export default function SectionPizzas() {
+
+export default function SectionPizzas({ products }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState({});
-
-  const { products } = useSelector(state => state.product);
 
   const handleOpenModal = producto => {
     setCurrentProducto(producto);
@@ -22,14 +20,17 @@ export default function SectionPizzas() {
   };
   return (
     <Element name="pizzas" className="w-full relative  element font-nunito">
-      <div className="bg-image font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
-        <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
+      <Image
+        src={"/images/FugazzetaPorcion.webp"}
+        loading="lazy"
+        layout="fill"
+        objectFit="cover"
+        objectPosition={"center"}
+      />
 
-        <style jsx>{`
-          .bg-image {
-            background-image: url(/images/FugazzetaPorcion.webp);
-          }
-        `}</style>
+      <div className="font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
+        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
+
         {currentProducto !== null && (
           <Modal
             key={currentProducto._id}

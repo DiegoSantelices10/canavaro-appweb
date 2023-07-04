@@ -59,3 +59,13 @@ export const updateProduct = async (id, body) => {
     return null;
   }
 };
+
+export const logout = async () => {
+  const { data } = await axios.get("/api/auth/logout");
+
+  if (data.message === "ok") {
+    return data.message;
+  } else {
+    throw new Error("Failed to log out");
+  }
+};

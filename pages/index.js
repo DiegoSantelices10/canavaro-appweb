@@ -11,8 +11,11 @@ import { setProductData } from "store/reducers/productSlice";
 
 import { wrapper } from "store/app/store";
 import { getProducts } from "services/fetchData";
+import { useSelector } from "react-redux";
 
 export default function index({ state }) {
+  const { products } = useSelector(state => state.product);
+
   useEffect(() => {
     localStorage.setItem("productos", JSON.stringify(state));
   });
@@ -22,9 +25,9 @@ export default function index({ state }) {
       <main className="font-nunito">
         <Header />
         <HomeFront />
-        <SectionPizzas />
-        <SectionEmpanadas />
-        <SectionCombos />
+        <SectionPizzas products={products} />
+        <SectionEmpanadas products={products} />
+        <SectionCombos products={products} />
         <SectionZona />
         <Footer />
       </main>
