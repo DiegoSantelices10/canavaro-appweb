@@ -11,7 +11,7 @@ const Modal = ({ handleClose, showModal, producto }) => {
       className={showHideClassName}
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5 }}
       exit={{ opacity: 0, y: -50 }}
     >
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

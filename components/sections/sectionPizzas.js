@@ -21,7 +21,7 @@ export default function SectionPizzas({ products }) {
   return (
     <Element name="pizzas" className="w-full relative  element font-nunito">
       <div className="font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
-        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
+        <div className="absolute inset-0 bg-black  h-full"> </div>
 
         {currentProducto !== null && (
           <Modal
@@ -35,32 +35,32 @@ export default function SectionPizzas({ products }) {
           Nuestras Pizzas
         </h1>
 
-        <div className="relative z-10 flex justify-center h-32 items-center w-full gap-10">
+        <div className="relative z-10 flex justify-center h-32  mb-8 items-center w-full gap-10">
           <div className="text-center h-28 w-auto flex flex-col justify-between ">
             <div className="h-24  flex justify-center items-center ">
-              <Image priority={true} src={"/images/pizza-vector.webp"} width={60} height={60} alt="gigante" />
+              <Image priority={true} src={"/images/pizza.png"} width={60} height={60} alt="gigante" />
             </div>
             <p className="font-bold text-gray-200 text-lg">Gigante</p>
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between">
             <div className="h-24 flex justify-center items-center">
-              <Image priority={true} src={"/images/pizza-vector.webp"} width={55} height={55} alt="mediana" />
+              <Image src={"/images/pizza.png"} width={55} height={55} alt="mediana" />
             </div>
             <p className="font-bold text-lg text-gray-200">Mediana</p>
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between">
             <div className="h-24 flex justify-center items-center">
-              <Image priority={true} src={"/images/pizza-vector.webp"} width={50} height={50} alt="chica" />
+              <Image priority={true} src={"/images/pizza.png"} width={50} height={50} alt="chica" />
             </div>
             <p className="font-bold text-gray-200 text-lg">Chica</p>
           </div>
         </div>
 
         <div
-          className="relative z-10 bg-sky-950 p-2 h-full  bg-opacity-70 w-full lg:w-4/5 mx-auto 
-							text-white grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
+          className="relative z-10 bg-sky-950 bg-opacity-20  p-2 h-full border rounded-lg border-gray-50   w-full lg:w-4/5 mx-auto 
+						 grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
         >
-          <p className="italic col-span-2 text-white text-center text-xs pb-4">
+          <p className=" col-span-2 text-white text-center text-xs pb-4">
             * Hacer click sobre el titulo para ver descripcion.
           </p>
           {products
@@ -75,14 +75,14 @@ export default function SectionPizzas({ products }) {
                     transition={{ duration: 1.5 }}
                     viewport={{ once: true }}
                   >
-                    <div className="w-auto py-2">
+                    <div className="w-auto py-2 text-white">
                       <p
                         onClick={() => handleOpenModal(producto)}
-                        className=" cursor-pointer text-white text-center font-nunito font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+                        className=" cursor-pointer  text-center font-nunito font-bold w-full md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
                       >
                         {producto.nombre}
                       </p>
-                      <p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+                      <p className="font-normal text-xs  text-center">{producto.descripcion}</p>
                     </div>
                   </motion.div>
                 </div>

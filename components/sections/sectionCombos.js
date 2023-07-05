@@ -19,9 +19,9 @@ export default function sectionCombos({ products }) {
   };
 
   return (
-    <Element name="combos" className=" w-full h-full relative  element">
+    <Element name="combos" className=" w-full h-full relative mb-10 element">
       <div className=" font-nunito w-full h-full bg-cover pt-10 md:py-10 lg:py-10 ">
-        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
+        <div className="absolute inset-0 bg-black  h-full"> </div>
 
         {currentProducto !== null && (
           <Modal
@@ -44,7 +44,7 @@ export default function sectionCombos({ products }) {
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between ">
             <div className="h-24  flex justify-center items-center ">
-              <Image src={"/images/pizza-vector.webp"} width={70} height={70} alt="pizza" />
+              <Image src={"/images/pizza.png"} width={70} height={70} alt="pizza" />
             </div>
           </div>
           <div className="text-center h-28 w-auto flex flex-col justify-between ">
@@ -53,7 +53,7 @@ export default function sectionCombos({ products }) {
             </div>
           </div>
         </div>
-        <div className="relative z-10 bg-sky-950 h-full bg-opacity-70 w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-2 pt-4 ">
+        <div className="relative z-10 bg-sky-950 h-full bg-opacity-20 border rounded-lg w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-2 pt-4 ">
           <p className="italic col-span-3 text-white text-center text-xs pb-2">
             * Hacer click sobre el titulo para ver descripcion.
           </p>
