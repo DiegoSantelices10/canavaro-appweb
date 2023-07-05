@@ -35,7 +35,8 @@ export default function index({ state }) {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ res }) => {
+  res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
   const state = await getProducts();
   store.dispatch(setProductData(state));
   return {
