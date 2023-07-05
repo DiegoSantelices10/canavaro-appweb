@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    minimumCacheTTL: 60,
     domains: [
       "live.staticflickr.com",
       "trello-attachments.s3.amazonaws.com",

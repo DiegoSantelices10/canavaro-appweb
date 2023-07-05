@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 
-export default function sectionCombos({ products }) {
+export default function sectionCombos({ products, imagefront }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState({});
 
@@ -19,9 +19,11 @@ export default function sectionCombos({ products }) {
   };
 
   return (
-    <Element name="combos" className=" w-full h-full relative mb-10 element">
+    <Element name="combos" className=" w-full h-full relative  element">
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
+
       <div className=" font-nunito w-full h-full bg-cover pt-10 md:py-10 lg:py-10 ">
-        <div className="absolute inset-0 bg-black  h-full"> </div>
+        <div className="absolute inset-0 bg-black bg-opacity-50  h-full"> </div>
 
         {currentProducto !== null && (
           <Modal
@@ -53,7 +55,7 @@ export default function sectionCombos({ products }) {
             </div>
           </div>
         </div>
-        <div className="relative z-10 bg-sky-950 h-full bg-opacity-20 border rounded-lg w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-2 pt-4 ">
+        <div className="relative z-10 bg-black h-full bg-opacity-40  rounded-lg w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-2 pt-4 ">
           <p className="italic col-span-3 text-white text-center text-xs pb-2">
             * Hacer click sobre el titulo para ver descripcion.
           </p>

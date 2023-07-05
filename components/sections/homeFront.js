@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 import Link from "next/link";
 import { Element } from "react-scroll";
@@ -5,12 +6,12 @@ import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { motion } from "framer-motion";
 
-function HomeFront() {
+function HomeFront({ imagefront }) {
   return (
     <Element name="home" className="relative element">
-      <Image src={"/images/fondonuevo.webp"} layout="fill" objectFit="cover" objectPosition={"center"} />
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
       <div className={` font-nunito w-full min-h-screen mx-auto `}>
-        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
+        <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
 
         <motion.div initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>
           <div className="relative text-center h-full">

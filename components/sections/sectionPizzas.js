@@ -5,7 +5,7 @@ import Image from "next/image";
 import Modal from "components/modal";
 import { motion } from "framer-motion";
 
-export default function SectionPizzas({ products }) {
+export default function SectionPizzas({ products, imagefront }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState({});
 
@@ -20,8 +20,10 @@ export default function SectionPizzas({ products }) {
   };
   return (
     <Element name="pizzas" className="w-full relative  element font-nunito">
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
+
       <div className="font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
-        <div className="absolute inset-0 bg-black  h-full"> </div>
+        <div className="absolute inset-0 bg-black bg-opacity-50  h-full"> </div>
 
         {currentProducto !== null && (
           <Modal
@@ -57,7 +59,7 @@ export default function SectionPizzas({ products }) {
         </div>
 
         <div
-          className="relative z-10 bg-sky-950 bg-opacity-20  p-2 h-full border rounded-lg border-gray-50   w-full lg:w-4/5 mx-auto 
+          className="relative z-10 bg-black bg-opacity-40  p-2 h-full  rounded-lg    w-full lg:w-4/5 mx-auto 
 						 grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
         >
           <p className=" col-span-2 text-white text-center text-xs pb-4">

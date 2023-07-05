@@ -5,7 +5,7 @@ import Modal from "components/modal";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function SectionEmpanadas({ products }) {
+export default function SectionEmpanadas({ products, imagefront }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState({});
 
@@ -20,8 +20,10 @@ export default function SectionEmpanadas({ products }) {
   };
   return (
     <Element name="empanadas" className=" w-full  relative element font-nunito">
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
+
       <div className=" w-full h-full mx-auto pt-10 md:py-10 lg:py-10  ">
-        <div className="absolute inset-0 bg-black h-full"> </div>
+        <div className="absolute inset-0 bg-black bg-opacity-50 h-full"> </div>
 
         {currentProducto !== null && (
           <Modal
@@ -50,7 +52,7 @@ export default function SectionEmpanadas({ products }) {
           </div>
         </div>
 
-        <div className="relative z-10 bg-sky-950 border rounded-lg h-full p-1 bg-opacity-20 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
+        <div className="relative z-10 bg-black  rounded-lg h-full p-1 bg-opacity-40 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
           <p className="italic col-span-2 text-white text-center text-xs pb-4">
             * Hacer click sobre el titulo para ver descripcion.
           </p>
