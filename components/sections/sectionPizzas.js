@@ -20,7 +20,7 @@ export default function SectionPizzas({ products, imagefront }) {
   };
   return (
     <Element name="pizzas" className="w-full relative  element font-nunito">
-      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} priority={false} />
 
       <div className="font-nunito w-auto h-full mx-auto pt-10 sm:pt-10 md:py-10 lg:py-10 bg-cover bg-center  ">
         <div className="absolute inset-0 bg-black bg-opacity-50  h-full"> </div>

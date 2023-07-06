@@ -20,7 +20,8 @@ export default function sectionCombos({ products, imagefront }) {
 
   return (
     <Element name="combos" className=" w-full h-full relative  element">
-      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} 
+      priority={false}/>
 
       <div className=" font-nunito w-full h-full bg-cover pt-10 md:py-10 lg:py-10 ">
         <div className="absolute inset-0 bg-black bg-opacity-50  h-full"> </div>

@@ -2,13 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    unoptimized: true,
     minimumCacheTTL: 60,
-    domains: [
-      "live.staticflickr.com",
-      "trello-attachments.s3.amazonaws.com",
-      "cdn.discordapp.com",
-      "res.cloudinary.com",
-    ],
+    domains: ["res.cloudinary.com"],
   },
 };
 

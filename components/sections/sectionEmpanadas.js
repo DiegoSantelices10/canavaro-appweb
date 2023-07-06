@@ -20,7 +20,9 @@ export default function SectionEmpanadas({ products, imagefront }) {
   };
   return (
     <Element name="empanadas" className=" w-full  relative element font-nunito">
-      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} 
+      priority={false}
+      />
 
       <div className=" w-full h-full mx-auto pt-10 md:py-10 lg:py-10  ">
         <div className="absolute inset-0 bg-black bg-opacity-50 h-full"> </div>
