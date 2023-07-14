@@ -19,7 +19,7 @@ function HomeFront({ imagefront }) {
               <div className="mx-auto mt-20 ">
                 <Image src="/images/logocanavaro.webp" width={150} height={150} alt="logo" />
                 <p className="text-xl font-extrabold text-gray-200">¡Todo lo que necesitas en un solo lugar!</p>
-                <p className="text-gray-200 font-medium text-base">Pelliza 4999 - Olivos</p>
+                <p className="text-gray-200 font-medium text-base">Pelliza 1794 - Olivos</p>
               </div>
 
               <div className="w-full h-auto p-3 mx-auto flex flex-col justify-center items-center gap-1   text-center">
