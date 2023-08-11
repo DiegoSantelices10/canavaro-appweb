@@ -93,7 +93,7 @@ export default function Home() {
     }
 
     if (cantidadTotal % requiredQuantity === 0) {
-      const totalDescuento = totalAmount - totalAmount * 0.1;
+      const totalDescuento = totalAmount - totalAmount * 0.05;
       const totalRedondeado = Math.ceil(totalDescuento / 100) * 100;
       setTotalPrice(totalRedondeado);
     }
@@ -259,11 +259,10 @@ export default function Home() {
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
-                className={`${
-                  orderPromo.length < 1
+                className={`${orderPromo.length < 1
                     ? "invisible"
                     : "p-3 font-bold bg-slate-50 rounded-md text-black text-xs hover:-translate-y-1 transition-all duration-500"
-                }`}
+                  }`}
               >
                 AGREGAR AL CARRITO
               </button>

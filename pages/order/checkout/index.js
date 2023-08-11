@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearOrderList } from "store/reducers/orderSlice";
 import moment from "moment-timezone";
 import { clearUser } from "store/reducers/userSlice";
+
+
 export default function Checkout() {
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora } = useSelector(state => state.order);
@@ -21,7 +23,7 @@ export default function Checkout() {
         <div className="flex items-center gap-3 py-4">
           <Link href={"/order/cart"}>
             <a>
-              <FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
+              <FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-md shadow p-1 top-4 left-4" size={30} />
             </a>
           </Link>
           <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
@@ -86,38 +88,40 @@ export default function Checkout() {
             <div className="h-full">
               <Form>
                 <div className="p-3 py-5">
-                  <div>
-                    {user.direccion !== "" ? (
-                      <>
-                        <h2 className="font-nunito font-extrabold text-base">Direccion de envio</h2>
-                        <p className="font-nunito">{user.direccion} </p>
-                      </>
-                    ) : (
-                      <>
-                        <h2 className="font-nunito font-extrabold text-base">Retira por local</h2>
-                        <p className="font-nunito">Nombre: {user.nombre} </p>
-                      </>
-                    )}
+                  <div className="shadow bg-slate-50 rounded-md p-2">
+                    <div className="p-1 py-3">
+                      {user.direccion !== "" ? (
+                        <>
+                          <h2 className="font-nunito font-extrabold text-base">Direccion de envio</h2>
+                          <p className="font-nunito text-gray-600">{user.direccion} </p>
+                        </>
+                      ) : (
+                        <>
+                          <h2 className="font-nunito font-extrabold text-base">Retira por local</h2>
+                          <p className="font-nunito">Nombre: <span className="text-gray-600">{user.nombre}</span> </p>
+                        </>
+                      )}
+                    </div>
+                    <hr />
+                    <div className="p-1 py-3">
+                      <h2 className="font-nunito font-extrabold text-base">
+                        {user.direccion !== "" ? "Tiempo de entrega" : "Retiralo en"}
+                      </h2>
+                      <p className="font-nunito px-1 text-gray-500">{demora}</p>
+                    </div>
+                    <hr />
+                    <div className="p-1">
+                      <h2 className="font-nunito font-extrabold text-base pb-1">Comentarios adicionales</h2>
+                      <Field
+                        id="comentarios"
+                        name="comentarios"
+                        className="border border-slate-300 rounded-md w-full p-2"
+                      />
+                    </div>
                   </div>
                 </div>
-                <hr />
-                <div className="p-3 py-5">
-                  <h2 className="font-nunito font-extrabold text-base">
-                    {user.direccion !== "" ? "Tiempo de entrega" : "Retiralo en"}
-                  </h2>
-                  <p className="font-nunito px-1">{demora}</p>
-                </div>
-                <hr />
-                <div className="p-3 ">
-                  <h2 className="font-nunito font-extrabold text-base pb-1">Comentarios adicionales</h2>
-                  <Field
-                    id="comentarios"
-                    name="comentarios"
-                    className="border border-slate-300 rounded-md w-full p-2"
-                  />
-                </div>
-                <div className="p-3  h-full">
-                  <h2 className="font-nunito font-extrabold text-base">Medio de pago</h2>
+                <div className="px-6 h-full">
+                  <h2 className="font-nunito font-extrabold text-base px-2">Medio de pago</h2>
                   <div>
                     <div
                       role="group"

@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { setAuth } from "store/reducers/authSlice";
 import ModalMessage from "components/modalMessage";
 import { useState } from "react";
+
+
 export default function Login() {
   const [showModal, setShowModal] = useState(false);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
@@ -87,7 +89,7 @@ export default function Login() {
                   <div className="flex" style={{ justifyContent: "flex-end" }}>
                     <button
                       type="submit"
-                      className=" w-auto text-right  p-2 rounded-3xl hover:bg-black hover:text-white hover:-translate-y-1 transition-all duration-500  
+                      className=" w-auto text-right shadow  p-2 rounded-md bg-slate-50 hover:bg-black hover:text-white hover:-translate-y-1 transition-all duration-500  
 													 font-semibold mt-3"
                     >
                       <FaChevronRight size={30} />

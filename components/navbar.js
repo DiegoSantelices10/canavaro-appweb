@@ -13,7 +13,7 @@ export default function Navbar() {
           ¡Hola!<span className="font-medium italic text-slate-700"> Que vas a pedir hoy?</span>{" "}
         </div>
         {orderList.length > 0 && (
-          <div className="p-1 rounded-md bg-sky-800 w-32 px-2 hover:-translate-y-1 transition-all duration-500">
+          <div className="p-1 rounded-md bg-sky-800 hover:bg-sky-700 w-32 px-2 hover:-translate-y-1 transition-all duration-500">
             <Link href={"/order/cart"}>
               <a className="flex justify-around items-center ">
                 <p className=" text-white p-1 font-nunito font-bold">Tu carrito</p>

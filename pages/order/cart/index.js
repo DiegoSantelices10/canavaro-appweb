@@ -55,16 +55,16 @@ export default function Cart({ data }) {
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
-          direccion: Yup.string().required("La dirección es obligatoria"),
-          telefono: Yup.string().required("El teléfono es obligatorio"),
-        }
+        direccion: Yup.string().required("La dirección es obligatoria"),
+        telefono: Yup.string().required("El teléfono es obligatorio"),
+      }
       : {
-          nombre: Yup.string().required("El nombre es obligatorio"),
-        }
+        nombre: Yup.string().required("El nombre es obligatorio"),
+      }
   );
 
   return (
-    <div className="font-poppins mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
+    <div className="font-nunito  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-3 ">
       <Formik
         initialValues={{
           direccion: direccion || "",
@@ -95,15 +95,15 @@ export default function Cart({ data }) {
                     <Link href={"/order/home"}>
                       <a>
                         <FiChevronsLeft
-                          className=" text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4"
+                          className=" text-slate-800 bg-slate-50 rounded-md shadow p-1 top-4 left-4"
                           size={30}
                         />
                       </a>
                     </Link>
                     <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
                   </div>
-                  <div>
-                    <div className="px-2 rounded-lg border-2 border-gray-200">
+                  <div className="py-2">
+                    <div className="p-2 rounded-md shadow bg-gray-100">
                       <div className="flex justify-center  w-full gap-3 py-3 text-sm ">
                         <button
                           type="button"
@@ -112,8 +112,8 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "domicilioActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
-                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 shadow text-white font-light p-3"
+                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow  font-light p-3"
                           }
                         >
                           <MdOutlineDeliveryDining size={20} />
@@ -126,8 +126,8 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "localActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 text-white font-light p-3"
-                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-gray-300 text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-900 shadow text-white font-light p-3"
+                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow font-light p-3"
                           }
                         >
                           <MdOutlineEmojiPeople size={20} />
@@ -141,7 +141,7 @@ export default function Cart({ data }) {
                               <Field
                                 id="direccion"
                                 name="direccion"
-                                className="border border-slate-300 rounded-md w-full p-2"
+                                className=" border-slate-300 border rounded-md w-full p-2"
                                 placeholder="Ingresa tu direccion, Barrio"
                               />{" "}
                               <ErrorMessage name="direccion">
@@ -154,7 +154,7 @@ export default function Cart({ data }) {
                               <Field
                                 id="telefono"
                                 name="telefono"
-                                className="border border-slate-300 rounded-md w-full p-2"
+                                className="border-slate-300 border rounded-md w-full p-2"
                                 placeholder="Ingresa tu telefono"
                               />
                               <ErrorMessage name="telefono">
@@ -180,17 +180,17 @@ export default function Cart({ data }) {
                           </>
                         )}
 
-                        <h1 className="font-light">{type === "domicilioActual" ? "Te llega en" : "Retiralo en"}</h1>
-                        <strong>{demora}</strong>
+                        <h1 className="font-bold text-lg">{type === "domicilioActual" ? "Te llega en" : "Retiralo en"}</h1>
+                        <p className="text-gray-600 text-lg">{demora}</p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="mb-20">
+                <div className="mb-20 px-3 rounded-md">
                   {orderList.map((item, index) => {
                     return (
                       <div key={index} className="font-nunito">
-                        <div className="mb-2 p-3  bg-white">
+                        <div className="my-2 p-2  rounded-md">
                           <div className="flex justify-between items-center gap-x-2">
                             <div className=" flex self-start gap-4">
                               <div className="w-full ">
@@ -212,10 +212,10 @@ export default function Cart({ data }) {
                                 <button
                                   type="button"
                                   onClick={() => handleOpenModal(item)}
-                                  className="font-normal text-sm w-auto underline"
+                                  className="font-normal text-sm w-auto ml-6 "
                                   style={{ whiteSpace: "nowrap" }}
                                 >
-                                  Descripcion
+                                  Ver Descripcion
                                 </button>
                               )}
                             </div>
@@ -225,7 +225,6 @@ export default function Cart({ data }) {
                             </button>
                           </div>
                         </div>
-                        <hr />
                       </div>
                     );
                   })}
