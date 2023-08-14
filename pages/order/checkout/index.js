@@ -111,12 +111,24 @@ export default function Checkout() {
                       )}
                     </div>
                     <hr />
-                    <div className="p-1 py-3">
-                      <h2 className="font-nunito font-extrabold text-base">
-                        {user.direccion !== "" ? "Tiempo de entrega" : "Retiralo en"}
-                      </h2>
-                      <p className="font-nunito px-1 text-gray-500">{demora}</p>
-                    </div>
+                    {user?.hPersonalizado ? (
+                      <div className="p-1 py-3">
+                        <h2 className="font-nunito font-extrabold text-base">
+                          {user?.direccion !== "" ? "horario de entrega" : "Retiralo"}
+                        </h2>
+                        <p className="font-nunito px-1 text-gray-500">{user?.hPersonalizado}</p>
+                      </div>
+                    ) : (
+                      <div className="p-1 py-3">
+                        <h2 className="font-nunito font-extrabold text-base">
+                          {user?.direccion !== "" ? "horario de entrega" : "Retiralo en"}
+                        </h2>
+                        <p className="font-nunito px-1 text-gray-500">{demora}</p>
+                      </div>
+
+
+                    )}
+
                     <hr />
                     <div className="p-1">
                       <h2 className="font-nunito font-extrabold text-base pb-1">Comentarios adicionales</h2>
@@ -188,11 +200,11 @@ export default function Checkout() {
                     </button>
                   </div>
                 </div>
-              </Form>
-            </div>
+              </Form >
+            </div >
           );
         }}
-      </Formik>
-    </div>
+      </Formik >
+    </div >
   );
 }

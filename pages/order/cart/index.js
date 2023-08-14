@@ -28,7 +28,6 @@ export default function Cart({ data }) {
 
   const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
 
-  console.log(hora);
 
   const hoursDelivery = () => {
     if (hora >= 19 && hora <= 23) {
@@ -78,6 +77,7 @@ export default function Cart({ data }) {
       : {
         nombre: Yup.string().required("El nombre es obligatorio"),
       }
+
   );
 
   return (
