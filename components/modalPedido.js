@@ -14,6 +14,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
   const { productos } = pedido;
 
+
   const separarNumero = numero => {
     const segmento1 = numero.substring(0, 2);
     const segmento2 = numero.substring(2, 6);
@@ -63,6 +64,9 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
               )}
               <h2>
                 Tipo de envio: <span className="font-bold text-gray-500 text-base">{pedido?.tipoEnvio}</span>
+              </h2>
+              <h2>
+                Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-bold text-gray-500 text-base">{pedido?.hPersonalizado}</span>
               </h2>
               <h2>
                 Medio de pago: <span className="font-bold text-gray-500 text-base">{pedido?.medioDePago}</span>

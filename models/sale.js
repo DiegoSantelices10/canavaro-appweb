@@ -16,6 +16,9 @@ const saleSchema = new Schema(
       trim: true,
       maxlength: [40, "El maximo es de 40 caracteres"],
     },
+    hPersonalizado: {
+      type: String
+    },
     productos: {
       type: Array,
       required: [true, "El campo es requerido."],

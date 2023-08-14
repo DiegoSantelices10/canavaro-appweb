@@ -3,7 +3,7 @@ import { convertToPath } from "libs/items";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CardPromotion({ data: { _id, nombre, descripcion, imagen, tamanio } }) {
+export default function CardPromotion({ data: { nombre, descripcion, imagen } }) {
   return (
     <div className="rounded-md">
       <div className="relative bg-white  rounded-t-md" style={{ width: "260px", height: "150px" }}>

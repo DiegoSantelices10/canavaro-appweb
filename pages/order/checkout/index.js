@@ -35,6 +35,7 @@ export default function Checkout() {
           cliente: user?.nombre || "",
           domicilio: user?.direccion || "",
           telefono: user?.telefono || "",
+          hPersonalizado: user?.hPersonalizado || "",
           productos: orderList || {},
           comentarios: "",
           medioDePago: "efectivo" || "",
@@ -45,41 +46,48 @@ export default function Checkout() {
           const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm");
           const fecha = moment.tz("America/Argentina/Buenos_Aires").format("DD/MM");
 
-          console.log(hora);
-          console.log(fecha);
-
           if (values.domicilio !== "") {
-            const res = await axios.post("/api/sales/", {
-              ...values,
-              tipoEnvio: "Envio a domicilio",
-              hora,
-              fecha,
-              liberado: false,
-            });
-            if (res.data.message === "ok") {
-              const response = await axios.post("/api/pusher", res.data.response);
-              if (response.status === 200) {
-                dispatch(clearOrderList());
-                dispatch(clearUser());
-                router.push("checkout/successful");
+            try {
+              const res = await axios.post("/api/sales/", {
+                ...values,
+                tipoEnvio: "Envio a domicilio",
+                hora,
+                fecha,
+                liberado: false,
+              });
+              if (res.data.message === "ok") {
+                const response = await axios.post("/api/pusher", res.data.response);
+                if (response.status === 200) {
+                  dispatch(clearOrderList());
+                  dispatch(clearUser());
+                  router.push("checkout/successful");
+                }
               }
+            } catch (error) {
+              alert("No se pudo Completar la acción")
             }
           } else {
-            const res = await axios.post("/api/sales/", {
-              ...values,
-              tipoEnvio: "Retira por local",
-              hora,
-              fecha,
-              liberado: false,
-            });
-            if (res.data.message === "ok") {
-              const response = await axios.post("/api/pusher", res.data.response);
-              if (response.status === 200) {
-                dispatch(clearOrderList());
-                dispatch(clearUser());
-                router.push("checkout/successful");
+            try {
+              const res = await axios.post("/api/sales/", {
+                ...values,
+                tipoEnvio: "Retira por local",
+                hora,
+                fecha,
+                liberado: false,
+              });
+              if (res.data.message === "ok") {
+                const response = await axios.post("/api/pusher", res.data.response);
+                if (response.status === 200) {
+                  dispatch(clearOrderList());
+                  dispatch(clearUser());
+                  router.push("checkout/successful");
+                }
               }
+            } catch (error) {
+              alert("No se pudo Completar la acción")
+
             }
+
           }
         }}
       >

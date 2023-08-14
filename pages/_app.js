@@ -7,9 +7,7 @@ import "typeface-nunito";
 import "styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
-export function reportWebVitals(metric) {
-  console.log(metric);
-}
+
 
 function MyApp({ Component, router, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
