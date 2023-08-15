@@ -11,7 +11,7 @@ import { setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
 import { getProducts } from "services/fetchData";
 import { useSelector } from "react-redux";
-import fondonuevo from "public/images/fondonuevo.webp";
+import fondonuevo from "../public/images/fondonuevo.webp";
 
 export default function index({ state }) {
   const { products } = useSelector(state => state.product);
