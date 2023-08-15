@@ -11,7 +11,7 @@ import { setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
 import { getProducts } from "services/fetchData";
 import { useSelector } from "react-redux";
-import fondonuevo from "../public/images/fondonuevo.webp";
+
 
 export default function index({ state }) {
   const { products } = useSelector(state => state.product);
@@ -24,10 +24,10 @@ export default function index({ state }) {
     <div className=" flex flex-col min-h-screen overflow-hidden bg-neutral-900 ">
       <main className="font-nunito">
         <Header />
-        <HomeFront imagefront={fondonuevo} />
-        <SectionPizzas products={products} imagefront={fondonuevo} />
-        <SectionEmpanadas products={products} imagefront={fondonuevo} />
-        <SectionCombos products={products} imagefront={fondonuevo} />
+        <HomeFront imagefront={"/images/fondonuevo.webp"} />
+        <SectionPizzas products={products} imagefront={"/images/fondonuevo.webp"} />
+        <SectionEmpanadas products={products} imagefront={"/images/fondonuevo.webp"} />
+        <SectionCombos products={products} imagefront={"/images/fondonuevo.webp"} />
         <SectionZona />
         <Footer />
       </main>
