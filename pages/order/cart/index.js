@@ -32,10 +32,8 @@ export default function Cart({ data }) {
   const hoursDelivery = () => {
     if (hora >= 19 && hora <= 23) {
       setOpen(true)
-      console.log("Abierto");
     } else {
       setOpen(false)
-      console.log("Cerrado");
     }
   }
 

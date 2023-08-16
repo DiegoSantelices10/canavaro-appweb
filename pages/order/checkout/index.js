@@ -56,11 +56,15 @@ export default function Checkout() {
                 liberado: false,
               });
               if (res.data.message === "ok") {
-                const response = await axios.post("/api/pusher", res.data.response);
-                if (response.status === 200) {
-                  dispatch(clearOrderList());
-                  dispatch(clearUser());
-                  router.push("checkout/successful");
+                try {
+                  const response = await axios.post("/api/pusher", res.data.response);
+                  if (response.status === 200) {
+                    dispatch(clearOrderList());
+                    dispatch(clearUser());
+                    router.push("checkout/successful");
+                  }
+                } catch (error) {
+                  alert("No se pudo Completar la acción")
                 }
               }
             } catch (error) {
@@ -76,16 +80,19 @@ export default function Checkout() {
                 liberado: false,
               });
               if (res.data.message === "ok") {
-                const response = await axios.post("/api/pusher", res.data.response);
-                if (response.status === 200) {
-                  dispatch(clearOrderList());
-                  dispatch(clearUser());
-                  router.push("checkout/successful");
+                try {
+                  const response = await axios.post("/api/pusher", res.data.response);
+                  if (response.status === 200) {
+                    dispatch(clearOrderList());
+                    dispatch(clearUser());
+                    router.push("checkout/successful");
+                  }
+                } catch (error) {
+                  alert("No se pudo Completar la acción")
                 }
               }
             } catch (error) {
               alert("No se pudo Completar la acción")
-
             }
 
           }

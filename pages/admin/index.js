@@ -24,24 +24,32 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get("/api/delay");
-      const local = res.data.find(item => item.tipo === "localActual");
-      setSelectedLocal({ ...local, demora: local.demoraActual });
-      const domicilio = res.data.find(item => item.tipo === "domicilioActual");
-      setSelectedDomicilio({ ...domicilio, demora: domicilio.demoraActual });
-      setData(res.data);
+      try {
+        const res = await axios.get("/api/delay");
+        const local = res.data.find(item => item.tipo === "localActual");
+        setSelectedLocal({ ...local, demora: local.demoraActual });
+        const domicilio = res.data.find(item => item.tipo === "domicilioActual");
+        setSelectedDomicilio({ ...domicilio, demora: domicilio.demoraActual });
+        setData(res.data);
+      } catch (error) {
+        alert("Error al obtener los datos")
+      }
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get("/api/sales");
-      localStorage.setItem("sales", JSON.stringify(res.data));
-      dispatch(setSaleData(res.data));
-      const pedidos = res.data.filter(item => item.liberado !== true);
+      try {
+        const res = await axios.get("/api/sales");
+        localStorage.setItem("sales", JSON.stringify(res.data));
+        dispatch(setSaleData(res.data));
+        const pedidos = res.data.filter(item => item.liberado !== true);
 
-      if (pedidos.length > 0) {
-        dispatch(setRenderSaleData(pedidos));
+        if (pedidos.length > 0) {
+          dispatch(setRenderSaleData(pedidos));
+        }
+      } catch (error) {
+        alert("Error al obtener los datos")
       }
     })();
   }, []);
@@ -79,21 +87,34 @@ export default function Home() {
     if (value.tipoEnvio === "local") {
       const local = data.find(item => item.tipo === "localActual");
       setSelectedLocal(value);
-      await axios.put(`/api/delay/${local._id}`, { demoraActual: value.demora });
+      try {
+        await axios.put(`/api/delay/${local._id}`, { demoraActual: value.demora });
+      } catch (error) {
+        alert("Error al actualizar los datos")
+      }
     } else {
       const domicilio = data.find(item => item.tipo === "domicilioActual");
       setSelectedDomicilio(value);
-      await axios.put(`/api/delay/${domicilio._id}`, { demoraActual: value.demora });
+      try {
+        await axios.put(`/api/delay/${domicilio._id}`, { demoraActual: value.demora });
+      } catch (error) {
+        alert("Error al actualizar los datos")
+      }
     }
   };
 
   const handleDelete = async id => {
-    const res = await axios.put(`/api/sales/${id}`, { liberado: true });
-    if (res.status === 200) {
-      const response = await axios.post("api/pusher/released", { id });
-      if (response.status === 200) {
-        console.log("pedidos liberado con exito!");
+    try {
+      const res = await axios.put(`/api/sales/${id}`, { liberado: true });
+      if (res.status === 200) {
+        try {
+          axios.post("api/pusher/released", { id });
+        } catch (error) {
+          alert("Error al realizar la accion")
+        }
       }
+    } catch (error) {
+      alert("Error al realizar la accion")
     }
   };
   return (

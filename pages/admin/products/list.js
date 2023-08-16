@@ -18,12 +18,16 @@ export default function Products() {
 
   useEffect(() => {
     (async () => {
-      const res = await getProductsFront();
-      const order = res.sort((a, b) => a.nombre.localeCompare(b.nombre));
-      const categories = [...new Set(res.map(producto => producto.categoria))];
-      setCategorias(categories);
-      setRenderProductos(order);
-      dispatch(setProductData(order));
+      try {
+        const res = await getProductsFront();
+        const order = res.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        const categories = [...new Set(res.map(producto => producto.categoria))];
+        setCategorias(categories);
+        setRenderProductos(order);
+        dispatch(setProductData(order));
+      } catch (error) {
+        alert("Error al obtener los datos");
+      }
     })();
   }, []);
 
@@ -54,12 +58,11 @@ export default function Products() {
     setRenderProductos(updatedProductos);
 
     try {
-      const response = await axios.put(`/api/products/${id}`, {
+      await axios.put(`/api/products/${id}`, {
         available: !availableCurrent,
       });
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      alert("Error al actualizar el estado")
     }
   };
 

@@ -27,7 +27,7 @@ function MyApp({ Component, router, ...rest }) {
             opacity: 0,
           },
           animateState: {
-            opacity: 2,
+            opacity: 1,
           },
         }}
       >
