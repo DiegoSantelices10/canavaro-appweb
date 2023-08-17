@@ -1,27 +1,32 @@
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const CircleAnimation = () => {
-  const [countdown, setCountdown] = useState(5);
-  const router = useRouter();
+  // const [countdown, setCountdown] = useState(5);
+  // const router = useRouter();
+  const { checkout } = useSelector(state => state.order);
 
-  useEffect(() => {
-    // Actualiza el contador cada segundo
-    const timer = setInterval(() => {
-      setCountdown(prevCountdown => prevCountdown - 1);
-    }, 1000);
+  console.log(checkout)
+  // useEffect(() => {
+  //   // Actualiza el contador cada segundo
+  //   const timer = setInterval(() => {
+  //     setCountdown(prevCountdown => prevCountdown - 1);
+  //   }, 1000);
 
-    // Redirecciona cuando el contador llega a cero
-    if (countdown === 0) {
-      clearInterval(timer);
-      router.push("/"); // Reemplaza '/pagina-principal' con la ruta de tu página principal
-    }
+  //   // Redirecciona cuando el contador llega a cero
+  //   if (countdown === 0) {
+  //     clearInterval(timer);
+  // dispatch(clearOrderList());
+  // dispatch(clearUser());
+  //     router.push("/"); // Reemplaza '/pagina-principal' con la ruta de tu página principal
+  //   }
 
-    // Limpia el temporizador al desmontar el componente
-    return () => clearInterval(timer);
-  }, [countdown, router]);
+  //   // Limpia el temporizador al desmontar el componente
+  //   return () => clearInterval(timer);
+  // }, [countdown, router]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -72,11 +77,8 @@ const CircleAnimation = () => {
         initial="hidden"
         animate="visible"
         style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
           width: "100%",
-          transform: "translate(-50%, -50%)",
+          marginTop: 40,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -93,13 +95,20 @@ const CircleAnimation = () => {
               margin: "auto",
             }}
           />
-          <h2 className="text-black font-poppins text-xl font-bold w-full mt-5">Tu pedido fue realizado con éxito! </h2>
-          <h3 className="text-black font-poppins text-xl font-bold">Muchas gracias!</h3>
-          <p className="text-black  font-bold font-nunito text-base py-2">
-            En {countdown} segundos se redirecciona a la pagina principal...
-          </p>
+          <h2 className="text-black font-poppins text-lg font-bold w-full mt-5">¡Recibimos tu pedido, </h2>
+          <h2 className="text-black font-poppins text-lg font-bold w-full ">Fue realizado con éxito!</h2>
         </motion.div>
+
       </motion.div>
+      <div className="p-5">
+        <p className="text-black font-bold font-nunito text-base">
+          Detalle del pedido
+        </p>
+        <div className="w-full h-auto rounded-md border-gray-200 border mt-5">
+          <h1>{checkout.cliente}</h1>
+        </div>
+
+      </div>
     </div>
   );
 };

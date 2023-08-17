@@ -4,16 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiChevronsLeft } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { clearOrderList } from "store/reducers/orderSlice";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment-timezone";
-import { clearUser } from "store/reducers/userSlice";
+import { setCheckout } from "store/reducers/orderSlice";
 
 
 export default function Checkout() {
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora } = useSelector(state => state.order);
-
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -59,9 +57,8 @@ export default function Checkout() {
                 try {
                   const response = await axios.post("/api/pusher", res.data.response);
                   if (response.status === 200) {
-                    dispatch(clearOrderList());
-                    dispatch(clearUser());
-                    router.push("checkout/successful");
+                    dispatch(setCheckout({ ...values, tipoEnvio: "Envio a domicilio", hora, fecha }))
+                    router.push("checkout/successful",);
                   }
                 } catch (error) {
                   alert("No se pudo Completar la acción")
@@ -83,8 +80,7 @@ export default function Checkout() {
                 try {
                   const response = await axios.post("/api/pusher", res.data.response);
                   if (response.status === 200) {
-                    dispatch(clearOrderList());
-                    dispatch(clearUser());
+                    dispatch(setCheckout({ ...values, tipoEnvio: "Retira por local", hora, fecha }))
                     router.push("checkout/successful");
                   }
                 } catch (error) {
