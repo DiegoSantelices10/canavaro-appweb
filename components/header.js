@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 function Header() {
   const [top, setTop] = useState(true);
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const router = useRouter();
+  // const router = useRouter();
   useEffect(() => {
     const scrollHandler = () => {
       window.pageYOffset > 10 ? setTop(false) : setTop(true);
@@ -17,9 +17,8 @@ function Header() {
 
   return (
     <header
-      className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
-        !top && "bg-black bg-opacity-70 backdrop-blur-sm shadow-lg"
-      }`}
+      className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && "bg-black bg-opacity-70 backdrop-blur-sm shadow-lg"
+        }`}
     >
       <div className="w-full sm:w-full md:w-full lg:w-11/12 mx-auto  sm:px-6">
         <div className="flex items-center justify-between px-3 h-16 md:h-20">
@@ -82,13 +81,13 @@ function Header() {
                         <button onClick={() => setIsNavOpen(false)}>Contacto</button>
                       </Link>
                     </li>
-                    <button
+                    {/* <button
                       onClick={() => router.push("/welcomeLogo")}
-                      className={`p-4 rounded-md font-bold font-nunito text-base w-auto mx-auto px-6   bg-gray-900 text-white mt-5 hover:bg-white hover:text-neutral-900   hover:-translate-y-1
+                      className={`p-4 rounded font-semibold font-nunito text-base w-auto mx-auto px-6   bg-gray-900 text-white mt-5 hover:bg-white hover:text-neutral-900   hover:-translate-y-1
 											transition-all duration-500`}
                     >
                       HAC&Eacute; TU PEDIDO
-                    </button>
+                    </button> */}
                   </ul>
                 </div>
               </motion.div>
@@ -150,9 +149,9 @@ function Header() {
                   className={`p-3 bg-gray-50 w-auto px-4 hover:bg-gray-900 hover:text-gray-50 hover:-translate-y-1
 											transition-all duration-500 rounded-xl`}
                 >
-                  <button onClick={() => router.push("/welcomeLogo")} className="flex justify-around items-center">
-                    <p className="text-base font-poppins font-bold">HAC&Eacute; TU PEDIDO</p>
-                  </button>
+                  {/* <button onClick={() => router.push("/welcomeLogo")} className="flex justify-around items-center">
+                    <p className="text-base font-nunito font-semibold">HAC&Eacute; TU PEDIDO</p>
+                  </button> */}
                 </div>
               </ul>
             </div>

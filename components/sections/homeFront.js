@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
-import Link from "next/link";
+// import Link from "next/link";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
@@ -31,7 +31,7 @@ function HomeFront({ imagefront }) {
                   <p className="text-base font-semibold">De martes a domingo de 19 a 23hs.</p>
                 </div>
 
-                <div className="w-full h-20 flex items-center">
+                {/* <div className="w-full h-20 flex items-center">
                   <Link href={"/welcomeLogo"}>
                     <a
                       className={`p-5 rounded-xl  font-bold font-poppins px-7 text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
@@ -40,7 +40,7 @@ function HomeFront({ imagefront }) {
                       HAC&Eacute; TU PEDIDO
                     </a>
                   </Link>
-                </div>
+                </div> */}
                 <h1 className="text-lg text-gray-200 font-semibold">Delivery & Take Away</h1>
               </div>
             </div>
