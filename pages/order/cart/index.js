@@ -309,13 +309,16 @@ export default function Cart({ data }) {
 
 export const getServerSideProps = async () => {
   const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
+  try {
+    const { data } = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}` + "/api/delay");
+    return {
+      props: {
+        // Pasa el estado hidratado como prop al componente de Next.js
+        data,
+      },
+    };
+  } catch (error) {
+    alert("Error al obtener los productos")
+  }
 
-  const { data } = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}` + "/api/delay");
-  // console.log("data", data);
-  return {
-    props: {
-      // Pasa el estado hidratado como prop al componente de Next.js
-      data,
-    },
-  };
 };
