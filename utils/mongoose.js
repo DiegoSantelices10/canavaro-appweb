@@ -13,8 +13,10 @@ const dbConnect = handler => async (req, res) => {
 	try {
 		const db = await connect(MONGODB_URI);
 		isConnected = db.connections[0].readyState;
+		console.log("conectado", isConnected);
 		return handler(req, res);
 	} catch (error) {
+		console.log("==========", error);
 		return Promise.reject(error);
 	}
 };
