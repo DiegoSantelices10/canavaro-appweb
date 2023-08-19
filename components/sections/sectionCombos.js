@@ -61,7 +61,7 @@ export default function sectionCombos({ products, imagefront }) {
             * Hacer click sobre el titulo para ver descripcion.
           </p>
 
-          {products && products
+          {products
             ?.filter(item => item?.nombre?.includes("Combo"))
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
             .map(producto => {
