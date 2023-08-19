@@ -62,7 +62,7 @@ export default function sectionCombos({ products, imagefront }) {
           </p>
 
           {products
-            ?.filter(item => item?.nombre?.includes("Combo"))
+            ?.filter(item => item?.nombre.includes("Combo"))
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
             .map(producto => {
               return (
