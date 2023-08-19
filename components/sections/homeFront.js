@@ -4,6 +4,8 @@
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa";
+import { BsTelephone } from "react-icons/bs"
 import { motion } from "framer-motion";
 
 function HomeFront({ imagefront }) {
@@ -22,27 +24,39 @@ function HomeFront({ imagefront }) {
                 <p className="text-gray-200 font-medium text-base">Pelliza 1794 - Olivos</p>
               </div>
 
-              <div className="w-full h-auto p-3 mx-auto flex flex-col justify-center items-center gap-1   text-center">
-                <MdOutlineDeliveryDining size={60} className="text-white" />
+              <div className="w-full h-auto  p-3 mx-auto flex flex-col justify-center items-center gap-1  relative text-center">
+                <div className="absolute bg-black mx-auto rounded-md h-full opacity-40 inset-0 z-0"></div>
+                <div className="relative z-10 flex flex-col justify-center items-center">
+                  <MdOutlineDeliveryDining size={60} className="text-white" />
+                  <div className="text-xl font-extrabold text-gray-200">
+                    <h1>Hac&eacute; tu pedido.</h1>
+                    <h2>¡Nosotros te lo llevamos!</h2>
+                    <p className="text-base font-semibold">De martes a domingo de 19 a 23hs.</p>
+                  </div>
 
-                <div className="text-2xl font-extrabold text-gray-200">
-                  <h1>Hac&eacute; tu pedido.</h1>
-                  <h2>¡Nosotros te lo llevamos!</h2>
-                  <p className="text-base font-semibold">De martes a domingo de 19 a 23hs.</p>
+                  {/* <div className="w-full h-20 flex items-center">
+                        <Link href={"/welcomeLogo"}>
+                          <a
+                            className={`p-5 rounded-xl  font-bold font-poppins px-7 text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
+                          transition-all duration-500`}
+                          >
+                            HAC&Eacute; TU PEDIDO
+                          </a>
+                        </Link>
+                      </div> */}
+                  <div className="flex items-center justify-between gap-2">
+                    <BsTelephone size={17} className="text-white" />
+                    <h1 className="text-lg text-gray-200 font-semibold">4711 3259</h1>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <FaWhatsapp size={20} className="text-white" />
+                    <h1 className="text-lg text-gray-200 font-semibold">11 2714 5669</h1>
+                  </div>
+                  <h1 className="text-xl text-gray-200 font-bold">Delivery & Take Away</h1>
                 </div>
 
-                {/* <div className="w-full h-20 flex items-center">
-                  <Link href={"/welcomeLogo"}>
-                    <a
-                      className={`p-5 rounded-xl  font-bold font-poppins px-7 text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
-										transition-all duration-500`}
-                    >
-                      HAC&Eacute; TU PEDIDO
-                    </a>
-                  </Link>
-                </div> */}
-                <h1 className="text-lg text-gray-200 font-semibold">Delivery & Take Away</h1>
               </div>
+
             </div>
           </div>
         </motion.div>

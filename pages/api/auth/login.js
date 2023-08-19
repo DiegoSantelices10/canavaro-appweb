@@ -34,7 +34,6 @@ const handler = async (req, res) => {
         "Set-Cookie",
         serialize("token", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
           sameSite: "strict",
           maxAge: 21600, // Tiempo de expiración de la cookie en segundos
           path: "/admin", // Ruta de la cookie, ajusta según tus necesidades
