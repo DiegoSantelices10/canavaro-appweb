@@ -57,7 +57,7 @@ export default function sectionCombos({ products, imagefront }) {
           </div>
         </div>
         <div className="relative z-10 bg-black h-full bg-opacity-40  rounded-lg w-full lg:w-4/5 mx-auto text-white block md:grid md:grid-cols-3   py-2 pt-4 ">
-          <p className="italic col-span-3 text-white text-center text-xs pb-2">
+          <p className="col-span-2 text-white text-center text-sm pb-4 italic font-poppins">
             * Hacer click sobre el titulo para ver descripcion.
           </p>
 

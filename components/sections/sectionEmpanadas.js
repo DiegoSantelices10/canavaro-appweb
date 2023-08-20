@@ -20,8 +20,8 @@ export default function SectionEmpanadas({ products, imagefront }) {
   };
   return (
     <Element name="empanadas" className=" w-full  relative element font-nunito">
-      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} 
-      priority={false}
+      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"}
+        priority={false}
       />
 
       <div className=" w-full h-full mx-auto pt-10 md:py-10 lg:py-10  ">
@@ -55,7 +55,7 @@ export default function SectionEmpanadas({ products, imagefront }) {
         </div>
 
         <div className="relative z-10 bg-black  rounded-lg h-full p-1 bg-opacity-40 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
-          <p className="italic col-span-2 text-white text-center text-xs pb-4">
+          <p className="col-span-2 text-white text-center text-sm pb-4 italic font-poppins">
             * Hacer click sobre el titulo para ver descripcion.
           </p>
           <h1 className="col-span-2 font-bold text-2xl text-center">Canastitas</h1>
