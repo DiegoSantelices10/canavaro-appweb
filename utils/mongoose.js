@@ -11,7 +11,11 @@ const dbConnect = handler => async (req, res) => {
 	}
 
 	try {
-		const db = await connect(MONGODB_URI);
+		const db = await connect(MONGODB_URI, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			family: 4
+		});
 		isConnected = db.connections[0].readyState;
 		console.log("conectado", isConnected);
 		return handler(req, res);
