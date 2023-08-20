@@ -5,7 +5,6 @@ const handler = async (req, res) => {
     "Set-Cookie",
     serialize("token", "", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 0,
       path: "/admin",
