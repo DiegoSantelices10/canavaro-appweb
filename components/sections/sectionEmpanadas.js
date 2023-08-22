@@ -60,7 +60,7 @@ export default function SectionEmpanadas({ products, imagefront }) {
           </p>
           <h1 className="col-span-2 font-bold text-2xl text-center">Canastitas</h1>
           {products
-            ?.filter(item => item.categoria === "empanadas")
+            ?.filter(item => item.categoria === "empanadas" && item.available === true)
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
             .map(producto => {
               return (

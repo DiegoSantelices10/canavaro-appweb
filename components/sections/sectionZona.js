@@ -33,7 +33,7 @@ export default function SectionZona() {
                 <p className="font-normal">11 2714 5669</p>
               </div>
               <div>
-                <h1 className="font-bold  text-lg">Zona de Cobertura</h1>
+                <h1 className="font-bold  text-lg">Zona de envío</h1>
                 <p className="font-normal">Vicente Lopez - Florida - Olivos - La Lucila</p>
                 <p className="font-normal">Acassuso - Martinez - Munro</p>
               </div>

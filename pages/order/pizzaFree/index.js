@@ -169,7 +169,7 @@ export default function Index() {
                 checked={select === "chica"}
                 className="mx-auto"
               />
-              <h3 className="font-semibold text-sm">Chica</h3>
+              <h3 className="font-bold text-sm">Chica</h3>
             </div>
             <div className="grid content-center gap-2">
               <input
@@ -181,7 +181,7 @@ export default function Index() {
                 checked={select === "mediana"}
                 className="mx-auto"
               />
-              <h3 className="font-semibold text-center text-sm">Mediana</h3>
+              <h3 className="font-bold text-center text-sm">Mediana</h3>
             </div>
             <div className="grid content-center gap-2">
               <input
@@ -193,17 +193,17 @@ export default function Index() {
                 checked={select === "gigante"}
                 className="mx-auto"
               />
-              <h3 className="font-semibold text-sm">Gigante</h3>
+              <h3 className="font-bold text-sm">Gigante</h3>
             </div>
           </div>
-          <div className="text-center font-poppins py-2 text-gray-400 text-sm">
+          <div className="text-center font-nunito py-2 text-gray-400 text-base">
             <p>puedes elegir hasta {select === "gigante" ? "4" : "2"} gustos</p>
           </div>
           <div
             className={
               total === 1
-                ? "bg-green-500  w-full text-white p-2 mt-2 text-center font-medium"
-                : "bg-sky-900 w-full text-white p-2 mt-2 text-center font-medium"
+                ? "bg-green-500 font-nunito  w-full text-white p-2 mt-2 text-center font-semibold"
+                : "bg-sky-900 w-full font-nunito text-white p-2 mt-2 text-center font-semibold"
             }
           >
             {productTotal()}
@@ -218,7 +218,7 @@ export default function Index() {
               .map(item => {
                 return (
                   <div key={item._id} className="flex justify-between items-center py-2  my-2 ">
-                    <h2 className="font-nunito font-semibold text-lg">{item.nombre}</h2>
+                    <h2 className="font-nunito font-bold text-base">{item.nombre}</h2>
                     <div className="w-auto   px-3 text-end space-x-4 text-base">
                       <div className="flex w-full justify-around items-center gap-5">
                         {radioSelect[item._id]?.fraccion && (
@@ -274,11 +274,10 @@ export default function Index() {
 
       <div className="bg-white w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
-          className={`${
-            total === 1
-              ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-sky-900  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
-              : "invisible"
-          }`}
+          className={`${total === 1
+            ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-sky-900  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
+            : "invisible"
+            }`}
           onClick={() => {
             addCartPromo(radioSelect, select);
           }}

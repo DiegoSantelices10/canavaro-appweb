@@ -26,10 +26,10 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen } })
       </div>
       <div className="bg-white h-16 rounded-b-md px-1 pt-2 py-0">
         <Link href={`/order/products/${convertToPath(nombre)}`}>
-          <a className="font-bold text-sm text-gray-800 whitespace-nowrap">{nombre.substring(0, 35)}</a>
+          <a className="font-bold text-sm font-nunito text-gray-800 whitespace-nowrap">{nombre.substring(0, 35)}</a>
         </Link>
 
-        <p className=" text-gray-400 text-xs font-medium ">{descripcion.substring(0, 55) + "..."}</p>
+        <p className=" text-gray-400 text-xs font-medium ">{descripcion.substring(0, 65) + "..."}</p>
       </div>
     </div>
   );

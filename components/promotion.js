@@ -159,7 +159,7 @@ export default function Promotion({
                 .map(({ _id, nombre }) => {
                   return (
                     <div key={_id} className=" font-nunito flex justify-between items-center my-6 p-1  ">
-                      <div className="w-1/2 font-semibold">
+                      <div className="w-1/2 font-bold text-base font-nunito">
                         <h2>{nombre}</h2>
                       </div>
                       <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">

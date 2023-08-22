@@ -66,7 +66,7 @@ export default function SectionPizzas({ products, imagefront }) {
             * Hacer click sobre el titulo para ver descripcion.
           </p>
           {products
-            ?.filter(item => item.categoria === "pizzas")
+            ?.filter(item => item.categoria === "pizzas" && item.available === true)
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
             .map(producto => {
               return (
