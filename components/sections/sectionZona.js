@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { FaFacebook } from "react-icons/fa";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 
@@ -40,15 +39,17 @@ export default function SectionZona() {
               <div>
                 <h1 className="font-bold  text-lg">Nuestras Redes</h1>
                 <div className="text-center mx-auto flex w-full gap-2 justify-center">
-                  <div className="flex items-center justify-center w-1/4 h-12 rounded-md shadow  text-center bg-white ">
+                  {/* <div className="flex items-center justify-center w-1/4 h-12 rounded-md shadow  text-center bg-white ">
                     <a href="https://facebook.com/Canavaro-289165874501296/">
                       <FaFacebook className="text-blue-700" size={30} />
                     </a>
-                  </div>
+                  </div> */}
                   <div className="flex justify-center items-center w-1/4 h-12 rounded-md shadow bg-white ">
                     <a
                       className="flex items-center justify-center"
-                      href="https://facebook.com/Canavaro-289165874501296/"
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://www.instagram.com/pizzeria_canavaro/"
                     >
                       <Image src="/images/logoig.webp" width={30} height={30} alt="logo" />
                     </a>

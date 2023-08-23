@@ -48,10 +48,15 @@ function HomeFront({ imagefront }) {
                     <BsTelephone size={17} className="text-white" />
                     <h1 className="text-lg text-gray-200 font-semibold">4711 3259</h1>
                   </div>
-                  <div className="flex gap-2 items-center">
-                    <FaWhatsapp size={20} className="text-white" />
-                    <h1 className="text-lg text-gray-200 font-semibold">11 2714 5669</h1>
-                  </div>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola%20quiero%20hacer%20un%20pedido!">
+                    <div className="flex gap-2 items-center bg-black hover:bg-slate-900 shadow p-2 rounded-md">
+                      <FaWhatsapp size={20} className="text-white" />
+                      <h1 className="text-lg text-gray-200 font-semibold">Hace tu pedido</h1>
+                    </div>
+                  </a>
                   <h1 className="text-xl text-gray-200 font-bold">Delivery & Take Away</h1>
                 </div>
 
