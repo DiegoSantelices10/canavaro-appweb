@@ -5,7 +5,7 @@ import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
-import { BsTelephone } from "react-icons/bs"
+// import { BsTelephone } from "react-icons/bs"
 import { motion } from "framer-motion";
 
 function HomeFront({ imagefront }) {
