@@ -5,8 +5,9 @@ import { runMiddleware } from "middleware/runMiddleware";
 import Cors from "cors";
 import { getProducts } from "./controllers/getProducts";
 import { createProduct } from "./controllers/createProduct";
+import { updatePrices } from "./controllers/updatePrices";
 const cors = Cors({
-	methods: ["POST", "GET"],
+	methods: ["POST", "GET", "PUT"],
 });
 
 const handler = async (req, res) => {
@@ -20,6 +21,8 @@ const handler = async (req, res) => {
 			case "POST":
 				await createProduct(req, res);
 				break;
+			case "PUT":
+				await updatePrices(req, res)
 		}
 	} catch (error) {
 		return await res.status(500).json({ error });

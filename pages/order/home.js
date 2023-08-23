@@ -145,7 +145,7 @@ export default function Home() {
     <Layout>
       <ToastContainer />
       <div className="py-4 mt-14 mx-auto w-full ">
-        <h1 className="text-lg  font-extrabold text-sky-950 px-3 pb-1">Promociones</h1>
+        <h1 className="text-lg  font-extrabold text-sky-900 px-3 pb-1">Promociones</h1>
         <hr className="pb-3" />
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-3">
           <style jsx>
@@ -164,12 +164,12 @@ export default function Home() {
         </div>
         <div className="my-4">
           <div className="w-full  p-3 flex items-center justify-between">
-            <p className="text-sky-900 text-center w-full font-poppins text-sm  font-bold">
-              ¡ ARMA TU PIZZA COMO QUIERAS !
+            <p className="text-center w-full font-nunito text-base  font-bold">
+              ¡ Arma tu pizza como quieras !
             </p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-poppins font-semibold w-auto  bg-sky-900 hover:bg-white hover:text-sky-900 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
-                INGRESA AQUI
+              <a className="rounded-md font-poppins font-semibold w-auto  bg-sky-800 hover:bg-white hover:text-sky-900 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
+                Ingresa aqui
               </a>
             </Link>
           </div>
@@ -245,7 +245,7 @@ export default function Home() {
         </div>
 
         <div>
-          <h1 className="text-lg  font-extrabold text-sky-950 px-3 pb-1">
+          <h1 className="text-lg  font-extrabold text-sky-900 px-3 pb-1">
             {renderProducts[0].toUpperCase() + renderProducts.substring(1)}
           </h1>
           <hr className="pb-3" />
@@ -255,13 +255,13 @@ export default function Home() {
           <div className="bg-white w-full fixed bottom-0 p-3  sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
               className="flex justify-between items-center gap-3 mx-auto text-center rounded-md 
-									   w-full md:w-1/2 lg:w-3/5 p-3 bg-sky-900 text-white text-base font-semibold "
+									   w-full md:w-1/2 lg:w-3/5 p-3 bg-sky-800 text-white text-base font-semibold "
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
                 className={`${orderPromo.length < 1
-                    ? "invisible"
-                    : "p-3 font-bold bg-slate-50 rounded-md text-black text-xs hover:-translate-y-1 transition-all duration-500"
+                  ? "invisible"
+                  : "p-3 font-bold bg-slate-50 rounded-md text-black text-xs hover:-translate-y-1 transition-all duration-500"
                   }`}
               >
                 AGREGAR AL CARRITO

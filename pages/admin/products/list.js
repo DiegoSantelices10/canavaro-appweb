@@ -76,7 +76,7 @@ export default function Products() {
   return (
     <Layout>
       <div className="lg:flex grid grid-rows-1 px-2 lg:px-0 gap-4  w-full md:w-11/12 lg:w-11/12 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
-        <div className="bg-white flex w-full lg:w-1/3  items-center gap-x-2 ">
+        <div className="bg-white flex w-full lg:w-1/4  items-center gap-x-2 ">
           <div
             className="flex  justify-between items-center w-full  h-12  pr-3 py-2 text-sm leading-tight text-gray-700 border-0 
                          rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -87,12 +87,13 @@ export default function Products() {
               type="text"
               placeholder="¿Que Desea Buscar?"
               onChange={handleChangeSearch}
-              className="w-full border-0  focus:outline-none focus:ring-0"
+              className="w-full border-0 text-sm  focus:outline-none focus:ring-0"
             />
-            <FaSearch size={20} />
+            <FaSearch size={20} className="text-gray-300" />
           </div>
         </div>
-        <div className="w-full lg:w-1/3 h-12 border-none shadow appearance-none focus:outline-none focus:shadow-outline">
+
+        <div className="w-full lg:w-1/4 h-12 border-none shadow appearance-none focus:outline-none focus:shadow-outline">
           <select
             onChange={handleCategoryChange}
             className="h-12 border-none font-nunito  text-gray-900 text-lg rounded-lg  block w-full p-2.5 "
@@ -107,16 +108,11 @@ export default function Products() {
             ))}
           </select>
         </div>
+
         <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-between ">
-          <h1
-            className="text-md lg:text-md font-nunito font-extrabold text-center
-                       text-zinc-800 w-full "
-          >
-            ¡Ingresa un producto nuevo!
-          </h1>
 
           <button
-            className="w-64 h-12 col-start-2 font-nunito font-bold
+            className="w-44 h-12 col-start-2 font-nunito font-bold
                              rounded-md  text-base 
                              border text-white bg-sky-800"
             type="button"
@@ -126,7 +122,19 @@ export default function Products() {
           >
             Producto Nuevo
           </button>
+          <button
+            className="w-44 h-12 col-start-2 font-nunito font-bold
+                             rounded-md  text-base 
+                             border text-sky-800 bg-white border-sky-800"
+            type="button"
+            onClick={() => {
+              router.push("/admin/products/updatePrices");
+            }}
+          >
+            Actualizar precios
+          </button>
         </div>
+
       </div>
 
       <div className="w-full px-2 md:w-11/12 lg:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">

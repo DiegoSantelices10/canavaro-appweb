@@ -103,12 +103,12 @@ export default function Checkout() {
                     <div className="p-1 py-3">
                       {user.direccion !== "" ? (
                         <>
-                          <h2 className="font-nunito font-extrabold text-base">Direccion de envio</h2>
+                          <h2 className="font-nunito text-sky-900 font-extrabold text-base">Direccion de envio</h2>
                           <p className="font-nunito text-gray-600">{user.direccion} </p>
                         </>
                       ) : (
                         <>
-                          <h2 className="font-nunito font-extrabold text-base">Retira por local</h2>
+                          <h2 className="font-nunito text-sky-900 font-extrabold text-base">Retira por local</h2>
                           <p className="font-nunito">Nombre: <span className="text-gray-600">{user.nombre}</span> </p>
                         </>
                       )}
@@ -116,14 +116,14 @@ export default function Checkout() {
                     <hr />
                     {user?.hPersonalizado ? (
                       <div className="p-1 py-3">
-                        <h2 className="font-nunito font-extrabold text-base">
+                        <h2 className="font-nunito font-extrabold text-base text-sky-900">
                           {user?.direccion !== "" ? "horario de entrega" : "Retiralo"}
                         </h2>
                         <p className="font-nunito px-1 text-gray-500">{user?.hPersonalizado}</p>
                       </div>
                     ) : (
                       <div className="p-1 py-3">
-                        <h2 className="font-nunito font-extrabold text-base">
+                        <h2 className="font-nunito font-extrabold text-base text-sky-900">
                           {user?.direccion !== "" ? "horario de entrega" : "Retiralo en"}
                         </h2>
                         <p className="font-nunito px-1 text-gray-500">{demora}</p>
@@ -134,7 +134,7 @@ export default function Checkout() {
 
                     <hr />
                     <div className="p-1">
-                      <h2 className="font-nunito font-extrabold text-base pb-1">Comentarios adicionales</h2>
+                      <h2 className="font-nunito font-extrabold text-base pb-1 text-sky-900">Comentarios adicionales</h2>
                       <Field
                         id="comentarios"
                         name="comentarios"
@@ -144,7 +144,7 @@ export default function Checkout() {
                   </div>
                 </div>
                 <div className="px-6 h-full">
-                  <h2 className="font-nunito font-extrabold text-base px-2">Medio de pago</h2>
+                  <h2 className="font-nunito font-extrabold text-base px-1 text-sky-900">Medio de pago</h2>
                   <div>
                     <div
                       role="group"
@@ -189,15 +189,15 @@ export default function Checkout() {
                 </div>
 
                 <div className="fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
-                  <div className="flex justify-between items-center p-3 font-poppins">
-                    <p className="text-xl font-bold">Total</p>
-                    <h3 className="text-2xl ">$ {totalAmount}</h3>
+                  <div className="flex justify-between items-center p-3">
+                    <p className="text-xl text-sky-900 font-bold">Total</p>
+                    <h3 className="text-2xl font-nunito font-bold">$ {totalAmount}</h3>
                   </div>
 
                   <div className="px-3 w-full">
                     <button
                       type="submit"
-                      className="text-center rounded-md w-full p-4 text-white font-bold bg-sky-900 hover:bg-sky-900 hover:-translate-y-1 transition-all duration-500"
+                      className="text-center font-nunito rounded-md w-full p-4 text-white font-bold bg-sky-800 hover:bg-sky-700 hover:-translate-y-1 transition-all duration-500"
                     >
                       Confirmar pedido
                     </button>

@@ -12,7 +12,6 @@ const productoSchema = new Schema(
     },
     categoria: {
       type: String,
-      required: [true, "El campo es requerido."],
       trim: true,
       maxlength: [40, "El maximo es de 40 caracteres"],
     },
