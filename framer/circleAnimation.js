@@ -167,14 +167,14 @@ const CircleAnimation = () => {
               </div>
             ))}
           </>
-          <h1 className="font-bold text-right text-base font-nunito">Total: <span className="text-gray-600 font-semibold">${checkout.total}</span></h1>
+          <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">${checkout.total}</span></h1>
         </div>
         <div className="flex justify-between items-center mt-2">
           <p className="font-semibold text-sm">¡No dudes en escribirnos!</p>
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola%20%20hacer%20un%20pedido!"
+            href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${nPedido}`}
           >
             <div className="flex items-center gap-2 bg-green-500 p-3 text-white font-semibold rounded-md shadow-md">
               <FaWhatsapp size={18} />

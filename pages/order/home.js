@@ -82,7 +82,12 @@ export default function Home() {
 
     if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
-    if (cantidadTotal === requiredQuantity && cantidadTotal % requiredQuantity === 0) setDocenaPrice(totalPrice);
+    if (cantidadTotal % requiredQuantity === 0) {
+      const totalDescuento = totalAmount - totalAmount * 0.05;
+      const totalRedondeado = Math.ceil(totalDescuento / 100) * 100;
+      if (cantidadTotal === requiredQuantity) setDocenaPrice(totalRedondeado);
+      setTotalPrice(totalRedondeado);
+    }
 
     if (cantidadTotal > requiredQuantity && cantidadTotal % requiredQuantity !== 0) {
       const cociente = Math.floor(cantidadTotal / requiredQuantity);
@@ -92,11 +97,7 @@ export default function Home() {
       setTotalPrice(total);
     }
 
-    if (cantidadTotal % requiredQuantity === 0) {
-      const totalDescuento = totalAmount - totalAmount * 0.05;
-      const totalRedondeado = Math.ceil(totalDescuento / 100) * 100;
-      setTotalPrice(totalRedondeado);
-    }
+
   };
 
   const addCartPromo = value => {

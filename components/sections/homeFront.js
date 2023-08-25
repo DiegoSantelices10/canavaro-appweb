@@ -52,7 +52,7 @@ function HomeFront({ imagefront }) {
                     target="_blank"
                     rel="noreferrer"
                     href="https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola%20quiero%20hacer%20un%20pedido!">
-                    <div className="flex gap-2 items-center px-3 bg-black my-2 hover:bg-sky-950 shadow p-2 rounded-md">
+                    <div className="flex gap-2 items-center px-3 bg-black my-2 hover:bg-gray-900 translate-x-1  shadow p-2 rounded-md">
                       <FaWhatsapp size={20} className="text-white" />
                       <h1 className="text-lg text-gray-200 font-semibold">Hace tu pedido</h1>
                     </div>
