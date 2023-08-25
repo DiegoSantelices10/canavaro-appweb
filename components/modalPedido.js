@@ -45,7 +45,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 />
               </button>
             </div>
-            <div className="font-extrabold text-left text-lg font-nunito">
+            <div className="font-extrabold text-left text-base font-nunito">
               {pedido?.cliente && (
                 <h2>
                   Cliente: <span className="font-bold text-gray-500 text-base">{pedido.cliente}</span>
@@ -65,9 +65,12 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
               <h2>
                 Tipo de envio: <span className="font-bold text-gray-500 text-base">{pedido?.tipoEnvio}</span>
               </h2>
-              <h2>
-                Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-bold text-gray-500 text-base">{pedido?.hPersonalizado}</span>
-              </h2>
+              {pedido.hPersonalizado !== "" && (
+                <h2>
+                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-bold text-gray-500 text-base">{pedido?.hPersonalizado}hs.</span>
+                </h2>
+
+              )}
               <h2>
                 Medio de pago: <span className="font-bold text-gray-500 text-base">{pedido?.medioDePago}</span>
               </h2>
@@ -105,13 +108,13 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                                   x {item?.cant || item?.cantidad}
                                 </span>
                               </p>
-                              <p>$ {item.categoria === "bebidas" ? item.precio * item.cantidad : item?.precio}</p>
+                              <p>$ {item.precio * item.cantidad}</p>
                             </div>
                             <p className="font-semibold text-gray-500 text-sm w-11/12">{item.descripcion}</p>
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
-                                  <p className="font-semibold text-gray-500 text-base">
+                                  <p className="font-semibold text-gray-500 text-sm">
                                     {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
                                   </p>
                                 </div>

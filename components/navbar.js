@@ -13,11 +13,11 @@ export default function Navbar() {
           ¡Hola!<span className="font-medium italic text-slate-700"> Que vas a pedir hoy?</span>{" "}
         </div>
         {orderList.length > 0 && (
-          <div className="p-1 rounded-md bg-sky-800 hover:bg-sky-700 w-32 px-2 hover:-translate-y-1 transition-all duration-500">
+          <div className="p-1 rounded-3xl w-auto bg-sky-800 hover:bg-sky-700  px-4 hover:-translate-y-1 transition-all duration-500">
             <Link href={"/order/cart"}>
-              <a className="flex justify-around items-center ">
-                <p className=" text-white p-1 font-nunito font-bold">Tu carrito</p>
-                <FiShoppingCart className="text-white" size={20} />
+              <a className="flex justify-center items-center gap-2">
+                <p className=" text-white p-1 font-poppins text-sm font-semibold">Tu carrito</p>
+                <FiShoppingCart className="text-white" size={18} />
               </a>
             </Link>
           </div>

@@ -152,7 +152,7 @@ export default function Cart({ data }) {
                       </div>
                       <div className="flex flex-col justify-center items-center gap-2">
                         {type === "domicilioActual" ? (
-                          <>
+                          <div className="w-full">
                             <div className="w-full">
                               <Field
                                 id="direccion"
@@ -166,7 +166,7 @@ export default function Cart({ data }) {
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full">
+                            <div className="w-full mt-1">
                               <Field
                                 id="telefono"
                                 name="telefono"
@@ -175,22 +175,17 @@ export default function Cart({ data }) {
                               />
                               <ErrorMessage name="telefono">
                                 {msg => {
-                                  return <div className="text-red-500 font-medium text-sm">{msg}</div>;
+                                  return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full flex justify-between items-center">
+                            <div className="mt-1 w-full flex justify-between items-center">
                               <Field
                                 id="hPersonalizado"
                                 name="hPersonalizado"
                                 className="border-slate-300 border rounded-md w-1/2 p-2 text-sm"
                                 placeholder="Ingresa horario de entrega"
                               />
-                              <ErrorMessage name="hPersonalizado">
-                                {msg => {
-                                  return <div className="text-red-500 font-medium text-sm">{msg}</div>;
-                                }}
-                              </ErrorMessage>
                               {open ? (
                                 <div className="pr-3">
                                   <h1 className="font-bold text-sm font-nunito">{type === "domicilioActual" ? "O te llega en" : "Retiralo en"}  <span className="text-gray-600 text-base">{demora}</span></h1>
@@ -198,11 +193,11 @@ export default function Cart({ data }) {
                               ) : (
                                 <h1 className="font-normal text-gray-600 text-sm pr-2 font-nunito">Delivery de 19:30 a 23hs.</h1>
                               )}
-
                             </div>
-                          </>
+                            <p className="text-left p-1 text-xs text-gray-400 font-normal">Considerando que sea mayor al tiempo de envío.</p>
+                          </div>
                         ) : (
-                          <>
+                          <div className="w-full ">
                             <Field
                               id="nombre"
                               name="nombre"
@@ -214,7 +209,7 @@ export default function Cart({ data }) {
                                 return <div className="text-red-500 font-medium text-sm text-left">{msg}</div>;
                               }}
                             </ErrorMessage>
-                            <div className="w-full flex justify-between items-center">
+                            <div className="mt-1 w-full flex justify-between items-center">
                               <Field
                                 id="hPersonalizado"
                                 name="hPersonalizado"
@@ -234,7 +229,8 @@ export default function Cart({ data }) {
                                 <h1 className="font-normal text-gray-600 text-sm pr-2 font-nunito">Retiro de  19:00 a 23hs.</h1>
                               )}
                             </div>
-                          </>
+                            <p className="text-left p-1 text-xs text-gray-400 font-normal">Considerando que sea mayor al tiempo de demora.</p>
+                          </div>
                         )}
                       </div>
                     </div>

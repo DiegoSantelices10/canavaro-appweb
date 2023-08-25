@@ -53,11 +53,12 @@ export default function Checkout() {
                 fecha,
                 liberado: false,
               });
+              dispatch(setCheckout(res.data.response))
               if (res.data.message === "ok") {
                 try {
                   const response = await axios.post("/api/pusher", res.data.response);
+
                   if (response.status === 200) {
-                    dispatch(setCheckout({ ...values, tipoEnvio: "Envio a domicilio", hora, fecha }))
                     router.push("checkout/successful",);
                   }
                 } catch (error) {
@@ -76,11 +77,13 @@ export default function Checkout() {
                 fecha,
                 liberado: false,
               });
+
+              dispatch(setCheckout(res.data.response))
+
               if (res.data.message === "ok") {
                 try {
                   const response = await axios.post("/api/pusher", res.data.response);
                   if (response.status === 200) {
-                    dispatch(setCheckout({ ...values, tipoEnvio: "Retira por local", hora, fecha }))
                     router.push("checkout/successful");
                   }
                 } catch (error) {
@@ -119,7 +122,7 @@ export default function Checkout() {
                         <h2 className="font-nunito font-extrabold text-base text-sky-900">
                           {user?.direccion !== "" ? "horario de entrega" : "Retiralo"}
                         </h2>
-                        <p className="font-nunito px-1 text-gray-500">{user?.hPersonalizado}</p>
+                        <p className="font-nunito px-1 text-gray-500">{user?.hPersonalizado}hs.</p>
                       </div>
                     ) : (
                       <div className="p-1 py-3">

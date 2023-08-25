@@ -8,6 +8,9 @@ import { addSale, setRenderSaleData, setSaleData, updateSale } from "store/reduc
 import axios from "axios";
 import Pusher from "pusher-js";
 import { Howl } from "howler";
+import * as bigintConversion from 'bigint-conversion'
+
+
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -52,6 +55,7 @@ export default function Home() {
         alert("Error al obtener los datos")
       }
     })();
+
   }, []);
 
   useEffect(() => {
@@ -73,6 +77,12 @@ export default function Home() {
       pusher.unsubscribe("pizzeria");
     };
   }, []);
+
+  const numeroPedido = (id) => {
+    const numero = bigintConversion.textToBigint(id);
+    return numero.toString().slice(-10)
+
+  }
 
   const handleOpenModal = pedido => {
     setCurrentPedido(pedido);
@@ -158,7 +168,7 @@ export default function Home() {
                   className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border-none"
                 >
                   <div className="w-full text-sm">
-                    <h2 className="text-right">{index + 1}</h2>
+                    <h2 className="text-right text-xs text-gray-500">codigo de pedido: <span className="text-xs">{numeroPedido(item._id)}</span></h2>
                     <div className="text-left py-3 font-medium">
                       <h5 className="font-semibold">{item?.cliente}</h5>
                       <h5 className="text-sm font-semibold">{item?.domicilio}</h5>

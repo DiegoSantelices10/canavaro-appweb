@@ -168,7 +168,7 @@ export default function Home() {
               ¡ Arma tu pizza como quieras !
             </p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-poppins font-semibold w-auto  bg-sky-800 hover:bg-white hover:text-sky-900 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
+              <a className="rounded-3xl font-poppins font-semibold w-auto bg-sky-800 hover:bg-white hover:text-sky-900 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
                 Ingresa aqui
               </a>
             </Link>
@@ -252,24 +252,24 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">{renderStore(renderProducts)}</div>
         </div>
         {(renderProducts === "empanadas" || renderProducts === "bebidas") && (
-          <div className="bg-white w-full fixed bottom-0 p-3  sm:w-4/5 md:w-4/5 lg:w-3/5">
+          <div className="w-full fixed bottom-0    sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
-              className="flex justify-between items-center gap-3 mx-auto text-center rounded-md 
-									   w-full md:w-1/2 lg:w-3/5 p-3 bg-sky-800 text-white text-base font-semibold "
+              className="flex justify-between items-center gap-3 rounded-t-3xl mx-auto text-center   
+									   w-full md:w-1/2 lg:w-3/5 p-4 bg-sky-900  text-white text-base font-semibold "
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
                 className={`${orderPromo.length < 1
                   ? "invisible"
-                  : "p-3 font-bold bg-slate-50 rounded-md text-black text-xs hover:-translate-y-1 transition-all duration-500"
+                  : "p-3 px-4 font-semibold font-poppins bg-slate-50 rounded-3xl text-sky-900 text-sm hover:-translate-y-1 transition-all duration-500"
                   }`}
               >
-                AGREGAR AL CARRITO
+                Agregar al carrito
               </button>
 
-              <div className="flex items-center gap-x-5 text-white font-semibold">
+              <div className="flex items-center gap-x-5 text-white font-semibold pr-4">
                 <p className="font-semibold text-xl">$ {totalPrice}</p>
-                <div className=" h-10 w-10 rounded-full bg-white flex justify-center items-center">
+                <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
                   <p className="text-sky-800 text-lg font-bold">{totalCant}</p>
                 </div>
               </div>
