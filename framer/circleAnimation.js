@@ -8,38 +8,22 @@ import { useEffect, useState } from "react";
 const CircleAnimation = () => {
   const [nPedido, setNPedido] = useState(0);
   const { checkout, demora } = useSelector(state => state.order);
-  let idIcrement = 1;
-  const categorias = [...new Set(checkout.productos.map(producto => producto.categoria))];
+  const [catId, setCatId] = useState([]);
 
-  const categoriasId = categorias.map(producto => ({
-    id: idIcrement++,
-    categoria: producto,
-  }));
 
   useEffect(() => {
+    let idIcrement = 1;
+    const categorias = [...new Set(checkout.productos.map(producto => producto.categoria))];
+    const categoriasId = categorias.map(producto => ({
+      id: idIcrement++,
+      categoria: producto,
+    }));
+    setCatId(categoriasId)
     const numero = bigintConversion.textToBigint(checkout._id);
     setNPedido(numero.toString().slice(-10));
 
   }, [])
 
-
-  // useEffect(() => {
-  //   // Actualiza el contador cada segundo
-  //   const timer = setInterval(() => {
-  //     setCountdown(prevCountdown => prevCountdown - 1);
-  //   }, 1000);
-
-  //   // Redirecciona cuando el contador llega a cero
-  //   if (countdown === 0) {
-  //     clearInterval(timer);
-  // dispatch(clearOrderList());
-  // dispatch(clearUser());
-  //     router.push("/"); // Reemplaza '/pagina-principal' con la ruta de tu página principal
-  //   }
-
-  //   // Limpia el temporizador al desmontar el componente
-  //   return () => clearInterval(timer);
-  // }, [countdown, router]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -146,7 +130,7 @@ const CircleAnimation = () => {
           </div>
           <>
             <h3 className="font-bold mt-2 text-xl">Pedido</h3>
-            {categoriasId?.map(categoria => (
+            {catId?.map(categoria => (
               <div key={categoria.id}>
 
                 {checkout.productos

@@ -30,7 +30,7 @@ export default function Cart({ data }) {
 
 
   const hoursDelivery = () => {
-    if (hora >= 19 && hora <= 23) {
+    if (hora >= 19 && hora < 23) {
       setOpen(true)
     } else {
       setOpen(false)
