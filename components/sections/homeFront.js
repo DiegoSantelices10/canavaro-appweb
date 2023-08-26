@@ -1,14 +1,31 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
-// import Link from "next/link";
+import Link from "next/link";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
-import { FaWhatsapp } from "react-icons/fa";
+// import { FaWhatsapp } from "react-icons/fa";
 // import { BsTelephone } from "react-icons/bs"
 import { motion } from "framer-motion";
+import moment from "moment-timezone";
+import { useEffect, useState } from "react";
 
 function HomeFront({ imagefront }) {
+  const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
+  const [open, setOpen] = useState(true);
+
+
+  const hoursDelivery = () => {
+    if (hora >= 17 && hora < 23) {
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    hoursDelivery();
+  }, [])
   return (
     <Element name="home" className="relative element">
       <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
@@ -33,22 +50,25 @@ function HomeFront({ imagefront }) {
                     <h2>¡Nosotros te lo llevamos!</h2>
                     <p className="text-base font-semibold">De martes a domingo de 19 a 23hs.</p>
                   </div>
+                  {open && (
+                    <div className="w-full h-20 flex items-center">
+                      <Link href={"/welcomeLogo"}>
+                        <a
+                          className={`p-5 rounded-xl font-bold font-poppins px-7 text-base  mx-auto 
+                                    bg-gray-900 text-white hover:bg-white hover:text-gray-900   
+                                      hover:-translate-y-1 transition-all duration-500`}
+                        >
+                          HAC&Eacute; TU PEDIDO
+                        </a>
+                      </Link>
+                    </div>
+                  )}
 
-                  {/* <div className="w-full h-20 flex items-center">
-                        <Link href={"/welcomeLogo"}>
-                          <a
-                            className={`p-5 rounded-xl  font-bold font-poppins px-7 text-base  mx-auto   bg-gray-900 text-white hover:bg-white hover:text-gray-900   hover:-translate-y-1
-                          transition-all duration-500`}
-                          >
-                            HAC&Eacute; TU PEDIDO
-                          </a>
-                        </Link>
-                      </div> */}
                   {/* <div className="flex items-center justify-between gap-2">
                     <BsTelephone size={17} className="text-white" />
                     <h1 className="text-lg text-gray-200 font-semibold">4711 3259</h1>
                   </div> */}
-                  <a
+                  {/* <a
                     target="_blank"
                     rel="noreferrer"
                     href="https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola%20quiero%20hacer%20un%20pedido!">
@@ -56,7 +76,7 @@ function HomeFront({ imagefront }) {
                       <FaWhatsapp size={20} className="text-white" />
                       <h1 className="text-lg text-gray-200 font-semibold">Hace tu pedido</h1>
                     </div>
-                  </a>
+                  </a> */}
                   <h1 className="text-xl text-gray-200 font-bold">Delivery & Take Away</h1>
                 </div>
 

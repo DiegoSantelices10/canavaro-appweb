@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-import { motion } from "framer-motion";
-// import { useRouter } from "next/router";
+// import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 function Header() {
   const [top, setTop] = useState(true);
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  // const router = useRouter();
+  // const [isNavOpen, setIsNavOpen] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     const scrollHandler = () => {
       window.pageYOffset > 10 ? setTop(false) : setTop(true);
@@ -21,12 +21,41 @@ function Header() {
         }`}
     >
       <div className="w-full sm:w-full md:w-full lg:w-11/12 mx-auto  sm:px-6">
-        <div className="flex items-center justify-between px-3 h-16 md:h-20">
-          <div className={`flex-shrink-0 mr-4 text-white font-extrabold font-nunito tracking-wider  text-xl`}>
-            <h1>CANAVARO</h1>
-          </div>
-          <nav className="flex flex-grow font-nunito justify-end">
-            <section className="MOBILE-MENU block sm:block  md:block lg:hidden">
+        <div className="flex items-center lg:justify-end justify-center px-3 h-16 md:h-20">
+          <nav className="flex font-nunito lg:justify-end">
+            <ul className="flex gap-5  lg:hidden">
+              <li>
+                <Link to="pizzas" spy={true} smooth={true} offset={-80} duration={500}>
+                  <button
+                    className={`text-white    rounded-md pointer-events-auto text-lg font-bold   p-2 px-4 block items-center transition duration-150 ease-in-out`}
+                    aria-current="page"
+                  >
+                    Pizzas
+                  </button>
+                </Link>
+              </li>
+              <li>
+                <Link to="empanadas" spy={true} smooth={true} offset={-80} duration={500}>
+                  <button
+                    className={`text-white  font-bold  rounded-md px-4 text-lg   p-2 block items-center transition duration-150 ease-in-out`}
+                    aria-current="page"
+                  >
+                    Empanadas
+                  </button>
+                </Link>
+              </li>
+              <li>
+                <Link to="combos" spy={true} smooth={true} offset={-80} duration={500}>
+                  <button
+                    className={`text-white   font-bold  px-4 rounded-md text-lg   p-2 block items-center transition duration-150 ease-in-out`}
+                    aria-current="page"
+                  >
+                    Combos
+                  </button>
+                </Link>
+              </li>
+            </ul>
+            {/* <section className="MOBILE-MENU block sm:block  md:block lg:hidden">
               <div className="HAMBURGER-ICON space-y-2" onClick={() => setIsNavOpen(prev => !prev)}>
                 <span className={`block h-0.5 w-8 animate-pulse	bg-white `}></span>
                 <span className={`block h-0.5 w-8 animate-pulse bg-white`}></span>
@@ -87,14 +116,14 @@ function Header() {
 											transition-all duration-500`}
                     >
                       HAC&Eacute; TU PEDIDO
-                    </button> */}
+                    </button> 
                   </ul>
                 </div>
               </motion.div>
-            </section>
+            </section> */}
 
-            <div>
-              <ul className="DESKTOP-MENU hidden md:hidden  lg:flex  md:flex-grow justify-end gap-4 flex-wrap items-center">
+            <div className="flex justify-end">
+              <ul className="DESKTOP-MENU hidden md:hidden lg:gap-5 lg:justify-end lg:flex  md:flex-grow justify-end gap-4 flex-wrap items-center">
                 <li>
                   <Link to="home" spy={true} smooth={true} offset={0} duration={500}>
                     <button
@@ -149,9 +178,9 @@ function Header() {
                   className={`p-3 bg-gray-50 w-auto px-4 hover:bg-gray-900 hover:text-gray-50 hover:-translate-y-1
 											transition-all duration-500 rounded-xl`}
                 >
-                  {/* <button onClick={() => router.push("/welcomeLogo")} className="flex justify-around items-center">
+                  <button onClick={() => router.push("/welcomeLogo")} className="flex justify-around items-center">
                     <p className="text-base font-nunito font-semibold">HAC&Eacute; TU PEDIDO</p>
-                  </button> */}
+                  </button>
                 </div>
               </ul>
             </div>
