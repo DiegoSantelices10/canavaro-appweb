@@ -41,7 +41,7 @@ const UpdatePrices = () => {
         reader.onload = (e) => {
             const data = e.target.result;
             const workbook = XLSX.read(data, { type: "binary" });
-            const sheetName = workbook?.SheetNames[1];
+            const sheetName = workbook?.SheetNames[0];
             const sheet = workbook?.Sheets[sheetName];
             const parsedData = XLSX.utils.sheet_to_json(sheet);
             setData(parsedData);
