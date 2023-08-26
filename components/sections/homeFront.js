@@ -16,7 +16,7 @@ function HomeFront({ imagefront }) {
 
 
   const hoursDelivery = () => {
-    if (hora >= 17 && hora < 23) {
+    if (hora >= 19 && hora < 23) {
       setOpen(true)
     } else {
       setOpen(false)
