@@ -101,7 +101,7 @@ export default function Checkout() {
           return (
             <div className="h-full">
               <Form>
-                <div className="p-3 py-5">
+                <div className="p-3 py-4">
                   <div className="shadow bg-slate-50 rounded-md p-2">
                     <div className="p-1 py-3">
                       {user.direccion !== "" ? (
@@ -159,12 +159,12 @@ export default function Checkout() {
                           type="radio"
                           name="medioDePago"
                           value="efectivo"
-                          className="font-nunito mx-5 p-2 rounded-md"
+                          className="font-nunito mx-4 p-2 rounded-md"
                         />
                         Efectivo
                       </label>
                       <label className="font-nunito">
-                        <Field type="radio" name="medioDePago" value="mercadoPago" className="mx-5 p-2 rounded-md" />
+                        <Field type="radio" name="medioDePago" value="mercadoPago" className="mx-4 p-2 rounded-md" />
                         Mercado Pago
                       </label>
                     </div>
@@ -179,12 +179,15 @@ export default function Checkout() {
                       )}
                       {values.medioDePago === "mercadoPago" && (
                         <>
+                          <p className="font-nunito text-center font-normal ">
+                            por transferencia a <span className="text-lg font-semibold font-poppins text-sky-800">canavaro.mp</span>
+                          </p>
+                          <p className="font-nunito text-center font-normal">
+                            a nombre de Federico Ariel Gahr
+                          </p>
                           <div className="flex justify-center w-full">
                             <Image src="/images/logoMP.webp" width={100} height={100} alt="logoMP" />
                           </div>
-                          <p className="font-nunito text-center font-semibold p-2">
-                            Abonas con QR al momento de recibir el pedido!
-                          </p>
                         </>
                       )}
                     </div>

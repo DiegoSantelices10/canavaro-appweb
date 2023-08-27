@@ -174,7 +174,7 @@ const CircleAnimation = () => {
           <a
             target="_blank"
             rel="noreferrer"
-            href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${nPedido}`}
+            href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}`}
           >
             <div className="flex items-center gap-2 bg-green-500 p-3 text-white font-semibold rounded-md shadow-md">
               <FaWhatsapp size={18} />
