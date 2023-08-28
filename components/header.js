@@ -19,9 +19,9 @@ function Header() {
   }, [top]);
   const hoursDelivery = () => {
     if (hora >= 19 && hora < 23) {
-      setOpen(true)
-    } else {
       setOpen(false)
+    } else {
+      setOpen(true)
     }
   }
 
