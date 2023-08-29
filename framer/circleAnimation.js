@@ -126,6 +126,7 @@ const CircleAnimation = () => {
                       {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span></h1>
                 </>
               )}
+              <div>{checkout.comentarios && "Comentarios: " + checkout.comentarios}</div>
             </div>
           </div>
           <>

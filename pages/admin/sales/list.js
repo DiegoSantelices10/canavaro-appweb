@@ -1,8 +1,15 @@
 import Layout from "components/admin/layout";
+import ModalPedido from "components/modalPedido";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSaleData } from "store/reducers/saleSlice";
+import { motion } from "framer-motion";
+import * as bigintConversion from 'bigint-conversion';
+
+
 export default function Sales() {
+  const [showModal, setShowModal] = useState(false);
+  const [currentPedido, setCurrentPedido] = useState(null);
   const { sales } = useSelector(state => state.sale);
   const dispatch = useDispatch();
   const [totalSale, setTotalSale] = useState("");
@@ -22,58 +29,80 @@ export default function Sales() {
     setTotalSale(total);
   }, [sales]);
 
+  const handleOpenModal = pedido => {
+    setCurrentPedido(pedido);
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setCurrentPedido(null);
+    setShowModal(false);
+  };
+  const numeroPedido = (id) => {
+    const numero = bigintConversion.textToBigint(id);
+    return numero.toString().slice(-10)
+  }
+
+
   return (
     <Layout>
+      {currentPedido && (
+        <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
+      )}
       <div className="bg-slate-50 h-full w-full">
-        <div className="w-full lg:w-11/12 h-auto text-center  mx-auto">
-          <div className=" py-5 w-full h-auto flex justify-center lg:justify-start items-center">
-            <div className="w-1/2 lg:w-1/3 font-bold bg-white rounded-md shadow p-5">
-              <h2 className="font-normal font-nunito text-lg whitespace-nowrap">
-                Ventas de hoy: <span className="font-nunito text-lg font-semibold">$ {totalSale}</span>
+        <div className="w-full lg:w-11/12 h-auto mx-auto">
+          <div className=" py-5 w-full px-2 lg:px-0 h-auto flex justify-center lg:justify-start items-center">
+            <div className="flex flex-col w-full  font-poppins justify-center items-start p-3 h-20 font-bold bg-white rounded-md shadow">
+              <h2 className="font-normal  text-sm whitespace-nowrap">
+                Ventas del día: <span className="font-semibold">$ {totalSale}</span>
+              </h2>
+              <h2 className="font-normal text-sm whitespace-nowrap">
+                Cant de pedidos: <span className="font-semibold">{sales?.length}</span>
               </h2>
             </div>
           </div>
 
-          <div className=" w-full lg:w-11/12 mx-auto h-full pt-5 ">
+          <div className="w-full mx-auto h-full">
             <div className="w-full mx-auto">
-              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-left text-sm  text-gray-500 dark:text-gray-400 ">
-                  <thead>
-                    <tr>
-                      <th scope="col" className="pl-4 py-3">
-                        Cliente
-                      </th>
-                      <th scope="col" className="pl-2 py-3">
-                        Tipo envio
-                      </th>
-                      <th scope="col" className="pl-2 py-3 w-1/4">
-                        Direccion
-                      </th>
+              <div className="relative overflow-x-auto">
+                <div className="w-full  mx-auto text-center py-2">
+                  <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito">
+                    {sales?.length > 0 ? (
+                      sales.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border-none"
+                        >
+                          <div className="w-full text-sm">
+                            <h2 className="text-right text-xs text-gray-500"><span className="text-xs">{numeroPedido(item._id)}</span></h2>
+                            <div className="text-left py-3 font-medium">
+                              <h5 className="font-semibold">{item?.cliente}</h5>
+                              <h5 className="text-sm font-semibold">{item?.domicilio}</h5>
 
-                      <th scope="col" className="pl-2 py-3">
-                        Hora
-                      </th>
-                      <th scope="col" className="pl-2 py-3">
-                        Total
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-gray-800 font-nunito">
-                    {sales?.map((pedido, index) => {
-                      return (
-                        <tr key={pedido._id} className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}>
-                          <th scope="row" className="pl-4 py-4 w-auto  ">
-                            {pedido.cliente}
-                          </th>
-                          <td className="pl-2 py-4 font-bold">{pedido.tipoEnvio}</td>
-                          <td className="pl-2 py-4 w-1/4">{pedido.domicilio}</td>
-                          <td className="pl-2 py-4">{pedido.hora}</td>
-                          <td className="pl-2 py-4 ">$ {pedido.total}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                              <h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
+                            </div>
+                          </div>
+                          <div className="flex justify-end  gap-3 w-full font-nunito">
+                            <button
+                              onClick={() => handleOpenModal(item)}
+                              className="px-4 py-2 w-auto rounded-md text-xs font-medium border 
+														shadow focus:outline-none focus:ring transition 
+														text-slate-500  hover:bg-blue-100 
+														active:bg-blue-200 focus:ring-blue-300"
+                              type="submit"
+                            >
+                              Ver descripcion
+                            </button>
+                          </div>
+                        </motion.div>
+                      ))
+                    ) : (
+                      <p className="text-center w-full font-semibold font-poppins">No Hay pedidos</p>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
