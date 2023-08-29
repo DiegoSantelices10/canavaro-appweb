@@ -42,7 +42,7 @@ function HomeFront({ imagefront }) {
               </div>
 
               <div className="w-full h-auto  p-3 mx-auto flex flex-col justify-center items-center gap-1  relative text-center">
-                <div className="absolute bg-black mx-auto rounded-md h-full opacity-40 inset-0 z-0"></div>
+                <div className="absolute bg-black mx-auto rounded-md h-full opacity-50 inset-0 z-0"></div>
                 <div className="relative z-10 flex flex-col justify-center items-center">
                   <MdOutlineDeliveryDining size={60} className="text-white" />
                   <div className="text-xl font-extrabold text-gray-200">
@@ -54,29 +54,16 @@ function HomeFront({ imagefront }) {
                     <div className="w-full h-20 flex items-center">
                       <Link href={"/welcomeLogo"}>
                         <a
-                          className={`p-5 rounded-xl font-bold font-poppins px-7 text-base  mx-auto 
-                                    bg-gray-900 text-white hover:bg-white hover:text-gray-900   
+                          className={`p-3 px-4 rounded-md font-bold  font-nunito  text-lg  mx-auto 
+                          hover:bg-black hover:text-white bg-white text-gray-900   
                                       hover:-translate-y-1 transition-all duration-500`}
                         >
-                          HAC&Eacute; TU PEDIDO
+                          Hac&eacute; tu pedido
                         </a>
                       </Link>
                     </div>
                   )}
 
-                  {/* <div className="flex items-center justify-between gap-2">
-                    <BsTelephone size={17} className="text-white" />
-                    <h1 className="text-lg text-gray-200 font-semibold">4711 3259</h1>
-                  </div> */}
-                  {/* <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola%20quiero%20hacer%20un%20pedido!">
-                    <div className="flex gap-2 items-center px-3 bg-black my-2 hover:bg-gray-900 translate-x-1  shadow p-2 rounded-md">
-                      <FaWhatsapp size={20} className="text-white" />
-                      <h1 className="text-lg text-gray-200 font-semibold">Hace tu pedido</h1>
-                    </div>
-                  </a> */}
                   <h1 className="text-xl text-gray-200 font-bold">Delivery & Take Away</h1>
                 </div>
 
