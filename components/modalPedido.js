@@ -56,36 +56,36 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
               </div>
               {pedido?.cliente && (
                 <h2>
-                  Cliente: <span className="font-medium  text-base">{pedido.cliente}</span>
+                  Cliente: <span className="font-semibold  text-base">{pedido.cliente}</span>
                 </h2>
               )}
 
               {pedido.domicilio && (
                 <h2>
-                  Direccion: <span className="font-medium text-base">{pedido?.domicilio}</span>
+                  Direccion: <span className="font-semibold text-base">{pedido?.domicilio}</span>
                 </h2>
               )}
               {pedido?.telefono && (
                 <h2>
-                  Telefono: <span className="font-medium text-base">{separarNumero(pedido?.telefono)}</span>
+                  Telefono: <span className="font-semibold text-base">{separarNumero(pedido?.telefono)}</span>
                 </h2>
               )}
               <h2>
-                Tipo de envio: <span className="font-medium text-base">{pedido?.tipoEnvio}</span>
+                Tipo de envio: <span className="font-semibold text-base">{pedido?.tipoEnvio}</span>
               </h2>
               {pedido.hPersonalizado !== "" && (
                 <h2>
-                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-medium text-base">{pedido?.hPersonalizado}hs.</span>
+                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-semibold text-base">{pedido?.hPersonalizado}hs.</span>
                 </h2>
 
               )}
               <h2>
-                Medio de pago: <span className="font-medium text-base">{pedido?.medioDePago}</span>
+                Medio de pago: <span className="font-semibold text-base">{pedido?.medioDePago}</span>
               </h2>
 
               {pedido?.comentarios && (
                 <h2>
-                  Comentarios: <span className="font-medium text-base">{pedido?.comentarios}</span>
+                  Comentarios: <span className="font-semibold text-base">{pedido?.comentarios}</span>
                 </h2>
               )}
               <div className="border-t-2 border-gray-300 my-3"></div>
