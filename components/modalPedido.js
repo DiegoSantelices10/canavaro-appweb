@@ -45,7 +45,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 />
               </button>
             </div>
-            <div className="font-normal text-left text-base font-poppins mt-4">
+            <div className="font-normal text-left text-base font-nunito mt-4">
               <div className="flex justify-between w-full">
                 <h2>
                   Fecha: <span className="font-medium text-base">{pedido?.fecha}</span>
@@ -90,16 +90,16 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
               )}
               <div className="border-t-2 border-gray-300 my-3"></div>
               <>
-                <h3>Pedido:</h3>
+
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <p className="text-base">{categoria?.categoria}</p>
+                    <p className="text-base text-gray-600">{categoria?.categoria}</p>
 
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
                       .map((item, index) => {
                         return (
-                          <div key={index} className="py-2 font-poppins text-lg">
+                          <div key={index} className="py-1 font-nunito text-base">
                             <div className="flex justify-between items-center font-nunito">
                               <p className="font-semibold">
                                 {item.nombre}

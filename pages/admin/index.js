@@ -179,7 +179,7 @@ export default function Home() {
                   <div className="flex justify-end  gap-3 w-full font-nunito">
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="px-4 py-2 w-auto rounded-md text-xs font-medium  
+                      className="px-4 py-2 w-auto rounded-md text-xs font-medium border  
 														shadow focus:outline-none focus:ring transition 
 														text-slate-500  hover:bg-blue-100 
 														active:bg-blue-200 focus:ring-blue-300"
