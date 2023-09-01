@@ -26,8 +26,8 @@ const CircleAnimation = () => {
       clearInterval(timer);
       dispatch(clearOrderList());
       dispatch(clearUser());
-      // const enlace = `https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}`
-      // window.open(enlace, "_blank");
+      const enlace = `https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}`
+      window.open(enlace, "_blank");
     }
 
     // Limpia el temporizador al desmontar el componente
