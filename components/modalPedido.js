@@ -45,44 +45,47 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 />
               </button>
             </div>
-            <div className="font-extrabold text-left text-base font-nunito">
+            <div className="font-normal text-left text-base font-poppins mt-4">
+              <div className="flex justify-between w-full">
+                <h2>
+                  Fecha: <span className="font-medium text-base">{pedido?.fecha}</span>
+                </h2>
+                <h2>
+                  Hora: <span className="font-medium text-base">{pedido?.hora}</span>
+                </h2>
+              </div>
               {pedido?.cliente && (
                 <h2>
-                  Cliente: <span className="font-bold text-gray-500 text-base">{pedido.cliente}</span>
+                  Cliente: <span className="font-medium  text-base">{pedido.cliente}</span>
                 </h2>
               )}
 
               {pedido.domicilio && (
                 <h2>
-                  Direccion: <span className="font-bold text-gray-500 text-base">{pedido?.domicilio}</span>
+                  Direccion: <span className="font-medium text-base">{pedido?.domicilio}</span>
                 </h2>
               )}
               {pedido?.telefono && (
                 <h2>
-                  Telefono: <span className="font-bold text-gray-500 text-base">{separarNumero(pedido?.telefono)}</span>
+                  Telefono: <span className="font-medium text-base">{separarNumero(pedido?.telefono)}</span>
                 </h2>
               )}
               <h2>
-                Tipo de envio: <span className="font-bold text-gray-500 text-base">{pedido?.tipoEnvio}</span>
+                Tipo de envio: <span className="font-medium text-base">{pedido?.tipoEnvio}</span>
               </h2>
               {pedido.hPersonalizado !== "" && (
                 <h2>
-                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-bold text-gray-500 text-base">{pedido?.hPersonalizado}hs.</span>
+                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-medium text-base">{pedido?.hPersonalizado}hs.</span>
                 </h2>
 
               )}
               <h2>
-                Medio de pago: <span className="font-bold text-gray-500 text-base">{pedido?.medioDePago}</span>
+                Medio de pago: <span className="font-medium text-base">{pedido?.medioDePago}</span>
               </h2>
-              <h2>
-                Fecha: <span className="font-bold text-gray-500 text-base">{pedido?.fecha}</span>
-              </h2>
-              <h2>
-                Hora: <span className="font-bold text-gray-500 text-base">{pedido?.hora}</span>
-              </h2>
+
               {pedido?.comentarios && (
                 <h2>
-                  Comentarios: <span className="font-bold text-gray-500 text-base">{pedido?.comentarios}</span>
+                  Comentarios: <span className="font-medium text-base">{pedido?.comentarios}</span>
                 </h2>
               )}
               <div className="border-t-2 border-gray-300 my-3"></div>
@@ -96,30 +99,30 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                       ?.filter(producto => producto?.categoria === categoria.categoria)
                       .map((item, index) => {
                         return (
-                          <div key={index} className="py-2">
+                          <div key={index} className="py-2 font-poppins text-lg">
                             <div className="flex justify-between items-center font-nunito">
-                              <p className="font-bold text-neutral-900 text-base">
+                              <p className="font-semibold">
                                 {item.nombre}
-                                <span className=" pl-1 font-semibold text-gray-500 text-base">
+                                <span className=" pl-1 font-semibold ">
                                   {item.categoria === "pizzas" && item?.tamanio}
                                 </span>
-                                <span className="text-gray-400 text-sm font-normal">
+                                <span className=" text-base font-normal">
                                   {" "}
                                   x {item?.cant || item?.cantidad}
                                 </span>
                               </p>
                               <p>$ {item.precio * item.cantidad}</p>
                             </div>
-                            <p className="font-semibold text-gray-500 text-sm w-11/12">{item.descripcion}</p>
+                            <p className="font-normal  text-xs w-11/12">{item.descripcion}</p>
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
-                                  <p className="font-semibold text-gray-500 text-sm">
+                                  <p className="font-medium text-base">
                                     {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
                                   </p>
                                 </div>
                               ))}
-                            <p className="font-semibold text-gray-500 text-sm w-11/12">{item.comentarios}</p>
+                            <p className="font-semibold text-sm w-11/12">{item.comentarios}</p>
                           </div>
                         );
                       })}
@@ -130,10 +133,10 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
               <div className="flex justify-between items-center">
                 <h2>Total</h2>
-                <p>$ {pedido.total}</p>
+                <p className="text-xl font-semibold">$ {pedido.total}</p>
               </div>
               {pedido.pagaCon !== 0 && (
-                <div className="flex justify-between items-center font-medium text-gray-400">
+                <div className="flex justify-between items-center font-medium">
                   <h2>Paga con</h2>
                   <p>$ {pedido.pagaCon}</p>
                 </div>

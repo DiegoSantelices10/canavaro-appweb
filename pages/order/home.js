@@ -32,10 +32,10 @@ export default function Home() {
   const dispatch = useDispatch();
   const renderPromotions = () => {
     // eslint-disable-next-line dot-notation
-    return products
-      ?.filter(item => item.categoria === "promociones" && item.available === true)
-      ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
-      .map(data => <CardPromotion key={data._id} data={data} />);
+    const combos = products.filter(item => item.nombre.includes("Combo"))?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+    const otraPromos = products.filter(item => item.categoria === "promociones" && !item.nombre.includes("Combo"))
+    const ordenado = [...combos, ...otraPromos];
+    return ordenado.map(data => <CardPromotion key={data._id} data={data} />);
   };
 
   const renderStore = renderProductos => {

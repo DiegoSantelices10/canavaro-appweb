@@ -1,14 +1,39 @@
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaWhatsapp } from "react-icons/fa"
 import * as bigintConversion from 'bigint-conversion'
 import { useEffect, useState } from "react";
-
+import { useRouter } from "next/router";
+import { clearOrderList } from "store/reducers/orderSlice";
+import { clearUser } from "store/reducers/userSlice";
 const CircleAnimation = () => {
   const [nPedido, setNPedido] = useState(0);
   const { checkout, demora } = useSelector(state => state.order);
   const [catId, setCatId] = useState([]);
+  const [countdown, setCountdown] = useState(5);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Actualiza el contador cada segundo
+    const timer = setInterval(() => {
+      setCountdown(prevCountdown => prevCountdown - 1);
+    }, 1000);
+
+    // Redirecciona cuando el contador llega a cero
+    if (countdown === 0) {
+      clearInterval(timer);
+      dispatch(clearOrderList());
+      dispatch(clearUser());
+      // const enlace = `https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}`
+      // window.open(enlace, "_blank");
+    }
+
+    // Limpia el temporizador al desmontar el componente
+    return () => clearInterval(timer);
+  }, [countdown, router]);
+
 
 
   useEffect(() => {
@@ -96,8 +121,13 @@ const CircleAnimation = () => {
         </motion.div>
 
       </motion.div>
-      <div className="p-5">
-        <p className="text-black font-semibold font-poppins text-base">
+      <div className="p-2">
+        <div className="text-center justify-center gap-2
+         flex items-center font-normal text-sm font-poppins text-green-500">
+          <p>En {countdown} se redirecciona al whatsapp</p>
+          <FaWhatsapp size={18} className="text-green-500" />
+        </div>
+        <p className="text-red-400 font-semibold font-poppins text-base px-1 mt-2">
           Detalle del pedido
         </p>
         <div className="w-full h-auto rounded-md border-gray-200 border mt-2 p-2">
@@ -168,9 +198,10 @@ const CircleAnimation = () => {
               </div>
             ))}
           </>
-          <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">${checkout.total}</span></h1>
+          <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
         </div>
-        <div className="flex justify-between items-center mt-2">
+
+        {/* <div className="flex justify-between items-center mt-2">
           <p className="font-semibold text-sm">¡No dudes en escribirnos!</p>
           <a
             target="_blank"
@@ -181,7 +212,7 @@ const CircleAnimation = () => {
               <FaWhatsapp size={18} />
               Ir a whatsapp</div>
           </a>
-        </div>
+        </div> */}
       </div>
     </div >
   );
