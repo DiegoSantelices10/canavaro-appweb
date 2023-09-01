@@ -113,7 +113,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                               </p>
                               <p>$ {item.precio * item.cantidad}</p>
                             </div>
-                            <p className="font-normal  text-xs w-11/12">{item.descripcion}</p>
+                            <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
