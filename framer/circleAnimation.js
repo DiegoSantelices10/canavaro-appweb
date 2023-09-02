@@ -1,39 +1,13 @@
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { FaWhatsapp } from "react-icons/fa"
 import * as bigintConversion from 'bigint-conversion'
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { clearOrderList } from "store/reducers/orderSlice";
-import { clearUser } from "store/reducers/userSlice";
 const CircleAnimation = () => {
   const [nPedido, setNPedido] = useState(0);
   const { checkout, demora } = useSelector(state => state.order);
   const [catId, setCatId] = useState([]);
-  const [countdown, setCountdown] = useState(5);
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    // Actualiza el contador cada segundo
-    const timer = setInterval(() => {
-      setCountdown(prevCountdown => prevCountdown - 1);
-    }, 1000);
-
-    // Redirecciona cuando el contador llega a cero
-    if (countdown === 0) {
-      clearInterval(timer);
-      dispatch(clearOrderList());
-      dispatch(clearUser());
-      const enlace = `https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}`
-      window.open(enlace, "_blank");
-    }
-
-    // Limpia el temporizador al desmontar el componente
-    return () => clearInterval(timer);
-  }, [countdown, router]);
-
 
 
   useEffect(() => {
@@ -117,22 +91,29 @@ const CircleAnimation = () => {
               margin: "auto",
             }}
           />
-          <h2 className="text-black font-poppins text-lg font-bold w-full mt-5">¡Ya recibimos tu pedido! </h2>
+          <h2 className="text-gray-800 font-poppins text-lg font-bold w-full py-4">¡Ya recibimos tu pedido! </h2>
         </motion.div>
 
       </motion.div>
-      <div className="p-2">
-        <div className="text-center justify-center gap-2
-         flex items-center font-normal text-sm font-poppins text-green-500">
-          <p>En {countdown} se redirecciona al whatsapp</p>
-          <FaWhatsapp size={18} className="text-green-500" />
+      <div className="p-2 w-full md:w-1/2 lg:w-1/2 mx-auto">
+        <div className="flex justify-center items-center flex-col py-4 gap-1">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20confirmar%20%20mi%20pedido%20de:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}`}
+          >
+            <div className="flex items-center gap-2  bg-green-500 hover:bg-green-400 p-3 text-white font-semibold rounded-md shadow-md">
+              <FaWhatsapp size={18} />
+              Ir a whatsapp</div>
+          </a>
+          <p className="font-semibold text-sm font-poppins text-gray-800 py-1">Escribinos para confirmar tu pedido.</p>
         </div>
-        <p className="text-red-400 font-semibold font-poppins text-base px-1 mt-2">
+        <p className="text-red-400 font-semibold font-poppins text-sm px-1 mt-2">
           Detalle del pedido
         </p>
         <div className="w-full h-auto rounded-md border-gray-200 border mt-2 p-2">
           <div className="flex justify-between">
-            <h1 className="font-nunito font-bold">Numero de pedido: <span className="text-gray-600 font-semibold ">{nPedido}</span></h1>
+            <h1 className="font-nunito font-bold">Numero de pedido: <span className="text-gray-700 font-semibold ">{nPedido}</span></h1>
             <h1 className="font-bold font-nunito">{checkout.hora}hs.</h1>
 
           </div>
@@ -141,10 +122,11 @@ const CircleAnimation = () => {
             <div className="">
               {checkout.domicilio !== "" ? (
                 <>
-                  <h2 className="font-nunito  font-bold text-base">Direccion de envío</h2>
-                  <p className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </p>
+
+                  <h2 className="font-nunito  font-bold text-base">Direccion de envío: <span className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </span></h2>
+
                   <h1 className="font-bold font-nunito">Horario de envío:
-                    <span className="text-gray-600 px-2 font-semibold">
+                    <span className="text-gray-700 px-2 font-semibold">
                       {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span></h1>
                 </>
               ) : (
@@ -152,11 +134,16 @@ const CircleAnimation = () => {
                   <h2 className="font-nunito font-bold text-base">Retira por local</h2>
                   <p className="font-nunito font-bold">Nombre: <span className="text-gray-600 font-semibold">{checkout.cliente}</span> </p>
                   <h1 className="font-bold font-nunito">Horario de retiro:
-                    <span className="text-gray-600 px-2 font-semibold">
+                    <span className="text-gray-700 px-2 font-semibold">
                       {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span></h1>
                 </>
               )}
-              <div>{checkout.comentarios && "Comentarios: " + checkout.comentarios}</div>
+              {checkout.comentarios && (
+                <p className="font-nunito font-bold">Comentarios:
+                  <span className="text-gray-700 font-semibold"> {checkout.comentarios}</span>
+                </p>
+
+              )}
             </div>
           </div>
           <>
@@ -172,7 +159,7 @@ const CircleAnimation = () => {
                         <div className="flex justify-between items-center font-nunito">
                           <p className="font-bold text-neutral-900 text-base">
                             {item.nombre}
-                            <span className=" pl-1 font-semibold text-gray-500 text-base">
+                            <span className=" pl-1 font-semibold text-gray-700 text-base">
                               {item.categoria === "pizzas" && item?.tamanio}
                             </span>
                             <span className="text-gray-400 text-sm font-normal">
@@ -182,16 +169,16 @@ const CircleAnimation = () => {
                           </p>
                           <p>$ {item.precio * item.cantidad}</p>
                         </div>
-                        <p className="font-normal text-gray-400 text-sm w-11/12">{item.descripcion}</p>
+                        <p className="font-normal text-gray-500 text-xs w-11/12">{item.descripcion}</p>
                         {item.products &&
                           item.products.map(producto => (
                             <div key={producto._id}>
-                              <p className="font-normal text-gray-400 text-sm">
+                              <p className="font-normal text-gray-700 text-sm">
                                 {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
                               </p>
                             </div>
                           ))}
-                        <p className="font-semibold text-gray-500 text-sm w-11/12">{item.comentarios}</p>
+                        <p className="font-semibold text-gray-700 text-sm w-11/12">{item.comentarios}</p>
                       </div>
                     );
                   })}
@@ -201,18 +188,7 @@ const CircleAnimation = () => {
           <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
         </div>
 
-        {/* <div className="flex justify-between items-center mt-2">
-          <p className="font-semibold text-sm">¡No dudes en escribirnos!</p>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20consultar%20por%20mi%20pedido:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}`}
-          >
-            <div className="flex items-center gap-2 bg-green-500 p-3 text-white font-semibold rounded-md shadow-md">
-              <FaWhatsapp size={18} />
-              Ir a whatsapp</div>
-          </a>
-        </div> */}
+
       </div>
     </div >
   );

@@ -129,29 +129,27 @@ export default function ProductLayout({
   };
 
   return (
-    <div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
+    <div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 ">
       {showModal && (
         <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
       )}
 
-      <div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
-        <Image
-          src={imagen?.url}
-          layout="responsive"
-          width={80}
-          height={40}
-          objectFit="cover"
-          objectPosition="center"
-          alt={nombre || "img"}
-        />
-        <button onClick={returnHome}>
-          <FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
-        </button>
-      </div>
 
+      <div className="flex justify-center items-center  w-full mt-12">
+        <Image
+          className="rounded-md w-1/2"
+          src={imagen?.url}
+          width={230}
+          height={200}
+          alt={nombre} />
+
+      </div>
+      <button onClick={returnHome}>
+        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-4 left-4" size={30} />
+      </button>
       <div className="w-full h-auto">
         <div className="flex flex-col   w-full">
-          <div className="w-full bg-white p-3">
+          <div className="w-full bg-white px-3 ">
             <h1 className="font-bold text-lg font-nunito text-gray-800">{nombre}</h1>
             <p className=" font-normal text-sm  text-gray-400 font-nunito">{descripcion}</p>
             {categoria === "promociones" && (
@@ -197,8 +195,8 @@ export default function ProductLayout({
       <div className="bg-white w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
           className={`${result() > 0
-              ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-sky-900 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
-              : "invisible"
+            ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-sky-900 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
+            : "invisible"
             } `}
           onClick={() => {
             addCartPromo(orderPromo);

@@ -45,46 +45,46 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 />
               </button>
             </div>
-            <div className="font-normal text-left text-base font-nunito mt-4">
-              <div className="flex justify-between w-full">
-                <h2>
+            <div className="font-normal text-left text-base font-nunito mt-4 text-gray-900">
+              <div className="flex justify-between w-full ">
+                <h2 className="font-bold">
                   Fecha: <span className="font-medium text-base">{pedido?.fecha}</span>
                 </h2>
-                <h2>
+                <h2 className="font-bold">
                   Hora: <span className="font-medium text-base">{pedido?.hora}</span>
                 </h2>
               </div>
               {pedido?.cliente && (
-                <h2>
+                <h2 className="font-bold">
                   Cliente: <span className="font-semibold  text-base">{pedido.cliente}</span>
                 </h2>
               )}
 
               {pedido.domicilio && (
-                <h2>
+                <h2 className="font-bold">
                   Direccion: <span className="font-semibold text-base">{pedido?.domicilio}</span>
                 </h2>
               )}
               {pedido?.telefono && (
-                <h2>
+                <h2 className="font-bold">
                   Telefono: <span className="font-semibold text-base">{separarNumero(pedido?.telefono)}</span>
                 </h2>
               )}
-              <h2>
+              <h2 className="font-bold">
                 Tipo de envio: <span className="font-semibold text-base">{pedido?.tipoEnvio}</span>
               </h2>
               {pedido.hPersonalizado !== "" && (
-                <h2>
+                <h2 className="font-bold">
                   Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-semibold text-base">{pedido?.hPersonalizado}hs.</span>
                 </h2>
 
               )}
-              <h2>
+              <h2 className="font-bold">
                 Medio de pago: <span className="font-semibold text-base">{pedido?.medioDePago}</span>
               </h2>
 
               {pedido?.comentarios && (
-                <h2>
+                <h2 className="font-bold">
                   Comentarios: <span className="font-semibold text-base">{pedido?.comentarios}</span>
                 </h2>
               )}
@@ -93,15 +93,15 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <p className="text-base text-gray-600">{categoria?.categoria}</p>
+                    <p className="text-base text-gray-900">{categoria?.categoria}</p>
 
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
                       .map((item, index) => {
                         return (
-                          <div key={index} className="py-1 font-nunito text-base">
+                          <div key={index} className="py-1 font-nunito text-base text-gray-900">
                             <div className="flex justify-between items-center font-nunito">
-                              <p className="font-semibold">
+                              <p className="font-bold">
                                 {item.nombre}
                                 <span className=" pl-1 font-semibold ">
                                   {item.categoria === "pizzas" && item?.tamanio}
@@ -111,7 +111,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                                   x {item?.cant || item?.cantidad}
                                 </span>
                               </p>
-                              <p>$ {item.precio * item.cantidad}</p>
+                              <p className="font-semibold">$ {item.precio * item.cantidad}</p>
                             </div>
                             <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>
                             {item.products &&
@@ -131,9 +131,9 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
               </>
               <div className="border-t-2 border-gray-300 my-3"></div>
 
-              <div className="flex justify-between items-center">
+              <div className="flex font-bold justify-between items-center text-gray-900">
                 <h2>Total</h2>
-                <p className="text-xl font-semibold">$ {pedido.total}</p>
+                <p className="text-xl font-bold">$ {pedido.total}</p>
               </div>
               {pedido.pagaCon !== 0 && (
                 <div className="flex justify-between items-center font-medium">
