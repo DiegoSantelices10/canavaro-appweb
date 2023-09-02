@@ -69,7 +69,7 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base">{producto.nombre}</h3>
+                    <h3 className="text-base font-nunito">{producto.nombre}</h3>
                     <h4 className="text-gray-400 text-xs font-nunito font-normal">{producto.descripcion}</h4>
                   </div>
                 );
@@ -89,7 +89,7 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base">{producto.nombre}</h3>
+                    <h3 className="text-base font-nunito">{producto.nombre}</h3>
                     <h4 className="text-gray-400 text-xs font-nunito font-normal">{producto.descripcion}</h4>
                   </div>
                 );
@@ -100,7 +100,7 @@ export default function Promotion({
 
       {addEmpanadas === "no" ? (
         <div className="flex justify-between items-center ">
-          <div className="text-lg font-medium">
+          <div className="font-nunito text-lg font-bold">
             <h2>{nombre}</h2>
           </div>
           <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">

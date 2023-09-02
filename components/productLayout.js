@@ -155,8 +155,8 @@ export default function ProductLayout({
             {categoria === "promociones" && (
               <p className=" font-normal font-nunito text-sm text-gray-400">$ {precio}</p>
             )}
+            <hr className="mt-4" />
           </div>
-          <hr />
           <div className="text-sm font-semibold text-left bg-white p-3 my-1">
             {categoria === "pizzas" ? (
               <div className=" flex flex-col gap-y-2  justify-evenly">
