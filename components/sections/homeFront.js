@@ -4,27 +4,26 @@ import Link from "next/link";
 import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
-// import { FaWhatsapp } from "react-icons/fa";
-// import { BsTelephone } from "react-icons/bs"
 import { motion } from "framer-motion";
-import moment from "moment-timezone";
+// import moment from "moment-timezone";
 import { useEffect, useState } from "react";
 
 function HomeFront({ imagefront }) {
-  const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
-  const [open, setOpen] = useState(true);
+  // const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
+  const [open, setOpen] = useState(false);
 
 
-  const hoursDelivery = () => {
-    if (hora >= 19 && hora < 23) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }
+  // const hoursDelivery = () => {
+  //   if (hora >= 19 && hora < 23) {
+  //     setOpen(true)
+  //   } else {
+  //     setOpen(false)
+  //   }
+  // }
 
   useEffect(() => {
-    hoursDelivery();
+    // hoursDelivery();
+    setOpen(false)
   }, [])
   return (
     <Element name="home" className="relative element">

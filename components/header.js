@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 // import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import moment from "moment-timezone";
+// import moment from "moment-timezone";
 
 function Header() {
   const [top, setTop] = useState(true);
-  // const [isNavOpen, setIsNavOpen] = useState(false);
   const router = useRouter();
-  const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
-  const [open, setOpen] = useState(true);
+  // const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const scrollHandler = () => {
       window.pageYOffset > 10 ? setTop(false) : setTop(true);
@@ -17,16 +16,18 @@ function Header() {
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
-  const hoursDelivery = () => {
-    if (hora >= 19 && hora < 23) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }
+
+  // const hoursDelivery = () => {
+  //   if (hora >= 19 && hora < 23) {
+  //     setOpen(true)
+  //   } else {
+  //     setOpen(false)
+  //   }
+  // }
 
   useEffect(() => {
-    hoursDelivery();
+    // hoursDelivery();
+    setOpen(false)
   }, [])
 
   return (
