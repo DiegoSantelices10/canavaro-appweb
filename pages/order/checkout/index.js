@@ -177,7 +177,7 @@ export default function Checkout() {
                       </label>
                     </div>
                     <div className="py-2">
-                      {values.medioDePago === "efectivo" && (
+                      {values.medioDePago === "Efectivo" && (
                         <Field
                           id="pagaCon"
                           name="pagaCon"
