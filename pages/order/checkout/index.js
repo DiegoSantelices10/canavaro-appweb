@@ -152,20 +152,28 @@ export default function Checkout() {
                     <div
                       role="group"
                       aria-labelledby="my-radio-group"
-                      className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
+                      className="w-full text-base  text-slate-400 flex flex-row justify-center items-center h-10 gap-6 my-5"
                     >
-                      <label className="font-nunito">
+                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field
                           type="radio"
                           name="medioDePago"
-                          value="efectivo"
+                          value="Efectivo"
                           className="font-nunito mx-4 p-2 rounded-md"
                         />
                         Efectivo
                       </label>
-                      <label className="font-nunito">
-                        <Field type="radio" name="medioDePago" value="mercadoPago" className="mx-4 p-2 rounded-md" />
+                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
+                        <Field type="radio" name="medioDePago" value="Cuenta Dni" className="mx-4 p-2 rounded-md" />
+                        Cuenta dni
+                      </label>
+                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
+                        <Field type="radio" name="medioDePago" value="Mercado Pago" className="mx-4 p-2 rounded-md" />
                         Mercado Pago
+                      </label>
+                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
+                        <Field type="radio" name="medioDePago" value="Open Pay" className="mx-4 p-2 rounded-md" />
+                        Open Pay
                       </label>
                     </div>
                     <div className="py-2">
@@ -177,17 +185,59 @@ export default function Checkout() {
                           placeholder="¿Con cuanto vas a pagar?"
                         />
                       )}
-                      {values.medioDePago === "mercadoPago" && (
+                      {values.medioDePago === "Mercado Pago" && (
                         <>
-                          <p className="font-nunito text-center font-normal ">
+                          <p className="font-nunito text-center font-semibold ">
                             por transferencia a <span className="text-lg font-semibold font-poppins text-sky-800">canavaro.mp</span>
                           </p>
-                          <p className="font-nunito text-center font-normal">
+                          <p className="font-nunito text-center font-semibold">
                             a nombre de Federico Ariel Gahr
                           </p>
                           <div className="flex justify-center w-full">
                             <Image src="/images/logoMP.webp" width={100} height={100} alt="logoMP" />
                           </div>
+                        </>
+                      )}
+                      {values.medioDePago === "Cuenta Dni" && (
+                        <>
+                          <p className="font-nunito text-center font-semibold ">
+                            Todos los miercoles y jueves 30% de descuento 
+                          </p>
+                          <p className="font-nunito text-center font-semibold">
+                            pagando con Cuenta Dni
+                          </p>
+                          <div className="flex justify-center w-full">
+                            <Image src="/images/cuenta-dni.jpg" width={250} height={100} alt="logoOpen" />
+                          </div>
+                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                            El reintegro se hace mediante la billetera virtual, tope $2500.
+                          </p>
+                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                            Abonas al momento de confirmar el pedido por whatsapp
+                          </p>
+                        </>
+                      )}
+                       {values.medioDePago === "Open Pay" && (
+                        <>
+                          <p className="font-nunito text-center font-semibold ">
+                            Todos los martes 30% de descuento 
+                          </p>
+                          <p className="font-nunito text-center font-semibold">
+                            pagando con BBVA
+                          </p>
+                          
+                          <div className="flex justify-center w-full">
+                            <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
+                          </div>
+                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                            Todos los dias 3 cuotas sin interes, menos los martes.
+                          </p>
+                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                            El reintegro se hace mediante el banco, tope $2500.
+                          </p>
+                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                            Abonas al momento de confirmar el pedido por whatsapp
+                          </p>
                         </>
                       )}
                     </div>
