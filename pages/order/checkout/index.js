@@ -188,7 +188,7 @@ export default function Checkout() {
                       {values.medioDePago === "Mercado Pago" && (
                         <>
                           <p className="font-nunito text-center font-semibold ">
-                            por transferencia a <span className="text-md font-semibold font-poppins text-sky-800">canavaro.mp</span>
+                            por transferencia a <span className="text-md font-semibold font-poppins text-sky-800">pizzeria.canavaro</span>
                           </p>
                           <p className="font-nunito text-center font-semibold">
                             o mediante QR
