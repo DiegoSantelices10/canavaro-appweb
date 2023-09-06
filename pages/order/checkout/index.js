@@ -146,7 +146,7 @@ export default function Checkout() {
                     </div>
                   </div>
                 </div>
-                <div className="px-6 h-full">
+                <div className="px-6 mb-28">
                   <h2 className="font-nunito font-extrabold text-base px-1 pb-3 text-sky-900">Medios de pago</h2>
                   <div>
                     <div
