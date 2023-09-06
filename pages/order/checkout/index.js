@@ -36,7 +36,7 @@ export default function Checkout() {
           hPersonalizado: user?.hPersonalizado || "",
           productos: orderList || {},
           comentarios: "",
-          medioDePago: "efectivo" || "",
+          medioDePago: "Efectivo" || "",
           pagaCon: 0,
           total: totalAmount || "",
         }}
