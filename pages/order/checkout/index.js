@@ -147,7 +147,7 @@ export default function Checkout() {
                   </div>
                 </div>
                 <div className="px-6 h-full">
-                  <h2 className="font-nunito font-extrabold text-base px-1 text-sky-900">Medio de pago</h2>
+                  <h2 className="font-nunito font-extrabold text-base px-1 pb-3 text-sky-900">Medios de pago</h2>
                   <div>
                     <div
                       role="group"
@@ -161,19 +161,19 @@ export default function Checkout() {
                           value="Efectivo"
                           className="font-nunito mx-4 p-2 rounded-md"
                         />
-                        Efectivo
+                         <p className="py-2">Efectivo</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Cuenta Dni" className="mx-4 p-2 rounded-md" />
-                        Cuenta dni
+                       <p className="py-2">Cuenta Dni</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Mercado Pago" className="mx-4 p-2 rounded-md" />
-                        Mercado Pago
+                        <p className="py-2">Mercado Pago</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Open Pay" className="mx-4 p-2 rounded-md" />
-                        Open Pay
+                        <p className="py-2">Open Pay</p>
                       </label>
                     </div>
                     <div className="py-2">
@@ -188,29 +188,32 @@ export default function Checkout() {
                       {values.medioDePago === "Mercado Pago" && (
                         <>
                           <p className="font-nunito text-center font-semibold ">
-                            por transferencia a <span className="text-lg font-semibold font-poppins text-sky-800">canavaro.mp</span>
+                            por transferencia a <span className="text-md font-semibold font-poppins text-sky-800">canavaro.mp</span>
                           </p>
                           <p className="font-nunito text-center font-semibold">
-                            a nombre de Federico Ariel Gahr
+                            o mediante QR
                           </p>
                           <div className="flex justify-center w-full">
-                            <Image src="/images/logoMP.webp" width={100} height={100} alt="logoMP" />
+                            <Image src="/images/logo-mercadopago.png" width={100} height={100} alt="logoMP" />
                           </div>
+                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                          Abonas al momento de confirmar el pedido por whatsapp
+                          </p>
                         </>
                       )}
                       {values.medioDePago === "Cuenta Dni" && (
                         <>
                           <p className="font-nunito text-center font-semibold ">
-                            Todos los miercoles y jueves 30% de descuento 
+                            Todos los miercoles y jueves 30% de reintegro 
                           </p>
                           <p className="font-nunito text-center font-semibold">
-                            pagando con Cuenta Dni
+                            pagando con Cuenta DNI
                           </p>
                           <div className="flex justify-center w-full">
-                            <Image src="/images/cuenta-dni.jpg" width={250} height={100} alt="logoOpen" />
+                            <Image src="/images/cuenta-dni.jpg" width={170} height={70} alt="logoOpen" />
                           </div>
                           <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
-                            El reintegro se hace mediante la billetera virtual, tope $2500.
+                            El reintegro lo realiza la billetera virtual, tope $2500 por semana.
                           </p>
                           <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
                             Abonas al momento de confirmar el pedido por whatsapp
@@ -220,7 +223,7 @@ export default function Checkout() {
                        {values.medioDePago === "Open Pay" && (
                         <>
                           <p className="font-nunito text-center font-semibold ">
-                            Todos los martes 30% de descuento 
+                            Todos los martes 30% de reintegro
                           </p>
                           <p className="font-nunito text-center font-semibold">
                             pagando con BBVA
@@ -230,10 +233,10 @@ export default function Checkout() {
                             <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                           </div>
                           <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
-                            Todos los dias 3 cuotas sin interes, menos los martes.
+                            El reintegro lo realiza el banco, tope $2000 por mes.
                           </p>
                           <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
-                            El reintegro se hace mediante el banco, tope $2500.
+                            Todos los dias 3 cuotas sin interes, menos los martes.
                           </p>
                           <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
                             Abonas al momento de confirmar el pedido por whatsapp
