@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { useRouter } from "next/router";
-import moment from "moment-timezone";
+import { getPromo } from "services/fetchData";
 
 function Header() {
   const [top, setTop] = useState(true);
   const router = useRouter();
-  const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const scrollHandler = () => {
@@ -16,18 +15,18 @@ function Header() {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
 
-  const hoursDelivery = () => {
-    if (hora >= 19 && hora < 23) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }
 
   useEffect(() => {
-    hoursDelivery();
-  }, [])
+    (async () => {
+      const { data, status } = await getPromo();
+      if (status === 200) {
+        const res = data.filter(item => item.nombre === "Delivery")
+        setOpen(res[0].available)
+      }
 
+    })()
+
+  }, [])
   return (
     <header
       className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && "bg-black bg-opacity-70 backdrop-blur-sm shadow-lg"

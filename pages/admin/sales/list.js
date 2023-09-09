@@ -49,14 +49,14 @@ export default function Sales() {
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
       <div className="bg-slate-50 h-full w-full">
-        <div className="w-full lg:w-11/12 h-auto mx-auto">
-          <div className=" py-5 w-full px-2 lg:px-0 h-auto flex justify-center lg:justify-start items-center">
-            <div className="flex flex-col w-full  font-roboto justify-center items-start p-2 h-20 font-bold bg-white rounded-md shadow">
-              <h2 className="font-medium  text-sm whitespace-nowrap">
-                Ventas del día: <span className="">$ {totalSale}</span>
+        <div className="w-full p-2 h-auto mx-auto">
+          <div className=" py-5 w-full lg:px-0 h-auto flex justify-center lg:justify-start items-center">
+            <div className="w-full flex flex-col justify-between font-roboto  p-4 h-20 font-bold bg-white rounded-md shadow">
+              <h2 className="font-semibold  text-sm whitespace-nowrap">
+                VENTAS DEL DÍA: <span className="font-medium">$ {totalSale}</span>
               </h2>
-              <h2 className="font-medium text-sm whitespace-nowrap">
-                Cant de pedidos: <span className="">{sales?.length}</span>
+              <h2 className="font-semibold text-sm whitespace-nowrap ">
+                PEDIDOS DEL DÍA: <span className="font-medium">{sales?.length}</span>
               </h2>
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function Sales() {
             <div className="w-full mx-auto">
               <div className="relative overflow-x-auto">
                 <div className="w-full  mx-auto text-center py-2">
-                  <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito">
+                  <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito  lg:p-0">
                     {sales?.length > 0 ? (
                       sales.map((item, index) => (
                         <motion.div

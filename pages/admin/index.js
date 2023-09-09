@@ -9,6 +9,7 @@ import axios from "axios";
 import Pusher from "pusher-js";
 import { Howl } from "howler";
 import * as bigintConversion from 'bigint-conversion'
+import { getPromo } from "services/fetchData";
 
 
 
@@ -17,11 +18,8 @@ export default function Home() {
   const [currentPedido, setCurrentPedido] = useState(null);
   const [data, setData] = useState(null);
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
-  const [barra, setBarra] = useState({
-    _id: "",
-    nombre: "",
-    available: false
-  });
+
+  const [barra, setBarra] = useState([]);
 
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
@@ -48,22 +46,6 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("/api/settings/promo");
-        console.log(res.data);
-        setBarra({
-          _id: res.data[0]._id,
-          nombre: res.data[0].nombre,
-          available: res.data[0].available
-        })
-      } catch (error) {
-        alert("Error al obtener los datos")
-      }
-    })();
-  }, [])
-
-  useEffect(() => {
-    (async () => {
-      try {
         const res = await axios.get("/api/sales");
         localStorage.setItem("sales", JSON.stringify(res.data));
         dispatch(setSaleData(res.data));
@@ -75,6 +57,11 @@ export default function Home() {
       } catch (error) {
         alert("Error al obtener los datos")
       }
+    })();
+    (async () => {
+      const res = await getPromo();
+      console.log("Get", res.data);
+      if (res.status === 200) return setBarra(res.data)
     })();
 
   }, []);
@@ -150,14 +137,20 @@ export default function Home() {
   };
 
   const promoBarra = async (id, available) => {
+
     try {
       const response = await axios.put(`/api/settings/promo/${id}`, { available: !available })
       if (response.status === 200) {
-        setBarra({
-          _id: id,
-          available: !available
-        })
-
+        const updatedBarra = barra?.map(item => {
+          if (item._id === id) {
+            return {
+              ...item,
+              available: !available
+            };
+          }
+          return item;
+        });
+        setBarra(updatedBarra);
       }
     } catch (error) {
       alert("Error al realizar la accion")
@@ -165,7 +158,7 @@ export default function Home() {
   }
 
 
-  console.log(barra);
+  console.log("================", barra);
 
   return (
     <Layout>
@@ -197,26 +190,17 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="w-1/2 self-center text-center mx-auto flex lg:flex-row lg:justify-center gap-4">
-            <button
-              className={`w-44 h-12 font-nunito font-bold rounded-md  text-base border" ${barra?.available ? "text-white bg-sky-800" : "text-sky-800 bg-white border"}`}
-              type="button"
-              onClick={() => promoBarra(barra._id, barra.available)}
-            >
-              Barra
-            </button>
-
-            <button
-              className="w-44 h-12 font-nunito font-bold
-                             rounded-md  text-base 
-                             border text-white bg-sky-800"
-              type="button"
-
-            >
-              Delivery
-            </button>
-
-          </div>
+          {barra?.map(item => (
+            <div key={item._id} className="w-1/3 self-center justify-center mx-auto text-center flex">
+              <button
+                className={`w-44 h-12 font-nunito font-bold rounded-md mt-2 text-base border" ${item?.available ? "text-white bg-sky-800" : "text-sky-800 bg-white border border-sky-800"}`}
+                type="button"
+                onClick={() => promoBarra(item?._id, item?.available)}
+              >
+                {item.nombre}
+              </button>
+            </div>
+          ))}
 
         </div>
 

@@ -5,24 +5,22 @@ import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { motion } from "framer-motion";
-import moment from "moment-timezone";
 import { useEffect, useState } from "react";
+import { getPromo } from "services/fetchData";
 
 function HomeFront({ imagefront }) {
-  const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
   const [open, setOpen] = useState(false);
 
-
-  const hoursDelivery = () => {
-    if (hora >= 19 && hora < 23) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }
-
   useEffect(() => {
-    hoursDelivery();
+    (async () => {
+      const { data, status } = await getPromo();
+      if (status === 200) {
+        const res = data.filter(item => item.nombre === "Delivery")
+        setOpen(res[0].available)
+      }
+
+    })()
+
   }, [])
   return (
     <Element name="home" className="relative element">
