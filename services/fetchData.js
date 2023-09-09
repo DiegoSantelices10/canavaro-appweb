@@ -65,6 +65,6 @@ export const getPromo = async () => {
     const data = await axios.get("/api/settings/promo");
     return data;
   } catch (error) {
-    alert("Error al obtener los datos")
+    throw new Error("Failed to log out");
   }
 };
