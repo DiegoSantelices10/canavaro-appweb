@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { AiOutlineLogout } from "react-icons/ai";
 import { logout } from "services/fetchData";
 
-export default function menu() {
+const AccessMenu = () => {
   const [selected, setSelected] = useState("/admin");
   const router = useRouter();
 
@@ -23,52 +23,49 @@ export default function menu() {
   };
 
   return (
-    <div className="w-full px-2">
-      <div className="w-full flex justify-end p-3 ">
-        <button onClick={signOut} className=" rounded-md shadow p-3 font-semibold">
-          <AiOutlineLogout size={30} />
-        </button>
-      </div>
-      <div className="flex font-nunito font-bold justify-start w-full lg:w-2/5 lg:pl-3  h-auto ">
+    <div className="w-full  h-full relative flex justify-between  mx-auto lg:flex  lg:flex-col lg:justify-between lg:items-center gap-4 p-4 ">
+
+      <div className="flex flex-row lg:flex-col gap-3">
         <Link href="/admin" passHref>
           <button
-            className={`${
-              selected === "/admin" ? "border-2 border-gray-300" : "bg-white"
-            } mx-auto rounded-2xl shadow-md p-2 h-auto w-28 `}
+            className={`${selected === "/admin" ? "border-2 font-bold border-gray-400" : "bg-white"
+              } mx-auto rounded-2xl shadow p-2 h-auto w-20`}
           >
             <div>
-              <Image priority={true} src="/images/pedidosblack.webp" width={35} height={35} alt="pedidoblack" />
-              <p className="font-extrabold text-base font-nunito lg:text-lg">Pedidos</p>
+              <Image priority={true} src="/images/pedidosblack.webp" width={25} height={25} alt="pedidoblack" />
+              <p className="text-sm font-nunito">Pedidos</p>
             </div>
           </button>
         </Link>
 
         <Link href="/admin/products/list" passHref>
           <button
-            className={`${
-              selected === "/admin/products/list" ? "border-2 border-gray-300" : "bg-white"
-            } mx-auto rounded-2xl shadow-md p-2 h-auto w-28`}
+            className={`${selected === "/admin/products/list" ? "border-2 font-bold border-gray-400" : "bg-white"
+              } mx-auto rounded-2xl shadow py-2 h-auto w-20 `}
           >
             <div>
-              <Image priority={true} src="/images/productsblack.webp" width={35} height={35} alt="black" />
-              <p className="font-extrabold text-base font-nunito lg:text-lg">Productos</p>
+              <Image priority={true} src="/images/productsblack.webp" width={25} height={25} alt="black" />
+              <p className="text-center text-sm font-nunito ">Productos</p>
             </div>
           </button>
         </Link>
 
         <Link href="/admin/sales/list" passHref>
           <button
-            className={`${
-              selected === "/admin/sales/list" ? "border-2 border-gray-300" : "bg-white"
-            } mx-auto rounded-2xl shadow-md p-2 h-auto w-28`}
+            className={`${selected === "/admin/sales/list" ? "border-2 font-bold border-gray-400" : "bg-white"
+              } mx-auto rounded-2xl shadow p-2 h-auto w-20 `}
           >
             <div>
               <Image priority={true} src="/images/salesblack.webp" width={35} height={35} alt="salesblack" />
-              <p className="font-extrabold text-base font-nunito lg:text-lg">Ventas</p>
+              <p className="text-sm font-nunito ">Ventas</p>
             </div>
           </button>
         </Link>
       </div>
+      <button onClick={signOut} className="font-semibold">
+        <AiOutlineLogout size={30} className="mx-auto" />
+      </button>
     </div>
   );
 }
+export default AccessMenu;

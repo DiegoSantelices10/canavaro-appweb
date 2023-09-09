@@ -59,7 +59,7 @@ export default function SectionPizzas({ products, imagefront }) {
         </div>
 
         <div
-          className="relative z-10 bg-black bg-opacity-40  p-2 h-full  rounded-lg    w-full lg:w-4/5 mx-auto 
+          className="relative z-10 bg-black bg-opacity-20  p-2 h-full  rounded-lg    w-full lg:w-4/5 mx-auto 
 						 grid grid-cols-2 gap-5 content-center pb-6 pt-4 "
         >
           <p className="col-span-2 text-white text-center text-sm pb-4 italic font-poppins">

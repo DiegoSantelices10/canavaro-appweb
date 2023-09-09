@@ -17,6 +17,11 @@ export default function Home() {
   const [currentPedido, setCurrentPedido] = useState(null);
   const [data, setData] = useState(null);
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
+  const [barra, setBarra] = useState({
+    _id: "",
+    nombre: "",
+    available: false
+  });
 
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
@@ -39,6 +44,22 @@ export default function Home() {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get("/api/settings/promo");
+        console.log(res.data);
+        setBarra({
+          _id: res.data[0]._id,
+          nombre: res.data[0].nombre,
+          available: res.data[0].available
+        })
+      } catch (error) {
+        alert("Error al obtener los datos")
+      }
+    })();
+  }, [])
 
   useEffect(() => {
     (async () => {
@@ -127,36 +148,80 @@ export default function Home() {
       alert("Error al realizar la accion")
     }
   };
+
+  const promoBarra = async (id, available) => {
+    try {
+      const response = await axios.put(`/api/settings/promo/${id}`, { available: !available })
+      if (response.status === 200) {
+        setBarra({
+          _id: id,
+          available: !available
+        })
+
+      }
+    } catch (error) {
+      alert("Error al realizar la accion")
+    }
+  }
+
+
+  console.log(barra);
+
   return (
     <Layout>
       {currentPedido && (
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
-      <div className="h-auto p-0 md:px-2">
-        <div className=" w-full block md:flex gap-1 p-2">
-          <div className="w-full md:w-1/2 text-center">
-            <h1 className="font-bold font-nunito text-lg my-5">Demora domicilio</h1>
-            <div className="flex gap-3  justify-center">
-              {data
-                ?.filter(item => item.tipoEnvio === "domicilio")
-                .map(item => (
-                  <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
-                ))}
+      <div className="h-auto w-full">
+        <div className="lg:flex w-full justify-between">
+          <div className="w-full py-5 lg:w-1/2 ">
+            <div className="w-full text-center">
+              <h1 className="font-semibold font-nunito py-2">Demora domicilio</h1>
+              <div className="flex gap-3  justify-center">
+                {data
+                  ?.filter(item => item.tipoEnvio === "domicilio")
+                  .map(item => (
+                    <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
+                  ))}
+              </div>
+            </div>
+
+            <div className="w-full  text-center">
+              <h1 className="font-semibold font-nunito py-2">Demora por local</h1>
+              <div className="flex gap-3 justify-center">
+                {data
+                  ?.filter(item => item.tipoEnvio === "local")
+                  .map(item => (
+                    <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
+                  ))}
+              </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 text-center">
-            <h1 className="font-bold font-nunito text-lg my-5">Demora por local</h1>
-            <div className="flex gap-3 justify-center">
-              {data
-                ?.filter(item => item.tipoEnvio === "local")
-                .map(item => (
-                  <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
-                ))}
-            </div>
+          <div className="w-1/2 self-center text-center mx-auto flex lg:flex-row lg:justify-center gap-4">
+            <button
+              className={`w-44 h-12 font-nunito font-bold rounded-md  text-base border" ${barra?.available ? "text-white bg-sky-800" : "text-sky-800 bg-white border"}`}
+              type="button"
+              onClick={() => promoBarra(barra._id, barra.available)}
+            >
+              Barra
+            </button>
+
+            <button
+              className="w-44 h-12 font-nunito font-bold
+                             rounded-md  text-base 
+                             border text-white bg-sky-800"
+              type="button"
+
+            >
+              Delivery
+            </button>
+
           </div>
+
         </div>
 
-        <div className="w-full bg-slate-50   mx-auto text-center p-2 mt-10 rounded-md ">
+
+        <div className="w-full bg-slate-50   mx-auto text-center p-2 mt-5 rounded-md ">
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
@@ -165,7 +230,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border-none"
+                  className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border"
                 >
                   <div className="w-full text-sm">
                     <h2 className="text-right text-xs text-gray-500">codigo de pedido: <span className="text-xs">{numeroPedido(item._id)}</span></h2>

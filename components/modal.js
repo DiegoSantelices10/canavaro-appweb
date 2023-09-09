@@ -21,15 +21,15 @@ const Modal = ({ handleClose, showModal, producto }) => {
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
           &#8203;
         </span>
-        <div className="inline-block align-bottom w-full  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-black  bg-opacity-80 text-white font-nunito font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div className="relative overflow-hidden h-full   mx-auto  ">
+        <div className="inline-block align-bottom w-full min-h-min rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div className="bg-black  bg-opacity-60 text-white font-nunito font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="relative overflow-hidden   mx-auto   ">
               {showModal && (
                 <Image
                   src={producto?.imagen.url}
                   layout="responsive"
-                  width={60}
-                  height={60}
+                  width={22}
+                  height={20}
                   objectFit="cover"
                   objectPosition="center"
                   className="rounded-md"
@@ -39,7 +39,7 @@ const Modal = ({ handleClose, showModal, producto }) => {
 
               <button onClick={handleClose}>
                 <AiOutlineClose
-                  className="absolute text-slate-800 bg-slate-50 bg-opacity-40 rounded-full p-1 top-4 left-4"
+                  className="absolute text-slate-800 bg-slate-50 bg-opacity-40 rounded-full p-1 top-5 left-4"
                   size={30}
                 />
               </button>
@@ -50,9 +50,15 @@ const Modal = ({ handleClose, showModal, producto }) => {
               <div className="flex w-full justify-between font-normal gap-1">
                 {!producto.precio ? (
                   <>
-                    <p> {`${producto?.precioPizza?.chica ? "Chica $ " + producto.precioPizza.chica : ""}`}</p> |
-                    <p>{`${producto?.precioPizza?.mediana ? "Mediana $ " + producto.precioPizza.mediana : ""}`}</p> |
-                    <p>{`${producto?.precioPizza?.gigante ? "Gigante $ " + producto.precioPizza.gigante : ""}`}</p>
+                  {producto.precioPizza?.chica && (
+                    <p className="font-normal text-gray-400">Chica<span className="font-normal  text-white text-lg"> ${producto.precioPizza.chica}</span></p>
+                  )} |
+                    {producto.precioPizza?.mediana && (
+                    <p className="font-normal text-gray-400">Mediana<span className="font-normal text-white  text-lg"> ${producto.precioPizza.mediana}</span></p>
+                  )} |
+                   {producto.precioPizza?.gigante && (
+                    <p className="font-normal text-gray-400">Gigante<span className="font-normal text-white  text-lg"> ${producto.precioPizza.gigante}</span></p>
+                  )}
                   </>
                 ) : (
                   <>

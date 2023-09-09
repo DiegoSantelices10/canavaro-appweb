@@ -37,7 +37,7 @@ export default function Checkout() {
           productos: orderList || {},
           comentarios: "",
           medioDePago: "Efectivo" || "",
-          pagaCon: 0,
+          pagaCon: "",
           total: totalAmount || "",
         }}
         onSubmit={async values => {
@@ -161,11 +161,11 @@ export default function Checkout() {
                           value="Efectivo"
                           className="font-nunito mx-4 p-2 rounded-md"
                         />
-                         <p className="py-2">Efectivo</p>
+                        <p className="py-2">Efectivo</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Cuenta Dni" className="mx-4 p-2 rounded-md" />
-                       <p className="py-2">Cuenta Dni</p>
+                        <p className="py-2">Cuenta Dni</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Mercado Pago" className="mx-4 p-2 rounded-md" />
@@ -197,14 +197,14 @@ export default function Checkout() {
                             <Image src="/images/logo-mercadopago.png" width={100} height={100} alt="logoMP" />
                           </div>
                           <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
-                          Abonas al momento de confirmar el pedido por whatsapp
+                            Abonas al momento de confirmar el pedido por whatsapp
                           </p>
                         </>
                       )}
                       {values.medioDePago === "Cuenta Dni" && (
                         <>
                           <p className="font-nunito text-center font-semibold ">
-                            Todos los miercoles y jueves 30% de reintegro 
+                            Todos los miercoles y jueves 30% de reintegro
                           </p>
                           <p className="font-nunito text-center font-semibold">
                             pagando con Cuenta DNI
@@ -220,7 +220,7 @@ export default function Checkout() {
                           </p>
                         </>
                       )}
-                       {values.medioDePago === "Open Pay" && (
+                      {values.medioDePago === "Open Pay" && (
                         <>
                           <p className="font-nunito text-center font-semibold ">
                             Todos los martes 30% de reintegro
@@ -228,7 +228,7 @@ export default function Checkout() {
                           <p className="font-nunito text-center font-semibold">
                             pagando con BBVA
                           </p>
-                          
+
                           <div className="flex justify-center w-full">
                             <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                           </div>

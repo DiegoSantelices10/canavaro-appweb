@@ -151,7 +151,7 @@ export default function Products() {
                 />
                 <div className=" p-2 relative w-full font-nunito h-28  self-start">
                   <h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
-                  <p className="text-gray-400 text-xs">{descripcion}</p>
+                  <p className="text-gray-400 text-xs">{descripcion.length > 30 ? descripcion.slice(0, 30) + "..." : descripcion}</p>
                   <h4 className="text-gray-700 text-xs ">{categoria}</h4>
                   <div className="absolute bottom-0">
                     <label className="inline-flex items-center cursor-pointer">
