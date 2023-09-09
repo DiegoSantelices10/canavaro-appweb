@@ -60,8 +60,7 @@ export default function Home() {
     })();
     (async () => {
       const res = await getPromo();
-      console.log("Get", res.data);
-      if (res.status === 200) return setBarra(res.data)
+      setBarra(res.data)
     })();
 
   }, []);
@@ -156,9 +155,6 @@ export default function Home() {
       alert("Error al realizar la accion")
     }
   }
-
-
-  console.log("================", barra);
 
   return (
     <Layout>
