@@ -91,12 +91,13 @@ const CircleAnimation = () => {
               margin: "auto",
             }}
           />
-          <h2 className="text-gray-800 font-poppins text-lg font-bold w-full py-4">¡Ya recibimos tu pedido! </h2>
+          <h2 className="text-gray-800 font-poppins text-lg font-bold w-full py-3">¡Ya recibimos tu pedido! </h2>
         </motion.div>
 
       </motion.div>
       <div className="p-2 w-full md:w-1/2 lg:w-1/2 mx-auto">
         <div className="flex justify-center items-center flex-col py-4 gap-1">
+          <p className="font-semibold text-sm font-nunito text-gray-800">confirmar tu pedido por whatsapp.</p>
           <a
             target="_blank"
             rel="noreferrer"
@@ -106,7 +107,6 @@ const CircleAnimation = () => {
               <FaWhatsapp size={18} />
               Ir a whatsapp</div>
           </a>
-          <p className="font-semibold text-sm font-poppins text-gray-800 py-1">Escribinos para confirmar tu pedido.</p>
         </div>
         <p className="text-red-400 font-semibold font-poppins text-sm px-1 mt-2">
           Detalle del pedido
