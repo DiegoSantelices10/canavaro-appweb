@@ -104,7 +104,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                               <p className="font-bold">
                                 {item?.cant || item?.cantidad} x
                                 <span className=" pl-1 font-semibold ">
-                                  {item.categoria === "pizzas" && item?.tamanio.charAt(0).toUpperCase() + item?.tamanio.slice(1)}
+                                  {item.categoria === "pizzas" && item?.tamanio}
                                 </span>
                                 <span className=" text-base font-normal">
                                   {" "}
