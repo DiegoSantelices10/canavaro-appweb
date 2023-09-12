@@ -166,7 +166,7 @@ export default function Cart({ data }) {
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full mt-1">
+                            <div className="w-full pt-2">
                               <Field
                                 id="telefono"
                                 name="telefono"
@@ -179,22 +179,24 @@ export default function Cart({ data }) {
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="mt-1 w-full flex justify-between items-center">
-                              <Field
+                            <div className="w-full mx-auto">
+                            
+                              {open ? (
+                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de envío: <span className="text-gray-600 text-base">{demora}</span></h1>
+                              ) : (
+                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Delivery de 19:30 a 23hs.</h1>
+                                )}
+                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario</p>
+                                <p className="text-center text-xs text-gray-400 font-normal">considerando que sea mayor al tiempo de envío.</p>
+                                <div className="w-full mx-auto flex justify-center mt-1">
+                                <Field
                                 id="hPersonalizado"
                                 name="hPersonalizado"
-                                className="border-slate-300 border rounded-md w-1/2 p-2 text-sm"
-                                placeholder="Ingresa horario de entrega"
+                                className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
+                                placeholder="Horario de entrega"
                               />
-                              {open ? (
-                                <div className="pr-3">
-                                  <h1 className="font-bold text-sm font-nunito">{type === "domicilioActual" ? "O te llega en" : "Retiralo en"}  <span className="text-gray-600 text-base">{demora}</span></h1>
                                 </div>
-                              ) : (
-                                <h1 className="font-normal text-gray-600 text-sm pr-2 font-nunito">Delivery de 19:30 a 23hs.</h1>
-                              )}
                             </div>
-                            <p className="text-left p-1 text-xs text-gray-400 font-normal">Considerando que sea mayor al tiempo de envío.</p>
                           </div>
                         ) : (
                           <div className="w-full ">
@@ -209,27 +211,26 @@ export default function Cart({ data }) {
                                 return <div className="text-red-500 font-medium text-sm text-left">{msg}</div>;
                               }}
                             </ErrorMessage>
-                            <div className="mt-1 w-full flex justify-between items-center">
-                              <Field
+                            
+
+                            <div className="w-full mx-auto">
+                            
+                              {open ? (
+                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de retiro: <span className="text-gray-600 text-base">{demora}</span></h1>
+                              ) : (
+                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Horario de 19:30 a 23hs.</h1>
+                                )}
+                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario</p>
+                                <p className="text-center text-xs text-gray-400 font-normal">considerando que sea mayor al tiempo de retiro.</p>
+                                <div className="w-full mx-auto flex justify-center mt-1">
+                                <Field
                                 id="hPersonalizado"
                                 name="hPersonalizado"
-                                className="border-slate-300 border rounded-md w-1/2 p-2 text-sm"
+                                className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
                                 placeholder="Horario de retiro"
                               />
-                              <ErrorMessage name="hPersonalizado">
-                                {msg => {
-                                  return <div className="text-red-500 font-medium text-sm">{msg}</div>;
-                                }}
-                              </ErrorMessage>
-                              {open ? (
-                                <div className="pr-3">
-                                  <h1 className="font-bold text-sm font-nunito">{type === "domicilioActual" ? "O te llega en" : "Retiralo en"}  <span className="text-gray-600 text-base">{demora}</span></h1>
                                 </div>
-                              ) : (
-                                <h1 className="font-normal text-gray-600 text-sm pr-2 font-nunito">Retiro de  19:00 a 23hs.</h1>
-                              )}
                             </div>
-                            <p className="text-left p-1 text-xs text-gray-400 font-normal">Considerando que sea mayor al tiempo de demora.</p>
                           </div>
                         )}
                       </div>

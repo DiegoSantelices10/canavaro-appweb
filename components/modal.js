@@ -51,13 +51,22 @@ const Modal = ({ handleClose, showModal, producto }) => {
                 {!producto.precio ? (
                   <>
                   {producto.precioPizza?.chica && (
-                    <p className="font-normal text-gray-400">Chica<span className="font-normal  text-white text-lg"> ${producto.precioPizza.chica}</span></p>
+                    <div className="text-center">
+                      <p className="font-normal text-gray-400">Chica<span className="font-normal  text-white text-lg"> ${producto.precioPizza.chica}</span></p>
+                    </div>
                   )} |
                     {producto.precioPizza?.mediana && (
-                    <p className="font-normal text-gray-400">Mediana<span className="font-normal text-white  text-lg"> ${producto.precioPizza.mediana}</span></p>
+                      <div className="text-center">
+
+                        <p className="font-normal text-gray-400">Mediana<span className="font-normal text-white  text-lg"> ${producto.precioPizza.mediana}</span></p>
+                      </div>
                   )} |
                    {producto.precioPizza?.gigante && (
-                    <p className="font-normal text-gray-400">Gigante<span className="font-normal text-white  text-lg"> ${producto.precioPizza.gigante}</span></p>
+                      <div className="text-center">
+                        <p className="font-normal text-gray-400">Gigante<span className="font-normal text-white  text-lg"> ${producto.precioPizza.gigante}</span></p>
+
+                      </div>
+
                   )}
                   </>
                 ) : (
