@@ -52,7 +52,7 @@ export default function Cart({ data }) {
 
   useEffect(() => {
     hoursDelivery()
-    if(Object.keys(promoBarra).length < 1){
+      // eslint-disable-next-line no-unexpected-multiline
       (async () => {
         const { data, status } = await getPromo();
         if (status === 200) {
@@ -60,9 +60,7 @@ export default function Cart({ data }) {
           dispatch(setPromoBarra({promoBarra: barra[0]}))
         }
       })()
-    }
     dispatch(clearUser());
-
   }, []);
   const deleteItem = _id => {
     dispatch(removeItemCart(_id));
