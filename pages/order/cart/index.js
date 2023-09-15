@@ -13,7 +13,6 @@ import axios from "axios";
 import * as Yup from "yup";
 import ModalDescripcion from "components/modalDescripcion";
 import moment from "moment-timezone";
-import { getPromo } from "services/fetchData";
 import { setPromoBarra } from "store/reducers/settingSlice";
 
 export default function Cart({ data }) {
@@ -58,13 +57,19 @@ export default function Cart({ data }) {
 
   const obtenerPromo = async () => {
     console.log("promo barra",promoBarra);
-    const { data, status } = await getPromo();
-    if (status === 200) {
-      const barra = data.filter(item => item.nombre === "Promo Barra")
-      console.log("barra", barra);
-      dispatch(setPromoBarra({promoBarra: barra[0]}))
+    try {
+      const { data, status } = await axios.get("/api/settings/promo");
+      if (status === 200) {
+        const barra = data.filter(item => item.nombre === "Promo Barra")
+        console.log("barra", barra);
+        dispatch(setPromoBarra({ promoBarra: barra[0] }))
+      }
+    } catch (error) {
+      throw new Error("Failed to log out");
     }
-  }
+  } 
+
+
   const deleteItem = _id => {
     dispatch(removeItemCart(_id));
   };
