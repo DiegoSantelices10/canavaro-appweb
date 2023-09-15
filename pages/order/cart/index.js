@@ -52,6 +52,7 @@ export default function Cart({ data }) {
   useEffect(() => {
     hoursDelivery()
     obtenerPromo()
+    dispatch(setDelivery("domicilioActual"))
     dispatch(clearUser());
   }, []);
 
@@ -98,6 +99,7 @@ export default function Cart({ data }) {
       }
 
   );
+
   return (
     <div className="font-nunito  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-3 ">
       <Formik
@@ -144,6 +146,7 @@ export default function Cart({ data }) {
                   
                   <div className="py-2">
                     <div className="p-2 rounded-md shadow bg-gray-100">
+                      
                       {promoBarra?.available && (
                         <div className="w-full mx-auto text-center font-bold">Retirando por el local tenes un 10% de descuento.</div>
                       )}

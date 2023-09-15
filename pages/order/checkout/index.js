@@ -266,7 +266,7 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div className={`fixed p-3 flex justify-between ${delivery?.available && delivery === "localActual" ? "items-end" : "items-center"} bottom-2 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
+                <div className={`fixed p-3 flex justify-between ${delivery?.available && delivery === "localActual" ? "items-end" : "items-end"} bottom-2 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
 
                   <div className="w-1/2 flex flex-col gap-1">
                     {promoBarra?.available && delivery === "localActual" ? (
