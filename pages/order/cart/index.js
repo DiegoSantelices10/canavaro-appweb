@@ -56,12 +56,10 @@ export default function Cart({ data }) {
   }, []);
 
   const obtenerPromo = async () => {
-    console.log("promo barra",promoBarra);
     try {
       const { data, status } = await axios.get("/api/settings/promo");
       if (status === 200) {
-        const barra = data.filter(item => item.nombre === "Promo Barra")
-        console.log("barra", barra);
+        const barra = data?.filter(item => item.nombre === "Promo barra")
         dispatch(setPromoBarra({ promoBarra: barra[0] }))
       }
     } catch (error) {
