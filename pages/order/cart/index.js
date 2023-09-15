@@ -57,9 +57,11 @@ export default function Cart({ data }) {
   }, []);
 
   const obtenerPromo = async () => {
+    console.log("promo barra",promoBarra);
     const { data, status } = await getPromo();
     if (status === 200) {
       const barra = data.filter(item => item.nombre === "Promo Barra")
+      console.log("barra", barra);
       dispatch(setPromoBarra({promoBarra: barra[0]}))
     }
   }
