@@ -52,16 +52,17 @@ export default function Cart({ data }) {
 
   useEffect(() => {
     hoursDelivery()
-      // eslint-disable-next-line no-unexpected-multiline
-      (async () => {
-        const { data, status } = await getPromo();
-        if (status === 200) {
-          const barra = data.filter(item => item.nombre === "Promo Barra")
-          dispatch(setPromoBarra({promoBarra: barra[0]}))
-        }
-      })()
+    obtenerPromo()
     dispatch(clearUser());
   }, []);
+
+  const obtenerPromo = async () => {
+    const { data, status } = await getPromo();
+    if (status === 200) {
+      const barra = data.filter(item => item.nombre === "Promo Barra")
+      dispatch(setPromoBarra({promoBarra: barra[0]}))
+    }
+  }
   const deleteItem = _id => {
     dispatch(removeItemCart(_id));
   };
