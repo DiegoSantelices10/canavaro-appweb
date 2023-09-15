@@ -5,20 +5,24 @@ import { Element } from "react-scroll";
 import Image from "next/image";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getPromo } from "services/fetchData";
+import { useDispatch, useSelector } from "react-redux";
+import { setSetting } from "store/reducers/settingSlice";
 
 function HomeFront({ imagefront }) {
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const { deliveryButton } = useSelector(state => state.setting);
 
   useEffect(() => {
     (async () => {
       const { data, status } = await getPromo();
       if (status === 200) {
-        const res = data.filter(item => item.nombre === "Delivery")
-        setOpen(res[0].available)
+        const delivery = data.filter(item => item.nombre === "Delivery")
+        const barra = data.filter(item => item.nombre === "Promo Barra")
+        dispatch(setSetting({deliveryButton: delivery[0], promoBarra: barra[0]}))
       }
-
     })()
 
   }, [])
@@ -46,7 +50,7 @@ function HomeFront({ imagefront }) {
                     <h2>¡Nosotros te lo llevamos!</h2>
                     <p className="text-base font-semibold">De martes a domingo de 19 a 23hs.</p>
                   </div>
-                  {open && (
+                  {deliveryButton.available && (
                     <div className="w-full h-20 flex items-center">
                       <Link href={"/welcomeLogo"}>
                         <a

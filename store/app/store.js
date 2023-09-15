@@ -5,6 +5,7 @@ import userReducer from "store/reducers/userSlice";
 import productReducer from "store/reducers/productSlice";
 import saleSlice from "store/reducers/saleSlice";
 import authSlice from "store/reducers/authSlice";
+import settingSlice from "store/reducers/settingSlice";
 
 export const makeStore = () =>
 	configureStore({
@@ -14,6 +15,7 @@ export const makeStore = () =>
 			user: userReducer,
 			sale: saleSlice,
 			auth: authSlice,
+			setting: settingSlice
 		},
 		devTools: true,
 	});

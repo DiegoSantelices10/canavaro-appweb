@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
@@ -6,17 +7,34 @@ import { useRouter } from "next/router";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment-timezone";
-import { setCheckout } from "store/reducers/orderSlice";
+import { setCheckout, setTotalAmount } from "store/reducers/orderSlice";
+import { useEffect, useState } from "react";
 
 
 export default function Checkout() {
   const user = useSelector(state => state.user);
-  const { totalAmount, orderList, demora } = useSelector(state => state.order);
+  const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
+  const { promoBarra } = useSelector(state => state.setting);
+  const [totalPedido, setTotalPedido] = useState();
   const dispatch = useDispatch();
   const router = useRouter();
 
+
+  useEffect(() => {
+    if (promoBarra.available && delivery === "localActual") {
+      promoDescuento()
+    } 
+  }, [])
+
+  const promoDescuento = () => {
+    setTotalPedido(totalAmount)
+    const desc = totalAmount * 0.10
+    const total = totalAmount - desc
+    dispatch(setTotalAmount(total))
+  }
+
   return (
-    <div className=" mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
+    <div className=" mx-auto relative w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
       <div className="px-3">
         <div className="flex items-center gap-3 py-4">
           <Link href={"/order/cart"}>
@@ -40,6 +58,7 @@ export default function Checkout() {
           pagaCon: "",
           total: totalAmount || "",
         }}
+        enableReinitialize
         onSubmit={async values => {
           const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm");
           const fecha = moment.tz("America/Argentina/Buenos_Aires").format("DD/MM");
@@ -104,7 +123,7 @@ export default function Checkout() {
                 <div className="p-3 py-4">
                   <div className="shadow bg-slate-50 rounded-md p-2">
                     <div className="p-1 py-3">
-                      {user.direccion !== "" ? (
+                      {delivery === "domicilioActual" ? (
                         <>
                           <h2 className="font-nunito text-sky-900 font-extrabold text-base">Direccion de envio</h2>
                           <p className="font-nunito text-gray-600">{user.direccion} </p>
@@ -120,14 +139,14 @@ export default function Checkout() {
                     {user?.hPersonalizado ? (
                       <div className="p-1 py-3">
                         <h2 className="font-nunito font-extrabold text-base text-sky-900">
-                          {user?.direccion !== "" ? "horario de entrega" : "Retiralo"}
+                          {delivery === "domicilioActual" ? "horario de entrega" : "Retiralo"}
                         </h2>
                         <p className="font-nunito px-1 text-gray-500">{user?.hPersonalizado}hs.</p>
                       </div>
                     ) : (
                       <div className="p-1 py-3">
                         <h2 className="font-nunito font-extrabold text-base text-sky-900">
-                          {user?.direccion !== "" ? "horario de entrega" : "Retiralo en"}
+                          {delivery === "domicilioActual" ? "horario de entrega" : "Retiralo en"}
                         </h2>
                         <p className="font-nunito px-1 text-gray-500">{demora}</p>
                       </div>
@@ -247,13 +266,31 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div className="fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
-                  <div className="flex justify-between items-center p-3">
-                    <p className="text-xl text-sky-900 font-bold">Total</p>
-                    <h3 className="text-2xl font-nunito font-bold">$ {totalAmount}</h3>
-                  </div>
+                <div className={`fixed p-3 flex justify-between ${delivery.available && delivery === "localActual" ? "items-end" : "items-center"} bottom-2 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
 
-                  <div className="px-3 w-full">
+                  <div className="w-1/2 flex flex-col gap-1">
+                    {promoBarra?.available && delivery === "localActual" ? (
+                      <>
+                        <div className="flex justify-between items-center">
+                          <div className="flex gap-1">
+                            <p className="text-base text-gray-600 font-bold">Subtotal<span className="font-normal"> ${totalPedido}</span></p>
+                            <p className="text-gray-600 font-normal"> - 10%</p>
+                          </div>
+                        </div>
+                        <div className="font-poppins">
+                          <p className="font-bold text-xl text-sky-900">Total</p>
+                          <h3 className="text-xl font-normal">$ {totalAmount}</h3>
+                        </div>
+                      </>
+
+                    ) : (
+                      <div className="font-poppins items-center flex gap-3 px-3">
+                        <p className="font-bold text-xl text-sky-900">Total</p>
+                        <h3 className="text-2xl font-light">$ {totalAmount}</h3>
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-auto">
                     <button
                       type="submit"
                       className="text-center font-nunito rounded-md w-full p-4 text-white font-bold bg-sky-800 hover:bg-sky-700 hover:-translate-y-1 transition-all duration-500"
@@ -261,6 +298,7 @@ export default function Checkout() {
                       Confirmar pedido
                     </button>
                   </div>
+
                 </div>
               </Form >
             </div >

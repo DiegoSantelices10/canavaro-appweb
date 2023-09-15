@@ -5,18 +5,21 @@ import { FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { calculateSubTotal, calculateTotalQuantity, removeItemCart, setDemora } from "store/reducers/orderSlice";
+import { calculateSubTotal, calculateTotalQuantity, removeItemCart, setDelivery, setDemora } from "store/reducers/orderSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import { addAddress, setUser } from "store/reducers/userSlice";
+import { clearUser, setUser } from "store/reducers/userSlice";
 import axios from "axios";
 import * as Yup from "yup";
 import ModalDescripcion from "components/modalDescripcion";
 import moment from "moment-timezone";
+import { getPromo } from "services/fetchData";
+import { setPromoBarra } from "store/reducers/settingSlice";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora } = useSelector(state => state.order);
   const { nombre, direccion, telefono } = useSelector(state => state.user);
+  const { promoBarra } = useSelector(state => state.setting);
 
   const [open, setOpen] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -49,7 +52,17 @@ export default function Cart({ data }) {
 
   useEffect(() => {
     hoursDelivery()
-    dispatch(addAddress(""));
+    if(Object.keys(promoBarra).length < 1){
+      (async () => {
+        const { data, status } = await getPromo();
+        if (status === 200) {
+          const barra = data.filter(item => item.nombre === "Promo Barra")
+          dispatch(setPromoBarra({promoBarra: barra[0]}))
+        }
+      })()
+    }
+    dispatch(clearUser());
+
   }, []);
   const deleteItem = _id => {
     dispatch(removeItemCart(_id));
@@ -65,6 +78,11 @@ export default function Cart({ data }) {
     setShowModal(false);
   };
 
+  const changeTypeDelivery = (value) => {
+    setType(value)
+    dispatch(setDelivery(value))
+  }
+
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
@@ -76,7 +94,6 @@ export default function Cart({ data }) {
       }
 
   );
-
   return (
     <div className="font-nunito  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-3 ">
       <Formik
@@ -85,7 +102,9 @@ export default function Cart({ data }) {
           telefono: telefono || "",
           nombre: nombre || "",
           hPersonalizado: "",
+         
         }}
+        enableReinitialize
         onSubmit={values => {
           dispatch(
             setUser({
@@ -118,13 +137,17 @@ export default function Cart({ data }) {
                     </Link>
                     <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
                   </div>
+                  
                   <div className="py-2">
                     <div className="p-2 rounded-md shadow bg-gray-100">
+                      {promoBarra?.available && (
+                        <div className="w-full mx-auto text-center font-bold">Retirando por el local tenes un 10% de descuento.</div>
+                      )}
                       <div className="flex justify-center  w-full gap-3 py-3 text-sm ">
                         <button
                           type="button"
                           onClick={() => {
-                            setType("domicilioActual");
+                            changeTypeDelivery("domicilioActual");
                           }}
                           className={
                             type === "domicilioActual"
@@ -138,7 +161,7 @@ export default function Cart({ data }) {
                         <button
                           type="button"
                           onClick={() => {
-                            setType("localActual");
+                            changeTypeDelivery("localActual");
                           }}
                           className={
                             type === "localActual"

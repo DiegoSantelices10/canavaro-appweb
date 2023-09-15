@@ -6,7 +6,9 @@ import * as bigintConversion from 'bigint-conversion'
 import { useEffect, useState } from "react";
 const CircleAnimation = () => {
   const [nPedido, setNPedido] = useState(0);
-  const { checkout, demora } = useSelector(state => state.order);
+  const { checkout, demora, delivery } = useSelector(state => state.order);
+  const { promoBarra } = useSelector(state => state.setting);
+
   const [catId, setCatId] = useState([]);
 
 
@@ -120,7 +122,7 @@ const CircleAnimation = () => {
 
           <div className="flex justify-between">
             <div className="">
-              {checkout.domicilio !== "" ? (
+              {delivery === "domicilioActual" ? (
                 <>
 
                   <h2 className="font-nunito  font-bold text-base">Direccion de envío: <span className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </span></h2>
@@ -185,6 +187,9 @@ const CircleAnimation = () => {
               </div>
             ))}
           </>
+          {promoBarra?.available && delivery === "localActual" && (
+            <h1 className="text-right text-sm text-gray-500">Descuento aplicado del 10%</h1>
+          )}
           <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
         </div>
 
