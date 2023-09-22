@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 
 
 export default function index({ state }) {
-  console.log("=================",state);
   const { products } = useSelector(state => state.product);
 
   useEffect(() => {

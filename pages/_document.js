@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta name="google-site-verification" content="DGDtKvpzOB-xK2jnGnVjjFG6kmUApXCPu3ZK26GoQh8" />
+        <link rel="icon" href="/images/logocanavaro.webp" sizes="any" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link

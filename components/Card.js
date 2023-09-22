@@ -80,7 +80,13 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
           <Link href={`/order/products/${convertToPath(nombre)}`}>
             <a>
               <div className="flex justify-between items-center gap-x-2">
-                <Image className="rounded-md" src={imagen?.url} width={140} height={140} alt={nombre} />
+                <Image
+                  className="rounded-md"
+                  src={imagen?.url}
+                  objectFit="cover"
+                  width={140} 
+                  height={140} 
+                  alt={nombre} />
                 <div className="w-full self-start">
                   <h1 className="font-bold text-sm text-sky-900">{nombre}</h1>
                   <p className="text-gray-400 text-xs">{descripcion}</p>
