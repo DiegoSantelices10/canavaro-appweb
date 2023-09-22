@@ -21,15 +21,15 @@ const Modal = ({ handleClose, showModal, producto }) => {
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
           &#8203;
         </span>
-        <div className="inline-block align-bottom w-full min-h-min rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-black  bg-opacity-60 text-white font-nunito font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div className="relative overflow-hidden   mx-auto   ">
+        <div className="inline-block align-bottom w-full min-h-min rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-4 sm:align-middle sm:max-w-lg sm:w-full">
+          <div className="bg-black  bg-opacity-80 text-white font-nunito font-semibold p-3">
+            <div className="relative overflow-hidden  mx-auto">
               {showModal && (
                 <Image
                   src={producto?.imagen.url}
                   layout="responsive"
-                  width={22}
-                  height={20}
+                  width={20}
+                  height={16}
                   objectFit="cover"
                   objectPosition="center"
                   className="rounded-md"

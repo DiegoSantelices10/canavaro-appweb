@@ -135,11 +135,11 @@ export default function ProductLayout({
       )}
 
 
-      <div className="flex justify-center items-center  w-full mt-12">
+      <div className="flex justify-center items-center  w-full mt-16">
         <Image
-          className="rounded-md w-1/2"
+          className="rounded-md "
           src={imagen?.url}
-          width={230}
+          width={280}
           height={200}
           alt={nombre} />
 
