@@ -1,5 +1,5 @@
 import Layout from 'components/admin/layout';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as XLSX from "xlsx";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -8,7 +8,7 @@ const UpdatePrices = () => {
     const { products } = useSelector(state => state.product);
     const [data, setData] = useState([]);
     const [updateData, setUpdateData] = useState([]);
-
+    const priceRef = useRef();
 
     useEffect(() => {
         if (data.length > 0) {
@@ -48,18 +48,39 @@ const UpdatePrices = () => {
         };
     }
 
-    const handleUpdate = async () => {
+    const handleUpdatePizzas = async () => {
         try {
             const response = await axios.put("/api/products/", updateData);
-            console.log("Actualizado con exito", response.data);
+            response.status === 200 && alert("Productos actualizados!");
         } catch (error) {
             console.log("Error al actualizar los datos")
         }
     }
 
+    const handleUpdateEmpanadas = async () => {
+        const pricesUpdate = priceRef.current.value;
+        try {
+            const response = await axios.put("/api/products/", { precio: pricesUpdate });
+            response.status === 200 && alert("Productos actualizados!");
+        } catch (error) {
+            console.log("Error al actualizar los datos")
+        }
+    }
 
     return (
         <Layout>
+            <div className='md:w-11/12 lg:w-11/12 mx-auto px-2 mt-5'>
+                <p className='font-nunito text-sm font-semibold text-gray-500'> Ingresa precio empanadas</p>
+                <input
+                 type='number'
+                 ref={priceRef}
+                 className="p-2 h-10 text-sm leading-tight text-gray-700  border-gray-200 border
+                            rounded-md shadow focus:border-gray-200"
+                />
+                <button
+                        onClick={handleUpdateEmpanadas}
+                        className='bg-sky-800 text-sm h-10 ml-2 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700'>Actualizar empanadas</button>
+            </div>
             <div className='w-full px-2 md:w-11/12 lg:w-11/12 mx-auto my-5 border-none outline-none sm:flex block'>
                 <input
                     className=" file:cursor-pointer text-gray-500 text-sm w-full file:font-semibold file:bg-sky-800 file:text-white file:border-none file:p-2 file:rounded-md "
@@ -70,8 +91,8 @@ const UpdatePrices = () => {
                 />
                 {updateData.length > 0 && (
                     <button
-                        onClick={handleUpdate}
-                        className='bg-sky-800 text-sm mt-2 sm:mt-0 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700'>Actualizar precios</button>
+                        onClick={handleUpdatePizzas}
+                        className='bg-sky-800 text-sm mt-2 sm:mt-0 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700'>Actualizar pizzas</button>
                 )}
 
             </div>
