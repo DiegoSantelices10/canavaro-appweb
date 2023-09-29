@@ -25,7 +25,7 @@ export default function PizzaInfo({
   return (
     <>
       {" "}
-      {gigante !== null && (
+      {gigante !== null && gigante !== 0 && (
         <div className="font-nunito grid grid-cols-3 items-center justify-between w-full mb-3">
           <div className="text-lg font-semibold">
             <h2>Gigante</h2>
@@ -75,7 +75,7 @@ export default function PizzaInfo({
           </div>
         </div>
       )}
-      {mediana !== null && (
+      {mediana !== null && mediana !== 0 && (
         <div className="font-nunito grid grid-cols-3 justify-between items-center mb-3">
           <div className="text-lg font-semibold">
             <h2>Mediana</h2>
@@ -125,7 +125,7 @@ export default function PizzaInfo({
           </div>
         </div>
       )}
-      {chica !== null && (
+      {chica !== null && chica !== 0 && (
         <div className=" font-nunito grid grid-cols-3 justify-between items-center mb-3">
           <div className="text-lg font-semibold">
             <h2>Chica</h2>
