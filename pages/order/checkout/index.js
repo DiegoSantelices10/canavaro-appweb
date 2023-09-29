@@ -180,19 +180,19 @@ export default function Checkout() {
                           value="Efectivo"
                           className="font-nunito mx-4 p-2 rounded-md"
                         />
-                        <p className="py-2">Efectivo</p>
+                        <p className="py-2 text-sm">Efectivo</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Cuenta Dni" className="mx-4 p-2 rounded-md" />
-                        <p className="py-2">Cuenta Dni</p>
+                        <p className="py-2 text-sm">Cuenta Dni</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Mercado Pago" className="mx-4 p-2 rounded-md" />
-                        <p className="py-2">Mercado Pago</p>
+                        <p className="py-2 text-sm">Mercado Pago</p>
                       </label>
                       <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
                         <Field type="radio" name="medioDePago" value="Open Pay" className="mx-4 p-2 rounded-md" />
-                        <p className="py-2">Open Pay</p>
+                        <p className="py-2 text-sm">Open Pay</p>
                       </label>
                     </div>
                     <div className="py-2">

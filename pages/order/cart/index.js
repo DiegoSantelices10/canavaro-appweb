@@ -91,11 +91,17 @@ export default function Cart({ data }) {
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
-        direccion: Yup.string().required("La dirección es obligatoria"),
-        telefono: Yup.string().required("El teléfono es obligatorio"),
+        direccion: Yup.string()
+                      .required("La dirección es obligatoria")
+                      .max(70, "La dirección no puede tener más de 70 caracteres"),
+        telefono: Yup.string()
+                     .required("El teléfono es obligatorio")
+                     .max(15, "El telefono no puede tener más de 15 caracteres"),
       }
       : {
-        nombre: Yup.string().required("El nombre es obligatorio"),
+        nombre: Yup.string()
+                   .required("El nombre es obligatorio")
+                   .max(30, "El nombre no puede tener más de 30 caracteres"),
       }
 
   );
@@ -212,12 +218,11 @@ export default function Cart({ data }) {
                             <div className="w-full mx-auto">
                             
                               {open ? (
-                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de envío: <span className="text-gray-600 text-base">{demora}</span></h1>
+                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de envío <span className="text-gray-600 text-base">{demora}</span></h1>
                               ) : (
                                   <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Delivery de 19:30 a 23hs.</h1>
                                 )}
-                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario</p>
-                                <p className="text-center text-xs text-gray-400 font-normal">considerando que sea mayor al tiempo de envío.</p>
+                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de envío.</p>
                                 <div className="w-full mx-auto flex justify-center mt-1">
                                 <Field
                                 id="hPersonalizado"
@@ -246,12 +251,11 @@ export default function Cart({ data }) {
                             <div className="w-full mx-auto">
                             
                               {open ? (
-                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de retiro: <span className="text-gray-600 text-base">{demora}</span></h1>
+                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de retiro <span className="text-gray-600 text-base">{demora}</span></h1>
                               ) : (
                                   <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Horario de 19:30 a 23hs.</h1>
                                 )}
-                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario</p>
-                                <p className="text-center text-xs text-gray-400 font-normal">considerando que sea mayor al tiempo de retiro.</p>
+                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de retiro.</p>
                                 <div className="w-full mx-auto flex justify-center mt-1">
                                 <Field
                                 id="hPersonalizado"
