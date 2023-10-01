@@ -163,7 +163,7 @@ export default function Home() {
       )}
       <div className="h-auto w-full">
         <div className="lg:flex w-full justify-between">
-          <div className="w-full py-5 lg:w-1/2 ">
+          <div className="w-full py-5 lg:w-3/5 ">
             <div className="w-full text-center">
               <h1 className="font-semibold font-nunito py-2">Demora domicilio</h1>
               <div className="flex gap-3  justify-center">
