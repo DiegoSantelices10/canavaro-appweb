@@ -66,7 +66,7 @@ export default function Cart({ data }) {
     } catch (error) {
       throw new Error("Failed to log out");
     }
-  } 
+  }
 
 
   const deleteItem = _id => {
@@ -83,25 +83,31 @@ export default function Cart({ data }) {
     setShowModal(false);
   };
 
-  const changeTypeDelivery = (value) => {
+  const changeTypeDelivery = (value, setField) => {
     setType(value)
     dispatch(setDelivery(value))
+    if (value === "localActual") {
+      setField("direccion", "")
+      setField("telefono", "")
+    } else {
+      setField("nombre", "")
+    }
   }
 
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
         direccion: Yup.string()
-                      .required("La dirección es obligatoria")
-                      .max(70, "La dirección no puede tener más de 70 caracteres"),
+          .required("La dirección es obligatoria")
+          .max(70, "La dirección no puede tener más de 70 caracteres"),
         telefono: Yup.string()
-                     .required("El teléfono es obligatorio")
-                     .max(15, "El telefono no puede tener más de 15 caracteres"),
+          .required("El teléfono es obligatorio")
+          .max(15, "El telefono no puede tener más de 15 caracteres"),
       }
       : {
         nombre: Yup.string()
-                   .required("El nombre es obligatorio")
-                   .max(30, "El nombre no puede tener más de 30 caracteres"),
+          .required("El nombre es obligatorio")
+          .max(30, "El nombre no puede tener más de 30 caracteres"),
       }
 
   );
@@ -114,7 +120,7 @@ export default function Cart({ data }) {
           telefono: telefono || "",
           nombre: nombre || "",
           hPersonalizado: "",
-         
+
         }}
         enableReinitialize
         onSubmit={values => {
@@ -130,7 +136,7 @@ export default function Cart({ data }) {
         }}
         validationSchema={validationSchema}
       >
-        {() => {
+        {({ setFieldValue }) => {
           return (
             <>
               {currentProducto && (
@@ -149,10 +155,10 @@ export default function Cart({ data }) {
                     </Link>
                     <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
                   </div>
-                  
+
                   <div className="py-2">
                     <div className="p-2 rounded-md shadow bg-gray-100">
-                      
+
                       {promoBarra?.available && (
                         <div className="w-full mx-auto text-center font-bold">Retirando por el local tenes un 10% de descuento.</div>
                       )}
@@ -160,7 +166,7 @@ export default function Cart({ data }) {
                         <button
                           type="button"
                           onClick={() => {
-                            changeTypeDelivery("domicilioActual");
+                            changeTypeDelivery("domicilioActual", setFieldValue);
                           }}
                           className={
                             type === "domicilioActual"
@@ -174,7 +180,7 @@ export default function Cart({ data }) {
                         <button
                           type="button"
                           onClick={() => {
-                            changeTypeDelivery("localActual");
+                            changeTypeDelivery("localActual", setFieldValue);
                           }}
                           className={
                             type === "localActual"
@@ -216,21 +222,21 @@ export default function Cart({ data }) {
                               </ErrorMessage>
                             </div>
                             <div className="w-full mx-auto">
-                            
+
                               {open ? (
-                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de envío <span className="text-gray-600 text-base">{demora}</span></h1>
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de envío <span className="text-gray-600 text-base">{demora}</span></h1>
                               ) : (
-                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Delivery de 19:30 a 23hs.</h1>
-                                )}
-                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de envío.</p>
-                                <div className="w-full mx-auto flex justify-center mt-1">
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Delivery de 19:30 a 23hs.</h1>
+                              )}
+                              <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de envío.</p>
+                              <div className="w-full mx-auto flex justify-center mt-1">
                                 <Field
-                                id="hPersonalizado"
-                                name="hPersonalizado"
-                                className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
-                                placeholder="Horario de entrega"
-                              />
-                                </div>
+                                  id="hPersonalizado"
+                                  name="hPersonalizado"
+                                  className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
+                                  placeholder="Horario de entrega"
+                                />
+                              </div>
                             </div>
                           </div>
                         ) : (
@@ -246,24 +252,24 @@ export default function Cart({ data }) {
                                 return <div className="text-red-500 font-medium text-sm text-left">{msg}</div>;
                               }}
                             </ErrorMessage>
-                            
+
 
                             <div className="w-full mx-auto">
-                            
+
                               {open ? (
-                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de retiro <span className="text-gray-600 text-base">{demora}</span></h1>
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de retiro <span className="text-gray-600 text-base">{demora}</span></h1>
                               ) : (
-                                  <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Horario de 19:30 a 23hs.</h1>
-                                )}
-                                <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de retiro.</p>
-                                <div className="w-full mx-auto flex justify-center mt-1">
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Horario de 19:30 a 23hs.</h1>
+                              )}
+                              <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de retiro.</p>
+                              <div className="w-full mx-auto flex justify-center mt-1">
                                 <Field
-                                id="hPersonalizado"
-                                name="hPersonalizado"
-                                className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
-                                placeholder="Horario de retiro"
-                              />
-                                </div>
+                                  id="hPersonalizado"
+                                  name="hPersonalizado"
+                                  className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
+                                  placeholder="Horario de retiro"
+                                />
+                              </div>
                             </div>
                           </div>
                         )}

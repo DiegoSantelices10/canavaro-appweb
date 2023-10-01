@@ -49,7 +49,7 @@ export default function Sales() {
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
       <div className="bg-slate-50 h-full w-full">
-        <div className="w-full p-2 h-auto mx-auto">
+        <div className="w-full p-2 h-auto mx-auto lg:px-10">
           <div className=" py-5 w-full lg:px-0 h-auto flex justify-center lg:justify-start items-center">
             <div className="w-full flex flex-col justify-between font-roboto  p-4 h-20 font-bold bg-white rounded-md shadow">
               <h2 className="font-semibold  text-sm whitespace-nowrap">

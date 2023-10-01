@@ -16,6 +16,7 @@ export default function Checkout() {
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
   const [totalPedido, setTotalPedido] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -60,6 +61,7 @@ export default function Checkout() {
         }}
         enableReinitialize
         onSubmit={async values => {
+          setIsSubmitting(true);
           const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm");
           const fecha = moment.tz("America/Argentina/Buenos_Aires").format("DD/MM");
 
@@ -293,6 +295,7 @@ export default function Checkout() {
                   <div className="w-auto">
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className="text-center font-nunito rounded-md w-full p-4 text-white font-bold bg-sky-800 hover:bg-sky-700 hover:-translate-y-1 transition-all duration-500"
                     >
                       Confirmar pedido

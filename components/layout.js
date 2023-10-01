@@ -6,7 +6,7 @@ export default function Layout({ children }) {
   return (
     <div className="h-full ">
       <Head>
-        <title>Cavanaro</title>
+        <title>Pizzeria Canavaro</title>
       </Head>
       <Navbar />
       <div className="w-full  mx-auto h-full ">

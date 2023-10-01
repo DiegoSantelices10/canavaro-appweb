@@ -201,7 +201,7 @@ export default function Home() {
         </div>
 
 
-        <div className="w-full bg-slate-50   mx-auto text-center p-2 mt-5 rounded-md ">
+        <div className="w-full bg-slate-50 lg:px-10   mx-auto text-center p-2 mt-5 rounded-md ">
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
