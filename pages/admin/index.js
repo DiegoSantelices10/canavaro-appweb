@@ -187,7 +187,7 @@ export default function Home() {
             </div>
           </div>
           {barra?.map(item => (
-            <div key={item._id} className="w-1/3 self-center justify-center mx-auto text-center flex">
+            <div key={item._id} className="w-1/5 self-center justify-center mx-auto text-center flex">
               <button
                 className={`w-44 h-12 font-nunito font-bold rounded-md mt-2 text-base border" ${item?.available ? "text-white bg-sky-800" : "text-sky-800 bg-white border border-sky-800"}`}
                 type="button"
