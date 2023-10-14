@@ -93,12 +93,12 @@ const CircleAnimation = () => {
               margin: "auto",
             }}
           />
-          <h2 className="text-gray-800 font-poppins text-lg font-bold w-full py-3">¡Ya recibimos tu pedido! </h2>
+          <h2 className="text-gray-800 font-poppins text-lg font-bold w-full py-2">¡Ya recibimos tu pedido! </h2>
         </motion.div>
 
       </motion.div>
       <div className="p-2 w-full md:w-1/2 lg:w-1/2 mx-auto">
-        <div className="flex justify-center items-center flex-col py-4 gap-1">
+        <div className="flex justify-center items-center flex-col  gap-1">
           <p className="font-semibold text-sm font-nunito text-gray-800">confirmar tu pedido por whatsapp.</p>
           <a
             target="_blank"
@@ -110,12 +110,12 @@ const CircleAnimation = () => {
               Ir a whatsapp</div>
           </a>
         </div>
-        <p className="text-red-400 font-semibold font-poppins text-sm px-1 mt-2">
+        <p className="text-red-400 font-semibold font-poppins text-sm px-1 mt-4">
           Detalle del pedido
         </p>
         <div className="w-full h-auto rounded-md border-gray-200 border mt-2 p-2">
           <div className="flex justify-between">
-            <h1 className="font-nunito font-bold">Numero de pedido: <span className="text-gray-700 font-semibold ">{nPedido}</span></h1>
+            <h1 className="font-nunito font-bold">N° de pedido: <span className="text-gray-700 font-semibold ">{nPedido}</span></h1>
             <h1 className="font-bold font-nunito">{checkout.hora}hs.</h1>
 
           </div>
@@ -125,7 +125,7 @@ const CircleAnimation = () => {
               {delivery === "domicilioActual" ? (
                 <>
 
-                  <h2 className="font-nunito  font-bold text-base">Direccion de envío: <span className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </span></h2>
+                  <h2 className="font-nunito  font-bold text-base">Enviar a: <span className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </span></h2>
 
                   <h1 className="font-bold font-nunito">Horario de envío:
                     <span className="text-gray-700 px-2 font-semibold">
@@ -133,8 +133,9 @@ const CircleAnimation = () => {
                 </>
               ) : (
                 <>
-                  <h2 className="font-nunito font-bold text-base">Retira por local</h2>
-                  <p className="font-nunito font-bold">Nombre: <span className="text-gray-600 font-semibold">{checkout.cliente}</span> </p>
+                  <h2 className="font-nunito font-bold text-base">Retira por local: 
+                  <span className="text-gray-600 font-semibold"> {checkout.cliente}</span>
+                  </h2>
                   <h1 className="font-bold font-nunito">Horario de retiro:
                     <span className="text-gray-700 px-2 font-semibold">
                       {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span></h1>
@@ -149,7 +150,7 @@ const CircleAnimation = () => {
             </div>
           </div>
           <>
-            <h3 className="font-bold mt-2 text-xl">Pedido</h3>
+            <h3 className="font-semibold mt-2 text-lg font-nunito">Pedido</h3>
             {catId?.map(categoria => (
               <div key={categoria.id}>
 

@@ -69,7 +69,7 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base font-nunito">{producto.nombre}</h3>
+                    <h3 className="text-base text-sky-800 font-nunito">{producto.nombre}</h3>
                     <h4 className="text-gray-400 text-xs font-nunito font-normal">{producto.descripcion}</h4>
                   </div>
                 );
@@ -89,7 +89,7 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base font-nunito">{producto.nombre}</h3>
+                    <h3 className="text-base text-sky-800 font-nunito">{producto.nombre}</h3>
                     <h4 className="text-gray-400 text-xs font-nunito font-normal">{producto.descripcion}</h4>
                   </div>
                 );
@@ -100,7 +100,7 @@ export default function Promotion({
 
       {addEmpanadas === "no" ? (
         <div className="flex justify-between items-center ">
-          <div className="font-nunito text-lg font-bold">
+          <div className="font-nunito text-sky-800 text-lg font-bold">
             <h2>{nombre}</h2>
           </div>
           <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
@@ -126,7 +126,7 @@ export default function Promotion({
             <div className="rounded-md  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-sky-900 font-normal text-3xl"
+                className="text-sky-800 font-normal text-3xl"
                 onClick={e => {
                   addItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
                   setQuantity(quantityDemanded - 1);
@@ -142,11 +142,11 @@ export default function Promotion({
           {
             <>
               {quantityDemanded < 1 ? (
-                <div className="bg-green-500 w-auto p-2">
+                <div className="bg-green-500 w-auto p-2 rounded-md">
                   <p className="text-white text-center">¡ Se completo la cantidad requerida !</p>
                 </div>
               ) : (
-                <div className="bg-sky-900 w-auto p-2">
+                <div className="bg-sky-700 w-auto p-2 rounded-md">
                   <p className="text-white text-center">
                     Selecciona {quantityDemanded} empanadas para completar la promo
                   </p>
@@ -159,7 +159,7 @@ export default function Promotion({
                 .map(({ _id, nombre }) => {
                   return (
                     <div key={_id} className=" font-nunito flex justify-between items-center my-6 p-1  ">
-                      <div className="w-1/2 font-bold text-base font-nunito">
+                      <div className="w-1/2 text-sky-800 font-bold text-base font-nunito">
                         <h2>{nombre}</h2>
                       </div>
                       <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
@@ -192,7 +192,7 @@ export default function Promotion({
                         >
                           <button
                             type="button"
-                            className="text-sky-900 font-normal text-3xl"
+                            className="text-sky-800 font-normal text-3xl"
                             onClick={e => {
                               setQuantity(quantityDemanded - 1);
                               addItems({ _id, nombre });

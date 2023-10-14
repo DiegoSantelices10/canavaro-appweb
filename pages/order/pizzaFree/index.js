@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { Toaster, toast } from "react-hot-toast";
 import {
   addPromoOrderList,
   calculateSubTotal,
@@ -118,10 +118,8 @@ export default function Index() {
     dispatch(calculateTotalQuantity());
     router.push("/order/home");
     setRadioSelect([]);
-    toast.error("Se agrego al carrito!", {
-      icon: false,
-      theme: "dark",
-    });
+    toast.success('Se agrego al pedido!')
+
   };
 
   const handleCloseModal = () => {
@@ -135,27 +133,24 @@ export default function Index() {
       {showModal && (
         <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
       )}
-
-      <div className="relative overflow-hidden h-52 lg:h-60  mx-auto  ">
+      <Toaster/>
+      <div className="flex justify-center items-center  w-full mt-4">
         <Image
+          className="rounded-md "
           src={"/images/pizzafree.webp"}
-          layout="responsive"
-          width={80}
-          height={40}
-          objectFit="cover"
-          objectPosition="center"
-          alt={"img"}
-        />
-        <button onClick={returnHome}>
-          <FiChevronsLeft className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 left-4" size={30} />
-        </button>
-      </div>
+          width={280}
+          height={200}
+          alt={"img"} />
 
+      </div>
+      <button onClick={returnHome}>
+        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-4 left-4" size={30} />
+      </button>
       <div className="w-full h-auto">
         <div className="flex flex-col  w-full">
           <div className="w-full bg-white p-3">
-            <h1 className="font-bold text-lg text-gray-800">Arma tu pizza</h1>
-            <p className=" font-normal text-sm  text-gray-400">Elegi los gustos que quieras</p>
+            <h1 className="font-bold text-lg text-sky-800 font-nunito">Arma tu pizza</h1>
+            <p className=" font-normal text-sm  text-gray-400 font-nunito">Elegi los gustos que quieras</p>
           </div>
           <hr className="pb-3" />
           <div className="flex w-full justify-around font-nunito font-bold mt-3">
@@ -167,9 +162,9 @@ export default function Index() {
                 name="chica"
                 onChange={onChangeValue}
                 checked={select === "chica"}
-                className="mx-auto"
+                className="mx-auto rounded focus:ring-0 focus:text-sky-700"
               />
-              <h3 className="font-bold text-sm">Chica</h3>
+              <h3 className="font-semibold font-nunito text-sm">Chica</h3>
             </div>
             <div className="grid content-center gap-2">
               <input
@@ -179,9 +174,9 @@ export default function Index() {
                 name="mediana"
                 onChange={onChangeValue}
                 checked={select === "mediana"}
-                className="mx-auto"
+                className="mx-auto rounded focus:ring-0 focus:text-sky-700"
               />
-              <h3 className="font-bold text-center text-sm">Mediana</h3>
+              <h3 className="font-semibold text-center text-sm">Mediana</h3>
             </div>
             <div className="grid content-center gap-2">
               <input
@@ -191,9 +186,9 @@ export default function Index() {
                 name="gigante"
                 onChange={onChangeValue}
                 checked={select === "gigante"}
-                className="mx-auto"
+                className="mx-auto rounded focus:ring-0 focus:text-sky-700"
               />
-              <h3 className="font-bold text-sm">Gigante</h3>
+              <h3 className="font-semibold text-sm">Gigante</h3>
             </div>
           </div>
           <div className="text-center font-nunito py-2 text-gray-400 text-base">
@@ -203,7 +198,7 @@ export default function Index() {
             className={
               total === 1
                 ? "bg-green-500 font-nunito  w-full text-white p-2 mt-2 text-center font-semibold"
-                : "bg-sky-900 w-full font-nunito text-white p-2 mt-2 text-center font-semibold"
+                : "bg-sky-700 w-full font-nunito text-white p-2 mt-2 text-center font-semibold"
             }
           >
             {productTotal()}
@@ -218,7 +213,7 @@ export default function Index() {
               .map(item => {
                 return (
                   <div key={item._id} className="flex justify-between items-center py-2  my-2 ">
-                    <h2 className="font-nunito font-bold text-base">{item.nombre}</h2>
+                    <h2 className="font-nunito font-bold text-sky-800 text-base">{item.nombre}</h2>
                     <div className="w-auto   px-3 text-end space-x-4 text-base">
                       <div className="flex w-full justify-around items-center gap-5">
                         {radioSelect[item._id]?.fraccion && (
@@ -230,24 +225,26 @@ export default function Index() {
                           </button>
                         )}
                         {select === "gigante" && (
-                          <div className="flex items-center gap-x-1">
-                            <h3 className="text-gray-400 text-base">1/4</h3>
+                          <div className="flex items-center justify-center gap-x-2">
+                            <h3 className="text-gray-400 text-sm font-nunito">1/4</h3>
                             <input
                               type="radio"
                               value="1/4"
                               name={item.nombre}
+                              className="mx-auto rounded focus:ring-0 focus:text-sky-700"
                               checked={radioSelect[item._id]?.fraccion === "1/4"}
                               onChange={() => handleChangeRadioButton(item, "1/4")}
                             />
                           </div>
                         )}
 
-                        <div className="flex items-center gap-x-1">
-                          <h3 className="text-gray-400 text-base">1/2</h3>
+                        <div className="flex items-center gap-x-2">
+                          <h3 className="text-gray-400 text-sm font-nunito">1/2</h3>
                           <input
                             type="radio"
                             value="1/2"
                             name={item.nombre}
+                            className="mx-auto rounded focus:ring-0 focus:text-sky-700 hover:text-sky-700"
                             checked={radioSelect[item._id]?.fraccion === "1/2"}
                             onChange={() => handleChangeRadioButton(item, "1/2")}
                           />
@@ -271,8 +268,8 @@ export default function Index() {
           />
         </div>
       </div>
-
-      <div className="bg-white w-full fixed bottom-0 p-4 border-t-2 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
+       {total === 1 && (
+      <div className="bg-white w-full fixed bottom-0 p-4  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
           className={`${total === 1
             ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-sky-900  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
@@ -286,6 +283,7 @@ export default function Index() {
           <FiShoppingCart size={23} />{" "}
         </button>
       </div>
+       )}       
     </div>
   );
 }

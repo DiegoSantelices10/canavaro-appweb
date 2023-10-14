@@ -166,7 +166,7 @@ export default function Home() {
           <div className="w-full py-5 lg:w-3/5 ">
             <div className="w-full text-center">
               <h1 className="font-semibold font-nunito py-2">Demora domicilio</h1>
-              <div className="flex gap-3  justify-center">
+              <div className="flex gap-1 lg:gap-3 p-2  justify-center">
                 {data
                   ?.filter(item => item.tipoEnvio === "domicilio")
                   .map(item => (
@@ -177,7 +177,7 @@ export default function Home() {
 
             <div className="w-full  text-center">
               <h1 className="font-semibold font-nunito py-2">Demora por local</h1>
-              <div className="flex gap-3 justify-center">
+              <div className="flex gap-1 lg:gap-3 p-2 justify-center">
                 {data
                   ?.filter(item => item.tipoEnvio === "local")
                   .map(item => (
@@ -187,9 +187,9 @@ export default function Home() {
             </div>
           </div>
           {barra?.map(item => (
-            <div key={item._id} className="w-1/5 self-center justify-center mx-auto text-center flex">
+            <div key={item._id} className="w-full lg:w-1/5 self-center justify-center mx-auto text-center flex">
               <button
-                className={`w-44 h-12 font-nunito font-bold rounded-md mt-2 text-base border" ${item?.available ? "text-white bg-sky-800" : "text-sky-800 bg-white border border-sky-800"}`}
+                className={`w-44 h-12 font-nunito whitespace-nowrap font-bold rounded-md mt-2 text-base border" ${item?.available ? "text-white bg-sky-800" : "text-sky-800 bg-white border border-sky-800"}`}
                 type="button"
                 onClick={() => promoBarra(item?._id, item?.available)}
               >
@@ -230,7 +230,7 @@ export default function Home() {
 														active:bg-blue-200 focus:ring-blue-300"
                       type="submit"
                     >
-                      Ver descripcion
+                      Ver pedido
                     </button>
                     <button
                       onClick={() => handleDelete(item?._id)}

@@ -10,7 +10,6 @@ import moment from "moment-timezone";
 import { setCheckout, setTotalAmount } from "store/reducers/orderSlice";
 import { useEffect, useState } from "react";
 
-
 export default function Checkout() {
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
@@ -24,20 +23,23 @@ export default function Checkout() {
   useEffect(() => {
     if (promoBarra?.available && delivery === "localActual") {
       promoDescuento()
-    } 
+    }
   }, [])
 
   const promoDescuento = () => {
     setTotalPedido(totalAmount)
     const desc = totalAmount * 0.10
     const total = totalAmount - desc
-    dispatch(setTotalAmount(total))
+    const convert = Math.floor(total);
+    dispatch(setTotalAmount(convert))
   }
+
+const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
   return (
     <div className=" mx-auto relative w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
       <div className="px-3">
-        <div className="flex items-center gap-3 py-4">
+        <div className="flex items-center gap-3 py-2">
           <Link href={"/order/cart"}>
             <a>
               <FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-md shadow p-1 top-4 left-4" size={30} />
@@ -122,43 +124,41 @@ export default function Checkout() {
           return (
             <div className="h-full">
               <Form>
-                <div className="p-3 py-4">
-                  <div className="shadow bg-slate-50 rounded-md p-2">
-                    <div className="p-1 py-3">
+                <div className="p-3 py-2">
+                  <div className="shadow-sm bg-gray-50 rounded p-2">
+                    <div className="py-2">
                       {delivery === "domicilioActual" ? (
                         <>
-                          <h2 className="font-nunito text-sky-900 font-extrabold text-base">Direccion de envio</h2>
-                          <p className="font-nunito text-gray-600">{user.direccion} </p>
+                          <h2 className="font-nunito text-sky-800 font-bold text-sm">Dirección de envío</h2>
+                          <p className="font-nunito text-gray-600 text-sm">{user.direccion} </p>
                         </>
                       ) : (
                         <>
-                          <h2 className="font-nunito text-sky-900 font-extrabold text-base">Retira por local</h2>
-                          <p className="font-nunito">Nombre: <span className="text-gray-600">{user.nombre}</span> </p>
+                          <h2 className="font-nunito text-sky-800 font-bold text-sm">Retira por local</h2>
+                          <p className="font-nunito text-sm">Nombre: <span className="text-gray-600">{user.nombre}</span> </p>
                         </>
                       )}
                     </div>
                     <hr />
                     {user?.hPersonalizado ? (
-                      <div className="p-1 py-3">
-                        <h2 className="font-nunito font-extrabold text-base text-sky-900">
-                          {delivery === "domicilioActual" ? "horario de entrega" : "Retiralo"}
+                      <div className="py-2" >
+                        <h2 className="font-nunito font-bold text-sm text-sky-800">
+                          {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo"}
                         </h2>
-                        <p className="font-nunito px-1 text-gray-500">{user?.hPersonalizado}hs.</p>
+                        <p className="font-nunito text-sm text-gray-500">{user?.hPersonalizado}hs.</p>
                       </div>
                     ) : (
-                      <div className="p-1 py-3">
-                        <h2 className="font-nunito font-extrabold text-base text-sky-900">
-                          {delivery === "domicilioActual" ? "horario de entrega" : "Retiralo en"}
+                      <div className="py-2">
+                        <h2 className="font-nunito font-bold text-sm text-sky-800">
+                          {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo en"}
                         </h2>
-                        <p className="font-nunito px-1 text-gray-500">{demora}</p>
+                        <p className="font-nunito text-sm text-gray-500">{demora}</p>
                       </div>
-
-
                     )}
 
                     <hr />
-                    <div className="p-1">
-                      <h2 className="font-nunito font-extrabold text-base pb-1 text-sky-900">Comentarios adicionales</h2>
+                    <div className="py-2">
+                      <h2 className="font-nunito font-bold text-sm pb-1 text-sky-800">Comentarios adicionales</h2>
                       <Field
                         id="comentarios"
                         name="comentarios"
@@ -167,37 +167,24 @@ export default function Checkout() {
                     </div>
                   </div>
                 </div>
-                <div className="px-6 mb-28">
-                  <h2 className="font-nunito font-extrabold text-base px-1 pb-3 text-sky-900">Medios de pago</h2>
-                  <div>
-                    <div
-                      role="group"
-                      aria-labelledby="my-radio-group"
-                      className="w-full text-base  text-slate-400 flex flex-row justify-center items-center h-10 gap-6 my-5"
+                <div className="px-5 h-full mb-20 rounded">
+                <h2 className="font-nunito font-bold text-sm py-3 text-sky-800">Medios de pago</h2>
+                  <div className="w-full h-10 border-none shadow rounded ">
+                    <Field
+                      as="select" 
+                      name="medioDePago"
+                      className="h-10 border-none font-nunito  text-gray-900 text-sm rounded-lg  block w-full p-2.5 focus:rounded focus:ring-slate-300 "
                     >
-                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
-                        <Field
-                          type="radio"
-                          name="medioDePago"
-                          value="Efectivo"
-                          className="font-nunito mx-4 p-2 rounded-md"
-                        />
-                        <p className="py-2 text-sm">Efectivo</p>
-                      </label>
-                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
-                        <Field type="radio" name="medioDePago" value="Cuenta Dni" className="mx-4 p-2 rounded-md" />
-                        <p className="py-2 text-sm">Cuenta Dni</p>
-                      </label>
-                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
-                        <Field type="radio" name="medioDePago" value="Mercado Pago" className="mx-4 p-2 rounded-md" />
-                        <p className="py-2 text-sm">Mercado Pago</p>
-                      </label>
-                      <label className="font-nunito font-semibold flex flex-col whitespace-nowrap justify-center items-center">
-                        <Field type="radio" name="medioDePago" value="Open Pay" className="mx-4 p-2 rounded-md" />
-                        <p className="py-2 text-sm">Open Pay</p>
-                      </label>
-                    </div>
-                    <div className="py-2">
+                      {medios.map((item, index) => (
+                        <option key={index} value={item} className="text-sm text-gray-500 font-nunito font-semibold">
+                          {item}
+                        </option>
+                       
+                      ))}
+                    </Field>
+                  </div>
+                  <div>
+                    <div className="py-4">
                       {values.medioDePago === "Efectivo" && (
                         <Field
                           id="pagaCon"
@@ -222,7 +209,7 @@ export default function Checkout() {
                           </p>
                         </>
                       )}
-                      {values.medioDePago === "Cuenta Dni" && (
+                      {values.medioDePago === "Cuenta DNI" && (
                         <>
                           <p className="font-nunito text-center font-semibold ">
                             Todos los miercoles y jueves 30% de reintegro
@@ -268,27 +255,27 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div className={`fixed p-3 flex justify-between ${delivery?.available && delivery === "localActual" ? "items-end" : "items-end"} bottom-2 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
+                <div className={`fixed p-2 bg-sky-700 flex items-center justify-between ${delivery?.available && delivery === "localActual" ? "items-end" : "items-end"} bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
 
-                  <div className="w-1/2 flex flex-col gap-1">
+                  <div className="w-1/2 flex flex-col">
                     {promoBarra?.available && delivery === "localActual" ? (
                       <>
                         <div className="flex justify-between items-center">
-                          <div className="flex gap-1">
-                            <p className="text-base text-gray-600 font-bold">Subtotal<span className="font-normal"> ${totalPedido}</span></p>
-                            <p className="text-gray-600 font-normal"> - 10%</p>
+                          <div className="flex gap-1 p-0">
+                            <p className="text-sm text-white font-bold">Subtotal<span className="font-normal"> ${totalPedido}</span></p>
+                            <p className="text-white text-sm font-normal"> - 10%</p>
                           </div>
                         </div>
                         <div className="font-poppins">
-                          <p className="font-bold text-xl text-sky-900">Total</p>
-                          <h3 className="text-xl font-normal">$ {totalAmount}</h3>
+                          <p className="font-bold text-base text-white">Total</p>
+                          <h3 className="text-lg text-white font-normal">$ {totalAmount}</h3>
                         </div>
                       </>
 
                     ) : (
-                      <div className="font-poppins items-center flex gap-3 px-3">
-                        <p className="font-bold text-xl text-sky-900">Total</p>
-                        <h3 className="text-2xl font-light">$ {totalAmount}</h3>
+                      <div className="flex justify-start items-center gap-3 px-3">
+                        <p className="font-bold font-nunito text-center text-xl text-white">Total</p>
+                        <h3 className="text-xl text-center font-nunito text-white font-light">$ {totalAmount}</h3>
                       </div>
                     )}
                   </div>
@@ -296,7 +283,7 @@ export default function Checkout() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="text-center font-nunito rounded-md w-full p-4 text-white font-bold bg-sky-800 hover:bg-sky-700 hover:-translate-y-1 transition-all duration-500"
+                      className="text-center font-nunito rounded-md w-full p-3 text-sky-800 bg-white font-semibold hover:-translate-y-1 transition-all duration-500"
                     >
                       Confirmar pedido
                     </button>

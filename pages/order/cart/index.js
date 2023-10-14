@@ -144,7 +144,7 @@ export default function Cart({ data }) {
               )}
               <Form>
                 <div className="px-3">
-                  <div className="flex items-center gap-3 py-4">
+                  <div className="flex items-center gap-3 py-2">
                     <Link href={"/order/home"}>
                       <a>
                         <FiChevronsLeft
@@ -170,7 +170,7 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "domicilioActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-800 shadow text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-700 shadow text-white font-light p-3"
                               : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow  font-light p-3"
                           }
                         >
@@ -184,7 +184,7 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "localActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-800 shadow text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-700 shadow text-white font-light p-3"
                               : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow font-light p-3"
                           }
                         >
@@ -283,9 +283,8 @@ export default function Cart({ data }) {
                       <div key={index} className="font-nunito">
                         <div className="my-2 p-2  rounded-md">
                           <div className="flex justify-between items-center gap-x-2">
-                            <div className=" flex self-start gap-4">
                               <div className="w-full ">
-                                <a className="font-bold text-sky-900 ">
+                                <a className="font-bold text-sky-800 ">
                                   {item.nombre}
                                   <span className="text-gray-400 font-light">
                                     {" "}
@@ -299,21 +298,21 @@ export default function Cart({ data }) {
                                 </p>
                                 <p className="font-semibold text-sm text-gray-600">$ {item.precio * item.cantidad}</p>
                               </div>
-                              {item?.products && (
+                            <div className="flex justify-center gap-2">
+                            {item?.products && (
                                 <button
                                   type="button"
                                   onClick={() => handleOpenModal(item)}
-                                  className="font-normal font-poppins text-xs w-auto ml-6 "
+                                  className="font-normal font-poppins text-xs w-auto "
                                   style={{ whiteSpace: "nowrap" }}
                                 >
                                   Ver Descripcion
                                 </button>
                               )}
-                            </div>
-
                             <button type="button" onClick={() => deleteItem(item._id)}>
                               <MdDeleteOutline size={30} className="text-red-700" />
                             </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -321,15 +320,15 @@ export default function Cart({ data }) {
                   })}
                 </div>
                 {orderList.length > 0 ? (
-                  <div className="font-nunito fixed bottom-3 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
+                  <div className="font-nunito fixed bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
                     <div className="flex justify-between items-center p-3 font-poppins">
                       <div>
-                        <p className="font-bold text-xl text-sky-900">Subtotal</p>
+                        <p className="font-bold text-xl text-sky-800">Subtotal</p>
                         <h3 className="text-xl">$ {totalAmount}</h3>
                       </div>
                       <button
                         type="submit"
-                        className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-sky-800 hover:bg-sky-700 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-sky-700 hover:bg-sky-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>
