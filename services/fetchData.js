@@ -3,9 +3,11 @@ import axios from "axios";
 export const getProducts = async () => {
   const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
   console.log("production: ", PROD_URL);
-  
+  console.log("node", NODE_ENV);
+
   try {
     const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products`);
+    console.log("====", response.data);
     return response.data;
   } catch (error) {
     throw new Error("Error al obtener los productos", error);
