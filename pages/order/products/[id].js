@@ -5,6 +5,8 @@ import { convertToPath } from "libs/items";
 import { getProducts } from "services/fetchData";
 
 export default function Product({ data }) {
+
+  
   return (
     <div className="min-h-screen ">
       <ProductLayout key={data._id} data={data} />

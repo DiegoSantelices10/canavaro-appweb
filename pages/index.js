@@ -8,17 +8,27 @@ import SectionCombos from "components/sections/sectionCombos";
 import SectionZona from "components/sections/sectionZona";
 import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
-import { wrapper } from "store/app/store";
-import { getProducts } from "services/fetchData";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsFront } from "services/fetchData";
 
 
-export default function index({ state }) {
+export default function index() {
   const { products } = useSelector(state => state.product);
+ const dispatch = useDispatch();
+  // useEffect(() => {
+  //   localStorage.setItem("productos", JSON.stringify(data));
+  // });
 
   useEffect(() => {
-    localStorage.setItem("productos", JSON.stringify(state));
-  });
+    (async () => {
+      try {
+        const res = await getProductsFront();
+        dispatch(setProductData(res));
+      } catch (error) {
+        alert("Error al obtener los datos");
+      }
+    })();
+  }, []);
 
   return (
     <div className=" flex flex-col min-h-screen overflow-hidden bg-neutral-900 ">
@@ -35,14 +45,14 @@ export default function index({ state }) {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ res }) => {
-  res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
-  const state = await getProducts();
-  store.dispatch(setProductData(state));
-  return {
-    props: {
-      // Pasa el estado hidratado como prop al componente de Next.js
-      state,
-    },
-  };
-});
+// export const getServerSideProps = wrapper.getServerSideProps(store => async ({ res }) => {
+//   res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
+//   const { data } = await axios.get("https://pizza-canavaro.com/api/products");
+//   store.dispatch(setProductData(data));
+//   return {
+//     props: {
+//       // Pasa el estado hidratado como prop al componente de Next.js
+//       data,
+//     },
+//   };
+// });
