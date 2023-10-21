@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment-timezone";
 import { setCheckout, setTotalAmount } from "store/reducers/orderSlice";
 import { useEffect, useState } from "react";
+import { ColorRing } from "react-loader-spinner";
 
 export default function Checkout() {
   const user = useSelector(state => state.user);
@@ -283,9 +284,20 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="text-center font-nunito rounded-md w-full p-3 text-sky-800 bg-white font-semibold hover:-translate-y-1 transition-all duration-500"
+                      className="text-center font-nunito rounded-md justify-center items-center flex h-12 w-[170px] text-sky-800 bg-white font-semibold hover:-translate-y-1 transition-all duration-500"
                     >
-                      Confirmar pedido
+                      {isSubmitting ? (
+                          <ColorRing
+                          visible={true}
+                          height="30"
+                          width="30"
+                          ariaLabel="blocks-loading"
+                          wrapperStyle={{}}
+                          wrapperClass="blocks-wrapper"
+                          colors={['#2A79D9', '#2A79D9', '#2A79D9', '#2A79D9', '#2A79D9']}
+                        />
+                      ) : "Confirmar pedido"}
+                      
                     </button>
                   </div>
 
