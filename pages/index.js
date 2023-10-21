@@ -8,12 +8,12 @@ import SectionCombos from "components/sections/sectionCombos";
 import SectionZona from "components/sections/sectionZona";
 import Footer from "components/sections/footer";
 import { setProductData } from "store/reducers/productSlice";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { wrapper } from "store/app/store";
 import { getProducts } from "services/fetchData";
 
 
-export default function index({data}) {
+export default function index({ data }) {
   const { products } = useSelector(state => state.product);
   useEffect(() => {
     localStorage.setItem("productos", JSON.stringify(data));
@@ -38,7 +38,7 @@ export default function index({data}) {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ res }) => {
   res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
-  const { data } = await getProducts();
+  const data = await getProducts();
   store.dispatch(setProductData(data));
   return {
     props: {
