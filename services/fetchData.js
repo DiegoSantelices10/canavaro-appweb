@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const getProducts = async () => {
   const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
+  console.log("production: ", PROD_URL);
   
   try {
     const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products`);
