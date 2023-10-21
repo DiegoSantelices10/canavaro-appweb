@@ -12,7 +12,6 @@ export default function Navbar() {
   const handleLoader = () => {
     setLoader(true)
   }
-  console.log(loader);
   return (
     <nav className="w-full bg-white   mx-auto fixed h-[7%]  top-0 py-8  z-50  ">
       <div className="w-full flex justify-between px-3  items-center sm:w-4/5 md:w-4/5 lg:w-3/5 mx-auto  h-full ">
