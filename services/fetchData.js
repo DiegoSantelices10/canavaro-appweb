@@ -2,7 +2,9 @@ import axios from "axios";
 
 export const getProducts = async () => {
   const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
-
+  console.log(NODE_ENV);
+  console.log("PRODUCCION", PROD_URL);
+  console.log("DEVELOPER", DEV_URL);
   try {
     const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products`);
     return response.data;
