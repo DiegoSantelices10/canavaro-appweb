@@ -1,12 +1,15 @@
 import axios from "axios";
+import https from "https";
+
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+})
 
 export const getProducts = async () => {
   const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
-  console.log("production: ", PROD_URL);
-  console.log("node", NODE_ENV);
 
   try {
-    const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products`);
+    const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products` , { httpsAgent: agent });
     console.log("====", response.data);
     return response.data;
   } catch (error) {
