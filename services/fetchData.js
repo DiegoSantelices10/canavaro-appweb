@@ -74,3 +74,14 @@ export const getPromo = async () => {
     throw new Error("Failed to log out");
   }
 };
+
+export const getDelay = async () => {
+  const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
+
+  try {
+    const { data } = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}` + "/api/delay", { httpsAgent: agent });
+    return data;
+  } catch (error) {
+    throw new Error("Failed to log out");
+  }
+};

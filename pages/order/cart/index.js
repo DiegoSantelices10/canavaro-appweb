@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import ModalDescripcion from "components/modalDescripcion";
 import moment from "moment-timezone";
 import { setPromoBarra } from "store/reducers/settingSlice";
+import { getDelay } from "services/fetchData";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora } = useSelector(state => state.order);
@@ -354,9 +355,8 @@ export default function Cart({ data }) {
 }
 
 export const getServerSideProps = async () => {
-  const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
   try {
-    const { data } = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}` + "/api/delay");
+    const data = await getDelay();
     return {
       props: {
         // Pasa el estado hidratado como prop al componente de Next.js
