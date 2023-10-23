@@ -83,8 +83,6 @@ export const orderSlice = createSlice({
 			state.orderPromo = state.orderPromo.filter(product => product._id !== action.payload._id);
 		},
 		removeItemCart: (state, action) => {
-			console.log("remove id store", action.payload);
-
 			state.orderList = state.orderList.filter(product => product._id !== action.payload);
 		},
 

@@ -10,7 +10,6 @@ export const getProducts = async () => {
 
   try {
     const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products` , { httpsAgent: agent });
-    console.log("====", response.data);
     return response.data;
   } catch (error) {
     throw new Error("Error al obtener los productos", error);

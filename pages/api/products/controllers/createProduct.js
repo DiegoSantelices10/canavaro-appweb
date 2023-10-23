@@ -75,7 +75,6 @@ export const createProduct = async (req, res) => {
     await newProduct
       .save()
       .then(() => {
-        console.log("Se creo el producto correctamente");
         return res.status(201).json({ message: "ok" });
       })
       .catch(error => {

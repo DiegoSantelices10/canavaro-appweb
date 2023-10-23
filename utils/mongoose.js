@@ -17,10 +17,8 @@ const dbConnect = handler => async (req, res) => {
 			family: 4
 		});
 		isConnected = db.connections[0].readyState;
-		console.log("conectado", isConnected);
 		return handler(req, res);
 	} catch (error) {
-		console.log("==========", error);
 		return Promise.reject(error);
 	}
 };

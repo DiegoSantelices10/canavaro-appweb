@@ -5,7 +5,6 @@ import Promo from "models/promo";
 
 const handler = async (req, res) => {
 	const { method } = req;
-    console.log(req.body);
 	try {
 		if (method === "PUT") {
 			const resultPut = await Promo.findByIdAndUpdate(req.query.id, req.body);

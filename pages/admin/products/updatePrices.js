@@ -53,7 +53,7 @@ const UpdatePrices = () => {
             const response = await axios.put("/api/products/", updateData);
             response.status === 200 && alert("Productos actualizados!");
         } catch (error) {
-            console.log("Error al actualizar los datos")
+            alert("Error al actualizar los datos")
         }
     }
 
@@ -63,7 +63,7 @@ const UpdatePrices = () => {
             const response = await axios.put("/api/products/", { precio: pricesUpdate });
             response.status === 200 && alert("Productos actualizados!");
         } catch (error) {
-            console.log("Error al actualizar los datos")
+            alert("Error al actualizar los datos")
         }
     }
 

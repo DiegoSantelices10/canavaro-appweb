@@ -20,7 +20,6 @@ export const saleSlice = createSlice({
     },
     updateSale: (state, { payload }) => {
       const newList = state.renderSales.filter(item => item._id !== payload);
-      console.log(newList);
       state.renderSales = newList;
     },
   },
