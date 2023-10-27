@@ -5,7 +5,13 @@ import { FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { calculateSubTotal, calculateTotalQuantity, removeItemCart, setDelivery, setDemora } from "store/reducers/orderSlice";
+import {
+  calculateSubTotal,
+  calculateTotalQuantity,
+  removeItemCart,
+  setDelivery,
+  setDemora,
+} from "store/reducers/orderSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { clearUser, setUser } from "store/reducers/userSlice";
@@ -31,14 +37,13 @@ export default function Cart({ data }) {
 
   const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
 
-
   const hoursDelivery = () => {
     if (hora >= 19 && hora < 23) {
-      setOpen(true)
+      setOpen(true);
     } else {
-      setOpen(false)
+      setOpen(false);
     }
-  }
+  };
 
   useEffect(() => {
     dispatch(calculateSubTotal());
@@ -51,9 +56,9 @@ export default function Cart({ data }) {
   }, [type]);
 
   useEffect(() => {
-    hoursDelivery()
-    obtenerPromo()
-    dispatch(setDelivery("domicilioActual"))
+    hoursDelivery();
+    obtenerPromo();
+    dispatch(setDelivery("domicilioActual"));
     dispatch(clearUser());
   }, []);
 
@@ -61,14 +66,13 @@ export default function Cart({ data }) {
     try {
       const { data, status } = await axios.get("/api/settings/promo");
       if (status === 200) {
-        const barra = data?.filter(item => item.nombre === "Promo barra")
-        dispatch(setPromoBarra({ promoBarra: barra[0] }))
+        const barra = data?.filter(item => item.nombre === "Promo barra");
+        dispatch(setPromoBarra({ promoBarra: barra[0] }));
       }
     } catch (error) {
       throw new Error("Failed to log out");
     }
-  }
-
+  };
 
   const deleteItem = _id => {
     dispatch(removeItemCart(_id));
@@ -85,32 +89,31 @@ export default function Cart({ data }) {
   };
 
   const changeTypeDelivery = (value, setField) => {
-    setType(value)
-    dispatch(setDelivery(value))
+    setType(value);
+    dispatch(setDelivery(value));
     if (value === "localActual") {
-      setField("direccion", "")
-      setField("telefono", "")
+      setField("direccion", "");
+      setField("telefono", "");
     } else {
-      setField("nombre", "")
+      setField("nombre", "");
     }
-  }
+  };
 
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
-        direccion: Yup.string()
-          .required("La dirección es obligatoria")
-          .max(70, "La dirección no puede tener más de 70 caracteres"),
-        telefono: Yup.string()
-          .required("El teléfono es obligatorio")
-          .max(15, "El telefono no puede tener más de 15 caracteres"),
-      }
+          direccion: Yup.string()
+            .required("La dirección es obligatoria")
+            .max(70, "La dirección no puede tener más de 70 caracteres"),
+          telefono: Yup.string()
+            .required("El teléfono es obligatorio")
+            .max(15, "El telefono no puede tener más de 15 caracteres"),
+        }
       : {
-        nombre: Yup.string()
-          .required("El nombre es obligatorio")
-          .max(30, "El nombre no puede tener más de 30 caracteres"),
-      }
-
+          nombre: Yup.string()
+            .required("El nombre es obligatorio")
+            .max(30, "El nombre no puede tener más de 30 caracteres"),
+        }
   );
 
   return (
@@ -121,7 +124,6 @@ export default function Cart({ data }) {
           telefono: telefono || "",
           nombre: nombre || "",
           hPersonalizado: "",
-
         }}
         enableReinitialize
         onSubmit={values => {
@@ -130,7 +132,7 @@ export default function Cart({ data }) {
               nombre: values.nombre,
               telefono: values.telefono,
               direccion: values.direccion,
-              hPersonalizado: values.hPersonalizado
+              hPersonalizado: values.hPersonalizado,
             })
           );
           router.push("/order/checkout");
@@ -158,10 +160,11 @@ export default function Cart({ data }) {
                   </div>
 
                   <div className="py-2">
-                    <div className="p-2 rounded-md shadow bg-gray-100">
-
+                    <div className="p-2 rounded-md shadow-sm bg-gray-100">
                       {promoBarra?.available && (
-                        <div className="w-full mx-auto text-center font-bold">Retirando por el local tenes un 10% de descuento.</div>
+                        <div className="w-full mx-auto text-center font-bold">
+                          Retirando por el local tenes un 10% de descuento.
+                        </div>
                       )}
                       <div className="flex justify-center  w-full gap-3 py-3 text-sm ">
                         <button
@@ -223,13 +226,18 @@ export default function Cart({ data }) {
                               </ErrorMessage>
                             </div>
                             <div className="w-full mx-auto">
-
                               {open ? (
-                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de envío <span className="text-gray-600 text-base">{demora}</span></h1>
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">
+                                  tiempo de envío <span className="text-gray-600 text-base">{demora}</span>
+                                </h1>
                               ) : (
-                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Delivery de 19:30 a 23hs.</h1>
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">
+                                  Delivery de 19:30 a 23hs.
+                                </h1>
                               )}
-                              <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de envío.</p>
+                              <p className="text-center text-xs text-gray-400 font-normal">
+                                {open && "o elige un horario que sea mayor al tiempo de envío."}{" "}
+                              </p>
                               <div className="w-full mx-auto flex justify-center mt-1">
                                 <Field
                                   id="hPersonalizado"
@@ -254,15 +262,19 @@ export default function Cart({ data }) {
                               }}
                             </ErrorMessage>
 
-
                             <div className="w-full mx-auto">
-
                               {open ? (
-                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">tiempo de retiro <span className="text-gray-600 text-base">{demora}</span></h1>
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">
+                                  tiempo de retiro <span className="text-gray-600 text-base">{demora}</span>
+                                </h1>
                               ) : (
-                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">Horario de 19:30 a 23hs.</h1>
+                                <h1 className="font-semibold text-center text-gray-600 text-sm mt-3 font-nunito">
+                                  Horario de 19:30 a 23hs.
+                                </h1>
                               )}
-                              <p className="text-center text-xs text-gray-400 font-normal">{open && "o"} elige un horario que sea mayor al tiempo de retiro.</p>
+                              <p className="text-center text-xs text-gray-400 font-normal">
+                                {open && "o elige un horario que sea mayor al tiempo de retiro."}{" "}
+                              </p>
                               <div className="w-full mx-auto flex justify-center mt-1">
                                 <Field
                                   id="hPersonalizado"
@@ -281,9 +293,10 @@ export default function Cart({ data }) {
                 <div className="mb-20 px-3 rounded-md">
                   {orderList.map((item, index) => {
                     return (
-                      <div key={index} className="font-nunito">
-                        <div className="my-2 p-2  rounded-md">
-                          <div className="flex justify-between items-center gap-x-2">
+                      <div key={index}>
+                        <div className="font-nunito py-3">
+                          <div className="p-2  rounded-md">
+                            <div className="flex justify-between items-center gap-x-2">
                               <div className="w-full ">
                                 <a className="font-bold text-sky-800 ">
                                   {item.nombre}
@@ -299,23 +312,25 @@ export default function Cart({ data }) {
                                 </p>
                                 <p className="font-semibold text-sm text-gray-600">$ {item.precio * item.cantidad}</p>
                               </div>
-                            <div className="flex justify-center gap-2">
-                            {item?.products && (
-                                <button
-                                  type="button"
-                                  onClick={() => handleOpenModal(item)}
-                                  className="font-normal font-poppins text-xs w-auto "
-                                  style={{ whiteSpace: "nowrap" }}
-                                >
-                                  Ver Descripcion
+                              <div className="flex justify-center gap-2">
+                                {item?.products && (
+                                  <button
+                                    type="button"
+                                    onClick={() => handleOpenModal(item)}
+                                    className="font-normal font-poppins text-xs w-auto "
+                                    style={{ whiteSpace: "nowrap" }}
+                                  >
+                                    Ver Descripcion
+                                  </button>
+                                )}
+                                <button type="button" onClick={() => deleteItem(item._id)}>
+                                  <MdDeleteOutline size={30} className="text-red-700" />
                                 </button>
-                              )}
-                            <button type="button" onClick={() => deleteItem(item._id)}>
-                              <MdDeleteOutline size={30} className="text-red-700" />
-                            </button>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <hr />
                       </div>
                     );
                   })}
@@ -337,9 +352,7 @@ export default function Cart({ data }) {
                   </div>
                 ) : (
                   <div>
-                    <p className="text-center w-full font-bold text-lg font-poppins">
-                      Tu Carrito esta vacio
-                    </p>
+                    <p className="text-center w-full font-bold text-lg font-poppins">Tu Carrito esta vacio</p>
                     <p className="text-center w-full font-medium text-sm text-gray-500 h-full font-poppins">
                       Por favor, regresa para realizar un pedido
                     </p>
@@ -364,7 +377,6 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    alert("Error al obtener los productos")
+    alert("Error al obtener los productos");
   }
-
 };

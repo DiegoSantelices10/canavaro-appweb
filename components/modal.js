@@ -46,24 +46,24 @@ const Modal = ({ handleClose, showModal, producto }) => {
             </div>
             <div className="w-full">
               <h2 className="text-xl">{producto?.nombre}</h2>
-              <p className="font-light  text-sm text-gray-300 pb-3">{producto?.descripcion}</p>
+              <p className="font-light  text-sm text-zinc-400 pb-3">{producto?.descripcion}</p>
               <div className="flex w-full justify-between font-normal gap-1">
                 {!producto.precio ? (
                   <>
                   {producto.precioPizza?.chica && producto.precioPizza.chica !== 0 && (
                     <div className="text-center">
-                      <p className="font-normal text-gray-400">Chica<span className="font-normal  text-white text-lg"> ${producto.precioPizza.chica}</span></p>
+                      <p className="font-normal text-gray-400 ">Chica<span className="font-normal  text-white text-base"> ${producto.precioPizza.chica}</span></p>
                     </div>
                   )} |
                     {producto.precioPizza?.mediana && producto.precioPizza.mediana !== 0 && (
                       <div className="text-center">
 
-                        <p className="font-normal text-gray-400">Mediana<span className="font-normal text-white  text-lg"> ${producto.precioPizza.mediana}</span></p>
+                        <p className="font-normal text-gray-400 ">Mediana<span className="font-normal text-white  text-base"> ${producto.precioPizza.mediana}</span></p>
                       </div>
                   )} |
                    {producto.precioPizza?.gigante && producto.precioPizza.gigante !== 0 && (
                       <div className="text-center">
-                        <p className="font-normal text-gray-400">Gigante<span className="font-normal text-white  text-lg"> ${producto.precioPizza.gigante}</span></p>
+                        <p className="font-normal text-gray-400 ">Gigante<span className="font-normal text-white  text-base"> ${producto.precioPizza.gigante}</span></p>
 
                       </div>
 

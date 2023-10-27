@@ -33,17 +33,13 @@ export default function SectionZona() {
               </div>
               <div>
                 <h1 className="font-bold  text-lg">Zona de envío</h1>
-                <p className="font-normal">Vicente Lopez - Florida - Olivos - La Lucila</p>
-                <p className="font-normal">Acassuso - Martinez - Munro</p>
+                <p className="font-normal">Vicente Lopez - Florida - Olivos</p>
+                <p className="font-normal">La Lucila - Martinez - Munro</p>
               </div>
               <div>
                 <h1 className="font-bold  text-lg">Nuestras Redes</h1>
                 <div className="text-center mx-auto flex w-full gap-2 justify-center">
-                  {/* <div className="flex items-center justify-center w-1/4 h-12 rounded-md shadow  text-center bg-white ">
-                    <a href="https://facebook.com/Canavaro-289165874501296/">
-                      <FaFacebook className="text-blue-700" size={30} />
-                    </a>
-                  </div> */}
+             
                   <div className="flex justify-center items-center w-1/4 h-12 rounded-md shadow bg-white ">
                     <a
                       className="flex items-center justify-center"

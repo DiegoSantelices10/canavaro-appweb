@@ -80,10 +80,7 @@ export default function sectionCombos({ products, imagefront }) {
                       >
                         {producto.nombre}
                       </p>
-                      <p className="text-sm text-gray-200 ">
-                        Pizza {producto.tamanio.charAt(0).toUpperCase() + producto.tamanio.slice(1)}
-                      </p>
-                      <p className="text-sm lg:text-md px-8">{producto.descripcion}</p>
+                      <p className="text-sm lg:text-base text-zinc-400 px-8">{producto.descripcion}</p>
                     </div>
                   </motion.div>
                 </div>

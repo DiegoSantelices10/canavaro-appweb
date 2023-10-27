@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-import { useRouter } from "next/router";
-import { getPromo } from "services/fetchData";
 
 function Header() {
   const [top, setTop] = useState(true);
-  const router = useRouter();
-  const [open, setOpen] = useState(false);
   useEffect(() => {
     const scrollHandler = () => {
       window.pageYOffset > 10 ? setTop(false) : setTop(true);
@@ -15,31 +11,19 @@ function Header() {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
 
-
-  useEffect(() => {
-    (async () => {
-      const { data, status } = await getPromo();
-      if (status === 200) {
-        const res = data.filter(item => item.nombre === "Delivery")
-        setOpen(res[0].available)
-      }
-
-    })()
-
-  }, [])
   return (
     <header
-      className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && "bg-black bg-opacity-70 backdrop-blur-sm shadow-lg"
+      className={`fixed w-full z-30 md:bg-opacity-30 transition duration-300 ease-in-out ${!top && "bg-gray-200 bg-opacity-40 backdrop-blur-sm shadow-lg"
         }`}
     >
       <div className="w-full sm:w-full md:w-full lg:w-11/12 mx-auto  sm:px-6">
-        <div className="flex items-center lg:justify-end justify-center px-3 h-16 md:h-20">
+        <div className="flex items-center lg:justify-center justify-center px-3 h-14 md:h-16">
           <nav className="flex font-nunito lg:justify-end">
             <ul className="flex gap-5  lg:hidden">
               <li>
                 <Link to="pizzas" spy={true} smooth={true} offset={-80} duration={500}>
                   <button
-                    className={`text-white    rounded-md pointer-events-auto text-lg font-bold   p-2 px-4 block items-center transition duration-150 ease-in-out`}
+                    className={`text-white rounded-md pointer-events-auto text-lg  p-2 px-4 block items-center transition duration-150 ease-in-out`}
                     aria-current="page"
                   >
                     Pizzas
@@ -49,7 +33,7 @@ function Header() {
               <li>
                 <Link to="empanadas" spy={true} smooth={true} offset={-80} duration={500}>
                   <button
-                    className={`text-white  font-bold  rounded-md px-4 text-lg   p-2 block items-center transition duration-150 ease-in-out`}
+                    className={`text-white   rounded-md px-4 text-lg   p-2 block items-center transition duration-150 ease-in-out`}
                     aria-current="page"
                   >
                     Empanadas
@@ -59,7 +43,7 @@ function Header() {
               <li>
                 <Link to="combos" spy={true} smooth={true} offset={-80} duration={500}>
                   <button
-                    className={`text-white   font-bold  px-4 rounded-md text-lg   p-2 block items-center transition duration-150 ease-in-out`}
+                    className={`text-white  px-4 rounded-md text-lg   p-2 block items-center transition duration-150 ease-in-out`}
                     aria-current="page"
                   >
                     Combos
@@ -70,16 +54,6 @@ function Header() {
 
             <div className="flex justify-end">
               <ul className="DESKTOP-MENU hidden md:hidden lg:gap-5 lg:justify-end lg:flex  md:flex-grow justify-end gap-4 flex-wrap items-center">
-                <li>
-                  <Link to="home" spy={true} smooth={true} offset={0} duration={500}>
-                    <button
-                      className={`text-white font-medium   p-2 block items-center transition duration-150 ease-in-out`}
-                      aria-current="page"
-                    >
-                      Home
-                    </button>
-                  </Link>
-                </li>
                 <li>
                   <Link to="pizzas" spy={true} smooth={true} offset={-80} duration={500}>
                     <button
@@ -120,14 +94,7 @@ function Header() {
                     </button>
                   </Link>
                 </li>
-                {open && (
-
-                  <button onClick={() => router.push("/welcomeLogo")} className="p-3 rounded-md font-bold font-nunito  text-base  mx-auto 
-                                    bg-white t hover:bg-black hover:text-white   
-                                      hover:-translate-y-1 transition-all duration-500">
-                    Hac&eacute; tu pedido
-                  </button>
-                )}
+              
               </ul>
             </div>
           </nav>

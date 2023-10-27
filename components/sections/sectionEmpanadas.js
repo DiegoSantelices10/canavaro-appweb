@@ -54,11 +54,11 @@ export default function SectionEmpanadas({ products, imagefront }) {
           </div>
         </div>
 
-        <div className="relative z-10 bg-black  rounded-lg h-full p-1 bg-opacity-40 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 gap-2 content-center pb-6 pt-4">
-          <p className="col-span-2 text-white text-center text-sm pb-4 italic font-poppins">
+        <div className="relative z-10 bg-black  rounded-lg h-full p-1 bg-opacity-40 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 lg:grid-cols-3 gap-2 content-center pb-6 pt-4">
+          <p className="col-span-2 lg:col-span-3 text-white text-center text-sm pb-4 italic font-poppins">
             * Hacer click sobre el titulo para ver descripcion.
           </p>
-          <h1 className="col-span-2 font-bold text-2xl text-center">Canastitas</h1>
+          <h1 className="col-span-2 grid lg:col-span-3 font-bold text-2xl text-center">Canastitas</h1>
           {products
             ?.filter(item => item.categoria === "empanadas" && item.available === true)
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
@@ -75,11 +75,11 @@ export default function SectionEmpanadas({ products, imagefront }) {
                       <div className="w-auto py-2">
                         <p
                           onClick={() => handleOpenModal(producto)}
-                          className=" cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+                          className="text-base md:text-lg lg:text-lg cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
                         >
                           {producto.nombre}
                         </p>
-                        <p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+                        <p className="font-normal text-xs md:text-base lg:text-base text-zinc-400 text-center">{producto.descripcion}</p>
                       </div>
                     </motion.div>
                   </div>
@@ -87,7 +87,7 @@ export default function SectionEmpanadas({ products, imagefront }) {
               );
             })}
 
-          <h1 className="col-span-2 font-bold text-2xl text-center">Empanadas</h1>
+          <h1 className="col-span-2 lg:col-span-3  font-bold text-2xl text-center">Empanadas</h1>
           {products
             ?.filter(item => item.categoria === "empanadas")
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
@@ -104,11 +104,11 @@ export default function SectionEmpanadas({ products, imagefront }) {
                       <div className="w-auto">
                         <p
                           onClick={() => handleOpenModal(producto)}
-                          className=" cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
+                          className="text-base md:text-lg lg:text-lg cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
                         >
                           {producto.nombre}
                         </p>
-                        <p className="font-normal text-xs text-gray-300 text-center">{producto.descripcion}</p>
+                        <p className="font-normal text-xs md:text-base lg:text-base text-zinc-400 text-center">{producto.descripcion}</p>
                       </div>
                     </motion.div>
                   </div>

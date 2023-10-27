@@ -129,7 +129,7 @@ export default function Index() {
   };
 
   return (
-    <div className=" min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
+    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
       {showModal && (
         <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
       )}
@@ -194,14 +194,16 @@ export default function Index() {
           <div className="text-center font-nunito py-2 text-gray-400 text-base">
             <p>puedes elegir hasta {select === "gigante" ? "4" : "2"} gustos</p>
           </div>
+          <div className="px-3 rounded-md">
           <div
             className={
               total === 1
-                ? "bg-green-500 font-nunito  w-full text-white p-2 mt-2 text-center font-semibold"
-                : "bg-sky-700 w-full font-nunito text-white p-2 mt-2 text-center font-semibold"
+                ? "bg-green-500 font-nunito rounded-md  w-full text-sm text-white p-2 mt-2 text-center font-semibold"
+                : "bg-sky-700 w-full font-nunito rounded-md text-white text-sm p-2 mt-2 text-center font-semibold"
             }
           >
             {productTotal()}
+          </div>
           </div>
           <div className="text-sm font-semibold text-left bg-white p-3 my-1">
             {products

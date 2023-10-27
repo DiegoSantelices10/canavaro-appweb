@@ -138,7 +138,7 @@ export default function Promotion({
           </div>
         </div>
       ) : (
-        <div className="mt-4">
+        <div className="mt-4 font-nunito">
           {
             <>
               {quantityDemanded < 1 ? (
