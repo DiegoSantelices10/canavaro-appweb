@@ -83,7 +83,7 @@ export default function Home() {
     if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
     if (cantidadTotal % requiredQuantity === 0) {
-      const totalDescuento = totalAmount - totalAmount * 0.10;
+      const totalDescuento = totalAmount - totalAmount * 0.13;
       const totalRedondeado = Math.floor(totalDescuento / 100) * 100;
       if (cantidadTotal === requiredQuantity) setDocenaPrice(totalRedondeado);
       setTotalPrice(totalRedondeado);
