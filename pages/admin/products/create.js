@@ -22,7 +22,7 @@ export default function Create() {
       {showModal && <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} />}
 
       <section className="w-full bg-slate-50">
-        <div className="w-full lg:w-3/5 p-2 md:p-10">
+        <div className="w-full  p-2 md:p-10">
           <h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
             ¡Ingresa un producto nuevo!
           </h1>
@@ -44,8 +44,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("empanadas")}
                 className={
                   renderProducts !== "empanadas"
-                    ? "w-52 rounded-3xl font-semibold text-gray-400"
-                    : "w-52 p-1 font-semibold bg-sky-900  text-white rounded-md"
+                    ? "w-52  font-semibold text-gray-400"
+                    : "w-52 p-1 font-semibold border-b-sky-700 border-b  text-sky-700 "
                 }
               >
                 Canastitas & Empanadas
@@ -56,8 +56,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("pizzas")}
                 className={
                   renderProducts !== "pizzas"
-                    ? "w-32 rounded-3xl font-semibold text-gray-400"
-                    : "w-32 p-1 font-semibold bg-sky-900 text-white rounded-md"
+                    ? "w-52  font-semibold text-gray-400"
+                    : "w-52 p-1 font-semibold border-b-sky-700 border-b  text-sky-700 "
                 }
               >
                 Pizzas
@@ -69,8 +69,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("promociones")}
                 className={
                   renderProducts !== "promociones"
-                    ? "w-32 rounded-3xl font-semibold text-gray-400"
-                    : "w-32 font-semibold p-1 bg-sky-900 text-white rounded-md"
+                    ? "w-52  font-semibold text-gray-400"
+                    : "w-52 p-1 font-semibold border-b-sky-700 border-b  text-sky-700 "
                 }
               >
                 Promociones
@@ -81,8 +81,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("bebidas")}
                 className={
                   renderProducts !== "bebidas"
-                    ? "w-32 rounded-3xl font-semibold text-gray-400"
-                    : "w-32 font-semibold  p-1 text-white rounded-md bg-sky-900"
+                    ? "w-52  font-semibold text-gray-400"
+                    : "w-52 font-semibold border-b-sky-700 border-b  text-sky-700 "
                 }
               >
                 Bebidas

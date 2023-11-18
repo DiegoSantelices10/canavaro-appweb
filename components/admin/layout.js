@@ -8,11 +8,11 @@ const Layout = ({ children }) => {
       <Head>
         <title>Pizzeria Canavaro</title>
       </Head>
-      <div className="w-full lg:w-24 shadow lg:fixed lg:h-full">
+      <div className="w-full lg:w-2/12 bg-sky-700 lg:h-full lg:fixed">
         <AccessMenu />
       </div>
 
-      <main className="max-h-max  bg-gray-100 w-full lg:pl-20">
+      <main className="max-h-max py-4 px-1 bg-gray-100 w-full lg:w-10/12 lg:absolute lg:right-0">
         {children}
       </main>
     </div>

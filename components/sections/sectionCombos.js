@@ -80,7 +80,7 @@ export default function sectionCombos({ products, imagefront }) {
                       >
                         {producto.nombre}
                       </p>
-                      <p className="text-sm lg:text-base text-zinc-400 px-8">{producto.descripcion}</p>
+                      <p className="text-sm lg:text-base text-zinc-300 px-8">{producto.descripcion}</p>
                     </div>
                   </motion.div>
                 </div>

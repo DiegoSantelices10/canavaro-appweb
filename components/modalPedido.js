@@ -45,54 +45,54 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 />
               </button>
             </div>
-            <div className="font-normal text-left text-base font-nunito mt-4 text-gray-900">
+            <div className="font-normal text-left text-base font-nunito mt-4 text-gray-800">
               <div className="flex justify-between w-full ">
-                <h2 className="font-bold">
-                  Fecha: <span className="font-medium text-base">{pedido?.fecha}</span>
+                <h2 className="font-semibold">
+                  Fecha: <span className="font-normal text-base">{pedido?.fecha}</span>
                 </h2>
-                <h2 className="font-bold">
-                  Hora: <span className="font-medium text-base">{pedido?.hora}</span>
+                <h2 className="font-semibold">
+                  Hora: <span className="font-normal text-base">{pedido?.hora}</span>
                 </h2>
               </div>
               {pedido?.cliente && (
-                <h2 className="font-bold">
-                  Cliente: <span className="font-semibold  text-base">{pedido.cliente}</span>
+                <h2 className="font-semibold">
+                  Cliente: <span className="font-normal  text-base">{pedido.cliente}</span>
                 </h2>
               )}
 
               {pedido.domicilio && (
-                <h2 className="font-bold">
-                  Direccion: <span className="font-semibold text-base">{pedido?.domicilio}</span>
+                <h2 className="font-semibold">
+                  Direccion: <span className="font-normal text-base">{pedido?.domicilio}</span>
                 </h2>
               )}
               {pedido?.telefono && (
-                <h2 className="font-bold">
-                  Telefono: <span className="font-semibold text-base">{separarNumero(pedido?.telefono)}</span>
+                <h2 className="font-semibold">
+                  Telefono: <span className="font-normal text-base">{separarNumero(pedido?.telefono)}</span>
                 </h2>
               )}
-              <h2 className="font-bold">
-                Tipo de envio: <span className="font-semibold text-base">{pedido?.tipoEnvio}</span>
+              <h2 className="font-semibold">
+                Tipo de envio: <span className="font-normal text-base">{pedido?.tipoEnvio}</span>
               </h2>
               {pedido.hPersonalizado !== "" && (
-                <h2 className="font-bold">
-                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-semibold text-base">{pedido?.hPersonalizado}hs.</span>
+                <h2 className="font-semibold">
+                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-normal text-base">{pedido?.hPersonalizado}hs.</span>
                 </h2>
 
               )}
-              <h2 className="font-bold">
-                Medio de pago: <span className="font-semibold text-base">{pedido?.medioDePago}</span>
+              <h2 className="font-semibold">
+                Medio de pago: <span className="font-normal text-base">{pedido?.medioDePago}</span>
               </h2>
 
               {pedido?.comentarios && (
-                <h2 className="font-bold">
-                  Comentarios: <span className="font-semibold text-base">{pedido?.comentarios}</span>
+                <h2 className="font-semibold">
+                  Comentarios: <span className="font-normal text-base">{pedido?.comentarios}</span>
                 </h2>
               )}
               <>
 
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <hr className="w-full h-1 my-3 bg-slate-800" />
+                    <hr className="w-full h-1 my-3 bg-slate-700" />
                     <p className="text-base text-gray-900">{categoria?.categoria}</p>
 
                     {productos

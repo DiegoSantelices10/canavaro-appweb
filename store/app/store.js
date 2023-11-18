@@ -17,7 +17,7 @@ export const makeStore = () =>
 			auth: authSlice,
 			setting: settingSlice
 		},
-		devTools: true,
+		devTools: false,
 	});
 
 export const wrapper = createWrapper(makeStore, { debug: false });

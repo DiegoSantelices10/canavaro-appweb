@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineLogout } from "react-icons/ai";
 import { logout } from "services/fetchData";
@@ -23,47 +22,37 @@ const AccessMenu = () => {
   };
 
   return (
-    <div className="w-full  h-full relative flex justify-between  mx-auto lg:flex  lg:flex-col lg:justify-between lg:items-center gap-4 p-4 ">
-
-      <div className="flex flex-row lg:flex-col gap-3">
+    <div className="w-full  h-20 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-between lg:items-center gap-4 p-4 ">
+      <div className="flex flex-row lg:flex-col lg:gap-3 gap-0 w-full lg:pt-10 pt-0 ">
         <Link href="/admin" passHref>
           <button
-            className={`${selected === "/admin" ? "border-2 font-bold border-gray-400" : "bg-white"
-              } mx-auto rounded-2xl shadow p-2 h-auto w-20`}
+            className={`${selected === "/admin" ? " text-white font-semibold border-gray-200 border-b" : "font-normal text-white"
+              } mx-auto w-full h-auto`}
           >
-            <div>
-              <Image priority={true} src="/images/pedidosblack.webp" width={25} height={25} alt="pedidoblack" />
-              <p className="text-sm font-nunito">Pedidos</p>
-            </div>
+              <p className="text-base font-nunito lg:text-left md:text-center text-center">Pedidos</p>
           </button>
         </Link>
 
         <Link href="/admin/products/list" passHref>
           <button
-            className={`${selected === "/admin/products/list" ? "border-2 font-bold border-gray-400" : "bg-white"
-              } mx-auto rounded-2xl shadow py-2 h-auto w-20 `}
+            className={`${selected === "/admin/products/list" ? "text-white border-b font-semibold border-gray-200" : "font-normal text-white"
+              } mx-auto w-full  h-auto  `}
           >
-            <div>
-              <Image priority={true} src="/images/productsblack.webp" width={25} height={25} alt="black" />
-              <p className="text-center text-sm font-nunito ">Productos</p>
-            </div>
+              <p className="lg:text-left md:text-center text-center text-base font-nunito ">Productos</p>
           </button>
         </Link>
 
         <Link href="/admin/sales/list" passHref>
           <button
-            className={`${selected === "/admin/sales/list" ? "border-2 font-bold border-gray-400" : "bg-white"
-              } mx-auto rounded-2xl shadow p-2 h-auto w-20 `}
+            className={`${selected === "/admin/sales/list" ? "text-white border-b font-semibold border-gray-200" : "font-normal text-white"
+              } mx-auto w-full h-auto `}
           >
-            <div>
-              <Image priority={true} src="/images/salesblack.webp" width={35} height={35} alt="salesblack" />
-              <p className="text-sm font-nunito ">Ventas</p>
-            </div>
+              <p className="text-base font-nunito lg:text-left md:text-center text-center">Ventas</p>
           </button>
         </Link>
       </div>
       <button onClick={signOut} className="font-semibold">
-        <AiOutlineLogout size={30} className="mx-auto" />
+        <AiOutlineLogout size={25} className="mx-auto text-white" />
       </button>
     </div>
   );

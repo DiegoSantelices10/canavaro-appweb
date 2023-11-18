@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSaleData } from "store/reducers/saleSlice";
 import { motion } from "framer-motion";
-import * as bigintConversion from 'bigint-conversion';
 
 
 export default function Sales() {
@@ -37,10 +36,7 @@ export default function Sales() {
     setCurrentPedido(null);
     setShowModal(false);
   };
-  const numeroPedido = (id) => {
-    const numero = bigintConversion.textToBigint(id);
-    return numero.toString().slice(-10)
-  }
+
 
 
   return (
@@ -49,7 +45,7 @@ export default function Sales() {
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
       <div className="bg-slate-50 h-full w-full">
-        <div className="w-full p-2 h-auto mx-auto lg:px-10">
+        <div className="w-full p-2 h-auto mx-auto ">
           <div className=" py-5 w-full lg:px-0 h-auto flex justify-center lg:justify-start items-center">
             <div className="w-full flex flex-col justify-between font-roboto  p-4 h-20 font-bold bg-white rounded-md shadow">
               <h2 className="font-semibold  text-sm whitespace-nowrap">
@@ -67,7 +63,7 @@ export default function Sales() {
                 <div className="w-full  mx-auto text-center py-2">
                   <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito  lg:p-0">
                     {sales?.length > 0 ? (
-                      sales.map((item, index) => (
+                      sales?.slice().reverse().map((item, index) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, y: -10 }}
@@ -76,7 +72,7 @@ export default function Sales() {
                           className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border"
                         >
                           <div className="w-full text-sm">
-                            <h2 className="text-right text-xs text-gray-500"><span className="text-xs">{numeroPedido(item._id)}</span></h2>
+                            <h2 className="text-right text-xs text-gray-500"><span className="text-xs">{item.hora}hs.</span></h2>
                             <div className="text-left py-3 font-medium">
                               <h5 className="font-semibold">{item?.cliente}</h5>
                               <h5 className="text-sm font-semibold">{item?.domicilio}</h5>

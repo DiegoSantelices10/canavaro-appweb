@@ -75,10 +75,10 @@ export default function Products() {
 
   return (
     <Layout>
-      <div className="lg:flex grid grid-rows-1 px-2 lg:px-0 gap-4 border-none  w-full md:w-11/12 lg:w-11/12 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
-        <div className="bg-white flex w-full lg:w-1/4  items-center gap-x-2 ">
+      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-2 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
+        <div className="bg-white flex w-full lg:w-1/4  items-center gap-x-2">
           <div
-            className="flex  justify-between items-center w-full  h-12  pr-3 py-2 text-sm leading-tight text-gray-700 border-0 
+            className="flex  justify-between items-center w-full  h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border-0 
                          rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
           >
             <input
@@ -93,28 +93,28 @@ export default function Products() {
           </div>
         </div>
 
-        <div className="w-full lg:w-1/4 h-12 border-none shadow appearance-none focus:outline-none focus:shadow-outline">
+        <div className="w-full lg:w-1/4 h-10 border-none shadow appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:ring-0">
           <select
             onChange={handleCategoryChange}
-            className="h-12 border-none font-nunito  text-gray-900 text-base rounded-lg  block w-full p-2.5 "
+            className="h-10 border-none font-nunito  text-gray-900 text-base rounded-lg  block w-full p-2.5 "
           >
-            <option className="text-gray-200" value="">
+            <option className="text-gray-200 text-sm" value="">
                 Seleccione una categoria
             </option>
             {categorias.map(item => (
-              <option key={item} value={item} className="text-lg font-nunito font-semibold">
+              <option key={item} value={item} className="text-sm font-nunito font-medium">
                 {item}
               </option>
             ))}
           </select>
         </div>
 
-        <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-between ">
+        <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-end gap-5 ">
 
           <button
-            className="w-44 h-12 col-start-2 font-nunito font-bold
-                             rounded-md  text-base 
-                             border text-white bg-sky-800"
+            className="w-36 h-10 col-start-2 font-nunito font-bold
+                             rounded-md  text-sm 
+                             border text-white bg-sky-700"
             type="button"
             onClick={() => {
               router.push("/admin/products/create");
@@ -123,9 +123,9 @@ export default function Products() {
             Producto Nuevo
           </button>
           <button
-            className="w-44 h-12 col-start-2 font-nunito font-bold
-                             rounded-md  text-base 
-                             border text-sky-800 bg-white border-sky-800"
+            className="w-36 h-10 col-start-2 font-nunito font-bold
+                             rounded-md  text-sm 
+                             border text-sky-700 bg-white border-sky-700"
             type="button"
             onClick={() => {
               router.push("/admin/products/updatePrices");
@@ -137,7 +137,7 @@ export default function Products() {
 
       </div>
 
-      <div className="w-full px-2 md:w-11/12 lg:w-11/12 mx-auto lg:px-0 grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
+      <div className="w-full px-2  mx-auto  grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
         {renderProductos.map(({ _id, nombre, descripcion, imagen, available, categoria }) => {
           return (
             <div key={_id} className="bg-white h-auto rounded-md pl-1 border">
@@ -162,13 +162,13 @@ export default function Products() {
                         checked={available}
                         onChange={() => handleCheckboxChange(_id, available)}
                       />
-                      <div className="w-11 h-6 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 
-                             dark:peer-focus:ring-sky-900  rounded-full 
+                      <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 
+                             dark:peer-focus:ring-sky-700  rounded-full 
                              dark:bg-gray-700 peer-checked:after:translate-x-full 
                             peer-checked:after:border-white after:content-[''] after:absolute 
-                            after:top-[2px] after:left-[2px] after:bg-white  
-                            after:border after:rounded-full after:h-5 after:w-5 after:transition-all 
-                            dark:border-gray-600 peer-checked:bg-sky-800 "></div>
+                            after:top-[2px] after:left-[1px] after:bg-white  
+                            after:border after:rounded-full after:h-4 after:w-4 after:transition-all 
+                            dark:border-gray-600 peer-checked:bg-sky-700 "></div>
                     </label>
                   </div>
                 </div>

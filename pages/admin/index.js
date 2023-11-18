@@ -8,7 +8,6 @@ import { addSale, setRenderSaleData, setSaleData, updateSale } from "store/reduc
 import axios from "axios";
 import Pusher from "pusher-js";
 import { Howl } from "howler";
-import * as bigintConversion from 'bigint-conversion'
 import { getPromo } from "services/fetchData";
 
 
@@ -85,12 +84,6 @@ export default function Home() {
     };
   }, []);
 
-  const numeroPedido = (id) => {
-    const numero = bigintConversion.textToBigint(id);
-    return numero.toString().slice(-10)
-
-  }
-
   const handleOpenModal = pedido => {
     setCurrentPedido(pedido);
     setShowModal(true);
@@ -162,11 +155,11 @@ export default function Home() {
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
       <div className="h-auto w-full">
-        <div className="lg:flex w-full justify-between">
-          <div className="w-full py-5 lg:w-3/5 ">
+        <div className="lg:flex w-full justify-between h-auto  px-2 gap-4">
+          <div className="w-full shadow rounded-md h-auto border border-gray-200  p-2 py-3">
             <div className="w-full text-center">
-              <h1 className="font-semibold font-nunito py-2">Demora domicilio</h1>
-              <div className="flex gap-1 lg:gap-3 p-2  justify-center">
+              <h1 className="font-medium font-nunito">Demora domicilio</h1>
+              <div className="flex gap-1 lg:gap-3  justify-center">
                 {data
                   ?.filter(item => item.tipoEnvio === "domicilio")
                   .map(item => (
@@ -174,10 +167,11 @@ export default function Home() {
                   ))}
               </div>
             </div>
+    
 
-            <div className="w-full  text-center">
-              <h1 className="font-semibold font-nunito py-2">Demora por local</h1>
-              <div className="flex gap-1 lg:gap-3 p-2 justify-center">
+            <div className="w-full  text-center mt-2">
+              <h1 className="font-medium font-nunito">Demora local</h1>
+              <div className="flex gap-1 lg:gap-3 justify-center">
                 {data
                   ?.filter(item => item.tipoEnvio === "local")
                   .map(item => (
@@ -186,10 +180,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="w-full shadow rounded-md p-2 flex items-center border border-gray-200 mt-2 lg:mt-0">
           {barra?.map(item => (
-            <div key={item._id} className="w-full lg:w-1/5 self-center justify-center mx-auto text-center flex">
+            <div key={item._id} className="w-full h-auto mx-auto text-center">
               <button
-                className={`w-44 h-12 font-nunito whitespace-nowrap font-bold rounded-md mt-2 text-base border" ${item?.available ? "text-white bg-sky-800" : "text-sky-800 bg-white border border-sky-800"}`}
+                className={`w-40 h-10 font-nunito whitespace-nowrap font-semibold rounded-md text-sm border" ${item?.available ? "text-white bg-sky-700" : "text-sky-800 bg-white border border-sky-800"}`}
                 type="button"
                 onClick={() => promoBarra(item?._id, item?.available)}
               >
@@ -198,10 +193,12 @@ export default function Home() {
             </div>
           ))}
 
+          </div>
+
         </div>
 
 
-        <div className="w-full bg-slate-50 lg:px-10   mx-auto text-center p-2 mt-5 rounded-md ">
+        <div className="w-full bg-slate-50  mx-auto text-center px-2 mt-5">
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
@@ -210,15 +207,15 @@ export default function Home() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border"
+                  className="w-full  md:w-72 border-gray-300  rounded-md h-auto shadow-md p-2 border"
                 >
-                  <div className="w-full text-sm">
-                    <h2 className="text-right text-xs text-gray-500">codigo de pedido: <span className="text-xs">{numeroPedido(item._id)}</span></h2>
+                  <div className="w-full text-sm text-gray-800">
+                    <h2 className="text-right text-xs ">{item.hora} hs.</h2>
                     <div className="text-left py-3 font-medium">
                       <h5 className="font-semibold">{item?.cliente}</h5>
-                      <h5 className="text-sm font-semibold">{item?.domicilio}</h5>
+                      <h5 className="text-sm font-semibold ">{item?.domicilio}</h5>
 
-                      <h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
+                      <h5 className="font-normal text-xs text-gray-700">{item?.tipoEnvio}</h5>
                     </div>
                   </div>
                   <div className="flex justify-end  gap-3 w-full font-nunito">

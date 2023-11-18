@@ -79,7 +79,7 @@ export default function SectionEmpanadas({ products, imagefront }) {
                         >
                           {producto.nombre}
                         </p>
-                        <p className="font-normal text-xs md:text-base lg:text-base text-zinc-400 text-center">{producto.descripcion}</p>
+                        <p className="font-normal text-xs md:text-base lg:text-base text-zinc-300 text-center">{producto.descripcion}</p>
                       </div>
                     </motion.div>
                   </div>

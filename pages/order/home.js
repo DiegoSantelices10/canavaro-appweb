@@ -144,7 +144,7 @@ export default function Home() {
       <div className="py-4 mt-12 mx-auto w-full ">
         <h1 className="text-lg  font-extrabold text-sky-800 px-3 pb-1">Promociones</h1>
         <hr className="pb-3" />
-        <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-3">
+        <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
           <style jsx>
             {`
               .flexp::-webkit-scrollbar-thumb {
@@ -193,7 +193,7 @@ export default function Home() {
               className={
                 renderProducts !== "empanadas"
                   ? "w-52  font-semibold text-gray-400"
-                  : "w-52 font-semibold bg-white text-sky-800 shadow rounded-md tracking-wide"
+                  : "w-52 font-semibold bg-white text-sky-700 border-b border-gray-300 tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -205,7 +205,7 @@ export default function Home() {
               className={
                 renderProducts !== "pizzas"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-semibold bg-white text-sky-800 shadow rounded-md tracking-wide"
+                  : "w-32 font-semibold bg-white text-sky-700 border-b border-gray-300 tracking-wide"
               }
             >
               Pizzas
@@ -218,7 +218,7 @@ export default function Home() {
               className={
                 renderProducts !== "promociones"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-semibold  bg-white text-sky-800 shadow rounded-md tracking-wide"
+                  : "w-32 font-semibold  bg-white text-sky-700 border-b border-gray-300 tracking-wide"
               }
             >
               Promociones
@@ -233,7 +233,7 @@ export default function Home() {
               className={
                 renderProducts !== "bebidas"
                   ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-semibold  bg-white text-sky-800 shadow rounded-md tracking-wide"
+                  : "w-32 font-semibold  bg-white text-sky-700 border-b border-gray-300 tracking-wide"
               }
             >
               Bebidas
