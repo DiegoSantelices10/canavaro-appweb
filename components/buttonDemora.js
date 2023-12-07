@@ -10,8 +10,8 @@ export default function Button({ handlePutTime, data, selected }) {
         }}
         className={
           selected.demora !== data.demora
-            ? "p-1 px-2 sm:p-2 md:p-2 lg:p-2   w-auto bg-white text-sm text-gray-400 font-semibold font-nunito rounded-md shadow "
-            : "p-1 px-2 sm:p-2 md:p-2 lg:p-2   w-auto bg-sky-700 text-white text-sm font-semibold font-nunito rounded-md shadow "
+            ? "p-2 w-auto bg-white text-sm text-gray-400 font-semibold font-nunito rounded-lg border-2 border-white"
+            : "p-2 w-auto bg-sky-800 text-white  text-sm font-semibold font-nunito rounded-lg border-2 border-white"
         }
       >
         {data.demora}

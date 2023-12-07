@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
         <AccessMenu />
       </div>
 
-      <main className="max-h-max py-4 px-1 bg-gray-100 w-full lg:w-10/12 lg:absolute lg:right-0">
+      <main className="max-h-max  bg-gray-100 w-full lg:w-10/12 lg:absolute lg:right-0">
         {children}
       </main>
     </div>

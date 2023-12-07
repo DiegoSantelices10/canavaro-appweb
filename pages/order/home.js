@@ -32,8 +32,10 @@ export default function Home() {
   const dispatch = useDispatch();
   const renderPromotions = () => {
     // eslint-disable-next-line dot-notation
-    const combos = products?.filter(item => item.nombre.includes("Combo"))?.sort((a, b) => a.nombre.localeCompare(b.nombre))
-    const otraPromos = products?.filter(item => item.categoria === "promociones" && !item.nombre.includes("Combo"))
+    const combos = products
+      ?.filter(item => item.nombre.includes("Combo"))
+      ?.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    const otraPromos = products?.filter(item => item.categoria === "promociones" && !item.nombre.includes("Combo"));
     const ordenado = [...combos, ...otraPromos];
     return ordenado?.filter(item => item.available === true).map(data => <CardPromotion key={data._id} data={data} />);
   };
@@ -83,8 +85,8 @@ export default function Home() {
     if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
     if (cantidadTotal % requiredQuantity === 0) {
-      const totalDescuento = totalAmount - totalAmount * 0.13;
-      const totalRedondeado = Math.floor(totalDescuento / 100) * 100;
+      const totalDescuento = totalAmount - totalAmount * 0.10;
+      const totalRedondeado = Math.ceil(totalDescuento / 100) * 100;
       if (cantidadTotal === requiredQuantity) setDocenaPrice(totalRedondeado);
       setTotalPrice(totalRedondeado);
     }
@@ -125,7 +127,7 @@ export default function Home() {
     };
     setTotalCant(0);
     dispatch(addPromoOrderList(result));
-    toast.success('Se agrego al pedido!')
+    toast.success("Se agrego al pedido!");
 
     dispatch(clearOrderPromo());
     dispatch(calculateSubTotal());
@@ -142,8 +144,7 @@ export default function Home() {
     <Layout>
       <Toaster/>
       <div className="py-4 mt-12 mx-auto w-full ">
-        <h1 className="text-lg  font-extrabold text-sky-800 px-3 pb-1">Promociones</h1>
-        <hr className="pb-3" />
+        <h1 className="text-lg  font-extrabold text-neutral-800 px-3 pb-1">Promociones</h1>
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
           <style jsx>
             {`
@@ -161,11 +162,9 @@ export default function Home() {
         </div>
         <div className="my-4">
           <div className="w-full  p-3 flex items-center justify-between">
-            <p className="text-left w-full font-nunito text-base  font-bold">
-              ¡ Arma tu pizza como quieras !
-            </p>
+            <p className="text-left w-full font-nunito text-base  font-bold">¡ Arma tu pizza como quieras !</p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-nunito font-semibold w-auto bg-sky-700 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
+              <a className="rounded-md font-nunito font-semibold w-auto bg-sky-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
                 Ingresa aqui
               </a>
             </Link>
@@ -241,25 +240,22 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
-          <h1 className="text-lg  font-extrabold text-sky-800 px-3 pb-1">
-            {renderProducts[0].toUpperCase() + renderProducts.substring(1)}
-          </h1>
-          <hr className="pb-3" />
+        <div className="pt-3">
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">{renderStore(renderProducts)}</div>
         </div>
         {(renderProducts === "empanadas" || renderProducts === "bebidas") && (
-          <div className="w-full fixed bottom-0    sm:w-4/5 md:w-4/5 lg:w-3/5">
+          <div className="w-full px-2 fixed bottom-2    sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
-              className="flex justify-between items-center gap-3 rounded-t-3xl mx-auto text-center   
-									   w-full md:w-1/2 lg:w-3/5 p-4 bg-sky-700  text-white text-base font-semibold "
+              className="flex justify-between items-center gap-3 rounded-xl mx-auto text-center   
+									   w-full md:w-1/2 lg:w-3/5 p-4 bg-sky-600  text-white text-base font-semibold "
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
-                className={`${orderPromo.length < 1
-                  ? "invisible"
-                  : "p-3 px-4 font-semibold font-nunito bg-slate-50 rounded-md text-sky-800 text-sm hover:-translate-y-1 transition-all duration-500"
-                  }`}
+                className={`${
+                  orderPromo.length < 1
+                    ? "invisible"
+                    : "p-3 px-4 font-semibold font-nunito bg-slate-50 rounded-md text-sky-800 text-sm hover:-translate-y-1 transition-all duration-500"
+                }`}
               >
                 Agregar al carrito
               </button>

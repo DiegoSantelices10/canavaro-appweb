@@ -125,7 +125,7 @@ export default function ProductLayout({
         <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
       )}
       <Toaster/>
-      <div className="flex justify-center items-center  w-full mt-4">
+      <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
           src={imagen?.url}
@@ -135,7 +135,7 @@ export default function ProductLayout({
 
       </div>
       <button onClick={returnHome}>
-        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-2 left-4" size={30} />
+        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-0 left-4" size={30} />
       </button>
       <div className="w-full h-auto">
         <div className="flex flex-col  w-full">

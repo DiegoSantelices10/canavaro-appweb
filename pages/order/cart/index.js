@@ -160,13 +160,13 @@ export default function Cart({ data }) {
                   </div>
 
                   <div className="py-2">
-                    <div className="p-2 rounded-md shadow-sm bg-gray-100">
+                    <div className="">
                       {promoBarra?.available && (
                         <div className="w-full mx-auto text-center font-bold">
                           Retirando por el local tenes un 10% de descuento.
                         </div>
                       )}
-                      <div className="flex justify-center  w-full gap-3 py-3 text-sm ">
+                      <div className="flex justify-center  w-full gap-3 text-sm bg-slate-50 shadow p-2 rounded-md">
                         <button
                           type="button"
                           onClick={() => {
@@ -174,7 +174,7 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "domicilioActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-700 shadow text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-600 shadow text-white font-light p-3"
                               : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow  font-light p-3"
                           }
                         >
@@ -188,7 +188,7 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "localActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-700 shadow text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-600 shadow text-white font-light p-3"
                               : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow font-light p-3"
                           }
                         >
@@ -196,14 +196,14 @@ export default function Cart({ data }) {
                           Retiro
                         </button>
                       </div>
-                      <div className="flex flex-col justify-center items-center gap-2">
+                      <div className="flex flex-col justify-center items-center gap-2 p-2 mt-3">
                         {type === "domicilioActual" ? (
                           <div className="w-full">
                             <div className="w-full">
                               <Field
                                 id="direccion"
                                 name="direccion"
-                                className=" border-slate-300 border rounded-md w-full p-2 text-sm"
+                                className="border-t-0 border-l-0 border-r-0 border-b-2 border-sky-600 focus:border-sky-600  w-full p-2 text-sm focus:ring-0 rounded-md"
                                 placeholder="Ingresa tu domicilio, Barrio"
                               />{" "}
                               <ErrorMessage name="direccion">
@@ -216,7 +216,7 @@ export default function Cart({ data }) {
                               <Field
                                 id="telefono"
                                 name="telefono"
-                                className="border-slate-300 border rounded-md w-full p-2 text-sm"
+                                className="border-t-0 border-l-0 border-r-0 border-b-2 border-sky-600 focus:border-sky-600  w-full p-2 text-sm focus:ring-0 rounded-md"
                                 placeholder="Ingresa tu telefono"
                               />
                               <ErrorMessage name="telefono">
@@ -242,7 +242,7 @@ export default function Cart({ data }) {
                                 <Field
                                   id="hPersonalizado"
                                   name="hPersonalizado"
-                                  className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
+                                  className="border-b-2 border-sky-600 focus:border-sky-600 border-t-0 border-r-0 border-l-0 rounded-md w-2/5 p-2 text-sm text-center focus:ring-0"
                                   placeholder="Horario de entrega"
                                 />
                               </div>
@@ -253,7 +253,7 @@ export default function Cart({ data }) {
                             <Field
                               id="nombre"
                               name="nombre"
-                              className="border border-slate-300 rounded-md w-full p-2 text-sm"
+                              className="border-t-0 border-l-0 border-r-0 border-b-2 border-sky-600 focus:border-sky-600 focus:ring-0 rounded-md w-full p-2 text-sm"
                               placeholder="Ingresa tu nombre"
                             />
                             <ErrorMessage name="nombre">
@@ -279,7 +279,7 @@ export default function Cart({ data }) {
                                 <Field
                                   id="hPersonalizado"
                                   name="hPersonalizado"
-                                  className="border-slate-300 border rounded-md w-2/5 p-2 text-sm text-center"
+                                  className="border-t-0 border-l-0 border-r-0 border-b-2 border-sky-600 focus:border-sky-600 rounded-md focus:ring-0 w-2/5 p-2 text-sm text-center"
                                   placeholder="Horario de retiro"
                                 />
                               </div>

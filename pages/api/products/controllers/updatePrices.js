@@ -1,4 +1,5 @@
 import Producto from "models/product";
+import PromoPrice from "models/promoPrice";
 
 export const updatePrices = async (req, res) => {
     const updateData = req.body;
@@ -22,20 +23,29 @@ export const updatePrices = async (req, res) => {
                     message: "Productos actualizados exitosamente",
                 });
             }
-        } else {
-                const updateOperation = {
-                    updateMany: {
-                        filter: { categoria: 'empanadas' },
-                        update: { $set: { 'precio': updateData.precio } }
-                    }
-                };
-                const response = await Producto.bulkWrite([updateOperation]);
-                if (response) {
-                    return res.status(200).json({
-                        success: true,
-                        message: "Precio de empanadas actualizado exitosamente",
-                    });
-        }
+        } else if(updateData.categoria === "docena") {
+            const products = await PromoPrice.findByIdAndUpdate(updateData._id, { precio: updateData.precio }, {
+                new: true,
+                runValidators: true,
+            });
+            return res.status(200).json({
+                success: true,
+                data: products,
+            });
+    } else  {
+        const updateOperation = {
+            updateMany: {
+                filter: { categoria: 'empanadas' },
+                update: { $set: { 'precio': updateData.precio } }
+            }
+        };
+        const response = await Producto.bulkWrite([updateOperation]);
+        if (response) {
+            return res.status(200).json({
+                success: true,
+                message: "Precio de empanadas actualizado exitosamente",
+            });
+}
     }
     } catch (error) {
         console.error("Error al actualizar los productos:", error);

@@ -9,6 +9,10 @@ const UpdatePrices = () => {
   const [data, setData] = useState([]);
   const [updateData, setUpdateData] = useState([]);
   const priceRef = useRef();
+  const priceDocenaRef = useRef();
+  // const priceExtraRef = useRef();
+
+
 
   useEffect(() => {
     if (data.length > 0) {
@@ -61,17 +65,40 @@ const UpdatePrices = () => {
     const pricesUpdate = priceRef.current.value;
     try {
       const response = await axios.put("/api/products/", { precio: pricesUpdate });
-      response.status === 200 && alert("Productos actualizados!");
+      response.status === 200 && alert("Precio de empanadas actualizados!");
     } catch (error) {
       alert("Error al actualizar los datos");
     }
   };
 
+  const handleUpdateEmpanadasPorDocena = async () => {
+    const pricesUpdate = priceDocenaRef.current.value;
+    try {
+      const response = await axios.put("/api/products/", { 
+        _id: "6571f5f6cf7c5cdd759d12e1",
+        categoria: "docena",
+        precio: pricesUpdate });
+      response.status === 200 && alert("Precio por docena actualizado!");
+    } catch (error) {
+      alert("Error al actualizar los datos");
+    }
+  };
+
+  // const handleUpdateExtra = async () => {
+  //   const pricesUpdate = priceExtraRef.current.value;
+  //   try {
+  //     const response = await axios.put("/api/products/", { precio: pricesUpdate });
+  //     response.status === 200 && alert("Precio extra actualizado!");
+  //   } catch (error) {
+  //     alert("Error al actualizar los datos");
+  //   }
+  // };
+
   return (
     <Layout>
-      <div className="lg:flex w-full justify-between items-center h-auto px-2 gap-4">
+      <div className="lg:flex w-full justify-between items-center h-auto p-2 gap-4">
         
-        <div className="mx-auto p-2 h-auto border border-gray-200 w-full  lg:w-2/3  shadow rounded-md">
+        <div className="mx-auto p-2 h-auto border border-gray-200 w-full  lg:w-1/2  shadow rounded-md">
           <p className="text-center font-nunito font-semibold">Actualiza precio empanadas</p>
           <div className=" md:flex lg:flex  justify-between w-full gap-2">
             <div className="w-full flex items-end">
@@ -96,40 +123,40 @@ const UpdatePrices = () => {
                 <p className="font-nunito text-sm font-semibold text-gray-500">Precio x docena</p>
                 <input
                   type="number"
-                  ref={priceRef}
+                  ref={priceDocenaRef}
                   className="p-2 h-9 w-full  text-sm leading-tight text-gray-700  border-gray-200 border
                             rounded-md shadow focus:border-gray-200"
                 />
               </div>
               <button
-                onClick={handleUpdateEmpanadas}
+                onClick={handleUpdateEmpanadasPorDocena}
                 className="bg-sky-800 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700"
               >
                 Actualizar
               </button>
             </div>
           </div>
-          <p className="font-nunito text-sm font-semibold text-gray-500 mt-2">Precio extra</p>
+          {/* <p className="font-nunito text-sm font-semibold text-gray-500 mt-2">Precio extra</p>
           <div className="w-full flex">
             <input
               type="number"
-              ref={priceRef}
+              ref={priceExtraRef}
               className="p-2 h-9 w-full  text-sm leading-tight text-gray-700  border-gray-200 border
                             rounded-md shadow focus:border-gray-200"
             />
             <button
-              onClick={handleUpdateEmpanadas}
+              onClick={handleUpdateExtra}
               className="bg-sky-800 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700"
             >
               Actualizar
             </button>
-          </div>
+          </div> */}
         </div>
 
-        <div className=" lg:w-1/3 w-full px-2 mt-3 lg:mt-0 flex flex-col items-center h-40 p-2   mx-auto border-none outline-none shadow border border-gray-200 rounded-md">
+        <div className=" lg:w-1/3 w-full px-2 mt-3 lg:mt-0 flex flex-col items-center  p-2   mx-auto border-none outline-none shadow border border-gray-200 rounded-md">
           <p className="font-nunito font-semibold">Actualizar el precio de las pizzas</p>
           <input
-            className=" file:cursor-pointer text-gray-500 text-sm w-5/5 mt-4 file:font-semibold file:bg-sky-800 file:text-white file:border-none file:p-2 file:rounded-md "
+            className=" file:cursor-pointer text-gray-500 text-sm w-5/5 mt-6 file:font-semibold file:bg-sky-800 file:text-white file:border-none file:p-2 file:rounded-md "
             type="file"
             title="Importar archivo"
             accept=".xlsx, .xls"

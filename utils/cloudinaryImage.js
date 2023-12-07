@@ -4,7 +4,7 @@ const cloudinaryImage = (value, setField) => {
   const file = value?.files[0];
 
   const extensions = /(jpe?g|png)$/i;
-  if (!extensions.test(file.type)) {
+  if (!extensions.test(file?.type)) {
     alert("El formato es invalido");
     return;
   }

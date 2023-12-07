@@ -154,12 +154,12 @@ export default function Home() {
       {currentPedido && (
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
-      <div className="h-auto w-full">
-        <div className="lg:flex w-full justify-between h-auto  px-2 gap-4">
-          <div className="w-full shadow rounded-md h-auto border border-gray-200  p-2 py-3">
-            <div className="w-full text-center">
-              <h1 className="font-medium font-nunito">Demora domicilio</h1>
-              <div className="flex gap-1 lg:gap-3  justify-center">
+      <div className="h-auto w-full ">
+        <div className="w-full bg-sky-700  h-auto gap-4">
+          <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
+            <div className="w-full text-center py-2">
+              <h1 className="font-medium font-nunito text-white">Demora domicilio</h1>
+              <div className="flex w-full gap-5 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "domicilio")
                   .map(item => (
@@ -167,11 +167,11 @@ export default function Home() {
                   ))}
               </div>
             </div>
-    
 
-            <div className="w-full  text-center mt-2">
-              <h1 className="font-medium font-nunito">Demora local</h1>
-              <div className="flex gap-1 lg:gap-3 justify-center">
+
+            <div className="w-full  text-center py-2">
+              <h1 className="font-medium font-nunito text-white">Demora local</h1>
+              <div className="flex w-full gap-5 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "local")
                   .map(item => (
@@ -180,11 +180,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="w-full shadow rounded-md p-2 flex items-center border border-gray-200 mt-2 lg:mt-0">
+          <div className="w-full lg:hidden shadow rounded-md p-2 flex items-center  mt-2 lg:mt-0">
           {barra?.map(item => (
             <div key={item._id} className="w-full h-auto mx-auto text-center">
               <button
-                className={`w-40 h-10 font-nunito whitespace-nowrap font-semibold rounded-md text-sm border" ${item?.available ? "text-white bg-sky-700" : "text-sky-800 bg-white border border-sky-800"}`}
+                className={`w-40 h-10 font-nunito whitespace-nowrap font-semibold rounded-md text-sm border" ${item?.available ? "text-white bg-sky-700 border border-white" : "text-sky-800 bg-white border border-sky-800"}`}
                 type="button"
                 onClick={() => promoBarra(item?._id, item?.available)}
               >
@@ -198,7 +198,7 @@ export default function Home() {
         </div>
 
 
-        <div className="w-full bg-slate-50  mx-auto text-center px-2 mt-5">
+        <div className="w-full   mx-auto text-center px-2 mt-5">
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
