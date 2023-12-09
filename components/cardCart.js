@@ -43,7 +43,6 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
             </div>
             <div className=" h-20 rounded-b-md px-1 py-2 ">
                 <p className=" text-gray-800 text-sm font-bold ">{nombre}</p>
-                <p className=" text-gray-400 text-xs font-medium ">{descripcion}</p>
                 <p className=" text-gray-400 text-xs font-medium ">${precio}</p>
                 
                 <div className=" absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
