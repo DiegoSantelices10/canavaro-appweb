@@ -20,7 +20,6 @@ const AccessMenu = () => {
   useEffect(() => {
     (async () => {
       const res = await getPromo();
-      console.log(res);
       setBarra(res.data)
     })();
 

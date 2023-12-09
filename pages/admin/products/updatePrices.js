@@ -74,7 +74,7 @@ const UpdatePrices = () => {
   const handleUpdateEmpanadasPorDocena = async () => {
     const pricesUpdate = priceDocenaRef.current.value;
     try {
-      const response = await axios.put("/api/products/", { 
+      const response = await axios.put("/api/promo/", { 
         _id: "6571f5f6cf7c5cdd759d12e1",
         categoria: "docena",
         precio: pricesUpdate });

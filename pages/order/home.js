@@ -17,12 +17,15 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { setProductData } from "store/reducers/productSlice";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+
 
 export default function Home() {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalCant, setTotalCant] = useState(0);
   const [docenaPrice, setDocenaPrice] = useState(0);
+
 
   const { products } = useSelector(state => state.product);
   const { orderPromo } = useSelector(state => state.order);
@@ -58,7 +61,13 @@ export default function Home() {
       const res = JSON.parse(localStorage.getItem("productos"));
       dispatch(setProductData(res));
     }
+
+   (async () => {
+    const res = await axios.get("/api/promo");
+    setDocenaPrice(res.data[0].precio)
+   })(); 
   }, []);
+
 
   const calculateEmpanadas = () => {
     const requiredQuantity = 12;
@@ -85,21 +94,31 @@ export default function Home() {
     if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
     if (cantidadTotal % requiredQuantity === 0) {
-      const totalDescuento = totalAmount - totalAmount * 0.10;
-      const totalRedondeado = Math.ceil(totalDescuento / 100) * 100;
-      if (cantidadTotal === requiredQuantity) setDocenaPrice(totalRedondeado);
-      setTotalPrice(totalRedondeado);
+     const cantDocena = cantidadTotal / requiredQuantity;
+     const total = cantDocena * docenaPrice;
+      setTotalPrice(total)
+      // const totalDescuento = totalAmount - totalAmount * 0.10;
+      // const totalRedondeado = Math.ceil(totalDescuento / 100) * 100;
+      // if (cantidadTotal === requiredQuantity) setDocenaPrice(totalRedondeado);
+      // setTotalPrice(totalRedondeado);
     }
 
     if (cantidadTotal > requiredQuantity && cantidadTotal % requiredQuantity !== 0) {
-      const cociente = Math.floor(cantidadTotal / requiredQuantity);
-      const result = cociente * docenaPrice;
+      let docenaCant = cantidadTotal / requiredQuantity;
+      docenaCant = Math.floor(docenaCant)
       const resto = cantidadTotal % requiredQuantity;
-      const total = result + resto * priceU;
-      setTotalPrice(total);
+      let subtotal;
+
+      if(docenaCant > 0) {
+        subtotal = docenaCant * docenaPrice;
+      }
+      const total = resto * priceU;
+      // const cociente = Math.floor(cantidadTotal / requiredQuantity);
+      // const result = cociente * docenaPrice;
+      // const resto = cantidadTotal % requiredQuantity;
+      // const total = result + resto * priceU;
+      setTotalPrice(subtotal + total);
     }
-
-
   };
 
   const addCartPromo = value => {

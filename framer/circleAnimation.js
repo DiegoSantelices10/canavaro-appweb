@@ -1,11 +1,11 @@
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { FaWhatsapp } from "react-icons/fa"
-import * as bigintConversion from 'bigint-conversion'
+import { FaWhatsapp, FaDownload } from "react-icons/fa"
 import { useEffect, useState } from "react";
+import html2canvas from "html2canvas";
+
 const CircleAnimation = () => {
-  const [nPedido, setNPedido] = useState(0);
   const { checkout, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
 
@@ -20,12 +20,26 @@ const CircleAnimation = () => {
       categoria: producto,
     }));
     setCatId(categoriasId)
-    const numero = bigintConversion.textToBigint(checkout._id);
-    setNPedido(numero.toString().slice(-10));
 
   }, [])
 
+  const handleCapture = () => {
+    const containerPedido = document.getElementById('container-pedido');
+    html2canvas(containerPedido).then((canvas) => {
+      const screenshot = canvas.toDataURL('image/png');
+      // Crea un enlace descargable
+      const downloadLink = document.createElement('a');
+      downloadLink.href = screenshot;
+      downloadLink.download = "Pedido-" + checkout.fecha;
 
+      // Agrega el enlace al documento y haz clic en él para iniciar la descarga
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Limpia el enlace después de la descarga
+      document.body.removeChild(downloadLink);
+    });
+  }
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -99,7 +113,7 @@ const CircleAnimation = () => {
       </motion.div>
       <div className="p-2 w-full md:w-1/2 lg:w-1/2 mx-auto">
         <div className="flex justify-center items-center flex-col  gap-1">
-          <p className="font-semibold text-sm font-nunito text-gray-800">confirmar tu pedido por whatsapp.</p>
+          <p className="font-bold text-sm font-nunito text-gray-700">confirmar tu pedido por whatsapp.</p>
           <a
             target="_blank"
             rel="noreferrer"
@@ -110,37 +124,41 @@ const CircleAnimation = () => {
               Ir a whatsapp</div>
           </a>
         </div>
-        <p className="text-red-400 font-semibold font-poppins text-sm px-1 mt-4">
-          Detalle del pedido
-        </p>
-        <div className="w-full h-auto rounded-md border-gray-200 border mt-2 p-2">
-          <div className="flex justify-between">
-            <h1 className="font-nunito font-bold">N° de pedido: <span className="text-gray-700 font-semibold ">{nPedido}</span></h1>
-            <h1 className="font-bold font-nunito">{checkout.hora}hs.</h1>
-
-          </div>
-
-          <div className="flex justify-between">
-            <div className="">
-              {delivery === "domicilioActual" ? (
-                <>
-
-                  <h2 className="font-nunito  font-bold text-base">Enviar a: <span className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </span></h2>
-
-                  <h1 className="font-bold font-nunito">Horario de envío:
-                    <span className="text-gray-700 px-2 font-semibold">
-                      {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span></h1>
-                </>
-              ) : (
-                <>
-                  <h2 className="font-nunito font-bold text-base">Retira por local: 
-                  <span className="text-gray-600 font-semibold"> {checkout.cliente}</span>
-                  </h2>
-                  <h1 className="font-bold font-nunito">Horario de retiro:
-                    <span className="text-gray-700 px-2 font-semibold">
-                      {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span></h1>
-                </>
-              )}
+        <div id="container-pedido">
+          <p className="text-red-400 font-semibold font-poppins text-sm px-1 mt-4">
+            Detalle del pedido
+          </p>
+          <div className="w-full h-auto rounded-md border-gray-200 border mt-2 p-2">
+            <div className="flex justify-between">
+              <div>
+                {delivery === "domicilioActual" ? (
+                  <>
+                    <h1 className="font-bold font-nunito">Horario de envío:
+                      <span className="text-gray-700 px-2 font-semibold">
+                        {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
+                    </h1>
+                    <h2 className="font-nunito  font-bold text-base">Enviar a: <span className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </span></h2>
+                  </>
+                ) : (
+                  <>
+                    <h1 className="font-bold font-nunito">Horario de retiro:
+                      <span className="text-gray-700 px-2 font-semibold">
+                        {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
+                    </h1>
+                    <h2 className="font-nunito font-bold text-base">Retira por local:
+                      <span className="text-gray-600 font-semibold"> {checkout.cliente}</span>
+                    </h2>
+                  </>
+                )}
+              </div>
+              <h1 className="font-bold font-nunito">{checkout.hora}hs.</h1>
+            </div>
+            <div>
+              <h2 className="font-nunito font-bold text-base">Medio de pago:
+                <span className="text-gray-600 font-semibold"> {checkout.medioDePago}</span>
+              </h2>
+            </div>
+            <div >
               {checkout.comentarios && (
                 <p className="font-nunito font-bold">Comentarios:
                   <span className="text-gray-700 font-semibold"> {checkout.comentarios}</span>
@@ -148,54 +166,63 @@ const CircleAnimation = () => {
 
               )}
             </div>
-          </div>
-          <>
-            <h3 className="font-semibold mt-2 text-lg font-nunito">Pedido</h3>
-            {catId?.map(categoria => (
-              <div key={categoria.id}>
+            <>
+              <h3 className="font-semibold my-2 text-lg font-nunito">Pedido</h3>
+              <hr className="border mt-2" />
+              {catId?.map(categoria => (
+                <div key={categoria.id}>
 
-                {checkout.productos
-                  ?.filter(producto => producto?.categoria === categoria.categoria)
-                  .map((item, index) => {
-                    return (
-                      <div key={index} className="py-2">
-                        <div className="flex justify-between items-center font-nunito">
-                          <p className="font-bold text-neutral-900 text-base">
-                            {item.nombre}
-                            <span className=" pl-1 font-semibold text-gray-700 text-base">
-                              {item.categoria === "pizzas" && item?.tamanio}
-                            </span>
-                            <span className="text-gray-400 text-sm font-normal">
-                              {" "}
-                              x {item?.cant || item?.cantidad}
-                            </span>
-                          </p>
-                          <p>$ {item.precio * item.cantidad}</p>
+                  {checkout.productos
+                    ?.filter(producto => producto?.categoria === categoria.categoria)
+                    .map((item, index) => {
+                      return (
+                        <div key={index} className="py-2">
+                          <div className="flex justify-between items-center font-nunito">
+                            <p className="font-bold text-neutral-900 text-base">
+                              {item.nombre}
+                              <span className=" pl-1 font-semibold text-gray-700 text-base">
+                                {item.categoria === "pizzas" && item?.tamanio}
+                              </span>
+                              <span className="text-gray-400 text-sm font-normal">
+                                {" "}
+                                x {item?.cant || item?.cantidad}
+                              </span>
+                            </p>
+                            <p>$ {item.precio * item.cantidad}</p>
+                          </div>
+                          <p className="font-normal text-gray-500 text-xs w-11/12">{item.descripcion}</p>
+                          {item.products &&
+                            item.products.map(producto => (
+                              <div key={producto._id}>
+                                <p className="font-normal text-gray-700 text-sm">
+                                  {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
+                                </p>
+                              </div>
+                            ))}
+                          <p className="font-semibold text-gray-700 text-sm w-11/12">{item.comentarios}</p>
                         </div>
-                        <p className="font-normal text-gray-500 text-xs w-11/12">{item.descripcion}</p>
-                        {item.products &&
-                          item.products.map(producto => (
-                            <div key={producto._id}>
-                              <p className="font-normal text-gray-700 text-sm">
-                                {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
-                              </p>
-                            </div>
-                          ))}
-                        <p className="font-semibold text-gray-700 text-sm w-11/12">{item.comentarios}</p>
-                      </div>
-                    );
-                  })}
-              </div>
-            ))}
-          </>
-          {promoBarra?.available && delivery === "localActual" && (
-            <h1 className="text-right text-sm text-gray-500">Descuento aplicado del 10%</h1>
-          )}
-          <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
+                      );
+                    })}
+                </div>
+              ))}
+            </>
+            {promoBarra?.available && delivery === "localActual" && (
+              <h1 className="text-right text-sm text-gray-500">Descuento aplicado del 10%</h1>
+            )}
+            <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
+          </div>
+      
         </div>
-
-
+        <div className="text-center gap-2 flex justify-between items-end py-2">
+            <h1 className="text-base font-bold text-gray-700 font-nunito">Guarda el detalle de tu pedido.</h1>
+            <button
+              onClick={handleCapture}
+              style={{backgroundColor: "#FD3307"}}
+              className="rounded-md text-white flex gap-2 justify-center items-center   h-12 w-36 font-nunito text-base font-semibold shadow-md">
+                Descargar <FaDownload size={16}/> </button>
+          </div>
       </div>
+
     </div >
   );
 };

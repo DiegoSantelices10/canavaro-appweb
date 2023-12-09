@@ -1,5 +1,4 @@
 import Producto from "models/product";
-import PromoPrice from "models/promoPrice";
 
 export const updatePrices = async (req, res) => {
     const updateData = req.body;
@@ -23,16 +22,7 @@ export const updatePrices = async (req, res) => {
                     message: "Productos actualizados exitosamente",
                 });
             }
-        } else if(updateData.categoria === "docena") {
-            const products = await PromoPrice.findByIdAndUpdate(updateData._id, { precio: updateData.precio }, {
-                new: true,
-                runValidators: true,
-            });
-            return res.status(200).json({
-                success: true,
-                data: products,
-            });
-    } else  {
+        }  else  {
         const updateOperation = {
             updateMany: {
                 filter: { categoria: 'empanadas' },

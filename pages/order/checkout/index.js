@@ -153,7 +153,7 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                         <h2 className="font-nunito font-bold text-sm text-sky-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo en"}
                         </h2>
-                        <p className="font-nunito text-sm text-gray-500">{demora}</p>
+                        <p className="font-nunito text-sm text-gray-500">{demora}m.</p>
                       </div>
                     )}
 
