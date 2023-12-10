@@ -4,7 +4,7 @@ import Head from "next/head";
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
   return (
-    <div className="h-screen w-full lg:flex block bg-gray-100">
+    <div className="h-screen w-full lg:flex block ">
       <Head>
         <title>Pizzeria Canavaro</title>
       </Head>
@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
         <AccessMenu />
       </div>
 
-      <main className="max-h-max  bg-gray-100 w-full lg:w-10/12 lg:absolute lg:right-0">
+      <main className="max-h-max  w-full lg:w-10/12 lg:absolute lg:right-0">
         {children}
       </main>
     </div>

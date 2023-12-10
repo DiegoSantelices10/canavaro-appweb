@@ -162,13 +162,13 @@ export default function Home() {
   return (
     <Layout>
       <Toaster/>
-      <div className="py-4 mt-12 mx-auto w-full ">
-        <h1 className="text-lg  font-extrabold text-neutral-800 px-3 pb-1">Promociones</h1>
+      <div className="py-4 mt-14 mx-auto w-full ">
+        <h1 className="text-lg  font-bold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
           <style jsx>
             {`
               .flexp::-webkit-scrollbar-thumb {
-                background: #e4e4e4;
+                background: #ffffff;
                 border-radius: 20px;
               }
 
@@ -179,11 +179,11 @@ export default function Home() {
           </style>
           {renderPromotions()}
         </div>
-        <div className="my-4">
+        <div className="my-6">
           <div className="w-full  p-3 flex items-center justify-between">
-            <p className="text-left w-full font-nunito text-base  font-bold">¡ Arma tu pizza como quieras !</p>
+            <p className="text-left w-full font-poppins text-base  font-semibold">¡ Arma tu pizza como quieras !</p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-nunito font-semibold w-auto bg-sky-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
+              <a className="rounded-md font-nunito font-semibold w-auto bg-red-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
                 Ingresa aqui
               </a>
             </Link>
@@ -210,8 +210,8 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "empanadas"
-                  ? "w-52  font-semibold text-gray-400"
-                  : "w-52 font-semibold bg-white text-sky-700 border-b border-gray-300 tracking-wide"
+                  ? "w-56  font-medium font-poppins text-gray-400"
+                  : "w-56 font-medium bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -222,8 +222,8 @@ export default function Home() {
               onClick={() => setRenderProductos("pizzas")}
               className={
                 renderProducts !== "pizzas"
-                  ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-semibold bg-white text-sky-700 border-b border-gray-300 tracking-wide"
+                  ? "w-32  font-medium font-poppins text-gray-400"
+                  : "w-32 font-medium bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Pizzas
@@ -235,8 +235,8 @@ export default function Home() {
               onClick={() => setRenderProductos("promociones")}
               className={
                 renderProducts !== "promociones"
-                  ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-semibold  bg-white text-sky-700 border-b border-gray-300 tracking-wide"
+                  ? "w-32  font-medium font-poppins text-gray-400"
+                  : "w-32 font-medium  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Promociones
@@ -250,8 +250,8 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "bebidas"
-                  ? "w-32  font-semibold text-gray-400"
-                  : "w-32 font-semibold  bg-white text-sky-700 border-b border-gray-300 tracking-wide"
+                  ? "w-32  font-medium font-poppins text-gray-400"
+                  : "w-32 font-medium  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Bebidas
@@ -266,14 +266,14 @@ export default function Home() {
           <div className="w-full px-2 fixed bottom-2    sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
               className="flex justify-between items-center gap-3 rounded-xl mx-auto text-center   
-									   w-full md:w-1/2 lg:w-3/5 p-4 bg-sky-600  text-white text-base font-semibold "
+									   w-full md:w-1/2 lg:w-3/5 p-4 bg-red-600  text-white text-base font-semibold "
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
                 className={`${
                   orderPromo.length < 1
                     ? "invisible"
-                    : "p-3 px-4 font-semibold font-nunito bg-slate-50 rounded-md text-sky-800 text-sm hover:-translate-y-1 transition-all duration-500"
+                    : "p-3 px-4 font-semibold font-nunito bg-slate-50 rounded-md text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
                 }`}
               >
                 Agregar al carrito
@@ -282,7 +282,7 @@ export default function Home() {
               <div className="flex items-center gap-x-5 text-white font-semibold pr-4">
                 <p className="font-semibold text-xl">$ {totalPrice}</p>
                 <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
-                  <p className="text-sky-700 text-lg font-bold">{totalCant}</p>
+                  <p className="text-neutral-800 text-lg font-bold">{totalCant}</p>
                 </div>
               </div>
             </div>

@@ -154,11 +154,11 @@ export default function Home() {
       {currentPedido && (
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
-      <div className="h-auto w-full ">
-        <div className="w-full bg-sky-700  h-auto gap-4">
+      <div className="h-auto w-full lg:p-4">
+        <div className="w-full lg:bg-sky-700 mx-auto lg:rounded-md  h-auto gap-4">
           <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
             <div className="w-full text-center py-2">
-              <h1 className="font-medium font-nunito text-white">Demora domicilio</h1>
+              <h1 className="font-medium font-poppins lg:text-white">Demora domicilio</h1>
               <div className="flex w-full gap-5 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "domicilio")
@@ -170,7 +170,7 @@ export default function Home() {
 
 
             <div className="w-full  text-center py-2">
-              <h1 className="font-medium font-nunito text-white">Demora local</h1>
+              <h1 className="font-medium font-poppins lg:text-white">Demora local</h1>
               <div className="flex w-full gap-5 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "local")
@@ -180,7 +180,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="w-full lg:hidden shadow rounded-md p-2 flex items-center  mt-2 lg:mt-0">
+          <div className="w-full lg:hidden  p-2 flex items-center  mt-2 lg:mt-0">
           {barra?.map(item => (
             <div key={item._id} className="w-full h-auto mx-auto text-center">
               <button
@@ -192,9 +192,7 @@ export default function Home() {
               </button>
             </div>
           ))}
-
           </div>
-
         </div>
 
 

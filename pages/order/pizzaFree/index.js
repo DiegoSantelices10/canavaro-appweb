@@ -134,7 +134,7 @@ export default function Index() {
         <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
       )}
       <Toaster/>
-      <div className="flex justify-center items-center  w-full mt-4">
+      <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
           src={"/images/pizzafree.webp"}
@@ -144,12 +144,12 @@ export default function Index() {
 
       </div>
       <button onClick={returnHome}>
-        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-4 left-4" size={30} />
+        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-0 left-4" size={30} />
       </button>
       <div className="w-full h-auto">
         <div className="flex flex-col  w-full">
           <div className="w-full bg-white p-3">
-            <h1 className="font-bold text-lg text-sky-800 font-nunito">Arma tu pizza</h1>
+            <h1 className="font-semibold text-lg text-neutral-800 font-poppins">Arma tu pizza</h1>
             <p className=" font-normal text-sm  text-gray-400 font-nunito">Elegi los gustos que quieras</p>
           </div>
           <hr className="pb-3" />
@@ -162,7 +162,7 @@ export default function Index() {
                 name="chica"
                 onChange={onChangeValue}
                 checked={select === "chica"}
-                className="mx-auto rounded focus:ring-0 focus:text-sky-700"
+                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
               />
               <h3 className="font-semibold font-nunito text-sm">Chica</h3>
             </div>
@@ -174,7 +174,7 @@ export default function Index() {
                 name="mediana"
                 onChange={onChangeValue}
                 checked={select === "mediana"}
-                className="mx-auto rounded focus:ring-0 focus:text-sky-700"
+                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
               />
               <h3 className="font-semibold text-center text-sm">Mediana</h3>
             </div>
@@ -186,7 +186,7 @@ export default function Index() {
                 name="gigante"
                 onChange={onChangeValue}
                 checked={select === "gigante"}
-                className="mx-auto rounded focus:ring-0 focus:text-sky-700"
+                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
               />
               <h3 className="font-semibold text-sm">Gigante</h3>
             </div>
@@ -199,7 +199,7 @@ export default function Index() {
             className={
               total === 1
                 ? "bg-green-500 font-nunito rounded-md  w-full text-sm text-white p-2 mt-2 text-center font-semibold"
-                : "bg-sky-700 w-full font-nunito rounded-md text-white text-sm p-2 mt-2 text-center font-semibold"
+                : "bg-red-600 w-full font-nunito rounded-md text-white text-sm p-2 mt-2 text-center font-semibold"
             }
           >
             {productTotal()}
@@ -215,7 +215,7 @@ export default function Index() {
               .map(item => {
                 return (
                   <div key={item._id} className="flex justify-between items-center py-2  my-2 ">
-                    <h2 className="font-nunito font-bold text-sky-800 text-base">{item.nombre}</h2>
+                    <h2 className="font-nunito font-bold text-neutral-800 text-base">{item.nombre}</h2>
                     <div className="w-auto   px-3 text-end space-x-4 text-base">
                       <div className="flex w-full justify-around items-center gap-5">
                         {radioSelect[item._id]?.fraccion && (
@@ -233,7 +233,7 @@ export default function Index() {
                               type="radio"
                               value="1/4"
                               name={item.nombre}
-                              className="mx-auto rounded focus:ring-0 focus:text-sky-700"
+                              className="mx-auto rounded focus:ring-0 focus:text-sky-800"
                               checked={radioSelect[item._id]?.fraccion === "1/4"}
                               onChange={() => handleChangeRadioButton(item, "1/4")}
                             />
@@ -246,7 +246,7 @@ export default function Index() {
                             type="radio"
                             value="1/2"
                             name={item.nombre}
-                            className="mx-auto rounded focus:ring-0 focus:text-sky-700 hover:text-sky-700"
+                            className="mx-auto rounded focus:ring-0 focus:text-sky-800 hover:text-sky-800"
                             checked={radioSelect[item._id]?.fraccion === "1/2"}
                             onChange={() => handleChangeRadioButton(item, "1/2")}
                           />
@@ -274,7 +274,7 @@ export default function Index() {
       <div className="bg-white w-full fixed bottom-0 p-4  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
           className={`${total === 1
-            ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-sky-900  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
+            ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
             : "invisible"
             }`}
           onClick={() => {

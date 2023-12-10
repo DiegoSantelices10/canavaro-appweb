@@ -60,39 +60,44 @@ const AccessMenu = () => {
       <div className="lg:flex lg:justify-center lg:items-center hidden">
         <Image height={110} width={110} src={"/images/logocanavaro.webp"} />
       </div>
-      <div className="flex flex-row justify-center items-center lg:flex-col lg:gap-3 gap-0 w-full lg:pt-10 pt-0 ">
-        <Link href="/admin" passHref>
-          <button
-            className={`${selected === "/admin" ? " text-white font-semibold border-gray-200 border-b" : "font-normal text-white"
-              } mx-auto w-full h-auto`}
-          >
-            <p className="text-base font-nunito lg:text-left md:text-center text-center">Pedidos</p>
-          </button>
-        </Link>
+      <div className="w-11/12 lg:w-full flex justify-around items-center lg:block lg:pt-10 pt-0">
+        <div>
+          <Link href="/admin" passHref>
+            <button
+              className={`${selected === "/admin" ? " text-white  font-semibold border-gray-200 border-b" : "font-normal text-white"
+                } mx-auto w-auto h-auto`}
+            >
+              <p className="text-base font-poppins lg:text-left md:text-center text-center">Pedidos</p>
+            </button>
+          </Link>
+        </div>
+        <div className="lg:mt-1">
+          <Link href="/admin/products/list" passHref>
+            <button
+              className={`${selected === "/admin/products/list"
+                ? "text-white border-b font-semibold border-gray-200"
+                : "font-normal text-white"
+                } mx-auto w-auto  h-auto  `}
+            >
+              <p className="lg:text-left md:text-center text-center text-base font-poppins ">Productos</p>
+            </button>
+          </Link>
 
-        <Link href="/admin/products/list" passHref>
-          <button
-            className={`${selected === "/admin/products/list"
-              ? "text-white border-b font-semibold border-gray-200"
-              : "font-normal text-white"
-              } mx-auto w-full  h-auto  `}
-          >
-            <p className="lg:text-left md:text-center text-center text-base font-nunito ">Productos</p>
-          </button>
-        </Link>
-
-        <Link href="/admin/sales/list" passHref>
-          <button
-            className={`${selected === "/admin/sales/list"
-              ? "text-white border-b font-semibold border-gray-200"
-              : "font-normal text-white"
-              } mx-auto w-full h-auto `}
-          >
-            <p className="text-base font-nunito lg:text-left md:text-center text-center">Ventas</p>
-          </button>
-        </Link>
+        </div>
+        <div className="lg:mt-1">
+          <Link href="/admin/sales/list" passHref>
+            <button
+              className={`${selected === "/admin/sales/list"
+                ? "text-white border-b font-semibold border-gray-200"
+                : "font-normal text-white"
+                } mx-auto w-auto h-auto `}
+            >
+              <p className="text-base font-poppins lg:text-left md:text-center text-center">Ventas</p>
+            </button>
+          </Link>
+        </div>
       </div>
-      <div className="rounded-md hidden lg:block">
+      <div className="rounded-md hidden lg:block mt-3">
         {barra?.map(item => (
           <div key={item._id} className="w-full py-1 h-auto mx-auto text-center">
             <button

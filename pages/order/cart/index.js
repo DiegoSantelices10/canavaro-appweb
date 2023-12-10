@@ -169,7 +169,7 @@ export default function Cart({ data }) {
       >
         {({ setFieldValue }) => {
           return (
-            <div className="">
+            <div className="bg-white">
               {currentProducto && (
                 <ModalDescripcion show={showModal} handleClose={handleCloseModal} pedido={currentProducto} />
               )}
@@ -184,7 +184,7 @@ export default function Cart({ data }) {
                         />
                       </a>
                     </Link>
-                    <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
+                    <h2 className="font-poppins font-bold text-lg">Tu pedido</h2>
                   </div>
 
                   <div className="py-2">
@@ -202,7 +202,7 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "domicilioActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-600 shadow text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
                               : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow  font-light p-3"
                           }
                         >
@@ -216,7 +216,7 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "localActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-sky-600 shadow text-white font-light p-3"
+                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
                               : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow font-light p-3"
                           }
                         >
@@ -231,7 +231,7 @@ export default function Cart({ data }) {
                               <Field
                                 id="direccion"
                                 name="direccion"
-                                className="border-t-0 border-l-0 border-r-0 border-b-2 p-1 px-2 border-sky-600 focus:border-sky-600  w-full  text-sm focus:ring-0 rounded-md"
+                                className="border-t-0 border-l-0 border-r-0 border-b-2 p-1 px-2 border-gray-500 focus:border-gray-500   w-full  text-sm focus:ring-0 rounded"
                                 placeholder="Ingresa tu domicilio, Barrio"
                               />{" "}
                               <ErrorMessage name="direccion">
@@ -244,7 +244,7 @@ export default function Cart({ data }) {
                               <Field
                                 id="telefono"
                                 name="telefono"
-                                className="border-t-0 border-l-0 border-r-0 border-b-2 border-sky-600 focus:border-sky-600  w-full p-1 px-2 text-sm focus:ring-0 rounded-md"
+                                className="border-t-0 border-l-0 border-r-0 border-b-2 border-gray-500 focus:border-gray-500   w-full p-1 px-2 text-sm focus:ring-0 rounded"
                                 placeholder="Ingresa tu telefono"
                               />
                               <ErrorMessage name="telefono">
@@ -257,11 +257,11 @@ export default function Cart({ data }) {
                               <p className="text-center text-xs text-gray-400 font-normal">
                                 {open && "o elige un horario que sea mayor al tiempo de envío."}{" "}
                               </p>
-                              <div className="w-full mx-auto flex justify-center mt-1">
+                              <div className="w-full mx-auto flex justify-center mt-3">
                                 <Field
                                   id="hPersonalizado"
                                   name="hPersonalizado"
-                                  className="border-b-2 border-sky-600 focus:border-sky-600 border-t-0 border-r-0 border-l-0 rounded-md w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
+                                  className="border-b-2 border-gray-500 focus:border-gray-500 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
                                   placeholder="Horario de entrega"
                                 />
                               </div>
@@ -281,7 +281,7 @@ export default function Cart({ data }) {
                             <Field
                               id="nombre"
                               name="nombre"
-                              className="border-t-0 border-l-0 border-r-0 border-b-2 border-sky-600 focus:border-sky-600 focus:ring-0 rounded-md w-full p-1 px-2 text-sm"
+                              className="border-t-0 border-l-0 border-r-0 border-b-2 border-gray-500 focus:border-gray-500 focus:ring-0 rounded w-full p-1 px-2 text-sm"
                               placeholder="Ingresa tu nombre"
                             />
                             <ErrorMessage name="nombre">
@@ -291,11 +291,11 @@ export default function Cart({ data }) {
                             </ErrorMessage>
 
                             <div className="w-full mx-auto">
-                            <div className="w-full mx-auto flex justify-center mt-1">
+                            <div className="w-full mx-auto flex justify-center mt-3">
                                 <Field
                                   id="hPersonalizado"
                                   name="hPersonalizado"
-                                  className="border-t-0 border-l-0 border-r-0 border-b-2 border-sky-600 focus:border-sky-600 rounded-md focus:ring-0 w-2/5 p-1 px-2 text-sm text-center"
+                                  className="border-t-0 border-l-0 border-r-0 border-b-2 border-gray-500 focus:border-gray-500 rounded focus:ring-0 w-2/5 p-1 px-2 text-sm text-center"
                                   placeholder="Horario de retiro"
                                 />
                               </div>
@@ -321,13 +321,13 @@ export default function Cart({ data }) {
                 </div>
                 {!orderList.some(item => item.categoria === 'bebidas') && (
 
-                  <div className="px-2">
-                    <h1 className="font-poppins font-bold text-gray-800 text-lg">¿ Deseas agregar alguna bebida ?</h1>
-                    <div className="flex overflow-x-scroll flexp h-auto    space-x-6 w-full p-2">
+                  <div className="p-2">
+                    <h1 className="font-poppins font-bold text-gray-800 text-lg ">¿ Deseas agregar alguna bebida ?</h1>
+                    <div className="flex overflow-x-scroll flexp h-auto    space-x-6 w-full p-2 mt-4  ">
                       <style jsx>
                         {`
                       .flexp::-webkit-scrollbar-thumb {
-                        background: #e4e4e4;
+                        background: #FFFFFF;
                         border-radius: 20px;
                       }
 
@@ -342,27 +342,27 @@ export default function Cart({ data }) {
                   </div>
                 )}
 
-                <div className="p-2 mb-16  rounded-md">
+                <div className="p-2 mb-16 pb-10 rounded-md">
                   <button
                     onClick={() => addCartPromo(orderPromo)}
                     type="button"
                     className={`${orderPromo.length < 1
                       ? "invisible"
-                      : "p-3 px-4 font-semibold w-full font-nunito mb-3 bg-sky-700 rounded-md text-white text-sm hover:-translate-y-1 transition-all duration-500"
+                      : "p-3 px-4 font-semibold w-full font-nunito mb-3 bg-red-600 rounded-md text-white text-sm hover:-translate-y-1 transition-all duration-500"
                       }`}
                   >
                     Agregar al carrito
                   </button>
-                  <h1 className="text-gray-800 font-bold font-poppins text-xl">Tu pedido</h1>
-                  <hr />
+                  <h1 className="text-gray-800 font-bold font-poppins px-2 text-xl">Detalle pedido</h1>
+                  <hr/>
                   {orderList.map((item, index) => {
                     return (
                       <div key={index}>
-                        <div className="font-nunito py-5">
+                        <div className="font-nunito py-6">
                           <div className="p-2  rounded-md">
                             <div className="flex justify-between items-center gap-x-2">
                               <div className="w-full ">
-                                <a className="font-bold text-sky-800 ">
+                                <a className="font-bold text-neutral-800 ">
                                   {item.nombre}
                                   <span className="text-gray-400 font-light">
                                     {" "}
@@ -403,12 +403,12 @@ export default function Cart({ data }) {
                   <div className="font-nunito fixed bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
                     <div className="flex justify-between items-center p-3 font-poppins">
                       <div>
-                        <p className="font-bold text-xl text-sky-800">Subtotal</p>
+                        <p className="font-bold text-xl text-neutral-800">Subtotal</p>
                         <h3 className="text-xl">$ {totalAmount}</h3>
                       </div>
                       <button
                         type="submit"
-                        className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-sky-700 hover:bg-sky-800 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>

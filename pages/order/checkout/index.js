@@ -35,7 +35,7 @@ export default function Checkout() {
     dispatch(setTotalAmount(convert))
   }
 
-const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
+  const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
   return (
     <div className=" mx-auto relative w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full  rounded-t-3xl py-4">
@@ -46,7 +46,7 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
               <FiChevronsLeft className=" text-slate-800 bg-slate-50 rounded-md shadow p-1 top-4 left-4" size={30} />
             </a>
           </Link>
-          <h2 className="font-nunito font-extrabold text-lg">Tu pedido</h2>
+          <h2 className="font-poppins font-bold text-lg">Tu pedido</h2>
         </div>
       </div>
 
@@ -125,41 +125,42 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
           return (
             <div className="h-full">
               <Form>
-                <div className="p-3 py-2">
-                  <div className="shadow-sm bg-gray-50 rounded p-2">
+                <div className="p-2 py-2">
+                  <div className=" rounded p-2">
                     <div className="py-2">
                       {delivery === "domicilioActual" ? (
                         <>
-                          <h2 className="font-nunito text-sky-800 font-bold text-sm">Dirección de envío</h2>
+                          <h2 className="font-poppins text-neutral-800 font-bold text-base">Dirección de envío</h2>
                           <p className="font-nunito text-gray-600 text-sm">{user.direccion} </p>
                         </>
                       ) : (
                         <>
-                          <h2 className="font-nunito text-sky-800 font-bold text-sm">Retira por local</h2>
-                          <p className="font-nunito text-sm">Nombre: <span className="text-gray-600">{user.nombre}</span> </p>
+                          <h2 className="font-poppins text-neutral-800 font-bold text-base">Retira por local</h2>
+                          <p className="font-nunito text-gray-600 text-base">{user.nombre}</p>
                         </>
                       )}
                     </div>
-                    <hr />
+                    <div className="bg-red-500 p-px"></div>
                     {user?.hPersonalizado ? (
                       <div className="py-2" >
-                        <h2 className="font-nunito font-bold text-sm text-sky-800">
+                        <h2 className="font-poppins font-bold text-base text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo"}
                         </h2>
-                        <p className="font-nunito text-sm text-gray-500">{user?.hPersonalizado}hs.</p>
+                        <p className="font-nunito text-base text-gray-600">{user?.hPersonalizado}hs.</p>
                       </div>
                     ) : (
                       <div className="py-2">
-                        <h2 className="font-nunito font-bold text-sm text-sky-800">
+                        <h2 className="font-poppins font-bold text-base text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo en"}
                         </h2>
-                        <p className="font-nunito text-sm text-gray-500">{demora}m.</p>
+                        <p className="font-nunito text-sm text-gray-600">{demora}m.</p>
                       </div>
                     )}
 
-                    <hr />
+                    <div className="bg-red-500 p-px"></div>
+
                     <div className="py-2">
-                      <h2 className="font-nunito font-bold text-sm pb-1 text-sky-800">Comentarios adicionales</h2>
+                      <h2 className="font-poppins font-bold text-base pb-1 text-neutral-800">Comentarios adicionales</h2>
                       <Field
                         id="comentarios"
                         name="comentarios"
@@ -168,11 +169,11 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                     </div>
                   </div>
                 </div>
-                <div className="px-5 h-full mb-20 rounded">
-                <h2 className="font-nunito font-bold text-sm py-3 text-sky-800">Medios de pago</h2>
+                <div className="px-4 h-full mb-20 rounded">
+                  <h2 className="font-poppins font-bold text-base py-3 text-neutral-800">Medios de pago</h2>
                   <div className="w-full h-10 border-none shadow rounded ">
                     <Field
-                      as="select" 
+                      as="select"
                       name="medioDePago"
                       className="h-10 border-none font-nunito  text-gray-900 text-sm rounded-lg  block w-full p-2.5 focus:rounded focus:ring-slate-300 "
                     >
@@ -180,7 +181,7 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                         <option key={index} value={item} className="text-sm text-gray-500 font-nunito font-semibold">
                           {item}
                         </option>
-                       
+
                       ))}
                     </Field>
                   </div>
@@ -190,7 +191,7 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                         <Field
                           id="pagaCon"
                           name="pagaCon"
-                          className="border border-slate-300 rounded-md w-full p-2"
+                          className="border rounded-md border-t-0 border-r-0 border-l-0 border-b border-gray-600 w-full p-2 focus:ring-0 focus:border-gray-600"
                           placeholder="¿Con cuanto vas a pagar?"
                         />
                       )}
@@ -256,27 +257,27 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                   </div>
                 </div>
 
-                <div className={`fixed p-2 bg-sky-700 flex items-center justify-between ${delivery?.available && delivery === "localActual" ? "items-end" : "items-end"} bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
+                <div className={`fixed p-2 flex items-center justify-between ${delivery?.available && delivery === "localActual" ? "items-end" : "items-end"} bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
 
-                  <div className="w-1/2 flex flex-col">
+                  <div className="w-1/2 flex flex-col ">
                     {promoBarra?.available && delivery === "localActual" ? (
                       <>
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center font-poppins">
                           <div className="flex gap-1 p-0">
-                            <p className="text-sm text-white font-bold">Subtotal<span className="font-normal"> ${totalPedido}</span></p>
-                            <p className="text-white text-sm font-normal"> - 10%</p>
+                            <p className="text-sm text-neutral-800 font-bold">Subtotal<span className="font-normal"> ${totalPedido}</span></p>
+                            <p className="text-neutral-800 text-sm font-normal"> - 10%</p>
                           </div>
                         </div>
                         <div className="font-poppins">
-                          <p className="font-bold text-base text-white">Total</p>
-                          <h3 className="text-lg text-white font-normal">$ {totalAmount}</h3>
+                          <p className="font-bold text-base text-neutral-800">Total</p>
+                          <h3 className="text-lg text-neutral-800 font-normal">$ {totalAmount}</h3>
                         </div>
                       </>
 
                     ) : (
                       <div className="flex justify-start items-center gap-3 px-3">
-                        <p className="font-bold font-nunito text-center text-xl text-white">Total</p>
-                        <h3 className="text-xl text-center font-nunito text-white font-light">$ {totalAmount}</h3>
+                        <p className="font-bold font-poppins text-center text-2xl text-neutral-800">Total</p>
+                        <h3 className="text-2xl text-center font-nunito text-neutral-800 font-semibold">$ {totalAmount}</h3>
                       </div>
                     )}
                   </div>
@@ -284,10 +285,10 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="text-center font-nunito rounded-md justify-center items-center flex h-12 w-[170px] text-sky-800 bg-white font-semibold hover:-translate-y-1 transition-all duration-500"
+                      className="text-center font-nunito rounded-md justify-center items-center flex h-12 w-[170px] text-white bg-red-600 font-semibold hover:-translate-y-1 transition-all duration-500"
                     >
                       {isSubmitting ? (
-                          <ColorRing
+                        <ColorRing
                           visible={true}
                           height="30"
                           width="30"
@@ -297,7 +298,7 @@ const medios = [ 'Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
                           colors={['#2A79D9', '#2A79D9', '#2A79D9', '#2A79D9', '#2A79D9']}
                         />
                       ) : "Confirmar pedido"}
-                      
+
                     </button>
                   </div>
 

@@ -39,7 +39,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
               alt={nombre}
             />
             <div className="relative w-full h-24 self-start">
-              <h1 className="font-bold text-sm text-neutral-800">{nombre}</h1>
+              <h1 className="font-semibold font-poppins text-sm text-neutral-800">{nombre}</h1>
               <p className="text-gray-400 text-xs">{descripcion}</p>
               <p className="text-gray-400 text-xs py-1">$ {precio}</p>
 
@@ -88,7 +88,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
                   height={140} 
                   alt={nombre} />
                 <div className="w-full self-start">
-                  <h1 className="font-bold text-sm text-sky-800">{nombre}</h1>
+                  <h1 className="font-semibold text-sm font-poppins text-neuttral-800">{nombre}</h1>
                   <p className="text-gray-400 text-xs">{descripcion}</p>
                   {categoria === "promociones" && <p className="text-gray-400 text-xs py-1">$ {precio}</p>}
                 </div>
