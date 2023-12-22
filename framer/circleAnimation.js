@@ -113,7 +113,7 @@ const CircleAnimation = () => {
       </motion.div>
       <div className="p-2 w-full md:w-1/2 lg:w-1/2 mx-auto">
         <div className="flex justify-center items-center flex-col  gap-1">
-          <p className="font-bold text-sm font-nunito text-gray-700">confirmar tu pedido por whatsapp.</p>
+          <p className="font-semibold text-sm font-poppins text-gray-700">¡Confirma tu pedido por whatsapp!</p>
           <a
             target="_blank"
             rel="noreferrer"
@@ -125,49 +125,58 @@ const CircleAnimation = () => {
           </a>
         </div>
         <div id="container-pedido">
-          <p className="text-red-400 font-semibold font-poppins text-sm px-1 mt-4">
-            Detalle del pedido
-          </p>
-          <div className="w-full h-auto rounded-md border-gray-200 border mt-2 p-2">
+          <div className="flex justify-between items-center p-1 mt-3">
+            <p className=" font-bold font-poppins">
+              Detalle del pedido
+            </p>
+            <h1 className="font-semibold font-poppins">{checkout.hora}hs.</h1>
+          </div>
+          <div className="w-full h-auto rounded-md border-gray-200 border mt-1 p-2">
             <div className="flex justify-between">
-              <div>
+              <div className="w-full">
                 {delivery === "domicilioActual" ? (
                   <>
-                    <h1 className="font-bold font-nunito">Horario de envío:
-                      <span className="text-gray-700 px-2 font-semibold">
-                        {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
-                    </h1>
-                    <h2 className="font-nunito  font-bold text-base">Enviar a: <span className="font-nunito font-semibold text-gray-600">{checkout.domicilio} </span></h2>
+                    <div className="mt-1">
+                      <h1 className="font-bold font-poppins">Horario de envío</h1>
+                      <span className="text-gray-700 font-medium">
+                        {checkout.hPersonalizado === "" ? demora + " min." : checkout.hPersonalizado + "hs."}</span>
+                    </div>
+                    <div className="mt-1">
+                      <h2 className="font-poppins  font-bold">Domicilio</h2>
+                      <span className="font-poppins font-medium text-gray-700">{checkout.domicilio} </span>
+                    </div>
                   </>
                 ) : (
                   <>
-                    <h1 className="font-bold font-nunito">Horario de retiro:
-                      <span className="text-gray-700 px-2 font-semibold">
+                    <div className="mt-1">
+                      <h1 className="font-bold font-poppins">Horario de retiro</h1>
+                      <span className="text-gray-700  font-medium">
                         {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
-                    </h1>
-                    <h2 className="font-nunito font-bold text-base">Retira por local:
-                      <span className="text-gray-600 font-semibold"> {checkout.cliente}</span>
-                    </h2>
+                    </div>
+                    <div className="mt-1">
+                      <h2 className="font-poppins font-bold">Retira por local</h2>
+                      <span className="text-gray-700 font-medium font-poppins"> {checkout.cliente}</span>
+                    </div>
                   </>
                 )}
               </div>
-              <h1 className="font-bold font-nunito">{checkout.hora}hs.</h1>
             </div>
-            <div>
-              <h2 className="font-nunito font-bold text-base">Medio de pago:
-                <span className="text-gray-600 font-semibold"> {checkout.medioDePago}</span>
-              </h2>
+            <div className="mt-1">
+              <h2 className="font-poppins font-bold text-base">Medio de pago</h2>
+              <span className="text-gray-600 font-semibold"> {checkout.medioDePago}</span>
             </div>
             <div >
               {checkout.comentarios && (
-                <p className="font-nunito font-bold">Comentarios:
+                <div className="mt-1">
+                  <p className="font-poppins font-bold">Comentarios</p>
                   <span className="text-gray-700 font-semibold"> {checkout.comentarios}</span>
-                </p>
-
+                </div>
               )}
             </div>
             <>
-              <h3 className="font-semibold my-2 text-lg font-nunito">Pedido</h3>
+              <p className=" font-bold font-poppins mt-3">
+                Pedido
+              </p>
               <hr className="border mt-2" />
               {catId?.map(categoria => (
                 <div key={categoria.id}>
@@ -190,7 +199,6 @@ const CircleAnimation = () => {
                             </p>
                             <p>$ {item.precio * item.cantidad}</p>
                           </div>
-                          <p className="font-normal text-gray-500 text-xs w-11/12">{item.descripcion}</p>
                           {item.products &&
                             item.products.map(producto => (
                               <div key={producto._id}>
@@ -211,16 +219,16 @@ const CircleAnimation = () => {
             )}
             <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
           </div>
-      
+
         </div>
         <div className="text-center gap-2 flex justify-between items-end py-2">
-            <h1 className="text-base font-bold text-gray-700 font-nunito">Guarda el detalle de tu pedido.</h1>
-            <button
-              onClick={handleCapture}
-              style={{backgroundColor: "#FD3307"}}
-              className="rounded-md text-white flex gap-2 justify-center items-center   h-12 w-36 font-nunito text-base font-semibold shadow-md">
-                Descargar <FaDownload size={16}/> </button>
-          </div>
+          <h1 className="text-base font-bold text-gray-700 font-nunito">Guarda el detalle de tu pedido.</h1>
+          <button
+            onClick={handleCapture}
+            style={{ backgroundColor: "#FD3307" }}
+            className="rounded-md text-white flex gap-2 justify-center items-center   h-12 w-36 font-nunito text-base font-semibold shadow-md">
+            Descargar <FaDownload size={16} /> </button>
+        </div>
       </div>
 
     </div >

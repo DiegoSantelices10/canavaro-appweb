@@ -36,15 +36,16 @@ export default function Cart({ data }) {
   const [open, setOpen] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState(null);
+  const [showHourEdit, setShowHourEdit] = useState(false);
 
 
   const { orderPromo } = useSelector(state => state.order);
+  const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
 
   const [type, setType] = useState("domicilioActual");
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
 
   const hoursDelivery = () => {
     if (hora >= 19 && hora < 23) {
@@ -132,13 +133,23 @@ export default function Cart({ data }) {
           .required("La dirección es obligatoria")
           .max(70, "La dirección no puede tener más de 70 caracteres"),
         telefono: Yup.string()
-          .required("El teléfono es obligatorio")
-          .max(15, "El telefono no puede tener más de 15 caracteres"),
+          .required('El teléfono es obligatorio')
+          .matches(/^[0-9]+$/, 'El teléfono solo puede contener números')
+          .min(10, 'El teléfono debe tener al menos 10 caracteres')
+          .max(15, 'El teléfono no puede tener más de 15 caracteres'),
+        hPersonalizado: Yup.string().matches(/^(\d+(:\d+)?)?$/, {
+          message: 'El horario debe contener solo números o ser de tipo HH:mm',
+          excludeEmptyString: true,
+        }).notRequired(),
       }
       : {
         nombre: Yup.string()
           .required("El nombre es obligatorio")
           .max(30, "El nombre no puede tener más de 30 caracteres"),
+        hPersonalizado: Yup.string().matches(/^(\d+(:\d+)?)?$/, {
+          message: 'El horario debe contener solo números o ser de tipo HH:mm',
+          excludeEmptyString: true,
+        }).notRequired(),
       }
   );
 
@@ -253,31 +264,49 @@ export default function Cart({ data }) {
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full mx-auto pt-1">
-                              <p className="text-center text-xs text-gray-400 font-normal">
-                                {open && "o elige un horario que sea mayor al tiempo de envío."}{" "}
-                              </p>
-                              <div className="w-full mx-auto flex justify-center mt-3">
-                                <Field
-                                  id="hPersonalizado"
-                                  name="hPersonalizado"
-                                  className="border-b-2 border-gray-500 focus:border-gray-500 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
-                                  placeholder="Horario de entrega"
-                                />
+                            <div className="w-full mx-auto mt-2">
+                              <div className="border rounded-md p-2 min-w-min text-sm">
+                                {open ? (
+                                  <>
+                                    <h1 className="font-medium text-center text-gray-800  mt-1 font-poppins">
+                                      Tiempo de envío: {demora} min.
+                                    </h1>
+                                    <p className="text-center text-xs text-gray-400 font-normal">
+                                      o elige un horario que sea mayor al tiempo de envío {" "}
+                                      <button
+                                        type="button"
+                                        className="text-gray-800"
+                                        onClick={() => setShowHourEdit(!showHourEdit)}
+                                      >hace click</button>
+                                    </p>
+                                    {showHourEdit &&
+                                      <>
+                                        <div className="w-full mx-auto flex justify-center mt-3">
+                                          <Field
+                                            id="hPersonalizado"
+                                            name="hPersonalizado"
+                                            className="border-b-2 border-gray-500 focus:border-gray-500 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
+                                            placeholder="Horario de entrega"
+                                          />
+                                        </div>
+                                        <ErrorMessage name="hPersonalizado">
+                                          {msg => {
+                                            return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
+                                          }}
+                                        </ErrorMessage>
+                                      </>
+                                    }
+                                  </>
+                                ) : (
+                                  <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-poppins">
+                                    Delivery de 19:30 a 23hs.
+                                  </h1>
+                                )}
                               </div>
-                              {open ? (
-                                <h1 className="font-semibold text-center text-gray-400 text-sm mt-1 font-nunito">
-                                  tiempo de envío <span className="text-gray-400 text-base">{demora}m.</span>
-                                </h1>
-                              ) : (
-                                <h1 className="font-semibold text-center text-gray-400 text-sm mt-1 font-nunito">
-                                  Delivery de 19:30 a 23hs.
-                                </h1>
-                              )}
                             </div>
                           </div>
                         ) : (
-                          <div className="w-full ">
+                          <div className="w-full mx-auto pt-1">
                             <Field
                               id="nombre"
                               name="nombre"
@@ -290,28 +319,50 @@ export default function Cart({ data }) {
                               }}
                             </ErrorMessage>
 
-                            <div className="w-full mx-auto">
-                            <div className="w-full mx-auto flex justify-center mt-3">
-                                <Field
-                                  id="hPersonalizado"
-                                  name="hPersonalizado"
-                                  className="border-t-0 border-l-0 border-r-0 border-b-2 border-gray-500 focus:border-gray-500 rounded focus:ring-0 w-2/5 p-1 px-2 text-sm text-center"
-                                  placeholder="Horario de retiro"
-                                />
+                            <div className="w-full mx-auto mt-2">
+                              <div className="border rounded-md p-2 min-w-min text-sm">
+                                {open ? (
+                                  <>
+                                    <h1 className="font-medium text-center text-gray-600 text-sm mt-1 font-poppins">
+                                      Tiempo de retiro: {demora} min.
+                                    </h1>
+                                    <p className="text-center text-xs text-gray-400 font-normal">
+                                      o elige un horario que sea mayor al tiempo de retiro {" "}
+                                      <button
+                                        type="button"
+                                        className="text-gray-800"
+                                        onClick={() => setShowHourEdit(!showHourEdit)}
+                                      >hace click</button>
+                                    </p>
+                                    {showHourEdit &&
+                                      <>
+                                        <div className="w-full mx-auto flex justify-center mt-3">
+                                          <Field
+                                            id="hPersonalizado"
+                                            name="hPersonalizado"
+                                            className="border-b-2 border-gray-500 focus:border-gray-500 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
+                                            placeholder="Horario de entrega"
+                                          />
+                                        </div>
+                                        <ErrorMessage name="hPersonalizado">
+                                          {msg => {
+                                            return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
+                                          }}
+                                        </ErrorMessage>
+                                      </>
+                                    }
+                                  </>
+                                ) : (
+                                  <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-poppins">
+                                    Retiro de 19:30 a 23hs.
+                                  </h1>
+                                )}
+
+
                               </div>
-                              {open ? (
-                                <h1 className="font-semibold text-center text-gray-400 text-sm mt-1 font-nunito">
-                                  tiempo de retiro <span className="text-gray-600 text-base">{demora}m.</span>
-                                </h1>
-                              ) : (
-                                <h1 className="font-semibold text-center text-gray-400 text-sm mt-1 font-nunito">
-                                  Horario de 19:30 a 23hs.
-                                </h1>
-                              )}
-                              <p className="text-center text-xs text-gray-400 font-normal">
-                                {open && "o elige un horario que sea mayor al tiempo de retiro."}{" "}
-                              </p>
-                              
+
+
+
                             </div>
                           </div>
                         )}
@@ -354,7 +405,7 @@ export default function Cart({ data }) {
                     Agregar al carrito
                   </button>
                   <h1 className="text-gray-800 font-bold font-poppins px-2 text-xl">Detalle pedido</h1>
-                  <hr/>
+                  <hr />
                   {orderList.map((item, index) => {
                     return (
                       <div key={index}>

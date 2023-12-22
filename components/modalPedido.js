@@ -93,7 +93,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
                     <hr className="w-full h-1 my-3 bg-slate-700" />
-                    <p className="text-base text-gray-900">{categoria?.categoria}</p>
+                    <p className="text-base font-semibold text-gray-800 font-poppins">{categoria?.categoria}</p>
 
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
@@ -113,7 +113,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                               </p>
                               <p className="font-semibold">$ {item.precio * item.cantidad}</p>
                             </div>
-                            <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>
+                            {categoria.categoria === 'pizzas' && <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>}
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
