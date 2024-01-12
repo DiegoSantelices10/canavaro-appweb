@@ -7,9 +7,10 @@ import { useRouter } from "next/router";
 import { FiChevronsLeft } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment-timezone";
-import { setCheckout, setTotalAmount } from "store/reducers/orderSlice";
+import { setCheckout, setDelivery, setDemora, setOrderListLocal, setTotalAmount } from "store/reducers/orderSlice";
 import { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
+import { setUser } from "store/reducers/userSlice";
 
 export default function Checkout() {
   const user = useSelector(state => state.user);
@@ -24,6 +25,25 @@ export default function Checkout() {
   useEffect(() => {
     if (promoBarra?.available && delivery === "localActual") {
       promoDescuento()
+    }
+
+
+  }, [])
+
+  useEffect(() => {
+    if (orderList.length === 0) {
+      const { nombre, telefono, direccion, demora, delivery, totalAmount, hPersonalizado, orderListLocal } = JSON.parse(localStorage.getItem('pedido'))
+      dispatch(setUser({
+        nombre,
+        telefono,
+        hPersonalizado,
+        direccion
+      }))
+      console.log('local', orderListLocal);
+      dispatch(setOrderListLocal(orderListLocal))
+      dispatch(setDemora(demora))
+      dispatch(setDelivery(delivery))
+      dispatch(setTotalAmount(totalAmount))
     }
   }, [])
 

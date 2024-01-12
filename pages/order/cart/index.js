@@ -27,7 +27,7 @@ import CardCart from "components/cardCart";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Cart({ data }) {
-  const { orderList, totalAmount, demora } = useSelector(state => state.order);
+  const { orderList, totalAmount, demora, orderPromo, delivery } = useSelector(state => state.order);
   const { nombre, direccion, telefono } = useSelector(state => state.user);
   const { promoBarra } = useSelector(state => state.setting);
   const { products } = useSelector(state => state.product);
@@ -38,8 +38,6 @@ export default function Cart({ data }) {
   const [currentProducto, setCurrentProducto] = useState(null);
   const [showHourEdit, setShowHourEdit] = useState(false);
 
-
-  const { orderPromo } = useSelector(state => state.order);
   const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
 
   const [type, setType] = useState("domicilioActual");
@@ -166,6 +164,17 @@ export default function Cart({ data }) {
         }}
         enableReinitialize
         onSubmit={values => {
+          const pedidoStorage = {
+            nombre: values.nombre,
+            telefono: values.telefono,
+            demora,
+            totalAmount,
+            delivery,
+            direccion: values.direccion,
+            hPersonalizado: values.hPersonalizado,
+            orderListLocal: orderList,
+          }
+          localStorage.setItem('pedido', JSON.stringify(pedidoStorage))
           dispatch(
             setUser({
               nombre: values.nombre,

@@ -27,7 +27,7 @@ export default function ProductLayout({
   data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
 }) {
   const { orderPromo, orderList, quantityDemanded } = useSelector(state => state.order);
-  const [selectCombo, setSelectCombo] = useState("");
+  const [selectCombo, setSelectCombo] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
 

@@ -6,7 +6,7 @@ const initialState = {
 	quantityDemanded: 0,
 	totalQuantity: 0,
 	totalAmount: 0,
-	delivery: "domicilioActual", 
+	delivery: "domicilioActual",
 	demora: "",
 	checkout: [],
 };
@@ -16,7 +16,7 @@ export const orderSlice = createSlice({
 	initialState,
 	reducers: {
 		setDelivery: (state, { payload }) => {
-		state.delivery = payload
+			state.delivery = payload
 		},
 		setDemora: (state, action) => {
 			state.demora = action.payload;
@@ -45,7 +45,9 @@ export const orderSlice = createSlice({
 		addPromoOrderList: (state, action) => {
 			state.orderList.push(action.payload);
 		},
-
+		setOrderListLocal: (state, action) => {
+			state.orderList = action.payload
+		},
 		addProductPromo: (state, action) => {
 			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
 			if (productIndex >= 0) {
@@ -129,6 +131,7 @@ export const {
 	calculateSubTotal,
 	calculateTotalQuantity,
 	addPromoOrderList,
+	setOrderListLocal,
 	clearOrderPromo,
 	setQuantityDemanded,
 	setCheckout,

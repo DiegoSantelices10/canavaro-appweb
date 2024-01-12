@@ -181,17 +181,17 @@ export default function Home() {
             </div>
           </div>
           <div className="w-full lg:hidden  p-2 flex items-center  mt-2 lg:mt-0">
-          {barra?.map(item => (
-            <div key={item._id} className="w-full h-auto mx-auto text-center">
-              <button
-                className={`w-40 h-10 font-nunito whitespace-nowrap font-semibold rounded-md text-sm border" ${item?.available ? "text-white bg-sky-700 border border-white" : "text-sky-800 bg-white border border-sky-800"}`}
-                type="button"
-                onClick={() => promoBarra(item?._id, item?.available)}
-              >
-                {item.nombre}
-              </button>
-            </div>
-          ))}
+            {barra?.map(item => (
+              <div key={item._id} className="w-full h-auto mx-auto text-center">
+                <button
+                  className={`w-40 h-10 font-nunito whitespace-nowrap font-semibold rounded-md text-sm border" ${item?.available ? "text-white bg-sky-700 border border-white" : "text-sky-800 bg-white border border-sky-800"}`}
+                  type="button"
+                  onClick={() => promoBarra(item?._id, item?.available)}
+                >
+                  {item.nombre}
+                </button>
+              </div>
+            ))}
           </div>
         </div>
 
