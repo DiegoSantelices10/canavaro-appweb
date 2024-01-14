@@ -12,6 +12,7 @@ import { getPromo } from "services/fetchData";
 
 
 
+
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [currentPedido, setCurrentPedido] = useState(null);
@@ -155,10 +156,10 @@ export default function Home() {
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
       <div className="h-auto w-full lg:p-4">
-        <div className="w-full lg:bg-sky-700 mx-auto lg:rounded-md  h-auto gap-4">
+        <div className="w-full  mx-auto lg:rounded-md  h-auto gap-4">
           <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
             <div className="w-full text-center py-2">
-              <h1 className="font-medium font-poppins lg:text-white">Demora domicilio</h1>
+              <h1 className="font-medium font-poppins ">Demora domicilio</h1>
               <div className="flex w-full gap-5 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "domicilio")
@@ -170,7 +171,7 @@ export default function Home() {
 
 
             <div className="w-full  text-center py-2">
-              <h1 className="font-medium font-poppins lg:text-white">Demora local</h1>
+              <h1 className="font-medium font-poppins ">Demora local</h1>
               <div className="flex w-full gap-5 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "local")
@@ -180,18 +181,36 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="w-full lg:hidden  p-2 flex items-center  mt-2 lg:mt-0">
+          <hr />
+          <div className="rounded-md mx-auto flex flex-col items-center justify-center lg:hidden mt-4">
             {barra?.map(item => (
-              <div key={item._id} className="w-full h-auto mx-auto text-center">
-                <button
-                  className={`w-40 h-10 font-nunito whitespace-nowrap font-semibold rounded-md text-sm border" ${item?.available ? "text-white bg-sky-700 border border-white" : "text-sky-800 bg-white border border-sky-800"}`}
-                  type="button"
-                  onClick={() => promoBarra(item?._id, item?.available)}
-                >
+              <div
+                key={item._id}
+                className="mt-2 w-1/2 flex justify-between items-center "
+              >
+                <h1 className=" font-poppins">
                   {item.nombre}
-                </button>
+                </h1>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    id={item._id}
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={item.available}
+                    onChange={() => promoBarra(item._id, item.available)}
+                  />
+                  <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
+                   rounded-full 
+                  dark:bg-gray-200 peer-checked:after:translate-x-full 
+                  after:content-[''] after:absolute 
+                  after:top-[2px] after:left-[2px] after:bg-white   
+                  after:rounded-full after:h-4 after:w-4 after:transition-all 
+                 dark:border-gray-600 peer-checked:bg-red-600 "></div>
+                </label>
+
               </div>
             ))}
+
           </div>
         </div>
 
@@ -221,7 +240,7 @@ export default function Home() {
                       onClick={() => handleOpenModal(item)}
                       className="px-4 py-2 w-auto rounded-md text-xs font-medium border  
 														shadow focus:outline-none focus:ring transition 
-														text-slate-500  hover:bg-blue-100 
+														text-slate-700  hover:bg-blue-100 
 														active:bg-blue-200 focus:ring-blue-300"
                       type="submit"
                     >
@@ -231,7 +250,7 @@ export default function Home() {
                       onClick={() => handleDelete(item?._id)}
                       className="px-4 py-2 w-auto rounded-md text-xs font-medium border shadow
 												focus:outline-none focus:ring transition text-white 
-											bg-sky-800   
+											bg-red-600   
 											hover:border-white "
                       type="submit"
                     >
@@ -243,6 +262,7 @@ export default function Home() {
             ) : (
               <p className="text-center w-full font-semibold font-poppins">No Hay pedidos</p>
             )}
+
           </div>
         </div>
       </div>

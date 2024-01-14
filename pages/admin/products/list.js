@@ -2,12 +2,14 @@ import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSearch, FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { setProductData } from "store/reducers/productSlice";
 import { getProductsFront } from "services/fetchData";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Products() {
   const [renderProductos, setRenderProductos] = useState([]);
@@ -73,8 +75,41 @@ export default function Products() {
     setRenderProductos(res);
   };
 
+  const deleteItemEndPoint = async (tId, id) => {
+    toast.dismiss(tId)
+    try {
+      await axios.delete(`/api/products/${id}`);
+      const res = renderProductos.filter(item => item._id !== id)
+      setRenderProductos(res);
+      toast.success('Producto Eliminado!')
+    } catch (error) {
+      alert("Error al actualizar el estado")
+    }
+  }
+
+  const deleteItem = async (id) => {
+    toast((t) => (
+      <div className="text-gray-900 flex justify-start gap-3 items-center font-poppins w-auto">
+        <h1 className="font-normal">
+          ¿Confirmas la acción?
+        </h1>
+        <button
+          className="p-2 bg-red-500 text-white font-normal font-poppins flex gap-1 item-center justify-center rounded-md"
+          onClick={() => deleteItemEndPoint(t.id, id)}>
+          <h1>
+            Eliminar
+          </h1>
+          <RiDeleteBin6Line size={17} className="text-white" />
+        </button>
+      </div>
+    ));
+
+
+  }
+
   return (
     <Layout>
+      <Toaster />
       <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-2 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
         <div className="bg-white flex w-full lg:w-1/4  items-center gap-x-2">
           <div
@@ -93,16 +128,16 @@ export default function Products() {
           </div>
         </div>
 
-        <div className="w-full lg:w-1/4 h-10 border-none shadow appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:ring-0">
+        <div className="w-full lg:w-1/4 h-10 border-none shadow appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
           <select
             onChange={handleCategoryChange}
-            className="h-10 border-none font-nunito  text-gray-900 text-base rounded-lg  block w-full p-2.5 "
+            className="h-10 border-none font-poppins focus:ring-0 focus:ring-gray-200  text-gray-400 text-sm rounded-lg  block w-full p-2.5 "
           >
-            <option className="text-gray-200 text-sm" value="">
-                Seleccione una categoria
+            <option className="text-gray-200 text-sm font-poppins" value="">
+              Seleccione una categoria
             </option>
             {categorias.map(item => (
-              <option key={item} value={item} className="text-sm font-nunito font-medium">
+              <option key={item} value={item} className="text-sm font-poppins font-medium">
                 {item}
               </option>
             ))}
@@ -112,9 +147,9 @@ export default function Products() {
         <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-end gap-5 ">
 
           <button
-            className="w-36 h-10 col-start-2 font-nunito font-bold
+            className="w-36 h-10 col-start-2 font-poppins font-normal
                              rounded-md  text-sm 
-                             border text-white bg-sky-700"
+                             border text-white bg-red-600"
             type="button"
             onClick={() => {
               router.push("/admin/products/create");
@@ -123,9 +158,9 @@ export default function Products() {
             Producto Nuevo
           </button>
           <button
-            className="w-36 h-10 col-start-2 font-nunito font-bold
+            className="w-36 h-10 col-start-2 font-poppins font-normal
                              rounded-md  text-sm 
-                             border text-sky-700 bg-white border-sky-700"
+                             border  bg-red-600 text-white"
             type="button"
             onClick={() => {
               router.push("/admin/products/updatePrices");
@@ -162,22 +197,25 @@ export default function Products() {
                         checked={available}
                         onChange={() => handleCheckboxChange(_id, available)}
                       />
-                      <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 
-                             dark:peer-focus:ring-sky-700  rounded-full 
-                             dark:bg-gray-700 peer-checked:after:translate-x-full 
-                            peer-checked:after:border-white after:content-[''] after:absolute 
-                            after:top-[2px] after:left-[1px] after:bg-white  
-                            after:border after:rounded-full after:h-4 after:w-4 after:transition-all 
-                            dark:border-gray-600 peer-checked:bg-sky-700 "></div>
+                      <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
+                   rounded-full 
+                  dark:bg-gray-200 peer-checked:after:translate-x-full 
+                  after:content-[''] after:absolute 
+                  after:top-[2px] after:left-[2px] after:bg-white   
+                  after:rounded-full after:h-4 after:w-4 after:transition-all 
+                 dark:border-gray-600 peer-checked:bg-red-600 "></div>
                     </label>
                   </div>
                 </div>
                 <div className="flex absolute bottom-2 right-3 gap-3">
                   <Link href={`/admin/products/${_id}`}>
                     <a>
-                      <FaRegEdit size={25} className="text-gray-800" />
+                      <FaRegEdit size={23} className="text-blue-800" />
                     </a>
                   </Link>
+                  <button onClick={() => deleteItem(_id)}>
+                    <RiDeleteBin6Line size={25} className="text-red-500" />
+                  </button>
                 </div>
               </div>
             </div>

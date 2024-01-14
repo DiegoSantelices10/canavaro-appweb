@@ -19,7 +19,7 @@ export default function Navbar() {
           ¡Hola!<span className="font-medium italic text-slate-700"> Que vas a pedir hoy?</span>{" "}
         </div>
         {orderList.length > 0 && (
-          <div className="h-9 w-[118px] flex justify-center items-center rounded-md  bg-red-600 hover:bg-sky-500  hover:-translate-y-1 transition-all duration-500">
+          <div className="h-9 w-[118px] flex justify-center items-center rounded-md  bg-red-600 hover:bg-red-500  hover:-translate-y-1 transition-all duration-500">
             {loader ?
               <ColorRing
                 visible={true}

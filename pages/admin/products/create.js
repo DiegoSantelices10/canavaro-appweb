@@ -21,12 +21,12 @@ export default function Create() {
     <Layout>
       {showModal && <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} />}
 
-      <section className="w-full bg-slate-50">
+      <section className="w-full flex justify-start items-start h-screen">
         <div className="w-full  p-2 md:p-10">
-          <h1 className="text-xl text-center md:text-3xl font-poppins font-extrabold text-zinc-800 my-4">
-            ¡Ingresa un producto nuevo!
+          <h1 className="text-xl text-center md:text-4xl font-poppins font-semibold text-zinc-800 my-4">
+            ¡Producto nuevo!
           </h1>
-          <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
+          <div className="flex overflow-x-scroll font-poppins flexp justify-start items-start space-x-1 w-full p-2 my-2">
             <style jsx>
               {`
                 .flexp::-webkit-scrollbar-thumb {
@@ -44,8 +44,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("empanadas")}
                 className={
                   renderProducts !== "empanadas"
-                    ? "w-52  font-semibold text-gray-400"
-                    : "w-52 p-1 font-semibold border-b-sky-700 border-b  text-sky-700 "
+                    ? "w-52  font-medium text-gray-400"
+                    : "w-52 font-medium border-b-red-600 border-b "
                 }
               >
                 Canastitas & Empanadas
@@ -56,8 +56,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("pizzas")}
                 className={
                   renderProducts !== "pizzas"
-                    ? "w-52  font-semibold text-gray-400"
-                    : "w-52 p-1 font-semibold border-b-sky-700 border-b  text-sky-700 "
+                    ? "w-48  font-semibold text-gray-400"
+                    : "w-48  font-semibold border-b-red-600 border-b  "
                 }
               >
                 Pizzas
@@ -69,8 +69,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("promociones")}
                 className={
                   renderProducts !== "promociones"
-                    ? "w-52  font-semibold text-gray-400"
-                    : "w-52 p-1 font-semibold border-b-sky-700 border-b  text-sky-700 "
+                    ? "w-48  font-semibold text-gray-400"
+                    : "w-48 font-semibold border-b-red-600 border-b   "
                 }
               >
                 Promociones
@@ -81,8 +81,8 @@ export default function Create() {
                 onClick={() => setRenderProductos("bebidas")}
                 className={
                   renderProducts !== "bebidas"
-                    ? "w-52  font-semibold text-gray-400"
-                    : "w-52 font-semibold border-b-sky-700 border-b  text-sky-700 "
+                    ? "w-48  font-semibold text-gray-400"
+                    : "w-48 font-semibold border-b-red-600 border-b  "
                 }
               >
                 Bebidas
@@ -132,10 +132,12 @@ export default function Create() {
             enableReinitialize
           >
             {({ setFieldValue, values, handleChange }) => (
-              <Form>
-                <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 ">
+              <Form
+                className="border border-gray-300 p-4 rounded-md"
+              >
+                <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-4 md:space-y-0">
                   <div className="w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400">
+                    <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                       Nombre del producto
                       <Field
                         id="nombre"
@@ -147,7 +149,7 @@ export default function Create() {
                   </div>
 
                   <div className=" hidden w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400">
+                    <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                       Categoria
                       <Field
                         id="categoria"
@@ -159,7 +161,7 @@ export default function Create() {
                   </div>
 
                   <div className=" w-full mx-auto ">
-                    <label className="block text-sm  text-slate-400">
+                    <label className="block text-sm  text-gray-400 font-poppins font-medium">
                       Descripcion
                       <Field
                         id="descripcion"
@@ -172,7 +174,7 @@ export default function Create() {
 
                   {renderProducts !== "pizzas" && (
                     <div className=" w-full mx-auto">
-                      <label className="block  text-sm  text-slate-400">
+                      <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                         Precio
                         <Field
                           id="precio"
@@ -187,11 +189,11 @@ export default function Create() {
                   {renderProducts === "empanadas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <p className="block  text-sm  text-slate-400">Formato</p>
+                        <p className="block  text-sm  text-gray-400 font-poppins font-medium">Formato</p>
                         <div
                           role="group"
                           aria-labelledby="my-radio-group"
-                          className="w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
+                          className="w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
                         >
                           <label>
                             <Field type="radio" name="formato" value="canastita" className="mx-5" />
@@ -208,7 +210,7 @@ export default function Create() {
                   {renderProducts === "pizzas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400">
+                        <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                           Precio gigante
                           <Field
                             id="precioPizza.gigante"
@@ -219,7 +221,7 @@ export default function Create() {
                         </label>
                       </div>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400">
+                        <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                           Precio mediana
                           <Field
                             id="precioPizza.mediana"
@@ -230,7 +232,7 @@ export default function Create() {
                         </label>
                       </div>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400">
+                        <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                           Precio chica
                           <Field
                             id="precioPizza.chica"
@@ -244,7 +246,7 @@ export default function Create() {
                   )}
 
                   <div className=" w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400">
+                    <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                       Cargar Imagen
                       <input
                         name="imagen"
@@ -259,11 +261,11 @@ export default function Create() {
                     <>
                       <div className="w-full mx-auto">
                         <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-slate-400">¿La promo cuenta con empanadas?</p>
+                          <p className="block  text-sm  text-gray-400 font-poppins font-medium">¿La promo cuenta con empanadas?</p>
                           <div
                             role="group"
                             aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
+                            className="p-2 w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
                           >
                             <label>
                               <Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
@@ -277,7 +279,7 @@ export default function Create() {
                         </div>
                         {values.addEmpanadas === "si" && (
                           <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-slate-400">
+                            <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                               Ingresa la cantidad de empanadas
                               <Field
                                 id="cantidadMaxima"
@@ -293,11 +295,11 @@ export default function Create() {
                       </div>
                       <div className="w-full mx-auto">
                         <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-slate-400">¿La promo cuenta con Pizza?</p>
+                          <p className="block  text-sm  text-gray-400 font-poppins font-medium">¿La promo cuenta con Pizza?</p>
                           <div
                             role="group"
                             aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-slate-400 flex justify-center items-center h-10 gap-10"
+                            className="p-2 w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
                           >
                             <label>
                               <Field type="radio" name="addPizzas" value="si" className="mx-5" />
@@ -311,7 +313,7 @@ export default function Create() {
                         </div>
                         {values.addPizzas === "si" && (
                           <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-slate-400">
+                            <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                               Ingresa el tamaño de la pizza
                               <Field
                                 id="tamanio"
@@ -328,9 +330,9 @@ export default function Create() {
                   )}
 
                   <button
-                    className="w-48 h-12 my-4 col-start-2
+                    className="w-44 h-12 col-start-2
                        						 rounded-md  text-sm 
-                       						 border text-white bg-sky-900 font-semibold font-nunito"
+                       						 border text-white bg-red-600 font-normal font-poppins hover:bg-red-500 translate-x-1"
                     type="submit"
                   >
                     Agregar Producto

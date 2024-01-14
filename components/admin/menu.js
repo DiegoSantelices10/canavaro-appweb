@@ -57,7 +57,7 @@ const AccessMenu = () => {
 
   return (
     <div className="w-full  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-4 ">
-      <div className="lg:flex lg:justify-center lg:items-center hidden">
+      <div className="lg:flex lg:justify-center lg:items-center hidden mt-5 ">
         <Image height={110} width={110} src={"/images/logocanavaro.webp"} />
       </div>
       <div className="w-11/12 lg:w-full flex justify-around items-center lg:block lg:pt-10 pt-0">
@@ -97,18 +97,35 @@ const AccessMenu = () => {
           </Link>
         </div>
       </div>
-      <div className="rounded-md hidden lg:block mt-3">
+      <div className="rounded-md hidden lg:block absolute bottom-20 px-3  w-full">
         {barra?.map(item => (
-          <div key={item._id} className="w-full py-1 h-auto mx-auto text-center">
-            <button
-              className={`w-32 h-8 font-nunito whitespace-nowrap font-semibold rounded-md text-sm border" ${item?.available ? "text-white border-2 border-white bg-sky-700" : "text-sky-900 bg-white border "}`}
-              type="button"
-              onClick={() => promoBarra(item?._id, item?.available)}
-            >
+          <div
+            key={item._id}
+            className="mt-2 w-full flex justify-between items-center gap-5"
+          >
+            <h1 className="text-white font-poppins">
               {item.nombre}
-            </button>
+            </h1>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                id={item._id}
+                type="checkbox"
+                className="sr-only peer"
+                checked={item.available}
+                onChange={() => promoBarra(item._id, item.available)}
+              />
+              <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
+                   rounded-full 
+                  dark:bg-gray-300 peer-checked:after:translate-x-full 
+                  after:content-[''] after:absolute 
+                 after:top-[2px] after:left-[2px] after:bg-white  
+                  after:rounded-full after:h-4 after:w-4 after:transition-all 
+                 dark:border-gray-600 peer-checked:bg-red-700 "></div>
+            </label>
+
           </div>
         ))}
+
       </div>
       <button onClick={signOut} className="font-semibold absolute right-3 top-1/2 -translate-y-1/2 lg:right-4 lg:bottom-1 lg:top-auto">
         <AiOutlineLogout size={25} className="mx-auto text-white" />

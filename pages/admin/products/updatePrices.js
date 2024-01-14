@@ -74,10 +74,11 @@ const UpdatePrices = () => {
   const handleUpdateEmpanadasPorDocena = async () => {
     const pricesUpdate = priceDocenaRef.current.value;
     try {
-      const response = await axios.put("/api/promo/", { 
+      const response = await axios.put("/api/promo/", {
         _id: "6571f5f6cf7c5cdd759d12e1",
         categoria: "docena",
-        precio: pricesUpdate });
+        precio: pricesUpdate
+      });
       response.status === 200 && alert("Precio por docena actualizado!");
     } catch (error) {
       alert("Error al actualizar los datos");
@@ -97,13 +98,13 @@ const UpdatePrices = () => {
   return (
     <Layout>
       <div className="lg:flex w-full justify-between items-center h-auto p-2 gap-4">
-        
-        <div className="mx-auto p-2 h-auto border border-gray-200 w-full  lg:w-1/2  shadow rounded-md">
-          <p className="text-center font-nunito font-semibold">Actualiza precio empanadas</p>
-          <div className=" md:flex lg:flex  justify-between w-full gap-2">
+
+        <div className="mx-auto p-2 h-auto  w-full  lg:w-1/2">
+          <p className="text-center font-poppins font-semibold">Actualizar el precio de las empanadas</p>
+          <div className=" md:flex lg:flex  justify-between w-full gap-2 mt-2">
             <div className="w-full flex items-end">
               <div className="w-full">
-                <p className="font-nunito text-sm font-semibold text-gray-500">Precio x unidad</p>
+                <p className="font-poppins text-sm font-normal text-gray-900">Precio x unidad</p>
                 <input
                   type="number"
                   ref={priceRef}
@@ -113,14 +114,14 @@ const UpdatePrices = () => {
               </div>
               <button
                 onClick={handleUpdateEmpanadas}
-                className="bg-sky-800 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-md shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>
             </div>
-            <div className="w-full flex items-end mt-2">
+            <div className="w-full flex items-end mt-3">
               <div className="w-full">
-                <p className="font-nunito text-sm font-semibold text-gray-500">Precio x docena</p>
+                <p className="font-poppins text-sm font-normal text-gray-900 ">Precio x docena</p>
                 <input
                   type="number"
                   ref={priceDocenaRef}
@@ -130,7 +131,7 @@ const UpdatePrices = () => {
               </div>
               <button
                 onClick={handleUpdateEmpanadasPorDocena}
-                className="bg-sky-800 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-md shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>
@@ -154,9 +155,9 @@ const UpdatePrices = () => {
         </div>
 
         <div className=" lg:w-1/3 w-full px-2 mt-3 lg:mt-0 flex flex-col items-center  p-2   mx-auto border-none outline-none shadow border border-gray-200 rounded-md">
-          <p className="font-nunito font-semibold">Actualizar el precio de las pizzas</p>
+          <p className="font-poppins font-semibold">Actualizar el precio de las pizzas</p>
           <input
-            className=" file:cursor-pointer text-gray-500 text-sm w-5/5 mt-6 file:font-semibold file:bg-sky-800 file:text-white file:border-none file:p-2 file:rounded-md "
+            className=" file:cursor-pointer text-gray-500 text-sm w-5/5 mt-6 file:font-medium font-poppins file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded-md "
             type="file"
             title="Importar archivo"
             accept=".xlsx, .xls"
@@ -173,6 +174,7 @@ const UpdatePrices = () => {
         </div>
 
       </div>
+      <hr />
 
       <div className="w-full px-2 pb-5 md:w-11/12 lg:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3  lg:grid lg:grid-cols-4 gap-3">
         {updateData.length !== 0 &&

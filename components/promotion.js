@@ -11,7 +11,7 @@ export default function Promotion({
   data: { _id, nombre, categoria, descripcion, precio, addEmpanadas },
   setSelectCombo,
 }) {
-  const [select, setSelect] = useState("");
+  const [select, setSelect] = useState("Combo 1");
 
   const dispatch = useDispatch();
 
@@ -21,6 +21,13 @@ export default function Promotion({
   useEffect(() => {
     dispatch(setQuantityDemanded(cantMax));
     dispatch(clearOrderPromo())
+    if (nombre === 'Combo 4' || nombre === 'Combo 5') {
+      console.log('entro');
+      const { _id, nombre, descripcion } =
+        products.filter(item => item.categoria === "promociones").find(item => item.nombre === select) || {};
+      const res = { _id, nombre, descripcion };
+      setSelectCombo(res);
+    }
   }, []);
 
   const addItems = value => {

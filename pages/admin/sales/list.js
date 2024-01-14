@@ -85,7 +85,7 @@ export default function Sales() {
                               onClick={() => handleOpenModal(item)}
                               className="px-4 py-2 w-auto rounded-md text-xs font-medium border 
 														shadow focus:outline-none focus:ring transition 
-														text-white bg-sky-800  hover:bg-sky-700 
+														text-white bg-red-600  hover:bg-red-500 
 														active:bg-blue-200 focus:ring-blue-300"
                               type="submit"
                             >
