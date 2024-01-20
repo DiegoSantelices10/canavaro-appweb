@@ -26,7 +26,7 @@ export default function PizzaInfo({
     <>
       {" "}
       {gigante !== null && gigante !== 0 && (
-        <div className="font-nunito grid grid-cols-3 items-center justify-between w-full mb-3">
+        <div className="font-poppins grid grid-cols-3 items-center justify-between w-full mb-3">
           <div className="text-lg font-semibold text-neutral-800">
             <h2>Gigante</h2>
           </div>
@@ -39,7 +39,7 @@ export default function PizzaInfo({
             >
               <button
                 type="button"
-                className="text-red-500 text-3xl "
+                className="text-red-500 font-normal text-2xl "
                 onClick={() =>
                   decrementCart({
                     _id: removeSpaces(nombre) + "gigante",
@@ -58,7 +58,7 @@ export default function PizzaInfo({
             <div className="rounded-md w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-sky-800 text-3xl"
+                className="text-green-500 font-normal text-2xl"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "gigante",
@@ -76,7 +76,7 @@ export default function PizzaInfo({
         </div>
       )}
       {mediana !== null && mediana !== 0 && (
-        <div className="font-nunito grid grid-cols-3 justify-between items-center mb-3">
+        <div className="font-poppins grid grid-cols-3 justify-between items-center mb-3">
           <div className="text-lg font-semibold text-neutral-800">
             <h2>Mediana</h2>
           </div>
@@ -89,7 +89,7 @@ export default function PizzaInfo({
             >
               <button
                 type="button"
-                className="text-red-500 text-3xl "
+                className="text-red-500 font-normal text-2xl"
                 onClick={() =>
                   decrementCart({
                     _id: removeSpaces(nombre) + "mediana",
@@ -108,7 +108,7 @@ export default function PizzaInfo({
             <div className="rounded-md w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-sky-800 text-3xl"
+                className="text-green-500 font-normal text-2xl"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "mediana",
@@ -126,7 +126,7 @@ export default function PizzaInfo({
         </div>
       )}
       {chica !== null && chica !== 0 && (
-        <div className=" font-nunito grid grid-cols-3 justify-between items-center mb-3">
+        <div className=" font-poppins grid grid-cols-3 justify-between items-center mb-3">
           <div className="text-lg font-semibold text-neutral-800">
             <h2>Chica</h2>
           </div>
@@ -139,7 +139,7 @@ export default function PizzaInfo({
             >
               <button
                 type="button"
-                className="text-red-500 text-3xl "
+                className="text-red-500 font-normal text-2xl"
                 onClick={() =>
                   decrementCart({
                     _id: removeSpaces(nombre) + "chica",
@@ -158,7 +158,7 @@ export default function PizzaInfo({
             <div className="rounded-md w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-sky-800 text-3xl"
+                className="text-green-500 font-normal text-2xl"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "chica",

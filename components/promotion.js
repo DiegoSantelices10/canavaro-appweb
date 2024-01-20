@@ -22,7 +22,6 @@ export default function Promotion({
     dispatch(setQuantityDemanded(cantMax));
     dispatch(clearOrderPromo())
     if (nombre === 'Combo 4' || nombre === 'Combo 5') {
-      console.log('entro');
       const { _id, nombre, descripcion } =
         products.filter(item => item.categoria === "promociones").find(item => item.nombre === select) || {};
       const res = { _id, nombre, descripcion };
@@ -77,8 +76,8 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base text-neutral-800 font-nunito">{producto.nombre}</h3>
-                    <h4 className="text-gray-400 text-xs font-nunito font-normal">{producto.descripcion}</h4>
+                    <h3 className="text-base text-neutral-800 font-poppins">{producto.nombre}</h3>
+                    <h4 className="text-gray-400 text-xs font-poppins font-normal">{producto.descripcion}</h4>
                   </div>
                 );
               })}
@@ -97,8 +96,8 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base text-neutral-800 font-nunito">{producto.nombre}</h3>
-                    <h4 className="text-gray-400 text-xs font-nunito font-normal">{producto.descripcion}</h4>
+                    <h3 className="text-base text-neutral-800 font-poppins">{producto.nombre}</h3>
+                    <h4 className="text-gray-400 text-xs font-poppins font-normal">{producto.descripcion}</h4>
                   </div>
                 );
               })}
@@ -108,7 +107,7 @@ export default function Promotion({
 
       {addEmpanadas === "no" ? (
         <div className="flex justify-between items-center ">
-          <div className="font-nunito text-neutral-800 text-lg font-bold">
+          <div className="font-poppins text-neutral-800 text-lg font-bold">
             <h2>{nombre}</h2>
           </div>
           <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
@@ -121,7 +120,7 @@ export default function Promotion({
             >
               <button
                 type="button"
-                className="text-red-500 text-2xl "
+                className="text-red-500 font-normal text-2xl "
                 onClick={e => {
                   decrementItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
                   setQuantity(quantityDemanded + 1);
@@ -134,7 +133,7 @@ export default function Promotion({
             <div className="rounded-md  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-sky-800 font-normal text-3xl"
+                className="text-green-500 font-normal text-2xl"
                 onClick={e => {
                   addItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
                   setQuantity(quantityDemanded - 1);
@@ -146,7 +145,7 @@ export default function Promotion({
           </div>
         </div>
       ) : (
-        <div className="mt-4 font-nunito">
+        <div className="mt-4 font-poppins">
           {
             <>
               {quantityDemanded < 1 ? (
@@ -166,8 +165,8 @@ export default function Promotion({
                 ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
                 .map(({ _id, nombre }) => {
                   return (
-                    <div key={_id} className=" font-nunito flex justify-between items-center my-6 p-1  ">
-                      <div className="w-1/2 text-neutral-800 font-bold text-base font-nunito">
+                    <div key={_id} className=" font-poppins flex justify-between items-center my-6 p-1  ">
+                      <div className="w-1/2 text-neutral-800 font-bold text-base font-poppins">
                         <h2>{nombre}</h2>
                       </div>
                       <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
@@ -180,7 +179,7 @@ export default function Promotion({
                         >
                           <button
                             type="button"
-                            className="text-red-500 text-3xl"
+                            className="text-red-500 font-normal text-2xl"
                             onClick={e => {
                               setQuantity(quantityDemanded + 1);
                               decrementItems({ _id, nombre });
@@ -200,7 +199,7 @@ export default function Promotion({
                         >
                           <button
                             type="button"
-                            className="text-neutral-800 font-normal text-3xl"
+                            className="text-green-500 font-normal text-2xl"
                             onClick={e => {
                               setQuantity(quantityDemanded - 1);
                               addItems({ _id, nombre });

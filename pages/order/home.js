@@ -62,10 +62,10 @@ export default function Home() {
       dispatch(setProductData(res));
     }
 
-   (async () => {
-    const res = await axios.get("/api/promo");
-    setDocenaPrice(res.data[0].precio)
-   })(); 
+    (async () => {
+      const res = await axios.get("/api/promo");
+      setDocenaPrice(res.data[0].precio)
+    })();
   }, []);
 
 
@@ -94,13 +94,9 @@ export default function Home() {
     if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
     if (cantidadTotal % requiredQuantity === 0) {
-     const cantDocena = cantidadTotal / requiredQuantity;
-     const total = cantDocena * docenaPrice;
+      const cantDocena = cantidadTotal / requiredQuantity;
+      const total = cantDocena * docenaPrice;
       setTotalPrice(total)
-      // const totalDescuento = totalAmount - totalAmount * 0.10;
-      // const totalRedondeado = Math.ceil(totalDescuento / 100) * 100;
-      // if (cantidadTotal === requiredQuantity) setDocenaPrice(totalRedondeado);
-      // setTotalPrice(totalRedondeado);
     }
 
     if (cantidadTotal > requiredQuantity && cantidadTotal % requiredQuantity !== 0) {
@@ -109,14 +105,10 @@ export default function Home() {
       const resto = cantidadTotal % requiredQuantity;
       let subtotal;
 
-      if(docenaCant > 0) {
+      if (docenaCant > 0) {
         subtotal = docenaCant * docenaPrice;
       }
       const total = resto * priceU;
-      // const cociente = Math.floor(cantidadTotal / requiredQuantity);
-      // const result = cociente * docenaPrice;
-      // const resto = cantidadTotal % requiredQuantity;
-      // const total = result + resto * priceU;
       setTotalPrice(subtotal + total);
     }
   };
@@ -129,7 +121,7 @@ export default function Home() {
       value.map(item => dispatch(addPromoOrderList({ ...item })));
 
       toast.success('Se agrego al pedido!')
-      
+
       dispatch(clearOrderPromo());
       dispatch(calculateSubTotal());
       dispatch(calculateTotalQuantity());
@@ -161,7 +153,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <Toaster/>
+      <Toaster />
       <div className="py-4 mt-14 mx-auto w-full ">
         <h1 className="text-lg  font-bold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
@@ -183,7 +175,7 @@ export default function Home() {
           <div className="w-full  p-3 flex items-center justify-between">
             <p className="text-left w-full font-poppins text-base  font-semibold">¡ Arma tu pizza como quieras !</p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-nunito font-semibold w-auto bg-red-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
+              <a className="rounded-md font-poppins font-semibold w-auto bg-red-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
                 Ingresa aqui
               </a>
             </Link>
@@ -270,11 +262,10 @@ export default function Home() {
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
-                className={`${
-                  orderPromo.length < 1
-                    ? "invisible"
-                    : "p-3 px-4 font-semibold font-nunito bg-slate-50 rounded-md text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
-                }`}
+                className={`${orderPromo.length < 1
+                  ? "invisible"
+                  : "p-3 px-4 font-semibold font-poppins bg-slate-50 rounded-md text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
+                  }`}
               >
                 Agregar al carrito
               </button>
@@ -282,7 +273,7 @@ export default function Home() {
               <div className="flex items-center gap-x-5 text-white font-semibold pr-4">
                 <p className="font-semibold text-xl">$ {totalPrice}</p>
                 <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
-                  <p className="text-neutral-800 text-lg font-bold">{totalCant}</p>
+                  <p className="text-neutral-800 text-lg font-semibold">{totalCant}</p>
                 </div>
               </div>
             </div>

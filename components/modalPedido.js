@@ -24,7 +24,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
   };
   return (
     <div className={showHideClassName}>
-      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-nunito">
+      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-poppins">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
@@ -45,7 +45,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 />
               </button>
             </div>
-            <div className="font-normal text-left text-base font-nunito mt-4 text-gray-800">
+            <div className="font-normal text-left text-base font-poppins mt-4 text-gray-800">
               <div className="flex justify-between w-full ">
                 <h2 className="font-semibold">
                   Fecha: <span className="font-normal text-base">{pedido?.fecha}</span>
@@ -99,8 +99,8 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                       ?.filter(producto => producto?.categoria === categoria.categoria)
                       .map((item, index) => {
                         return (
-                          <div key={index} className="py-1 font-nunito text-base text-gray-900">
-                            <div className="flex justify-between items-center font-nunito">
+                          <div key={index} className="py-1 font-poppins text-base text-gray-900">
+                            <div className="flex justify-between items-center font-poppins">
                               <p className="font-bold">
                                 {item?.cant || item?.cantidad} x
                                 <span className=" pl-1 font-semibold ">

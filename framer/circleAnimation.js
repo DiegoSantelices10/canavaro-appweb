@@ -186,7 +186,7 @@ const CircleAnimation = () => {
                     .map((item, index) => {
                       return (
                         <div key={index} className="py-2">
-                          <div className="flex justify-between items-center font-nunito">
+                          <div className="flex justify-between items-center font-poppins">
                             <p className="font-bold text-neutral-900 text-base">
                               {item.nombre}
                               <span className=" pl-1 font-semibold text-gray-700 text-base">
@@ -217,16 +217,16 @@ const CircleAnimation = () => {
             {promoBarra?.available && delivery === "localActual" && (
               <h1 className="text-right text-sm text-gray-500">Descuento aplicado del 10%</h1>
             )}
-            <h1 className="font-bold text-right text-base font-nunito">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
+            <h1 className="font-bold text-right text-base font-poppins">Total: <span className=" font-bold text-lg">$ {checkout.total}</span></h1>
           </div>
 
         </div>
         <div className="text-center gap-2 flex justify-between items-end py-2">
-          <h1 className="text-base font-bold text-gray-700 font-nunito">Guarda el detalle de tu pedido.</h1>
+          <h1 className="text-base font-bold text-gray-700 font-poppins">Guarda el detalle de tu pedido.</h1>
           <button
             onClick={handleCapture}
             style={{ backgroundColor: "#FD3307" }}
-            className="rounded-md text-white flex gap-2 justify-center items-center   h-12 w-36 font-nunito text-base font-semibold shadow-md">
+            className="rounded-md text-white flex gap-2 justify-center items-center   h-12 w-36 font-poppins text-base font-semibold shadow-md">
             Descargar <FaDownload size={16} /> </button>
         </div>
       </div>

@@ -133,7 +133,7 @@ export default function Index() {
       {showModal && (
         <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
       )}
-      <Toaster/>
+      <Toaster />
       <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
@@ -150,10 +150,10 @@ export default function Index() {
         <div className="flex flex-col  w-full">
           <div className="w-full bg-white p-3">
             <h1 className="font-semibold text-lg text-neutral-800 font-poppins">Arma tu pizza</h1>
-            <p className=" font-normal text-sm  text-gray-400 font-nunito">Elegi los gustos que quieras</p>
+            <p className=" font-normal text-sm  text-gray-400 font-poppins">Elegi los gustos que quieras</p>
           </div>
           <hr className="pb-3" />
-          <div className="flex w-full justify-around font-nunito font-bold mt-3">
+          <div className="flex w-full justify-around font-poppins font-bold mt-3">
             <div className="grid content-center gap-2">
               <input
                 id="chica"
@@ -164,7 +164,7 @@ export default function Index() {
                 checked={select === "chica"}
                 className="mx-auto rounded focus:ring-0 focus:text-sky-800"
               />
-              <h3 className="font-semibold font-nunito text-sm">Chica</h3>
+              <h3 className="font-semibold font-poppins text-sm">Chica</h3>
             </div>
             <div className="grid content-center gap-2">
               <input
@@ -191,19 +191,19 @@ export default function Index() {
               <h3 className="font-semibold text-sm">Gigante</h3>
             </div>
           </div>
-          <div className="text-center font-nunito py-2 text-gray-400 text-base">
+          <div className="text-center font-poppins py-2 text-gray-400 text-base">
             <p>puedes elegir hasta {select === "gigante" ? "4" : "2"} gustos</p>
           </div>
           <div className="px-3 rounded-md">
-          <div
-            className={
-              total === 1
-                ? "bg-green-500 font-nunito rounded-md  w-full text-sm text-white p-2 mt-2 text-center font-semibold"
-                : "bg-red-600 w-full font-nunito rounded-md text-white text-sm p-2 mt-2 text-center font-semibold"
-            }
-          >
-            {productTotal()}
-          </div>
+            <div
+              className={
+                total === 1
+                  ? "bg-green-500 font-poppins rounded-md  w-full text-sm text-white p-2 mt-2 text-center font-semibold"
+                  : "bg-red-600 w-full font-poppins rounded-md text-white text-sm p-2 mt-2 text-center font-semibold"
+              }
+            >
+              {productTotal()}
+            </div>
           </div>
           <div className="text-sm font-semibold text-left bg-white p-3 my-1">
             {products
@@ -215,7 +215,7 @@ export default function Index() {
               .map(item => {
                 return (
                   <div key={item._id} className="flex justify-between items-center py-2  my-2 ">
-                    <h2 className="font-nunito font-bold text-neutral-800 text-base">{item.nombre}</h2>
+                    <h2 className="font-poppins font-bold text-neutral-800 text-base">{item.nombre}</h2>
                     <div className="w-auto   px-3 text-end space-x-4 text-base">
                       <div className="flex w-full justify-around items-center gap-5">
                         {radioSelect[item._id]?.fraccion && (
@@ -228,7 +228,7 @@ export default function Index() {
                         )}
                         {select === "gigante" && (
                           <div className="flex items-center justify-center gap-x-2">
-                            <h3 className="text-gray-400 text-sm font-nunito">1/4</h3>
+                            <h3 className="text-gray-400 text-sm font-poppins">1/4</h3>
                             <input
                               type="radio"
                               value="1/4"
@@ -241,7 +241,7 @@ export default function Index() {
                         )}
 
                         <div className="flex items-center gap-x-2">
-                          <h3 className="text-gray-400 text-sm font-nunito">1/2</h3>
+                          <h3 className="text-gray-400 text-sm font-poppins">1/2</h3>
                           <input
                             type="radio"
                             value="1/2"
@@ -270,22 +270,22 @@ export default function Index() {
           />
         </div>
       </div>
-       {total === 1 && (
-      <div className="bg-white w-full fixed bottom-0 p-4  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
-        <button
-          className={`${total === 1
-            ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
-            : "invisible"
-            }`}
-          onClick={() => {
-            addCartPromo(radioSelect, select);
-          }}
-        >
-          Agregar al Carrito
-          <FiShoppingCart size={23} />{" "}
-        </button>
-      </div>
-       )}       
+      {total === 1 && (
+        <div className="bg-white w-full fixed bottom-0 p-4  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
+          <button
+            className={`${total === 1
+              ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
+              : "invisible"
+              }`}
+            onClick={() => {
+              addCartPromo(radioSelect, select);
+            }}
+          >
+            Agregar al Carrito
+            <FiShoppingCart size={23} />{" "}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

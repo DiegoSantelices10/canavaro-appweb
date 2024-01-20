@@ -124,7 +124,7 @@ export default function ProductLayout({
       {showModal && (
         <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
       )}
-      <Toaster/>
+      <Toaster />
       <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
@@ -141,9 +141,9 @@ export default function ProductLayout({
         <div className="flex flex-col  w-full">
           <div className="w-full bg-white px-3 ">
             <h1 className="font-semibold text-lg font-poppins text-neutral-800">{nombre}</h1>
-            <p className=" font-normal text-sm  text-gray-400 font-nunito">{descripcion}</p>
+            <p className=" font-normal text-sm  text-gray-400 font-poppins">{descripcion}</p>
             {categoria === "promociones" && (
-              <p className=" font-normal font-nunito text-sm text-gray-400">$ {precio}</p>
+              <p className=" font-normal font-poppins text-sm text-gray-400">$ {precio}</p>
             )}
             <hr className="mt-4" />
           </div>

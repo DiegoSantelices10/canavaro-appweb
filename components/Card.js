@@ -51,7 +51,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
                 >
                   <button
                     type="button"
-                    className="text-red-500 text-3xl "
+                    className="text-red-500 text-2xl font-normal "
                     onClick={e => {
                       decrementItems({ _id, nombre, precio, categoria });
                     }}
@@ -65,7 +65,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
                 <div className="rounded-md w-8 h-8 grid content-center  shadow  bg-slate-50">
                   <button
                     type="button"
-                    className="text-sky-700 text-3xl"
+                    className="text-green-500 text-2xl font-normal"
                     onClick={e => {
                       addItems({ _id, nombre, precio, categoria });
                     }}
@@ -84,8 +84,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
                   className="rounded-md"
                   src={imagen?.url}
                   objectFit="cover"
-                  width={140} 
-                  height={140} 
+                  width={140}
+                  height={140}
                   alt={nombre} />
                 <div className="w-full self-start">
                   <h1 className="font-semibold text-sm font-poppins text-neuttral-800">{nombre}</h1>

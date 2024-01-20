@@ -20,7 +20,8 @@ function HomeFront({ imagefront }) {
       if (status === 200) {
         const delivery = data.filter(item => item.nombre === "Delivery")
         const barra = data.filter(item => item.nombre === "Promo Barra")
-        dispatch(setSetting({deliveryButton: delivery[0], promoBarra: barra[0]}))
+        dispatch(setSetting({ deliveryButton: delivery[0], promoBarra: barra[0] }))
+        localStorage.setItem('buttom delivery', { buttomDelivery: delivery[0] })
       }
     })()
 
@@ -28,7 +29,7 @@ function HomeFront({ imagefront }) {
   return (
     <Element name="home" className="relative element">
       <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
-      <div className={` font-nunito w-full min-h-screen mx-auto `}>
+      <div className={` font-poppins w-full min-h-screen mx-auto `}>
         <div className="absolute inset-0 bg-black bg-opacity-50 h-full"> </div>
 
         <motion.div initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>
@@ -36,22 +37,32 @@ function HomeFront({ imagefront }) {
             <div className="w-full flex sm:flex-col md:flex-row lg:flex-row flex-col justify-center items-center min-h-screen gap-7">
 
               <div className="w-full md:w-1/2">
-                <p className="font-nunito text-4xl md:text-4xl lg:text-6xl text-center  font-bold text-gray-200">Pizzeria Canavaro</p>
+                <p className="font-poppins text-4xl lg:text-6xl text-center  font-bold text-gray-200">Pizzeria Canavaro</p>
                 <p className="text-base md:text-xl font-semibold text-white">¡Todo lo que necesitas en un solo lugar!</p>
-                <p className="text-sm lg:text-base text-zinc-300 font-normal">De martes a domingo de 19 a 23hs.</p>
-               <p className="text-zinc-300  text-sm lg:text-base">Pelliza 1794 - Olivos</p>
+                <p className="text-sm lg:text-base text-zinc-200 font-normal">De martes a domingo de 19 a 23hs.</p>
+                <p className="text-zinc-200  text-sm lg:text-base">Pelliza 1794 - Olivos</p>
+                <div className="w-full flex items-center my-5 lg:mb-2">
+                  <Link href={"/digitalMenu"}>
+                    <a
+                      className={`p-2 px-4 rounded-md font-semibold  font-poppins  text-lg  mx-auto 
+                          hover:bg-black hover:text-white bg-white  text-gray-900   
+                          hover:-translate-y-1 transition-all duration-500`}
+                    >
+                      Men&uacute; digital
+                    </a>
+                  </Link>
+                </div>
               </div>
 
               <div className="w-full md:w-1/3  h-auto p-5 lg:py-10 mx-auto flex flex-col justify-center items-center gap-1  relative text-center">
                 <div className="absolute bg-black  mx-auto rounded-md h-full opacity-40 inset-0 z-0"></div>
                 <div className="relative z-10 flex flex-col justify-center items-center">
-                <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
-                  {/* <MdOutlineDeliveryDining size={60} className="text-white " /> */}
+                  <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
                   {deliveryButton.available && (
                     <div className="w-full flex items-center my-5 lg:mb-2">
                       <Link href={"/welcomeLogo"}>
                         <a
-                          className={`p-2 px-4 rounded-md font-semibold  font-nunito  text-lg  mx-auto 
+                          className={`p-2 px-4 rounded-md font-semibold  font-poppins  text-lg  mx-auto 
                           hover:bg-black hover:text-white bg-white  text-gray-900   
                           hover:-translate-y-1 transition-all duration-500`}
                         >
@@ -60,9 +71,9 @@ function HomeFront({ imagefront }) {
                       </Link>
                     </div>
                   )}
-                
-                <h1 className="text-xl text-gray-200 font-semibold">¡ Nosotros te lo llevamos !</h1>
-                <h1 className="text-base text-gray-200 font-normal">Delivery & Take Away</h1>
+
+                  <h1 className="text-xl text-gray-200 font-semibold">¡ Nosotros te lo llevamos !</h1>
+                  <h1 className="text-base text-gray-200 font-normal">Delivery & Take Away</h1>
                 </div>
 
               </div>

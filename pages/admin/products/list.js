@@ -184,7 +184,7 @@ export default function Products() {
                   height={140}
                   alt={nombre}
                 />
-                <div className=" p-2 relative w-full font-nunito h-28  self-start">
+                <div className=" p-2 relative w-full font-poppins h-28  self-start">
                   <h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
                   <p className="text-gray-400 text-xs">{descripcion.length > 30 ? descripcion.slice(0, 30) + "..." : descripcion}</p>
                   <h4 className="text-gray-700 text-xs ">{categoria}</h4>

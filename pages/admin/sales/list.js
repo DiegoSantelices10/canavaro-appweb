@@ -61,7 +61,7 @@ export default function Sales() {
             <div className="w-full mx-auto">
               <div className="relative overflow-x-auto">
                 <div className="w-full  mx-auto text-center py-2">
-                  <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito  lg:p-0">
+                  <div className="flex flex-wrap justify-start gap-4 mx-auto font-poppins  lg:p-0">
                     {sales?.length > 0 ? (
                       sales?.slice().reverse().map((item, index) => (
                         <motion.div
@@ -80,7 +80,7 @@ export default function Sales() {
                               <h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
                             </div>
                           </div>
-                          <div className="flex justify-end  gap-3 w-full font-nunito">
+                          <div className="flex justify-end  gap-3 w-full font-poppins">
                             <button
                               onClick={() => handleOpenModal(item)}
                               className="px-4 py-2 w-auto rounded-md text-xs font-medium border 
