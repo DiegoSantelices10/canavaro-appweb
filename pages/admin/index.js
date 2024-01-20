@@ -216,7 +216,7 @@ export default function Home() {
 
 
         <div className="w-full   mx-auto text-center px-2 mt-5">
-          <div className="flex flex-wrap justify-start gap-4 mx-auto font-nunito">
+          <div className="flex flex-wrap justify-start gap-4 mx-auto font-poppins">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
                 <motion.div
@@ -235,7 +235,7 @@ export default function Home() {
                       <h5 className="font-normal text-xs text-gray-700">{item?.tipoEnvio}</h5>
                     </div>
                   </div>
-                  <div className="flex justify-end  gap-3 w-full font-nunito">
+                  <div className="flex justify-end  gap-3 w-full font-poppins">
                     <button
                       onClick={() => handleOpenModal(item)}
                       className="px-4 py-2 w-auto rounded-md text-xs font-medium border  

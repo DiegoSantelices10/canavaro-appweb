@@ -152,7 +152,7 @@ export default function Cart({ data }) {
   );
 
   return (
-    <div className="font-nunito  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full   rounded-t-3xl py-3 ">
+    <div className="font-poppins  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full   rounded-t-3xl py-3 ">
       <Toaster />
 
       <Formik
@@ -222,8 +222,8 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "domicilioActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
-                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow  font-light p-3"
+                              ? "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
+                              : "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-white shadow  font-light p-3"
                           }
                         >
                           <MdOutlineDeliveryDining size={20} />
@@ -236,8 +236,8 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "localActual"
-                              ? "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
-                              : "w-1/2 rounded-md flex font-nunito items-center justify-center gap-2 bg-white shadow font-light p-3"
+                              ? "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
+                              : "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-white shadow font-light p-3"
                           }
                         >
                           <MdOutlineEmojiPeople size={20} />
@@ -408,7 +408,7 @@ export default function Cart({ data }) {
                     type="button"
                     className={`${orderPromo.length < 1
                       ? "invisible"
-                      : "p-3 px-4 font-semibold w-full font-nunito mb-3 bg-red-600 rounded-md text-white text-sm hover:-translate-y-1 transition-all duration-500"
+                      : "p-3 px-4 font-semibold w-full font-poppins mb-3 bg-red-600 rounded-md text-white text-sm hover:-translate-y-1 transition-all duration-500"
                       }`}
                   >
                     Agregar al carrito
@@ -418,7 +418,7 @@ export default function Cart({ data }) {
                   {orderList.map((item, index) => {
                     return (
                       <div key={index}>
-                        <div className="font-nunito py-6">
+                        <div className="font-poppins py-6">
                           <div className="p-2  rounded-md">
                             <div className="flex justify-between items-center gap-x-2">
                               <div className="w-full ">
@@ -460,7 +460,7 @@ export default function Cart({ data }) {
                   })}
                 </div>
                 {orderList.length > 0 ? (
-                  <div className="font-nunito fixed bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
+                  <div className="font-poppins fixed bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
                     <div className="flex justify-between items-center p-3 font-poppins">
                       <div>
                         <p className="font-bold text-xl text-neutral-800">Subtotal</p>
@@ -468,7 +468,7 @@ export default function Cart({ data }) {
                       </div>
                       <button
                         type="submit"
-                        className="text-center font-nunito rounded-md w-auto p-4 text-white font-bold bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center font-poppins rounded-md w-auto p-4 text-white font-bold bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>

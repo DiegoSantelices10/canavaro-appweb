@@ -1,64 +1,49 @@
 /* eslint-disable react/prop-types */
-import Image from "next/image";
-import { Element } from "react-scroll";
-import Modal from "components/modal";
-import { useState } from "react";
-import { motion } from "framer-motion";
 
-export default function SectionEmpanadas({ products, imagefront }) {
-  const [showModal, setShowModal] = useState(false);
-  const [currentProducto, setCurrentProducto] = useState({});
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-  const handleOpenModal = producto => {
-    setCurrentProducto(producto);
-    setShowModal(true);
-  };
+export default function SectionEmpanadas({ products }) {
+  const [docenaPrice, setDocenaPrice] = useState(0);
+  const [unitPrice, setUnitPrice] = useState(0);
 
-  const handleCloseModal = () => {
-    setCurrentProducto(null);
-    setShowModal(false);
-  };
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get("/api/promo");
+      setDocenaPrice(res.data[0].precio)
+    })();
+    const filterCat = products.filter(item => item.categoria === "empanadas")
+    const price = filterCat[0].precio
+    setUnitPrice(price)
+  }, []);
+
+
   return (
-    <Element name="empanadas" className=" w-full  relative element font-nunito">
-      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"}
-        priority={false}
-      />
-
-      <div className=" w-full h-full mx-auto pt-10 md:py-10 lg:py-10  ">
-        <div className="absolute inset-0 bg-black bg-opacity-50 h-full"> </div>
-
-        {currentProducto !== null && (
-          <Modal
-            key={currentProducto._id}
-            showModal={showModal}
-            handleClose={handleCloseModal}
-            producto={currentProducto}
-          >
-            {currentProducto}
-          </Modal>
-        )}
-        <h1 className=" relative z-10 text-center p-3 text-2xl lg:text-3xl font-extrabold text-gray-200">
+    <div className=" w-full  bg-zinc-900">
+      <div className="relative p-2 h-full  
+          rounded-lg w-full lg:w-4/5 mx-auto 
+					gap-5 content-center pb-6">
+        <h1 className="relative font-poppins  w-full 
+              text-center text-gray-200  text-2xl lg:text-3xl 
+              font-semibold ">
           Empanadas & Canastitas
         </h1>
-
-        <div className="flex justify-center h-28 items-center w-full gap-10">
-          <div className="text-center h-28 w-auto flex flex-col justify-between">
-            <div className="h-24 flex justify-center items-center">
-              <Image src={"/images/empanadaBlanca.webp"} width={90} height={75} alt="empanadas" />
-            </div>
+        <hr className="py-2" />
+        <div className="flex text-center  my-2 mb-4 py-4 justify-around items-center font-poppins text-white font-semibold">
+          <div>
+            <p className="font-medium text-2xl">${unitPrice}</p>
+            <h1 className="text-lg font-medium">Precio x unidad</h1>
           </div>
-          <div className="text-center h-28 w-auto flex flex-col justify-between ">
-            <div className="h-24  flex justify-center items-center ">
-              <Image src={"/images/canastitaBlanca.webp"} width={90} height={90} alt="canastitas" />
-            </div>
+          <div>
+            <p className="font-medium text-2xl">${docenaPrice}</p>
+            <h1 className="text-lg font-medium">Precio x docena</h1>
           </div>
         </div>
+        <hr className="py-2" />
 
-        <div className="relative z-10 bg-black  rounded-lg h-full p-1 bg-opacity-40 w-full lg:w-4/5 mx-auto text-white grid grid-cols-2 lg:grid-cols-3 gap-2 content-center pb-6 pt-4">
-          <p className="col-span-2 lg:col-span-3 text-white text-center text-sm pb-4 italic font-poppins">
-            * Hacer click sobre el titulo para ver descripcion.
-          </p>
-          <h1 className="col-span-2 grid lg:col-span-3 font-bold text-2xl text-center">Canastitas</h1>
+        <div className=" h-full w-full  mx-auto text-white grid grid-cols-2 gap-2 content-center">
+          <h1 className="font-bold col-span-2 text-2xl text-center">Canastitas</h1>
           {products
             ?.filter(item => item.categoria === "empanadas" && item.available === true)
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
@@ -66,28 +51,18 @@ export default function SectionEmpanadas({ products, imagefront }) {
               return (
                 producto.formato === "canastita" && (
                   <div key={producto._id}>
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 1.5 }}
-                      viewport={{ once: true }}
+                    <p
+                      className="text-base font-poppins text-white text-center whitespace-nowrap"
                     >
-                      <div className="w-auto py-2">
-                        <p
-                          onClick={() => handleOpenModal(producto)}
-                          className="text-base md:text-lg lg:text-lg cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
-                        >
-                          {producto.nombre}
-                        </p>
-                        <p className="font-normal text-xs md:text-base lg:text-base text-zinc-300 text-center">{producto.descripcion}</p>
-                      </div>
-                    </motion.div>
+                      {producto.nombre}
+                    </p>
                   </div>
                 )
               );
             })}
+          <hr className="py-2 col-span-2 mt-4" />
 
-          <h1 className="col-span-2 lg:col-span-3  font-bold text-2xl text-center">Empanadas</h1>
+          <h1 className="col-span-2  font-bold text-2xl text-center">Empanadas</h1>
           {products
             ?.filter(item => item.categoria === "empanadas")
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
@@ -95,28 +70,17 @@ export default function SectionEmpanadas({ products, imagefront }) {
               return (
                 producto.formato === "empanada" && (
                   <div key={producto._id}>
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 1.5 }}
-                      viewport={{ once: true }}
+                    <p
+                      className="text-base font-poppins text-white text-center w-full whitespace-nowrap"
                     >
-                      <div className="w-auto">
-                        <p
-                          onClick={() => handleOpenModal(producto)}
-                          className="text-base md:text-lg lg:text-lg cursor-pointer font-bold font-nunito text-white text-center w-4/5 md:w-3/5 mx-auto rounded-md hover:bg-slate-50 hover:text-neutral-900 transition-colors duration-500"
-                        >
-                          {producto.nombre}
-                        </p>
-                        <p className="font-normal text-xs md:text-base lg:text-base text-zinc-400 text-center">{producto.descripcion}</p>
-                      </div>
-                    </motion.div>
+                      {producto.nombre}
+                    </p>
                   </div>
                 )
               );
             })}
         </div>
       </div>
-    </Element>
+    </div>
   );
 }

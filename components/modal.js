@@ -22,7 +22,7 @@ const Modal = ({ handleClose, showModal, producto }) => {
           &#8203;
         </span>
         <div className="inline-block align-bottom w-full min-h-min rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-4 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-black  bg-opacity-80 text-white font-nunito font-semibold p-3">
+          <div className="bg-black  bg-opacity-80 text-white font-poppins font-semibold p-3">
             <div className="relative overflow-hidden  mx-auto">
               {showModal && (
                 <Image
@@ -50,24 +50,24 @@ const Modal = ({ handleClose, showModal, producto }) => {
               <div className="flex w-full justify-between font-normal gap-1">
                 {!producto.precio ? (
                   <>
-                  {producto.precioPizza?.chica && producto.precioPizza.chica !== 0 && (
-                    <div className="text-center">
-                      <p className="font-normal text-gray-400 ">Chica<span className="font-normal  text-white text-base"> ${producto.precioPizza.chica}</span></p>
-                    </div>
-                  )} |
+                    {producto.precioPizza?.chica && producto.precioPizza.chica !== 0 && (
+                      <div className="text-center">
+                        <p className="font-normal text-gray-400 ">Chica<span className="font-normal  text-white text-base"> ${producto.precioPizza.chica}</span></p>
+                      </div>
+                    )} |
                     {producto.precioPizza?.mediana && producto.precioPizza.mediana !== 0 && (
                       <div className="text-center">
 
                         <p className="font-normal text-gray-400 ">Mediana<span className="font-normal text-white  text-base"> ${producto.precioPizza.mediana}</span></p>
                       </div>
-                  )} |
-                   {producto.precioPizza?.gigante && producto.precioPizza.gigante !== 0 && (
+                    )} |
+                    {producto.precioPizza?.gigante && producto.precioPizza.gigante !== 0 && (
                       <div className="text-center">
                         <p className="font-normal text-gray-400 ">Gigante<span className="font-normal text-white  text-base"> ${producto.precioPizza.gigante}</span></p>
 
                       </div>
 
-                  )}
+                    )}
                   </>
                 ) : (
                   <>

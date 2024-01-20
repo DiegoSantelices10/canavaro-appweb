@@ -26,8 +26,8 @@ export default function Register() {
             </div>
           </div>
           <div className="w-auto mx-auto pt-10 pb-4">
-            <h1 className="font-extrabold text-center text-3xl font-nunito">¡Bienvenido!</h1>
-            <h3 className="font-medium text-lg font-nunito">Registro de usuario</h3>
+            <h1 className="font-extrabold text-center text-3xl font-poppins">¡Bienvenido!</h1>
+            <h3 className="font-medium text-lg font-poppins">Registro de usuario</h3>
           </div>
           <div className="flex flex-col gap-3">
             <Formik
@@ -36,8 +36,7 @@ export default function Register() {
                 password: "",
               }}
               onSubmit={async values => {
-                const res = await axios.post("/api/auth/register", values);
-                console.log(res);
+                await axios.post("/api/auth/register", values);
               }}
             >
               {() => (
@@ -45,7 +44,7 @@ export default function Register() {
                   <div className="mb-3">
                     <Field
                       id="username"
-                      className="shadow w-full font-nunito font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+                      className="shadow w-full font-poppins font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
                       placeholder="Introduce tu usuario"
                       type="text"
                       name="username"
@@ -54,7 +53,7 @@ export default function Register() {
                   <div>
                     <Field
                       id="password"
-                      className="shadow w-full font-nunito bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+                      className="shadow w-full font-poppins bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
                       placeholder="Introduce tu contraseña"
                       type="password"
                       name="password"

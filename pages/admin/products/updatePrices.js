@@ -137,7 +137,7 @@ const UpdatePrices = () => {
               </button>
             </div>
           </div>
-          {/* <p className="font-nunito text-sm font-semibold text-gray-500 mt-2">Precio extra</p>
+          {/* <p className="font-poppins text-sm font-semibold text-gray-500 mt-2">Precio extra</p>
           <div className="w-full flex">
             <input
               type="number"
@@ -147,7 +147,7 @@ const UpdatePrices = () => {
             />
             <button
               onClick={handleUpdateExtra}
-              className="bg-sky-800 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700"
+              className="bg-sky-800 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-semibold font-poppins px-3 rounded-md shadow-md hover:bg-sky-700"
             >
               Actualizar
             </button>
@@ -166,7 +166,7 @@ const UpdatePrices = () => {
           {updateData.length > 0 && (
             <button
               onClick={handleUpdatePizzas}
-              className="bg-sky-800 text-sm mt-2 sm:mt-0 p-2 whitespace-nowrap text-white font-semibold font-nunito px-3 rounded-md shadow-md hover:bg-sky-700"
+              className="bg-sky-800 text-sm mt-2 sm:mt-0 p-2 whitespace-nowrap text-white font-semibold font-poppins px-3 rounded-md shadow-md hover:bg-sky-700"
             >
               Actualizar pizzas
             </button>
@@ -181,7 +181,7 @@ const UpdatePrices = () => {
           updateData.map(({ _id, nombre, precioPizza }) => (
             <div
               key={_id}
-              className="flex font-nunito p-2 justify-between relative h-24 border border-gray-200 rounded-md "
+              className="flex font-poppins p-2 justify-between relative h-24 border border-gray-200 rounded-md "
             >
               <h1 className="font-bold text-sm w-3/5">{nombre}</h1>
               <div className="absolute text-sm font-semibold bottom-2 right-4 justify-between w-auto">

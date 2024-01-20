@@ -17,7 +17,7 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: -50 }}
-            className="bg-black h-full bg-opacity-80 text-white font-nunito font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+            className="bg-black h-full bg-opacity-80 text-white font-poppins font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
           >
             <div className="relative overflow-hidden h-full   mx-auto  ">
               <button onClick={handleClose}>

@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className="w-full    mx-auto fixed lg:h-[9%] h-[7%] top-0  z-50  ">
       <div className="w-full flex justify-between px-3 h-full lg:shadow-md  bg-white  items-center sm:w-4/5 md:w-4/5 lg:w-3/5 mx-auto">
-        <div className="font-nunito font-bold text-base tracking-wide">
+        <div className="font-poppins font-bold text-base tracking-wide">
           ¡Hola!<span className="font-medium italic text-slate-700"> Que vas a pedir hoy?</span>{" "}
         </div>
         {orderList.length > 0 && (
@@ -32,7 +32,7 @@ export default function Navbar() {
               /> : (
                 <Link href={"/order/cart"} >
                   <a className="flex justify-center items-center gap-2" onClick={handleLoader}>
-                    <p className=" text-white font-nunito text-sm font-semibold">Ver pedido</p>
+                    <p className=" text-white font-poppins text-sm font-semibold">Ver pedido</p>
                     <FiShoppingCart className="text-white" size={16} />
                   </a>
                 </Link>

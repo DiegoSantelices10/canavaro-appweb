@@ -17,7 +17,7 @@ const ModalMessage = ({ handleClose, showModal, setShowModal, info: { status, ti
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: -50 }}
-            className="h-72 grid grid-cols-1 content-center gap-3 mx-auto bg-opacity-80 text-sky-800 bg-white font-nunito font-semibold px-4  "
+            className="h-72 grid grid-cols-1 content-center gap-3 mx-auto bg-opacity-80 text-sky-800 bg-white font-poppins font-semibold px-4  "
           >
             <button onClick={() => setShowModal(false)}>
               <BsXCircleFill className="absolute text-slate-800 bg-slate-50 rounded-full p-1 top-4 right-4" size={35} />

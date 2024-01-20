@@ -39,7 +39,7 @@ export default function Checkout() {
         hPersonalizado,
         direccion
       }))
-      console.log('local', orderListLocal);
+
       dispatch(setOrderListLocal(orderListLocal))
       dispatch(setDemora(demora))
       dispatch(setDelivery(delivery))
@@ -151,12 +151,12 @@ export default function Checkout() {
                       {delivery === "domicilioActual" ? (
                         <>
                           <h2 className="font-poppins text-neutral-800 font-bold text-base">Dirección de envío</h2>
-                          <p className="font-nunito text-gray-600 text-sm">{user.direccion} </p>
+                          <p className="font-poppins text-gray-600 text-sm">{user.direccion} </p>
                         </>
                       ) : (
                         <>
                           <h2 className="font-poppins text-neutral-800 font-bold text-base">Retira por local</h2>
-                          <p className="font-nunito text-gray-600 text-base">{user.nombre}</p>
+                          <p className="font-poppins text-gray-600 text-base">{user.nombre}</p>
                         </>
                       )}
                     </div>
@@ -166,14 +166,14 @@ export default function Checkout() {
                         <h2 className="font-poppins font-bold text-base text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo"}
                         </h2>
-                        <p className="font-nunito text-base text-gray-600">{user?.hPersonalizado}hs.</p>
+                        <p className="font-poppins text-base text-gray-600">{user?.hPersonalizado}hs.</p>
                       </div>
                     ) : (
                       <div className="py-2">
                         <h2 className="font-poppins font-bold text-base text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo en"}
                         </h2>
-                        <p className="font-nunito text-sm text-gray-600">{demora}m.</p>
+                        <p className="font-poppins text-sm text-gray-600">{demora}m.</p>
                       </div>
                     )}
 
@@ -195,10 +195,10 @@ export default function Checkout() {
                     <Field
                       as="select"
                       name="medioDePago"
-                      className="h-10 border-none font-nunito  text-gray-900 text-sm rounded-lg  block w-full p-2.5 focus:rounded focus:ring-slate-300 "
+                      className="h-10 border-none font-poppins  text-gray-900 text-sm rounded-lg  block w-full p-2.5 focus:rounded focus:ring-slate-300 "
                     >
                       {medios.map((item, index) => (
-                        <option key={index} value={item} className="text-sm text-gray-500 font-nunito font-semibold">
+                        <option key={index} value={item} className="text-sm text-gray-500 font-poppins font-semibold">
                           {item}
                         </option>
 
@@ -217,58 +217,58 @@ export default function Checkout() {
                       )}
                       {values.medioDePago === "Mercado Pago" && (
                         <>
-                          <p className="font-nunito text-center font-semibold ">
+                          <p className="font-poppins text-center font-semibold ">
                             por transferencia a <span className="text-md font-semibold font-poppins text-sky-800">pizzeria.canavaro</span>
                           </p>
-                          <p className="font-nunito text-center font-semibold">
+                          <p className="font-poppins text-center font-semibold">
                             o mediante QR
                           </p>
                           <div className="flex justify-center w-full">
                             <Image src="/images/logo-mercadopago.png" width={100} height={100} alt="logoMP" />
                           </div>
-                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
                             Abonas al momento de confirmar el pedido por whatsapp
                           </p>
                         </>
                       )}
                       {values.medioDePago === "Cuenta DNI" && (
                         <>
-                          <p className="font-nunito text-center font-semibold ">
+                          <p className="font-poppins text-center font-semibold ">
                             Todos los miercoles y jueves 30% de reintegro
                           </p>
-                          <p className="font-nunito text-center font-semibold">
+                          <p className="font-poppins text-center font-semibold">
                             pagando con Cuenta DNI
                           </p>
                           <div className="flex justify-center w-full">
                             <Image src="/images/cuenta-dni.jpg" width={170} height={70} alt="logoOpen" />
                           </div>
-                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
                             El reintegro lo realiza la billetera virtual, tope $2500 por semana.
                           </p>
-                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
                             Abonas al momento de confirmar el pedido por whatsapp
                           </p>
                         </>
                       )}
                       {values.medioDePago === "Open Pay" && (
                         <>
-                          <p className="font-nunito text-center font-semibold ">
+                          <p className="font-poppins text-center font-semibold ">
                             Todos los martes 30% de reintegro
                           </p>
-                          <p className="font-nunito text-center font-semibold">
+                          <p className="font-poppins text-center font-semibold">
                             pagando con BBVA
                           </p>
 
                           <div className="flex justify-center w-full">
                             <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                           </div>
-                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
                             El reintegro lo realiza el banco, tope $2000 por mes.
                           </p>
-                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
                             Todos los dias 3 cuotas sin interes, menos los martes.
                           </p>
-                          <p className="font-nunito text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
                             Abonas al momento de confirmar el pedido por whatsapp
                           </p>
                         </>
@@ -297,7 +297,7 @@ export default function Checkout() {
                     ) : (
                       <div className="flex justify-start items-center gap-3 px-3">
                         <p className="font-bold font-poppins text-center text-2xl text-neutral-800">Total</p>
-                        <h3 className="text-2xl text-center font-nunito text-neutral-800 font-semibold">$ {totalAmount}</h3>
+                        <h3 className="text-2xl text-center font-poppins text-neutral-800 font-semibold">$ {totalAmount}</h3>
                       </div>
                     )}
                   </div>
@@ -305,7 +305,7 @@ export default function Checkout() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="text-center font-nunito rounded-md justify-center items-center flex h-12 w-[170px] text-white bg-red-600 font-semibold hover:-translate-y-1 transition-all duration-500"
+                      className="text-center font-poppins rounded-md justify-center items-center flex h-12 w-[170px] text-white bg-red-600 font-semibold hover:-translate-y-1 transition-all duration-500"
                     >
                       {isSubmitting ? (
                         <ColorRing

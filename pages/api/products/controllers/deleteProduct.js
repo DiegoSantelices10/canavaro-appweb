@@ -2,8 +2,7 @@ import Producto from "models/product";
 
 export const deleteProduct = async (req, res) => {
 	const { id } = req.query;
-	console.log(id);
-	console.log('entro aca');
+
 	try {
 		await Producto.deleteOne({ _id: id });
 
