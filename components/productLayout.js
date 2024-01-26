@@ -175,7 +175,7 @@ export default function ProductLayout({
                   decrementCart={decrementCartPizza}
                   cart={orderPromo}
                 />
-                {result() > 0 && (
+                {result() > 0 && extras.length > 0 && (
                   <div className="mt-1 font-poppins">
                     <button
                       className="flex w-full justify-between items-center py-3 focus:"
