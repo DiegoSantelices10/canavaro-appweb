@@ -186,7 +186,7 @@ export default function ProductLayout({
                           Eleg&iacute; extras para tu pizza
                         </p>
                         <p className="text-xs font-normal text-gray-400">
-                          Si elegis mas de una pizza, el extra se suma a ambas
+                          Si elegis mas de una pizza, el extra se suma en ambas
                         </p>
 
                       </div>
