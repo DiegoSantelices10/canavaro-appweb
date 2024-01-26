@@ -422,7 +422,7 @@ export default function Cart({ data }) {
                           <div className="p-2  rounded-md">
                             <div className="flex justify-between items-center gap-x-2">
                               <div className="w-full ">
-                                <a className="font-bold text-neutral-800 ">
+                                <a className="font-semibold text-neutral-800 ">
                                   {item.nombre}
                                   <span className="text-gray-400 font-light">
                                     {" "}
@@ -434,6 +434,11 @@ export default function Cart({ data }) {
                                     item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) ||
                                     ""}
                                 </p>
+                                {item.extra && (
+                                  <p className="text-gray-400 text-sm">
+                                    extra: {item.extra}
+                                  </p>
+                                )}
                                 <p className="font-semibold text-sm text-gray-600">$ {item.precio * item.cantidad}</p>
                               </div>
                               <div className="flex justify-center gap-2">

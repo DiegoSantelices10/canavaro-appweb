@@ -138,24 +138,24 @@ const CircleAnimation = () => {
                   <>
                     <div className="mt-1">
                       <h1 className="font-bold font-poppins">Horario de envío</h1>
-                      <span className="text-gray-700 font-medium">
+                      <span className="text-gray-400 font-normal">
                         {checkout.hPersonalizado === "" ? demora + " min." : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
                       <h2 className="font-poppins  font-bold">Domicilio</h2>
-                      <span className="font-poppins font-medium text-gray-700">{checkout.domicilio} </span>
+                      <span className="font-poppins font-normal text-gray-400">{checkout.domicilio} </span>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="mt-1">
                       <h1 className="font-bold font-poppins">Horario de retiro</h1>
-                      <span className="text-gray-700  font-medium">
+                      <span className="text-gray-400  font-normal">
                         {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
                       <h2 className="font-poppins font-bold">Retira por local</h2>
-                      <span className="text-gray-700 font-medium font-poppins"> {checkout.cliente}</span>
+                      <span className="text-gray-400 font-normal font-poppins"> {checkout.cliente}</span>
                     </div>
                   </>
                 )}
@@ -163,13 +163,13 @@ const CircleAnimation = () => {
             </div>
             <div className="mt-1">
               <h2 className="font-poppins font-bold text-base">Medio de pago</h2>
-              <span className="text-gray-600 font-semibold"> {checkout.medioDePago}</span>
+              <span className="text-gray-400 font-normal"> {checkout.medioDePago}</span>
             </div>
             <div >
               {checkout.comentarios && (
                 <div className="mt-1">
                   <p className="font-poppins font-bold">Comentarios</p>
-                  <span className="text-gray-700 font-semibold"> {checkout.comentarios}</span>
+                  <span className="text-gray-400 font-normal"> {checkout.comentarios}</span>
                 </div>
               )}
             </div>
@@ -187,22 +187,33 @@ const CircleAnimation = () => {
                       return (
                         <div key={index} className="py-2">
                           <div className="flex justify-between items-center font-poppins">
-                            <p className="font-bold text-neutral-900 text-base">
-                              {item.nombre}
-                              <span className=" pl-1 font-semibold text-gray-700 text-base">
-                                {item.categoria === "pizzas" && item?.tamanio}
-                              </span>
-                              <span className="text-gray-400 text-sm font-normal">
-                                {" "}
-                                x {item?.cant || item?.cantidad}
-                              </span>
-                            </p>
+                            <div className="font-semibold text-neutral-900 text-base flex justify-start items-start">
+                              <div>
+                                <p>
+                                  {item.nombre}
+                                  {" "}
+                                  <span className=" font-semibold text-gray-700 text-base">
+                                    {item.categoria === "pizzas" && item?.tamanio}
+                                  </span>
+                                  <span className="text-gray-400 text-base font-normal pl-1">
+                                    {" "}
+                                    x {item?.cant || item?.cantidad}
+                                  </span>
+                                </p>
+                                {item.extra && (
+                                  <p className="text-gray-400 text-sm font-normal">extra: {item.extra}</p>
+                                )}
+                              </div>
+
+
+                            </div>
+
                             <p>$ {item.precio * item.cantidad}</p>
                           </div>
                           {item.products &&
                             item.products.map(producto => (
                               <div key={producto._id}>
-                                <p className="font-normal text-gray-700 text-sm">
+                                <p className="font-normal font-poppins text-gray-400 text-sm">
                                   {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
                                 </p>
                               </div>

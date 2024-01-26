@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
 	products: [],
+	extras: []
 };
 
 export const productSlice = createSlice({
@@ -11,6 +12,9 @@ export const productSlice = createSlice({
 		setProductData: (state, { payload }) => {
 			state.products = payload;
 		},
+		setExtras: (state, { payload }) => {
+			state.extras = payload
+		}
 	},
 
 	extraReducers: builder => {
@@ -24,6 +28,6 @@ export const productSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setProductData, getProductsData } = productSlice.actions;
+export const { setProductData, getProductsData, setExtras } = productSlice.actions;
 
 export default productSlice.reducer;

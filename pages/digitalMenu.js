@@ -4,25 +4,30 @@ import SectionEmpanadas from "components/sections/sectionEmpanadas";
 import SectionCombos from "components/sections/sectionCombos";
 import SectionZona from "components/sections/sectionZona";
 import Carousel from 'react-multi-carousel';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Header from 'components/header';
-import { setProductData } from "store/reducers/productSlice";
-import { wrapper } from "store/app/store";
-import { getProducts } from "services/fetchData";
+
 import 'react-multi-carousel/lib/styles.css';
 import CustomArrow from 'components/CustomArrows/CustomArrow';
-
+import { setProductData } from 'store/reducers/productSlice';
 
 
 
 
 // eslint-disable-next-line react/prop-types
-function DigitalMenu({ data }) {
+function DigitalMenu() {
 
     const { products } = useSelector(state => state.product);
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        localStorage.setItem("productos", JSON.stringify(data));
-    });
+        if (products?.length <= 0) {
+            const res = JSON.parse(localStorage.getItem("productos"));
+            dispatch(setProductData(res));
+        }
+
+    }, []);
+
 
     const responsive = {
         superLargeDesktop: {
@@ -64,16 +69,6 @@ function DigitalMenu({ data }) {
     )
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ res }) => {
-    res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
-    const data = await getProducts();
-    store.dispatch(setProductData(data));
-    return {
-        props: {
-            // Pasa el estado hidratado como prop al componente de Next.js
-            data,
-        },
-    };
-});
+
 
 export default DigitalMenu;

@@ -77,6 +77,13 @@ export default function Update({ data }) {
         precio,
       };
     }
+    if (categoria === "extras") {
+      model = {
+        nombre,
+        categoria,
+        precio,
+      };
+    }
 
     return model;
   };
@@ -180,7 +187,7 @@ export default function Update({ data }) {
               <Form
                 className="border border-gray-300 p-4 rounded-md"
               >
-                <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-2">
+                <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-2 lg:space-y-0 md:space-y-0">
                   <div className="w-full mx-auto">
                     <label className="block  text-sm  text-gray-400 font-poppins font-medium">
                       Nombre del producto
@@ -204,18 +211,19 @@ export default function Update({ data }) {
                       />
                     </label>
                   </div>
-
-                  <div className=" w-full mx-auto ">
-                    <label className="block text-sm  text-slate-400 font-poppins font-medium">
-                      Descripcion
-                      <Field
-                        id="descripcion"
-                        name="descripcion"
-                        className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+                  {renderProducts !== 'extras' && (
+                    <div className=" w-full mx-auto ">
+                      <label className="block text-sm  text-slate-400 font-poppins font-medium">
+                        Descripcion
+                        <Field
+                          id="descripcion"
+                          name="descripcion"
+                          className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
-                      />
-                    </label>
-                  </div>
+                        />
+                      </label>
+                    </div>
+                  )}
 
                   {renderProducts !== "pizzas" && (
                     <div className=" w-full mx-auto">
@@ -289,19 +297,21 @@ export default function Update({ data }) {
                       </div>
                     </>
                   )}
-
-                  <div className=" w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400 font-poppins font-medium">
-                      Cargar Imagen
-                      <input
-                        name="imagen"
-                        type="file"
-                        onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10 px-3 py-2 text-sm leading-tight text-gray-700 border-gray-200 
+                  {renderProducts !== 'extras' && (
+                    <div className=" w-full mx-auto">
+                      <label className="block  text-sm  text-slate-400 font-poppins font-medium">
+                        Cargar Imagen
+                        <input
+                          name="imagen"
+                          type="file"
+                          onChange={e => cloudinaryImage(e.target, setFieldValue)}
+                          className="w-full h-10 px-3 py-2 text-sm leading-tight text-gray-700 border-gray-200 
                   									rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
-                      />
-                    </label>
-                  </div>
+                        />
+                      </label>
+                    </div>
+
+                  )}
 
                   {renderProducts === "promociones" && (
                     <>

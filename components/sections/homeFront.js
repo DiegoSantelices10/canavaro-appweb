@@ -30,7 +30,7 @@ function HomeFront({ imagefront }) {
     <Element name="home" className="relative element">
       <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
       <div className={` font-poppins w-full min-h-screen mx-auto `}>
-        <div className="absolute inset-0 bg-black bg-opacity-50 h-full"> </div>
+        <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
 
         <motion.div initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>
           <div className="relative text-center h-full">
@@ -38,13 +38,13 @@ function HomeFront({ imagefront }) {
 
               <div className="w-full md:w-1/2">
                 <p className="font-poppins text-4xl lg:text-6xl text-center  font-bold text-gray-200">Pizzeria Canavaro</p>
-                <p className="text-base md:text-xl font-semibold text-white">¡Todo lo que necesitas en un solo lugar!</p>
+                <p className="text-base md:text-xl font-medium text-white">¡Todo lo que necesitas en un solo lugar!</p>
                 <p className="text-sm lg:text-base text-zinc-200 font-normal">De martes a domingo de 19 a 23hs.</p>
                 <p className="text-zinc-200  text-sm lg:text-base">Pelliza 1794 - Olivos</p>
                 <div className="w-full flex items-center my-5 lg:mb-2">
                   <Link href={"/digitalMenu"}>
                     <a
-                      className={`p-2 px-4 rounded-md font-semibold  font-poppins  text-lg  mx-auto 
+                      className={`p-2 px-4 rounded-md font-medium  font-poppins  text-lg  mx-auto 
                           hover:bg-black hover:text-white bg-white  text-gray-900   
                           hover:-translate-y-1 transition-all duration-500`}
                     >
@@ -62,7 +62,7 @@ function HomeFront({ imagefront }) {
                     <div className="w-full flex items-center my-5 lg:mb-2">
                       <Link href={"/welcomeLogo"}>
                         <a
-                          className={`p-2 px-4 rounded-md font-semibold  font-poppins  text-lg  mx-auto 
+                          className={`p-2 px-4 rounded-md font-medium  font-poppins  text-lg  mx-auto 
                           hover:bg-black hover:text-white bg-white  text-gray-900   
                           hover:-translate-y-1 transition-all duration-500`}
                         >

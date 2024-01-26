@@ -172,8 +172,8 @@ export default function Products() {
 
       </div>
 
-      <div className="w-full px-2  mx-auto  grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
-        {renderProductos.map(({ _id, nombre, descripcion, imagen, available, categoria }) => {
+      <div className="w-full px-2 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
+        {renderProductos.map(({ _id, nombre, imagen, available, categoria }) => {
           return (
             <div key={_id} className="bg-white h-auto rounded-md pl-1 border">
               <div className="flex justify-between items-center p-0  relative ">
@@ -185,9 +185,9 @@ export default function Products() {
                   alt={nombre}
                 />
                 <div className=" p-2 relative w-full font-poppins h-28  self-start">
-                  <h1 className="font-bold text-sm text-gray-800">{nombre}</h1>
-                  <p className="text-gray-400 text-xs">{descripcion.length > 30 ? descripcion.slice(0, 30) + "..." : descripcion}</p>
-                  <h4 className="text-gray-700 text-xs ">{categoria}</h4>
+                  <h1 className="font-semibold text-sm text-gray-800">{nombre}</h1>
+
+                  <h4 className="text-gray-500 text-xs font-medium ">{categoria}</h4>
                   <div className="absolute bottom-0">
                     <label className="inline-flex items-center cursor-pointer">
                       <input
@@ -198,12 +198,14 @@ export default function Products() {
                         onChange={() => handleCheckboxChange(_id, available)}
                       />
                       <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
-                   rounded-full 
-                  dark:bg-gray-200 peer-checked:after:translate-x-full 
-                  after:content-[''] after:absolute 
-                  after:top-[2px] after:left-[2px] after:bg-white   
-                  after:rounded-full after:h-4 after:w-4 after:transition-all 
-                 dark:border-gray-600 peer-checked:bg-red-600 "></div>
+                                      rounded-full 
+                                      dark:bg-gray-200 peer-checked:after:translate-x-full 
+                                      after:content-[''] after:absolute 
+                                      after:top-[2px] after:left-[2px] after:bg-white   
+                                      after:rounded-full after:h-4 after:w-4 after:transition-all 
+                                    dark:border-gray-600 peer-checked:bg-red-600">
+
+                      </div>
                     </label>
                   </div>
                 </div>

@@ -6,10 +6,11 @@ import { useRouter } from "next/router";
 
 import PizzaInfo from "./pizzaInfo";
 import Promotion from "./promotion";
-
+import { useCollapse } from 'react-collapsed'
 import { Toaster, toast } from "react-hot-toast";
 
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 import {
   addProductPizza,
@@ -27,8 +28,14 @@ export default function ProductLayout({
   data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
 }) {
   const { orderPromo, orderList, quantityDemanded } = useSelector(state => state.order);
+  const { extras } = useSelector(state => state.product);
+  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({
+    easing: '0.4',
+    duration: 10,
+  })
   const [selectCombo, setSelectCombo] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [extraPizza, setExtraPizza] = useState([]);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
 
   const comentarioRef = useRef();
@@ -39,6 +46,7 @@ export default function ProductLayout({
     dispatch(calculateSubTotal());
     dispatch(calculateTotalQuantity());
   }, [orderList, dispatch]);
+
 
   const productQuantity = _id => {
     const pre = orderPromo.find(item => item._id === _id);
@@ -106,7 +114,14 @@ export default function ProductLayout({
       }
     } else {
       toast.success("Se agrego al pedido!");
-      value.map(item => dispatch(addPromoOrderList({ ...item, comentarios: comentarioRef.current.value })));
+
+      value.map(item =>
+        dispatch(addPromoOrderList({
+          ...item,
+          comentarios: comentarioRef.current.value,
+          precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
+          extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
+        })));
     }
 
     dispatch(clearOrderPromo());
@@ -118,6 +133,10 @@ export default function ProductLayout({
     dispatch(clearOrderPromo());
     router.push("/order/home");
   };
+
+  const addExtra = (item) => {
+    setExtraPizza([...extraPizza, item]);
+  }
 
   return (
     <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 ">
@@ -156,6 +175,64 @@ export default function ProductLayout({
                   decrementCart={decrementCartPizza}
                   cart={orderPromo}
                 />
+                {result() > 0 && (
+                  <div className="mt-1 font-poppins">
+                    <button
+                      className="flex w-full justify-between items-center py-3 focus:"
+                      {...getToggleProps()}
+                    >
+                      <div className="text-left">
+                        <p className="text-base tracking-wide">
+                          Eleg&iacute; extras para tu pizza
+                        </p>
+                        <p className="text-xs font-normal text-gray-400">
+                          Si elegis mas de una pizza, el extra se suma a ambas
+                        </p>
+
+                      </div>
+                      {isExpanded ?
+                        <FaAngleUp size={25} className="text-red-500" /> :
+                        <FaAngleDown size={25} className="text-green-500" />
+                      }
+                    </button>
+                    <hr />
+                    {isExpanded && extras.map(item => (
+                      <div
+                        key={item._id}
+                      >
+                        <section
+                          {...getCollapseProps()}
+                          className="my-4 text-base font-normal flex justify-between"
+                        >
+                          <div className="flex justify-between w-3/5">
+                            <p>
+                              {item.nombre}
+                            </p>
+                            <p>
+                              $ {item.precio}
+                            </p>
+                          </div>
+                          {extraPizza.includes(item) ? (
+                            <p
+                              className="text-sm"
+                            >Agregado</p>
+                          ) : (
+                            <button
+                              onClick={() => addExtra(item)}
+                              className="bg-red-500 rounded-md text-sm text-white p-1 px-2"
+                            >
+                              Agregar
+                            </button>
+                          )
+
+                          }
+
+                        </section>
+                        <hr />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <Promotion

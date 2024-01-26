@@ -93,7 +93,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
                     <hr className="w-full h-1 my-3 bg-slate-700" />
-                    <p className="text-base font-semibold text-gray-800 font-poppins">{categoria?.categoria}</p>
+                    <p className="text-base font-semibold text-gray-700 font-poppins">{categoria?.categoria}</p>
 
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
@@ -101,7 +101,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                         return (
                           <div key={index} className="py-1 font-poppins text-base text-gray-900">
                             <div className="flex justify-between items-center font-poppins">
-                              <p className="font-bold">
+                              <div className="font-bold">
                                 {item?.cant || item?.cantidad} x
                                 <span className=" pl-1 font-semibold ">
                                   {item.categoria === "pizzas" && item?.tamanio}
@@ -110,19 +110,24 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                                   {" "}
                                   {item.nombre}
                                 </span>
-                              </p>
+                                {item.extra && (
+                                  <p className="text-gray-400 text-sm font-normal">
+                                    extra: {item.extra}
+                                  </p>
+                                )}
+                              </div>
                               <p className="font-semibold">$ {item.precio * item.cantidad}</p>
                             </div>
                             {categoria.categoria === 'pizzas' && <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>}
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
-                                  <p className="font-medium text-base">
+                                  <p className="font-medium text-base text-gray-500">
                                     {producto.cantidad && `${producto.cantidad}  `}<span>{producto.nombre}</span>
                                   </p>
                                 </div>
                               ))}
-                            <p className="font-semibold text-sm w-11/12">{item.comentarios}</p>
+                            <p className="font-normal text-gray-400 text-sm w-11/12">{item.comentarios}</p>
                           </div>
                         );
                       })}
@@ -133,7 +138,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
               <div className="flex font-bold justify-between items-center text-gray-900">
                 <h2>Total</h2>
-                <p className="text-xl font-bold">$ {pedido.total}</p>
+                <p className="text-2xl font-semibold">$ {pedido.total}</p>
               </div>
               {pedido.pagaCon !== null && (
                 <div className="flex justify-between items-center font-medium">

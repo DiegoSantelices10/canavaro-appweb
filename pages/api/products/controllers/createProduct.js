@@ -72,6 +72,15 @@ export const createProduct = async (req, res) => {
       });
     }
 
+    if (categoria === "extras") {
+      newProduct = new Producto({
+        nombre,
+        categoria,
+        precio,
+        available: true,
+      });
+    }
+
     await newProduct
       .save()
       .then(() => {

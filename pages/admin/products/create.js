@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import ModalMessage from "components/modalMessage";
 
 export default function Create() {
-  const [renderProducts, setRenderProductos] = useState("empanadas");
+  const [renderProducts, setRenderProductos] = useState("pizzas");
   const [showModal, setShowModal] = useState(false);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
   const router = useRouter();
@@ -16,6 +16,13 @@ export default function Create() {
     setShowModal(false);
     return router.push("list");
   };
+
+  const handleCategoryChange = event => {
+    const cat = event.target.value;
+    setRenderProductos(cat);
+  };
+
+  const categorias = ['pizzas', 'empanadas', 'promociones', 'bebidas', 'extras']
 
   return (
     <Layout>
@@ -26,7 +33,20 @@ export default function Create() {
           <h1 className="text-xl text-center md:text-4xl font-poppins font-semibold text-zinc-800 my-4">
             ¡Producto nuevo!
           </h1>
-          <div className="flex overflow-x-scroll font-poppins flexp justify-start items-start space-x-1 w-full p-2 my-2">
+          <p>Seleccione una categoria</p>
+          <div className="w-full lg:w-1/4 h-10 mb-5 outline-none  focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
+            <select
+              onChange={handleCategoryChange}
+              className="h-10  font-poppins focus:ring-0 border-gray-300 focus:ring-gray-200  text-gray-400 text-sm rounded-lg  block w-full p-2.5 "
+            >
+              {categorias.map(item => (
+                <option key={item} value={item} className="text-sm font-poppins font-medium">
+                  {item}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* <div className="flex overflow-x-scroll font-poppins flexp justify-start items-start space-x-1 w-full p-2 my-2">
             <style jsx>
               {`
                 .flexp::-webkit-scrollbar-thumb {
@@ -88,7 +108,7 @@ export default function Create() {
                 Bebidas
               </button>
             </div>
-          </div>
+          </div> */}
           <Formik
             initialValues={{
               nombre: "",
@@ -159,18 +179,20 @@ export default function Create() {
                       />
                     </label>
                   </div>
-
-                  <div className=" w-full mx-auto ">
-                    <label className="block text-sm  text-gray-400 font-poppins font-medium">
-                      Descripcion
-                      <Field
-                        id="descripcion"
-                        name="descripcion"
-                        className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+                  {renderProducts !== 'extras' && (
+                    <div className=" w-full mx-auto ">
+                      <label className="block text-sm  text-gray-400 font-poppins font-medium">
+                        Descripcion
+                        <Field
+                          id="descripcion"
+                          name="descripcion"
+                          className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
                   									rounded-md shadow   focus:border-gray-200"
-                      />
-                    </label>
-                  </div>
+                        />
+                      </label>
+                    </div>
+
+                  )}
 
                   {renderProducts !== "pizzas" && (
                     <div className=" w-full mx-auto">
@@ -244,19 +266,20 @@ export default function Create() {
                       </div>
                     </>
                   )}
-
-                  <div className=" w-full mx-auto">
-                    <label className="block  text-sm  text-gray-400 font-poppins font-medium">
-                      Cargar Imagen
-                      <input
-                        name="imagen"
-                        type="file"
-                        onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10 px-3 py-2 text-sm leading-tight text-gray-700 border-gray-200 
+                  {renderProducts !== 'extras' && (
+                    <div className=" w-full mx-auto">
+                      <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                        Cargar Imagen
+                        <input
+                          name="imagen"
+                          type="file"
+                          onChange={e => cloudinaryImage(e.target, setFieldValue)}
+                          className="w-full h-10 px-3 py-2 text-sm leading-tight text-gray-700 border-gray-200 
                   									rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
-                      />
-                    </label>
-                  </div>
+                        />
+                      </label>
+                    </div>
+                  )}
                   {renderProducts === "promociones" && (
                     <>
                       <div className="w-full mx-auto">
@@ -287,7 +310,7 @@ export default function Create() {
                                 value={values.cantidadMaxima}
                                 onChange={handleChange}
                                 className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													  rounded-md shadow   focus:border-gray-200"
+													                  rounded-md shadow   focus:border-gray-200"
                               />
                             </label>
                           </div>
