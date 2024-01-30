@@ -10,6 +10,8 @@ export default function footer() {
         <a href="https://linkedin.com/in/diegosantelices10" target="_blank" rel="noopener noreferrer">
           <FaLinkedin size={26} className="text-white" />
         </a>
+        <script language="JavaScript" type="text/javascript"></script>
+        <a href="https://donweb.com/es-ar/certificados-ssl" id="comodoTL" title="Certificados SSL Argentina">Certificados SSL Argentina</a>
       </div>
     </div>
   );
