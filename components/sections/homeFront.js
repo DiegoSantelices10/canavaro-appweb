@@ -44,8 +44,8 @@ function HomeFront({ imagefront }) {
                 <div className="w-full flex items-center my-5 lg:mb-2">
                   <Link href={"/digitalMenu"}>
                     <a
-                      className={`p-2 px-4 rounded-md font-medium  font-poppins  text-lg  mx-auto 
-                          hover:bg-black hover:text-white bg-white  text-gray-900   
+                      className={`p-2 px-3 rounded-md font-medium text-white font-poppins  text-lg  mx-auto 
+                          hover:bg-black hover:text-white bg-zinc-900 border
                           hover:-translate-y-1 transition-all duration-500`}
                     >
                       Men&uacute; digital
@@ -62,8 +62,8 @@ function HomeFront({ imagefront }) {
                     <div className="w-full flex items-center my-5 lg:mb-2">
                       <Link href={"/welcomeLogo"}>
                         <a
-                          className={`p-2 px-4 rounded-md font-medium  font-poppins  text-lg  mx-auto 
-                          hover:bg-black hover:text-white bg-white  text-gray-900   
+                          className={`p-2 px-3 rounded-md font-medium  font-poppins  text-lg  mx-auto 
+                          hover:bg-black hover:text-white bg-zinc-900  text-white  border
                           hover:-translate-y-1 transition-all duration-500`}
                         >
                           Hac&eacute; tu pedido

@@ -8,7 +8,25 @@ export default function SectionPizzas({ products, imagefront }) {
   useEffect(() => {
     const pizzas = products
       ?.filter(item => item.categoria === "pizzas" && item.available === true)
-      ?.sort((a, b) => a.nombre.localeCompare(b.nombre)).map((item) => ({
+      ?.sort((a, b) => {
+        const nombreA = a.nombre.toUpperCase();
+        const nombreB = b.nombre.toUpperCase();
+
+        if (nombreA.startsWith('M') && !nombreB.startsWith('M')) {
+          return -1;
+        } else if (nombreB.startsWith('M') && !nombreA.startsWith('M')) {
+          return 1;
+        }
+
+        if (nombreA.startsWith('J') && !nombreB.startsWith('J')) {
+          return -1;
+        } else if (nombreB.startsWith('J') && !nombreA.startsWith('J')) {
+          return 1;
+        }
+
+        return nombreA.localeCompare(nombreB);
+
+      }).map((item) => ({
         key: item._id,
         nombre: item.nombre,
         gigante: item.precioPizza.gigante,

@@ -60,9 +60,9 @@ function DigitalMenu() {
                 customButtonGroup={<CustomArrow />}
                 arrows={false}
             >
+                <SectionCombos products={products} />
                 <SectionPizzas products={products} />
                 <SectionEmpanadas products={products} />
-                <SectionCombos products={products} />
                 <SectionZona />
             </Carousel>
         </div>

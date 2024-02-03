@@ -11,24 +11,23 @@ export default function sectionCombos({ products }) {
           Nuestros Combos
         </h1>
         <hr className="py-2" />
-        <div className="h-full w-full  mx-auto text-white py-2">
+        <div className="h-full w-full  mx-auto text-white flex flex-col gap-y-5 mt-4">
           {products
             ?.filter(item => item?.nombre.includes("Combo"))
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
             .map(producto => {
               return (
                 <div key={producto._id}>
-
-                  <div className="text-center py-3">
+                  <div className="text-center">
                     <p
-                      className="text-2xl font-poppins text-white text-center font-semibold"
+                      className="text-2xl font-poppins text-white text-center font-medium "
                     >
                       {producto.nombre}
                     </p>
-                    <p className="text-sm lg:text-base font-poppins text-zinc-300 px-4">{producto.descripcion}</p>
-                    <p className="text-xl font-poppins text-white font-medium pt-2">$ {producto.precio}</p>
-
+                    <p className="text-sm  md:text-sm lg:text-base font-poppins text-zinc-300 px-3">{producto.descripcion}</p>
+                    <p className="text-2xl font-poppins text-white font-light pt-2">${producto.precio}</p>
                   </div>
+                  <hr className="w-6/12 mx-auto mt-5" />
                 </div>
               );
             })}
