@@ -45,7 +45,7 @@ function HomeFront({ imagefront }) {
                   <Link href={"/digitalMenu"}>
                     <a
                       className={`p-2 px-3 rounded-md font-medium text-white font-poppins  text-lg  mx-auto 
-                          hover:bg-black hover:text-white bg-zinc-900 border
+                          hover:bg-black hover:text-white bg-red-600 
                           hover:-translate-y-1 transition-all duration-500`}
                     >
                       Men&uacute; digital
@@ -63,7 +63,7 @@ function HomeFront({ imagefront }) {
                       <Link href={"/welcomeLogo"}>
                         <a
                           className={`p-2 px-3 rounded-md font-medium  font-poppins  text-lg  mx-auto 
-                          hover:bg-black hover:text-white bg-zinc-900  text-white  border
+                          hover:bg-black hover:text-white bg-red-600  text-white 
                           hover:-translate-y-1 transition-all duration-500`}
                         >
                           Hac&eacute; tu pedido
