@@ -33,7 +33,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
           <div className="flex justify-between items-center gap-x-2">
             <Image
               className="rounded-xl"
-              src={imagen?.url || "/images/canavaro-image.png"}
+              src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
               width={140}
               height={140}
               alt={nombre}
@@ -82,7 +82,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
               <div className="flex justify-between items-center gap-x-2">
                 <Image
                   className="rounded-md"
-                  src={imagen?.url}
+                  src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
                   objectFit="cover"
                   width={140}
                   height={140}

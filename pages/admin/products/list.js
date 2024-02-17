@@ -179,7 +179,7 @@ export default function Products() {
               <div className="flex justify-between items-center p-0  relative ">
                 <Image
                   className="rounded-md"
-                  src={imagen?.url || "/images/logocanavaro.webp"}
+                  src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
                   width={140}
                   height={140}
                   alt={nombre}
