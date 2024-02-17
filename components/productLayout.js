@@ -147,7 +147,7 @@ export default function ProductLayout({
       <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
-          src={imagen?.url}
+          src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
           width={280}
           height={200}
           alt={nombre} />
