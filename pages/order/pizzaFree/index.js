@@ -17,10 +17,11 @@ import ModalMessage from "components/modalMessage";
 export default function Index() {
   const [select, setSelect] = useState("gigante");
   const [radioSelect, setRadioSelect] = useState([]);
+  const [extraPizza, setExtraPizza] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
   const [total, setTotal] = useState(0);
-  const { products } = useSelector(state => state.product);
+  const { products, extras } = useSelector(state => state.product);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -63,7 +64,7 @@ export default function Index() {
     setInfo({
       title: "Estas seguro que deseas salir?",
       description: "Los datos no seran guardados al carrito",
-      status: false,
+      status: 'error',
     });
     setShowModal(true);
   };
@@ -123,23 +124,47 @@ export default function Index() {
   };
 
   const handleCloseModal = () => {
+    addCartPromo(radioSelect, select);
     setShowModal(false);
     dispatch(clearOrderPromo());
     router.push("/order/home");
   };
+  const addExtra = (item) => {
+    setExtraPizza([...extraPizza, item]);
+  }
+  const openModal = () => {
+    if (extras.length > 0) {
+      setInfo({
+        title: "Puedes agregar extras",
+        status: null,
+      });
+
+      setShowModal(true);
+    } else {
+      addCartPromo(radioSelect, select);
+    }
+  }
 
   return (
     <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
       {showModal && (
-        <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
+        <ModalMessage
+          showModal={showModal}
+          handleClose={handleCloseModal}
+          addExtra={addExtra}
+          extraPizza={extraPizza}
+          info={info}
+          extras={extras}
+          setShowModal={setShowModal} />
       )}
       <Toaster />
       <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
           src={"/images/pizzafree.webp"}
-          width={280}
-          height={200}
+          objectFit="cover"
+          width={300}
+          height={220}
           alt={"img"} />
 
       </div>
@@ -274,11 +299,12 @@ export default function Index() {
         <div className="bg-white w-full fixed bottom-0 p-4  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
           <button
             className={`${total === 1
-              ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600  hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold "
+              ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600  hover:-translate-y-1 transition-all font-poppins duration-500 text-white text-base font-semibold "
               : "invisible"
               }`}
             onClick={() => {
-              addCartPromo(radioSelect, select);
+              openModal();
+              // addCartPromo(radioSelect, select);
             }}
           >
             Agregar al Carrito

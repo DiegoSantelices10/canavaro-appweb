@@ -178,7 +178,9 @@ export default function Home() {
           <div className="w-full  p-3 flex items-center justify-between">
             <p className="text-left w-full font-poppins text-base  font-semibold">¡ Arma tu pizza como quieras !</p>
             <Link href={"/order/pizzaFree"}>
-              <a className="rounded-md font-poppins font-semibold w-auto bg-red-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
+              <a
+                onClick={() => clearTotal()}
+                className="rounded-md font-poppins font-semibold w-auto bg-red-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
                 Ingresa aqui
               </a>
             </Link>

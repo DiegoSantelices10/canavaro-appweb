@@ -134,7 +134,7 @@ export default function Create() {
                     setInfo({
                       title: "Creación exitosa",
                       description: "Se guardaron los datos correctamente!",
-                      status: true,
+                      status: 'success',
                     });
                     setShowModal(true);
                   }
@@ -144,7 +144,7 @@ export default function Create() {
                   setInfo({
                     title: "Error en la carga",
                     description: "No pudimos guardar los datos, intente nuevamente.",
-                    status: false,
+                    status: 'error',
                   });
                   setShowModal(true);
                 });

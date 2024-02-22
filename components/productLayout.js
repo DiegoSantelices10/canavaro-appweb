@@ -129,6 +129,7 @@ export default function ProductLayout({
   };
 
   const handleCloseModal = () => {
+    addCartPromo(orderPromo);
     setShowModal(false);
     dispatch(clearOrderPromo());
     router.push("/order/home");
@@ -138,18 +139,39 @@ export default function ProductLayout({
     setExtraPizza([...extraPizza, item]);
   }
 
+  const openModal = () => {
+    if (extras.length > 0) {
+      setInfo({
+        title: "Puedes agregar extras",
+        status: null,
+      });
+
+      setShowModal(true);
+    } else {
+      addCartPromo(orderPromo);
+    }
+  }
   return (
     <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 ">
       {showModal && (
-        <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
+        <ModalMessage
+          showModal={showModal}
+          addExtra={addExtra}
+          handleClose={handleCloseModal}
+          info={info}
+          setShowModal={setShowModal}
+          extraPizza={extraPizza}
+          extras={extras}
+        />
       )}
       <Toaster />
       <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
           src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
-          width={280}
-          height={200}
+          objectFit="cover"
+          width={300}
+          height={220}
           alt={nombre} />
 
       </div>
@@ -266,7 +288,8 @@ export default function ProductLayout({
             : "invisible"
             } `}
           onClick={() => {
-            addCartPromo(orderPromo);
+            // addCartPromo(orderPromo);
+            openModal();
           }}
         >
           Agregar al Carrito

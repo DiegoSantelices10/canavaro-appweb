@@ -48,7 +48,7 @@ export default function Login() {
                       setInfo({
                         title: "Ingreso exitoso",
                         description: "Ingresando al sistema..!",
-                        status: true,
+                        status: 'success',
                       });
                       setShowModal(true);
 
@@ -60,7 +60,7 @@ export default function Login() {
                       setInfo({
                         title: "Ingreso incorrecto",
                         description: "Las credenciales son invalidas",
-                        status: false,
+                        status: 'error',
                       });
                       setShowModal(true);
                     }

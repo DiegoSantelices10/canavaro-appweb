@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 import Link from "next/link";
-import { Element } from "react-scroll";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
@@ -27,14 +26,14 @@ function HomeFront({ imagefront }) {
 
   }, [])
   return (
-    <Element name="home" className="relative element">
+    <div>
       <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
       <div className={` font-poppins w-full min-h-screen mx-auto `}>
         <div className="absolute inset-0 bg-black bg-opacity-30 h-full"> </div>
 
         <motion.div initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }}>
           <div className="relative text-center h-full">
-            <div className="w-full flex sm:flex-col md:flex-row lg:flex-row flex-col justify-center items-center min-h-screen gap-7">
+            <div className="w-full flex sm:flex-col md:flex-row lg:flex-row flex-col justify-center items-center min-h-screen gap-3">
 
               <div className="w-full md:w-1/2">
                 <p className="font-poppins text-4xl lg:text-6xl text-center  font-bold text-gray-200">Pizzeria Canavaro</p>
@@ -44,7 +43,7 @@ function HomeFront({ imagefront }) {
                 <div className="w-full flex items-center my-5 lg:mb-2">
                   <Link href={"/digitalMenu"}>
                     <a
-                      className={`p-2 px-3 rounded-md font-medium text-white font-poppins  text-lg  mx-auto 
+                      className={`p-3 px-5 rounded-3xl font-medium text-white font-poppins  text-lg  mx-auto 
                           hover:bg-black hover:text-white bg-red-600 
                           hover:-translate-y-1 transition-all duration-500`}
                     >
@@ -62,7 +61,7 @@ function HomeFront({ imagefront }) {
                     <div className="w-full flex items-center my-5 lg:mb-2">
                       <Link href={"/welcomeLogo"}>
                         <a
-                          className={`p-2 px-3 rounded-md font-medium  font-poppins  text-lg  mx-auto 
+                          className={`p-3 px-5 rounded-3xl font-medium  font-poppins  text-lg  mx-auto 
                           hover:bg-black hover:text-white bg-red-600  text-white 
                           hover:-translate-y-1 transition-all duration-500`}
                         >
@@ -82,7 +81,7 @@ function HomeFront({ imagefront }) {
           </div>
         </motion.div>
       </div>
-    </Element>
+    </div>
   );
 }
 

@@ -36,6 +36,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
               src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
               width={140}
               height={140}
+              objectFit='cover'
+              objectPosition='center'
               alt={nombre}
             />
             <div className="relative w-full h-24 self-start">
@@ -83,7 +85,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
                 <Image
                   className="rounded-md"
                   src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
-                  objectFit="cover"
+                  objectFit='cover'
+                  objectPosition='center'
                   width={140}
                   height={140}
                   alt={nombre} />
