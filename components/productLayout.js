@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 
 import PizzaInfo from "./pizzaInfo";
 import Promotion from "./promotion";
-import { useCollapse } from 'react-collapsed'
+
 import { Toaster, toast } from "react-hot-toast";
 
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+
 
 import {
   addProductPizza,
@@ -29,10 +29,7 @@ export default function ProductLayout({
 }) {
   const { orderPromo, orderList, quantityDemanded } = useSelector(state => state.order);
   const { extras } = useSelector(state => state.product);
-  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({
-    easing: '0.4',
-    duration: 10,
-  })
+
   const [selectCombo, setSelectCombo] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [extraPizza, setExtraPizza] = useState([]);
@@ -47,7 +44,6 @@ export default function ProductLayout({
     dispatch(calculateTotalQuantity());
   }, [orderList, dispatch]);
 
-
   const productQuantity = _id => {
     const pre = orderPromo.find(item => item._id === _id);
     return pre?.cantidad ? pre.cantidad : 0;
@@ -58,12 +54,14 @@ export default function ProductLayout({
       if (quantityDemanded < 1 && orderPromo.length > 0) {
         return true;
       }
+    } else if (orderPromo.some(item => item.categoria === 'pizzas')) {
+      return true;
     } else {
-      if (orderPromo.length > 0) {
-        return true;
-      }
+      return false
     }
   };
+
+
   const incrementCartPizza = data => {
     dispatch(addProductPizza(data));
   };
@@ -76,7 +74,8 @@ export default function ProductLayout({
     setInfo({
       title: "Estas seguro que deseas salir?",
       description: "Los datos no seran guardados al carrito",
-      status: false,
+      status: 'error',
+      type: 'return home'
     });
     setShowModal(true);
   };
@@ -114,7 +113,6 @@ export default function ProductLayout({
       }
     } else {
       toast.success("Se agrego al pedido!");
-
       value.map(item =>
         dispatch(addPromoOrderList({
           ...item,
@@ -129,6 +127,7 @@ export default function ProductLayout({
   };
 
   const handleCloseModal = () => {
+    if (info.type !== 'return home') addCartPromo(orderPromo);
     setShowModal(false);
     dispatch(clearOrderPromo());
     router.push("/order/home");
@@ -138,18 +137,42 @@ export default function ProductLayout({
     setExtraPizza([...extraPizza, item]);
   }
 
+  const openModal = () => {
+    if (extras.length > 0 && orderPromo.length === 1) {
+      if (orderPromo[0].cantidad === 1) {
+        setInfo({
+          title: "AGREGA EXTRAS A TU PIZZA",
+          status: null,
+        });
+        setShowModal(true);
+      } else {
+        addCartPromo(orderPromo);
+      }
+    } else {
+      addCartPromo(orderPromo);
+    }
+  }
   return (
     <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 ">
       {showModal && (
-        <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
+        <ModalMessage
+          showModal={showModal}
+          handleClose={handleCloseModal}
+          addExtra={addExtra}
+          extraPizza={extraPizza}
+          info={info}
+          extras={extras}
+          setShowModal={setShowModal}
+        />
       )}
       <Toaster />
       <div className="flex justify-center items-center  w-full mt-8">
         <Image
           className="rounded-md "
           src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
-          width={280}
-          height={200}
+          objectFit="cover"
+          width={300}
+          height={220}
           alt={nombre} />
 
       </div>
@@ -175,64 +198,6 @@ export default function ProductLayout({
                   decrementCart={decrementCartPizza}
                   cart={orderPromo}
                 />
-                {result() > 0 && extras.length > 0 && (
-                  <div className="mt-1 font-poppins">
-                    <button
-                      className="flex w-full justify-between items-center py-3 focus:"
-                      {...getToggleProps()}
-                    >
-                      <div className="text-left">
-                        <p className="text-base tracking-wide">
-                          Eleg&iacute; extras para tu pizza
-                        </p>
-                        <p className="text-xs font-normal text-gray-400">
-                          Si elegis mas de una pizza, el extra se suma en ambas
-                        </p>
-
-                      </div>
-                      {isExpanded ?
-                        <FaAngleUp size={25} className="text-red-500" /> :
-                        <FaAngleDown size={25} className="text-green-500" />
-                      }
-                    </button>
-                    <hr />
-                    {isExpanded && extras.map(item => (
-                      <div
-                        key={item._id}
-                      >
-                        <section
-                          {...getCollapseProps()}
-                          className="my-4 text-base font-normal flex justify-between"
-                        >
-                          <div className="flex justify-between w-3/5">
-                            <p>
-                              {item.nombre}
-                            </p>
-                            <p>
-                              $ {item.precio}
-                            </p>
-                          </div>
-                          {extraPizza.includes(item) ? (
-                            <p
-                              className="text-sm"
-                            >Agregado</p>
-                          ) : (
-                            <button
-                              onClick={() => addExtra(item)}
-                              className="bg-red-500 rounded-md text-sm text-white p-1 px-2"
-                            >
-                              Agregar
-                            </button>
-                          )
-
-                          }
-
-                        </section>
-                        <hr />
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             ) : (
               <Promotion
@@ -262,11 +227,11 @@ export default function ProductLayout({
       <div className=" w-full fixed bottom-0 p-4  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
           className={`${result() > 0
-            ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
+            ? "flex justify-center gap-3 text-center font-poppins rounded-md w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
             : "invisible"
             } `}
           onClick={() => {
-            addCartPromo(orderPromo);
+            openModal();
           }}
         >
           Agregar al Carrito

@@ -286,7 +286,7 @@ export default function Cart({ data }) {
                                         type="button"
                                         className="text-gray-800"
                                         onClick={() => setShowHourEdit(!showHourEdit)}
-                                      >hace click</button>
+                                      >Ingresa aqui</button>
                                     </p>
                                     {showHourEdit &&
                                       <>
@@ -341,7 +341,7 @@ export default function Cart({ data }) {
                                         type="button"
                                         className="text-gray-800"
                                         onClick={() => setShowHourEdit(!showHourEdit)}
-                                      >hace click</button>
+                                      >Ingresa aqui</button>
                                     </p>
                                     {showHourEdit &&
                                       <>

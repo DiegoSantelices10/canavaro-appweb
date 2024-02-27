@@ -4,25 +4,20 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setAuth } from "store/reducers/authSlice";
-import ModalMessage from "components/modalMessage";
-import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+
 
 
 export default function Login() {
-  const [showModal, setShowModal] = useState(false);
-  const [info, setInfo] = useState({ title: "", description: "", status: true });
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+
 
   return (
     <div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
-      {showModal && (
-        <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} setShowModal={setShowModal} />
-      )}
+   
+      <Toaster />
 
       <div className="h-full w-full lg:w-2/5 md:w-3/5 sm:w-3/5 flex items-center justify-center lg:justify-between mx-auto">
         <div
@@ -45,26 +40,14 @@ export default function Login() {
                     if (res.data.token) {
                       localStorage.setItem("token", JSON.stringify(res.data.token));
                       dispatch(setAuth({ username: res.data.user, token: res.data.token }));
-                      setInfo({
-                        title: "Ingreso exitoso",
-                        description: "Ingresando al sistema..!",
-                        status: true,
-                      });
-                      setShowModal(true);
-
+                      toast.success("Ingresando a la cuenta!");
                       router.push("/admin/");
                     }
                   })
                   .catch(error => {
                     if (error.response.status === 401) {
-                      setInfo({
-                        title: "Ingreso incorrecto",
-                        description: "Las credenciales son invalidas",
-                        status: false,
-                      });
-                      setShowModal(true);
-                    }
-                  });
+                    toast.error("Credenciales incorrectas!")
+                  }});
               }}
             >
               {() => (

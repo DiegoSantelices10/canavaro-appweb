@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
-const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } }) => {
+const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, digital }) => {
   const { orderPromo } = useSelector(state => state.order);
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
   };
   return (
     <div>
-      <div className="p-3 bg-white">
+      <div className="p-3">
         {categoria === "empanadas" || categoria === "bebidas" ? (
           <div className="flex justify-between items-center gap-x-2">
             <Image
@@ -36,6 +36,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
               src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
               width={140}
               height={140}
+              objectFit='cover'
+              objectPosition='center'
               alt={nombre}
             />
             <div className="relative w-full h-24 self-start">
@@ -83,7 +85,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } })
                 <Image
                   className="rounded-md"
                   src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
-                  objectFit="cover"
+                  objectFit='cover'
+                  objectPosition='center'
                   width={140}
                   height={140}
                   alt={nombre} />

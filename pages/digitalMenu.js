@@ -1,22 +1,16 @@
-import React, { useEffect } from 'react'
-import SectionPizzas from "components/sections/sectionPizzas";
-import SectionEmpanadas from "components/sections/sectionEmpanadas";
-import SectionCombos from "components/sections/sectionCombos";
-import SectionZona from "components/sections/sectionZona";
-import Carousel from 'react-multi-carousel';
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import Header from 'components/header';
 
 import 'react-multi-carousel/lib/styles.css';
-import CustomArrow from 'components/CustomArrows/CustomArrow';
 import { setProductData } from 'store/reducers/productSlice';
-
+import Image from 'next/image'
 
 
 
 // eslint-disable-next-line react/prop-types
 function DigitalMenu() {
-
+    const [renderProductos, setRenderProductos] = useState('promociones')
     const { products } = useSelector(state => state.product);
     const dispatch = useDispatch()
 
@@ -28,44 +22,100 @@ function DigitalMenu() {
 
     }, []);
 
+    const renderStore = renderProductos => {
+        return products
+            ?.filter(item => item.categoria === renderProductos && item.available === true)
+            ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            .map(data => (
+                <div
+                    key={data._id}
+                >
+                    <div
+                        className="flex justify-between items-center h-full  gap-x-2 p-2 py-3">
+                        <Image
+                            className="rounded-xl"
+                            src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
+                            width={180}
+                            height={180}
+                            objectFit='cover'
+                            objectPosition='center'
+                            alt={data.nombre}
+                        />
+                        <div className="relative w-full h-full flex flex-col justify-between">
+                            <div>
+                                <h1 className="font-medium font-poppins text-base text-white">{data.nombre}</h1>
+                                <p className="text-gray-300 font-nunito font-light text-sm">{data.descripcion}</p>
+                            </div>
+                            {data.categoria === 'pizzas' ? (
+                                <div className='flex font-poppins justify-center gap-5 mt-2'>
 
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 2,
+                                    {data.precioPizza.gigante && (
+                                        <div>
+                                            <p className="text-xs font-normal text-gray-300 px-1 text-center ">Gigante</p>
+                                            <p className="text-lg font-poppins font-normal   px-1 text-white text-center">${data.precioPizza.gigante}</p>
+                                        </div>
+                                    )}
+                                    {data.precioPizza.mediana && (
+                                        <div>
+                                            <p className="text-xs font-normal text-gray-300 px-1 text-center ">Mediana</p>
+                                            <p className="text-lg font-poppins font-normal   px-1 text-center text-white ">${data.precioPizza.mediana}</p>
+                                        </div>
+                                    )}
+                                    {data.precioPizza.chica && (
+                                        <div>
+                                            <p className="text-xs font-normal text-gray-300 px-1 text-center ">Chica</p>
+                                            <p className="text-lg font-poppins font-normal   px-1 text-center text-white">${data.precioPizza.chica}</p>
+                                        </div>
+                                    )}
 
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 2,
-
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 1,
-
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-
-        }
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className="text-2xl whitespace-normal font-poppins font-normal text-white">${data.precio}</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <hr className='text-white  w-full' />
+                </div>
+            ));
     };
+
     return (
-        <div className='bg-zinc-900 min-h-screen'>
+        <div className='bg-zinc-900'>
             <Header />
-            <Carousel
-                responsive={responsive}
-                customButtonGroup={<CustomArrow />}
-                arrows={false}
-            >
-                <SectionCombos products={products} />
-                <SectionPizzas products={products} />
-                <SectionEmpanadas products={products} />
-                <SectionZona />
-            </Carousel>
+            <hr className='my-3' />
+            <div className=' px-8 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-medium'>
+
+                <button
+                    onClick={() => setRenderProductos('empanadas')}
+                    className={renderProductos === 'empanadas' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+
+                    EMPANADAS & CANASTITAS
+                </button>
+                <button
+                    onClick={() => setRenderProductos('promociones')}
+                    className={renderProductos === 'promociones' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+
+                    COMBOS
+                </button>
+                <button
+                    onClick={() => setRenderProductos('pizzas')}
+                    className={renderProductos === 'pizzas' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+                    PIZZAS
+                </button>
+                <button
+                    onClick={() => setRenderProductos('bebidas')}
+                    className={renderProductos === 'bebidas' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+
+                    BEBIDAS
+                </button>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-1">
+                {renderStore(renderProductos)}
+            </div>
         </div>
+
     )
 }
 

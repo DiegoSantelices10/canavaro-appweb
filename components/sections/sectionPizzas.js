@@ -81,11 +81,15 @@ export default function SectionPizzas({ products, imagefront }) {
             Nuestras Pizzas
           </h1>
           <hr className="py-2" />
-          <Table
-            className="text-white w-full  flex justify-center font-poppins"
-            columns={columns}
-            data={renderPizzas}
-          />
+          <div className="h-full w-full mx-auto text-white overflow-y-auto">
+            <div className="flex flex-col gap-y-5 mt-4">
+              <Table
+                className="text-white w-full  flex justify-center font-poppins"
+                columns={columns}
+                data={renderPizzas}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -10,16 +10,16 @@ export default function CustomArrow({ next, previous }) {
         >
             <button
                 onClick={() => previous()}
-                className='block p-2 bg-slate-300 rounded-full opacity-80'
+                className='block p-2 '
             >
-                <MdKeyboardDoubleArrowLeft size={25} />
+                <MdKeyboardDoubleArrowLeft size={35} className='text-white' />
             </button>
             <button
                 onClick={() => next()}
-                className='block p-2 bg-slate-300 rounded-full opacity-80'
+                className='block p-2 '
 
             >
-                <MdKeyboardDoubleArrowRight size={25} />
+                <MdKeyboardDoubleArrowRight size={35} className='text-white' />
             </button>
         </div>
     )

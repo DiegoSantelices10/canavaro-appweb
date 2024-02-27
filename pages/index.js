@@ -5,6 +5,10 @@ import { setExtras, setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
 import { getProducts } from "services/fetchData";
 import { useDispatch } from 'react-redux'
+import SectionZona from "components/sections/sectionZona";
+import Carousel from 'react-multi-carousel';
+import "react-multi-carousel/lib/styles.css";
+import CustomArrow from "components/CustomArrows/CustomArrow";
 
 
 export default function index({ data }) {
@@ -19,10 +23,42 @@ export default function index({ data }) {
     const extras = data.filter(item => item.categoria === 'extras' && item.available === true)
     dispatch(setExtras(extras))
   }
+
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 1,
+
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+
+    }
+  };
   return (
     <div className=" flex flex-col min-h-screen overflow-hidden ">
       <main className="w-full mx-auto">
-        <HomeFront imagefront={"/images/fondonuevo.webp"} />
+        <Carousel
+          responsive={responsive}
+          customButtonGroup={<CustomArrow />}
+          arrows={false}
+        >
+          <HomeFront imagefront={"/images/fondonuevo.webp"} />
+          <SectionZona />
+        </Carousel>
       </main>
     </div>
   );
