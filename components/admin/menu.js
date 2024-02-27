@@ -58,7 +58,7 @@ const AccessMenu = () => {
   return (
     <div className="w-full  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-4 ">
       <div className="lg:flex lg:justify-center lg:items-center hidden mt-5 ">
-        <Image height={110} width={110} src={"/images/logocanavaro.webp"} />
+        <Image height={100} width={100} src={"/images/logocanavaro.webp"} />
       </div>
       <div className="w-11/12 lg:w-full flex justify-around items-center lg:block lg:pt-10 pt-0">
         <div>
@@ -117,8 +117,8 @@ const AccessMenu = () => {
               <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
                    rounded-full 
                   dark:bg-gray-300 peer-checked:after:translate-x-full 
-                  after:content-[''] after:absolute 
-                 after:top-[2px] after:left-[2px] after:bg-white  
+                    after:content-[''] after:absolute 
+                   after:top-[2px] after:left-[2px] after:bg-white  
                   after:rounded-full after:h-4 after:w-4 after:transition-all 
                  dark:border-gray-600 peer-checked:bg-red-700 "></div>
             </label>

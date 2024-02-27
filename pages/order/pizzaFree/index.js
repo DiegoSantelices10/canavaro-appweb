@@ -65,6 +65,7 @@ export default function Index() {
       title: "Estas seguro que deseas salir?",
       description: "Los datos no seran guardados al carrito",
       status: 'error',
+      type: 'return home'
     });
     setShowModal(true);
   };
@@ -104,16 +105,30 @@ export default function Index() {
     const concatenatedString = Object.values(newList)
       .map(product => `${product.fraccion} ${product.nombre} `)
       .join(", ");
+    let promo = {};
 
-    const promo = {
-      _id: idGenerator,
-      nombre: `Pizza ${select}`,
-      descripcion: concatenatedString,
-      categoria: "pizzas",
-      comentarios: comentariosRef.current.value,
-      precio: totalRedondeado,
-      cantidad: 1,
-    };
+    if (extraPizza.length > 0) {
+      promo = {
+        _id: idGenerator,
+        nombre: `Pizza ${select}`,
+        descripcion: concatenatedString,
+        categoria: "pizzas",
+        comentarios: comentariosRef.current.value,
+        extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`,
+        precio: totalRedondeado + extraPizza.reduce((total, extra) => total + extra.precio, 0),
+        cantidad: 1,
+      };
+    } else {
+      promo = {
+        _id: idGenerator,
+        nombre: `Pizza ${select}`,
+        descripcion: concatenatedString,
+        categoria: "pizzas",
+        comentarios: comentariosRef.current.value,
+        precio: totalRedondeado,
+        cantidad: 1,
+      };
+    }
     dispatch(addPromoOrderList(promo));
     dispatch(calculateSubTotal());
     dispatch(calculateTotalQuantity());
@@ -124,6 +139,7 @@ export default function Index() {
   };
 
   const handleCloseModal = () => {
+    console.log('entro close');
     addCartPromo(radioSelect, select);
     setShowModal(false);
     dispatch(clearOrderPromo());
@@ -132,13 +148,13 @@ export default function Index() {
   const addExtra = (item) => {
     setExtraPizza([...extraPizza, item]);
   }
+
   const openModal = () => {
     if (extras.length > 0) {
       setInfo({
         title: "Puedes agregar extras",
         status: null,
       });
-
       setShowModal(true);
     } else {
       addCartPromo(radioSelect, select);
@@ -152,10 +168,12 @@ export default function Index() {
           showModal={showModal}
           handleClose={handleCloseModal}
           addExtra={addExtra}
+          free
           extraPizza={extraPizza}
           info={info}
           extras={extras}
-          setShowModal={setShowModal} />
+          setShowModal={setShowModal}
+        />
       )}
       <Toaster />
       <div className="flex justify-center items-center  w-full mt-8">

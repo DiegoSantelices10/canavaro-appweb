@@ -15,7 +15,7 @@ import {
 } from "store/reducers/orderSlice";
 
 import { v4 as uuidv4 } from "uuid";
-import { setProductData } from "store/reducers/productSlice";
+import { setExtras, setProductData } from "store/reducers/productSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
@@ -27,7 +27,7 @@ export default function Home() {
   const [docenaPrice, setDocenaPrice] = useState(0);
 
 
-  const { products } = useSelector(state => state.product);
+  const { products, extras } = useSelector(state => state.product);
   const { orderPromo } = useSelector(state => state.order);
 
   const idGenerator = uuidv4();
@@ -66,8 +66,13 @@ export default function Home() {
       const res = await axios.get("/api/promo");
       setDocenaPrice(res.data[0].precio)
     })();
-  }, []);
 
+    if(extras?.length <= 0) {
+      const res = JSON.parse(localStorage.getItem("productos"));
+      const extras = res.filter(item => item.categoria === 'extras' && item.available === true)
+      dispatch(setExtras(extras))
+    } 
+  }, []);
 
 
 
@@ -157,7 +162,7 @@ export default function Home() {
   return (
     <Layout>
       <Toaster />
-      <div className="py-4 mt-14 mx-auto w-full ">
+      <div className="py-4 mt-16 mx-auto w-full ">
         <h1 className="text-lg  font-bold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
           <style jsx>
@@ -176,7 +181,10 @@ export default function Home() {
         </div>
         <div className="my-6">
           <div className="w-full  p-3 flex items-center justify-between">
-            <p className="text-left w-full font-poppins text-base  font-semibold">¡ Arma tu pizza como quieras !</p>
+            <div>
+              <p className="text-left w-full font-poppins text-base  font-medium">¡Arma tu pizza como quieras!</p>
+
+            </div>
             <Link href={"/order/pizzaFree"}>
               <a
                 onClick={() => clearTotal()}
@@ -276,9 +284,9 @@ export default function Home() {
               </button>
 
               <div className="flex items-center gap-x-5 text-white font-semibold pr-4">
-                <p className="font-semibold text-xl">$ {totalPrice}</p>
+                <p className="font-medium text-xl">$ {totalPrice}</p>
                 <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
-                  <p className="text-neutral-800 text-lg font-semibold">{totalCant}</p>
+                  <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
                 </div>
               </div>
             </div>

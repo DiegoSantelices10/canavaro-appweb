@@ -110,15 +110,15 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                                   {" "}
                                   {item.nombre}
                                 </span>
-                                {item.extra && (
-                                  <p className="text-gray-400 text-sm font-normal">
-                                    extra: {item.extra}
-                                  </p>
-                                )}
                               </div>
                               <p className="font-semibold">$ {item.precio * item.cantidad}</p>
                             </div>
                             {categoria.categoria === 'pizzas' && <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>}
+                            {item.extra && (
+                                  <p className="text-gray-500 text-sm font-normal">
+                                    Extra: {item.extra}
+                                  </p>
+                                )}
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
