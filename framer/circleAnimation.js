@@ -56,7 +56,7 @@ const CircleAnimation = () => {
       transition: { duration: 0.5 },
     },
   };
-
+console.log('check', checkout);
   return (
     <div
       style={{
@@ -200,8 +200,12 @@ const CircleAnimation = () => {
                                     x {item?.cant || item?.cantidad}
                                   </span>
                                 </p>
+                                {item.descripcion && (
+                                  <p className="text-gray-400 text-sm font-normal">{item.descripcion}</p>
+
+                                )}
                                 {item.extra && (
-                                  <p className="text-gray-400 text-sm font-normal">extra: {item.extra}</p>
+                                  <p className="text-gray-400 text-sm font-normal">Extra: {item.extra}</p>
                                 )}
                               </div>
 
