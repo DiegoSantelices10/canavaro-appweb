@@ -214,7 +214,7 @@ export default function Cart({ data }) {
                           Retirando por el local tenes un 10% de descuento.
                         </div>
                       )}
-                      <div className="flex justify-center  w-full gap-3 text-sm bg-slate-50 shadow p-2 rounded-md">
+                      <div className="flex justify-center  w-full gap-3 text-sm bg-slate-50 shadow p-2 rounded-2xl">
                         <button
                           type="button"
                           onClick={() => {
@@ -222,8 +222,8 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "domicilioActual"
-                              ? "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
-                              : "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-white shadow  font-light p-3"
+                              ? "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
+                              : "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-white shadow  font-light p-3"
                           }
                         >
                           <MdOutlineDeliveryDining size={20} />
@@ -236,15 +236,15 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "localActual"
-                              ? "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
-                              : "w-1/2 rounded-md flex font-poppins items-center justify-center gap-2 bg-white shadow font-light p-3"
+                              ? "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
+                              : "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-white shadow font-light p-3"
                           }
                         >
                           <MdOutlineEmojiPeople size={20} />
                           Retiro
                         </button>
                       </div>
-                      <div className="flex flex-col justify-center items-center gap-2 p-2 mt-3">
+                      <div className="flex flex-col justify-center items-center gap-2 p-2 mt-4">
                         {type === "domicilioActual" ? (
                           <div className="w-full">
                             <div className="w-full">
@@ -260,7 +260,7 @@ export default function Cart({ data }) {
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full pt-2">
+                            <div className="w-full mt-4">
                               <Field
                                 id="telefono"
                                 name="telefono"
@@ -273,7 +273,7 @@ export default function Cart({ data }) {
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full mx-auto mt-2">
+                            <div className="w-full mx-auto mt-4">
                               <div className="border rounded-md p-2 min-w-min text-sm">
                                 {open ? (
                                   <>
@@ -315,7 +315,7 @@ export default function Cart({ data }) {
                             </div>
                           </div>
                         ) : (
-                          <div className="w-full mx-auto pt-1">
+                          <div className="w-full mx-auto ">
                             <Field
                               id="nombre"
                               name="nombre"
@@ -328,7 +328,7 @@ export default function Cart({ data }) {
                               }}
                             </ErrorMessage>
 
-                            <div className="w-full mx-auto mt-2">
+                            <div className="w-full mx-auto mt-4">
                               <div className="border rounded-md p-2 min-w-min text-sm">
                                 {open ? (
                                   <>
@@ -408,12 +408,12 @@ export default function Cart({ data }) {
                     type="button"
                     className={`${orderPromo.length < 1
                       ? "invisible"
-                      : "p-3 px-4 font-semibold w-full font-poppins mb-3 bg-red-600 rounded-md text-white text-sm hover:-translate-y-1 transition-all duration-500"
+                      : "p-4 font-semibold w-full font-poppins mb-3 bg-red-600 rounded-2xl text-white  hover:-translate-y-1 transition-all duration-500"
                       }`}
                   >
                     Agregar al carrito
                   </button>
-                  <h1 className="text-gray-800 font-bold font-poppins px-2 text-xl">Detalle pedido</h1>
+                  <h1 className="text-gray-800 font-bold font-poppins px-2 text-xl mt-3">Detalle pedido</h1>
                   <hr />
                   {orderList.map((item, index) => {
                     return (
@@ -473,7 +473,7 @@ export default function Cart({ data }) {
                       </div>
                       <button
                         type="submit"
-                        className="text-center font-poppins rounded-md w-auto p-4 text-white font-bold bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center font-poppins rounded-2xl w-auto p-4 text-white font-semibold bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>

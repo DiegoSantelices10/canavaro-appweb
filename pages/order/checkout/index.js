@@ -305,7 +305,7 @@ export default function Checkout() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="text-center font-poppins rounded-md justify-center items-center flex h-12 w-[170px] text-white bg-red-600 font-semibold hover:-translate-y-1 transition-all duration-500"
+                      className="text-center font-poppins rounded-2xl justify-center items-center flex p-4 text-white bg-red-600 font-semibold hover:-translate-y-1 transition-all duration-500"
                     >
                       {isSubmitting ? (
                         <ColorRing

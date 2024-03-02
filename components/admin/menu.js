@@ -64,18 +64,18 @@ const AccessMenu = () => {
         <div>
           <Link href="/admin" passHref>
             <button
-              className={`${selected === "/admin" ? " text-white  font-semibold border-gray-200 border-b" : "font-normal text-white"
+              className={`${selected === "/admin" ? " text-white  font-bold tracking-wider" : "font-normal text-white"
                 } mx-auto w-auto h-auto`}
             >
               <p className="text-base font-poppins lg:text-left md:text-center text-center">Pedidos</p>
             </button>
           </Link>
         </div>
-        <div className="lg:mt-1">
+        <div className="lg:mt-4">
           <Link href="/admin/products/list" passHref>
             <button
               className={`${selected === "/admin/products/list"
-                ? "text-white border-b font-semibold border-gray-200"
+                ? "text-white tracking-wider font-semibold "
                 : "font-normal text-white"
                 } mx-auto w-auto  h-auto  `}
             >
@@ -84,11 +84,11 @@ const AccessMenu = () => {
           </Link>
 
         </div>
-        <div className="lg:mt-1">
+        <div className="lg:mt-4">
           <Link href="/admin/sales/list" passHref>
             <button
               className={`${selected === "/admin/sales/list"
-                ? "text-white border-b font-semibold border-gray-200"
+                ? "text-white tracking-wider font-semibold "
                 : "font-normal text-white"
                 } mx-auto w-auto h-auto `}
             >

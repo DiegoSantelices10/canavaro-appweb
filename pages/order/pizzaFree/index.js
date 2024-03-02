@@ -61,13 +61,8 @@ export default function Index() {
     setRadioSelect(response);
   };
   const returnHome = () => {
-    setInfo({
-      title: "Estas seguro que deseas salir?",
-      description: "Los datos no seran guardados al carrito",
-      status: 'error',
-      type: 'return home'
-    });
-    setShowModal(true);
+    dispatch(clearOrderPromo());
+    router.push("/order/home");
   };
 
   const checkSuma = radioArray => {
@@ -139,7 +134,6 @@ export default function Index() {
   };
 
   const handleCloseModal = () => {
-    console.log('entro close');
     addCartPromo(radioSelect, select);
     setShowModal(false);
     dispatch(clearOrderPromo());
@@ -165,14 +159,13 @@ export default function Index() {
     <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
       {showModal && (
         <ModalMessage
-          showModal={showModal}
           handleClose={handleCloseModal}
           addExtra={addExtra}
-          free
+          showModal={showModal}
           extraPizza={extraPizza}
-          info={info}
-          extras={extras}
           setShowModal={setShowModal}
+          extras={extras}
+          info={info}
         />
       )}
       <Toaster />
@@ -241,8 +234,8 @@ export default function Index() {
             <div
               className={
                 total === 1
-                  ? "bg-green-500 font-poppins rounded-md  w-full text-sm text-white p-2 mt-2 text-center font-semibold"
-                  : "bg-red-600 w-full font-poppins rounded-md text-white text-sm p-2 mt-2 text-center font-semibold"
+                  ? "bg-green-500 font-poppins rounded-xl  w-full text-sm text-white p-3 mt-2 text-center font-semibold"
+                  : "bg-red-600 w-full font-poppins rounded-xl text-white text-sm p-3 mt-2 text-center font-semibold"
               }
             >
               {productTotal()}
@@ -314,10 +307,10 @@ export default function Index() {
         </div>
       </div>
       {total === 1 && (
-        <div className="bg-white w-full fixed bottom-0 p-4  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
+        <div className="bg-white w-full fixed bottom-0 p-3  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
           <button
             className={`${total === 1
-              ? "flex justify-center gap-3 text-center rounded-md w-full p-4 bg-red-600  hover:-translate-y-1 transition-all font-poppins duration-500 text-white text-base font-semibold "
+              ? "flex justify-center gap-3 text-center rounded-2xl w-full p-4 bg-red-600  hover:-translate-y-1 transition-all font-poppins duration-500 text-white text-base font-semibold "
               : "invisible"
               }`}
             onClick={() => {

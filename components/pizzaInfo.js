@@ -26,11 +26,11 @@ export default function PizzaInfo({
     <>
       {" "}
       {gigante !== null && gigante !== 0 && (
-        <div className="font-poppins grid grid-cols-3 items-center justify-between w-full mb-3">
+        <div className="font-poppins grid grid-cols-2  items-start justify-between w-full my-3">
           <div className="text-lg font-semibold text-neutral-800">
             <h2>Gigante</h2>
+            <h2 className='text-gray-400 font-normal font-poppins text-sm'>$ {gigante}</h2>
           </div>
-          <div className="font-semibold text-lg text-neutral-800 flex items-center text-center ">{<h2>$ {gigante}</h2>}</div>
           <div className=" flex  items-center justify-end bottom-0 right-0 w-auto   text-end gap-3 text-base">
             <div
               className={
@@ -76,11 +76,11 @@ export default function PizzaInfo({
         </div>
       )}
       {mediana !== null && mediana !== 0 && (
-        <div className="font-poppins grid grid-cols-3 justify-between items-center mb-3">
+        <div className="font-poppins grid grid-cols-2 justify-between items-start my-3">
           <div className="text-lg font-semibold text-neutral-800">
-            <h2>Mediana</h2>
+            <h1>Mediana</h1>
+            <h2 className='text-gray-400 font-normal font-poppins text-sm'>$ {mediana}</h2>
           </div>
-          <div className="text-lg font-semibold text-neutral-800 ">{<h2>$ {mediana}</h2>}</div>
           <div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
             <div
               className={
@@ -126,11 +126,11 @@ export default function PizzaInfo({
         </div>
       )}
       {chica !== null && chica !== 0 && (
-        <div className=" font-poppins grid grid-cols-3 justify-between items-center mb-3">
+        <div className=" font-poppins grid grid-cols-2 justify-between items-start my-3">
           <div className="text-lg font-semibold text-neutral-800">
             <h2>Chica</h2>
+            <h2 className='text-gray-400 font-normal font-poppins text-sm'>$ {chica}</h2>
           </div>
-          <div className="text-lg text-neutral-800 font-semibold">{<h2>$ {chica}</h2>}</div>
           <div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
             <div
               className={

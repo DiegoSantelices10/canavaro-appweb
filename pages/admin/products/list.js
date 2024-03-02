@@ -105,12 +105,6 @@ export default function Products() {
     ));
   }
 
-  const deleteImage = async () => {
-    console.log('entro');
-    const response = await axios.put("/api/products/");
-    console.log(response);
-  }
-
   return (
     <Layout>
       <Toaster />
@@ -155,8 +149,9 @@ export default function Products() {
                              rounded-md  text-sm 
                              border text-white bg-red-600"
             type="button"
-            onClick={() => deleteImage()}
-          // router.push("/admin/products/create")
+            onClick={() =>
+              router.push("/admin/products/create")
+            }
           >
             Producto Nuevo
           </button>

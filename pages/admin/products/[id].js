@@ -134,7 +134,7 @@ export default function Update({ data }) {
                     if (res.success) {
                       toast.success('Producto actualizado!')
                     }
-                    // router.push("list");
+                    router.push("list");
                     resetForm();
                   })
                   .catch(() => {
@@ -147,7 +147,7 @@ export default function Update({ data }) {
                     if (res.success) {
                       toast.success('Producto actualizado!')
                     }
-                    // router.push("list");
+                    router.push("list");
                     resetForm();
                   })
                   .catch(() => {

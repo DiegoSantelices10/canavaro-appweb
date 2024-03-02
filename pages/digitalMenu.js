@@ -35,8 +35,8 @@ function DigitalMenu() {
                         <Image
                             className="rounded-xl"
                             src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
-                            width={180}
-                            height={180}
+                            width={160}
+                            height={160}
                             objectFit='cover'
                             objectPosition='center'
                             alt={data.nombre}
@@ -85,7 +85,7 @@ function DigitalMenu() {
         <div className='bg-zinc-900'>
             <Header />
             <hr className='my-3' />
-            <div className=' px-8 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-medium'>
+            <div className=' px-8 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-medium text-lg'>
 
                 <button
                     onClick={() => setRenderProductos('empanadas')}

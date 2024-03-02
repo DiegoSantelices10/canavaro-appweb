@@ -71,13 +71,8 @@ export default function ProductLayout({
   };
 
   const returnHome = () => {
-    setInfo({
-      title: "Estas seguro que deseas salir?",
-      description: "Los datos no seran guardados al carrito",
-      status: 'error',
-      type: 'return home'
-    });
-    setShowModal(true);
+    dispatch(clearOrderPromo());
+    router.push("/order/home");
   };
 
   const addCartPromo = value => {
@@ -127,7 +122,7 @@ export default function ProductLayout({
   };
 
   const handleCloseModal = () => {
-    if (info.type !== 'return home') addCartPromo(orderPromo);
+    addCartPromo(orderPromo);
     setShowModal(false);
     dispatch(clearOrderPromo());
     router.push("/order/home");
@@ -141,7 +136,7 @@ export default function ProductLayout({
     if (extras.length > 0 && orderPromo.length === 1) {
       if (orderPromo[0].cantidad === 1) {
         setInfo({
-          title: "AGREGA EXTRAS A TU PIZZA",
+          title: "Agrega extras a tu pizza.",
           status: null,
         });
         setShowModal(true);
@@ -211,14 +206,14 @@ export default function ProductLayout({
         </div>
 
         <div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
-          <label className="pb-1">
+          <label className="pb-1 font-poppins font-medium text-lg">
             Comentarios
             <input
               id="comentarios"
               name="comentarios"
               type="text"
               ref={comentarioRef}
-              className="border border-gray-300 rounded-md w-full p-2"
+              className="border border-gray-300 rounded-xl w-full p-2"
             />
           </label>
         </div>
@@ -227,7 +222,7 @@ export default function ProductLayout({
       <div className=" w-full fixed bottom-0 p-4  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
           className={`${result() > 0
-            ? "flex justify-center gap-3 text-center font-poppins rounded-md w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
+            ? "flex justify-center gap-3 text-center font-poppins rounded-2xl w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
             : "invisible"
             } `}
           onClick={() => {

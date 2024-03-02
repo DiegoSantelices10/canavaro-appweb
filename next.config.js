@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     minimumCacheTTL: 60,
-    domains: ["res.cloudinary.com"],
+    domains: ["res.cloudinary.com", "cdn.hugeicons.com"],
   },
 };
 

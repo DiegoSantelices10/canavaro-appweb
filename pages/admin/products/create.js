@@ -4,18 +4,13 @@ import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
 import { createProduct } from "services/fetchData";
 import { useRouter } from "next/router";
-import ModalMessage from "components/modalMessage";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Create() {
   const [renderProducts, setRenderProductos] = useState("pizzas");
-  const [showModal, setShowModal] = useState(false);
-  const [info, setInfo] = useState({ title: "", description: "", status: true });
   const router = useRouter();
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    return router.push("list");
-  };
+
 
   const handleCategoryChange = event => {
     const cat = event.target.value;
@@ -26,8 +21,7 @@ export default function Create() {
 
   return (
     <Layout>
-      {showModal && <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} />}
-
+      <Toaster />
       <section className="w-full flex justify-start items-start h-screen">
         <div className="w-full  p-2 md:p-10">
           <h1 className="text-xl text-center md:text-4xl font-poppins font-semibold text-zinc-800 my-4">
@@ -46,69 +40,7 @@ export default function Create() {
               ))}
             </select>
           </div>
-          {/* <div className="flex overflow-x-scroll font-poppins flexp justify-start items-start space-x-1 w-full p-2 my-2">
-            <style jsx>
-              {`
-                .flexp::-webkit-scrollbar-thumb {
-                  background: #ffffff;
-                  border-radius: 20px;
-                }
 
-                .flexp::-webkit-scrollbar {
-                  height: 0px;
-                }
-              `}
-            </style>
-            <div>
-              <button
-                onClick={() => setRenderProductos("empanadas")}
-                className={
-                  renderProducts !== "empanadas"
-                    ? "w-52  font-medium text-gray-400"
-                    : "w-52 font-medium border-b-red-600 border-b "
-                }
-              >
-                Canastitas & Empanadas
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={() => setRenderProductos("pizzas")}
-                className={
-                  renderProducts !== "pizzas"
-                    ? "w-48  font-semibold text-gray-400"
-                    : "w-48  font-semibold border-b-red-600 border-b  "
-                }
-              >
-                Pizzas
-              </button>
-            </div>
-
-            <div>
-              <button
-                onClick={() => setRenderProductos("promociones")}
-                className={
-                  renderProducts !== "promociones"
-                    ? "w-48  font-semibold text-gray-400"
-                    : "w-48 font-semibold border-b-red-600 border-b   "
-                }
-              >
-                Promociones
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={() => setRenderProductos("bebidas")}
-                className={
-                  renderProducts !== "bebidas"
-                    ? "w-48  font-semibold text-gray-400"
-                    : "w-48 font-semibold border-b-red-600 border-b  "
-                }
-              >
-                Bebidas
-              </button>
-            </div>
-          </div> */}
           <Formik
             initialValues={{
               nombre: "",
@@ -131,22 +63,13 @@ export default function Create() {
               await createProduct(values)
                 .then(res => {
                   if (res.message === "ok") {
-                    setInfo({
-                      title: "Creación exitosa",
-                      description: "Se guardaron los datos correctamente!",
-                      status: 'success',
-                    });
-                    setShowModal(true);
+                    toast.success('Creado con exito!')
                   }
+                  router.push("list")
                   resetForm();
                 })
                 .catch(() => {
-                  setInfo({
-                    title: "Error en la carga",
-                    description: "No pudimos guardar los datos, intente nuevamente.",
-                    status: 'error',
-                  });
-                  setShowModal(true);
+                  toast.error('Error al crear al producto.')
                 });
             }}
             enableReinitialize

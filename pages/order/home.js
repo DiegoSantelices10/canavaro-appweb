@@ -67,11 +67,11 @@ export default function Home() {
       setDocenaPrice(res.data[0].precio)
     })();
 
-    if(extras?.length <= 0) {
+    if (extras?.length <= 0) {
       const res = JSON.parse(localStorage.getItem("productos"));
       const extras = res.filter(item => item.categoria === 'extras' && item.available === true)
       dispatch(setExtras(extras))
-    } 
+    }
   }, []);
 
 
@@ -188,7 +188,7 @@ export default function Home() {
             <Link href={"/order/pizzaFree"}>
               <a
                 onClick={() => clearTotal()}
-                className="rounded-md font-poppins font-semibold w-auto bg-red-600 hover:bg-white hover:text-sky-800 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
+                className="rounded-xl font-poppins font-medium w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-base px-4">
                 Ingresa aqui
               </a>
             </Link>
@@ -270,14 +270,14 @@ export default function Home() {
         {(renderProducts === "empanadas" || renderProducts === "bebidas") && (
           <div className="w-full px-2 fixed bottom-2    sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
-              className="flex justify-between items-center gap-3 rounded-xl mx-auto text-center   
+              className="flex justify-between items-center gap-3 rounded-3xl mx-auto text-center   
 									   w-full md:w-1/2 lg:w-3/5 p-4 bg-red-600  text-white text-base font-semibold "
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
                 className={`${orderPromo.length < 1
                   ? "invisible"
-                  : "p-3 px-4 font-semibold font-poppins bg-slate-50 rounded-md text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
+                  : "p-3 px-4 font-semibold font-poppins bg-slate-50 rounded-xl text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
                   }`}
               >
                 Agregar al carrito
