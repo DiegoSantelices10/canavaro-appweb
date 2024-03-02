@@ -30,7 +30,7 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
                 <div className="w-full">
                     <a className="font-bold text-sm text-gray-800">
                         <Image
-                            src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
+                            src={imagen?.url || "/images/producto-sin-imagen.png"}
                             width={220}
                             height={130}
                             objectFit="contain"

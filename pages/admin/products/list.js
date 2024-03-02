@@ -103,8 +103,12 @@ export default function Products() {
         </button>
       </div>
     ));
+  }
 
-
+  const deleteImage = async () => {
+    console.log('entro');
+    const response = await axios.put("/api/products/");
+    console.log(response);
   }
 
   return (
@@ -151,9 +155,8 @@ export default function Products() {
                              rounded-md  text-sm 
                              border text-white bg-red-600"
             type="button"
-            onClick={() => {
-              router.push("/admin/products/create");
-            }}
+            onClick={() => deleteImage()}
+          // router.push("/admin/products/create")
           >
             Producto Nuevo
           </button>
@@ -179,7 +182,7 @@ export default function Products() {
               <div className="flex justify-between items-center p-0  relative ">
                 <Image
                   className="rounded-md"
-                  src={imagen?.url ? imagen.url : "/images/producto-sin-imagen.png"}
+                  src={imagen?.url || "/images/producto-sin-imagen.png"}
                   width={140}
                   height={140}
                   alt={nombre}
@@ -225,7 +228,7 @@ export default function Products() {
         })}
       </div>
       <hr />
-    </Layout>
+    </Layout >
   );
 }
 

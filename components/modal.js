@@ -26,7 +26,7 @@ const Modal = ({ handleClose, showModal, producto }) => {
             <div className="relative overflow-hidden  mx-auto">
               {showModal && (
                 <Image
-                  src={producto.imagen?.url !== '' ? producto.imagen.url : "/images/producto-sin-imagen.png"}
+                  src={producto.imagen?.url || "/images/producto-sin-imagen.png"}
                   layout="responsive"
                   width={20}
                   height={16}

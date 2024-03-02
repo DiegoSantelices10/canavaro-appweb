@@ -4,16 +4,15 @@ import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
+import toast, { Toaster } from "react-hot-toast";
+
 import { useRouter } from "next/router";
 import { getProducts, updateProduct } from "services/fetchData";
-import ModalMessage from "components/modalMessage";
 import { IoChevronBack } from "react-icons/io5";
 
 export default function Update({ data }) {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [productRender, setProductRender] = useState({});
-  const [showModal, setShowModal] = useState(false);
-  const [info, setInfo] = useState({ title: "", description: "", status: true });
   const router = useRouter();
 
   useEffect(() => {
@@ -88,19 +87,14 @@ export default function Update({ data }) {
     return model;
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    return router.push("list");
-  };
-
   const backNavigate = () => {
     router.back()
   }
 
   return (
     <Layout>
-      {showModal && <ModalMessage showModal={showModal} handleClose={handleCloseModal} info={info} />}
       <section className="w-full flex justify-start items-start h-screen">
+        <Toaster />
 
         <div className="w-full  p-2 mt-10">
           <div className="flex  justify-center relative items-center">
@@ -138,46 +132,26 @@ export default function Update({ data }) {
                 await updateProduct(data._id, model)
                   .then(res => {
                     if (res.success) {
-                      setInfo({
-                        title: "Actualización exitosa",
-                        description: "Se guardaron los datos correctamente!",
-                        status: 'success',
-                      });
-                      setShowModal(true);
+                      toast.success('Producto actualizado!')
                     }
-                    router.push("list");
+                    // router.push("list");
                     resetForm();
                   })
                   .catch(() => {
-                    setInfo({
-                      title: "Error en la carga",
-                      description: "No pudimos guardar los datos, intente nuevamente.",
-                      status: 'error',
-                    });
-                    setShowModal(true);
+                    toast.error('Hubo error al cargar los datos!')
                   });
               } else {
                 const model = modelProducto(values);
                 await updateProduct(data._id, model)
                   .then(res => {
                     if (res.success) {
-                      setInfo({
-                        title: "Actualización exitosa",
-                        description: "Se guardaron los datos correctamente!",
-                        status: 'success',
-                      });
-                      setShowModal(true);
+                      toast.success('Producto actualizado!')
                     }
-                    router.push("list");
+                    // router.push("list");
                     resetForm();
                   })
                   .catch(() => {
-                    setInfo({
-                      title: "Error en la carga",
-                      description: "No pudimos guardar los datos, intente nuevamente.",
-                      status: 'error',
-                    });
-                    setShowModal(true);
+                    toast.error('Hubo error al cargar los datos!')
                   });
               }
             }}

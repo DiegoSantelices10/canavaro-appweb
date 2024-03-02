@@ -11,7 +11,7 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen } })
           <Link href={`/order/products/${convertToPath(nombre)}`}>
             <a className="font-bold text-sm text-gray-800">
               <Image
-                src={imagen?.url !== '' ? imagen.url : "/images/producto-sin-imagen.png"}
+                src={imagen?.url || "/images/producto-sin-imagen.png"}
                 layout="responsive"
                 width={220}
                 height={130}
