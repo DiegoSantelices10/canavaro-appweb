@@ -52,31 +52,30 @@ function DigitalMenu() {
                                     {data.precioPizza.gigante && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Gigante</p>
-                                            <p className="text-lg font-poppins font-normal   px-1 text-white text-center">${data.precioPizza.gigante}</p>
+                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-white text-center">${data.precioPizza.gigante}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.mediana && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Mediana</p>
-                                            <p className="text-lg font-poppins font-normal   px-1 text-center text-white ">${data.precioPizza.mediana}</p>
+                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white ">${data.precioPizza.mediana}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.chica && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Chica</p>
-                                            <p className="text-lg font-poppins font-normal   px-1 text-center text-white">${data.precioPizza.chica}</p>
+                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white">${data.precioPizza.chica}</p>
                                         </div>
                                     )}
 
                                 </div>
                             ) : (
                                 <div>
-                                    <p className="text-2xl whitespace-normal font-poppins font-normal text-white">${data.precio}</p>
+                                    <p className="text-xl tracking-wider font-nunito font-normal text-white">$ {data.precio}</p>
                                 </div>
                             )}
                         </div>
                     </div>
-                    <hr className='text-white  w-full' />
                 </div>
             ));
     };
@@ -89,29 +88,29 @@ function DigitalMenu() {
 
                 <button
                     onClick={() => setRenderProductos('empanadas')}
-                    className={renderProductos === 'empanadas' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'empanadas' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
 
                     EMPANADAS & CANASTITAS
                 </button>
                 <button
                     onClick={() => setRenderProductos('promociones')}
-                    className={renderProductos === 'promociones' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'promociones' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
 
                     COMBOS
                 </button>
                 <button
                     onClick={() => setRenderProductos('pizzas')}
-                    className={renderProductos === 'pizzas' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'pizzas' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
                     PIZZAS
                 </button>
                 <button
                     onClick={() => setRenderProductos('bebidas')}
-                    className={renderProductos === 'bebidas' ? 'bg-white rounded-3xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'bebidas' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
 
                     BEBIDAS
                 </button>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-1">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-1 lg:p-3">
                 {renderStore(renderProductos)}
             </div>
         </div>
