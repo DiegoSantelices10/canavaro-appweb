@@ -169,7 +169,7 @@ export default function Update({ data }) {
                         id="nombre"
                         name="nombre"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl  focus:border-gray-200"
                       />
                     </label>
                   </div>
@@ -181,7 +181,7 @@ export default function Update({ data }) {
                         id="categoria"
                         name="categoria"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl   focus:border-gray-200"
                       />
                     </label>
                   </div>
@@ -193,7 +193,7 @@ export default function Update({ data }) {
                           id="descripcion"
                           name="descripcion"
                           className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl   focus:border-gray-200"
                         />
                       </label>
                     </div>
@@ -207,7 +207,7 @@ export default function Update({ data }) {
                           id="precio"
                           name="precio"
                           className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-md shadow   focus:border-gray-200"
+											  rounded-xl   focus:border-gray-200"
                         />
                       </label>
                     </div>
@@ -243,7 +243,7 @@ export default function Update({ data }) {
                             id="precioPizza.gigante"
                             name="precioPizza.gigante"
                             className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-md shadow   focus:border-gray-200"
+											  rounded-xl focus:border-gray-200"
                           />
                         </label>
                       </div>
@@ -254,7 +254,7 @@ export default function Update({ data }) {
                             id="precioPizza.mediana"
                             name="precioPizza.mediana"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl focus:border-gray-200"
                           />
                         </label>
                       </div>
@@ -265,7 +265,7 @@ export default function Update({ data }) {
                             id="precioPizza.chica"
                             name="precioPizza.chica"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl focus:border-gray-200"
                           />
                         </label>
                       </div>
@@ -279,8 +279,11 @@ export default function Update({ data }) {
                           name="imagen"
                           type="file"
                           onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                          className="w-full h-10 px-3 py-2 text-sm leading-tight text-gray-700 border-gray-200 
-                  									rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
+                          className="w-full h-10 px-3 mt-2  text-sm leading-tight text-gray-700 border-gray-200 
+                  									 appearance-none focus:outline-none focus:shadow-outline
+                                    file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded-xl
+                                    file:font-normal
+                                    "
                         />
                       </label>
                     </div>
@@ -360,9 +363,8 @@ export default function Update({ data }) {
                   )}
 
                   <button
-                    className="w-48 h-12  col-start-2
-                       						 rounded-md  text-sm 
-                       						 border text-white bg-red-600 hover:bg-red-500 font-normal font-poppins"
+                    className="w-48 h-12  col-start-2 rounded-xl  text-sm 
+                       				border text-white bg-red-600 hover:bg-red-500 font-normal font-poppins"
                     type="submit"
                   >
                     Actualizar Producto

@@ -111,8 +111,8 @@ export default function Products() {
       <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-2 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
         <div className="bg-white flex w-full lg:w-1/4  items-center gap-x-2">
           <div
-            className="flex  justify-between items-center w-full  h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border-0 
-                         rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
+            className="flex  justify-between items-center w-full  h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border
+                         rounded-xl appearance-none focus:outline-none focus:shadow-outline"
           >
             <input
               id="query"
@@ -120,16 +120,16 @@ export default function Products() {
               type="text"
               placeholder="¿Que Desea Buscar?"
               onChange={handleChangeSearch}
-              className="w-full border-0 text-sm  focus:outline-none focus:ring-0"
+              className="w-full border-none text-sm rounded-xl  focus:outline-none focus:ring-0"
             />
             <FaSearch size={20} className="text-gray-300" />
           </div>
         </div>
 
-        <div className="w-full lg:w-1/4 h-10 border-none shadow appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
+        <div className="w-full lg:w-1/4 h-10 rounded-xl appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
           <select
             onChange={handleCategoryChange}
-            className="h-10 border-none font-poppins focus:ring-0 focus:ring-gray-200  text-gray-400 text-sm rounded-lg  block w-full p-2.5 "
+            className="h-10 border border-gray-200 font-poppins focus:ring-0 focus:ring-gray-200 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-xl  block w-full p-2.5 "
           >
             <option className="text-gray-200 text-sm font-poppins" value="">
               Seleccione una categoria
@@ -145,8 +145,8 @@ export default function Products() {
         <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-end gap-5 ">
 
           <button
-            className="w-36 h-10 col-start-2 font-poppins font-normal
-                             rounded-md  text-sm 
+            className="px-2 whitespace-nowrap h-10 col-start-2 font-poppins font-normal
+                             rounded-xl  text-sm 
                              border text-white bg-red-600"
             type="button"
             onClick={() =>
@@ -156,8 +156,8 @@ export default function Products() {
             Producto Nuevo
           </button>
           <button
-            className="w-36 h-10 col-start-2 font-poppins font-normal
-                             rounded-md  text-sm 
+            className=" h-10 col-start-2 whitespace-nowrap px-2 font-poppins font-normal
+                             rounded-xl  text-sm 
                              border  bg-red-600 text-white"
             type="button"
             onClick={() => {

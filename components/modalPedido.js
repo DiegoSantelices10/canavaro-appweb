@@ -29,7 +29,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
 
-        <div className="inline-block align-bottom  rounded-lg text-left overflow-hidden w-full shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div className="inline-block align-bottom  rounded-xl text-left overflow-hidden w-full shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -55,36 +55,36 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 </h2>
               </div>
               {pedido?.cliente && (
-                <h2 className="font-semibold">
+                <h2 className="font-semibold mt-1">
                   Cliente: <span className="font-normal  text-base">{pedido.cliente}</span>
                 </h2>
               )}
 
               {pedido.domicilio && (
-                <h2 className="font-semibold">
+                <h2 className="font-semibold mt-1">
                   Direccion: <span className="font-normal text-base">{pedido?.domicilio}</span>
                 </h2>
               )}
               {pedido?.telefono && (
-                <h2 className="font-semibold">
+                <h2 className="font-semibold mt-1">
                   Telefono: <span className="font-normal text-base">{separarNumero(pedido?.telefono)}</span>
                 </h2>
               )}
-              <h2 className="font-semibold">
+              <h2 className="font-semibold mt-1">
                 Tipo de envio: <span className="font-normal text-base">{pedido?.tipoEnvio}</span>
               </h2>
               {pedido.hPersonalizado !== "" && (
-                <h2 className="font-semibold">
+                <h2 className="font-semibold mt-1">
                   Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-normal text-base">{pedido?.hPersonalizado}hs.</span>
                 </h2>
 
               )}
-              <h2 className="font-semibold">
+              <h2 className="font-semibold mt-1">
                 Medio de pago: <span className="font-normal text-base">{pedido?.medioDePago}</span>
               </h2>
 
               {pedido?.comentarios && (
-                <h2 className="font-semibold">
+                <h2 className="font-semibold mt-1">
                   Comentarios: <span className="font-normal text-base">{pedido?.comentarios}</span>
                 </h2>
               )}
@@ -92,7 +92,8 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <hr className="w-full h-1 my-3 bg-slate-700" />
+                    <div className="border-t-2 border-gray-300 my-3"></div>
+
                     <p className="text-base font-semibold text-gray-700 font-poppins">{categoria?.categoria}</p>
 
                     {productos
@@ -115,10 +116,10 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                             </div>
                             {categoria.categoria === 'pizzas' && <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>}
                             {item.extra && (
-                                  <p className="text-gray-500 text-sm font-normal">
-                                    Extra: {item.extra}
-                                  </p>
-                                )}
+                              <p className="text-gray-500 text-sm font-normal">
+                                Extra: {item.extra}
+                              </p>
+                            )}
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>

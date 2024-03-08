@@ -100,7 +100,7 @@ const UpdatePrices = () => {
       <div className="lg:flex w-full justify-between items-center h-auto p-2 gap-4">
 
         <div className="mx-auto p-2 h-auto  w-full  lg:w-1/2">
-          <p className="text-center font-poppins font-semibold">Actualizar el precio de las empanadas</p>
+          <p className="text-center font-poppins font-semibold">Actualizá el precio de las empanadas</p>
           <div className=" md:flex lg:flex  justify-between w-full gap-2 mt-2">
             <div className="w-full flex items-end">
               <div className="w-full">
@@ -109,12 +109,12 @@ const UpdatePrices = () => {
                   type="number"
                   ref={priceRef}
                   className="p-2 h-9 w-full text-sm leading-tight text-gray-700  border-gray-200 border
-                            rounded-md shadow focus:border-gray-200"
+                            rounded-xl focus:border-gray-200"
                 />
               </div>
               <button
                 onClick={handleUpdateEmpanadas}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-md shadow-md hover:bg-red-500"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-xl shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>
@@ -126,38 +126,23 @@ const UpdatePrices = () => {
                   type="number"
                   ref={priceDocenaRef}
                   className="p-2 h-9 w-full  text-sm leading-tight text-gray-700  border-gray-200 border
-                            rounded-md shadow focus:border-gray-200"
+                            rounded-xl focus:border-gray-200"
                 />
               </div>
               <button
                 onClick={handleUpdateEmpanadasPorDocena}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-md shadow-md hover:bg-red-500"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-xl shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>
             </div>
           </div>
-          {/* <p className="font-poppins text-sm font-semibold text-gray-500 mt-2">Precio extra</p>
-          <div className="w-full flex">
-            <input
-              type="number"
-              ref={priceExtraRef}
-              className="p-2 h-9 w-full  text-sm leading-tight text-gray-700  border-gray-200 border
-                            rounded-md shadow focus:border-gray-200"
-            />
-            <button
-              onClick={handleUpdateExtra}
-              className="bg-sky-800 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-semibold font-poppins px-3 rounded-md shadow-md hover:bg-sky-700"
-            >
-              Actualizar
-            </button>
-          </div> */}
         </div>
 
         <div className=" lg:w-1/3 w-full px-2 mt-3 lg:mt-0 flex flex-col items-center  p-2   mx-auto border-none outline-none shadow border border-gray-200 rounded-md">
-          <p className="font-poppins font-semibold">Actualizar el precio de las pizzas</p>
+          <p className="font-poppins font-semibold">Actualizá el precio de las pizzas</p>
           <input
-            className=" file:cursor-pointer text-gray-500 text-sm w-5/5 mt-6 file:font-medium font-poppins file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded-md "
+            className=" file:cursor-pointer text-gray-500 text-sm w-5/5 mt-6 file:font-medium font-poppins file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded-xl "
             type="file"
             title="Importar archivo"
             accept=".xlsx, .xls"

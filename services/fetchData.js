@@ -25,6 +25,15 @@ export const getProductsFront = async () => {
   }
 };
 
+export const getSales = async () => {
+  try {
+    const response = await axios.get(`/api/sales`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error al obtener las ventas", error);
+  }
+};
+
 export const getProductId = async id => {
   try {
     const response = await axios.get(`/api/products/${id}`);

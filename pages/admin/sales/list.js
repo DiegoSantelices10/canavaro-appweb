@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSaleData } from "store/reducers/saleSlice";
 import { motion } from "framer-motion";
+import { getSales } from "services/fetchData";
 
 
 export default function Sales() {
@@ -13,20 +14,20 @@ export default function Sales() {
   const dispatch = useDispatch();
   const [totalSale, setTotalSale] = useState("");
 
-  useEffect(() => {
-    if (sales.length < 1) {
-      const salesLocal = JSON.parse(localStorage.getItem("sales"));
-      dispatch(setSaleData(salesLocal));
-    }
 
-    const total = sales.reduce((accumulator, pedido) => accumulator + pedido.total, 0);
-    setTotalSale(total);
+  useEffect(() => {
+    (async () => {
+      const salesLocal = await getSales();
+      dispatch(setSaleData(salesLocal));
+      console.log('sales', salesLocal);
+    })()
+
+    if (sales.length > 0) {
+      const total = sales?.reduce((accumulator, pedido) => accumulator + pedido.total, 0);
+      setTotalSale(total);
+    }
   }, []);
 
-  useEffect(() => {
-    const total = sales.reduce((accumulator, pedido) => accumulator + pedido.total, 0);
-    setTotalSale(total);
-  }, [sales]);
 
   const handleOpenModal = pedido => {
     setCurrentPedido(pedido);
@@ -44,10 +45,11 @@ export default function Sales() {
       {currentPedido && (
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
-      <div className="bg-slate-50 h-full w-full">
+      <div className=" h-full w-full">
         <div className="w-full p-2 h-auto mx-auto ">
           <div className=" py-5 w-full lg:px-0 h-auto flex justify-center lg:justify-start items-center">
-            <div className="w-full flex flex-col justify-between font-roboto  p-4 h-20 font-bold bg-white rounded-md shadow">
+            <div className="w-full flex flex-col justify-between font-poppins  
+                            p-4 h-20 font-bold bg-white rounded-xl border border-gray-200">
               <h2 className="font-semibold  text-sm whitespace-nowrap">
                 VENTAS DEL DÍA: <span className="font-medium">$ {totalSale}</span>
               </h2>
@@ -69,7 +71,7 @@ export default function Sales() {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className="w-full  md:w-72 bg-white rounded-xl h-auto shadow-md p-3 border"
+                          className="w-full  md:w-72 bg-white rounded-xl h-auto  p-3 border"
                         >
                           <div className="w-full text-sm">
                             <h2 className="text-right text-xs text-gray-500"><span className="text-xs">{item.hora}hs.</span></h2>
@@ -83,8 +85,8 @@ export default function Sales() {
                           <div className="flex justify-end  gap-3 w-full font-poppins">
                             <button
                               onClick={() => handleOpenModal(item)}
-                              className="px-4 py-2 w-auto rounded-md text-xs font-medium border 
-														shadow focus:outline-none focus:ring transition 
+                              className="px-4 py-2 w-auto rounded-xl text-xs font-medium border 
+														 focus:outline-none focus:ring transition 
 														text-white bg-red-600  hover:bg-red-500 
 														active:bg-blue-200 focus:ring-blue-300"
                               type="submit"

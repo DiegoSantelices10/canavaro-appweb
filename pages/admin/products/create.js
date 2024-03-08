@@ -31,7 +31,7 @@ export default function Create() {
           <div className="w-full lg:w-1/4 h-10 mb-5 outline-none  focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
             <select
               onChange={handleCategoryChange}
-              className="h-10  font-poppins focus:ring-0 border-gray-300 focus:ring-gray-200  text-gray-400 text-sm rounded-lg  block w-full p-2.5 "
+              className="h-10  font-poppins focus:ring-0 border-gray-300 focus:ring-gray-200  text-gray-400 text-sm rounded-xl  block w-full p-2.5 "
             >
               {categorias.map(item => (
                 <option key={item} value={item} className="text-sm font-poppins font-medium">
@@ -76,7 +76,7 @@ export default function Create() {
           >
             {({ setFieldValue, values, handleChange }) => (
               <Form
-                className="border border-gray-300 p-4 rounded-md"
+                className="border border-gray-300 p-4 rounded-xl"
               >
                 <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-4 md:space-y-0">
                   <div className="w-full mx-auto">
@@ -86,7 +86,7 @@ export default function Create() {
                         id="nombre"
                         name="nombre"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl    focus:border-gray-200"
                       />
                     </label>
                   </div>
@@ -98,7 +98,7 @@ export default function Create() {
                         id="categoria"
                         name="categoria"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl    focus:border-gray-200"
                       />
                     </label>
                   </div>
@@ -110,7 +110,7 @@ export default function Create() {
                           id="descripcion"
                           name="descripcion"
                           className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl  focus:border-gray-200"
                         />
                       </label>
                     </div>
@@ -125,7 +125,7 @@ export default function Create() {
                           id="precio"
                           name="precio"
                           className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-md shadow   focus:border-gray-200"
+											  rounded-xl   focus:border-gray-200"
                         />
                       </label>
                     </div>
@@ -161,7 +161,7 @@ export default function Create() {
                             id="precioPizza.gigante"
                             name="precioPizza.gigante"
                             className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-md shadow   focus:border-gray-200"
+											  rounded-xl  focus:border-gray-200"
                           />
                         </label>
                       </div>
@@ -172,7 +172,7 @@ export default function Create() {
                             id="precioPizza.mediana"
                             name="precioPizza.mediana"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl  focus:border-gray-200"
                           />
                         </label>
                       </div>
@@ -183,7 +183,7 @@ export default function Create() {
                             id="precioPizza.chica"
                             name="precioPizza.chica"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-md shadow   focus:border-gray-200"
+                  									rounded-xl  focus:border-gray-200"
                           />
                         </label>
                       </div>
@@ -191,14 +191,16 @@ export default function Create() {
                   )}
                   {renderProducts !== 'extras' && (
                     <div className=" w-full mx-auto">
-                      <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                      <label className="block  text-sm w-full text-gray-400 font-poppins font-medium p-2">
                         Cargar Imagen
                         <input
                           name="imagen"
                           type="file"
                           onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                          className="w-full h-10 px-3 py-2 text-sm leading-tight text-gray-700 border-gray-200 
-                  									rounded-md shadow appearance-none focus:outline-none focus:shadow-outline"
+                          className="w-full h-10 px-3 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
+                  									rounded-xl appearance-none focus:outline-none focus:shadow-outline
+                                    file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded-xl
+                                    file:font-normal"
                         />
                       </label>
                     </div>
@@ -233,7 +235,7 @@ export default function Create() {
                                 value={values.cantidadMaxima}
                                 onChange={handleChange}
                                 className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													                  rounded-md shadow   focus:border-gray-200"
+													                  rounded-xl focus:border-gray-200"
                               />
                             </label>
                           </div>
@@ -266,7 +268,7 @@ export default function Create() {
                                 name="tamanio"
                                 value={values.tamanio}
                                 className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													  rounded-md shadow   focus:border-gray-200"
+													  rounded-xl focus:border-gray-200"
                               />
                             </label>
                           </div>
@@ -277,7 +279,7 @@ export default function Create() {
 
                   <button
                     className="w-44 h-12 col-start-2
-                       						 rounded-md  text-sm 
+                       						 rounded-xl  text-sm 
                        						 border text-white bg-red-600 font-normal font-poppins hover:bg-red-500 translate-x-1"
                     type="submit"
                   >

@@ -160,7 +160,7 @@ export default function Home() {
           <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
             <div className="w-full text-center py-2">
               <h1 className="font-medium font-poppins ">Demora domicilio</h1>
-              <div className="flex w-full gap-5 justify-center mt-2">
+              <div className="flex w-full gap-3 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "domicilio")
                   .map(item => (
@@ -172,7 +172,7 @@ export default function Home() {
 
             <div className="w-full  text-center py-2">
               <h1 className="font-medium font-poppins ">Demora local</h1>
-              <div className="flex w-full gap-5 justify-center mt-2">
+              <div className="flex w-full gap-3 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "local")
                   .map(item => (
@@ -224,7 +224,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full  md:w-72 border-gray-300  rounded-md h-auto shadow-md p-2 border"
+                  className="w-full  md:w-72 border-gray-200  rounded-xl h-auto  p-3 border"
                 >
                   <div className="w-full text-sm text-gray-800">
                     <h2 className="text-right text-xs ">{item.hora} hs.</h2>
@@ -238,8 +238,8 @@ export default function Home() {
                   <div className="flex justify-end  gap-3 w-full font-poppins">
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="px-4 py-2 w-auto rounded-md text-xs font-medium border  
-														shadow focus:outline-none focus:ring transition 
+                      className="px-4 py-2 w-auto rounded-xl text-xs font-medium border  
+														 focus:outline-none focus:ring transition 
 														text-slate-700  hover:bg-blue-100 
 														active:bg-blue-200 focus:ring-blue-300"
                       type="submit"
@@ -248,7 +248,7 @@ export default function Home() {
                     </button>
                     <button
                       onClick={() => handleDelete(item?._id)}
-                      className="px-4 py-2 w-auto rounded-md text-xs font-medium border shadow
+                      className="px-4 py-2 w-auto rounded-xl text-xs font-medium border 
 												focus:outline-none focus:ring transition text-white 
 											bg-red-600   
 											hover:border-white "
