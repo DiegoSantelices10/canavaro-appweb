@@ -19,7 +19,6 @@ export default function Sales() {
     (async () => {
       const salesLocal = await getSales();
       dispatch(setSaleData(salesLocal));
-      console.log('sales', salesLocal);
     })()
 
     if (sales.length > 0) {
