@@ -162,8 +162,8 @@ export default function Home() {
   return (
     <Layout>
       <Toaster />
-      <div className="py-4 mt-16 mx-auto w-full ">
-        <h1 className="text-lg  font-bold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
+      <div className="py-4 mt-16 mx-auto w-full rounded-3xl bg-white">
+        <h1 className="text-lg font-semibold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
           <style jsx>
             {`
@@ -188,7 +188,7 @@ export default function Home() {
             <Link href={"/order/pizzaFree"}>
               <a
                 onClick={() => clearTotal()}
-                className="rounded-xl font-poppins font-medium w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-base px-4">
+                className="rounded-xl font-poppins font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-base px-4">
                 Ingresa aqui
               </a>
             </Link>

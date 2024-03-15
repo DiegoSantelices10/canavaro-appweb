@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import Header from 'components/header';
+import Link from "next/link";
+
 
 import 'react-multi-carousel/lib/styles.css';
 import { setProductData } from 'store/reducers/productSlice';
@@ -11,6 +12,8 @@ import Image from 'next/image'
 // eslint-disable-next-line react/prop-types
 function DigitalMenu() {
     const [renderProductos, setRenderProductos] = useState('promociones')
+    const { deliveryButton } = useSelector(state => state.setting);
+
     const { products } = useSelector(state => state.product);
     const dispatch = useDispatch()
 
@@ -31,7 +34,7 @@ function DigitalMenu() {
                     key={data._id}
                 >
                     <div
-                        className="flex justify-between items-center h-full  gap-x-2 p-2 py-3">
+                        className="flex bg-zinc-800 p-1 rounded-2xl justify-between items-center h-full  gap-x-2">
                         <Image
                             className="rounded-xl"
                             src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
@@ -81,37 +84,56 @@ function DigitalMenu() {
     };
 
     return (
-        <div className='bg-zinc-900'>
-            <Header />
-            <hr className='my-3' />
-            <div className=' px-8 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-medium text-lg'>
+        <div className='bg-gradient-to-l from-zinc-800 to-black'>
+            <div className='flex justify-between px-3 items-center'>
+                <h1 className='text-white font-bold font-poppins text-xl tracking-wider'>CANAVARO</h1>
+                <div className='py-5'>
+                    {deliveryButton.available && (
+                        <div className="w-full flex items-center">
+                            <Link href={"/welcomeLogo"}>
+                                <a
+                                    className={`p-2 px-5 rounded-xl font-medium  font-poppins  text-base  mx-auto 
+                               hover:bg-black hover:text-white bg-white  text-gray-900   
+                                 hover:-translate-y-1 transition-all duration-500`}
+                                >
+                                    Hac&eacute; tu pedido
+                                </a>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <hr />
+            <div className=' px-8 py-4 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-medium text-lg font-poppins'>
 
-                <button
-                    onClick={() => setRenderProductos('empanadas')}
-                    className={renderProductos === 'empanadas' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
-
-                    EMPANADAS & CANASTITAS
-                </button>
                 <button
                     onClick={() => setRenderProductos('promociones')}
-                    className={renderProductos === 'promociones' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'promociones' ? 'bg-white rounded-xl p-1 px-4 tracking-wider' : 'text-white tracking-wider bg-transparent p-1 px-4'}>
 
-                    COMBOS
+                    Combos
                 </button>
                 <button
                     onClick={() => setRenderProductos('pizzas')}
-                    className={renderProductos === 'pizzas' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
-                    PIZZAS
+                    className={renderProductos === 'pizzas' ? 'bg-white rounded-xl p-1 px-4 tracking-wider' : 'text-white tracking-wider bg-transparent p-1 px-4'}>
+                    Pizzas
                 </button>
                 <button
                     onClick={() => setRenderProductos('bebidas')}
-                    className={renderProductos === 'bebidas' ? 'bg-white rounded-xl p-1 px-4' : 'text-white bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'bebidas' ? 'bg-white rounded-xl p-1 px-4 tracking-wider' : 'text-white tracking-wider bg-transparent p-1 px-4'}>
 
-                    BEBIDAS
+                    Bebidas
+                </button>
+                <button
+                    onClick={() => setRenderProductos('empanadas')}
+                    className={renderProductos === 'empanadas' ? 'bg-white rounded-xl p-1 px-4 tracking-wider' : 'text-white tracking-wider bg-transparent p-1 px-4'}>
+
+                    Empanadas & Canastitas
                 </button>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-1 lg:p-3">
-                {renderStore(renderProductos)}
+            <div className="lg:px-2">
+                <div className=' grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:p-3 '>
+                    {renderStore(renderProductos)}
+                </div>
             </div>
         </div>
 

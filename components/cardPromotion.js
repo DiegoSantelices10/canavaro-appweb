@@ -29,7 +29,7 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen } })
           <a className="font-semibold text-sm font-poppins text-neutral-800 whitespace-nowrap">{nombre.substring(0, 35)}</a>
         </Link>
 
-        <p className=" text-gray-400 text-xs font-medium ">{descripcion.substring(0, 65) + "..."}</p>
+        <p className=" text-gray-400 text-xs tracking-wider">{descripcion.substring(0, 65) + "..."}</p>
       </div>
     </div>
   );

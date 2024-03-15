@@ -42,8 +42,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
             />
             <div className="relative w-full h-24 self-start">
               <h1 className="font-semibold font-poppins text-sm text-neutral-800">{nombre}</h1>
-              <p className="text-gray-400 text-xs">{descripcion}</p>
-              <p className="text-gray-400 text-xs py-1">$ {precio}</p>
+              <p className="text-gray-400 text-xs tracking-wider">{descripcion}</p>
+              <p className=" text-sm py-1">${precio}</p>
 
               <div className="absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
                 <div
