@@ -163,8 +163,9 @@ export default function ProductLayout({
       <Toaster />
         <Image
           src={imagen?.url || "/images/sin-imagen-id.png"}
-          className="-z-10"
           layout="responsive"
+          className="-z-10"
+
           objectFit="contain"
           objectPosition="top"
           width={300}
@@ -176,8 +177,8 @@ export default function ProductLayout({
       onClick={returnHome}>
         <FiChevronsLeft className="absolute text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
-      <div className="w-full h-auto bg-white rounded-t-3xl -mt-52 sm:-mt-72 md:-mt-80 lg:-mt-80 p-4">
-        <div className="flex flex-col w-full">
+      <div className=" w-full h-auto bg-white rounded-t-3xl -mt-52 sm:-mt-72 md:-mt-80 lg:-mt-80 p-4">
+        <div className="flex flex-col w-full ">
           <div className="w-full ">
             <h1 className="font-bold text-lg font-poppins text-zinc-800">{nombre}</h1>
             <p className=" font-normal text-sm  text-gray-400 font-poppins">{descripcion}</p>
@@ -186,7 +187,7 @@ export default function ProductLayout({
             )}
             <hr className="mt-4" />
           </div>
-          <div className="text-sm font-semibold text-left my-1">
+          <div className="text-sm font-semibold text-left my-1 z-50">
             {categoria === "pizzas" ? (
               <div className=" flex flex-col gap-y-2  justify-evenly">
                 <PizzaInfo
@@ -221,7 +222,7 @@ export default function ProductLayout({
         </div>
       </div>
 
-      <div className=" w-full fixed bottom-0 p-4  sm:w-4/5 md:w-3/5 lg:w-2/5">
+      <div className=" w-full fixed bottom-0 p-4 z-50  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
           className={`${result() > 0
             ? "flex justify-center gap-3 text-center font-poppins rounded-2xl w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
