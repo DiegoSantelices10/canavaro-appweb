@@ -59,7 +59,7 @@ export default function Promotion({
   };
 
   return (
-    <div>
+    <div className="mt-4">
       {(nombre === "Combo 4" || nombre === "Combo 5") && (
         <>
           <div className="font nunito p-1 flex gap-2 justify-start items-center">
@@ -107,7 +107,7 @@ export default function Promotion({
 
       {addEmpanadas === "no" ? (
         <div className="flex justify-between items-center ">
-          <div className="font-poppins text-neutral-800 text-lg font-bold">
+          <div className="font-poppins text-neutral-800 text-lg font-medium">
             <h2>{nombre}</h2>
           </div>
           <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
@@ -165,8 +165,9 @@ export default function Promotion({
                 ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
                 .map(({ _id, nombre }) => {
                   return (
-                    <div key={_id} className=" font-poppins flex justify-between items-center my-6 p-1  ">
-                      <div className="w-1/2 text-neutral-800 font-bold text-base font-poppins">
+                    <div key={_id}>
+                    <div  className=" font-poppins flex justify-between items-center my-6 p-1  ">
+                      <div className="w-1/2 text-zinc-800 font-medium text-base font-poppins">
                         <h2>{nombre}</h2>
                       </div>
                       <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
@@ -210,6 +211,9 @@ export default function Promotion({
                         </div>
                       </div>
                     </div>
+                    <hr/>
+                    </div>
+                    
                   );
                 })}
             </>

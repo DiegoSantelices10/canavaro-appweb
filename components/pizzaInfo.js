@@ -27,7 +27,7 @@ export default function PizzaInfo({
       {" "}
       {gigante !== null && gigante !== 0 && (
         <div className="font-poppins grid grid-cols-2  items-start justify-between w-full my-3">
-          <div className="text-lg font-semibold text-neutral-800">
+          <div className="text-lg font-medium text-neutral-800">
             <h2>Gigante</h2>
             <h2 className='text-gray-400 font-normal font-poppins text-sm'>$ {gigante}</h2>
           </div>
@@ -77,7 +77,7 @@ export default function PizzaInfo({
       )}
       {mediana !== null && mediana !== 0 && (
         <div className="font-poppins grid grid-cols-2 justify-between items-start my-3">
-          <div className="text-lg font-semibold text-neutral-800">
+          <div className="text-lg font-medium text-neutral-800">
             <h1>Mediana</h1>
             <h2 className='text-gray-400 font-normal font-poppins text-sm'>$ {mediana}</h2>
           </div>
@@ -127,7 +127,7 @@ export default function PizzaInfo({
       )}
       {chica !== null && chica !== 0 && (
         <div className=" font-poppins grid grid-cols-2 justify-between items-start my-3">
-          <div className="text-lg font-semibold text-neutral-800">
+          <div className="text-lg font-medium text-neutral-800">
             <h2>Chica</h2>
             <h2 className='text-gray-400 font-normal font-poppins text-sm'>$ {chica}</h2>
           </div>

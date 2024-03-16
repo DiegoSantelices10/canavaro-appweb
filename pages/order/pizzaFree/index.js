@@ -156,7 +156,7 @@ export default function Index() {
   }
 
   return (
-    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
+    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2">
       {showModal && (
         <ModalMessage
           handleClose={handleCloseModal}
@@ -169,27 +169,28 @@ export default function Index() {
         />
       )}
       <Toaster />
-      <div className="flex justify-center items-center  w-full mt-8">
         <Image
-          className="rounded-md "
           src={"/images/pizzafree.webp"}
-          objectFit="cover"
+          className="-z-10"
+          layout="responsive"
+          objectFit="contain"
+          objectPosition="top"
           width={300}
-          height={220}
+          height={300}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        
           alt={"img"} />
 
-      </div>
       <button onClick={returnHome}>
-        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-0 left-4" size={30} />
+        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
-      <div className="w-full h-auto">
-        <div className="flex flex-col  w-full">
-          <div className="w-full bg-white p-3">
+      <div className="w-full h-auto -mt-60 sm:-mt-72 md:-mt-72 lg:-mt-80">
+        <div className="flex flex-col  w-full ">
+          <div className="w-full bg-white rounded-t-3xl p-4">
             <h1 className="font-semibold text-lg text-neutral-800 font-poppins">Arma tu pizza</h1>
             <p className=" font-normal text-sm  text-gray-400 font-poppins">Elegi los gustos que quieras</p>
           </div>
-          <hr className="pb-3" />
-          <div className="flex w-full justify-around font-poppins font-bold mt-3">
+          <div className="flex w-full justify-around font-poppins font-bold bg-white">
             <div className="grid content-center gap-2">
               <input
                 id="chica"
@@ -250,8 +251,10 @@ export default function Index() {
 
               .map(item => {
                 return (
-                  <div key={item._id} className="flex justify-between items-center py-2  my-2 ">
-                    <h2 className="font-poppins font-bold text-neutral-800 text-base">{item.nombre}</h2>
+                  <div key={item._id}>
+                  
+                  <div className="flex justify-between items-center py-2  my-2 ">
+                    <h2 className="font-poppins font-medium text-neutral-800 text-base">{item.nombre}</h2>
                     <div className="w-auto   px-3 text-end space-x-4 text-base">
                       <div className="flex w-full justify-around items-center gap-5">
                         {radioSelect[item._id]?.fraccion && (
@@ -289,6 +292,8 @@ export default function Index() {
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <hr/>
                   </div>
                 );
               })}

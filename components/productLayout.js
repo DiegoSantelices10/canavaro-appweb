@@ -148,7 +148,7 @@ export default function ProductLayout({
     }
   }
   return (
-    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 ">
+    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-5/12 ">
       {showModal && (
         <ModalMessage
           showModal={showModal}
@@ -161,30 +161,32 @@ export default function ProductLayout({
         />
       )}
       <Toaster />
-      <div className="flex justify-center items-center  w-full mt-8">
         <Image
-          className="rounded-md "
-          src={imagen?.url || "/images/producto-sin-imagen.png"}
-          objectFit="cover"
+          src={imagen?.url || "/images/sin-imagen-id.png"}
+          className="-z-10"
+          layout="responsive"
+          objectFit="contain"
+          objectPosition="top"
           width={300}
-          height={220}
+          height={300}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           alt={nombre} />
 
-      </div>
-      <button onClick={returnHome}>
-        <FiChevronsLeft className="absolute text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-0 left-4" size={30} />
+      <button 
+      onClick={returnHome}>
+        <FiChevronsLeft className="absolute text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
-      <div className="w-full h-auto">
-        <div className="flex flex-col  w-full">
-          <div className="w-full bg-white px-3 ">
-            <h1 className="font-semibold text-lg font-poppins text-neutral-800">{nombre}</h1>
+      <div className="w-full h-auto bg-white rounded-t-3xl -mt-52 sm:-mt-72 md:-mt-80 lg:-mt-80 p-4">
+        <div className="flex flex-col w-full">
+          <div className="w-full ">
+            <h1 className="font-bold text-lg font-poppins text-zinc-800">{nombre}</h1>
             <p className=" font-normal text-sm  text-gray-400 font-poppins">{descripcion}</p>
             {categoria === "promociones" && (
               <p className=" font-normal font-poppins text-sm text-gray-400">$ {precio}</p>
             )}
             <hr className="mt-4" />
           </div>
-          <div className="text-sm font-semibold text-left bg-white p-3 my-1">
+          <div className="text-sm font-semibold text-left my-1">
             {categoria === "pizzas" ? (
               <div className=" flex flex-col gap-y-2  justify-evenly">
                 <PizzaInfo
@@ -205,8 +207,8 @@ export default function ProductLayout({
           </div>
         </div>
 
-        <div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
-          <label className="pb-1 font-poppins font-medium text-lg">
+        <div className="font-normal text-left text-sm pb-24 pt-5 max-h-full">
+          <label className="pb-1 font-poppins font-medium text-sm text-gray-600">
             Comentarios
             <input
               id="comentarios"
