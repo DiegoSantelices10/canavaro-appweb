@@ -190,7 +190,7 @@ export default function Index() {
             <h1 className="font-semibold text-lg text-neutral-800 font-poppins">Arma tu pizza</h1>
             <p className=" font-normal text-sm  text-gray-400 font-poppins">Elegi los gustos que quieras</p>
           </div>
-          <div className="flex w-full justify-around font-poppins font-bold bg-white">
+          <div className="flex w-full justify-around font-poppins font-bold bg-white z-10">
             <div className="grid content-center gap-2">
               <input
                 id="chica"

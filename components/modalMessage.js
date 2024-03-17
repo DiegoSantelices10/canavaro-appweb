@@ -11,7 +11,7 @@ const ModalMessage = ({
   extras,
   info: { status, title, description, type }
 }) => {
-  const showHideClassName = showModal ? "fixed z-40 inset-0 overflow-y-auto mx-auto" : "hidden";
+  const showHideClassName = showModal ? "fixed z-40 inset-0 overflow-y-auto mx-auto z-30" : "hidden";
 
   return (
     <div className={showHideClassName}>

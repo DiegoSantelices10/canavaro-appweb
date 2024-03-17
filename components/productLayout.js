@@ -165,7 +165,6 @@ export default function ProductLayout({
           src={imagen?.url || "/images/sin-imagen-id.png"}
           layout="responsive"
           className="-z-10"
-
           objectFit="contain"
           objectPosition="top"
           width={300}
@@ -187,7 +186,7 @@ export default function ProductLayout({
             )}
             <hr className="mt-4" />
           </div>
-          <div className="text-sm font-semibold text-left my-1 z-50">
+          <div className="text-sm font-semibold text-left my-1 ">
             {categoria === "pizzas" ? (
               <div className=" flex flex-col gap-y-2  justify-evenly">
                 <PizzaInfo
@@ -222,7 +221,7 @@ export default function ProductLayout({
         </div>
       </div>
 
-      <div className=" w-full fixed bottom-0 p-4 z-50  sm:w-4/5 md:w-3/5 lg:w-2/5">
+      <div className=" w-full fixed bottom-0 p-4 z-20  sm:w-4/5 md:w-3/5 lg:w-2/5">
         <button
           className={`${result() > 0
             ? "flex justify-center gap-3 text-center font-poppins rounded-2xl w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
