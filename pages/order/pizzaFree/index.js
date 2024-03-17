@@ -169,17 +169,17 @@ export default function Index() {
         />
       )}
       <Toaster />
-        <Image
-          src={"/images/pizzafree.webp"}
-          className="-z-10"
-          layout="responsive"
-          objectFit="contain"
-          objectPosition="top"
-          width={300}
-          height={300}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        
-          alt={"img"} />
+      <Image
+        src={"/images/pizzafree.webp"}
+        className="-z-10"
+        layout="responsive"
+        objectFit="contain"
+        objectPosition="top"
+        width={300}
+        height={300}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+
+        alt={"img"} />
 
       <button onClick={returnHome}>
         <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
@@ -242,7 +242,7 @@ export default function Index() {
               {productTotal()}
             </div>
           </div>
-          <div className="text-sm font-semibold text-left bg-white p-3 my-1">
+          <div className="text-sm font-semibold text-left bg-white p-3 my-1 z-20">
             {products
               .filter(
                 item => item.categoria === "pizzas" && item.nombre !== "Fugazzeta rellena" && item.available === true
@@ -252,48 +252,48 @@ export default function Index() {
               .map(item => {
                 return (
                   <div key={item._id}>
-                  
-                  <div className="flex justify-between items-center py-2  my-2 ">
-                    <h2 className="font-poppins font-medium text-neutral-800 text-base">{item.nombre}</h2>
-                    <div className="w-auto   px-3 text-end space-x-4 text-base">
-                      <div className="flex w-full justify-around items-center gap-5">
-                        {radioSelect[item._id]?.fraccion && (
-                          <button
-                            onClick={() => clearFraction(item._id)}
-                            className="text-gray-400 text-xs font-semibold"
-                          >
-                            Deshacer
-                          </button>
-                        )}
-                        {select === "gigante" && (
-                          <div className="flex items-center justify-center gap-x-2">
-                            <h3 className="text-gray-400 text-sm font-poppins">1/4</h3>
+
+                    <div className="flex justify-between items-center py-2  my-2 ">
+                      <h2 className="font-poppins font-medium text-neutral-800 text-base">{item.nombre}</h2>
+                      <div className="w-auto   px-3 text-end space-x-4 text-base">
+                        <div className="flex w-full justify-around items-center gap-5">
+                          {radioSelect[item._id]?.fraccion && (
+                            <button
+                              onClick={() => clearFraction(item._id)}
+                              className="text-gray-400 text-xs font-semibold"
+                            >
+                              Deshacer
+                            </button>
+                          )}
+                          {select === "gigante" && (
+                            <div className="flex items-center justify-center gap-x-2">
+                              <h3 className="text-gray-400 text-sm font-poppins">1/4</h3>
+                              <input
+                                type="radio"
+                                value="1/4"
+                                name={item.nombre}
+                                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
+                                checked={radioSelect[item._id]?.fraccion === "1/4"}
+                                onChange={() => handleChangeRadioButton(item, "1/4")}
+                              />
+                            </div>
+                          )}
+
+                          <div className="flex items-center gap-x-2">
+                            <h3 className="text-gray-400 text-sm font-poppins">1/2</h3>
                             <input
                               type="radio"
-                              value="1/4"
+                              value="1/2"
                               name={item.nombre}
-                              className="mx-auto rounded focus:ring-0 focus:text-sky-800"
-                              checked={radioSelect[item._id]?.fraccion === "1/4"}
-                              onChange={() => handleChangeRadioButton(item, "1/4")}
+                              className="mx-auto rounded focus:ring-0 focus:text-sky-800 hover:text-sky-800"
+                              checked={radioSelect[item._id]?.fraccion === "1/2"}
+                              onChange={() => handleChangeRadioButton(item, "1/2")}
                             />
                           </div>
-                        )}
-
-                        <div className="flex items-center gap-x-2">
-                          <h3 className="text-gray-400 text-sm font-poppins">1/2</h3>
-                          <input
-                            type="radio"
-                            value="1/2"
-                            name={item.nombre}
-                            className="mx-auto rounded focus:ring-0 focus:text-sky-800 hover:text-sky-800"
-                            checked={radioSelect[item._id]?.fraccion === "1/2"}
-                            onChange={() => handleChangeRadioButton(item, "1/2")}
-                          />
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <hr/>
+                    <hr />
                   </div>
                 );
               })}
@@ -312,7 +312,7 @@ export default function Index() {
         </div>
       </div>
       {total === 1 && (
-        <div className="bg-white w-full fixed bottom-0 p-3  border-gray-200  sm:w-4/5 md:w-3/5 lg:w-2/5">
+        <div className="bg-white w-full fixed bottom-0 p-3 z-30 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-1/2">
           <button
             className={`${total === 1
               ? "flex justify-center gap-3 text-center rounded-2xl w-full p-4 bg-red-600  hover:-translate-y-1 transition-all font-poppins duration-500 text-white text-base font-semibold "
