@@ -179,7 +179,7 @@ export default function Checkout() {
 
                     <div className="bg-red-500 p-px"></div>
 
-                    <div className="py-2">
+                    <div className="mt-8">
                       <h2 className="font-poppins font-bold text-base pb-1 text-neutral-800">Comentarios adicionales</h2>
                       <Field
                         id="comentarios"
@@ -191,11 +191,11 @@ export default function Checkout() {
                 </div>
                 <div className="px-4 h-full mb-20 rounded">
                   <h2 className="font-poppins font-bold text-base py-3 text-neutral-800">Medios de pago</h2>
-                  <div className="w-full h-10 border-none shadow rounded ">
+                  <div className="w-full  border border-gray-200 rounded-xl ">
                     <Field
                       as="select"
                       name="medioDePago"
-                      className="h-10 border-none font-poppins  text-gray-900 text-sm rounded-lg  block w-full p-2.5 focus:rounded focus:ring-slate-300 "
+                      className=" border-none font-poppins p-3  text-gray-900 font-normal text-sm rounded-xl  block w-full focus:ring-slate-300 "
                     >
                       {medios.map((item, index) => (
                         <option key={index} value={item} className="text-sm text-gray-500 font-poppins font-semibold">

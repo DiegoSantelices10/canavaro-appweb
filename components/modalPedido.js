@@ -102,19 +102,19 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                         return (
                           <div key={index} className="py-1 font-poppins text-base text-gray-900">
                             <div className="flex justify-between items-center font-poppins">
-                              <div className="font-bold">
+                              <div className="font-semibold">
                                 {item?.cant || item?.cantidad} x
-                                <span className=" pl-1 font-semibold ">
-                                  {item.categoria === "pizzas" && item?.tamanio}
-                                </span>
-                                <span className=" text-base font-normal">
+                                <span className=" text-base font-medium">
                                   {" "}
                                   {item.nombre}
                                 </span>
+                                <span className=" pl-1 font-medium ">
+                                  {item.categoria === "pizzas" && item?.tamanio}
+                                </span>
                               </div>
-                              <p className="font-semibold">$ {item.precio * item.cantidad}</p>
+                              <p className="font-semibold whitespace-nowrap">$ {item.precio * item.cantidad}</p>
                             </div>
-                            {categoria.categoria === 'pizzas' && <p className="font-normal  text-sm w-11/12">{item.descripcion}</p>}
+                            {categoria.categoria === 'pizzas' && <p className="font-normal text-gray-500  text-sm w-11/12">{item.descripcion}</p>}
                             {item.extra && (
                               <p className="text-gray-500 text-sm font-normal">
                                 Extra: {item.extra}
@@ -123,7 +123,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
-                                  <p className="font-medium text-base text-gray-500">
+                                  <p className="font-normal text-sm text-gray-500">
                                     {producto.cantidad && `${producto.cantidad}  `}<span>{producto.nombre}</span>
                                   </p>
                                 </div>

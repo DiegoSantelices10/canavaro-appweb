@@ -188,7 +188,7 @@ export default function Home() {
             <Link href={"/order/pizzaFree"}>
               <a
                 onClick={() => clearTotal()}
-                className="rounded-xl font-poppins font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-base px-4">
+                className="rounded-xl font-poppins font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
                 Ingresa aqui
               </a>
             </Link>

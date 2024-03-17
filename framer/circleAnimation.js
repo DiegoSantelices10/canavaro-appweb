@@ -237,11 +237,11 @@ console.log('check', checkout);
 
         </div>
         <div className="text-center gap-2 flex justify-between items-end py-2">
-          <h1 className="text-base font-bold text-gray-700 font-poppins">Guarda el detalle de tu pedido.</h1>
+          <h1 className="text-base font-semibold text-gray-700 font-poppins">Guarda el detalle de tu pedido.</h1>
           <button
             onClick={handleCapture}
             style={{ backgroundColor: "#FD3307" }}
-            className="rounded-md text-white flex gap-2 justify-center items-center   h-12 w-36 font-poppins text-base font-semibold shadow-md">
+            className="rounded-xl text-white flex gap-2 justify-center items-center  p-2 font-poppins text-base font-semibold shadow-md">
             Descargar <FaDownload size={16} /> </button>
         </div>
       </div>

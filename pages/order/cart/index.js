@@ -473,7 +473,7 @@ export default function Cart({ data }) {
                       </div>
                       <button
                         type="submit"
-                        className="text-center font-poppins rounded-2xl w-auto p-4 text-white font-semibold bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center font-poppins rounded-2xl w-auto p-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>

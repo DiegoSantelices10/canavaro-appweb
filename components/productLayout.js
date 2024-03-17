@@ -186,7 +186,7 @@ export default function ProductLayout({
             )}
             <hr className="mt-4" />
           </div>
-          <div className="text-sm font-semibold text-left my-1 ">
+          <div className="text-sm font-semibold text-left my-1 z-20 ">
             {categoria === "pizzas" ? (
               <div className=" flex flex-col gap-y-2  justify-evenly">
                 <PizzaInfo

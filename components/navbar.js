@@ -32,7 +32,7 @@ export default function Navbar() {
               /> : (
                 <Link href={"/order/cart"} >
                   <a className="flex justify-center items-center gap-2" onClick={handleLoader}>
-                    <p className=" text-white font-poppins text-sm font-semibold">Ver pedido</p>
+                    <p className=" text-white font-poppins text-sm font-normal">Ver pedido</p>
                     <FiShoppingCart className="text-white" size={16} />
                   </a>
                 </Link>
