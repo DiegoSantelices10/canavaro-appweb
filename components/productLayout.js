@@ -176,7 +176,7 @@ export default function ProductLayout({
       onClick={returnHome}>
         <FiChevronsLeft className="absolute text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
-      <div className=" w-full h-auto bg-white rounded-t-3xl -mt-52 sm:-mt-72 md:-mt-80 lg:-mt-80 p-4">
+      <div className="w-full h-auto bg-white rounded-t-3xl -mt-52 sm:-mt-72 md:-mt-80 lg:-mt-80 p-4">
         <div className="flex flex-col w-full ">
           <div className="w-full ">
             <h1 className="font-bold text-lg font-poppins text-zinc-800">{nombre}</h1>

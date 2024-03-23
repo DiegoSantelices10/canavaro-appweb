@@ -5,31 +5,33 @@ export default function SectionZona() {
     <div className=" bg-black w-full h-full">
       <div className="relative p-2 h-full  
           rounded-lg w-full lg:w-4/5 mx-auto 
-					gap-5 content-center ">
+					">
         <h1 className="relative font-poppins py-4  w-full 
               text-center text-gray-200  text-2xl lg:text-3xl 
               font-semibold ">Contacto</h1>
         <hr className="py-2" />
-        <div className="text-center text-white grid  gap-12 mt-14  font-poppins">
-          <div>
-            <h1 className="font-bold text-xl">HORARIOS DE ATENCI&Oacute;N</h1>
-            <p className="font-normal">De Martes a Domingo</p>
-            <p className="font-normal">De 19 a 23hs.</p>
-          </div>
-          <div>
-            <h1 className="font-bold  text-xl">DIRECCI&Oacute;N DEL LOCAL</h1>
-            <p className="font-normal">Mariano Pelliza 1794, Esquina D. F. Sarmiento</p>
-            <p className="font-normal">Zona Olivos</p>
-          </div>
-          <div>
-            <h1 className="font-bold  text-xl">TELEFONO DE CONTACTO</h1>
-            <p className="font-normal">4711 3259</p>
-            <p className="font-normal">11 2714 5669</p>
-          </div>
-          <div>
-            <h1 className="font-bold  text-xl">ZONA DE ENV&Iacute;O</h1>
-            <p className="font-normal">Vicente L&oacute;pez - Florida - Olivos</p>
-            <p className="font-normal">La Lucila - Mart&iacute;nez - Munro</p>
+        <div className="text-center text-white grid  mt-6 h-full  font-poppins ">
+          <div className="flex flex-wrap justify-center items-center ">
+            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
+              <h1 className="font-bold text-xl">HORARIOS DE ATENCI&Oacute;N</h1>
+              <p className="font-normal">De Martes a Domingo</p>
+              <p className="font-normal">De 19 a 23hs.</p>
+            </div>
+            <div className=" w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
+              <h1 className="font-bold  text-xl">DIRECCI&Oacute;N DEL LOCAL</h1>
+              <p className="font-normal">Mariano Pelliza 1794, Esquina D. F. Sarmiento</p>
+              <p className="font-normal">Zona Olivos</p>
+            </div>
+            <div className=" w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
+              <h1 className="font-bold  text-xl">TELEFONO DE CONTACTO</h1>
+              <p className="font-normal">4711 3259</p>
+              <p className="font-normal">11 2714 5669</p>
+            </div>
+            <div className=" w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
+              <h1 className="font-bold  text-xl">ZONA DE ENV&Iacute;O</h1>
+              <p className="font-normal">Vicente L&oacute;pez - Florida - Olivos</p>
+              <p className="font-normal">La Lucila - Mart&iacute;nez - Munro</p>
+            </div>
           </div>
           <div>
             <h1 className="font-bold  text-lg">SEGUINOS EN</h1>

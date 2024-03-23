@@ -255,7 +255,7 @@ export default function Index() {
 
                     <div className="flex justify-between items-center py-2  my-2 ">
                       <h2 className="font-poppins font-medium text-neutral-800 text-base">{item.nombre}</h2>
-                      <div className="w-auto   px-3 text-end space-x-4 text-base">
+                      <div className="w-auto  px-3 text-end space-x-4 text-base">
                         <div className="flex w-full justify-around items-center gap-5">
                           {radioSelect[item._id]?.fraccion && (
                             <button
