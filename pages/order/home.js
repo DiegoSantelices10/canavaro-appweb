@@ -122,7 +122,7 @@ export default function Home() {
   };
 
   const addCartPromo = value => {
-    const res = value.find(item => item.categoria === "bebidas");
+    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "porciones");
 
     if (res) {
       setTotalCant(0);
@@ -250,6 +250,21 @@ export default function Home() {
           <div>
             <button
               onClick={() => {
+                setRenderProductos("porciones");
+                clearTotal();
+              }}
+              className={
+                renderProducts !== "porciones"
+                  ? "w-32  font-medium font-poppins text-gray-400"
+                  : "w-32 font-medium  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+              }
+            >
+              Porciones
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => {
                 setRenderProductos("bebidas");
                 clearTotal();
               }}
@@ -267,7 +282,7 @@ export default function Home() {
         <div className="pt-3">
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">{renderStore(renderProducts)}</div>
         </div>
-        {(renderProducts === "empanadas" || renderProducts === "bebidas") && (
+        {(renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
           <div className="w-full px-2 fixed bottom-2    sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
               className="flex justify-between items-center gap-3 rounded-3xl mx-auto text-center   

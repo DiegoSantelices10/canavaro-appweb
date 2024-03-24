@@ -72,6 +72,17 @@ export const createProduct = async (req, res) => {
       });
     }
 
+    if (categoria === "porciones") {
+      newProduct = new Producto({
+        nombre,
+        descripcion,
+        categoria,
+        imagen: imageCloud,
+        precio,
+        available: true,
+      });
+    }
+
     if (categoria === "extras") {
       newProduct = new Producto({
         nombre,

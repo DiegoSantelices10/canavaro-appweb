@@ -17,7 +17,7 @@ export default function Create() {
     setRenderProductos(cat);
   };
 
-  const categorias = ['pizzas', 'empanadas', 'promociones', 'bebidas', 'extras']
+  const categorias = ['pizzas', 'empanadas', 'promociones', 'porciones', 'bebidas', 'extras']
 
   return (
     <Layout>

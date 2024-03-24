@@ -222,7 +222,6 @@ export default function Products() {
           );
         })}
       </div>
-      <hr />
     </Layout >
   );
 }

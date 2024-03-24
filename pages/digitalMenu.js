@@ -84,7 +84,7 @@ function DigitalMenu() {
     };
 
     return (
-        <div className='bg-gradient-to-l from-zinc-800 to-black'>
+        <div className='bg-gradient-to-l from-zinc-800 to-black h-screen'>
             <div className='flex justify-between px-3 items-center'>
                 <h1 className='text-white font-bold font-poppins text-xl tracking-wider'>CANAVARO</h1>
                 <div className='py-5'>
@@ -122,6 +122,12 @@ function DigitalMenu() {
                     className={renderProductos === 'bebidas' ? 'bg-white rounded-xl p-1 px-4 tracking-wider' : 'text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Bebidas
+                </button>
+                <button
+                    onClick={() => setRenderProductos('porciones')}
+                    className={renderProductos === 'porciones' ? 'bg-white rounded-xl p-1 px-4 tracking-wider' : 'text-white tracking-wider bg-transparent p-1 px-4'}>
+
+                    Porciones
                 </button>
                 <button
                     onClick={() => setRenderProductos('empanadas')}

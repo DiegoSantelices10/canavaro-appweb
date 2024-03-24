@@ -76,6 +76,17 @@ export default function Update({ data }) {
         precio,
       };
     }
+
+    if (categoria === "porciones") {
+      model = {
+        nombre,
+        descripcion,
+        categoria,
+        imagen,
+        precio,
+      };
+    }
+
     if (categoria === "extras") {
       model = {
         nombre,
