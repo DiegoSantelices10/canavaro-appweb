@@ -145,7 +145,7 @@ export default function Products() {
         <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-end gap-5 ">
 
           <button
-            className="px-2 whitespace-nowrap h-10 col-start-2 font-poppins font-normal
+            className="px-3 whitespace-nowrap h-10 col-start-2 font-poppins font-normal
                              rounded-xl  text-sm 
                              border text-white bg-red-600"
             type="button"
@@ -156,7 +156,7 @@ export default function Products() {
             Producto Nuevo
           </button>
           <button
-            className=" h-10 col-start-2 whitespace-nowrap px-2 font-poppins font-normal
+            className=" h-10 col-start-2 whitespace-nowrap px-3 font-poppins font-normal
                              rounded-xl  text-sm 
                              border  bg-red-600 text-white"
             type="button"

@@ -147,7 +147,6 @@ export default function Index() {
     if (extras.length > 0) {
       setInfo({
         title: "Puedes agregar extras",
-        status: null,
       });
       setShowModal(true);
     } else {

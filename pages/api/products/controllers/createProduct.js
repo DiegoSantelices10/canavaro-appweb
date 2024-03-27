@@ -87,6 +87,7 @@ export const createProduct = async (req, res) => {
       newProduct = new Producto({
         nombre,
         categoria,
+        imagen: imageCloud,
         precio,
         available: true,
       });

@@ -189,22 +189,20 @@ export default function Create() {
                       </div>
                     </>
                   )}
-                  {renderProducts !== 'extras' && (
-                    <div className=" w-full mx-auto">
-                      <label className="block  text-sm w-full text-gray-400 font-poppins font-medium p-2">
-                        Cargar Imagen
-                        <input
-                          name="imagen"
-                          type="file"
-                          onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                          className="w-full h-10 px-3 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
+                  <div className=" w-full mx-auto">
+                    <label className="block  text-sm w-full text-gray-400 font-poppins font-medium p-2">
+                      Cargar Imagen
+                      <input
+                        name="imagen"
+                        type="file"
+                        onChange={e => cloudinaryImage(e.target, setFieldValue)}
+                        className="w-full h-10 px-3 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
                   									rounded-xl appearance-none focus:outline-none focus:shadow-outline
                                     file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded-xl
                                     file:font-normal"
-                        />
-                      </label>
-                    </div>
-                  )}
+                      />
+                    </label>
+                  </div>
                   {renderProducts === "promociones" && (
                     <>
                       <div className="w-full mx-auto">

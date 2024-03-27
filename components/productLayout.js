@@ -136,8 +136,7 @@ export default function ProductLayout({
     if (extras.length > 0 && orderPromo.length === 1) {
       if (orderPromo[0].cantidad === 1) {
         setInfo({
-          title: "Agrega extras a tu pizza.",
-          status: null,
+          title: "Agrega extras a tu pizza",
         });
         setShowModal(true);
       } else {
@@ -161,19 +160,19 @@ export default function ProductLayout({
         />
       )}
       <Toaster />
-        <Image
-          src={imagen?.url || "/images/sin-imagen-id.png"}
-          layout="responsive"
-          className="-z-10"
-          objectFit="contain"
-          objectPosition="top"
-          width={300}
-          height={300}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          alt={nombre} />
+      <Image
+        src={imagen?.url || "/images/sin-imagen-id.png"}
+        layout="responsive"
+        className="-z-10"
+        objectFit="contain"
+        objectPosition="top"
+        width={300}
+        height={300}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        alt={nombre} />
 
-      <button 
-      onClick={returnHome}>
+      <button
+        onClick={returnHome}>
         <FiChevronsLeft className="absolute text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
       <div className="w-full h-auto bg-white rounded-t-3xl -mt-52 sm:-mt-72 md:-mt-80 lg:-mt-80 p-4">
