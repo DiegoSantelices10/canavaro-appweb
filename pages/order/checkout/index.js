@@ -11,28 +11,46 @@ import { setCheckout, setDelivery, setDemora, setOrderListLocal, setTotalAmount 
 import { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { setUser } from "store/reducers/userSlice";
+import { useSocket } from "Hooks/useSocket";
+
 
 export default function Checkout() {
+
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
+  const { socket } = useSocket(process.env.SOCKET_URL)
+
   const [totalPedido, setTotalPedido] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
 
+  const enviarPedido = (pedido) => {
+    socket.emit('enviar-pedido', pedido)
+    socket.on('disconnect', () => {
+      console.log('Cliente deconectado');
+    })
+    router.push("checkout/successful");
+  }
+
   useEffect(() => {
     if (promoBarra?.available && delivery === "localActual") {
       promoDescuento()
     }
 
-
-  }, [])
-
-  useEffect(() => {
     if (orderList.length === 0) {
-      const { nombre, telefono, direccion, demora, delivery, totalAmount, hPersonalizado, orderListLocal } = JSON.parse(localStorage.getItem('pedido'))
+      const {
+        nombre,
+        telefono,
+        direccion,
+        demora,
+        delivery,
+        totalAmount,
+        hPersonalizado,
+        orderListLocal
+      } = JSON.parse(localStorage.getItem('pedido'))
       dispatch(setUser({
         nombre,
         telefono,
@@ -100,11 +118,7 @@ export default function Checkout() {
               dispatch(setCheckout(res.data.response))
               if (res.data.message === "ok") {
                 try {
-                  const response = await axios.post("/api/pusher", res.data.response);
-
-                  if (response.status === 200) {
-                    router.push("checkout/successful",);
-                  }
+                  enviarPedido(res.data.response)
                 } catch (error) {
                   alert("No se pudo Completar la acción")
                 }
@@ -121,15 +135,10 @@ export default function Checkout() {
                 fecha,
                 liberado: false,
               });
-
               dispatch(setCheckout(res.data.response))
-
               if (res.data.message === "ok") {
                 try {
-                  const response = await axios.post("/api/pusher", res.data.response);
-                  if (response.status === 200) {
-                    router.push("checkout/successful");
-                  }
+                  enviarPedido(res.data.response)
                 } catch (error) {
                   alert("No se pudo Completar la acción")
                 }
@@ -327,7 +336,7 @@ export default function Checkout() {
             </div >
           );
         }}
-      </Formik >
+      </Formik>
     </div >
   );
 }

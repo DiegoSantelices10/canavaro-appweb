@@ -41,11 +41,11 @@ function MyApp({ Component, router, ...rest }) {
       >
         <Provider store={store}>
 
-            <Head>
-              <title>Pizzería Canavaro</title>
-              <meta name="description" content="La mejor pizzería de Olivos!" />
-            </Head>
-            <Component {...props.pageProps} />
+          <Head>
+            <title>Pizzería Canavaro</title>
+            <meta name="description" content="La mejor pizzería de Olivos!" />
+          </Head>
+          <Component {...props.pageProps} />
 
         </Provider>
       </motion.div>
