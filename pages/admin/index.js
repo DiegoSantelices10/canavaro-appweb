@@ -17,7 +17,14 @@ export default function Home() {
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
 
   const [barra, setBarra] = useState([]);
-  const { socket } = useSocket('https://canavaro-websocket.vercel.app', { transports: ['websocket'] })
+  const { socket } = useSocket('https://canavaro-websocket.vercel.app',
+    {
+      transports: ['websocket'],
+      withCredentials: true,
+      extraHeaders: {
+        "secretHeader": "secret value"
+      }
+    })
 
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
