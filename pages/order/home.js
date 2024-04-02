@@ -286,7 +286,7 @@ export default function Home() {
           <div className="w-full px-2 fixed bottom-2    sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
               className="flex justify-between items-center gap-3 rounded-3xl mx-auto text-center   
-									   w-full md:w-1/2 lg:w-3/5 p-4 bg-red-600  text-white text-base font-semibold "
+									   w-full md:w-4/5 lg:w-3/5 p-4 bg-red-600  text-white text-base font-semibold "
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}

@@ -56,7 +56,7 @@ const CircleAnimation = () => {
       transition: { duration: 0.5 },
     },
   };
-console.log('check', checkout);
+  console.log('check', checkout);
   return (
     <div
       style={{

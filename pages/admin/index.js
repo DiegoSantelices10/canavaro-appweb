@@ -6,12 +6,9 @@ import Button from "components/buttonDemora";
 import { useDispatch, useSelector } from "react-redux";
 import { addSale, setRenderSaleData, setSaleData, updateSale } from "store/reducers/saleSlice";
 import axios from "axios";
-import Pusher from "pusher-js";
 import { Howl } from "howler";
 import { getPromo } from "services/fetchData";
-
-
-
+import { useSocket } from "Hooks/useSocket";
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -20,6 +17,7 @@ export default function Home() {
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
 
   const [barra, setBarra] = useState([]);
+  const { socket } = useSocket('https://canavaro-websocket.vercel.app')
 
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
@@ -29,61 +27,58 @@ export default function Home() {
   });
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get("/api/delay");
-        const local = res.data.find(item => item.tipo === "localActual");
-        setSelectedLocal({ ...local, demora: local.demoraActual });
-        const domicilio = res.data.find(item => item.tipo === "domicilioActual");
-        setSelectedDomicilio({ ...domicilio, demora: domicilio.demoraActual });
-        setData(res.data);
-      } catch (error) {
-        alert("Error al obtener los datos")
-      }
-    })();
+    getDelay()
+    getSales()
   }, []);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get("/api/sales");
-        localStorage.setItem("sales", JSON.stringify(res.data));
-        dispatch(setSaleData(res.data));
-        const pedidos = res.data.filter(item => item.liberado !== true);
-
-        if (pedidos.length > 0) {
-          dispatch(setRenderSaleData(pedidos));
-        }
-      } catch (error) {
-        alert("Error al obtener los datos")
-      }
-    })();
-    (async () => {
-      const res = await getPromo();
-      setBarra(res.data)
-    })();
-
-  }, []);
-
-  useEffect(() => {
-    const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {
-      cluster: "us2",
-    });
-
-    const channel = pusher.subscribe("pizzeria");
-    channel.bind("canavaro", data => {
+    const pedidosHandler = (pedidos) => {
       sound.play();
-      dispatch(addSale(data.message));
-    });
-
-    channel.bind("pedido-liberado", data => {
-      dispatch(updateSale(data.id.id));
-    });
+      dispatch(addSale(pedidos));
+    };
+    socket.on('pedidos', pedidosHandler)
 
     return () => {
-      pusher.unsubscribe("pizzeria");
+      socket.off('pedidos', pedidosHandler);
+      socket.on('disconnect', () => console.log('desconectar pedido'))
     };
-  }, []);
+  }, [])
+
+  useEffect(() => {
+    socket.on('liberado', (data) => {
+      dispatch(updateSale(data));
+    })
+  }, [])
+
+  const getDelay = async () => {
+    try {
+      const res = await axios.get("/api/delay");
+      const local = res.data.find(item => item.tipo === "localActual");
+      setSelectedLocal({ ...local, demora: local.demoraActual });
+      const domicilio = res.data.find(item => item.tipo === "domicilioActual");
+      setSelectedDomicilio({ ...domicilio, demora: domicilio.demoraActual });
+      setData(res.data);
+    } catch (error) {
+      alert("Error al obtener los datos")
+    }
+  }
+
+  const getSales = async () => {
+    try {
+      const res = await axios.get("/api/sales");
+      localStorage.setItem("sales", JSON.stringify(res.data));
+      dispatch(setSaleData(res.data));
+      const pedidos = res.data.filter(item => item.liberado !== true);
+      if (pedidos.length > 0) {
+        dispatch(setRenderSaleData(pedidos));
+      }
+    } catch (error) {
+      alert("Error al obtener los datos")
+    }
+    const res = await getPromo();
+    setBarra(res.data)
+  }
+
 
   const handleOpenModal = pedido => {
     setCurrentPedido(pedido);
@@ -119,7 +114,7 @@ export default function Home() {
       const res = await axios.put(`/api/sales/${id}`, { liberado: true });
       if (res.status === 200) {
         try {
-          axios.post("api/pusher/released", { id });
+          socket.emit('enviar-liberado', id)
         } catch (error) {
           alert("Error al realizar la accion")
         }
@@ -130,7 +125,6 @@ export default function Home() {
   };
 
   const promoBarra = async (id, available) => {
-
     try {
       const response = await axios.put(`/api/settings/promo/${id}`, { available: !available })
       if (response.status === 200) {
