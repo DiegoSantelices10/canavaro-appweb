@@ -20,10 +20,6 @@ export default function Home() {
   const { socket } = useSocket('https://canavaro-websocket.vercel.app',
     {
       transports: ['websocket'],
-      withCredentials: true,
-      extraHeaders: {
-        "secretHeader": "secret value"
-      }
     })
 
   const [selectedLocal, setSelectedLocal] = useState({});
