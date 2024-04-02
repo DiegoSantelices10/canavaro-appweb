@@ -5,7 +5,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "node": "nodemon pages/api/socket/index.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {

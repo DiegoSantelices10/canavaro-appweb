@@ -9,7 +9,7 @@ export const getProducts = async () => {
   const { DEV_URL, PROD_URL, NODE_ENV } = process.env;
 
   try {
-    const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products` , { httpsAgent: agent });
+    const response = await axios.get(`${NODE_ENV === "production" ? PROD_URL : DEV_URL}/api/products`, { httpsAgent: agent });
     return response.data;
   } catch (error) {
     throw new Error("Error al obtener los productos", error);
