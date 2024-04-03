@@ -19,7 +19,7 @@ export default function Checkout() {
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
-  const { socket } = useSocket('https://canavaro-websocket.vercel.app', { transports: ['websocket'] })
+  const { socket } = useSocket('http://149.50.131.39:4000')
 
   const [totalPedido, setTotalPedido] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);

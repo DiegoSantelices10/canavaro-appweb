@@ -17,10 +17,7 @@ export default function Home() {
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
 
   const [barra, setBarra] = useState([]);
-  const { socket } = useSocket('https://canavaro-websocket.vercel.app',
-    {
-      transports: ['websocket'],
-    })
+  const { socket } = useSocket('http://149.50.131.39:4000')
 
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
@@ -42,6 +39,7 @@ export default function Home() {
     socket.on('pedidos', pedidosHandler)
 
     return () => {
+      console.log('entro return');
       socket.off('pedidos', pedidosHandler);
       socket.on('disconnect', () => console.log('desconectar pedido'))
     };
