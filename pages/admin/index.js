@@ -17,7 +17,7 @@ export default function Home() {
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
 
   const [barra, setBarra] = useState([]);
-  const { socket } = useSocket('http://149.50.131.39:4000')
+  const { socket } = useSocket('https://canavaro-websocket-dev-jcez.2.us-1.fl0.io/')
 
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
