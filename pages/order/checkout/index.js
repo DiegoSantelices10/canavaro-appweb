@@ -19,7 +19,7 @@ export default function Checkout() {
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
-  const { socket } = useSocket('https://canavaro-websocket-dev-jcez.2.us-1.fl0.io/')
+  const { socket } = useSocket('https://pizzacanavaro-socket.com/', { transport: ['websocket'] })
 
   const [totalPedido, setTotalPedido] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);

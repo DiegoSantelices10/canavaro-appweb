@@ -17,7 +17,9 @@ export default function Home() {
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
 
   const [barra, setBarra] = useState([]);
-  const { socket } = useSocket('https://canavaro-websocket-dev-jcez.2.us-1.fl0.io/')
+  const { socket } = useSocket('https://pizzacanavaro-socket.com/', {
+    transports: ['websocket'],
+  })
 
   const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
@@ -39,7 +41,6 @@ export default function Home() {
     socket.on('pedidos', pedidosHandler)
 
     return () => {
-      console.log('entro return');
       socket.off('pedidos', pedidosHandler);
       socket.on('disconnect', () => console.log('desconectar pedido'))
     };
@@ -47,6 +48,7 @@ export default function Home() {
 
   useEffect(() => {
     socket.on('liberado', (data) => {
+      console.log('liberado', data);
       dispatch(updateSale(data));
     })
   }, [])
@@ -116,6 +118,7 @@ export default function Home() {
       if (res.status === 200) {
         try {
           socket.emit('enviar-liberado', id)
+          dispatch(updateSale(id));
         } catch (error) {
           alert("Error al realizar la accion")
         }
