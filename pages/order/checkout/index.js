@@ -11,15 +11,16 @@ import { setCheckout, setDelivery, setDemora, setOrderListLocal, setTotalAmount 
 import { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { setUser } from "store/reducers/userSlice";
-import { useSocket } from "Hooks/useSocket";
+import io from 'socket.io-client';
 
+
+const socket = io.connect('https://pizzacanavaro-socket.com')
 
 export default function Checkout() {
 
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
-  const { socket } = useSocket('http://localhost:5000', { transport: ['websocket'] })
 
   const [totalPedido, setTotalPedido] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,9 +30,7 @@ export default function Checkout() {
 
   const enviarPedido = (pedido) => {
     socket.emit('enviar-pedido', pedido)
-    socket.on('disconnect', () => {
-      console.log('Cliente deconectado');
-    })
+    socket.disconnect()
     router.push("checkout/successful");
   }
 
@@ -219,6 +218,7 @@ export default function Checkout() {
                       {values.medioDePago === "Efectivo" && (
                         <Field
                           id="pagaCon"
+                          type="number"
                           name="pagaCon"
                           className="border rounded-md border-t-0 border-r-0 border-l-0 border-b border-gray-600 w-full p-2 focus:ring-0 focus:border-gray-600"
                           placeholder="¿Con cuanto vas a pagar?"
