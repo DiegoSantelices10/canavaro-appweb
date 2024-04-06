@@ -1,23 +1,20 @@
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo, useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 
 export const useSocket = (serverPath) => {
+    const socketRef = useRef(null);
 
-    const socket = useMemo(() => io.connect(serverPath), [serverPath]);
+    const socket = useMemo(() => {
+        if (!socketRef.current) {
+            console.log('entro');
+            socketRef.current = io.connect(serverPath);
+        }
+        return socketRef.current;
+    }, [serverPath]);
     const [online, setOnline] = useState(false);
 
     useEffect(() => {
         setOnline(socket.connected);
-    }, [socket])
-
-    useEffect(() => {
-        socket.on('connect', () => {
-            setOnline(true);
-        })
-
-    }, [socket])
-
-    useEffect(() => {
 
         socket.on('disconnect', () => {
             setOnline(false);

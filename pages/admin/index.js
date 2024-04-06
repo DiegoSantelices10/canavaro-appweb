@@ -17,7 +17,7 @@ export default function Home() {
   const [selectedDomicilio, setSelectedDomicilio] = useState({});
 
   const [barra, setBarra] = useState([]);
-  const { socket } = useSocket('https://pizzacanavaro-socket.com/', {
+  const { socket } = useSocket('https://pizzacanavaro-socket.com', {
     transports: ['websocket'],
   })
 
