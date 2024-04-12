@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { FaWhatsapp, FaDownload } from "react-icons/fa"
 import { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
-import { formatearNumero } from "libs/items";
 import { useRouter } from "next/router";
 
 
@@ -214,7 +213,7 @@ const CircleAnimation = () => {
                                   <p className="text-gray-400 text-sm font-normal">Extra: {item.extra}</p>
                                 )}
                               </div>
-                              <p className="text-nowrap text-right font-normal">{formatearNumero(item.precio * item.cantidad)}</p>
+                              <p className="text-nowrap text-right font-normal">{item.precio * item.cantidad}</p>
                             </div>
 
                           </div>
@@ -236,7 +235,7 @@ const CircleAnimation = () => {
             {promoBarra?.available && delivery === "localActual" && (
               <h1 className="text-right text-sm text-gray-500">Descuento aplicado del 10%</h1>
             )}
-            <h1 className="font-bold text-right text-base font-poppins">Total: <span className="font-normal text-lg">{formatearNumero(checkout.total)}</span></h1>
+            <h1 className="font-bold text-right text-base font-poppins">Total: <span className="font-normal text-lg">{checkout.total}</span></h1>
           </div>
 
         </div>
