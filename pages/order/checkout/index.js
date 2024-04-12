@@ -235,7 +235,7 @@ export default function Checkout() {
                       {values.medioDePago === "Cuenta DNI" && (
                         <>
                           <p className="font-poppins text-center font-semibold">
-                            Todos los miercoles y jueves 30% de reintegro
+                            De martes a viernes 20% de reintegro
                           </p>
                           <p className="font-poppins text-center font-semibold">
                             pagando con Cuenta DNI
@@ -244,7 +244,7 @@ export default function Checkout() {
                             <Image src="/images/cuenta-dni.jpg" width={170} height={70} alt="logoOpen" />
                           </div>
                           <p className="font-poppins text-center text-xs text-gray-400">
-                            El reintegro lo realiza la billetera virtual, tope $2500 por semana.
+                            El reintegro lo realiza la billetera virtual, tope $4600 por semana.
                           </p>
                           <p className="font-poppins text-center text-xs text-gray-400">
                             Abonas al momento de confirmar el pedido por whatsapp
@@ -254,20 +254,17 @@ export default function Checkout() {
                       {values.medioDePago === "Open Pay" && (
                         <>
                           <p className="font-poppins text-center font-semibold ">
-                            Todos los martes 30% de reintegro
+                            Los martes y viernes de abril
                           </p>
                           <p className="font-poppins text-center font-semibold">
-                            pagando con BBVA
+                            30% de reintegro pagando con BBVA
                           </p>
 
                           <div className="flex justify-center w-full">
                             <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                           </div>
                           <p className="font-poppins text-center text-xs text-gray-400">
-                            El reintegro lo realiza el banco, tope $2000 por mes.
-                          </p>
-                          <p className="font-poppins text-center text-xs text-gray-400">
-                            Todos los dias 3 cuotas sin interes, menos los martes.
+                            El reintegro lo realiza el banco, tope $3500 por mes.
                           </p>
                           <p className="font-poppins text-center text-xs text-gray-400">
                             Abonas al momento de confirmar el pedido por whatsapp
