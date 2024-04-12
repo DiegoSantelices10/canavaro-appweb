@@ -2,13 +2,13 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { FaWhatsapp, FaDownload } from "react-icons/fa"
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import { formatearNumero } from "libs/items";
 import { useRouter } from "next/router";
 
 
-const Successful = () => {
+export default function successful() {
   const { checkout, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
   const router = useRouter()
@@ -250,6 +250,5 @@ const Successful = () => {
 
     </div >
   );
-};
+}
 
-export default Successful;
