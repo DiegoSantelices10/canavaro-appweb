@@ -20,9 +20,9 @@ export function convertToPath(title) {
 
 
 export const formatearNumero = (numero) => {
-    return numero.toLocaleString('es-AR', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 0,
-    });
-  };
+	return numero?.toLocaleString('es-AR', {
+		style: 'currency',
+		currency: 'ARS',
+		minimumFractionDigits: 0,
+	});
+};
