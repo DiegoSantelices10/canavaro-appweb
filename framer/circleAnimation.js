@@ -27,7 +27,7 @@ const CircleAnimation = () => {
 
     setTimeout(() => {
       router.push('/')
-    }, 15000);
+    }, 5000);
 
   }, [])
 
