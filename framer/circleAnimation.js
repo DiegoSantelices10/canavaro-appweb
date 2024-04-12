@@ -40,11 +40,9 @@ const CircleAnimation = () => {
       downloadLink.href = screenshot;
       downloadLink.download = "Pedido-" + checkout.fecha;
 
-      // Agrega el enlace al documento y haz clic en él para iniciar la descarga
       document.body.appendChild(downloadLink);
       downloadLink.click();
 
-      // Limpia el enlace después de la descarga
       document.body.removeChild(downloadLink);
     });
   }
