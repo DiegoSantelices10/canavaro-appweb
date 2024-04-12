@@ -2,7 +2,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { FaWhatsapp, FaDownload } from "react-icons/fa"
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import { formatearNumero } from "libs/items";
 import { useRouter } from "next/router";
