@@ -23,6 +23,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import ModalMessage from "./modalMessage";
+import { formatearNumero } from "libs/items";
 export default function ProductLayout({
   data,
   data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
@@ -181,7 +182,7 @@ export default function ProductLayout({
             <h1 className="font-bold text-lg font-poppins text-zinc-800">{nombre}</h1>
             <p className=" font-normal text-sm  text-gray-400 font-poppins">{descripcion}</p>
             {categoria === "promociones" && (
-              <p className=" font-normal font-poppins text-sm text-gray-400">$ {precio}</p>
+              <p className=" font-normal font-poppins text-sm text-gray-400">{formatearNumero(precio)}</p>
             )}
             <hr className="mt-4" />
           </div>

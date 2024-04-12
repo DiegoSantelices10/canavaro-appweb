@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line react/prop-types
 import { motion } from "framer-motion";
+import { formatearNumero } from "libs/items";
 import { AiOutlineClose } from "react-icons/ai";
 const ModalPedido = ({ handleClose, show, pedido }) => {
   const showHideClassName = show ? "fixed z-10 inset-0 overflow-y-auto w-full" : "hidden";
@@ -92,27 +93,24 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <div className="border-t-2 border-gray-300 my-3"></div>
-
-                    <p className="text-base font-semibold text-gray-700 font-poppins">{categoria?.categoria}</p>
-
+                    <p className="text-base font-semibold rounded-xl mt-4 p-0.5 px-3 border w-min text-neutral-800 font-poppins">{categoria?.categoria}</p>
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
                       .map((item, index) => {
                         return (
-                          <div key={index} className="py-1 font-poppins text-base text-gray-900">
+                          <div key={index} className="py-1 font-poppins text-base text-neutral-800">
                             <div className="flex justify-between items-center font-poppins">
                               <div className="font-semibold">
                                 {item?.cant || item?.cantidad} x
-                                <span className=" text-base font-medium">
+                                <span className=" text-base font-normal">
                                   {" "}
                                   {item.nombre}
                                 </span>
-                                <span className=" pl-1 font-medium ">
+                                <span className=" pl-1 font-normal ">
                                   {item.categoria === "pizzas" && item?.tamanio}
                                 </span>
                               </div>
-                              <p className="font-semibold whitespace-nowrap">$ {item.precio * item.cantidad}</p>
+                              <p className="whitespace-nowrap">{formatearNumero(item.precio * item.cantidad)}</p>
                             </div>
                             {categoria.categoria === 'pizzas' && <p className="font-normal text-gray-500  text-sm w-11/12">{item.descripcion}</p>}
                             {item.extra && (
@@ -139,12 +137,12 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
               <div className="flex font-bold justify-between items-center text-gray-900">
                 <h2>Total</h2>
-                <p className="text-2xl font-semibold">$ {pedido.total}</p>
+                <p className="text-2xl font-semibold">{formatearNumero(pedido.total)}</p>
               </div>
               {pedido.pagaCon !== null && (
                 <div className="flex justify-between items-center font-medium">
                   <h2>Paga con</h2>
-                  <p>$ {pedido.pagaCon}</p>
+                  <p>{formatearNumero(pedido.pagaCon)}</p>
                 </div>
               )}
             </div>

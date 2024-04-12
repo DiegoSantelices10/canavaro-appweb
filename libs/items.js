@@ -17,3 +17,12 @@ export async function getItemData(id, products) {
 export function convertToPath(title) {
 	return title.toLowerCase().replace(/\s/g, "-");
 }
+
+
+export const formatearNumero = (numero) => {
+    return numero.toLocaleString('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 0,
+    });
+  };

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiChevronsLeft } from "react-icons/fi";
-import { MdOutlineDeliveryDining, MdOutlineEmojiPeople, MdDeleteOutline } from "react-icons/md";
+import { MdOutlineDeliveryDining, MdOutlineEmojiPeople } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -25,6 +25,9 @@ import { setPromoBarra } from "store/reducers/settingSlice";
 import { getDelay } from "services/fetchData";
 import CardCart from "components/cardCart";
 import toast, { Toaster } from "react-hot-toast";
+import { formatearNumero } from "libs/items";
+import Delete02Icon from "public/images/delete-02-stroke-rounded";
+import AlignBoxMiddleLeftIcon from "public/images/align-box-middle-left-stroke-rounded";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora, orderPromo, delivery } = useSelector(state => state.order);
@@ -154,7 +157,6 @@ export default function Cart({ data }) {
   return (
     <div className="font-poppins  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full   rounded-t-3xl py-3 ">
       <Toaster />
-
       <Formik
         initialValues={{
           direccion: direccion || "",
@@ -413,7 +415,7 @@ export default function Cart({ data }) {
                   >
                     Agregar al carrito
                   </button>
-                  <h1 className="text-gray-800 font-bold font-poppins px-2 text-xl mt-3">Detalle pedido</h1>
+                  <h1 className="text-gray-800 font-bold font-poppins px-2 text-lg mt-3">Detalle pedido</h1>
                   <hr />
                   {orderList.map((item, index) => {
                     return (
@@ -429,7 +431,7 @@ export default function Cart({ data }) {
                                     x {item.cant ? item.cant : item.cantidad}
                                   </span>
                                 </a>
-                                <p className="text-gray-400 text-sm">
+                                <p className="text-gray-400 text-xs tracking-wider">
                                   {item?.descripcion ||
                                     item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) ||
                                     ""}
@@ -439,21 +441,20 @@ export default function Cart({ data }) {
                                     extra: {item.extra}
                                   </p>
                                 )}
-                                <p className="font-semibold text-sm text-gray-600">$ {item.precio * item.cantidad}</p>
+                                <p className="text-sm text-gray-400">{formatearNumero(item.precio * item.cantidad)}</p>
                               </div>
-                              <div className="flex justify-center gap-2">
+                              <div className="flex justify-center gap-3">
                                 {item?.products && (
                                   <button
                                     type="button"
                                     onClick={() => handleOpenModal(item)}
                                     className="font-normal font-poppins text-xs w-auto "
-                                    style={{ whiteSpace: "nowrap" }}
                                   >
-                                    Ver Descripcion
+                                    <AlignBoxMiddleLeftIcon color={"#1618A4"} />
                                   </button>
                                 )}
                                 <button type="button" onClick={() => deleteItem(item._id)}>
-                                  <MdDeleteOutline size={30} className="text-red-700" />
+                                  {<Delete02Icon color={"red"} />}
                                 </button>
                               </div>
                             </div>
@@ -469,7 +470,7 @@ export default function Cart({ data }) {
                     <div className="flex justify-between items-center p-3 font-poppins">
                       <div>
                         <p className="font-bold text-xl text-neutral-800">Subtotal</p>
-                        <h3 className="text-xl">$ {totalAmount}</h3>
+                        <h3 className="text-xl">{formatearNumero(totalAmount)}</h3>
                       </div>
                       <button
                         type="submit"

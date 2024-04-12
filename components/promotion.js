@@ -114,7 +114,7 @@ export default function Promotion({
             <div
               className={
                 orderPromo.length >= 1
-                  ? "rounded-md  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50"
+                  ? "rounded-full  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50"
                   : "invisible"
               }
             >
@@ -129,8 +129,8 @@ export default function Promotion({
                 -
               </button>
             </div>
-            <span className="font-normal text-xl  h-6">{productQuantity(_id)}</span>
-            <div className="rounded-md  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
+            <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
+            <div className="rounded-full  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
               <button
                 type="button"
                 className="text-green-500 font-normal text-2xl"
@@ -166,54 +166,54 @@ export default function Promotion({
                 .map(({ _id, nombre }) => {
                   return (
                     <div key={_id}>
-                    <div  className=" font-poppins flex justify-between items-center my-6 p-1  ">
-                      <div className="w-1/2 text-zinc-800 font-medium text-base font-poppins">
-                        <h2>{nombre}</h2>
-                      </div>
-                      <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
-                        <div
-                          className={
-                            quantityZero(_id)
-                              ? "rounded-md w-8 h-8 grid content-center  shadow  bg-slate-50"
-                              : "invisible"
-                          }
-                        >
-                          <button
-                            type="button"
-                            className="text-red-500 font-normal text-2xl"
-                            onClick={e => {
-                              setQuantity(quantityDemanded + 1);
-                              decrementItems({ _id, nombre });
-                            }}
-                          >
-                            -
-                          </button>
+                      <div className=" font-poppins flex justify-between items-center my-6 p-1  ">
+                        <div className="w-1/2 text-zinc-800 font-medium text-base font-poppins">
+                          <h2>{nombre}</h2>
                         </div>
+                        <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
+                          <div
+                            className={
+                              quantityZero(_id)
+                                ? "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+                                : "invisible"
+                            }
+                          >
+                            <button
+                              type="button"
+                              className="text-red-500 font-normal text-2xl"
+                              onClick={e => {
+                                setQuantity(quantityDemanded + 1);
+                                decrementItems({ _id, nombre });
+                              }}
+                            >
+                              -
+                            </button>
+                          </div>
 
-                        <span className="font-normal text-xl  h-6">{productQuantity(_id)}</span>
-                        <div
-                          className={
-                            quantityDemanded < 1
-                              ? `invisible`
-                              : "rounded-md w-8 h-8 grid content-center  shadow  bg-slate-50"
-                          }
-                        >
-                          <button
-                            type="button"
-                            className="text-green-500 font-normal text-2xl"
-                            onClick={e => {
-                              setQuantity(quantityDemanded - 1);
-                              addItems({ _id, nombre });
-                            }}
+                          <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
+                          <div
+                            className={
+                              quantityDemanded < 1
+                                ? `invisible`
+                                : "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+                            }
                           >
-                            +
-                          </button>
+                            <button
+                              type="button"
+                              className="text-green-500 font-normal text-2xl"
+                              onClick={e => {
+                                setQuantity(quantityDemanded - 1);
+                                addItems({ _id, nombre });
+                              }}
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </div>
+                      <hr />
                     </div>
-                    <hr/>
-                    </div>
-                    
+
                   );
                 })}
             </>

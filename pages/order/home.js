@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 import { setExtras, setProductData } from "store/reducers/productSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import { formatearNumero } from "libs/items";
 
 
 export default function Home() {
@@ -57,6 +58,7 @@ export default function Home() {
   }, [orderPromo]);
 
   useEffect(() => {
+    dispatch(clearOrderPromo());
     if (products?.length <= 0) {
       const res = JSON.parse(localStorage.getItem("productos"));
       dispatch(setProductData(res));
@@ -139,6 +141,7 @@ export default function Home() {
     const result = {
       _id: idGenerator,
       nombre: "Empanadas a eleccion",
+      categoria: "empanadas",
       products: [...value],
       cantidad: 1,
       cant: totalCant,
@@ -216,7 +219,7 @@ export default function Home() {
               className={
                 renderProducts !== "empanadas"
                   ? "w-56  font-medium font-poppins text-gray-400"
-                  : "w-56 font-medium bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  : "w-56 font-semibold bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -228,7 +231,7 @@ export default function Home() {
               className={
                 renderProducts !== "pizzas"
                   ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-medium bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  : "w-32 font-semibold bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Pizzas
@@ -241,7 +244,7 @@ export default function Home() {
               className={
                 renderProducts !== "promociones"
                   ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-medium  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  : "w-32 font-semibold  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Promociones
@@ -256,7 +259,7 @@ export default function Home() {
               className={
                 renderProducts !== "porciones"
                   ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-medium  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  : "w-32 font-semibold  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Porciones
@@ -271,7 +274,7 @@ export default function Home() {
               className={
                 renderProducts !== "bebidas"
                   ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-medium  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  : "w-32 font-semibold  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Bebidas
@@ -285,21 +288,21 @@ export default function Home() {
         {(renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
           <div className="w-full px-2 fixed bottom-2    sm:w-4/5 md:w-4/5 lg:w-3/5">
             <div
-              className="flex justify-between items-center gap-3 rounded-3xl mx-auto text-center   
+              className="flex justify-between items-center gap-3 rounded-2xl mx-auto text-center   
 									   w-full md:w-4/5 lg:w-3/5 p-4 bg-red-600  text-white text-base font-semibold "
             >
               <button
                 onClick={() => addCartPromo(orderPromo)}
                 className={`${orderPromo.length < 1
                   ? "invisible"
-                  : "p-3 px-4 font-semibold font-poppins bg-slate-50 rounded-xl text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
+                  : "p-3 px-4 font-medium font-poppins bg-slate-50 rounded-xl text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
                   }`}
               >
                 Agregar al carrito
               </button>
 
               <div className="flex items-center gap-x-5 text-white font-semibold pr-4">
-                <p className="font-medium text-xl">$ {totalPrice}</p>
+                <p className="font-medium text-xl">{totalPrice !== 0 && formatearNumero(totalPrice)}</p>
                 <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
                   <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
                 </div>

@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { setUser } from "store/reducers/userSlice";
 import io from 'socket.io-client';
+import { formatearNumero } from "libs/items";
 
 
 const socket = io.connect('https://pizzacanavaro-socket.com')
@@ -158,12 +159,12 @@ export default function Checkout() {
                     <div className="py-2">
                       {delivery === "domicilioActual" ? (
                         <>
-                          <h2 className="font-poppins text-neutral-800 font-bold text-base">Dirección de envío</h2>
+                          <h2 className="font-poppins text-neutral-800 font-semibold text-base">Dirección de envío</h2>
                           <p className="font-poppins text-gray-600 text-sm">{user.direccion} </p>
                         </>
                       ) : (
                         <>
-                          <h2 className="font-poppins text-neutral-800 font-bold text-base">Retira por local</h2>
+                          <h2 className="font-poppins text-neutral-800 font-semibold text-base">Retira por local</h2>
                           <p className="font-poppins text-gray-600 text-base">{user.nombre}</p>
                         </>
                       )}
@@ -171,34 +172,24 @@ export default function Checkout() {
                     <div className="bg-red-500 p-px"></div>
                     {user?.hPersonalizado ? (
                       <div className="py-2" >
-                        <h2 className="font-poppins font-bold text-base text-neutral-800">
+                        <h2 className="font-poppins font-semibold text-base text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo"}
                         </h2>
                         <p className="font-poppins text-base text-gray-600">{user?.hPersonalizado}hs.</p>
                       </div>
                     ) : (
-                      <div className="py-2">
-                        <h2 className="font-poppins font-bold text-base text-neutral-800">
+                      <div className="py-2 mt-3">
+                        <h2 className="font-poppins font-semibold text-base text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo en"}
                         </h2>
                         <p className="font-poppins text-sm text-gray-600">{demora}m.</p>
                       </div>
                     )}
-
                     <div className="bg-red-500 p-px"></div>
-
-                    <div className="mt-8">
-                      <h2 className="font-poppins font-bold text-base pb-1 text-neutral-800">Comentarios adicionales</h2>
-                      <Field
-                        id="comentarios"
-                        name="comentarios"
-                        className="border border-slate-300 rounded-md w-full p-2"
-                      />
-                    </div>
                   </div>
                 </div>
                 <div className="px-4 h-full mb-20 rounded">
-                  <h2 className="font-poppins font-bold text-base py-3 text-neutral-800">Medios de pago</h2>
+                  <h2 className="font-poppins font-semibold text-base py-3 text-neutral-800">Medios de pago</h2>
                   <div className="w-full  border border-gray-200 rounded-xl ">
                     <Field
                       as="select"
@@ -214,20 +205,21 @@ export default function Checkout() {
                     </Field>
                   </div>
                   <div>
-                    <div className="py-4">
+                    <div className="py-6">
                       {values.medioDePago === "Efectivo" && (
                         <Field
                           id="pagaCon"
                           type="number"
                           name="pagaCon"
-                          className="border rounded-md border-t-0 border-r-0 border-l-0 border-b border-gray-600 w-full p-2 focus:ring-0 focus:border-gray-600"
+                          className="border rounded-md border-t-0 border-r-0 border-l-0 border-b 
+                          border-gray-300 font-poppins text-sm w-full p-2 focus:ring-0 focus:border-gray-600"
                           placeholder="¿Con cuanto vas a pagar?"
                         />
                       )}
                       {values.medioDePago === "Mercado Pago" && (
                         <>
                           <p className="font-poppins text-center font-semibold ">
-                            por transferencia a <span className="text-md font-semibold font-poppins text-sky-800">pizzeria.canavaro</span>
+                            por transferencia a <span className="text-md font-semibold font-poppins text-sky-500">pizzeria.canavaro</span>
                           </p>
                           <p className="font-poppins text-center font-semibold">
                             o mediante QR
@@ -235,14 +227,14 @@ export default function Checkout() {
                           <div className="flex justify-center w-full">
                             <Image src="/images/logo-mercadopago.png" width={100} height={100} alt="logoMP" />
                           </div>
-                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400 font-normal">
                             Abonas al momento de confirmar el pedido por whatsapp
                           </p>
                         </>
                       )}
                       {values.medioDePago === "Cuenta DNI" && (
                         <>
-                          <p className="font-poppins text-center font-semibold ">
+                          <p className="font-poppins text-center font-semibold">
                             Todos los miercoles y jueves 30% de reintegro
                           </p>
                           <p className="font-poppins text-center font-semibold">
@@ -251,10 +243,10 @@ export default function Checkout() {
                           <div className="flex justify-center w-full">
                             <Image src="/images/cuenta-dni.jpg" width={170} height={70} alt="logoOpen" />
                           </div>
-                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400">
                             El reintegro lo realiza la billetera virtual, tope $2500 por semana.
                           </p>
-                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400">
                             Abonas al momento de confirmar el pedido por whatsapp
                           </p>
                         </>
@@ -271,18 +263,26 @@ export default function Checkout() {
                           <div className="flex justify-center w-full">
                             <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                           </div>
-                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400">
                             El reintegro lo realiza el banco, tope $2000 por mes.
                           </p>
-                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400">
                             Todos los dias 3 cuotas sin interes, menos los martes.
                           </p>
-                          <p className="font-poppins text-center text-xs text-gray-400 font-semibold">
+                          <p className="font-poppins text-center text-xs text-gray-400">
                             Abonas al momento de confirmar el pedido por whatsapp
                           </p>
                         </>
                       )}
                     </div>
+                  </div>
+                  <div className="mt-4">
+                    <h2 className="font-poppins text-sm font-semibold pb-1 text-neutral-800">Comentarios adicionales</h2>
+                    <Field
+                      id="comentarios"
+                      name="comentarios"
+                      className="border border-slate-300 rounded-xl w-full p-2"
+                    />
                   </div>
                 </div>
 
@@ -304,9 +304,9 @@ export default function Checkout() {
                       </>
 
                     ) : (
-                      <div className="flex justify-start items-center gap-3 px-3">
-                        <p className="font-bold font-poppins text-center text-2xl text-neutral-800">Total</p>
-                        <h3 className="text-2xl text-center font-poppins text-neutral-800 font-semibold">$ {totalAmount}</h3>
+                      <div className="flex flex-col px-3">
+                        <p className="font-bold font-poppins text-xl text-neutral-800">Total</p>
+                        <h3 className="text-xl font-poppins text-neutral-800 ">{formatearNumero(totalAmount)}</h3>
                       </div>
                     )}
                   </div>

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { convertToPath } from "libs/items";
+import { convertToPath, formatearNumero } from "libs/items";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
   const decrementItems = value => {
     dispatch(decrementProductPromo(value));
   };
+
+
 
   const productQuantity = _id => {
     const pre = orderPromo?.find(item => item._id === _id);
@@ -43,12 +45,12 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
             <div className="relative w-full h-24 self-start">
               <h1 className="font-semibold font-poppins text-sm text-neutral-800">{nombre}</h1>
               <p className="text-gray-400 text-xs tracking-wider">{descripcion}</p>
-              <p className=" text-sm py-1">${precio}</p>
+              <p className="text-sm py-1 text-gray-400">{formatearNumero(precio)}</p>
 
               <div className="absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
                 <div
                   className={
-                    quantityZero(_id) ? "rounded-md w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
+                    quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
                   }
                 >
                   <button
@@ -62,9 +64,9 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
                   </button>
                 </div>
 
-                <span className="font-normal text-xl  h-6">{productQuantity(_id)}</span>
+                <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
 
-                <div className="rounded-md w-8 h-8 grid content-center  shadow  bg-slate-50">
+                <div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
                   <button
                     type="button"
                     className="text-green-500 text-2xl font-normal"
@@ -93,7 +95,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
                 <div className="w-full self-start">
                   <h1 className="font-semibold text-sm font-poppins text-neuttral-800">{nombre}</h1>
                   <p className="text-gray-400 text-xs">{descripcion}</p>
-                  {categoria === "promociones" && <p className="text-gray-400 text-xs py-1">$ {precio}</p>}
+                  {categoria === "promociones" && <p className="text-gray-400  text-sm py-1">{formatearNumero(precio)}</p>}
                 </div>
               </div>
             </a>

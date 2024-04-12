@@ -84,7 +84,7 @@ function DigitalMenu() {
     };
 
     return (
-        <div className='bg-gradient-to-l from-zinc-800 to-black h-screen'>
+        <div className='bg-gradient-to-l from-zinc-800 to-black min-h-screen'>
             <div className='flex justify-between px-3 items-center'>
                 <h1 className='text-white font-bold font-poppins text-xl tracking-wider'>CANAVARO</h1>
                 <div className='py-5'>
