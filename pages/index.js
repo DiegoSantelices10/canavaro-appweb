@@ -49,8 +49,8 @@ export default function index({ data }) {
     }
   };
   return (
-    <div className=" flex flex-col min-h-screen overflow-hidden ">
-      <main className="w-full mx-auto">
+    <div className="flex flex-col min-h-screen ">
+      <main className="flex-grow w-full mx-auto ">
         <Carousel
           responsive={responsive}
           customButtonGroup={<CustomArrow />}
@@ -60,6 +60,7 @@ export default function index({ data }) {
           <SectionZona />
         </Carousel>
       </main>
+
     </div>
   );
 }
