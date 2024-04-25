@@ -30,7 +30,7 @@ function HomeFront({ imagefront }) {
       <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
-        className="flex items-center flex-col md:flex-row gap-y-20 md:gap-0 justify-center  w-full relative flex-grow "
+        className="flex items-center flex-col md:flex-row gap-y-36 md:gap-0 justify-center  w-full relative flex-grow "
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5 }}>
@@ -41,7 +41,7 @@ function HomeFront({ imagefront }) {
           <p className="font-poppins text-3xl lg:text-5xl text-center font-bold text-gray-200">Pizzeria Canavaro</p>
           <p className="text-sm md:text-base font-normal text-white ">¡Todo lo que necesitas en un solo lugar!</p>
 
-          <div className="w-full flex items-center  mt-3">
+          <div className="w-full flex items-center mt-3">
             <Link href={"/digitalMenu"}>
               <a
                 className={`p-2 px-4 rounded-lg font-normal text-white font-poppins  text-base  mx-auto 
