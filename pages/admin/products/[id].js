@@ -120,7 +120,7 @@ export default function Update({ data }) {
             </h1>
           </div>
 
-          <p className="font-poppins text-lg font-light mt-5">Categoria: <span className="font-semibold">{data.categoria}</span></p>
+          <p className="font-poppins text-base font-medium mt-5 mb-2">Categoria: <span className="font-normal text-gray-500">{data.categoria}</span></p>
 
           <Formik
             initialValues={{
@@ -174,9 +174,9 @@ export default function Update({ data }) {
           >
             {({ setFieldValue, values, handleChange }) => (
               <Form
-                className="border border-gray-300 p-4 rounded-md"
+                className="border border-gray-300 p-4  rounded-md"
               >
-                <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-2 lg:space-y-0 md:space-y-0">
+                <div className="md:grid  md:grid-cols-2  justify-items-end gap-4 space-y-2 lg:space-y-0 md:space-y-0">
                   <div className="w-full mx-auto">
                     <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                       Nombre del producto
@@ -304,9 +304,9 @@ export default function Update({ data }) {
                         name="imagen"
                         type="file"
                         onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10 px-3 mt-2  text-sm leading-tight text-gray-700 border-gray-200 
+                        className="w-full h-10  mt-2  text-xs leading-tight text-gray-700 border-gray-200 
                   									 appearance-none focus:outline-none focus:shadow-outline
-                                    file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-xl
+                                    file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-lg
                                     file:font-normal
                                     "
                       />

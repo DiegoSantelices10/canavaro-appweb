@@ -178,19 +178,18 @@ export default function Products() {
         {renderProductos.map(({ _id, nombre, imagen, available, categoria }) => {
           return (
             <div key={_id} className="bg-white h-auto ">
-              <div className="flex justify-between items-center relative border rounded-md ">
+              <div className="flex justify-between items-center relative border rounded-md h-full">
                 <Image
-                  className="rounded-md"
+                  className="rounded-tl-md rounded-bl-md"
                   src={imagen?.url || "/images/producto-sin-imagen.png"}
                   width={140}
                   height={140}
                   alt={nombre}
                 />
-                <div className=" p-2 relative w-full font-poppins  self-start">
-                  <h1 className="font-semibold text-sm text-gray-800">{nombre}</h1>
-
-                  <h4 className="text-gray-500 text-xs font-medium ">{categoria}</h4>
-                  <div className="absolute bottom-0">
+                <div className=" p-2 relative w-full font-poppins  self-start  h-full">
+                  <h1 className="font-medium text-sm text-gray-800">{nombre}</h1>
+                  <h4 className="text-gray-400 text-xs font-normal ">{categoria}</h4>
+                  <div className="absolute bottom-1 ">
                     <label className="inline-flex items-center cursor-pointer">
                       <input
                         id={_id}
@@ -210,17 +209,19 @@ export default function Products() {
                       </div>
                     </label>
                   </div>
+                  <div className="absolute bottom-2 right-3 flex gap-3">
+                    <Link href={`/admin/products/${_id}`}>
+                      <a>
+                        <PencilEdit02Icon color={"blue"} />
+                      </a>
+                    </Link>
+                    <button onClick={() => deleteItem(_id)}>
+                      <Delete02Icon color={"red"} />
+                    </button>
+
+                  </div>
                 </div>
-                <div className="flex absolute bottom-2 right-3 gap-3">
-                  <Link href={`/admin/products/${_id}`}>
-                    <a>
-                      <PencilEdit02Icon color={"blue"} />
-                    </a>
-                  </Link>
-                  <button onClick={() => deleteItem(_id)}>
-                    <Delete02Icon color={"red"} />
-                  </button>
-                </div>
+
               </div>
             </div>
           );
