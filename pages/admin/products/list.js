@@ -1,7 +1,6 @@
 import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { FaSearch } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { setProductData } from "store/reducers/productSlice";
 import { getProductsFront } from "services/fetchData";
