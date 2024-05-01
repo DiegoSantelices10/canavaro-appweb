@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
-import { formatearNumero } from "libs/items";
 import MultiplicationSignCircleIcon from "public/images/multiplication-sign-circle-stroke-rounded";
 
 const ModalDescripcion = ({ handleClose, show, pedido }) => {
@@ -30,19 +29,19 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
             <div className="w-full mt-6">
               <h2 className="text-lg">{pedido.nombre}</h2>
               <p className="font-normal  text-base text-gray-400 ">{pedido.descripcion}</p>
-              <p className="font-normal  text-base text-gray-400 ">{formatearNumero(pedido.precio)}</p>
             </div>
+            <hr />
             <div className="py-4">
               {pedido.products.map(item => {
                 return (
                   <div
                     className="flex  items-center gap-1"
                     key={item._id}>
-                    <p>
+                    <p className="font-normal text-gray-800 text-sm">
                       {item.nombre}
                     </p>
                     <p>
-                      {item.cantidad && <span className="font-normal pl-1 text-gray-400">x {item.cantidad}</span>}
+                      {item.cantidad && <span className="font-normal text-sm pl-1 text-gray-400">x {item.cantidad}</span>}
                     </p>
                   </div>
                 );

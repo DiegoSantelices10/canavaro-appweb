@@ -26,3 +26,14 @@ export const formatearNumero = (numero) => {
 		minimumFractionDigits: 0,
 	});
 };
+
+
+export const totalExtrasProductos = (extras) => {
+	return extras.reduce((total, empanada) => {
+		if (empanada.precioExtra && empanada.cantidad) {
+			return total + (empanada.precioExtra * empanada.cantidad);
+		} else {
+			return total;
+		}
+	}, 0);
+}

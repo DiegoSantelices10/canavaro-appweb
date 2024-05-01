@@ -1,7 +1,7 @@
 import Layout from "components/admin/layout";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { FaSearch, FaRegEdit } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { setProductData } from "store/reducers/productSlice";
 import { getProductsFront } from "services/fetchData";
@@ -10,6 +10,9 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Delete02Icon from "public/images/delete-02-stroke-rounded";
+import PencilEdit02Icon from "public/images/pencil-edit-02-stroke-rounded";
+import Search01Icon from "public/images/search-01-stroke-rounded";
 
 export default function Products() {
   const [renderProductos, setRenderProductos] = useState([]);
@@ -108,44 +111,46 @@ export default function Products() {
   return (
     <Layout>
       <Toaster />
-      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-2 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
-        <div className="bg-white flex w-full lg:w-1/4  items-center gap-x-2">
-          <div
-            className="flex  justify-between items-center w-full  h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border
+      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-1 md:px-3 mx-auto lg:items-center gap-x-4 lg:justify-between py-10 h-auto">
+        <div className="flex flex-col sm:flex-col md:flex-row w-full gap-2">
+
+          <div className="bg-white flex w-full lg:w-1/2  items-center gap-x-2">
+            <div
+              className="flex  justify-between items-center w-full  h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border
                          rounded-xl appearance-none focus:outline-none focus:shadow-outline"
-          >
-            <input
-              id="query"
-              name="query"
-              type="text"
-              placeholder="¿Que Desea Buscar?"
-              onChange={handleChangeSearch}
-              className="w-full border-none text-sm rounded-xl  focus:outline-none focus:ring-0"
-            />
-            <FaSearch size={20} className="text-gray-300" />
+            >
+              <input
+                id="query"
+                name="query"
+                type="text"
+                placeholder="¿Que Desea Buscar?"
+                onChange={handleChangeSearch}
+                className="w-full border-none text-sm rounded-xl  focus:outline-none focus:ring-0"
+              />
+              <Search01Icon color="#BFBFBF" width={20} />
+            </div>
+          </div>
+
+          <div className="w-full lg:w-1/2 h-10 rounded-xl appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
+            <select
+              onChange={handleCategoryChange}
+              className="h-10 border border-gray-200 font-poppins focus:ring-0 focus:ring-gray-200 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-xl  block w-full p-2.5 "
+            >
+              <option className="text-gray-200 text-sm font-poppins" value="">
+                Seleccione una categoria
+              </option>
+              {categorias.map(item => (
+                <option key={item} value={item} className="text-sm font-poppins font-medium">
+                  {item}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
-        <div className="w-full lg:w-1/4 h-10 rounded-xl appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
-          <select
-            onChange={handleCategoryChange}
-            className="h-10 border border-gray-200 font-poppins focus:ring-0 focus:ring-gray-200 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-xl  block w-full p-2.5 "
-          >
-            <option className="text-gray-200 text-sm font-poppins" value="">
-              Seleccione una categoria
-            </option>
-            {categorias.map(item => (
-              <option key={item} value={item} className="text-sm font-poppins font-medium">
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-
         <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-end gap-5 ">
-
           <button
-            className="px-3 whitespace-nowrap h-10 col-start-2 font-poppins font-normal
+            className="px-3 whitespace-nowrap h-10  col-start-2 font-poppins font-normal
                              rounded-xl  text-sm 
                              border text-white bg-red-600"
             type="button"
@@ -156,7 +161,7 @@ export default function Products() {
             Producto Nuevo
           </button>
           <button
-            className=" h-10 col-start-2 whitespace-nowrap px-3 font-poppins font-normal
+            className=" h-10 col-start-2 whitespace-nowrap  px-3 font-poppins font-normal
                              rounded-xl  text-sm 
                              border  bg-red-600 text-white"
             type="button"
@@ -170,11 +175,11 @@ export default function Products() {
 
       </div>
 
-      <div className="w-full px-2 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
+      <div className="w-full px-1 md:px-3 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
         {renderProductos.map(({ _id, nombre, imagen, available, categoria }) => {
           return (
-            <div key={_id} className="bg-white h-auto rounded-md pl-1 border">
-              <div className="flex justify-between items-center p-0  relative ">
+            <div key={_id} className="bg-white h-auto ">
+              <div className="flex justify-between items-center relative border rounded-md ">
                 <Image
                   className="rounded-md"
                   src={imagen?.url || "/images/producto-sin-imagen.png"}
@@ -182,7 +187,7 @@ export default function Products() {
                   height={140}
                   alt={nombre}
                 />
-                <div className=" p-2 relative w-full font-poppins h-28  self-start">
+                <div className=" p-2 relative w-full font-poppins  self-start">
                   <h1 className="font-semibold text-sm text-gray-800">{nombre}</h1>
 
                   <h4 className="text-gray-500 text-xs font-medium ">{categoria}</h4>
@@ -210,11 +215,11 @@ export default function Products() {
                 <div className="flex absolute bottom-2 right-3 gap-3">
                   <Link href={`/admin/products/${_id}`}>
                     <a>
-                      <FaRegEdit size={23} className="text-blue-800" />
+                      <PencilEdit02Icon color={"blue"} />
                     </a>
                   </Link>
                   <button onClick={() => deleteItem(_id)}>
-                    <RiDeleteBin6Line size={25} className="text-red-500" />
+                    <Delete02Icon color={"red"} />
                   </button>
                 </div>
               </div>

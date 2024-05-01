@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 
 import PizzaInfo from "./pizzaInfo";
 import Promotion from "./promotion";
+import { v4 as uuidv4 } from "uuid";
+
 
 import { Toaster, toast } from "react-hot-toast";
 
@@ -23,7 +25,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import ModalMessage from "./modalMessage";
-import { formatearNumero } from "libs/items";
+import { formatearNumero, totalExtrasProductos } from "libs/items";
 export default function ProductLayout({
   data,
   data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
@@ -77,31 +79,34 @@ export default function ProductLayout({
   };
 
   const addCartPromo = value => {
+    const idGenerator = uuidv4();
+    const totalExtra = totalExtrasProductos(value)
+    console.log('total extra', totalExtra);
     if (data.addEmpanadas === "si") {
       if (selectCombo) {
         const promo = {
-          _id,
+          _id: idGenerator,
           nombre,
           descripcion,
           products: [selectCombo, ...value],
           categoria,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
-          precio,
+          precio: precio + totalExtra,
           cantidad: 1,
         };
         dispatch(addPromoOrderList(promo));
         toast.success("Se agrego al pedido!");
       } else {
         const promo = {
-          _id,
+          _id: idGenerator,
           nombre,
           descripcion,
           products: [...value],
           categoria,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
-          precio,
+          precio: precio + totalExtra,
           cantidad: 1,
         };
         dispatch(addPromoOrderList(promo));
@@ -112,6 +117,7 @@ export default function ProductLayout({
       value.map(item =>
         dispatch(addPromoOrderList({
           ...item,
+          _id: idGenerator,
           comentarios: comentarioRef.current.value,
           precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
           extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`

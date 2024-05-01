@@ -18,6 +18,9 @@ const productoSchema = new Schema(
     precio: {
       type: Number,
     },
+    precioExtra: {
+      type: Number,
+    },
     precioPizza: {
       gigante: {
         type: Number,

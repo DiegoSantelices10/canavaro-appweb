@@ -74,7 +74,7 @@ function DigitalMenu() {
                                 </div>
                             ) : (
                                 <div>
-                                    <p className="text-xl tracking-wider font-nunito font-normal text-white">$ {data.precio}</p>
+                                    <p className="text-xl tracking-wider font-nunito font-normal text-white">$ {data.precioExtra ? `${data.precioExtra + data.precio}` : data.precio}</p>
                                 </div>
                             )}
                         </div>

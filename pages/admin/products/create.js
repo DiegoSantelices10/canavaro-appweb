@@ -27,7 +27,7 @@ export default function Create() {
           <h1 className="text-xl text-center md:text-4xl font-poppins font-semibold text-zinc-800 my-4">
             ¡Producto nuevo!
           </h1>
-          <p>Seleccione una categoria</p>
+          <p className="text-gray-400 font-normal text-sm font-poppins">Seleccione una categoria</p>
           <div className="w-full lg:w-1/4 h-10 mb-5 outline-none  focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
             <select
               onChange={handleCategoryChange}
@@ -80,7 +80,7 @@ export default function Create() {
               >
                 <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-4 md:space-y-0">
                   <div className="w-full mx-auto">
-                    <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                    <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                       Nombre del producto
                       <Field
                         id="nombre"
@@ -92,7 +92,7 @@ export default function Create() {
                   </div>
 
                   <div className=" hidden w-full mx-auto">
-                    <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                    <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                       Categoria
                       <Field
                         id="categoria"
@@ -104,7 +104,7 @@ export default function Create() {
                   </div>
                   {renderProducts !== 'extras' && (
                     <div className=" w-full mx-auto ">
-                      <label className="block text-sm  text-gray-400 font-poppins font-medium">
+                      <label className="block text-sm  text-gray-400 font-poppins font-normal">
                         Descripcion
                         <Field
                           id="descripcion"
@@ -119,7 +119,7 @@ export default function Create() {
 
                   {renderProducts !== "pizzas" && (
                     <div className=" w-full mx-auto">
-                      <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                      <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                         Precio
                         <Field
                           id="precio"
@@ -134,17 +134,28 @@ export default function Create() {
                   {renderProducts === "empanadas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <p className="block  text-sm  text-gray-400 font-poppins font-medium">Formato</p>
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                          Precio Extra <span className="text-gray-300 font-light text-sm">se le suma al precio actual de la unidad</span>
+                          <Field
+                            id="precioExtra"
+                            name="precioExtra"
+                            className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+											                  rounded-xl  focus:border-gray-200"
+                          />
+                        </label>
+                      </div>
+                      <div className=" w-full mx-auto">
+                        <p className="block  text-sm  text-gray-400 font-poppins font-normal">Formato</p>
                         <div
                           role="group"
                           aria-labelledby="my-radio-group"
                           className="w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
                         >
-                          <label>
+                          <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                             <Field type="radio" name="formato" value="canastita" className="mx-5" />
                             Canastita
                           </label>
-                          <label>
+                          <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                             <Field type="radio" name="formato" value="empanada" className="mx-5" />
                             Empanada
                           </label>
@@ -155,7 +166,7 @@ export default function Create() {
                   {renderProducts === "pizzas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                           Precio gigante
                           <Field
                             id="precioPizza.gigante"
@@ -166,7 +177,7 @@ export default function Create() {
                         </label>
                       </div>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                           Precio mediana
                           <Field
                             id="precioPizza.mediana"
@@ -177,7 +188,7 @@ export default function Create() {
                         </label>
                       </div>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                           Precio chica
                           <Field
                             id="precioPizza.chica"
@@ -190,7 +201,7 @@ export default function Create() {
                     </>
                   )}
                   <div className=" w-full mx-auto">
-                    <label className="block  text-sm w-full text-gray-400 font-poppins font-medium p-2">
+                    <label className="block  text-sm w-full text-gray-400 font-poppins font-normal p-2">
                       Cargar Imagen
                       <input
                         name="imagen"
@@ -198,8 +209,8 @@ export default function Create() {
                         onChange={e => cloudinaryImage(e.target, setFieldValue)}
                         className="w-full h-10 px-3 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
                   									rounded-xl appearance-none focus:outline-none focus:shadow-outline
-                                    file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded-xl
-                                    file:font-normal"
+                                    file:bg-red-600 file:text-white file:text-sm  file:border-none file:p-2 file:px-6 file:rounded-lg
+                                    file:font-light file:cursor-pointer"
                       />
                     </label>
                   </div>
@@ -207,11 +218,11 @@ export default function Create() {
                     <>
                       <div className="w-full mx-auto">
                         <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-gray-400 font-poppins font-medium">¿La promo cuenta con empanadas?</p>
+                          <p className="block  text-sm  text-gray-400 font-poppins font-normal">¿La promo cuenta con empanadas?</p>
                           <div
                             role="group"
                             aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
+                            className="p-2 w-full text-base  text-gray-400 font-poppins font-normal flex justify-center items-center h-10 gap-10"
                           >
                             <label>
                               <Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
@@ -225,7 +236,7 @@ export default function Create() {
                         </div>
                         {values.addEmpanadas === "si" && (
                           <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                            <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                               Ingresa la cantidad de empanadas
                               <Field
                                 id="cantidadMaxima"
@@ -241,11 +252,11 @@ export default function Create() {
                       </div>
                       <div className="w-full mx-auto">
                         <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-gray-400 font-poppins font-medium">¿La promo cuenta con Pizza?</p>
+                          <p className="block  text-sm  text-gray-400 font-poppins font-normal">¿La promo cuenta con Pizza?</p>
                           <div
                             role="group"
                             aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
+                            className="p-2 w-full text-base  text-gray-400 font-poppins font-normal flex justify-center items-center h-10 gap-10"
                           >
                             <label>
                               <Field type="radio" name="addPizzas" value="si" className="mx-5" />
@@ -259,7 +270,7 @@ export default function Create() {
                         </div>
                         {values.addPizzas === "si" && (
                           <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-gray-400 font-poppins font-medium">
+                            <label className="block  text-sm  text-gray-400 font-poppins font-normal">
                               Ingresa el tamaño de la pizza
                               <Field
                                 id="tamanio"

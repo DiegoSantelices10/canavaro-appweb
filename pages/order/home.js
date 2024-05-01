@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 import { setExtras, setProductData } from "store/reducers/productSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-import { formatearNumero } from "libs/items";
+import { formatearNumero, totalExtrasProductos } from "libs/items";
 
 
 export default function Home() {
@@ -79,6 +79,7 @@ export default function Home() {
 
 
 
+
   const calculateEmpanadas = () => {
     const requiredQuantity = 12;
     let priceU;
@@ -86,7 +87,15 @@ export default function Home() {
     let cantidadTotal = 0;
 
     if (orderPromo.length > 0) {
-      orderPromo.map(({ cantidad, precio }) => {
+      orderPromo.map(({ cantidad, precio, precioExtra }) => {
+        if (precioExtra) {
+          const precioAddExtra = precio + precioExtra
+          priceU = precioAddExtra;
+          const listItemAmount = precioAddExtra * cantidad;
+          cantidadTotal = cantidadTotal + cantidad;
+          setTotalCant(cantidadTotal);
+          return array.push(listItemAmount);
+        }
         priceU = precio;
         const listItemAmount = precio * cantidad;
         cantidadTotal = cantidadTotal + cantidad;
@@ -100,12 +109,13 @@ export default function Home() {
     const totalAmount = array.reduce((a, b) => {
       return a + b;
     }, 0);
-
     if (cantidadTotal < requiredQuantity) return setTotalPrice(totalAmount);
 
     if (cantidadTotal % requiredQuantity === 0) {
+      const totalPrecioExtra = totalExtrasProductos(orderPromo)
       const cantDocena = cantidadTotal / requiredQuantity;
-      const total = cantDocena * docenaPrice;
+      let total = cantDocena * docenaPrice;
+      total += totalPrecioExtra;
       setTotalPrice(total)
     }
 

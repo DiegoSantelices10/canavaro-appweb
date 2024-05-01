@@ -163,7 +163,7 @@ export default function Promotion({
               {products
                 ?.filter(item => item.categoria === "empanadas" && item.available === true)
                 ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
-                .map(({ _id, nombre }) => {
+                .map(({ _id, nombre, precioExtra }) => {
                   return (
                     <div key={_id}>
                       <div className=" font-poppins flex justify-between items-center my-6 p-1  ">
@@ -183,7 +183,7 @@ export default function Promotion({
                               className="text-red-500 font-normal text-2xl"
                               onClick={e => {
                                 setQuantity(quantityDemanded + 1);
-                                decrementItems({ _id, nombre });
+                                decrementItems({ _id, nombre, precioExtra });
                               }}
                             >
                               -
@@ -203,7 +203,7 @@ export default function Promotion({
                               className="text-green-500 font-normal text-2xl"
                               onClick={e => {
                                 setQuantity(quantityDemanded - 1);
-                                addItems({ _id, nombre });
+                                addItems({ _id, nombre, precioExtra });
                               }}
                             >
                               +

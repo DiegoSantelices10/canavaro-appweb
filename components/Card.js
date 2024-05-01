@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
-const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, digital }) => {
+const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, precioExtra } }) => {
   const { orderPromo } = useSelector(state => state.order);
 
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
             <div className="relative w-full h-24 self-start">
               <h1 className="font-semibold font-poppins text-sm text-neutral-800">{nombre}</h1>
               <p className="text-gray-400 text-xs tracking-wider">{descripcion}</p>
-              <p className="text-sm py-1 text-gray-400">{formatearNumero(precio)}</p>
+              <p className="text-sm py-1 text-gray-400">{precioExtra ? `${formatearNumero(precioExtra + precio)}` : formatearNumero(precio)}</p>
 
               <div className="absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
                 <div
@@ -57,7 +57,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
                     type="button"
                     className="text-red-500 text-2xl font-normal "
                     onClick={e => {
-                      decrementItems({ _id, nombre, precio, categoria });
+                      decrementItems({ _id, nombre, precio, precioExtra, categoria });
                     }}
                   >
                     -
@@ -71,7 +71,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio }, d
                     type="button"
                     className="text-green-500 text-2xl font-normal"
                     onClick={e => {
-                      addItems({ _id, nombre, precio, categoria });
+                      addItems({ _id, nombre, precio, precioExtra, categoria });
                     }}
                   >
                     +

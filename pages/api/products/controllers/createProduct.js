@@ -8,6 +8,7 @@ export const createProduct = async (req, res) => {
     categoria,
     imagen,
     precio,
+    precioExtra,
     precioPizza,
     addEmpanadas,
     cantidadMaxima,
@@ -57,6 +58,7 @@ export const createProduct = async (req, res) => {
         categoria,
         imagen: imageCloud,
         precio,
+        precioExtra,
         formato,
         available: true,
       });
