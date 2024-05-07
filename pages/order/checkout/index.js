@@ -244,7 +244,7 @@ export default function Checkout() {
                             <Image src="/images/cuenta-dni.jpg" width={170} height={70} alt="logoOpen" />
                           </div>
                           <p className="font-poppins text-center text-xs text-gray-400">
-                            El reintegro lo realiza la billetera virtual, tope $4600 por semana.
+                            El reintegro lo realiza la billetera virtual, tope $4600 por mes.
                           </p>
                           <p className="font-poppins text-center text-xs text-gray-400">
                             Abonas al momento de confirmar el pedido por whatsapp
