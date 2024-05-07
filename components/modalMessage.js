@@ -34,6 +34,14 @@ const ModalMessage = ({
     return orderPromo?.find(item => item._id === _id);
   };
 
+  const orderExtras = (extras) => {
+
+    const cantidad = extras.filter(item => item.isCantidad === 'si')
+    const notCantidad = extras.filter(item => item.isCantidad === 'no')
+
+    return [...cantidad, ...notCantidad]
+  }
+
   return (
     <div className={showHideClassName}>
       <div className="flex items-center   justify-center p-3 text-center sm:block ">
@@ -58,7 +66,7 @@ const ModalMessage = ({
             <div
               className="grid md:grid-cols-2 gap-x-3"
             >
-              {extras.length > 0 && extras?.map(item => (
+              {extras.length > 0 && orderExtras(extras)?.map(item => (
                 <div
                   key={item._id}
                   className="flex justify-between items-start w-full gap-2 mb-2 pt-4">
