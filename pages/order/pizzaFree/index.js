@@ -22,6 +22,8 @@ export default function Index() {
   const [info, setInfo] = useState({ title: "", description: "", status: true });
   const [total, setTotal] = useState(0);
   const { products, extras } = useSelector(state => state.product);
+  const { orderPromo } = useSelector(state => state.order);
+
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -124,6 +126,15 @@ export default function Index() {
         cantidad: 1,
       };
     }
+    if (orderPromo.length > 0) {
+      console.log('entro');
+      orderPromo.map(product => {
+        return (
+          dispatch(addPromoOrderList({ ...product }))
+        )
+      }
+      )
+    }
     dispatch(addPromoOrderList(promo));
     dispatch(calculateSubTotal());
     dispatch(calculateTotalQuantity());
@@ -161,6 +172,7 @@ export default function Index() {
           handleClose={handleCloseModal}
           addExtra={addExtra}
           showModal={showModal}
+          orderPromo={orderPromo}
           extraPizza={extraPizza}
           setShowModal={setShowModal}
           extras={extras}

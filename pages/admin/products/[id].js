@@ -28,6 +28,7 @@ export default function Update({ data }) {
       imagen,
       cantidadMaxima,
       precio,
+      isCantidad,
       precioExtra,
       precioPizza,
       addEmpanadas,
@@ -93,6 +94,7 @@ export default function Update({ data }) {
       model = {
         nombre,
         categoria,
+        isCantidad,
         imagen,
         precio,
       };
@@ -134,6 +136,7 @@ export default function Update({ data }) {
                 chica: productRender?.precioPizza?.chica || "",
               },
               categoria: renderProducts,
+              isCantidad: productRender?.isCantidad || "",
               imagen: productRender?.imagen || "",
               cantidadMaxima: productRender?.cantidadMaxima || "",
               addEmpanadas: productRender?.addEmpanadas || "",
@@ -249,7 +252,7 @@ export default function Update({ data }) {
                       </div>
                       <div className=" w-full mx-auto">
                         <label className="block  text-sm  text-gray-400 font-poppins font-normal">
-                          Precio Extra <span className="text-gray-300 font-light text-sm">se le suma al precio actual de la unidad</span>
+                          Precio Extra <span className="text-gray-400 font-light text-xs">se le suma al precio actual de la unidad</span>
                           <Field
                             id="precioExtra"
                             name="precioExtra"
@@ -297,6 +300,26 @@ export default function Update({ data }) {
                       </div>
                     </>
                   )}
+                  {renderProducts === "extras" && (
+                    <div className=" w-full mx-auto">
+                      <p className="block  text-sm  text-gray-400 font-poppins font-normal">Cantidad, si o no?</p>
+                      <div
+                        role="group"
+                        aria-labelledby="my-radio-group"
+                        className="w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
+                      >
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                          <Field type="radio" name="isCantidad" value="si" className="mx-5" checked={values.isCantidad === 'si'} />
+                          Si
+                        </label>
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                          <Field type="radio" name="isCantidad" value="no" className="mx-5" checked={values.isCantidad === 'no'} />
+                          No
+                        </label>
+                      </div>
+                    </div>
+                  )}
+
                   <div className=" w-full mx-auto">
                     <label className="block  text-sm  text-slate-400 font-poppins font-normal">
                       Cargar Imagen

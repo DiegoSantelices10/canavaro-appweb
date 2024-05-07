@@ -51,6 +51,7 @@ export default function Create() {
                 mediana: "",
                 chica: "",
               },
+              isCantidad: "",
               categoria: renderProducts,
               imagen: "",
               cantidadMaxima: "",
@@ -60,6 +61,7 @@ export default function Create() {
               tamanio: "",
             }}
             onSubmit={async (values, { resetForm }) => {
+              console.log('values', values);
               await createProduct(values)
                 .then(res => {
                   if (res.message === "ok") {
@@ -200,15 +202,34 @@ export default function Create() {
                       </div>
                     </>
                   )}
+                  {renderProducts === "extras" && (
+                    <div className=" w-full mx-auto">
+                      <p className="block  text-sm  text-gray-400 font-poppins font-normal">Cantidad, si o no?</p>
+                      <div
+                        role="group"
+                        aria-labelledby="my-radio-group"
+                        className="w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
+                      >
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                          <Field type="radio" name="isCantidad" value="si" className="mx-5" />
+                          Si
+                        </label>
+                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                          <Field type="radio" name="isCantidad" value="no" className="mx-5" />
+                          No
+                        </label>
+                      </div>
+                    </div>
+                  )}
                   <div className=" w-full mx-auto">
-                    <label className="block  text-sm w-full text-gray-400 font-poppins font-normal p-2">
+                    <label className="block  text-sm w-full text-gray-400 font-poppins font-normal">
                       Cargar Imagen
                       <input
                         name="imagen"
                         type="file"
                         onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10 px-3 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
-                  									rounded-xl appearance-none focus:outline-none focus:shadow-outline
+                        className="w-full h-10 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
+                  									 appearance-none focus:outline-none focus:shadow-outline
                                     file:bg-red-600 file:text-white file:text-sm  file:border-none file:p-2 file:px-6 file:rounded-lg
                                     file:font-light file:cursor-pointer"
                       />
@@ -285,6 +306,7 @@ export default function Create() {
                       </div>
                     </>
                   )}
+
 
                   <button
                     className="w-44 h-12 col-start-2

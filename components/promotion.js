@@ -1,5 +1,7 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
+import Add01Icon from "public/images/add-01-stroke-rounded";
+import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,7 +9,6 @@ import { addProductPromo, clearOrderPromo, decrementProductPromo, setQuantityDem
 
 export default function Promotion({
   cantMax,
-
   data: { _id, nombre, categoria, descripcion, precio, addEmpanadas },
   setSelectCombo,
 }) {
@@ -19,7 +20,7 @@ export default function Promotion({
   const { products } = useSelector(state => state.product);
 
   useEffect(() => {
-    dispatch(setQuantityDemanded(cantMax));
+    dispatch(setQuantityDemanded(cantMax || 0));
     dispatch(clearOrderPromo())
     if (nombre === 'Combo 4' || nombre === 'Combo 5') {
       const { _id, nombre, descripcion } =
@@ -120,26 +121,27 @@ export default function Promotion({
             >
               <button
                 type="button"
-                className="text-red-500 font-normal text-2xl "
+                className="text-red-500 font-normal text-2xl flex justify-center items-center"
                 onClick={e => {
                   decrementItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
-                  setQuantity(quantityDemanded + 1);
+                  setQuantity(quantityDemanded - 1);
                 }}
               >
-                -
+                <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
               </button>
             </div>
             <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
             <div className="rounded-full  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 font-normal text-2xl"
+                className="text-green-500 font-normal text-2xl justify-center items-center"
                 onClick={e => {
                   addItems({ _id, nombre, categoria, descripcion, precio, addEmpanadas });
-                  setQuantity(quantityDemanded - 1);
+                  setQuantity(quantityDemanded + 1);
                 }}
               >
-                +
+                <Add01Icon color={"bg-green-500"} width={18} height={18} />
+
               </button>
             </div>
           </div>
@@ -149,12 +151,12 @@ export default function Promotion({
           {
             <>
               {quantityDemanded < 1 ? (
-                <div className="bg-green-500 w-auto p-2 rounded-md">
-                  <p className="text-white text-center">¡ Se completo la cantidad requerida !</p>
+                <div className="bg-green-500 w-auto p-2 rounded-xl">
+                  <p className="text-white text-center font-normal">¡ Se completo la cantidad requerida !</p>
                 </div>
               ) : (
-                <div className="bg-red-600 w-auto p-2 rounded-md">
-                  <p className="text-white text-center">
+                <div className="bg-red-600 w-auto p-2 rounded-xl">
+                  <p className="text-white text-center font-normal">
                     Selecciona {quantityDemanded} empanadas para completar la promo
                   </p>
                 </div>
@@ -180,13 +182,13 @@ export default function Promotion({
                           >
                             <button
                               type="button"
-                              className="text-red-500 font-normal text-2xl"
+                              className="text-red-500 font-normal text-2xl flex justify-center items-center"
                               onClick={e => {
                                 setQuantity(quantityDemanded + 1);
                                 decrementItems({ _id, nombre, precioExtra });
                               }}
                             >
-                              -
+                              <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
                             </button>
                           </div>
 
@@ -200,13 +202,13 @@ export default function Promotion({
                           >
                             <button
                               type="button"
-                              className="text-green-500 font-normal text-2xl"
+                              className="text-green-500 font-normal text-2xl flex justify-center items-center"
                               onClick={e => {
                                 setQuantity(quantityDemanded - 1);
                                 addItems({ _id, nombre, precioExtra });
                               }}
                             >
-                              +
+                              <Add01Icon color={"bg-green-500"} width={18} height={18} />
                             </button>
                           </div>
                         </div>

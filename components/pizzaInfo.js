@@ -2,6 +2,8 @@
 /* eslint-disable react/prop-types */
 
 import { formatearNumero } from "libs/items";
+import Add01Icon from "public/images/add-01-stroke-rounded";
+import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 
 export default function PizzaInfo({
   data: {
@@ -24,6 +26,8 @@ export default function PizzaInfo({
   const removeSpaces = str => {
     return str.replace(/\s/g, "");
   };
+
+
   return (
     <>
       {" "}
@@ -41,7 +45,7 @@ export default function PizzaInfo({
             >
               <button
                 type="button"
-                className="text-red-500 font-normal text-2xl "
+                className="text-red-500 font-normal text-2xl flex justify-center items-center "
                 onClick={() =>
                   decrementCart({
                     _id: removeSpaces(nombre) + "gigante",
@@ -52,7 +56,8 @@ export default function PizzaInfo({
                   })
                 }
               >
-                -
+                <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
+
               </button>
             </div>
 
@@ -60,7 +65,7 @@ export default function PizzaInfo({
             <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 font-normal text-2xl"
+                className="text-green-500 font-normal text-2xl flex justify-center items-center"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "gigante",
@@ -71,7 +76,7 @@ export default function PizzaInfo({
                   })
                 }
               >
-                +
+                <Add01Icon color={"bg-green-500"} width={18} height={18} />
               </button>
             </div>
           </div>
@@ -91,7 +96,7 @@ export default function PizzaInfo({
             >
               <button
                 type="button"
-                className="text-red-500 font-normal text-2xl"
+                className="text-red-500 font-normal text-2xl flex justify-center items-center "
                 onClick={() =>
                   decrementCart({
                     _id: removeSpaces(nombre) + "mediana",
@@ -102,7 +107,8 @@ export default function PizzaInfo({
                   })
                 }
               >
-                -
+                <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
+
               </button>
             </div>
 
@@ -110,7 +116,7 @@ export default function PizzaInfo({
             <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 font-normal text-2xl"
+                className="text-green-500 font-normal text-2xl flex justify-center items-center"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "mediana",
@@ -121,7 +127,7 @@ export default function PizzaInfo({
                   })
                 }
               >
-                +
+                <Add01Icon color={"bg-green-500"} width={18} height={18} />
               </button>
             </div>
           </div>
@@ -141,7 +147,7 @@ export default function PizzaInfo({
             >
               <button
                 type="button"
-                className="text-red-500 font-normal text-2xl"
+                className="text-red-500 font-normal text-2xl flex justify-center items-center "
                 onClick={() =>
                   decrementCart({
                     _id: removeSpaces(nombre) + "chica",
@@ -152,7 +158,7 @@ export default function PizzaInfo({
                   })
                 }
               >
-                -
+                <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
               </button>
             </div>
 
@@ -160,7 +166,7 @@ export default function PizzaInfo({
             <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
               <button
                 type="button"
-                className="text-green-500 font-normal text-2xl"
+                className="text-green-500 font-normal text-2xl flex justify-center items-center"
                 onClick={() =>
                   incrementCart({
                     _id: removeSpaces(nombre) + "chica",
@@ -171,7 +177,7 @@ export default function PizzaInfo({
                   })
                 }
               >
-                +
+                <Add01Icon color={"bg-green-500"} width={18} height={18} />
               </button>
             </div>
           </div>

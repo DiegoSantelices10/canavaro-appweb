@@ -2,6 +2,8 @@
 import { convertToPath, formatearNumero } from "libs/items";
 import Image from "next/image";
 import Link from "next/link";
+import Add01Icon from "public/images/add-01-stroke-rounded";
+import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
@@ -55,12 +57,12 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
                 >
                   <button
                     type="button"
-                    className="text-red-500 text-2xl font-normal "
+                    className="text-red-500 text-2xl font-normal flex justify-center items-center"
                     onClick={e => {
                       decrementItems({ _id, nombre, precio, precioExtra, categoria });
                     }}
                   >
-                    -
+                    <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
                   </button>
                 </div>
 
@@ -69,12 +71,12 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
                 <div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
                   <button
                     type="button"
-                    className="text-green-500 text-2xl font-normal"
+                    className="text-green-500 text-2xl font-normal flex justify-center items-center"
                     onClick={e => {
                       addItems({ _id, nombre, precio, precioExtra, categoria });
                     }}
                   >
-                    +
+                    <Add01Icon color={"bg-green-500"} width={18} height={18} />
                   </button>
                 </div>
               </div>

@@ -1,17 +1,19 @@
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaWhatsapp, FaDownload } from "react-icons/fa"
 import React, { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import { formatearNumero } from "libs/items";
 import { useRouter } from "next/router";
+import { clearOrderList } from "store/reducers/orderSlice";
 
 
 const CircleAnimation = () => {
   const { checkout, demora, delivery } = useSelector(state => state.order);
   const { promoBarra } = useSelector(state => state.setting);
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const [catId, setCatId] = useState([]);
 
@@ -26,6 +28,7 @@ const CircleAnimation = () => {
     setCatId(categoriasId)
 
     setTimeout(() => {
+      dispatch(clearOrderList())
       router.push('/')
     }, 20000);
 
@@ -168,13 +171,13 @@ const CircleAnimation = () => {
             </div>
             <div className="mt-1">
               <h2 className="font-poppins font-semibold text-base">Medio de pago</h2>
-              <span className="text-gray-400 font-normal"> {checkout.medioDePago}</span>
+              <span className="text-gray-400 font-normal font-poppins"> {checkout.medioDePago}</span>
             </div>
             <div >
               {checkout.comentarios && (
                 <div className="mt-1">
                   <p className="font-poppins font-semibold">Comentarios</p>
-                  <span className="text-gray-400 font-normal"> {checkout.comentarios}</span>
+                  <span className="text-gray-400 font-normal font-poppins"> {checkout.comentarios}</span>
                 </div>
               )}
             </div>

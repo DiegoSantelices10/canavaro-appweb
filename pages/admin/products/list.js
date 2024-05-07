@@ -110,8 +110,8 @@ export default function Products() {
   return (
     <Layout>
       <Toaster />
-      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-1 md:px-3 mx-auto lg:items-center gap-x-4 lg:justify-between py-10 h-auto">
-        <div className="flex flex-col sm:flex-col md:flex-row w-full gap-2">
+      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-1 md:px-3 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
+        <div className="flex flex-col sm:flex-col md:flex-row w-full gap-4">
 
           <div className="bg-white flex w-full lg:w-1/2  items-center gap-x-2">
             <div
@@ -124,7 +124,7 @@ export default function Products() {
                 type="text"
                 placeholder="¿Que Desea Buscar?"
                 onChange={handleChangeSearch}
-                className="w-full border-none text-sm rounded-xl  focus:outline-none focus:ring-0"
+                className="w-full border-none text-sm rounded-xl text-gray-200 placeholder:text-gray-400 placeholder:font-poppins  focus:outline-none focus:ring-0"
               />
               <Search01Icon color="#BFBFBF" width={20} />
             </div>
@@ -145,13 +145,9 @@ export default function Products() {
               ))}
             </select>
           </div>
-        </div>
-
-        <div className="flex w-full my-2 md:my-0  lg:w-1/3 items-center justify-end gap-5 ">
           <button
-            className="px-3 whitespace-nowrap h-10  col-start-2 font-poppins font-normal
-                             rounded-xl  text-sm 
-                             border text-white bg-red-600"
+            className="px-3 whitespace-nowrap h-10 w-full md:w-1/3  font-poppins font-normal
+                       rounded-xl  text-sm border text-white bg-red-600"
             type="button"
             onClick={() =>
               router.push("/admin/products/create")
@@ -160,9 +156,8 @@ export default function Products() {
             Producto Nuevo
           </button>
           <button
-            className=" h-10 col-start-2 whitespace-nowrap  px-3 font-poppins font-normal
-                             rounded-xl  text-sm 
-                             border  bg-red-600 text-white"
+            className="h-10 whitespace-nowrap w-full md:w-1/3 px-3 font-poppins font-normal
+                        rounded-xl  text-sm border  bg-red-600 text-white"
             type="button"
             onClick={() => {
               router.push("/admin/products/updatePrices");
@@ -171,7 +166,6 @@ export default function Products() {
             Actualizar precios
           </button>
         </div>
-
       </div>
 
       <div className="w-full px-1 md:px-3 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">

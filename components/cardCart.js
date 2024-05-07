@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import Image from "next/image";
+import Add01Icon from "public/images/add-01-stroke-rounded";
+import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
 
@@ -53,12 +55,12 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
                     >
                         <button
                             type="button"
-                            className="text-red-500 text-3xl "
+                            className="text-red-500 text-3xl flex justify-center items-center "
                             onClick={e => {
                                 decrementItems({ _id, nombre, precio, categoria });
                             }}
                         >
-                            -
+                            <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
                         </button>
                     </div>
 
@@ -67,12 +69,13 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
                     <div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
                         <button
                             type="button"
-                            className="text-green-500 text-3xl"
+                            className="text-green-500 text-3xl flex justify-center items-center"
                             onClick={e => {
                                 addItems({ _id, nombre, precio, categoria });
                             }}
                         >
-                            +
+                            <Add01Icon color={"bg-green-500"} width={18} height={18} />
+
                         </button>
                     </div>
                 </div>

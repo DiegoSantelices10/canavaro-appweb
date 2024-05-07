@@ -21,6 +21,7 @@ import {
   addPromoOrderList,
   clearOrderPromo,
   decrementProductPizza,
+  setQuantityDemanded,
 } from "store/reducers/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -53,15 +54,22 @@ export default function ProductLayout({
   };
 
   const result = () => {
-    if (data.addEmpanadas) {
+    if (data.addEmpanadas === 'si') {
+      console.log('empanadas', data.addEmpanadas);
       if (quantityDemanded < 1 && orderPromo.length > 0) {
         return true;
       }
-    } else if (orderPromo.some(item => item.categoria === 'pizzas')) {
-      return true;
-    } else {
-      return false
+      return false;
     }
+    if (orderPromo.some(item => item.categoria === 'pizzas')) {
+      console.log('pizzas');
+      return true;
+    }
+
+    if (quantityDemanded > 0) {
+      return true;
+    }
+    return false;
   };
 
 
@@ -81,7 +89,6 @@ export default function ProductLayout({
   const addCartPromo = value => {
     const idGenerator = uuidv4();
     const totalExtra = totalExtrasProductos(value)
-    console.log('total extra', totalExtra);
     if (data.addEmpanadas === "si") {
       if (selectCombo) {
         const promo = {
@@ -113,18 +120,32 @@ export default function ProductLayout({
         toast.success("Se agrego al pedido!");
       }
     } else {
+      value.map(item => {
+        if (item.categoria !== 'extras') {
+          dispatch(addPromoOrderList({
+            ...item,
+            _id: idGenerator,
+            comentarios: comentarioRef.current.value,
+            precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
+            extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
+          }))
+        }
+        if (item.categoria === 'extras') {
+          return (
+            dispatch(addPromoOrderList({
+              ...item,
+            }))
+          )
+        }
+        return null;
+      }
+
+      );
       toast.success("Se agrego al pedido!");
-      value.map(item =>
-        dispatch(addPromoOrderList({
-          ...item,
-          _id: idGenerator,
-          comentarios: comentarioRef.current.value,
-          precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
-          extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
-        })));
     }
 
     dispatch(clearOrderPromo());
+    dispatch(setQuantityDemanded(0));
     router.push("/order/home");
   };
 
@@ -160,6 +181,7 @@ export default function ProductLayout({
           showModal={showModal}
           handleClose={handleCloseModal}
           addExtra={addExtra}
+          orderPromo={orderPromo}
           extraPizza={extraPizza}
           info={info}
           extras={extras}

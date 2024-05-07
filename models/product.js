@@ -52,6 +52,9 @@ const productoSchema = new Schema(
     tamanio: {
       type: String,
     },
+    isCantidad: {
+      type: String,
+    },
     available: {
       type: Boolean,
     },

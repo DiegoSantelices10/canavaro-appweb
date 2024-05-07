@@ -8,6 +8,7 @@ export const createProduct = async (req, res) => {
     categoria,
     imagen,
     precio,
+    isCantidad,
     precioExtra,
     precioPizza,
     addEmpanadas,
@@ -16,6 +17,7 @@ export const createProduct = async (req, res) => {
     addPizzas,
     tamanio,
   } = req.body;
+  console.log('body', req.body);
 
   try {
     let imageCloud;
@@ -89,11 +91,13 @@ export const createProduct = async (req, res) => {
       newProduct = new Producto({
         nombre,
         categoria,
+        isCantidad,
         imagen: imageCloud,
         precio,
         available: true,
       });
     }
+    console.log('newProduct', newProduct)
 
     await newProduct
       .save()
