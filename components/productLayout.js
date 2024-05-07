@@ -55,14 +55,12 @@ export default function ProductLayout({
 
   const result = () => {
     if (data.addEmpanadas === 'si') {
-      console.log('empanadas', data.addEmpanadas);
       if (quantityDemanded < 1 && orderPromo.length > 0) {
         return true;
       }
       return false;
     }
     if (orderPromo.some(item => item.categoria === 'pizzas')) {
-      console.log('pizzas');
       return true;
     }
 
