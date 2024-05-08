@@ -24,7 +24,7 @@ export default function Products() {
     (async () => {
       try {
         const res = await getProductsFront();
-        const order = res.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        const order = res.sort(compararDisponibilidad);
         const categories = [...new Set(res.map(producto => producto.categoria))];
         setCategorias(categories);
         setRenderProductos(order);
@@ -89,6 +89,12 @@ export default function Products() {
     }
   }
 
+  const compararDisponibilidad = (objeto1, objeto2) => {
+    if (objeto1.available === objeto2.available) {
+      return 0;
+    }
+    return objeto1.available ? 1 : -1;
+  }
   const deleteItem = async (id) => {
     toast((t) => (
       <div className="text-gray-900 flex justify-start gap-3 items-center font-poppins w-auto">
