@@ -291,7 +291,18 @@ export default function Home() {
             </button>
           </div>
         </div>
+        <div className="px-4 rounded-xl">
+          {
+            renderProducts === "empanadas" && (
+              <div className="p-2 bg-red-500 rounded-xl">
+                <p className="text-sm font-poppins text-white text-center">
+                  Cada 12 empanadas o canastitas, tenes promo!
+                </p>
+              </div>
+            )
+          }
 
+        </div>
         <div className="pt-3">
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">{renderStore(renderProducts)}</div>
         </div>
