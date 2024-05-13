@@ -228,8 +228,8 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "empanadas"
-                  ? "w-56  font-medium font-poppins text-gray-400"
-                  : "w-56 font-semibold bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-48  font-medium font-poppins text-sm text-gray-400"
+                  : "w-48 font-semibold bg-white text-neutral-800  text-sm font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -240,8 +240,8 @@ export default function Home() {
               onClick={() => setRenderProductos("pizzas")}
               className={
                 renderProducts !== "pizzas"
-                  ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-semibold bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
+                  : "w-28 font-semibold bg-white text-neutral-800  text-sm font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Pizzas
@@ -253,8 +253,8 @@ export default function Home() {
               onClick={() => setRenderProductos("promociones")}
               className={
                 renderProducts !== "promociones"
-                  ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-semibold  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
+                  : "w-28 font-semibold  bg-white text-neutral-800 text-sm font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Promociones
@@ -268,8 +268,8 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "porciones"
-                  ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-semibold  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
+                  : "w-28 font-semibold  bg-white text-neutral-800 text-sm font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Porciones
@@ -283,15 +283,15 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "bebidas"
-                  ? "w-32  font-medium font-poppins text-gray-400"
-                  : "w-32 font-semibold  bg-white text-neutral-800 font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
+                  : "w-28 font-semibold  bg-white text-neutral-800 text-sm font-poppins border-b border-gray-300 tracking-wide"
               }
             >
               Bebidas
             </button>
           </div>
         </div>
-        <div className="px-4 rounded-xl">
+        <div className="px-3 rounded-xl">
           {
             renderProducts === "empanadas" && (
               <div className="p-2 bg-red-500 rounded-xl">
