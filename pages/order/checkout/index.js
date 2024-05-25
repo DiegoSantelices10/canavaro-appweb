@@ -290,7 +290,6 @@ export default function Checkout() {
                   <div className="flex justify-between items-end">
                     <PriceTotal
                       available={promoEfectivo?.available}
-                      totalAmount={values?.total}
                       totalPedido={totalPedido}
                     />
                     <div className="w-auto">
