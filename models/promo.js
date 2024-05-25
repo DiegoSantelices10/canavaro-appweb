@@ -8,6 +8,9 @@ const promoSchema = new Schema(
     available: {
       type: Boolean,
     },
+    descuento: {
+      type: Number,
+    }
   },
   {
     timestamp: true,
@@ -17,4 +20,3 @@ const promoSchema = new Schema(
 
 export default models.Promo || model("Promo", promoSchema);
 
-// export default models.empanadas || model("empanadas", empanadasSchema);

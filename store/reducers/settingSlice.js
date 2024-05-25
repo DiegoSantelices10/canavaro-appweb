@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   deliveryButton: {},
   promoBarra: {},
+  promoEfectivo: {},
 };
 
 export const settingSlice = createSlice({
@@ -13,10 +14,15 @@ export const settingSlice = createSlice({
     setSetting: (state, { payload }) => {
       state.deliveryButton = payload.deliveryButton;
       state.promoBarra = payload.promoBarra;
+      state.promoEfectivo = payload.promoEfectivo;
     },
-    setPromoBarra: (state, {payload}) => {
+    setPromoBarra: (state, { payload }) => {
       state.promoBarra = payload.promoBarra;
-    }
+    },
+    setPromoEfectivo: (state, { payload }) => {
+      state.promoEfectivo = payload.promoEfectivo;
+    },
+
   },
 });
 

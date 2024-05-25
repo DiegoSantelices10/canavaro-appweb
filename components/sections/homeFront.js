@@ -17,9 +17,11 @@ function HomeFront({ imagefront }) {
     (async () => {
       const { data, status } = await getPromo();
       if (status === 200) {
-        const delivery = data.filter(item => item.nombre === "Delivery")
-        const barra = data.filter(item => item.nombre === "Promo Barra")
-        dispatch(setSetting({ deliveryButton: delivery[0], promoBarra: barra[0] }))
+
+        const delivery = data.find(item => item.nombre === "Delivery")
+        const barra = data.find(item => item.nombre === "Promo Barra")
+        const efectivo = data.find(item => item.nombre === "Promo Efectivo")
+        dispatch(setSetting({ deliveryButton: delivery, promoBarra: barra, promoEfectivo: efectivo }));
         localStorage.setItem('buttom delivery', { buttomDelivery: delivery[0] })
       }
     })()
