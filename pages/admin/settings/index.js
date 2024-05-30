@@ -9,6 +9,7 @@ export default function Settings() {
 	const [porcentaje, setPorcentaje] = useState(0);
 	const { promoEfectivo } = useSelector(state => state.setting);
 
+	console.log('promoEfectivo', promoEfectivo);
 
 	const onChangePorcentaje = (e) => {
 		setPorcentaje(e.target.value)
