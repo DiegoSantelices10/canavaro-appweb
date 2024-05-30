@@ -21,6 +21,7 @@ function HomeFront({ imagefront }) {
         const delivery = data.find(item => item.nombre === "Delivery")
         const barra = data.find(item => item.nombre === "Promo Barra")
         const efectivo = data.find(item => item.nombre === "Promo Efectivo")
+        console.log('endpoint', efectivo);
         dispatch(setSetting({ deliveryButton: delivery, promoBarra: barra, promoEfectivo: efectivo }));
         localStorage.setItem('buttom delivery', { buttomDelivery: delivery[0] })
       }
