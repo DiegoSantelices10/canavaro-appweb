@@ -3,7 +3,7 @@ import { useFormikContext } from 'formik';
 import { formatearNumero } from 'libs/items';
 import React, { useEffect, useState } from 'react'
 
-const PriceTotal = ({ totalPedido, available, descuento }) => {
+const PriceTotal = ({ totalPedido, available }) => {
 
     const { values, setFieldValue } = useFormikContext();
     const [isPromo, setIsPromo] = useState(false);
@@ -12,7 +12,7 @@ const PriceTotal = ({ totalPedido, available, descuento }) => {
 
     useEffect(() => {
         if (values.medioDePago === 'Efectivo' && available) {
-            const desc = values.total * (descuento / 100)
+            const desc = values.total * 0.05
             const total = values.total - desc
             const convert = Math.floor(total);
             setFieldValue('total', convert)
@@ -31,7 +31,7 @@ const PriceTotal = ({ totalPedido, available, descuento }) => {
                 {isPromo && (
                     <div className="flex gap-1 justify-start items-end font-poppins">
                         <p className="text-sm text-neutral-800 font-bold">Subtotal<span className="font-normal"> ${totalPedido}</span></p>
-                        <p className="text-neutral-800 text-sm font-normal"> - {descuento}%</p>
+                        <p className="text-neutral-800 text-sm font-normal"> - 5%</p>
                     </div>
                 )}
                 <div className="font-poppins p-0">

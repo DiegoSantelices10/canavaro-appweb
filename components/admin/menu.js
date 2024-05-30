@@ -5,15 +5,12 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { getPromo, logout } from "services/fetchData";
 import Image from "next/image";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { setSetting } from "store/reducers/settingSlice";
 
 const AccessMenu = () => {
   const [selected, setSelected] = useState("/admin");
   const [barra, setBarra] = useState([]);
 
   const router = useRouter();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
@@ -23,9 +20,7 @@ const AccessMenu = () => {
   useEffect(() => {
     (async () => {
       const res = await getPromo();
-      const efectivo = res.data.find(item => item.nombre === "Promo Efectivo")
-      console.log('efectivo', efectivo);
-      dispatch(setSetting({ promoEfectivo: efectivo }));
+
       setBarra(res.data)
     })();
 
