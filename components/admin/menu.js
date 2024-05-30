@@ -5,12 +5,15 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { getPromo, logout } from "services/fetchData";
 import Image from "next/image";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setSetting } from "store/reducers/settingSlice";
 
 const AccessMenu = () => {
   const [selected, setSelected] = useState("/admin");
   const [barra, setBarra] = useState([]);
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
@@ -20,6 +23,8 @@ const AccessMenu = () => {
   useEffect(() => {
     (async () => {
       const res = await getPromo();
+      const efectivo = res.data.find(item => item.nombre === "Promo Efectivo")
+      dispatch(setSetting({ promoEfectivo: efectivo }));
       setBarra(res.data)
     })();
 
@@ -93,6 +98,18 @@ const AccessMenu = () => {
                 } mx-auto w-auto h-auto `}
             >
               <p className="text-base font-poppins lg:text-left md:text-center text-center">Ventas</p>
+            </button>
+          </Link>
+        </div>
+        <div className="lg:mt-4">
+          <Link href="/admin/settings" passHref>
+            <button
+              className={`${selected === "/admin/settings"
+                ? "text-white tracking-wider font-semibold "
+                : "font-normal text-white"
+                } mx-auto w-auto  h-auto  `}
+            >
+              <p className="lg:text-left md:text-center text-center text-base font-poppins ">Ajustes</p>
             </button>
           </Link>
         </div>
