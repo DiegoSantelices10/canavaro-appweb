@@ -30,6 +30,8 @@ export default function Checkout() {
 
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
+  console.log('promoEfectivo', promoEfectivo);
+
   const enviarPedido = (pedido) => {
     socket.emit('enviar-pedido', pedido)
     socket.disconnect()
