@@ -24,6 +24,7 @@ const AccessMenu = () => {
     (async () => {
       const res = await getPromo();
       const efectivo = res.data.find(item => item.nombre === "Promo Efectivo")
+      console.log('efectivo', efectivo);
       dispatch(setSetting({ promoEfectivo: efectivo }));
       setBarra(res.data)
     })();
