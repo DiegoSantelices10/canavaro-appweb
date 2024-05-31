@@ -9,7 +9,6 @@ const PriceTotal = ({ totalPedido, available, descuento }) => {
     const [isPromo, setIsPromo] = useState(false);
 
 
-
     useEffect(() => {
         if (values.medioDePago === 'Efectivo' && available) {
             const desc = values.total * (descuento / 100)

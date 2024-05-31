@@ -85,7 +85,6 @@ export default function AdminContent({ socket }) {
         const res = await getPromo();
         const efectivo = res.data.find(item => item.nombre === "Promo efectivo")
         dispatch(setSetting({ promoEfectivo: efectivo }));
-        console.log('efectivo', efectivo);
         setBarra(res.data)
     }
 

@@ -127,7 +127,6 @@ export default function Index() {
       };
     }
     if (orderPromo.length > 0) {
-      console.log('entro');
       orderPromo.map(product => {
         return (
           dispatch(addPromoOrderList({ ...product }))

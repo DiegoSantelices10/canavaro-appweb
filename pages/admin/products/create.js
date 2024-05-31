@@ -61,7 +61,6 @@ export default function Create() {
               tamanio: "",
             }}
             onSubmit={async (values, { resetForm }) => {
-              console.log('values', values);
               await createProduct(values)
                 .then(res => {
                   if (res.message === "ok") {

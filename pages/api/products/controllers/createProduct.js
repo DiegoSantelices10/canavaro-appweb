@@ -17,7 +17,6 @@ export const createProduct = async (req, res) => {
     addPizzas,
     tamanio,
   } = req.body;
-  console.log('body', req.body);
 
   try {
     let imageCloud;
