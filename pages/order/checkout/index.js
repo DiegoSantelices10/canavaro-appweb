@@ -290,6 +290,7 @@ export default function Checkout() {
                 <div className={`fixed p-2 bottom-0 w-full bg-white  sm:w-4/5 md:w-3/5 lg:w-2/5`}>
                   <div className="flex justify-between items-end">
                     <PriceTotal
+                      efectivo={promoEfectivo?.descuento}
                       available={promoEfectivo?.available}
                       totalPedido={totalPedido}
                     />
