@@ -13,6 +13,8 @@ import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import PencilEdit02Icon from "public/images/pencil-edit-02-stroke-rounded";
 import Search01Icon from "public/images/search-01-stroke-rounded";
 
+
+
 export default function Products() {
   const [renderProductos, setRenderProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
@@ -198,12 +200,12 @@ export default function Products() {
                         checked={available}
                         onChange={() => handleCheckboxChange(_id, available)}
                       />
-                      <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
-                                      rounded-full 
-                                      dark:bg-gray-200 peer-checked:after:translate-x-full 
-                                      after:content-[''] after:absolute 
-                                      after:top-[2px] after:left-[2px] after:bg-white   
-                                      after:rounded-full after:h-4 after:w-4 after:transition-all 
+                      <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0
+                                      rounded-full
+                                      dark:bg-gray-200 peer-checked:after:translate-x-full
+                                      after:content-[''] after:absolute
+                                      after:top-[2px] after:left-[2px] after:bg-white
+                                      after:rounded-full after:h-4 after:w-4 after:transition-all
                                     dark:border-gray-600 peer-checked:bg-red-600">
 
                       </div>
@@ -231,16 +233,4 @@ export default function Products() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { req, res } = context;
 
-  const token = req.headers.cookie?.includes("token") || req.cookies.token;
-  if (!token) {
-    res.setHeader("location", "/admin/auth/login"); // Redirigir al usuario a la página de inicio de sesión
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
-
-  return { props: {} };
-}

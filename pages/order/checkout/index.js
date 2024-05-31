@@ -30,7 +30,6 @@ export default function Checkout() {
 
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
-  console.log('promoEfectivo', promoEfectivo);
 
   const enviarPedido = (pedido) => {
     socket.emit('enviar-pedido', pedido)
@@ -191,7 +190,7 @@ export default function Checkout() {
                 <div className="px-4 h-full mb-20 rounded">
                   {promoEfectivo?.available && (
                     <div className="bg-red-500 w-auto p-2 rounded-xl my-4">
-                      <p className="text-white text-center font-normal">¡ Abonando en efectivo tenes un 5% de descuento !</p>
+                      <p className="text-white text-center font-normal">¡ Abonando en efectivo tenes un {promoEfectivo?.descuento}% de descuento !</p>
                     </div>
                   )}
                   <h2 className="font-poppins font-semibold text-base py-3 text-neutral-800">Medios de pago</h2>

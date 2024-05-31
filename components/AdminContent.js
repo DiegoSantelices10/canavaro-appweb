@@ -5,10 +5,18 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Button from "components/buttonDemora";
 import { useDispatch, useSelector } from "react-redux";
-import { addSale, setRenderSaleData, setSaleData, updateSale } from "store/reducers/saleSlice";
+import {
+    addSale,
+    setRenderSaleData,
+    setSaleData,
+    updateSale
+} from "store/reducers/saleSlice";
 import axios from "axios";
 import { Howl } from "howler";
 import { getPromo } from "services/fetchData";
+import { setSetting } from "store/reducers/settingSlice";
+
+
 
 export default function AdminContent({ socket }) {
     const [showModal, setShowModal] = useState(false);
@@ -36,11 +44,6 @@ export default function AdminContent({ socket }) {
             dispatch(addSale(pedidos));
         };
         socket.on('pedidos', pedidosHandler)
-
-        return () => {
-            socket.off('pedidos', pedidosHandler);
-            socket.disconnect()
-        };
     }, [])
 
     useEffect(() => {
@@ -75,6 +78,9 @@ export default function AdminContent({ socket }) {
             alert("Error al obtener los datos")
         }
         const res = await getPromo();
+        const efectivo = res.data.find(item => item.nombre === "Promo efectivo")
+        dispatch(setSetting({ promoEfectivo: efectivo }));
+        console.log('efectivo', efectivo);
         setBarra(res.data)
     }
 

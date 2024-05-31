@@ -426,18 +426,12 @@ export default function Update({ data }) {
 
 export async function getServerSideProps(context) {
   const productos = await getProducts();
-  const { req, res, query } = context;
+  const { query } = context;
 
   const id = query.id;
   const data = await productos.find(item => item._id === id);
 
-  const token = req.headers.cookie?.includes("token") || req.cookies.token;
-  if (!token) {
-    res.setHeader("location", "/admin/auth/login"); // Redirigir al usuario a la página de inicio de sesión
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
+
 
   return { props: { data } };
 }

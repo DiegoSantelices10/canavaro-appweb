@@ -113,7 +113,7 @@ const AccessMenu = () => {
       <div className="rounded-md hidden lg:block absolute bottom-20 px-3  w-full">
         {barra?.map(item => (
           <div
-            key={item._id}
+            key={item._id + 'menu'}
             className="mt-2 w-full flex justify-between items-center gap-5"
           >
             <h1 className="text-white font-poppins">
@@ -121,7 +121,7 @@ const AccessMenu = () => {
             </h1>
             <label className="relative inline-flex items-center cursor-pointer">
               <input
-                id={item._id}
+                id={item._id + 'menu'}
                 type="checkbox"
                 className="sr-only peer"
                 checked={item.available}

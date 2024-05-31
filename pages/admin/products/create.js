@@ -326,16 +326,4 @@ export default function Create() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { req, res } = context;
 
-  const token = req.headers.cookie?.includes("token") || req.cookies.token;
-  if (!token) {
-    res.setHeader("location", "/admin/auth/login"); // Redirigir al usuario a la página de inicio de sesión
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
-
-  return { props: {} };
-}

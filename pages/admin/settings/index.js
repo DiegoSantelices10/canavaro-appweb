@@ -1,7 +1,7 @@
 import axios from "axios";
 import Layout from "components/admin/layout";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 export default function Settings() {
@@ -27,6 +27,7 @@ export default function Settings() {
 
 	return (
 		<Layout>
+			<Toaster />
 			<div
 				className="p-4"
 			>
