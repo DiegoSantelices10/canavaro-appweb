@@ -33,12 +33,16 @@ export default function AdminContent({ socket }) {
         src: ["/sound/notificacion.mp3"],
     });
 
+
     useEffect(() => {
         getDelay()
         getSales()
     }, []);
 
     useEffect(() => {
+        if (!socket.connected) {
+            socket.connect()
+        }
         const pedidosHandler = (pedidos) => {
             sound.play();
             dispatch(addSale(pedidos));
@@ -46,6 +50,7 @@ export default function AdminContent({ socket }) {
         socket.on('pedidos', pedidosHandler)
 
         return () => {
+            console.log('Desconectado');
             socket.off('pedidos', pedidosHandler);
             socket.disconnect()
         };
