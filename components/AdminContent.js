@@ -52,7 +52,6 @@ export default function AdminContent({ socket }) {
         return () => {
             console.log('Desconectado');
             socket.off('pedidos', pedidosHandler);
-            socket.disconnect()
         };
     }, [])
 
