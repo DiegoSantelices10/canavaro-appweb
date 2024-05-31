@@ -39,11 +39,17 @@ export default function AdminContent({ socket }) {
     }, []);
 
     useEffect(() => {
+        console.log('socket.on', socket.on('pedidos'));
         const pedidosHandler = (pedidos) => {
             sound.play();
             dispatch(addSale(pedidos));
         };
         socket.on('pedidos', pedidosHandler)
+
+        return () => {
+            socket.off('pedidos', pedidosHandler)
+            socket.disconnect()
+        }
     }, [])
 
     useEffect(() => {
