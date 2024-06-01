@@ -188,7 +188,12 @@ export default function Home() {
     <Layout>
       <Toaster />
       <div className="py-4 mt-16 mx-auto w-full rounded-3xl bg-white">
-        <h1 className="text-lg font-semibold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
+        {products.find(product => product.categoria === "soloEfectivo" && product.available === true)
+          && (
+            <h1 className="text-lg font-semibold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
+          )}
+
+
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
           <style jsx>
             {`
@@ -233,7 +238,7 @@ export default function Home() {
               }
             `}
           </style>
-          {products.find(product => product.categoria === "soloEfectivo") && renderEfectivo()}
+          {products.find(product => product.categoria === "soloEfectivo" && product.available === true) && (renderEfectivo())}
         </div>
 
         <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
