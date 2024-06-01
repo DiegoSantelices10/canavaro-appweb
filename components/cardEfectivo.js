@@ -27,8 +27,7 @@ const CardEfectivo = ({ data: { _id, nombre, imagen, descripcion, categoria, pre
         return orderPromo?.find(item => item._id === _id);
     };
     return (
-        <div className="rounded-xl shadow p-3"
-        >
+        <div className="rounded-xl shadow p-3">
             <div
                 className="w-60 flex flex-col h-full justify-between"
             >

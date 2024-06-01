@@ -190,7 +190,6 @@ export default function Home() {
 
       <div className="py-4 mt-16 mx-auto w-full rounded-3xl bg-white">
         <h1 className="text-lg font-semibold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
-
         <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
           <style jsx>
             {`
@@ -206,7 +205,7 @@ export default function Home() {
           </style>
           {renderPromotions()}
         </div>
-        <div className="my-6">
+        <div className="my-4">
           <div className="w-full  p-3 flex items-center justify-between">
             <div>
               <p className="text-left w-full font-poppins text-base  font-medium">¡Arma tu pizza como quieras!</p>
@@ -223,11 +222,11 @@ export default function Home() {
         </div>
         {products?.find(product => product.categoria === "soloEfectivo" && product.available === true)
           && (
-            <p className="text-lg font-semibold font-poppins text-neutral-800 px-3 ">Promos en efectivo</p>
-          )}
-        <div className="flex overflow-x-scroll flexp  space-x-6 w-full p-2">
-          <style jsx>
-            {`
+            <div className="mb-4">
+              <p className="text-lg font-semibold font-poppins text-neutral-800 px-3 ">Promos en efectivo</p>
+              <div className="flex overflow-x-scroll flexp  space-x-6 w-full p-2">
+                <style jsx>
+                  {`
               .flexp::-webkit-scrollbar-thumb {
                 background: #ffffff;
                 border-radius: 20px;
@@ -237,11 +236,13 @@ export default function Home() {
                 height: 5px;
               }
             `}
-          </style>
-          {products?.find(product => product.categoria === "soloEfectivo" && product.available === true) && (renderEfectivo())}
-        </div>
+                </style>
+                {renderEfectivo()}
+              </div>
+            </div>
+          )}
 
-        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
+        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 mb-6">
           <style jsx>
             {`
               .flexp::-webkit-scrollbar-thumb {
