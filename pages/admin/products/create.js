@@ -4,7 +4,7 @@ import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/admin/layout";
 import { createProduct } from "services/fetchData";
 import { useRouter } from "next/router";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function Create() {
   const [renderProducts, setRenderProductos] = useState("pizzas");
@@ -17,11 +17,10 @@ export default function Create() {
     setRenderProductos(cat);
   };
 
-  const categorias = ['pizzas', 'empanadas', 'promociones', 'porciones', 'bebidas', 'extras']
+  const categorias = ['pizzas', 'empanadas', 'promociones', 'porciones', 'bebidas', 'extras', 'soloEfectivo']
 
   return (
     <Layout>
-      <Toaster />
       <section className="w-full flex justify-start items-start h-screen">
         <div className="w-full  p-2 md:p-10">
           <h1 className="text-xl text-center md:text-4xl font-poppins font-semibold text-zinc-800 my-4">
@@ -61,6 +60,7 @@ export default function Create() {
               tamanio: "",
             }}
             onSubmit={async (values, { resetForm }) => {
+              console.log('values', values)
               await createProduct(values)
                 .then(res => {
                   if (res.message === "ok") {
@@ -220,20 +220,22 @@ export default function Create() {
                       </div>
                     </div>
                   )}
-                  <div className=" w-full mx-auto">
-                    <label className="block  text-sm w-full text-gray-400 font-poppins font-normal">
-                      Cargar Imagen
-                      <input
-                        name="imagen"
-                        type="file"
-                        onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
+                  {renderProducts !== "soloEfectivo" && (
+                    <div className=" w-full mx-auto">
+                      <label className="block  text-sm w-full text-gray-400 font-poppins font-normal">
+                        Cargar Imagen
+                        <input
+                          name="imagen"
+                          type="file"
+                          onChange={e => cloudinaryImage(e.target, setFieldValue)}
+                          className="w-full h-10 mt-2 text-sm leading-tight text-gray-700 border-gray-200 
                   									 appearance-none focus:outline-none focus:shadow-outline
                                     file:bg-red-600 file:text-white file:text-sm  file:border-none file:p-2 file:px-6 file:rounded-lg
                                     file:font-light file:cursor-pointer"
-                      />
-                    </label>
-                  </div>
+                        />
+                      </label>
+                    </div>
+                  )}
                   {renderProducts === "promociones" && (
                     <>
                       <div className="w-full mx-auto">

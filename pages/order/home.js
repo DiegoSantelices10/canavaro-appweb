@@ -19,6 +19,7 @@ import { setExtras, setProductData } from "store/reducers/productSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { formatearNumero, totalExtrasProductos } from "libs/items";
+import CardEfectivo from "components/cardEfectivo";
 
 
 export default function Home() {
@@ -49,6 +50,17 @@ export default function Home() {
       ?.filter(item => item.categoria === renderProductos && item.available === true)
       ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
       .map(data => <Card key={data._id} data={data} />);
+  };
+
+  const renderEfectivo = () => {
+    return products
+      ?.filter(item => item.categoria === "soloEfectivo" && item.available === true)
+      .map(data => (
+        <CardEfectivo
+          key={data._id}
+          data={data}
+        />
+      ));
   };
 
   useEffect(() => {
@@ -134,7 +146,7 @@ export default function Home() {
   };
 
   const addCartPromo = value => {
-    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "porciones");
+    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "porciones" || item.categoria === "soloEfectivo");
 
     if (res) {
       setTotalCant(0);
@@ -207,6 +219,23 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <p className="text-lg font-semibold font-poppins text-neutral-800 px-3 ">Promos en efectivo</p>
+        <div className="flex overflow-x-scroll flexp  space-x-6 w-full p-2">
+          <style jsx>
+            {`
+              .flexp::-webkit-scrollbar-thumb {
+                background: #ffffff;
+                border-radius: 20px;
+              }
+
+              .flexp::-webkit-scrollbar {
+                height: 5px;
+              }
+            `}
+          </style>
+          {products.find(product => product.categoria === "soloEfectivo") && renderEfectivo()}
+        </div>
+
         <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
           <style jsx>
             {`

@@ -96,7 +96,16 @@ export const createProduct = async (req, res) => {
         available: true,
       });
     }
-    console.log('newProduct', newProduct)
+
+    if (categoria === "soloEfectivo") {
+      newProduct = new Producto({
+        nombre,
+        categoria,
+        descripcion,
+        precio,
+        available: true,
+      });
+    }
 
     await newProduct
       .save()

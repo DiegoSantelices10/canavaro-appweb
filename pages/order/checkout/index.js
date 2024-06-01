@@ -30,6 +30,9 @@ export default function Checkout() {
 
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
+  const hasSoloEfectivo = () => {
+    return orderList.filter(item => item.categoria === 'soloEfectivo').length > 0
+  }
   const enviarPedido = (pedido) => {
     socket.emit('enviar-pedido', pedido)
     socket.disconnect()
@@ -193,20 +196,25 @@ export default function Checkout() {
                     </div>
                   )}
                   <h2 className="font-poppins font-semibold text-base py-3 text-neutral-800">Medios de pago</h2>
-                  <div className="w-full  border border-gray-200 rounded-xl ">
-                    <Field
-                      as="select"
-                      name="medioDePago"
-                      className=" border-none font-poppins p-3  text-gray-900 font-normal text-sm rounded-xl  block w-full focus:ring-slate-300 "
-                    >
-                      {medios.map((item, index) => (
-                        <option key={index} value={item} className="text-sm text-gray-500 font-poppins font-semibold">
-                          {item}
-                        </option>
+                  {hasSoloEfectivo() ? (
+                    <p className="text-center mt-2 font-poppins text-sm text-gray-800">Solo podras abonar en efectivo.</p>
+                  ) : (
+                    <div className="w-full  border border-gray-200 rounded-xl ">
+                      <Field
+                        as="select"
+                        name="medioDePago"
+                        className=" border-none font-poppins p-3  text-gray-900 font-normal text-sm rounded-xl  block w-full focus:ring-slate-300 "
+                      >
+                        {medios.map((item, index) => (
+                          <option key={index} value={item} className="text-sm text-gray-500 font-poppins font-semibold">
+                            {item}
+                          </option>
 
-                      ))}
-                    </Field>
-                  </div>
+                        ))}
+                      </Field>
+                    </div>
+                  )}
+
                   <div>
                     <div className="py-6">
                       {values.medioDePago === "Efectivo" && (
@@ -238,7 +246,7 @@ export default function Checkout() {
                       {values.medioDePago === "Cuenta DNI" && (
                         <>
                           <p className="font-poppins text-center font-semibold">
-                            De martes a viernes 20% de reintegro
+                            De lunes a viernes 20% de reintegro
                           </p>
                           <p className="font-poppins text-center font-semibold">
                             pagando con Cuenta DNI
@@ -247,7 +255,7 @@ export default function Checkout() {
                             <Image src="/images/cuenta-dni.jpg" width={170} height={70} alt="logoOpen" />
                           </div>
                           <p className="font-poppins text-center text-xs text-gray-400">
-                            El reintegro lo realiza la billetera virtual, tope $4600 por mes.
+                            El reintegro lo realiza la billetera virtual, tope $5600 por mes.
                           </p>
                           <p className="font-poppins text-center text-xs text-gray-400">
                             Abonas al momento de confirmar el pedido por whatsapp
@@ -257,7 +265,7 @@ export default function Checkout() {
                       {values.medioDePago === "Open Pay" && (
                         <>
                           <p className="font-poppins text-center font-semibold ">
-                            Los martes y viernes de abril
+                            Los martes y viernes
                           </p>
                           <p className="font-poppins text-center font-semibold">
                             30% de reintegro pagando con BBVA

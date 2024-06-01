@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { formatearNumero } from "libs/items";
 import Image from "next/image";
 import Add01Icon from "public/images/add-01-stroke-rounded";
 import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
@@ -28,7 +29,7 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
     };
     return (
         <div className="rounded-md relative ">
-            <div className="relative bg-white  rounded-t-md" style={{ width: "150px", height: "100px" }}>
+            <div className="relative bg-white  rounded-t-md" style={{ width: "160px", height: "100px" }}>
                 <div className="w-full">
                     <a className="font-bold text-sm text-gray-800">
                         <Image
@@ -43,9 +44,9 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
                     </a>
                 </div>
             </div>
-            <div className=" h-20 rounded-b-md px-1 py-2 ">
+            <div className=" h-24 rounded-b-md px-1 py-2 ">
                 <p className=" text-gray-800 text-sm font-bold ">{nombre}</p>
-                <p className=" text-gray-400 text-xs font-medium ">${precio}</p>
+                <p className=" text-gray-400 text-sm font-poppins">{formatearNumero(precio)}</p>
 
                 <div className=" absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
                     <div

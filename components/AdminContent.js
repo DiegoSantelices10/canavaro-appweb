@@ -160,6 +160,7 @@ export default function AdminContent({ socket }) {
 
     return (
         <Layout>
+
             {currentPedido && (
                 <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
             )}
