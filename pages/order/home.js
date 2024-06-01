@@ -221,7 +221,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        {products.find(product => product.categoria === "soloEfectivo" && product.available === true)
+        {products?.find(product => product.categoria === "soloEfectivo" && product.available === true)
           && (
             <p className="text-lg font-semibold font-poppins text-neutral-800 px-3 ">Promos en efectivo</p>
           )}
@@ -238,7 +238,7 @@ export default function Home() {
               }
             `}
           </style>
-          {products.find(product => product.categoria === "soloEfectivo" && product.available === true) && (renderEfectivo())}
+          {products?.find(product => product.categoria === "soloEfectivo" && product.available === true) && (renderEfectivo())}
         </div>
 
         <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 my-2">
