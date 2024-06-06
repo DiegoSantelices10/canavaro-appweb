@@ -191,7 +191,7 @@ export default function Checkout() {
                   )}
                   <div className="bg-red-500 p-px"></div>
                 </div>
-                <div className="flex flex-col gap-6 px-3 mt-6">
+                <div className="flex flex-col gap-6 px-3 my-6">
                   <div>
                     <h2 className="font-poppins text-sm font-semibold pb-1 text-neutral-800">Comentarios adicionales</h2>
                     <Field
