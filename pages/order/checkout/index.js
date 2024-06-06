@@ -17,9 +17,11 @@ import { formatearNumero } from "libs/items";
 import { setSetting } from "store/reducers/settingSlice";
 
 
-const socket = io.connect('https://pizzacanavaro-socket.com')
 
 export default function Checkout() {
+  const socket = io.connect('http://localhost:5000')
+
+  console.log('socket', socket)
 
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
