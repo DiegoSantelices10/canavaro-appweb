@@ -9,25 +9,27 @@ import { useRouter } from "next/router";
 
 
 export default function successful() {
-  const { checkout, demora, delivery } = useSelector(state => state.order);
-  const { promoBarra } = useSelector(state => state.setting);
+  const { checkout, demora, delivery, orderList, totalAmount } = useSelector(state => state.order);
+  const { promoEfectivo: { available, descuento } } = useSelector(state => state.setting);
+  const [subTotal, setSubTotal] = useState(0);
   const router = useRouter()
-
-  const [catId, setCatId] = useState([]);
-
-
+  // const [catId, setCatId] = useState([]);
+  const hasProductosEfectivo = () => {
+    return orderList.filter(product => product.categoria === "soloEfectivo");
+  }
+  const hasProductosGeneral = () => {
+    return orderList.filter(product => product.categoria !== "soloEfectivo");
+  }
   useEffect(() => {
-    let idIcrement = 1;
-    const categorias = [...new Set(checkout.productos.map(producto => producto.categoria))];
-    const categoriasId = categorias.map(producto => ({
-      id: idIcrement++,
-      categoria: producto,
-    }));
-    setCatId(categoriasId)
+    const productosGeneral = hasProductosGeneral()
+    const sumGeneral = productosGeneral.reduce((acumulador, producto) => {
+      return acumulador + (producto.precio * producto.cantidad);
+    }, 0);
+    setSubTotal(sumGeneral)
 
     setTimeout(() => {
       router.push('/')
-    }, 20000);
+    }, 5000);
 
   }, [])
 
@@ -62,6 +64,13 @@ export default function successful() {
       transition: { duration: 0.5 },
     },
   };
+
+  const renderSubtotal = (descuento) => {
+    const sumTotal = hasProductosGeneral().reduce((acumulador, producto) => {
+      return acumulador + (producto.precio * producto.cantidad);
+    }, 0);
+    return sumTotal - (sumTotal * (descuento / 100));
+  }
   return (
     <div
       style={{
@@ -118,7 +127,6 @@ export default function successful() {
       </motion.div>
       <div className="p-2 w-full md:w-1/2 lg:w-1/2 mx-auto">
         <div className="flex justify-center items-center flex-col  gap-1">
-          <p className=" text-sm font-poppins font-semibold  text-neutral-800">¡Confirma tu pedido por whatsapp!</p>
           <a
             target="_blank"
             rel="noreferrer"
@@ -128,10 +136,12 @@ export default function successful() {
               <FaWhatsapp size={18} />
               Ir a whatsapp</div>
           </a>
+          <p className=" text-xs font-poppins font-normal text-neutral-400">¡Confirma tu pedido por whatsapp!</p>
         </div>
         <div id="container-pedido">
           <div className="flex justify-between items-center p-1 mt-3">
-            <p className=" font-bold font-poppins text-lg">
+            <p className=" font-semibold font-poppins text-base">
+
               Detalle del pedido
             </p>
             <h1 className="font-medium font-poppins">{checkout.hora}hs.</h1>
@@ -142,104 +152,121 @@ export default function successful() {
                 {delivery === "domicilioActual" ? (
                   <>
                     <div className="mt-1">
-                      <h1 className="font-semibold font-poppins">Horario de envío</h1>
-                      <span className="text-gray-400 font-normal">
+                      <h1 className="font-semibold text-sm font-poppins">Horario de envío</h1>
+                      <span className="text-gray-400 text-sm font-normal font-poppins">
                         {checkout.hPersonalizado === "" ? demora + " min." : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
-                      <h2 className="font-poppins  font-bold">Domicilio</h2>
-                      <span className="font-poppins font-normal text-gray-400">{checkout.domicilio} </span>
+                      <h2 className="font-poppins text-sm  font-semibold">Domicilio</h2>
+                      <span className="font-poppins text-sm font-normal text-gray-400">{checkout.domicilio} </span>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="mt-1">
-                      <h1 className="font-semibold font-poppins">Horario de retiro</h1>
-                      <span className="text-gray-400  font-normal">
+                      <h1 className="font-semibold text-sm font-poppins">Horario de retiro</h1>
+                      <span className="text-gray-400 text-sm font-poppins  font-normal">
                         {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
-                      <h2 className="font-poppins font-semibold">Retira por local</h2>
-                      <span className="text-gray-400 font-normal font-poppins"> {checkout.cliente}</span>
+                      <h2 className="font-poppins text-sm font-semibold">Retira por local</h2>
+                      <span className="text-gray-400 text-sm font-normal font-poppins"> {checkout.cliente}</span>
                     </div>
                   </>
                 )}
               </div>
             </div>
             <div className="mt-1">
-              <h2 className="font-poppins font-semibold text-base">Medio de pago</h2>
-              <span className="text-gray-400 font-normal"> {checkout.medioDePago}</span>
+              <h2 className="font-poppins text-sm font-semibold ">Medio de pago</h2>
+              <span className="text-gray-400 text-sm font-normal font-poppins"> {checkout.medioDePago}</span>
             </div>
             <div >
               {checkout.comentarios && (
                 <div className="mt-1">
-                  <p className="font-poppins font-semibold">Comentarios</p>
-                  <span className="text-gray-400 font-normal"> {checkout.comentarios}</span>
+                  <p className="font-poppins text-sm font-semibold">Comentarios</p>
+                  <span className="text-gray-400 font-poppins text-sm font-normal"> {checkout.comentarios}</span>
                 </div>
               )}
             </div>
-            <>
-              <p className=" font-bold font-poppins mt-3 text-lg">
-                Pedido
-              </p>
-              <hr className="border mt-2" />
-              {catId?.map(categoria => (
-                <div key={categoria.id}>
-                  {checkout.productos
-                    ?.filter(producto => producto?.categoria === categoria.categoria)
-                    .map((item, index) => {
-                      return (
-                        <div key={index} className="py-4">
-                          <div className="flex justify-between items-center font-poppins">
-                            <div className="font-semibold text-neutral-900  text-base w-full flex justify-between items-start">
-                              <div>
-                                <p>
-                                  {item.nombre}
-                                  {" "}
-                                  <span className=" font-semibold text-gray-700 text-base">
-                                    {item.categoria === "pizzas" && item?.tamanio}
-                                  </span>
-                                  <span className="text-gray-400 text-base font-normal pl-1">
-                                    {" "}
-                                    x {item?.cant || item?.cantidad}
-                                  </span>
-                                </p>
-                                {item.descripcion && (
-                                  <p className="text-gray-400 text-xs font-normal">{item.descripcion}</p>
-
-                                )}
-                                {item.extra && (
-                                  <p className="text-gray-400 text-sm font-normal">Extra: {item.extra}</p>
-                                )}
-                              </div>
-                              <p className="text-nowrap text-right font-normal">{formatearNumero(item.precio * item.cantidad)}</p>
-                            </div>
-
-                          </div>
-                          {item.products &&
-                            item.products.map(producto => (
-                              <div key={producto._id}>
-                                <p className="font-normal font-poppins text-gray-400 text-sm">
-                                  {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
-                                </p>
-                              </div>
-                            ))}
-                          <p className="font-semibold text-gray-700 text-sm w-11/12">{item.comentarios}</p>
+            <h2 className="font-poppins text-base font-semibold mt-1">Pedido</h2>
+            <div className="w-full font-poppins relative">
+              {available && hasProductosEfectivo()?.length > 0 && hasProductosGeneral()?.length > 0 && (
+                <>
+                  <div className='my-2'>
+                    {hasProductosGeneral()?.map(product => (
+                      <div key={product._id} className='flex justify-between items-center w-full py-1'>
+                        <h3 className='text-sm font-semibold text-slate-800'>{product.nombre} <span className='text-xs text-gray-800 font-light'>{product.categoria === "empanadas" ? `x ${product.cant}` : `x ${product.cantidad}`}</span> </h3>
+                        <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                      </div>
+                    ))}
+                    {checkout.medioDePago === 'Efectivo' && (
+                      <>
+                        <hr className='my-1' />
+                        <div className='flex items-center justify-between'>
+                          <p className='py-1 text-sm font-semibold text-slate-800'>Subtotal</p>
+                          <p className='text-sm'>{formatearNumero(subTotal)}</p>
                         </div>
-                      );
-                    })}
+                      </>
+                    )}
+                    {checkout.medioDePago === 'Efectivo' && (
+                      <div className='flex text-red-500 items-center justify-between w-full'>
+                        <p className='text-xs'>Abonando en efectivo, descuento del {descuento}%</p>
+                        <p className='text-sm'>{formatearNumero(renderSubtotal(descuento))}</p>
+                      </div>
+                    )}
+                  </div>
+                  <h3 className='text-xs font-medium text-gray-400'>Solo efectivo{`${checkout.medioDePago === 'Efectivo' ? ", no aplica el descuento" : ""}`}</h3>
+                  {hasProductosEfectivo()?.map(product => (
+                    <div key={product._id} className='flex justify-between w-full items-center py-1'>
+                      <h3 className='text-sm font-semibold text-slate-800'>{product.nombre}<span className='text-xs text-gray-800 font-light'>{` x ${product.cantidad}`}</span></h3>
+                      <div className='flex gap-4 items-center'>
+                        <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                      </div>
+                    </div>
+
+                  ))}
+                </>
+              )}
+              {hasProductosGeneral()?.length === 0 && hasProductosEfectivo().map(product => (
+                <div key={product._id} className='flex justify-between w-full items-center py-1'>
+                  <h3 className='text-sm font-semibold text-slate-800'>{product.nombre}<span className='text-xs text-gray-800 font-light'>{` x ${product.cantidad}`}</span></h3>
+                  <div className='flex gap-4 items-center'>
+                    <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                  </div>
                 </div>
               ))}
-            </>
-            {promoBarra?.available && delivery === "localActual" && (
-              <h1 className="text-right text-sm text-gray-500">Descuento aplicado del 10%</h1>
-            )}
-            <h1 className="font-bold text-right text-base font-poppins">Total: <span className="font-normal text-lg">{formatearNumero(checkout.total)}</span></h1>
+              {hasProductosEfectivo()?.length === 0 && hasProductosGeneral().map(product => (
+                <div key={product._id} className='flex justify-between w-full items-center py-1'>
+                  <h3 className='text-sm font-semibold text-slate-800'>{product.nombre}<span className='text-xs text-gray-800 font-light'>{` x ${product.cantidad}`}</span></h3>
+                  <div className='flex gap-4 items-center'>
+                    <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                  </div>
+                </div>
+              ))}
+
+              <div>
+                {hasProductosEfectivo()?.length === 0 && checkout.medioDePago === 'Efectivo' && available && (
+                  <>
+                    <div className=" w-auto p-2  my-2">
+                      <p className="text-red-500 text-center font-normal text-sm">Se aplica el {descuento}% de descuento abonando</p>
+                    </div>
+                    <div className='flex font-poppins text-sm justify-between w-full items-center py-1 mt-2'>
+                      <p className='font-semibold'>Subtotal</p>
+                      <p className='font-semibold'>{formatearNumero(totalAmount)}</p>
+                    </div>
+                  </>
+                )}
+              </div>
+              <div className="flex justify-between text-sm font-semibold font-poppins items-center mt-4">
+                <p>Total</p>
+                <p>{formatearNumero(checkout.total)}</p>
+              </div>
+            </div>
           </div>
 
         </div>
         <div className="text-center gap-2 flex justify-between items-end py-2">
-          <h1 className="text-base  text-neutral-800 font-poppins">Guarda el detalle de tu pedido.</h1>
+          <h1 className="text-sm font-semibold  text-neutral-800 font-poppins">Guarda el detalle de tu pedido.</h1>
           <button
             onClick={handleCapture}
             style={{ backgroundColor: "#FD3307" }}

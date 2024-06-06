@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { formatearNumero } from "libs/items";
 import { AiOutlineClose } from "react-icons/ai";
+import { useSelector } from "react-redux";
 const ModalPedido = ({ handleClose, show, pedido }) => {
+  const { promoEfectivo } = useSelector(state => state.setting);
   const showHideClassName = show ? "fixed z-10 inset-0 overflow-y-auto w-full" : "hidden";
   let idIcrement = 1;
   const categorias = [...new Set(pedido.productos.map(producto => producto.categoria))];
@@ -14,7 +16,6 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
   }));
 
   const { productos } = pedido;
-
 
   const separarNumero = numero => {
     const segmento1 = numero.substring(0, 2);
@@ -134,6 +135,9 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                   </div>
                 ))}
               </>
+              {promoEfectivo.available && pedido.medioDePago === "Efectivo" && (
+                <p className="text-sm font-normal  mt-2 text-red-500">Se aplica el {promoEfectivo.descuento}% de descuento, excepto soloEfectivo</p>
+              )}
               <div className="border-t-2 border-gray-300 my-3"></div>
 
               <div className="flex font-bold justify-between items-center text-gray-900">

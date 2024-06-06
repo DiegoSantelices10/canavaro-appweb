@@ -72,6 +72,7 @@ export default function ProductLayout({
 
 
   const incrementCartPizza = data => {
+    console.log('data', data);
     dispatch(addProductPizza(data));
   };
 
@@ -122,7 +123,6 @@ export default function ProductLayout({
         if (item.categoria !== 'extras') {
           dispatch(addPromoOrderList({
             ...item,
-            _id: idGenerator,
             comentarios: comentarioRef.current.value,
             precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
             extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
@@ -159,6 +159,7 @@ export default function ProductLayout({
   }
 
   const openModal = () => {
+    console.log('guardar');
     if (extras.length > 0 && orderPromo.length === 1) {
       if (orderPromo[0].cantidad === 1) {
         setInfo({

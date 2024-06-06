@@ -23,6 +23,8 @@ function HomeFront({ imagefront }) {
         const efectivo = data.find(item => item.nombre === "Promo efectivo")
         dispatch(setSetting({ deliveryButton: delivery, promoBarra: barra, promoEfectivo: efectivo }));
         localStorage.setItem('buttom delivery', { buttomDelivery: delivery[0] })
+        localStorage.setItem('promo efectivo', JSON.stringify(efectivo))
+
       }
     })()
 

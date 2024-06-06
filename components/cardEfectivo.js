@@ -26,6 +26,10 @@ const CardEfectivo = ({ data: { _id, nombre, imagen, descripcion, categoria, pre
     const quantityZero = _id => {
         return orderPromo?.find(item => item._id === _id);
     };
+
+    const hasCategoriaEmpanadas = () => {
+        return orderPromo?.find(item => item.categoria === "empanadas");
+    };
     return (
         <div className="rounded-xl shadow p-3">
             <div
@@ -56,19 +60,20 @@ const CardEfectivo = ({ data: { _id, nombre, imagen, descripcion, categoria, pre
                         </div>
 
                         <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
+                        {!hasCategoriaEmpanadas() && (
+                            <div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
+                                <button
+                                    type="button"
+                                    className="text-green-500 text-3xl flex justify-center items-center"
+                                    onClick={e => {
+                                        addItems({ _id, nombre, precio, categoria });
+                                    }}
+                                >
+                                    <Add01Icon color={"bg-green-500"} width={18} height={18} />
 
-                        <div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
-                            <button
-                                type="button"
-                                className="text-green-500 text-3xl flex justify-center items-center"
-                                onClick={e => {
-                                    addItems({ _id, nombre, precio, categoria });
-                                }}
-                            >
-                                <Add01Icon color={"bg-green-500"} width={18} height={18} />
-
-                            </button>
-                        </div>
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

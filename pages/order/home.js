@@ -88,10 +88,6 @@ export default function Home() {
     }
   }, []);
 
-
-
-
-
   const calculateEmpanadas = () => {
     const requiredQuantity = 12;
     let priceU;
@@ -177,6 +173,7 @@ export default function Home() {
     dispatch(calculateSubTotal());
     dispatch(calculateTotalQuantity());
   };
+
   const clearTotal = () => {
     dispatch(clearOrderPromo());
 
