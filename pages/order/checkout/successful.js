@@ -13,7 +13,6 @@ export default function successful() {
   const { promoEfectivo: { available, descuento } } = useSelector(state => state.setting);
   const [subTotal, setSubTotal] = useState(0);
   const router = useRouter()
-  // const [catId, setCatId] = useState([]);
   const hasProductosEfectivo = () => {
     return orderList.filter(product => product.categoria === "soloEfectivo");
   }
@@ -29,7 +28,7 @@ export default function successful() {
 
     setTimeout(() => {
       router.push('/')
-    }, 5000);
+    }, 10000);
 
   }, [])
 
