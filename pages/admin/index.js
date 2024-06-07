@@ -40,8 +40,10 @@ export default function HomeAdmin() {
     getSales()
   }, []);
   useEffect(() => {
-
+    socket.connect()
+    console.log('socket not connected', socket);
     const pedidosHandler = (pedidos) => {
+      console.log('pedidos', pedidos);
       sound.play();
       dispatch(addSale(pedidos));
     };
@@ -49,6 +51,7 @@ export default function HomeAdmin() {
 
     return () => {
       console.log('Desconectado');
+      socket.disconnect()
       socket.off('pedidos');
     };
   }, [])
