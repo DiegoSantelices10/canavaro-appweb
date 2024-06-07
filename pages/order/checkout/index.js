@@ -11,17 +11,14 @@ import { setCheckout, setDelivery, setDemora, setOrderListLocal, setTotalAmount 
 import { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { setUser } from "store/reducers/userSlice";
-import io from 'socket.io-client';
 import PriceTotal from "components/priceTotal";
 import { formatearNumero } from "libs/items";
 import { setSetting } from "store/reducers/settingSlice";
+import { socket } from "socket";
 
 
 
 export default function Checkout() {
-  const socket = io.connect('http://localhost:5000')
-
-  console.log('socket', socket)
 
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
@@ -34,6 +31,7 @@ export default function Checkout() {
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
   const enviarPedido = (pedido) => {
+    socket.connect()
     socket.emit('enviar-pedido', pedido)
     socket.disconnect()
     router.push("checkout/successful");
