@@ -28,7 +28,7 @@ export default function successful() {
 
     setTimeout(() => {
       router.push('/')
-    }, 10000);
+    }, 20000);
 
   }, [])
 
