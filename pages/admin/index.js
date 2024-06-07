@@ -33,6 +33,7 @@ export default function HomeAdmin() {
   const sound = new Howl({
     src: ["/sound/notificacion.mp3"],
   });
+  socket.connect()
 
 
   useEffect(() => {
@@ -40,7 +41,6 @@ export default function HomeAdmin() {
     getSales()
   }, []);
   useEffect(() => {
-    socket.connect()
     console.log('socket not connected', socket);
     const pedidosHandler = (pedidos) => {
       console.log('pedidos', pedidos);
@@ -54,7 +54,7 @@ export default function HomeAdmin() {
       socket.disconnect()
       socket.off('pedidos');
     };
-  }, [])
+  }, [socket])
 
   useEffect(() => {
     socket.on('liberado', (data) => {
