@@ -33,15 +33,18 @@ export default function HomeAdmin() {
   const sound = new Howl({
     src: ["/sound/notificacion.mp3"],
   });
-  socket.connect()
 
+  if (!socket.connected) {
+    socket.connect()
+  }
 
   useEffect(() => {
     getDelay()
     getSales()
   }, []);
+
   useEffect(() => {
-    console.log('socket not connected', socket);
+    console.log('socket connected', socket);
     const pedidosHandler = (pedidos) => {
       console.log('pedidos', pedidos);
       sound.play();
