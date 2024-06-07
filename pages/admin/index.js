@@ -54,7 +54,6 @@ export default function HomeAdmin() {
 
     return () => {
       console.log('Desconectado');
-      socket.disconnect()
       socket.off('pedidos');
     };
   }, [socket])

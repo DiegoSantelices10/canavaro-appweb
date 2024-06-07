@@ -31,9 +31,14 @@ export default function Checkout() {
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
   const enviarPedido = (pedido) => {
-    socket.connect()
+    if (!socket.connected) {
+      socket.connect()
+    }
     socket.emit('enviar-pedido', pedido)
-    socket.disconnect()
+    console.log('socket-checkout', socket);
+    setTimeout(() => {
+      socket.disconnect()
+    }, 3000);
     router.push("checkout/successful");
   }
 
