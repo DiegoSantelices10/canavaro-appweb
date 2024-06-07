@@ -39,9 +39,8 @@ export default function HomeAdmin() {
     getDelay()
     getSales()
   }, []);
-
   useEffect(() => {
-    socket.connect()
+
     const pedidosHandler = (pedidos) => {
       sound.play();
       dispatch(addSale(pedidos));
@@ -50,7 +49,7 @@ export default function HomeAdmin() {
 
     return () => {
       console.log('Desconectado');
-      socket.off('pedidos', pedidosHandler);
+      socket.off('pedidos');
     };
   }, [])
 

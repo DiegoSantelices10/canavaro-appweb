@@ -31,7 +31,6 @@ export default function Checkout() {
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
   const enviarPedido = (pedido) => {
-    socket.connect()
     socket.emit('enviar-pedido', pedido)
     socket.disconnect()
     router.push("checkout/successful");
