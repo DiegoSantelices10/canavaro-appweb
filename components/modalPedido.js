@@ -24,6 +24,10 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
     return `${segmento1} ${segmento2} ${segmento3}`;
   };
+
+  const conDescuento = () => {
+    return productos.some(p => p.categoria !== 'soloEfectivo');
+  }
   return (
     <div className={showHideClassName}>
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-poppins">
@@ -135,7 +139,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                   </div>
                 ))}
               </>
-              {promoEfectivo.available && pedido.medioDePago === "Efectivo" && (
+              {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
                 <p className="text-sm font-normal  mt-2 text-red-500">Se aplica el {promoEfectivo.descuento}% de descuento, excepto soloEfectivo</p>
               )}
               <div className="border-t-2 border-gray-300 my-3"></div>

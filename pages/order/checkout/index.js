@@ -35,10 +35,9 @@ export default function Checkout() {
       socket.connect()
     }
     socket.emit('enviar-pedido', pedido)
-    console.log('socket-checkout', socket);
     setTimeout(() => {
       socket.disconnect()
-    }, 3000);
+    }, 7000);
     router.push("checkout/successful");
   }
 

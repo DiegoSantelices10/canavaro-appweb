@@ -44,16 +44,13 @@ export default function HomeAdmin() {
   }, []);
 
   useEffect(() => {
-    console.log('socket connected', socket);
     const pedidosHandler = (pedidos) => {
-      console.log('pedidos', pedidos);
       sound.play();
       dispatch(addSale(pedidos));
     };
     socket.on('pedidos', pedidosHandler)
 
     return () => {
-      console.log('Desconectado');
       socket.off('pedidos');
     };
   }, [socket])
