@@ -57,11 +57,11 @@ const AccessMenu = () => {
 
 
   return (
-    <div className="w-full  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-4 ">
+    <div className="w-full bg-red-500 rounded-xl  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-4 ">
       <div className="lg:flex lg:justify-center lg:items-center hidden mt-5 ">
         <Image height={100} width={100} src={"/images/logocanavaro.webp"} />
       </div>
-      <div className="w-11/12 lg:w-full flex justify-around items-center lg:block lg:pt-10 pt-0">
+      <div className="w-11/12 lg:w-full flex justify-between items-center lg:block lg:pt-10 pt-0">
         <div>
           <Link href="/admin" passHref>
             <button
@@ -141,7 +141,7 @@ const AccessMenu = () => {
 
       </div>
       <button onClick={signOut} className="font-semibold absolute right-3 top-1/2 -translate-y-1/2 lg:right-4 lg:bottom-1 lg:top-auto">
-        <AiOutlineLogout size={25} className="mx-auto text-white" />
+        <AiOutlineLogout size={20} className="mx-auto text-white" />
       </button>
     </div>
   );

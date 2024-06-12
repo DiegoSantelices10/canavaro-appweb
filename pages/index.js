@@ -56,7 +56,7 @@ export default function index({ data }) {
           customButtonGroup={<CustomArrow />}
           arrows={false}
         >
-          <HomeFront imagefront={"/images/fondonuevo.webp"} />
+          <HomeFront />
           <SectionZona />
         </Carousel>
       </main>

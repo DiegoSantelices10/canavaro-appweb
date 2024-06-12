@@ -6,6 +6,7 @@ import Link from "next/link";
 import 'react-multi-carousel/lib/styles.css';
 import { setProductData } from 'store/reducers/productSlice';
 import Image from 'next/image'
+import { formatearNumero } from 'libs/items';
 
 
 
@@ -55,26 +56,26 @@ function DigitalMenu() {
                                     {data.precioPizza.gigante && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Gigante</p>
-                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-white text-center">${data.precioPizza.gigante}</p>
+                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-white text-center">{formatearNumero(data.precioPizza.gigante)}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.mediana && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Mediana</p>
-                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white ">${data.precioPizza.mediana}</p>
+                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white ">{formatearNumero(data.precioPizza.mediana)}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.chica && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Chica</p>
-                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white">${data.precioPizza.chica}</p>
+                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white">{formatearNumero(data.precioPizza.chica)}</p>
                                         </div>
                                     )}
 
                                 </div>
                             ) : (
                                 <div>
-                                    <p className="text-xl tracking-wider font-nunito font-normal text-white">$ {data.precioExtra ? `${data.precioExtra + data.precio}` : data.precio}</p>
+                                    <p className="text-xl tracking-wider font-nunito font-normal text-white"> {data.precioExtra ? `${formatearNumero(data.precioExtra + data.precio)}` : formatearNumero(data.precio)}</p>
                                 </div>
                             )}
                         </div>

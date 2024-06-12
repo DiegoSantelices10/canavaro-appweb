@@ -8,7 +8,7 @@ import { getPromo } from "services/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setSetting } from "store/reducers/settingSlice";
 
-function HomeFront({ imagefront }) {
+function HomeFront() {
   const dispatch = useDispatch();
 
   const { deliveryButton } = useSelector(state => state.setting);
@@ -30,8 +30,8 @@ function HomeFront({ imagefront }) {
 
   }, [])
   return (
-    <div className="font-poppins w-full min-h-screen mx-auto flex flex-col">
-      <Image src={imagefront} layout="fill" objectFit="cover" objectPosition={"center"} />
+    <div className="font-poppins w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
+
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
         className="flex items-center flex-col md:flex-row gap-y-36 md:gap-0 justify-center  w-full relative flex-grow "
