@@ -77,11 +77,12 @@ export default function Calcular({ data }) {
             });
             const promedio = totalPrecio / cantidad;
 
-            const totalRedondeado = Math.ceil(promedio / 100) * 100;
 
-            setSubtotal(totalRedondeado)
+            // const totalRedondeado = Math.ceil(promedio / 100) * 100;
 
-            console.log('totalRedondeado', totalRedondeado);
+            setSubtotal(promedio);
+
+            console.log('totalRedondeado', promedio);
         } else {
             setSubtotal(0)
         }
