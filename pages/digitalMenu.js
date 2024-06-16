@@ -35,9 +35,9 @@ function DigitalMenu() {
                     key={data._id}
                 >
                     <div
-                        className="flex bg-zinc-800 p-1 rounded-2xl justify-between items-center h-full  gap-x-2">
+                        className="flex bg-zinc-800 rounded-2xl justify-between items-center h-full  gap-x-2">
                         <Image
-                            className="rounded-xl"
+                            className="rounded-l-xl"
                             src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
                             width={160}
                             height={160}
@@ -48,7 +48,7 @@ function DigitalMenu() {
                         <div className="relative w-full h-full flex flex-col justify-between">
                             <div>
                                 <h1 className="font-medium font-poppins text-base text-white">{data.nombre}</h1>
-                                <p className="text-gray-300 font-nunito font-light text-sm">{data.descripcion}</p>
+                                <p className="text-gray-400 font-poppins font-light text-xs">{data.descripcion}</p>
                             </div>
                             {data.categoria === 'pizzas' ? (
                                 <div className='flex font-poppins justify-center gap-5 mt-2'>
@@ -109,36 +109,36 @@ function DigitalMenu() {
 
                 <button
                     onClick={() => setRenderProductos('promociones')}
-                    className={renderProductos === 'promociones' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-base' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'promociones' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Combos
                 </button>
                 <button
                     onClick={() => setRenderProductos('pizzas')}
-                    className={renderProductos === 'pizzas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-base' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'pizzas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
                     Pizzas
                 </button>
                 <button
                     onClick={() => setRenderProductos('bebidas')}
-                    className={renderProductos === 'bebidas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-base' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'bebidas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Bebidas
                 </button>
                 <button
                     onClick={() => setRenderProductos('porciones')}
-                    className={renderProductos === 'porciones' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-base' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'porciones' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Porciones
                 </button>
                 <button
                     onClick={() => setRenderProductos('empanadas')}
-                    className={renderProductos === 'empanadas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-base' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'empanadas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Empanadas & Canastitas
                 </button>
             </div>
             <div className="lg:px-2">
-                <div className=' grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:p-3 '>
+                <div className=' grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:p-3  pb-4'>
                     {renderStore(renderProductos)}
                 </div>
             </div>

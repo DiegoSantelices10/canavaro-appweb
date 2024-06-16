@@ -5,14 +5,12 @@ import { FaWhatsapp, FaDownload } from "react-icons/fa"
 import React, { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import { formatearNumero } from "libs/items";
-import { useRouter } from "next/router";
 
 
 export default function successful() {
   const { checkout, demora, delivery, orderList, totalAmount } = useSelector(state => state.order);
   const { promoEfectivo: { available, descuento } } = useSelector(state => state.setting);
   const [subTotal, setSubTotal] = useState(0);
-  const router = useRouter()
   const hasProductosEfectivo = () => {
     return orderList.filter(product => product.categoria === "soloEfectivo");
   }
@@ -25,11 +23,6 @@ export default function successful() {
       return acumulador + (producto.precio * producto.cantidad);
     }, 0);
     setSubTotal(sumGeneral)
-
-    setTimeout(() => {
-      router.push('/')
-    }, 10000);
-
   }, [])
 
   const handleCapture = () => {

@@ -57,7 +57,7 @@ const AccessMenu = () => {
 
 
   return (
-    <div className="w-full bg-red-500 rounded-xl  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-4 ">
+    <div className="w-full bg-red-600 rounded-xl  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-4 ">
       <div className="lg:flex lg:justify-center lg:items-center hidden mt-5 ">
         <Image height={100} width={100} src={"/images/logocanavaro.webp"} />
       </div>
