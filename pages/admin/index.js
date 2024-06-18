@@ -16,6 +16,7 @@ import { Howl } from "howler";
 import { getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
 import { socket } from "socket";
+import Link from "next/link";
 
 
 
@@ -164,7 +165,7 @@ export default function HomeAdmin() {
       {currentPedido && (
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
-      <div className="h-auto w-full lg:p-4">
+      <div className="min-h-screen w-full lg:p-4 ">
         <div className="w-full  mx-auto lg:rounded-md  h-auto gap-4">
           <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
             <div className="w-full text-center py-2">
@@ -222,9 +223,7 @@ export default function HomeAdmin() {
 
           </div>
         </div>
-
-
-        <div className="w-full   mx-auto text-center px-2 mt-5">
+        <div className="w-full  relative mx-auto text-center px-2 mt-5">
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-poppins">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
@@ -274,6 +273,16 @@ export default function HomeAdmin() {
 
           </div>
         </div>
+        <Link
+          href={"/calcular"}
+        >
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 
+                     px-4 rounded-lg absolute bottom-4 right-4 hover:-translate-y-1
+                     transition-all duration-500">
+            Calcular Pizzas
+          </button>
+        </Link>
       </div>
     </Layout>
   );
