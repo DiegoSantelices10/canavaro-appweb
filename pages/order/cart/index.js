@@ -426,9 +426,9 @@ export default function Cart({ data }) {
                               <div className="w-full ">
                                 <a className="font-semibold text-neutral-800 ">
                                   {item.nombre}
-                                  <span className="text-gray-400 font-light">
+                                  <span className="text-gray-400 font-light text-sm">
                                     {" "}
-                                    x {item.cant ? item.cant : item.cantidad}
+                                    {item.cant ? item.cant : item.cantidad}u
                                   </span>
                                 </a>
                                 <p className="text-gray-400 text-xs tracking-wider">
@@ -474,7 +474,7 @@ export default function Cart({ data }) {
                       </div>
                       <button
                         type="submit"
-                        className="text-center font-poppins rounded-2xl w-auto p-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center text-sm font-poppins rounded-2xl w-auto p-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>

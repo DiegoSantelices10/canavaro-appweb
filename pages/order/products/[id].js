@@ -34,8 +34,7 @@ export async function getServerSideProps({ query }) {
   const id = query.id;
   const data = await productos.find(
     item =>
-      (convertToPath(item.nombre) === id && item.categoria === "pizzas") ||
-      (convertToPath(item.nombre) === id && item.categoria === "promociones")
+      (convertToPath(item.nombre) === id && (item.categoria === "pizzas" || item.categoria === "promociones" || item.categoria === "soloEfectivo"))
   );
 
   return {

@@ -58,7 +58,7 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
                     <div className='p-2 border rounded-xl border-red-500 my-2'>
                         {hasProductosGeneral().map(product => (
                             <div key={product._id} className='flex justify-between items-center w-full py-1'>
-                                <h3 className='text-sm font-semibold text-slate-800'>{product.nombre} <span className='text-xs text-gray-800 font-light'>{product.categoria === "empanadas" ? `x ${product.cant}` : `x ${product.cantidad}`}</span> </h3>
+                                <h3 className='text-sm font-semibold text-slate-800'>{product.nombre} <span className='text-xs text-gray-800 font-light'>{product.categoria === "empanadas" ? ` ${product.cant}u` : ` ${product.cantidad}u`}</span> </h3>
                                 <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
                             </div>
                         ))}
@@ -77,7 +77,7 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
                     <h3 className='text-xs px-2 font-medium mt-2 text-gray-400'>Solo efectivo</h3>
                     {hasProductosEfectivo().map(product => (
                         <div key={product._id} className='flex px-2 justify-between w-full items-center py-1'>
-                            <h3 className='text-sm font-semibold text-slate-800'>{product.nombre}<span className='text-xs text-gray-800 font-light'>{` x ${product.cantidad}`}</span></h3>
+                            <h3 className='text-sm font-semibold text-slate-800'>{product.nombre}<span className='text-xs text-gray-800 font-light'>{` ${product.cantidad}u`}</span></h3>
                             <div className='flex gap-4 items-center'>
                                 <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
                             </div>

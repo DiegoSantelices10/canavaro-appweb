@@ -28,7 +28,7 @@ export const createProduct = async (req, res) => {
       };
     }
     let newProduct = null;
-    if (categoria === "promociones") {
+    if (categoria === "promociones" || categoria === "soloEfectivo") {
       newProduct = new Producto({
         nombre,
         descripcion,
@@ -97,15 +97,7 @@ export const createProduct = async (req, res) => {
       });
     }
 
-    if (categoria === "soloEfectivo") {
-      newProduct = new Producto({
-        nombre,
-        categoria,
-        descripcion,
-        precio,
-        available: true,
-      });
-    }
+ 
 
     await newProduct
       .save()

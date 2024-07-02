@@ -365,7 +365,7 @@ export default function Update({ data }) {
                                 value={values.cantidadMaxima}
                                 onChange={handleChange}
                                 className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													  rounded-md shadow   focus:border-gray-200"
+													                  rounded-md shadow   focus:border-gray-200"
                               />
                             </label>
                           </div>

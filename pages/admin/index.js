@@ -17,6 +17,7 @@ import { getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
 import { socket } from "socket";
 import Link from "next/link";
+import PercentIcon from "public/images/porcentaje";
 
 
 
@@ -277,10 +278,9 @@ export default function HomeAdmin() {
           href={"/calcular"}
         >
           <button
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 
-                     px-4 rounded-lg absolute bottom-4 right-4 hover:-translate-y-1
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold p-3 opacity-70 hover:opacity-100 rounded-full fixed bottom-4 right-4 hover:-translate-y-1
                      transition-all duration-500">
-            Calcular Pizzas
+            <PercentIcon color="white" />
           </button>
         </Link>
       </div>

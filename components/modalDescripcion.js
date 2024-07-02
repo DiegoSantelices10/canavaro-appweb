@@ -27,8 +27,8 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
               </button>
             </div>
             <div className="w-full mt-6">
-              <h2 className="text-lg">{pedido.nombre}</h2>
-              <p className="font-normal  text-base text-gray-400 ">{pedido.descripcion}</p>
+              <h2 className="text-base font-poppins">{pedido.nombre}</h2>
+              <p className="font-normal font-poppins  text-sm text-gray-400 ">{pedido.descripcion}</p>
             </div>
             <hr />
             <div className="py-4">
@@ -41,7 +41,7 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
                       {item.nombre}
                     </p>
                     <p>
-                      {item.cantidad && <span className="font-normal text-sm pl-1 text-gray-400">x {item.cantidad}</span>}
+                      {item.cantidad && <span className="font-normal text-sm pl-1 text-gray-400">{item.cantidad}u</span>}
                     </p>
                   </div>
                 );

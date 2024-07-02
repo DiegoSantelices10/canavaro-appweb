@@ -159,7 +159,6 @@ export default function ProductLayout({
   }
 
   const openModal = () => {
-    console.log('guardar');
     if (extras.length > 0 && orderPromo.length === 1) {
       if (orderPromo[0].cantidad === 1) {
         setInfo({
@@ -208,7 +207,7 @@ export default function ProductLayout({
           <div className="w-full ">
             <h1 className="font-bold text-lg font-poppins text-zinc-800">{nombre}</h1>
             <p className=" font-normal text-sm  text-gray-400 font-poppins">{descripcion}</p>
-            {categoria === "promociones" && (
+            {(categoria === "promociones" || categoria === "soloEfectivo") && (
               <p className=" font-normal font-poppins text-sm text-gray-400">{formatearNumero(precio)}</p>
             )}
             <hr className="mt-4" />
