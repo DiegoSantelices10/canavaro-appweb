@@ -282,7 +282,7 @@ export default function Checkout() {
                                 <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                               </div>
                               <p className="font-poppins text-center text-xs text-gray-400">
-                                El reintegro lo realiza el banco, tope $3500 por mes.
+                                El reintegro lo realiza el banco, tope $5000 por mes.
                               </p>
                               <p className="font-poppins text-center text-xs text-gray-400">
                                 Abonas al momento de confirmar el pedido por whatsapp
