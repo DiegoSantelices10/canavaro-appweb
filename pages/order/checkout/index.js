@@ -15,6 +15,7 @@ import PriceTotal from "components/priceTotal";
 import { formatearNumero } from "libs/items";
 import { setSetting } from "store/reducers/settingSlice";
 import { socket } from "socket";
+import { getUrl } from "utils/getUrl";
 
 
 
@@ -29,6 +30,9 @@ export default function Checkout() {
   const router = useRouter();
 
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
+
+
+  console.log(getUrl());
 
   const enviarPedido = (pedido) => {
     if (!socket.connected) {
@@ -230,7 +234,7 @@ export default function Checkout() {
                               type="number"
                               name="pagaCon"
                               className="border rounded-xl placeholder:text-gray-400  
-                          border-gray-200 font-poppins text-sm w-full p-3 focus:ring-0 focus:border-gray-300"
+                                       border-gray-200 font-poppins text-sm w-full p-3 focus:ring-0 focus:border-gray-300"
                               placeholder="¿Con cuanto vas a pagar?"
                             />
                           )}
