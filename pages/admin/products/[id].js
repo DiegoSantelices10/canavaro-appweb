@@ -177,7 +177,7 @@ export default function Update({ data }) {
           >
             {({ setFieldValue, values, handleChange }) => (
               <Form
-                className="border border-gray-300 p-4  rounded-md"
+                className="border border-gray-200 p-4  rounded-xl"
               >
                 <div className="md:grid  md:grid-cols-2  justify-items-end gap-4 space-y-2 lg:space-y-0 md:space-y-0">
                   <div className="w-full mx-auto">

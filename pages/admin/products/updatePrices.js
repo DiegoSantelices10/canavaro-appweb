@@ -142,7 +142,7 @@ const UpdatePrices = () => {
         <div className=" lg:w-1/3 w-full px-2 mt-3 lg:mt-0 flex flex-col items-center  p-2   mx-auto border-none outline-none shadow border border-gray-200 rounded-md">
           <p className="font-poppins font-semibold">Actualizá el precio de las pizzas</p>
           <input
-            className=" file:cursor-pointer text-gray-500 text-sm w-5/5 mt-6 file:font-medium font-poppins file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded "
+            className=" file:cursor-pointer text-gray-500 text-xs w-5/5 mt-6 file:font-medium font-poppins file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded file:text-xs "
             type="file"
             title="Importar archivo"
             accept=".xlsx, .xls"

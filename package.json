@@ -24,6 +24,7 @@
     "express": "^4.19.2",
     "formik": "^2.2.9",
     "framer-motion": "^10.12.16",
+    "hamburger-react": "^2.5.1",
     "howler": "^2.2.3",
     "html2canvas": "^1.4.1",
     "jest-worker": "^29.4.3",

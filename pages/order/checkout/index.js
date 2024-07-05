@@ -32,7 +32,9 @@ export default function Checkout() {
   const medios = ['Efectivo', 'Mercado Pago', 'Cuenta DNI', 'Open Pay']
 
 
-  console.log(getUrl());
+  const isCanavaroVercel = getUrl() === 'canavaro-appweb.vercel.app'
+
+
 
   const enviarPedido = (pedido) => {
     if (!socket.connected) {
@@ -116,6 +118,8 @@ export default function Checkout() {
         }}
         onSubmit={async values => {
           setIsSubmitting(true);
+
+
           const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm");
           const fecha = moment.tz("America/Argentina/Buenos_Aires").format("DD/MM");
 
@@ -129,11 +133,16 @@ export default function Checkout() {
                 liberado: false,
               });
               dispatch(setCheckout(res.data.response))
-              if (res.data.message === "ok") {
-                try {
-                  enviarPedido(res.data.response)
-                } catch (error) {
-                  alert("No se pudo Completar la acción")
+
+              if (isCanavaroVercel) {
+                router.push("checkout/successful");
+              } else {
+                if (res.data.message === "ok") {
+                  try {
+                    enviarPedido(res.data.response)
+                  } catch (error) {
+                    alert("No se pudo Completar la acción")
+                  }
                 }
               }
             } catch (error) {
@@ -149,17 +158,20 @@ export default function Checkout() {
                 liberado: false,
               });
               dispatch(setCheckout(res.data.response))
-              if (res.data.message === "ok") {
-                try {
-                  enviarPedido(res.data.response)
-                } catch (error) {
-                  alert("No se pudo Completar la acción")
+              if (isCanavaroVercel) {
+                router.push("checkout/successful");
+              } else {
+                if (res.data.message === "ok") {
+                  try {
+                    enviarPedido(res.data.response)
+                  } catch (error) {
+                    alert("No se pudo Completar la acción")
+                  }
                 }
               }
             } catch (error) {
               alert("No se pudo Completar la acción")
             }
-
           }
         }}
       >

@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
       <Toaster />
 
 
-      <main className="max-h-max  w-full lg:w-10/12 lg:absolute lg:right-0">
+      <main className="max-h-max  w-full lg:w-10/12 lg:absolute lg:right-0 p-2">
         {children}
       </main>
     </div>

@@ -22,7 +22,7 @@ export default function Create() {
   return (
     <Layout>
       <section className="w-full flex justify-start items-start h-screen">
-        <div className="w-full  p-2 md:p-10">
+        <div className="w-full md:p-10">
           <h1 className="text-xl text-center md:text-4xl font-poppins font-semibold text-zinc-800 my-4">
             ¡Producto nuevo!
           </h1>

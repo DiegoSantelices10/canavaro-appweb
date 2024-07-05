@@ -118,7 +118,7 @@ export default function Products() {
   return (
     <Layout>
       <Toaster />
-      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full px-1 md:px-3 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
+      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full  md:px-3 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
         <div className="flex flex-col sm:flex-col md:flex-row w-full gap-4">
 
           <div className="bg-white flex w-full lg:w-1/2  items-center gap-x-2">
