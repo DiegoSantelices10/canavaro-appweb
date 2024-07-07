@@ -22,7 +22,7 @@ const Modal = ({ handleClose, showModal, producto }) => {
           &#8203;
         </span>
         <div className="inline-block align-bottom w-full min-h-min rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-4 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-black  bg-opacity-80 text-white font-poppins font-semibold p-3">
+          <div className="bg-black  bg-opacity-80 text-white font-montserrat font-semibold p-3">
             <div className="relative overflow-hidden  mx-auto">
               {showModal && (
                 <Image

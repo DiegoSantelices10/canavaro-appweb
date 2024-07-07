@@ -87,12 +87,12 @@ export default function Calcular({ data }) {
 
     const productTotal = () => {
 
-        if (total === 0) return <h1 className="font-nunito">Arma tu pizza</h1>;
-        if (total === 0.25) return <h1 className="font-nunito">Te falta 3/4 de pizza</h1>;
-        if (total === 0.5) return <h1 className="font-nunito">Te falta 1/2 de pizza</h1>;
-        if (total === 0.75) return <h1 className="font-nunito">Te falta 1/4 de pizza</h1>;
-        if (total === 1) return <h1 className="font-nunito">¡ Pizza Completa !</h1>;
-        if (total > 1) return <h1 className="font-nunito">Completa correctamente</h1>;
+        if (total === 0) return <h1 className="font-montserrat">Arma tu pizza</h1>;
+        if (total === 0.25) return <h1 className="font-montserrat">Te falta 3/4 de pizza</h1>;
+        if (total === 0.5) return <h1 className="font-montserrat">Te falta 1/2 de pizza</h1>;
+        if (total === 0.75) return <h1 className="font-montserrat">Te falta 1/4 de pizza</h1>;
+        if (total === 1) return <h1 className="font-montserrat">¡ Pizza Completa !</h1>;
+        if (total > 1) return <h1 className="font-montserrat">Completa correctamente</h1>;
     };
 
     const addCartPromo = () => {
@@ -112,12 +112,12 @@ export default function Calcular({ data }) {
                     <div className="w-full sticky top-0 bg-slate-900 flex flex-col md:flex-row  items-center justify-around rounded-md shadow-gray-600 shadow p-2 py-4">
                         <div className="flex gap-4 justify-around w-full md:w-1/2">
                             <div className="flex flex-col text-center">
-                                <h1 className="font-semibold text-base text-white font-poppins">Subtotal</h1>
-                                <p className=" font-normal text-lg  text-gray-400 font-poppins">{formatearNumero(subtotal)}</p>
+                                <h1 className="font-semibold text-base text-white font-montserrat">Subtotal</h1>
+                                <p className=" font-normal text-lg  text-gray-400 font-montserrat">{formatearNumero(subtotal)}</p>
                             </div>
                             <div className="flex flex-col text-center">
-                                <h1 className="font-semibold text-base text-white font-poppins">Total</h1>
-                                <p className=" font-normal text-lg  text-gray-400 font-poppins">{formatearNumero(totalPrecioPedido)}</p>
+                                <h1 className="font-semibold text-base text-white font-montserrat">Total</h1>
+                                <p className=" font-normal text-lg  text-gray-400 font-montserrat">{formatearNumero(totalPrecioPedido)}</p>
                             </div>
                             <button
                                 className="bg-gray-800 rounded-full px-3"
@@ -131,8 +131,8 @@ export default function Calcular({ data }) {
                             <div
                                 className={
                                     total === 1
-                                        ? "bg-green-500 font-poppins rounded-md  w-1/2 text-sm text-white p-2  text-center font-semibold"
-                                        : "bg-red-600 w-1/2 font-poppins rounded-md text-white text-sm p-2  text-center font-semibold"
+                                        ? "bg-green-500 font-montserrat rounded-md  w-1/2 text-sm text-white p-2  text-center font-semibold"
+                                        : "bg-red-600 w-1/2 font-montserrat rounded-md text-white text-sm p-2  text-center font-semibold"
                                 }
                             >
                                 {productTotal()}
@@ -141,7 +141,7 @@ export default function Calcular({ data }) {
                                 <div className="mx-auto border-gray-200 w-1/2">
                                     <button
                                         className={`${total === 1
-                                            ? "flex justify-center items-center gap-3 py-2 text-center rounded-md w-full bg-red-600 mx-auto  hover:-translate-y-1 transition-all font-nunito duration-500 text-white text-sm font-semibold "
+                                            ? "flex justify-center items-center gap-3 py-2 text-center rounded-md w-full bg-red-600 mx-auto  hover:-translate-y-1 transition-all font-montserrat duration-500 text-white text-sm font-semibold "
                                             : "invisible"
                                             }`}
                                         onClick={() => {
@@ -157,7 +157,7 @@ export default function Calcular({ data }) {
                     </div>
 
                     <div className="block lg:flex">
-                        <div className="flex justify-center gap-10 font-poppins  w-full font-bold py-4 lg:py-0">
+                        <div className="flex justify-center gap-10 font-montserrat  w-full font-bold py-4 lg:py-0">
                             <div className="grid content-center gap-2">
                                 <input
                                     id="chica"
@@ -168,7 +168,7 @@ export default function Calcular({ data }) {
                                     checked={select === "chica"}
                                     className="mx-auto p-4 rounded-xl focus:ring-0 focus:text-red-600 hover:text-red-600 checked:text-red-600"
                                 />
-                                <h3 className="font-semibold font-poppins text-white text-sm">Chica</h3>
+                                <h3 className="font-semibold font-montserrat text-white text-sm">Chica</h3>
                             </div>
                             <div className="grid content-center gap-2">
                                 <input
@@ -203,8 +203,8 @@ export default function Calcular({ data }) {
                             .map((item) => (
 
                                 <div key={item._id} className="w-[205px] shadow-gray-600 shadow-inner rounded-2xl border-gray-400">
-                                    <h2 className=" font-medium font-poppins text-white text-center text-xs mt-4 uppercase ">{item.nombre}</h2>
-                                    <h2 className=" font-medium font-poppins text-gray-400 text-center text-xs uppercase ">{formatearNumero(item.precioPizza[select])}</h2>
+                                    <h2 className=" font-medium font-montserrat text-white text-center text-xs mt-4 uppercase ">{item.nombre}</h2>
+                                    <h2 className=" font-medium font-montserrat text-gray-400 text-center text-xs uppercase ">{formatearNumero(item.precioPizza[select])}</h2>
 
                                     <div className="w-auto text-center text-base mt-2">
                                         <div className="flex w-full justify-center items-center gap-2">

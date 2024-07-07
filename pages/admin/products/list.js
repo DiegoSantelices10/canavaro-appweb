@@ -99,12 +99,12 @@ export default function Products() {
   }
   const deleteItem = async (id) => {
     toast((t) => (
-      <div className="text-gray-900 flex justify-start gap-3 items-center font-poppins w-auto">
+      <div className="text-gray-900 flex justify-start gap-3 items-center font-montserrat w-auto">
         <h1 className="font-normal">
           ¿Confirmas la acción?
         </h1>
         <button
-          className="p-2 bg-red-500 text-white font-normal font-poppins flex gap-1 item-center justify-center rounded-md"
+          className="p-2 bg-red-500 text-white font-normal font-montserrat flex gap-1 item-center justify-center rounded-md"
           onClick={() => deleteItemEndPoint(t.id, id)}>
           <h1>
             Eliminar
@@ -132,7 +132,7 @@ export default function Products() {
                 type="text"
                 placeholder="¿Que Desea Buscar?"
                 onChange={handleChangeSearch}
-                className="w-full border-none text-sm rounded-xl text-gray-200 placeholder:text-gray-400 placeholder:font-poppins  focus:outline-none focus:ring-0"
+                className="w-full border-none text-sm rounded-xl text-gray-200 placeholder:text-gray-400 placeholder:font-montserrat  focus:outline-none focus:ring-0"
               />
               <Search01Icon color="#BFBFBF" width={20} />
             </div>
@@ -141,20 +141,20 @@ export default function Products() {
           <div className="w-full lg:w-1/2 h-10 rounded-xl appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
             <select
               onChange={handleCategoryChange}
-              className="h-10 border border-gray-200 font-poppins focus:ring-0 focus:ring-gray-200 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-xl  block w-full p-2.5 "
+              className="h-10 border border-gray-200 font-montserrat focus:ring-0 focus:ring-gray-200 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-xl  block w-full p-2.5 "
             >
-              <option className="text-gray-200 text-sm font-poppins" value="">
+              <option className="text-gray-200 text-sm font-montserrat" value="">
                 Seleccione una categoria
               </option>
               {categorias.map(item => (
-                <option key={item} value={item} className="text-sm font-poppins font-medium">
+                <option key={item} value={item} className="text-sm font-montserrat font-medium">
                   {item}
                 </option>
               ))}
             </select>
           </div>
           <button
-            className="px-3 whitespace-nowrap h-10 w-full md:w-1/3  font-poppins font-normal
+            className="px-3 whitespace-nowrap h-10 w-full md:w-1/3  font-montserrat font-normal
                        rounded-xl  text-sm border text-white bg-red-600"
             type="button"
             onClick={() =>
@@ -164,7 +164,7 @@ export default function Products() {
             Producto Nuevo
           </button>
           <button
-            className="h-10 whitespace-nowrap w-full md:w-1/3 px-3 font-poppins font-normal
+            className="h-10 whitespace-nowrap w-full md:w-1/3 px-3 font-montserrat font-normal
                         rounded-xl  text-sm border  bg-red-600 text-white"
             type="button"
             onClick={() => {
@@ -188,7 +188,7 @@ export default function Products() {
                   height={140}
                   alt={nombre}
                 />
-                <div className=" p-2 relative w-full font-poppins  self-start  h-full">
+                <div className=" p-2 relative w-full font-montserrat  self-start  h-full">
                   <h1 className="font-medium text-sm text-gray-800">{nombre}</h1>
                   <h4 className="text-gray-400 text-xs font-normal ">{categoria}</h4>
                   <div className="absolute bottom-1 ">

@@ -23,7 +23,7 @@ export default function Product({ data }) {
   }, []);
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen">
       <ProductLayout key={data._id} data={data} />
     </div>
   );

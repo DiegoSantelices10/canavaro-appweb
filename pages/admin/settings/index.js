@@ -31,8 +31,8 @@ export default function Settings() {
 			<div
 				className="p-4"
 			>
-				<p className="text-sm font-nunito font-medium">Pago en efectivo, el porcentaje de descuento es: {promoEfectivo?.descuento}%</p>
-				<p className="text-xs font-nunito font-normal text-gray-500">Agregar solo el numero ej: 5 o 10</p>
+				<p className="text-sm font-montserrat font-medium">Pago en efectivo, el porcentaje de descuento es: {promoEfectivo?.descuento}%</p>
+				<p className="text-xs font-montserrat font-normal text-gray-500">Agregar solo el numero ej: 5 o 10</p>
 				<div
 					className="flex justify-start items-center mt-2 gap-4"
 				>

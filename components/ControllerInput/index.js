@@ -6,7 +6,7 @@ const ControllerInput = ({ label, name }) => {
 
     return (
         <div className="w-full mx-auto">
-            <label className="block  text-xs  text-gray-400 font-poppins font-normal">
+            <label className="block  text-xs  text-gray-400 font-montserrat font-normal">
                 {label}
                 <Field
                     id={name}

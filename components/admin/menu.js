@@ -101,7 +101,7 @@ const AccessMenu = () => {
                 className={`${selected === "/admin" ? " text-white  font-bold tracking-wider" : "font-normal text-white"
                   } mx-auto w-auto h-auto`}
               >
-                <p className="text-base font-poppins lg:text-left md:text-center text-center">Pedidos</p>
+                <p className="text-base font-montserrat lg:text-left md:text-center text-center">Pedidos</p>
               </button>
             </Link>
           </div>
@@ -113,7 +113,7 @@ const AccessMenu = () => {
                   : "font-normal text-white"
                   } mx-auto w-auto  h-auto  `}
               >
-                <p className="lg:text-left md:text-center text-center text-base font-poppins ">Productos</p>
+                <p className="lg:text-left md:text-center text-center text-base font-montserrat ">Productos</p>
               </button>
             </Link>
 
@@ -126,7 +126,7 @@ const AccessMenu = () => {
                   : "font-normal text-white"
                   } mx-auto w-auto h-auto `}
               >
-                <p className="text-base font-poppins lg:text-left md:text-center text-center">Ventas</p>
+                <p className="text-base font-montserrat lg:text-left md:text-center text-center">Ventas</p>
               </button>
             </Link>
           </div>
@@ -138,7 +138,7 @@ const AccessMenu = () => {
                   : "font-normal text-white"
                   } mx-auto w-auto  h-auto  `}
               >
-                <p className="lg:text-left md:text-center text-center text-base font-poppins ">Ajustes</p>
+                <p className="lg:text-left md:text-center text-center text-base font-montserrat ">Ajustes</p>
               </button>
             </Link>
           </div>
@@ -149,7 +149,7 @@ const AccessMenu = () => {
               key={item._id + 'menu'}
               className="mt-2 w-full flex justify-between items-center gap-5"
             >
-              <h1 className="text-white font-poppins">
+              <h1 className="text-white font-montserrat">
                 {item.nombre}
               </h1>
               <label className="relative inline-flex items-center cursor-pointer">
@@ -192,7 +192,7 @@ const AccessMenu = () => {
                   className={`${selected === "/admin" ? " text-white  font-bold tracking-wider" : "font-normal text-white"
                     } mx-auto w-auto h-auto`}
                 >
-                  <p className="text-base font-poppins">Pedidos</p>
+                  <p className="text-base font-montserrat">Pedidos</p>
                 </button>
               </Link>
             </div>
@@ -204,7 +204,7 @@ const AccessMenu = () => {
                     : "font-normal text-white"
                     }  w-auto  h-auto  `}
                 >
-                  <p className="text-base font-poppins">Productos</p>
+                  <p className="text-base font-montserrat">Productos</p>
                 </button>
               </Link>
             </div>
@@ -217,7 +217,7 @@ const AccessMenu = () => {
                     : "font-normal text-white"
                     } mx-auto w-auto h-auto `}
                 >
-                  <p className="text-base font-poppins">Ventas</p>
+                  <p className="text-base font-montserrat">Ventas</p>
                 </button>
               </Link>
             </div>
@@ -230,7 +230,7 @@ const AccessMenu = () => {
                     : "font-normal text-white"
                     } mx-auto w-auto  h-auto  `}
                 >
-                  <p className="text-base font-poppins">Ajustes</p>
+                  <p className="text-base font-montserrat">Ajustes</p>
                 </button>
               </Link>
             </div>

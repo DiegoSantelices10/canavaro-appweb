@@ -162,7 +162,7 @@ export default function ProductLayout({
     if (extras.length > 0 && orderPromo.length === 1) {
       if (orderPromo[0].cantidad === 1) {
         setInfo({
-          title: "Agrega extras a tu pizza",
+          title: "Extras a tu pizza",
         });
         setShowModal(true);
       } else {
@@ -173,7 +173,7 @@ export default function ProductLayout({
     }
   }
   return (
-    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-5/12 ">
+    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 shadow-md">
       {showModal && (
         <ModalMessage
           showModal={showModal}
@@ -205,10 +205,10 @@ export default function ProductLayout({
       <div className="w-full h-auto bg-white rounded-t-3xl -mt-52 sm:-mt-72 md:-mt-80 lg:-mt-80 p-4">
         <div className="flex flex-col w-full ">
           <div className="w-full ">
-            <h1 className="font-bold text-lg font-poppins text-zinc-800">{nombre}</h1>
-            <p className=" font-normal text-sm  text-gray-400 font-poppins">{descripcion}</p>
+            <h1 className="font-semibold text-lg font-montserrat text-zinc-800">{nombre}</h1>
+            <p className=" font-normal text-sm  text-gray-400 font-montserrat">{descripcion}</p>
             {(categoria === "promociones" || categoria === "soloEfectivo") && (
-              <p className=" font-normal font-poppins text-sm text-gray-400">{formatearNumero(precio)}</p>
+              <p className=" font-normal font-montserrat text-sm text-gray-400">{formatearNumero(precio)}</p>
             )}
             <hr className="mt-4" />
           </div>
@@ -234,7 +234,7 @@ export default function ProductLayout({
         </div>
 
         <div className="font-normal text-left text-sm pb-24 pt-5 max-h-full">
-          <label className="pb-1 font-poppins font-medium text-sm text-gray-600">
+          <label className="pb-1 font-montserrat font-medium text-sm text-gray-600">
             Comentarios
             <input
               id="comentarios"
@@ -246,11 +246,10 @@ export default function ProductLayout({
           </label>
         </div>
       </div>
-
-      <div className=" w-full fixed bottom-0 p-4 z-20  sm:w-4/5 md:w-3/5 lg:w-2/5">
+      <div className="fixed bottom-3 z-20 mx-auto flex justify-center w-full sm:w-4/5 md:w-3/5 lg:w-2/5 px-4">
         <button
           className={`${result() > 0
-            ? "flex justify-center gap-3 text-center font-poppins rounded-2xl w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-semibold"
+            ? "flex justify-center gap-3 text-center font-montserrat rounded-lg w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-medium"
             : "invisible"
             } `}
           onClick={() => {

@@ -17,7 +17,7 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: -50 }}
-            className=" h-full bg-white z-10 font-poppins font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+            className=" h-full bg-white z-10 font-montserrat font-semibold px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
           >
             <div className=" overflow-hidden h-full   mx-auto  ">
               <button
@@ -27,8 +27,8 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
               </button>
             </div>
             <div className="w-full mt-6">
-              <h2 className="text-base font-poppins">{pedido.nombre}</h2>
-              <p className="font-normal font-poppins  text-sm text-gray-400 ">{pedido.descripcion}</p>
+              <h2 className="text-base font-montserrat">{pedido.nombre}</h2>
+              <p className="font-normal font-montserrat  text-sm text-gray-400 ">{pedido.descripcion}</p>
             </div>
             <hr />
             <div className="py-4">

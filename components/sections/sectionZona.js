@@ -6,11 +6,11 @@ export default function SectionZona() {
       <div className="relative p-2 h-full  
           rounded-lg w-full lg:w-4/5 mx-auto 
 					">
-        <h1 className="relative font-poppins py-4  w-full 
+        <h1 className="relative font-montserrat py-4  w-full 
               text-center text-gray-200  text-2xl lg:text-3xl 
               font-semibold ">Contacto</h1>
         <hr className="py-2" />
-        <div className="text-center text-white grid  mt-6 h-full  font-poppins ">
+        <div className="text-center text-white grid  mt-6 h-full  font-montserrat ">
           <div className="flex flex-wrap justify-center items-center ">
             <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
               <h1 className="font-bold text-xl">HORARIOS DE ATENCI&Oacute;N</h1>

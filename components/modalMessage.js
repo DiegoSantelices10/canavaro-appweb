@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
+import { formatearNumero } from "libs/items";
 import Image from 'next/image';
 import Add01Icon from "public/images/add-01-stroke-rounded";
 import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
@@ -57,10 +58,10 @@ const ModalMessage = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: -50 }}
-            className=" mx-auto  text-zinc-800 lg:w-3/5 md:w-4/5  w-full bg-white p-3 h-full py-5 rounded-3xl font-poppins font-semibold"
+            className=" mx-auto  text-zinc-800 lg:w-3/5 md:w-4/5  w-full bg-white p-3 h-full py-5 rounded-3xl font-montserrat font-semibold"
           >
             <div className="w-full">
-              <h2 className="text-base font-bold font-poppins text-center">{title}</h2>
+              <h2 className="text-base font-semibold  text-center">{title}</h2>
             </div>
             <hr className=" bg-gray-500 mt-3" />
             <div
@@ -81,15 +82,15 @@ const ModalMessage = ({
                       alt={item.nombre} />
                   </div>
                   <div className="w-full self-start">
-                    <h1 className="font-semibold text-base font-poppins text-neuttral-800">{item.nombre}</h1>
-                    <p className="text-gray-400 font-normal text-sm">$ {item.precio}</p>
+                    <h1 className="font-semibold text-sm font-montserrat text-neuttral-800">{item.nombre}</h1>
+                    <p className="text-gray-400 font-normal text-sm">{formatearNumero(item.precio)}</p>
                   </div>
                   {
                     item?.isCantidad === 'si' ? (
                       <div className="flex items-center justify-between bottom-0 right-0 w-1/2    text-end  text-base">
                         <div
                           className={
-                            quantityZero(item._id) ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "w-7 h-7"
+                            quantityZero(item._id) ? "rounded-full w-7 h-7 grid content-center  shadow-sm  bg-slate-50" : "w-7 h-7"
                           }
                         >
                           <button
@@ -109,7 +110,7 @@ const ModalMessage = ({
 
                         <span className="font-normal text-xl text-center w-6  h-6">{productQuantity(item._id) === 0 ? "" : productQuantity(item._id)}</span>
 
-                        <div className="rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50">
+                        <div className="rounded-full w-7 h-7 grid content-center  shadow-sm  bg-slate-50">
                           <button
                             type="button"
                             className="text-green-500 text-3xl flex justify-center items-center "
@@ -130,7 +131,7 @@ const ModalMessage = ({
                         ) : (
                           <button
                             onClick={() => addExtra(item)}
-                            className="bg-green-500 rounded-xl font-normal shadow text-sm text-white p-2 px-4 font-poppins"
+                            className="bg-green-500 rounded-lg font-normal shadow text-sm text-white p-2 px-4 font-montserrat"
                           >
                             Agregar
                           </button>
@@ -143,7 +144,7 @@ const ModalMessage = ({
             </div>
             <div>
               <button
-                className="p-4 mt-8 rounded-2xl font-poppins w-full shadow text-white bg-red-500 mx-auto text-center"
+                className="p-4 mt-8 rounded-2xl font-medium font-montserrat w-full shadow text-white bg-red-500 mx-auto text-center"
                 onClick={handleClose}>{type !== 'return home' ? 'Continuar con el pedido' : 'Aceptar'}</button>
             </div>
           </motion.div>

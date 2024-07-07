@@ -14,6 +14,16 @@ import "styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 
+import "@fontsource/montserrat/100.css"; // Specify weight
+import "@fontsource/montserrat/200.css"; // Specify weight
+import "@fontsource/montserrat/300.css"; // Specify weight
+import "@fontsource/montserrat/400.css"; // Specify weight
+import "@fontsource/montserrat/500.css"; // Specify weight
+import "@fontsource/montserrat/600.css"; // Specify weight
+import "@fontsource/montserrat/700.css"; // Specify weight
+import "@fontsource/montserrat/800.css"; // Specify weight
+import "@fontsource/montserrat/900.css"; // Specify weight
+
 
 
 function MyApp({ Component, router, ...rest }) {

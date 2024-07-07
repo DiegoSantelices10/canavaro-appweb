@@ -100,11 +100,11 @@ const UpdatePrices = () => {
       <div className="lg:flex w-full justify-between items-center h-auto p-2 gap-4">
 
         <div className="mx-auto p-2 h-auto  w-full  lg:w-1/2">
-          <p className="text-center font-poppins font-semibold">Actualizá el precio de las empanadas</p>
+          <p className="text-center font-montserrat font-semibold">Actualizá el precio de las empanadas</p>
           <div className=" md:flex lg:flex  justify-between w-full gap-2 mt-2">
             <div className="w-full flex items-end">
               <div className="w-full">
-                <p className="font-poppins text-sm font-normal text-gray-900">Precio x unidad</p>
+                <p className="font-montserrat text-sm font-normal text-gray-900">Precio x unidad</p>
                 <input
                   type="number"
                   ref={priceRef}
@@ -114,14 +114,14 @@ const UpdatePrices = () => {
               </div>
               <button
                 onClick={handleUpdateEmpanadas}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-xl shadow-md hover:bg-red-500"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-xl shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>
             </div>
             <div className="w-full flex items-end mt-3">
               <div className="w-full">
-                <p className="font-poppins text-sm font-normal text-gray-900 ">Precio x docena</p>
+                <p className="font-montserrat text-sm font-normal text-gray-900 ">Precio x docena</p>
                 <input
                   type="number"
                   ref={priceDocenaRef}
@@ -131,7 +131,7 @@ const UpdatePrices = () => {
               </div>
               <button
                 onClick={handleUpdateEmpanadasPorDocena}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-poppins px-3 rounded-xl shadow-md hover:bg-red-500"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-xl shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>
@@ -140,9 +140,9 @@ const UpdatePrices = () => {
         </div>
 
         <div className=" lg:w-1/3 w-full px-2 mt-3 lg:mt-0 flex flex-col items-center  p-2   mx-auto border-none outline-none shadow border border-gray-200 rounded-md">
-          <p className="font-poppins font-semibold">Actualizá el precio de las pizzas</p>
+          <p className="font-montserrat font-semibold">Actualizá el precio de las pizzas</p>
           <input
-            className=" file:cursor-pointer text-gray-500 text-xs w-5/5 mt-6 file:font-medium font-poppins file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded file:text-xs "
+            className=" file:cursor-pointer text-gray-500 text-xs w-5/5 mt-6 file:font-medium font-montserrat file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded file:text-xs "
             type="file"
             title="Importar archivo"
             accept=".xlsx, .xls"
@@ -151,7 +151,7 @@ const UpdatePrices = () => {
           {updateData.length > 0 && (
             <button
               onClick={handleUpdatePizzas}
-              className="bg-sky-800 text-sm mt-2 sm:mt-0 p-2 whitespace-nowrap text-white font-semibold font-poppins px-3 rounded-md shadow-md hover:bg-sky-700"
+              className="bg-sky-800 text-sm mt-2 sm:mt-0 p-2 whitespace-nowrap text-white font-semibold font-montserrat px-3 rounded-md shadow-md hover:bg-sky-700"
             >
               Actualizar pizzas
             </button>
@@ -166,7 +166,7 @@ const UpdatePrices = () => {
           updateData.map(({ _id, nombre, precioPizza }) => (
             <div
               key={_id}
-              className="flex font-poppins p-2 justify-between relative h-24 border border-gray-200 rounded-md "
+              className="flex font-montserrat p-2 justify-between relative h-24 border border-gray-200 rounded-md "
             >
               <h1 className="font-bold text-sm w-3/5">{nombre}</h1>
               <div className="absolute text-sm font-semibold bottom-2 right-4 justify-between w-auto">

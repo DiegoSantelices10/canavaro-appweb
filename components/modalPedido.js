@@ -30,7 +30,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
   }
   return (
     <div className={showHideClassName}>
-      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-poppins">
+      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-montserrat">
         <div
           onClick={handleClose}
           className="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -53,7 +53,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 />
               </button>
             </div>
-            <div className="font-normal text-left text-base font-poppins mt-4 text-gray-800">
+            <div className="font-normal text-left text-base font-montserrat mt-4 text-gray-800">
               <div className="flex justify-between w-full ">
                 <h2 className="font-semibold">
                   Fecha: <span className="font-normal text-base">{pedido?.fecha}</span>
@@ -100,14 +100,14 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <p className="text-sm font-medium  mt-4 text-gray-500 font-poppins">{categoria?.categoria}</p>
+                    <p className="text-sm font-medium  mt-4 text-gray-500 font-montserrat">{categoria?.categoria}</p>
                     <hr />
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
                       .map((item, index) => {
                         return (
-                          <div key={index} className="py-1 font-poppins text-base text-neutral-800">
-                            <div className="flex justify-between items-center font-poppins">
+                          <div key={index} className="py-1 font-montserrat text-base text-neutral-800">
+                            <div className="flex justify-between items-center font-montserrat">
                               <div className="font-semibold">
                                 {item?.cant || item?.cantidad} x
                                 <span className=" text-base font-normal">

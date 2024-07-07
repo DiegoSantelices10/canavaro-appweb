@@ -197,10 +197,10 @@ export default function Index() {
       <div className="w-full h-auto -mt-60 sm:-mt-72 md:-mt-72 lg:-mt-80">
         <div className="flex flex-col  w-full ">
           <div className="w-full bg-white rounded-t-3xl p-4">
-            <h1 className="font-semibold text-lg text-neutral-800 font-poppins">Arma tu pizza</h1>
-            <p className=" font-normal text-sm  text-gray-400 font-poppins">Elegi los gustos que quieras</p>
+            <h1 className="font-semibold text-lg text-neutral-800 font-montserrat">Arma tu pizza</h1>
+            <p className=" font-normal text-sm  text-gray-400 font-montserrat">Elegi los gustos que quieras</p>
           </div>
-          <div className="flex w-full justify-around font-poppins font-bold bg-white z-10">
+          <div className="flex w-full justify-around font-montserrat font-bold bg-white z-10">
             <div className="grid content-center gap-2">
               <input
                 id="chica"
@@ -211,7 +211,7 @@ export default function Index() {
                 checked={select === "chica"}
                 className="mx-auto rounded focus:ring-0 focus:text-sky-800"
               />
-              <h3 className="font-semibold font-poppins text-sm">Chica</h3>
+              <h3 className="font-semibold font-montserrat text-sm">Chica</h3>
             </div>
             <div className="grid content-center gap-2">
               <input
@@ -238,15 +238,15 @@ export default function Index() {
               <h3 className="font-semibold text-sm">Gigante</h3>
             </div>
           </div>
-          <div className="text-center font-poppins py-2 text-gray-400 text-base">
+          <div className="text-center font-montserrat py-2 text-gray-400 text-base">
             <p>puedes elegir hasta {select === "gigante" ? "4" : "2"} gustos</p>
           </div>
           <div className="px-3 rounded-md">
             <div
               className={
                 total === 1
-                  ? "bg-green-500 font-poppins rounded-xl  w-full text-sm text-white p-3 mt-2 text-center font-semibold"
-                  : "bg-red-600 w-full font-poppins rounded-xl text-white text-sm p-3 mt-2 text-center font-semibold"
+                  ? "bg-green-500 font-montserrat rounded-lg  w-full text-sm text-white p-3 mt-2 text-center font-semibold"
+                  : "bg-red-600 w-full font-montserrat rounded-lg text-white text-sm p-3 mt-2 text-center font-semibold"
               }
             >
               {productTotal()}
@@ -264,7 +264,7 @@ export default function Index() {
                   <div key={item._id}>
 
                     <div className="flex justify-between items-center py-2  my-2 ">
-                      <h2 className="font-poppins font-medium text-neutral-800 text-base">{item.nombre}</h2>
+                      <h2 className="font-montserrat font-medium text-neutral-800 text-base">{item.nombre}</h2>
                       <div className="w-auto  px-3 text-end space-x-4 text-base">
                         <div className="flex w-full justify-around items-center gap-5">
                           {radioSelect[item._id]?.fraccion && (
@@ -277,7 +277,7 @@ export default function Index() {
                           )}
                           {select === "gigante" && (
                             <div className="flex items-center justify-center gap-x-2">
-                              <h3 className="text-gray-400 text-sm font-poppins">1/4</h3>
+                              <h3 className="text-gray-400 text-sm font-montserrat">1/4</h3>
                               <input
                                 type="radio"
                                 value="1/4"
@@ -290,7 +290,7 @@ export default function Index() {
                           )}
 
                           <div className="flex items-center gap-x-2">
-                            <h3 className="text-gray-400 text-sm font-poppins">1/2</h3>
+                            <h3 className="text-gray-400 text-sm font-montserrat">1/2</h3>
                             <input
                               type="radio"
                               value="1/2"
@@ -325,7 +325,7 @@ export default function Index() {
         <div className="bg-white w-full fixed bottom-0 p-3 z-30 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-1/2">
           <button
             className={`${total === 1
-              ? "flex justify-center gap-3 text-center rounded-2xl w-full p-4 bg-red-600  hover:-translate-y-1 transition-all font-poppins duration-500 text-white text-base font-semibold "
+              ? "flex justify-center gap-3 text-center rounded-lg w-full p-4 bg-red-600  hover:-translate-y-1 transition-all font-montserrat duration-500 text-white text-base font-semibold "
               : "invisible"
               }`}
             onClick={() => {

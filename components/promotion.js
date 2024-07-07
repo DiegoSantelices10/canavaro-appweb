@@ -77,8 +77,8 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base text-neutral-800 font-poppins">{producto.nombre}</h3>
-                    <h4 className="text-gray-400 text-xs font-poppins font-normal">{producto.descripcion}</h4>
+                    <h3 className="text-base text-neutral-800 font-montserrat">{producto.nombre}</h3>
+                    <h4 className="text-gray-400 text-xs font-montserrat font-normal">{producto.descripcion}</h4>
                   </div>
                 );
               })}
@@ -97,8 +97,8 @@ export default function Promotion({
               .map(producto => {
                 return (
                   <div key={producto._id}>
-                    <h3 className="text-base text-neutral-800 font-poppins">{producto.nombre}</h3>
-                    <h4 className="text-gray-400 text-xs font-poppins font-normal">{producto.descripcion}</h4>
+                    <h3 className="text-base text-neutral-800 font-montserrat">{producto.nombre}</h3>
+                    <h4 className="text-gray-400 text-xs font-montserrat font-normal">{producto.descripcion}</h4>
                   </div>
                 );
               })}
@@ -108,7 +108,7 @@ export default function Promotion({
 
       {addEmpanadas === "no" ? (
         <div className="flex justify-between items-center ">
-          <div className="font-poppins text-neutral-800 text-lg font-medium">
+          <div className="font-montserrat text-neutral-800 text-lg font-medium">
             <h2>{nombre}</h2>
           </div>
           <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
@@ -147,15 +147,15 @@ export default function Promotion({
           </div>
         </div>
       ) : (
-        <div className="mt-4 font-poppins">
+        <div className="mt-4 font-montserrat">
           {
             <>
               {quantityDemanded < 1 ? (
-                <div className="bg-green-500 w-auto p-2 rounded-xl">
+                <div className="bg-green-500 w-auto p-2 rounded-lg">
                   <p className="text-white text-center font-normal">¡ Se completo la cantidad requerida !</p>
                 </div>
               ) : (
-                <div className="bg-red-600 w-auto p-2 rounded-xl">
+                <div className="bg-red-600 w-auto p-2 rounded-lg">
                   <p className="text-white text-center font-normal">
                     Selecciona {quantityDemanded} empanadas para completar la promo
                   </p>
@@ -168,8 +168,8 @@ export default function Promotion({
                 .map(({ _id, nombre, precioExtra }) => {
                   return (
                     <div key={_id}>
-                      <div className=" font-poppins flex justify-between items-center my-6 p-1  ">
-                        <div className="w-1/2 text-zinc-800 font-medium text-base font-poppins">
+                      <div className=" font-montserrat flex justify-between items-center my-6 p-1  ">
+                        <div className="w-1/2 text-zinc-800 font-medium text-base font-montserrat">
                           <h2>{nombre}</h2>
                         </div>
                         <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">

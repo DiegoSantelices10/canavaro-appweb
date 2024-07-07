@@ -42,28 +42,28 @@ export default function SectionPizzas({ products, imagefront }) {
       dataIndex: 'nombre',
       key: 'nombre',
       width: 400,
-      render: (value) => <div className=" font-poppins">{value}</div>
+      render: (value) => <div className=" font-montserrat">{value}</div>
     },
     {
       title: 'Gig',
       dataIndex: 'gigante',
       key: 'gigante',
       align: 'center',
-      render: (value) => <div className="text-center font-poppins">{value}</div>
+      render: (value) => <div className="text-center font-montserrat">{value}</div>
     },
     {
       title: 'Med',
       dataIndex: 'mediana',
       key: 'mediana',
       align: 'center',
-      render: (value) => <div className="text-center px-4 font-poppins">{value}</div>
+      render: (value) => <div className="text-center px-4 font-montserrat">{value}</div>
     },
     {
       title: 'Chi',
       dataIndex: 'chica',
       key: 'chica',
       align: 'center',
-      render: (value) => <div className="text-center font-poppins">{value}</div>
+      render: (value) => <div className="text-center font-montserrat">{value}</div>
     },
   ];
 
@@ -75,7 +75,7 @@ export default function SectionPizzas({ products, imagefront }) {
           rounded-lg w-full lg:w-4/5 mx-auto 
 					gap-5 content-center pb-6 "
         >
-          <h1 className="relative font-poppins  w-full 
+          <h1 className="relative font-montserrat  w-full 
               text-center text-gray-200  text-2xl lg:text-3xl 
               font-semibold ">
             Nuestras Pizzas
@@ -84,7 +84,7 @@ export default function SectionPizzas({ products, imagefront }) {
           <div className="h-full w-full mx-auto text-white overflow-y-auto">
             <div className="flex flex-col gap-y-5 mt-4">
               <Table
-                className="text-white w-full  flex justify-center font-poppins"
+                className="text-white w-full  flex justify-center font-montserrat"
                 columns={columns}
                 data={renderPizzas}
               />

@@ -12,6 +12,7 @@ import {
   calculateSubTotal,
   calculateTotalQuantity,
   clearOrderPromo,
+  setQuantityDemanded,
 } from "store/reducers/orderSlice";
 
 import { v4 as uuidv4 } from "uuid";
@@ -71,6 +72,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(clearOrderPromo());
+    dispatch(setQuantityDemanded(0));
     if (products?.length <= 0) {
       const res = JSON.parse(localStorage.getItem("productos"));
       dispatch(setProductData(res));
@@ -184,46 +186,27 @@ export default function Home() {
   return (
     <Layout>
       <Toaster />
+      <div className="pt-[90px] mx-auto w-full rounded-3xl relative">
+        <div className="w-full flex items-center justify-between">
+          <div>
+            <p className="text-left w-full font-montserrat text-base  font-semibold">¡Arma tu pizza como quieras!</p>
 
-      <div className="py-4 mt-16 mx-auto w-full rounded-3xl bg-white">
-        <h1 className="text-lg font-semibold font-poppins text-neutral-800 px-3 pb-1 ">Nuestros combos</h1>
-        <div className="flex overflow-x-scroll flexp h-60   space-x-6 w-full p-2">
-          <style jsx>
-            {`
-              .flexp::-webkit-scrollbar-thumb {
-                background: #ffffff;
-                border-radius: 20px;
-              }
-
-              .flexp::-webkit-scrollbar {
-                height: 5px;
-              }
-            `}
-          </style>
-          {renderPromotions()}
-        </div>
-        <div className="my-4">
-          <div className="w-full  p-3 flex items-center justify-between">
-            <div>
-              <p className="text-left w-full font-poppins text-base  font-medium">¡Arma tu pizza como quieras!</p>
-
-            </div>
-            <Link href={"/order/pizzaFree"}>
-              <a
-                onClick={() => clearTotal()}
-                className="rounded-xl font-poppins font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
-                Ingresa aqui
-              </a>
-            </Link>
           </div>
+          <Link href={"/order/pizzaFree"}>
+            <a
+              onClick={() => clearTotal()}
+              className="rounded-lg font-montserrat font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
+              Ingresa aqui
+            </a>
+          </Link>
         </div>
-        {products?.find(product => product.categoria === "soloEfectivo" && product.available === true)
-          && (
-            <div className="mb-4">
-              <p className="text-lg font-semibold font-poppins text-neutral-800 px-3 ">Promos en efectivo</p>
-              <div className="flex overflow-x-scroll flexp  space-x-6 w-full p-2">
-                <style jsx>
-                  {`
+
+        <>
+          <h1 className="text-base font-bold font-montserrat text-neutral-800 mt-6">Nuestros combos</h1>
+          <div className="py-2">
+            <div className="flex overflow-x-scroll flexp h-auto p-0.5 space-x-6 w-full">
+              <style jsx>
+                {`
               .flexp::-webkit-scrollbar-thumb {
                 background: #ffffff;
                 border-radius: 20px;
@@ -233,13 +216,39 @@ export default function Home() {
                 height: 5px;
               }
             `}
-                </style>
-                {renderEfectivo()}
-              </div>
+              </style>
+              {renderPromotions()}
             </div>
-          )}
+          </div>
+        </>
 
-        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full p-2 mb-6">
+        <>
+          {products?.find(product => product.categoria === "soloEfectivo" && product.available === true)
+            && (
+              <div className="mt-4">
+                <p className="text-base font-bold font-montserrat text-neutral-800">Promos en efectivo</p>
+                <div className="flex overflow-x-scroll flexp  space-x-6 w-full py-2 px-0.5">
+                  <style jsx>
+                    {`
+              .flexp::-webkit-scrollbar-thumb {
+                background: #ffffff;
+                border-radius: 20px;
+              }
+
+              .flexp::-webkit-scrollbar {
+                height: 5px;
+              }
+            `}
+                  </style>
+                  {renderEfectivo()}
+                </div>
+              </div>
+            )}
+
+        </>
+
+
+        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full mt-4">
           <style jsx>
             {`
               .flexp::-webkit-scrollbar-thumb {
@@ -260,8 +269,8 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "empanadas"
-                  ? "w-48  font-medium font-poppins text-sm text-gray-400"
-                  : "w-48 font-semibold bg-white text-neutral-800  text-sm font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-48  font-medium font-montserrat text-sm text-gray-400"
+                  : "w-48 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-300 tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -272,8 +281,8 @@ export default function Home() {
               onClick={() => setRenderProductos("pizzas")}
               className={
                 renderProducts !== "pizzas"
-                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
-                  : "w-28 font-semibold bg-white text-neutral-800  text-sm font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
+                  : "w-28 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-300 tracking-wide"
               }
             >
               Pizzas
@@ -285,8 +294,8 @@ export default function Home() {
               onClick={() => setRenderProductos("promociones")}
               className={
                 renderProducts !== "promociones"
-                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
-                  : "w-28 font-semibold  bg-white text-neutral-800 text-sm font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
+                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-300 tracking-wide"
               }
             >
               Promociones
@@ -300,8 +309,8 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "porciones"
-                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
-                  : "w-28 font-semibold  bg-white text-neutral-800 text-sm font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
+                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-300 tracking-wide"
               }
             >
               Porciones
@@ -315,19 +324,20 @@ export default function Home() {
               }}
               className={
                 renderProducts !== "bebidas"
-                  ? "w-28  font-medium font-poppins text-sm text-gray-400"
-                  : "w-28 font-semibold  bg-white text-neutral-800 text-sm font-poppins border-b border-gray-300 tracking-wide"
+                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
+                  : "w-28 font-semibold  text-neutral-800 text-sm font-montserrat border-b border-gray-300 tracking-wide"
               }
             >
               Bebidas
             </button>
           </div>
         </div>
-        <div className="px-3 rounded-xl">
+
+        <div className="py-6">
           {
             renderProducts === "empanadas" && (
-              <div className="p-2 bg-red-500 rounded-xl">
-                <p className="text-sm font-poppins text-white text-center">
+              <div className="p-2 bg-red-600 rounded-lg">
+                <p className="text-sm font-medium font-montserrat text-white text-center">
                   Cada 12 empanadas o canastitas, tenes promo!
                 </p>
               </div>
@@ -335,34 +345,41 @@ export default function Home() {
           }
 
         </div>
-        <div className="pt-3">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-1 mb-16">{renderStore(renderProducts)}</div>
-        </div>
-        {(renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
-          <div className="w-full px-2 fixed bottom-2    sm:w-4/5 md:w-4/5 lg:w-3/5">
-            <div
-              className="flex justify-between items-center gap-3 rounded-2xl mx-auto text-center   
-									   w-full md:w-4/5 lg:w-3/5 p-4 bg-red-600  text-white text-base font-semibold "
-            >
-              <button
-                onClick={() => addCartPromo(orderPromo)}
-                className={`${orderPromo.length < 1
-                  ? "invisible"
-                  : "p-3 px-4 font-medium font-poppins bg-slate-50 rounded-xl text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
-                  }`}
-              >
-                Agregar al carrito
-              </button>
 
-              <div className="flex items-center gap-x-5 text-white font-semibold pr-4">
-                <p className="font-medium text-xl">{totalPrice !== 0 && formatearNumero(totalPrice)}</p>
-                <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
-                  <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
+        <div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 md:gap-x-4 lg:gap-x-4 mb-10">{renderStore(renderProducts)}</div>
+        </div>
+
+        <div className="relative flex justify-center">
+          {(renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
+            orderPromo.length > 0 && (
+              <div className="w-full fixed bottom-2 mx-auto px-3 md:w-4/5 lg:w-3/5">
+                <div
+                  className="flex justify-between items-center  rounded-xl mx-auto text-center   
+									   w-full md:w-4/5 lg:w-3/5 p-3 bg-red-600  text-white text-base font-semibold "
+                >
+                  <button
+                    onClick={() => addCartPromo(orderPromo)}
+                    className={`${orderPromo.length < 1
+                      ? "invisible"
+                      : "p-2 px-3 font-medium font-montserrat bg-slate-50 rounded-lg text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
+                      }`}
+                  >
+                    Agregar al carrito
+                  </button>
+
+                  <div className="flex items-center gap-x-5 text-white font-semibold">
+                    <p className="font-medium text-xl">{totalPrice !== 0 && formatearNumero(totalPrice)}</p>
+                    <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
+                      <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            )
+          )}
+        </div>
+
       </div>
     </Layout>
   );

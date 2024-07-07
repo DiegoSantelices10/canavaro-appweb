@@ -47,7 +47,7 @@ export default function Sales() {
       <div className=" h-full w-full">
         <div className="w-full h-auto mx-auto ">
           <div className=" py-5 w-full lg:px-0 h-auto flex justify-center lg:justify-start items-center">
-            <div className="w-full flex flex-col justify-between font-poppins  
+            <div className="w-full flex flex-col justify-between font-montserrat  
                             p-4 h-20 font-bold bg-white rounded-xl border border-gray-200">
               <h2 className="font-semibold  text-sm whitespace-nowrap">
                 VENTAS DEL DÍA: <span className="font-medium">$ {totalSale}</span>
@@ -62,7 +62,7 @@ export default function Sales() {
             <div className="w-full mx-auto">
               <div className="relative overflow-x-auto">
                 <div className="w-full  mx-auto text-center py-2">
-                  <div className="flex flex-wrap justify-start gap-4 mx-auto font-poppins  lg:p-0">
+                  <div className="flex flex-wrap justify-start gap-4 mx-auto font-montserrat  lg:p-0">
                     {sales?.length > 0 ? (
                       sales?.slice().reverse().map((item, index) => (
                         <motion.div
@@ -81,7 +81,7 @@ export default function Sales() {
                               <h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
                             </div>
                           </div>
-                          <div className="flex justify-end  gap-3 w-full font-poppins">
+                          <div className="flex justify-end  gap-3 w-full font-montserrat">
                             <button
                               onClick={() => handleOpenModal(item)}
                               className="px-4 py-2 w-auto rounded-xl text-xs font-medium border 
@@ -96,7 +96,7 @@ export default function Sales() {
                         </motion.div>
                       ))
                     ) : (
-                      <p className="text-center w-full font-semibold font-poppins">No Hay pedidos</p>
+                      <p className="text-center w-full font-semibold font-montserrat">No Hay pedidos</p>
                     )}
                   </div>
                 </div>

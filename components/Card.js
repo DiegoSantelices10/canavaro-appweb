@@ -36,7 +36,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
   };
   return (
     <div>
-      <div className="p-3">
+      <div className="py-3">
         {categoria === "empanadas" || categoria === "bebidas" || categoria === "porciones" ? (
           <div className="flex justify-between items-center gap-x-2">
             <Image
@@ -49,14 +49,14 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
               alt={nombre}
             />
             <div className="relative w-full h-24 self-start">
-              <h1 className="font-semibold font-poppins text-sm text-neutral-800">{nombre}</h1>
+              <h1 className="font-semibold font-montserrat text-sm text-neutral-800">{nombre}</h1>
               <p className="text-gray-400 text-xs tracking-wider">{descripcion}</p>
               <p className="text-sm py-1 text-gray-400">{precioExtra ? `${formatearNumero(precioExtra + precio)}` : formatearNumero(precio)}</p>
 
               <div className="absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
                 <div
                   className={
-                    quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
+                    quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow-sm  bg-gray-50" : "invisible"
                   }
                 >
                   <button
@@ -73,7 +73,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
                 <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
 
                 {!hasPromoEfectivo() && (
-                  <div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
+                  <div className="rounded-full w-8 h-8 grid content-center  shadow-sm  bg-gray-50">
                     <button
                       type="button"
                       className="text-green-500 text-2xl font-normal flex justify-center items-center"
@@ -101,7 +101,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
                   height={140}
                   alt={nombre} />
                 <div className="w-full self-start">
-                  <h1 className="font-semibold text-sm font-poppins text-neuttral-800">{nombre}</h1>
+                  <h1 className="font-semibold text-sm font-montserrat text-neuttral-800">{nombre}</h1>
                   <p className="text-gray-400 text-xs">{descripcion}</p>
                   {categoria === "promociones" && <p className="text-gray-400  text-sm py-1">{formatearNumero(precio)}</p>}
                 </div>

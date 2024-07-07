@@ -47,35 +47,35 @@ function DigitalMenu() {
                         />
                         <div className="relative w-full h-full flex flex-col justify-between">
                             <div>
-                                <h1 className="font-medium font-poppins text-base text-white">{data.nombre}</h1>
-                                <p className="text-gray-400 font-poppins font-light text-xs">{data.descripcion}</p>
+                                <h1 className="font-medium font-montserrat text-base text-white">{data.nombre}</h1>
+                                <p className="text-gray-400 font-montserrat font-light text-xs">{data.descripcion}</p>
                             </div>
                             {data.categoria === 'pizzas' ? (
-                                <div className='flex font-poppins justify-center gap-5 mt-2'>
+                                <div className='flex font-montserrat justify-center gap-5 mt-2'>
 
                                     {data.precioPizza.gigante && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Gigante</p>
-                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-white text-center">{formatearNumero(data.precioPizza.gigante)}</p>
+                                            <p className="text-lg font-montserrat tracking-wider font-normal   px-1 text-white text-center">{formatearNumero(data.precioPizza.gigante)}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.mediana && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Mediana</p>
-                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white ">{formatearNumero(data.precioPizza.mediana)}</p>
+                                            <p className="text-lg font-montserrat tracking-wider font-normal   px-1 text-center text-white ">{formatearNumero(data.precioPizza.mediana)}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.chica && (
                                         <div>
                                             <p className="text-xs font-normal text-gray-300 px-1 text-center ">Chica</p>
-                                            <p className="text-lg font-nunito tracking-wider font-normal   px-1 text-center text-white">{formatearNumero(data.precioPizza.chica)}</p>
+                                            <p className="text-lg font-montserrat tracking-wider font-normal   px-1 text-center text-white">{formatearNumero(data.precioPizza.chica)}</p>
                                         </div>
                                     )}
 
                                 </div>
                             ) : (
                                 <div>
-                                    <p className="text-xl tracking-wider font-nunito font-normal text-white"> {data.precioExtra ? `${formatearNumero(data.precioExtra + data.precio)}` : formatearNumero(data.precio)}</p>
+                                    <p className="text-xl tracking-wider font-montserrat font-normal text-white"> {data.precioExtra ? `${formatearNumero(data.precioExtra + data.precio)}` : formatearNumero(data.precio)}</p>
                                 </div>
                             )}
                         </div>
@@ -87,13 +87,13 @@ function DigitalMenu() {
     return (
         <div className='bg-gradient-to-l from-zinc-800 to-black min-h-screen'>
             <div className='flex justify-between px-3 items-center'>
-                <h1 className='text-white font-bold font-poppins text-xl tracking-wider'>CANAVARO</h1>
+                <h1 className='text-white font-bold font-montserrat text-xl tracking-wider'>CANAVARO</h1>
                 <div className='py-5'>
                     {deliveryButton.available && (
                         <div className="w-full flex items-center">
                             <Link href={"/welcomeLogo"}>
                                 <a
-                                    className={`p-2 px-5 rounded-xl font-normal  font-poppins  text-sm  mx-auto 
+                                    className={`p-2 px-5 rounded-xl font-normal  font-montserrat  text-sm  mx-auto 
                                hover:bg-black hover:text-white bg-white  text-gray-900   
                                  hover:-translate-y-1 transition-all duration-500`}
                                 >
@@ -105,7 +105,7 @@ function DigitalMenu() {
                 </div>
             </div>
             <hr />
-            <div className=' px-6 py-4 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-normal  font-poppins'>
+            <div className=' px-6 py-4 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-normal  font-montserrat'>
 
                 <button
                     onClick={() => setRenderProductos('promociones')}

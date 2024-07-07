@@ -16,7 +16,7 @@ export default function Login() {
 
   return (
     <div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
-   
+
       <Toaster />
 
       <div className="h-full w-full lg:w-2/5 md:w-3/5 sm:w-3/5 flex items-center justify-center lg:justify-between mx-auto">
@@ -25,7 +25,7 @@ export default function Login() {
 								 lg:h-auto  md:h-auto sm:h-auto"
         >
           <div className="w-auto mx-auto pt-10 pb-4">
-            <h1 className="font-extrabold text-center text-3xl font-poppins">¡Bienvenido!</h1>
+            <h1 className="font-extrabold text-center text-3xl font-montserrat">¡Bienvenido!</h1>
           </div>
           <div className="flex flex-col gap-3">
             <Formik
@@ -46,8 +46,9 @@ export default function Login() {
                   })
                   .catch(error => {
                     if (error.response.status === 401) {
-                    toast.error("Credenciales incorrectas!")
-                  }});
+                      toast.error("Credenciales incorrectas!")
+                    }
+                  });
               }}
             >
               {() => (
@@ -55,7 +56,7 @@ export default function Login() {
                   <div className="mb-3">
                     <Field
                       id="username"
-                      className="shadow w-full font-poppins font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+                      className="shadow w-full font-montserrat font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
                       placeholder="Introduce tu usuario"
                       name="username"
                     />
@@ -64,7 +65,7 @@ export default function Login() {
                     <Field
                       id="password"
                       type="password"
-                      className="shadow w-full font-poppins bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+                      className="shadow w-full font-montserrat bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
                       placeholder="Introduce tu contraseña"
                       name="password"
                     />

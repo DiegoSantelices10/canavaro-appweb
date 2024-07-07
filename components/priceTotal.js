@@ -52,7 +52,7 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
     }
 
     return (
-        <div className="w-full font-poppins mb-20 relative">
+        <div className="w-full font-montserrat mb-20 relative">
             {available && hasProductosEfectivo().length > 0 && hasProductosGeneral().length > 0 && (
                 <>
                     <div className='p-2 border rounded-xl border-red-500 my-2'>

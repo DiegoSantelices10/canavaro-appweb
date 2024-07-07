@@ -117,12 +117,12 @@ export default function Update({ data }) {
             <button onClick={backNavigate} className="absolute left-2 self-start items-start">
               <IoChevronBack className="text-gray-900" size={25} />
             </button>
-            <h1 className="text-xl text-center md:text-3xl font-poppins font-semibold text-zinc-800">
+            <h1 className="text-xl text-center md:text-3xl font-montserrat font-semibold text-zinc-800">
               ¡Actualizar producto!
             </h1>
           </div>
 
-          <p className="font-poppins text-base font-medium mt-5 mb-2">Categoria: <span className="font-normal text-gray-500">{data.categoria}</span></p>
+          <p className="font-montserrat text-base font-medium mt-5 mb-2">Categoria: <span className="font-normal text-gray-500">{data.categoria}</span></p>
 
           <Formik
             initialValues={{
@@ -181,7 +181,7 @@ export default function Update({ data }) {
               >
                 <div className="md:grid  md:grid-cols-2  justify-items-end gap-4 space-y-2 lg:space-y-0 md:space-y-0">
                   <div className="w-full mx-auto">
-                    <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                    <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                       Nombre del producto
                       <Field
                         id="nombre"
@@ -193,7 +193,7 @@ export default function Update({ data }) {
                   </div>
 
                   <div className=" hidden w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                    <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                       Categoria
                       <Field
                         id="categoria"
@@ -205,7 +205,7 @@ export default function Update({ data }) {
                   </div>
                   {renderProducts !== 'extras' && (
                     <div className=" w-full mx-auto ">
-                      <label className="block text-sm  text-slate-400 font-poppins font-normal">
+                      <label className="block text-sm  text-slate-400 font-montserrat font-normal">
                         Descripcion
                         <Field
                           id="descripcion"
@@ -219,7 +219,7 @@ export default function Update({ data }) {
 
                   {renderProducts !== "pizzas" && (
                     <div className=" w-full mx-auto">
-                      <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                      <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                         Precio
                         <Field
                           id="precio"
@@ -234,24 +234,24 @@ export default function Update({ data }) {
                   {renderProducts === "empanadas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <p className="block  text-sm  text-slate-400 font-poppins font-normal">Formato</p>
+                        <p className="block  text-sm  text-slate-400 font-montserrat font-normal">Formato</p>
                         <div
                           role="group"
                           aria-labelledby="my-radio-group"
-                          className="w-full text-base  text-slate-400 font-poppins font-normal flex justify-center items-center h-10 gap-10"
+                          className="w-full text-base  text-slate-400 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
                         >
-                          <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                          <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                             <Field type="radio" name="formato" value="canastita" className="mx-5" />
                             Canastita
                           </label>
-                          <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                          <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                             <Field type="radio" name="formato" value="empanada" className="mx-5" />
                             Empanada
                           </label>
                         </div>
                       </div>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                           Precio Extra <span className="text-gray-400 font-light text-xs">se le suma al precio actual de la unidad</span>
                           <Field
                             id="precioExtra"
@@ -266,7 +266,7 @@ export default function Update({ data }) {
                   {renderProducts === "pizzas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                        <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                           Precio gigante
                           <Field
                             id="precioPizza.gigante"
@@ -277,7 +277,7 @@ export default function Update({ data }) {
                         </label>
                       </div>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                        <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                           Precio mediana
                           <Field
                             id="precioPizza.mediana"
@@ -288,7 +288,7 @@ export default function Update({ data }) {
                         </label>
                       </div>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                        <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                           Precio chica
                           <Field
                             id="precioPizza.chica"
@@ -302,17 +302,17 @@ export default function Update({ data }) {
                   )}
                   {renderProducts === "extras" && (
                     <div className=" w-full mx-auto">
-                      <p className="block  text-sm  text-gray-400 font-poppins font-normal">Cantidad, si o no?</p>
+                      <p className="block  text-sm  text-gray-400 font-montserrat font-normal">Cantidad, si o no?</p>
                       <div
                         role="group"
                         aria-labelledby="my-radio-group"
-                        className="w-full text-base  text-gray-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
+                        className="w-full text-base  text-gray-400 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
                       >
-                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                           <Field type="radio" name="isCantidad" value="si" className="mx-5" checked={values.isCantidad === 'si'} />
                           Si
                         </label>
-                        <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                           <Field type="radio" name="isCantidad" value="no" className="mx-5" checked={values.isCantidad === 'no'} />
                           No
                         </label>
@@ -321,7 +321,7 @@ export default function Update({ data }) {
                   )}
 
                   <div className=" w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                    <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                       Cargar Imagen
                       <input
                         name="imagen"
@@ -339,17 +339,17 @@ export default function Update({ data }) {
                     <>
                       <div className="w-full mx-auto">
                         <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-slate-400 font-poppins font-normal">¿La promo cuenta con empanadas?</p>
+                          <p className="block  text-sm  text-slate-400 font-montserrat font-normal">¿La promo cuenta con empanadas?</p>
                           <div
                             role="group"
                             aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-slate-400 font-poppins font-normal flex justify-center items-center h-10 gap-10"
+                            className="p-2 w-full text-base  text-slate-400 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
                           >
-                            <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                            <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                               <Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
                               Si
                             </label>
-                            <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                            <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                               <Field type="radio" name="addEmpanadas" value="no" className="mx-5" />
                               No
                             </label>
@@ -357,7 +357,7 @@ export default function Update({ data }) {
                         </div>
                         {values.addEmpanadas === "si" && (
                           <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                            <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                               Ingresa la cantidad de empanadas
                               <Field
                                 id="cantidadMaxima"
@@ -373,17 +373,17 @@ export default function Update({ data }) {
                       </div>
                       <div className="w-full mx-auto">
                         <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-slate-400 font-poppins font-normal">¿La promo cuenta con Pizza?</p>
+                          <p className="block  text-sm  text-slate-400 font-montserrat font-normal">¿La promo cuenta con Pizza?</p>
                           <div
                             role="group"
                             aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-slate-400 font-poppins font-medium flex justify-center items-center h-10 gap-10"
+                            className="p-2 w-full text-base  text-slate-400 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
                           >
-                            <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                            <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                               <Field type="radio" name="addPizzas" value="si" className="mx-5" />
                               Si
                             </label>
-                            <label className="block  text-sm  text-gray-400 font-poppins font-normal">
+                            <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
                               <Field type="radio" name="addPizzas" value="no" className="mx-5" />
                               No
                             </label>
@@ -391,7 +391,7 @@ export default function Update({ data }) {
                         </div>
                         {values.addPizzas === "si" && (
                           <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-slate-400 font-poppins font-normal">
+                            <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
                               Ingresa el tamaño de la pizza
                               <Field
                                 id="tamanio"
@@ -409,7 +409,7 @@ export default function Update({ data }) {
 
                   <button
                     className="w-48 h-12  col-start-2 rounded-xl  text-sm 
-                       				border text-white bg-red-600 hover:bg-red-500 font-normal font-poppins"
+                       				border text-white bg-red-600 hover:bg-red-500 font-normal font-montserrat"
                     type="submit"
                   >
                     Actualizar Producto

@@ -115,13 +115,13 @@ const CircleAnimation = () => {
               margin: "auto",
             }}
           />
-          <h2 className="text-gray-800 font-poppins text-lg font-bold w-full py-2">¡Ya recibimos tu pedido! </h2>
+          <h2 className="text-gray-800 font-montserrat text-lg font-bold w-full py-2">¡Ya recibimos tu pedido! </h2>
         </motion.div>
 
       </motion.div>
       <div className="p-2 w-full md:w-1/2 lg:w-1/2 mx-auto">
         <div className="flex justify-center items-center flex-col  gap-1">
-          <p className=" text-sm font-poppins font-semibold  text-neutral-800">¡Confirma tu pedido por whatsapp!</p>
+          <p className=" text-sm font-montserrat font-semibold  text-neutral-800">¡Confirma tu pedido por whatsapp!</p>
           <a
             target="_blank"
             rel="noreferrer"
@@ -134,10 +134,10 @@ const CircleAnimation = () => {
         </div>
         <div id="container-pedido">
           <div className="flex justify-between items-center p-1 mt-3">
-            <p className=" font-bold font-poppins text-lg">
+            <p className=" font-bold font-montserrat text-lg">
               Detalle del pedido
             </p>
-            <h1 className="font-medium font-poppins">{checkout.hora}hs.</h1>
+            <h1 className="font-medium font-montserrat">{checkout.hora}hs.</h1>
           </div>
           <div className="w-full h-auto rounded-md border-gray-200 border mt-1 p-2">
             <div className="flex justify-between">
@@ -145,44 +145,44 @@ const CircleAnimation = () => {
                 {delivery === "domicilioActual" ? (
                   <>
                     <div className="mt-1">
-                      <h1 className="font-semibold font-poppins">Horario de envío</h1>
+                      <h1 className="font-semibold font-montserrat">Horario de envío</h1>
                       <span className="text-gray-400 font-normal">
                         {checkout.hPersonalizado === "" ? demora + " min." : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
-                      <h2 className="font-poppins  font-bold">Domicilio</h2>
-                      <span className="font-poppins font-normal text-gray-400">{checkout.domicilio} </span>
+                      <h2 className="font-montserrat  font-bold">Domicilio</h2>
+                      <span className="font-montserrat font-normal text-gray-400">{checkout.domicilio} </span>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="mt-1">
-                      <h1 className="font-semibold font-poppins">Horario de retiro</h1>
+                      <h1 className="font-semibold font-montserrat">Horario de retiro</h1>
                       <span className="text-gray-400  font-normal">
                         {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
-                      <h2 className="font-poppins font-semibold">Retira por local</h2>
-                      <span className="text-gray-400 font-normal font-poppins"> {checkout.cliente}</span>
+                      <h2 className="font-montserrat font-semibold">Retira por local</h2>
+                      <span className="text-gray-400 font-normal font-montserrat"> {checkout.cliente}</span>
                     </div>
                   </>
                 )}
               </div>
             </div>
             <div className="mt-1">
-              <h2 className="font-poppins font-semibold text-base">Medio de pago</h2>
-              <span className="text-gray-400 font-normal font-poppins"> {checkout.medioDePago}</span>
+              <h2 className="font-montserrat font-semibold text-base">Medio de pago</h2>
+              <span className="text-gray-400 font-normal font-montserrat"> {checkout.medioDePago}</span>
             </div>
             <div >
               {checkout.comentarios && (
                 <div className="mt-1">
-                  <p className="font-poppins font-semibold">Comentarios</p>
-                  <span className="text-gray-400 font-normal font-poppins"> {checkout.comentarios}</span>
+                  <p className="font-montserrat font-semibold">Comentarios</p>
+                  <span className="text-gray-400 font-normal font-montserrat"> {checkout.comentarios}</span>
                 </div>
               )}
             </div>
             <>
-              <p className=" font-bold font-poppins mt-3 text-lg">
+              <p className=" font-bold font-montserrat mt-3 text-lg">
                 Pedido
               </p>
               <hr className="border mt-2" />
@@ -193,7 +193,7 @@ const CircleAnimation = () => {
                     .map((item, index) => {
                       return (
                         <div key={index} className="py-4">
-                          <div className="flex justify-between items-center font-poppins">
+                          <div className="flex justify-between items-center font-montserrat">
                             <div className="font-semibold text-neutral-900  text-base w-full flex justify-between items-start">
                               <div>
                                 <p>
@@ -222,7 +222,7 @@ const CircleAnimation = () => {
                           {item.products &&
                             item.products.map(producto => (
                               <div key={producto._id}>
-                                <p className="font-normal font-poppins text-gray-400 text-sm">
+                                <p className="font-normal font-montserrat text-gray-400 text-sm">
                                   {producto.nombre} <span>{producto.cantidad && `x ${producto.cantidad}`}</span>
                                 </p>
                               </div>
@@ -237,16 +237,16 @@ const CircleAnimation = () => {
             {promoBarra?.available && delivery === "localActual" && (
               <h1 className="text-right text-sm text-gray-500">Descuento aplicado del 10%</h1>
             )}
-            <h1 className="font-bold text-right text-base font-poppins">Total: <span className="font-normal text-lg">{formatearNumero(checkout.total)}</span></h1>
+            <h1 className="font-bold text-right text-base font-montserrat">Total: <span className="font-normal text-lg">{formatearNumero(checkout.total)}</span></h1>
           </div>
 
         </div>
         <div className="text-center gap-2 flex justify-between items-end py-2">
-          <h1 className="text-base  text-neutral-800 font-poppins">Guarda el detalle de tu pedido.</h1>
+          <h1 className="text-base  text-neutral-800 font-montserrat">Guarda el detalle de tu pedido.</h1>
           <button
             onClick={handleCapture}
             style={{ backgroundColor: "#FD3307" }}
-            className="rounded-xl text-white flex gap-2 justify-center items-center px-3  p-2 font-poppins text-base  shadow-md">
+            className="rounded-xl text-white flex gap-2 justify-center items-center px-3  p-2 font-montserrat text-base  shadow-md">
             Descargar <FaDownload size={16} /> </button>
         </div>
       </div>

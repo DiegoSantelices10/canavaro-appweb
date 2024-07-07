@@ -49,7 +49,7 @@ export default function Cart({ data }) {
 
 
   const hoursDelivery = () => {
-    if (hora >= 19 && hora < 23) {
+    if (hora >= 11 && hora < 23) {
       setOpen(true);
     } else {
       setOpen(false);
@@ -155,7 +155,7 @@ export default function Cart({ data }) {
   );
 
   return (
-    <div className="font-poppins  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 h-full   rounded-t-3xl py-3 ">
+    <div className="font-montserrat shadow-md mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2 h-full   rounded-t-3xl py-3 ">
       <Toaster />
       <Formik
         initialValues={{
@@ -206,7 +206,7 @@ export default function Cart({ data }) {
                         />
                       </a>
                     </Link>
-                    <h2 className="font-poppins font-bold text-lg">Tu pedido</h2>
+                    <h2 className="font-montserrat font-bold text-lg">Tu pedido</h2>
                   </div>
 
                   <div className="py-2">
@@ -216,7 +216,7 @@ export default function Cart({ data }) {
                           Retirando por el local tenes un 10% de descuento.
                         </div>
                       )}
-                      <div className="flex justify-center  w-full gap-3 text-sm bg-slate-50 shadow p-2 rounded-2xl">
+                      <div className="flex justify-center w-full gap-3 text-sm bg-[#fdfcfc] shadow-sm p-2 rounded-lg">
                         <button
                           type="button"
                           onClick={() => {
@@ -224,8 +224,8 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "domicilioActual"
-                              ? "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
-                              : "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-white shadow  font-light p-3"
+                              ? "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-red-600 shadow text-white font-semibold p-3"
+                              : "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-white shadow  font-normal p-3"
                           }
                         >
                           <MdOutlineDeliveryDining size={20} />
@@ -238,142 +238,133 @@ export default function Cart({ data }) {
                           }}
                           className={
                             type === "localActual"
-                              ? "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-red-600 shadow text-white font-light p-3"
-                              : "w-1/2 rounded-xl flex font-poppins items-center justify-center gap-2 bg-white shadow font-light p-3"
+                              ? "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-red-600 shadow text-white font-semibold p-3"
+                              : "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-white shadow font-normal p-3"
                           }
                         >
                           <MdOutlineEmojiPeople size={20} />
                           Retiro
                         </button>
                       </div>
-                      <div className="flex flex-col justify-center items-center gap-2 p-2 mt-4">
+                      <div className="flex flex-col justify-center items-center mt-5">
                         {type === "domicilioActual" ? (
-                          <div className="w-full">
+                          <div className="w-full grid gap-6">
                             <div className="w-full">
                               <Field
                                 id="direccion"
                                 name="direccion"
-                                className="border-t-0 border-l-0 border-r-0 border-b-2 p-1 px-2 border-gray-500 focus:border-gray-500   w-full  text-sm focus:ring-0 rounded"
+                                className="border-t-0 border-l-0 border-r-0 border-b-1 p-1 px-2 border-gray-300 focus:border-gray-400   w-full  text-sm focus:ring-0 rounded"
                                 placeholder="Ingresa tu domicilio, Barrio"
                               />{" "}
                               <ErrorMessage name="direccion">
                                 {msg => {
-                                  return <div className="text-red-500 font-medium text-sm">{msg}</div>;
+                                  return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full mt-4">
+                            <div className="w-full">
                               <Field
                                 id="telefono"
                                 name="telefono"
-                                className="border-t-0 border-l-0 border-r-0 border-b-2 border-gray-500 focus:border-gray-500   w-full p-1 px-2 text-sm focus:ring-0 rounded"
+                                className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-300 focus:border-gray-400   w-full p-1 px-2 text-sm focus:ring-0 rounded"
                                 placeholder="Ingresa tu telefono"
                               />
                               <ErrorMessage name="telefono">
                                 {msg => {
-                                  return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
+                                  return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
                                 }}
                               </ErrorMessage>
                             </div>
-                            <div className="w-full mx-auto mt-4">
-                              <div className="border rounded-md p-2 min-w-min text-sm">
-                                {open ? (
-                                  <>
-                                    <h1 className="font-medium text-center text-gray-800  mt-1 font-poppins">
-                                      Tiempo de envío: {demora} min.
-                                    </h1>
-                                    <p className="text-center text-xs text-gray-400 font-normal">
-                                      o elige un horario que sea mayor al tiempo de envío {" "}
-                                      <button
-                                        type="button"
-                                        className="text-gray-800"
-                                        onClick={() => setShowHourEdit(!showHourEdit)}
-                                      >Ingresa aqui</button>
-                                    </p>
-                                    {showHourEdit &&
-                                      <>
-                                        <div className="w-full mx-auto flex justify-center mt-3">
-                                          <Field
-                                            id="hPersonalizado"
-                                            name="hPersonalizado"
-                                            className="border-b-2 border-gray-500 focus:border-gray-500 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
-                                            placeholder="Horario de entrega"
-                                          />
-                                        </div>
-                                        <ErrorMessage name="hPersonalizado">
-                                          {msg => {
-                                            return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
-                                          }}
-                                        </ErrorMessage>
-                                      </>
-                                    }
-                                  </>
-                                ) : (
-                                  <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-poppins">
-                                    Delivery de 19:30 a 23hs.
+                            <div className="p-3 py-5 rounded-lg shadow-sm bg-[#fdfcfc] min-w-min text-sm">
+                              {open ? (
+                                <>
+                                  <h1 className="font-medium text-center text-gray-800  mt-1 font-montserrat">
+                                    Tiempo de envío: {demora} min.
                                   </h1>
-                                )}
-                              </div>
+                                  <p className="text-center text-xs text-gray-400 font-normal font-montserrat">
+                                    o elige un horario que sea mayor al tiempo de envío {" "}
+                                    <button
+                                      type="button"
+                                      className="text-gray-800 font-montserrat"
+                                      onClick={() => setShowHourEdit(!showHourEdit)}
+                                    >Ingresa aqui</button>
+                                  </p>
+                                  {showHourEdit &&
+                                    <>
+                                      <div className="w-full mx-auto flex justify-center mt-3">
+                                        <Field
+                                          id="hPersonalizado"
+                                          name="hPersonalizado"
+                                          className="border-b-1 border-gray-300 bg-[#fdfcfc] placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
+                                          placeholder="Horario de entrega"
+                                        />
+                                      </div>
+                                      <ErrorMessage name="hPersonalizado">
+                                        {msg => {
+                                          return <div className="text-red-500 font-montserrat font-normal text-xs">{msg}</div>;
+                                        }}
+                                      </ErrorMessage>
+                                    </>
+                                  }
+                                </>
+                              ) : (
+                                <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-montserrat">
+                                  Delivery de 19:30 a 23hs.
+                                </h1>
+                              )}
                             </div>
                           </div>
                         ) : (
-                          <div className="w-full mx-auto ">
+                          <div className="w-full mx-auto">
                             <Field
                               id="nombre"
                               name="nombre"
-                              className="border-t-0 border-l-0 border-r-0 border-b-2 border-gray-500 focus:border-gray-500 focus:ring-0 rounded w-full p-1 px-2 text-sm"
+                              className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-300 focus:border-gray-400 focus:ring-0 rounded w-full p-1 px-2 text-sm"
                               placeholder="Ingresa tu nombre"
                             />
                             <ErrorMessage name="nombre">
                               {msg => {
-                                return <div className="text-red-500 font-medium text-sm text-left">{msg}</div>;
+                                return <div className="text-red-500 font-normal font-montserrat text-xs text-left pt-1 pl-2">{msg}</div>;
                               }}
                             </ErrorMessage>
 
-                            <div className="w-full mx-auto mt-4">
-                              <div className="border rounded-md p-2 min-w-min text-sm">
-                                {open ? (
-                                  <>
-                                    <h1 className="font-medium text-center text-gray-600 text-sm mt-1 font-poppins">
-                                      Tiempo de retiro: {demora} min.
-                                    </h1>
-                                    <p className="text-center text-xs text-gray-400 font-normal">
-                                      o elige un horario que sea mayor al tiempo de retiro {" "}
-                                      <button
-                                        type="button"
-                                        className="text-gray-800"
-                                        onClick={() => setShowHourEdit(!showHourEdit)}
-                                      >Ingresa aqui</button>
-                                    </p>
-                                    {showHourEdit &&
-                                      <>
-                                        <div className="w-full mx-auto flex justify-center mt-3">
-                                          <Field
-                                            id="hPersonalizado"
-                                            name="hPersonalizado"
-                                            className="border-b-2 border-gray-500 focus:border-gray-500 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
-                                            placeholder="Horario de entrega"
-                                          />
-                                        </div>
-                                        <ErrorMessage name="hPersonalizado">
-                                          {msg => {
-                                            return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
-                                          }}
-                                        </ErrorMessage>
-                                      </>
-                                    }
-                                  </>
-                                ) : (
-                                  <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-poppins">
-                                    Retiro de 19:30 a 23hs.
+                            <div className="p-3 py-5 rounded-lg shadow-sm bg-[#fdfcfc] min-w-min text-sm mt-6">
+                              {open ? (
+                                <>
+                                  <h1 className="font-medium text-center text-gray-600 text-sm mt-1 font-montserrat">
+                                    Tiempo de retiro: {demora} min.
                                   </h1>
-                                )}
-
-
-                              </div>
-
-
-
+                                  <p className="text-center text-xs text-gray-400 font-normal font-montserrat">
+                                    o elige un horario que sea mayor al tiempo de retiro {" "}
+                                    <button
+                                      type="button"
+                                      className="text-gray-800 font-montserrat"
+                                      onClick={() => setShowHourEdit(!showHourEdit)}
+                                    >Ingresa aqui</button>
+                                  </p>
+                                  {showHourEdit &&
+                                    <>
+                                      <div className="w-full mx-auto flex justify-center mt-3">
+                                        <Field
+                                          id="hPersonalizado"
+                                          name="hPersonalizado"
+                                          className="border-b-1 border-gray-300 bg-[#fdfcfc] placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
+                                          placeholder="Horario de entrega"
+                                        />
+                                      </div>
+                                      <ErrorMessage name="hPersonalizado">
+                                        {msg => {
+                                          return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
+                                        }}
+                                      </ErrorMessage>
+                                    </>
+                                  }
+                                </>
+                              ) : (
+                                <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-montserrat">
+                                  Retiro de 19:30 a 23hs.
+                                </h1>
+                              )}
                             </div>
                           </div>
                         )}
@@ -383,9 +374,9 @@ export default function Cart({ data }) {
                 </div>
                 {!orderList.some(item => item.categoria === 'bebidas') && (
 
-                  <div className="p-2">
-                    <h1 className="font-poppins font-bold text-gray-800 text-lg ">¿ Deseas agregar alguna bebida ?</h1>
-                    <div className="flex overflow-x-scroll flexp h-auto    space-x-6 w-full p-2 mt-4  ">
+                  <div className="p-3">
+                    <h1 className="font-montserrat font-bold text-gray-800 text-base">¿ Deseas agregar alguna bebida ?</h1>
+                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
                       <style jsx>
                         {`
                       .flexp::-webkit-scrollbar-thumb {
@@ -404,29 +395,29 @@ export default function Cart({ data }) {
                   </div>
                 )}
 
-                <div className="p-2 mb-16 pb-10 rounded-md">
+                <div className="p-3 mb-16 pb-10 rounded-md">
                   <button
                     onClick={() => addCartPromo(orderPromo)}
                     type="button"
                     className={`${orderPromo.length < 1
                       ? "invisible"
-                      : "p-4 font-semibold w-full font-poppins mb-3 bg-red-600 rounded-2xl text-white  hover:-translate-y-1 transition-all duration-500"
+                      : "p-3 font-medium w-full font-montserrat mb-3 bg-red-600 rounded-lg text-white  hover:-translate-y-1 transition-all duration-500"
                       }`}
                   >
                     Agregar al carrito
                   </button>
-                  <h1 className="text-gray-800 font-bold font-poppins px-2 text-lg mt-3">Detalle pedido</h1>
+                  <h1 className="text-gray-800 font-bold font-montserrat px-2 text-base mt-3">Detalle pedido</h1>
                   <hr />
                   {orderList.map((item, index) => {
                     return (
                       <div key={index}>
-                        <div className="font-poppins py-6">
-                          <div className="p-2  rounded-md">
+                        <div className="font-montserrat py-6">
+                          <div className="p-2 rounded-md">
                             <div className="flex justify-between items-center gap-x-2">
                               <div className="w-full ">
-                                <a className="font-semibold text-neutral-800 ">
+                                <a className="font-semibold text-neutral-800">
                                   {item.nombre}
-                                  <span className="text-gray-400 font-light text-sm">
+                                  <span className="text-gray-400 font-normal text-sm">
                                     {" "}
                                     {item.cant ? item.cant : item.cantidad}u
                                   </span>
@@ -448,7 +439,7 @@ export default function Cart({ data }) {
                                   <button
                                     type="button"
                                     onClick={() => handleOpenModal(item)}
-                                    className="font-normal font-poppins text-xs w-auto "
+                                    className="font-normal font-montserrat text-xs w-auto "
                                   >
                                     <AlignBoxMiddleLeftIcon color={"#1618A4"} />
                                   </button>
@@ -466,15 +457,15 @@ export default function Cart({ data }) {
                   })}
                 </div>
                 {orderList.length > 0 ? (
-                  <div className="font-poppins fixed bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white">
-                    <div className="flex justify-between items-center p-3 font-poppins">
+                  <div className="font-montserrat fixed bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-1/2 bg-white">
+                    <div className="flex justify-between items-center p-3 font-montserrat">
                       <div>
                         <p className="font-bold text-xl text-neutral-800">Subtotal</p>
                         <h3 className="text-xl">{formatearNumero(totalAmount)}</h3>
                       </div>
                       <button
                         type="submit"
-                        className="text-center text-sm font-poppins rounded-2xl w-auto p-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center text-sm font-montserrat rounded-lg w-auto p-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>
@@ -482,8 +473,8 @@ export default function Cart({ data }) {
                   </div>
                 ) : (
                   <div>
-                    <p className="text-center w-full font-bold text-lg font-poppins">Tu Carrito esta vacio</p>
-                    <p className="text-center w-full font-medium text-sm text-gray-500 h-full font-poppins">
+                    <p className="text-center w-full font-bold text-lg font-montserrat">Tu Carrito esta vacio</p>
+                    <p className="text-center w-full font-medium text-sm text-gray-500 h-full font-montserrat">
                       Por favor, regresa para realizar un pedido
                     </p>
                   </div>

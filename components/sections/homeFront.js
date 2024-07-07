@@ -30,7 +30,7 @@ function HomeFront() {
 
   }, [])
   return (
-    <div className="font-poppins w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
+    <div className="font-montserrat w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
 
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
@@ -42,17 +42,17 @@ function HomeFront() {
           <div className="md:absolute md:bottom-4 md:right-4 md:w-28">
             <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
           </div>
-          <p className="font-poppins text-3xl lg:text-5xl text-center font-bold text-gray-200">Pizzeria Canavaro</p>
+          <p className="font-montserrat text-3xl lg:text-5xl text-center font-bold text-gray-200">Pizzeria Canavaro</p>
           <p className="text-sm md:text-base font-normal text-white ">¡Todo lo que necesitas en un solo lugar!</p>
 
           <div className="w-full flex items-center mt-3">
             <Link href={"/digitalMenu"}>
               <a
-                className={`p-2 px-4 rounded-lg font-normal text-white font-poppins  text-base  mx-auto 
-                          hover:bg-black hover:text-white bg-red-600 
+                className={`p-2 px-4 rounded-lg font-normal  font-montserrat  text-base  mx-auto 
+                          hover:bg-black hover:text-white bg-white text-red-600  
                           hover:-translate-y-1 transition-all duration-500`}
               >
-                Men&uacute; digital
+                Men&uacute;
               </a>
             </Link>
           </div>
@@ -73,7 +73,7 @@ function HomeFront() {
                 <div className="w-full flex items-center mt-3">
                   <Link href={"/welcomeLogo"}>
                     <a
-                      className={`p-2 px-4 rounded-lg font-normal  font-poppins  text-base  mx-auto 
+                      className={`p-2 px-4 rounded-lg font-normal  font-montserrat  text-base  mx-auto 
                           hover:bg-black hover:text-white bg-red-600  text-white 
                           hover:-translate-y-1 transition-all duration-500`}
                     >
@@ -86,11 +86,11 @@ function HomeFront() {
           </div>
         </div>
       </motion.div>
-      <div className="w-full flex justify-center items-start gap-4 p-1 bg-red-600 z-50">
+      <div className="w-full flex justify-start items-start gap-4 p-1 px-5 bg-red-600 z-50">
         <div className="flex items-center">
-          <h1 className="text-white font-poppins tracking-wider font-light text-sm">
+          <h1 className="text-white font-montserrat tracking-wider font-light text-sm">
             Desarrollado por <span
-              className="font-poppins text-white font-medium text-sm tracking-wider"
+              className="font-montserrat text-white font-medium text-sm tracking-wider"
 
             >
               dinhodev

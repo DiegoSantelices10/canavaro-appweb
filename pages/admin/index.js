@@ -170,7 +170,7 @@ export default function HomeAdmin() {
         <div className="w-full  mx-auto lg:rounded-md  h-auto gap-4">
           <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
             <div className="w-full text-center py-2">
-              <h1 className="font-medium font-poppins ">Demora domicilio</h1>
+              <h1 className="font-medium font-montserrat ">Demora domicilio</h1>
               <div className="flex w-full gap-3 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "domicilio")
@@ -182,7 +182,7 @@ export default function HomeAdmin() {
 
 
             <div className="w-full  text-center py-2">
-              <h1 className="font-medium font-poppins ">Demora local</h1>
+              <h1 className="font-medium font-montserrat ">Demora local</h1>
               <div className="flex w-full gap-3 justify-center mt-2">
                 {data
                   ?.filter(item => item.tipoEnvio === "local")
@@ -199,7 +199,7 @@ export default function HomeAdmin() {
                 key={item._id}
                 className="mt-2 w-1/2 flex justify-between items-center "
               >
-                <h1 className=" font-poppins">
+                <h1 className=" font-montserrat">
                   {item.nombre}
                 </h1>
                 <label className="relative inline-flex items-center cursor-pointer">
@@ -225,7 +225,7 @@ export default function HomeAdmin() {
           </div>
         </div>
         <div className="w-full  relative mx-auto text-center px-2 mt-5">
-          <div className="flex flex-wrap justify-start gap-4 mx-auto font-poppins">
+          <div className="flex flex-wrap justify-start gap-4 mx-auto font-montserrat">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
                 <motion.div
@@ -244,7 +244,7 @@ export default function HomeAdmin() {
                       <h5 className="font-normal text-xs text-gray-700">{item?.tipoEnvio}</h5>
                     </div>
                   </div>
-                  <div className="flex justify-end  gap-3 w-full font-poppins">
+                  <div className="flex justify-end  gap-3 w-full font-montserrat">
                     <button
                       onClick={() => handleOpenModal(item)}
                       className="px-4 py-2 w-auto rounded-xl text-xs font-medium border  
@@ -269,7 +269,7 @@ export default function HomeAdmin() {
                 </motion.div>
               ))
             ) : (
-              <p className="text-center w-full font-semibold font-poppins">No Hay pedidos</p>
+              <p className="text-center w-full font-semibold font-montserrat">No Hay pedidos</p>
             )}
 
           </div>

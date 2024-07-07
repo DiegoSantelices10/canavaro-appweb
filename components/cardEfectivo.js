@@ -5,14 +5,14 @@ import Link from "next/link";
 const CardEfectivo = ({ data: { nombre, descripcion, precio } }) => {
 
     return (
-        <div className="rounded-xl shadow p-3">
+        <div className="rounded-lg bg-[#fdfcfc] shadow-sm p-3">
             <Link href={`/order/products/${convertToPath(nombre)}`}>
                 <a>
-                    <div className="w-60 flex flex-col h-full justify-between">
+                    <div className="w-60 flex flex-col h-full justify-between font-montserrat">
                         <div>
-                            <p className=" text-gray-800 text-sm font-bold">{nombre}</p>
+                            <p className=" text-gray-800 text-sm font-semibold">{nombre}</p>
                             <p className=" text-gray-400 text-xs tracking-wider">{descripcion}</p>
-                            <p className=" text-gray-400 text-sm font-poppins py-1">{formatearNumero(precio)}</p>
+                            <p className=" text-gray-400 text-sm font-montserrat py-1">{formatearNumero(precio)}</p>
                         </div>
                     </div>
 

@@ -51,7 +51,7 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
                 <div className=" absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
                     <div
                         className={
-                            quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
+                            quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow-sm  bg-slate-50" : "invisible"
                         }
                     >
                         <button
@@ -67,7 +67,7 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
 
                     <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
 
-                    <div className="rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50">
+                    <div className="rounded-full w-8 h-8 grid content-center  shadow-sm  bg-slate-50">
                         <button
                             type="button"
                             className="text-green-500 text-3xl flex justify-center items-center"

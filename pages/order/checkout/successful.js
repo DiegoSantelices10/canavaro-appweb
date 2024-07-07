@@ -113,7 +113,7 @@ export default function successful() {
               margin: "auto",
             }}
           />
-          <h2 className="text-gray-800 font-poppins text-lg font-bold w-full py-2">¡Ya recibimos tu pedido! </h2>
+          <h2 className="text-gray-800 font-montserrat text-lg font-bold w-full py-2">¡Ya recibimos tu pedido! </h2>
         </motion.div>
 
       </motion.div>
@@ -128,15 +128,15 @@ export default function successful() {
               <FaWhatsapp size={18} />
               Ir a whatsapp</div>
           </a>
-          <p className=" text-xs font-poppins font-normal text-neutral-400">¡Confirma tu pedido por whatsapp!</p>
+          <p className=" text-xs font-montserrat font-normal text-neutral-400">¡Confirma tu pedido por whatsapp!</p>
         </div>
         <div id="container-pedido">
           <div className="flex justify-between items-center p-1 mt-3">
-            <p className=" font-semibold font-poppins text-base">
+            <p className=" font-semibold font-montserrat text-base">
 
               Detalle del pedido
             </p>
-            <h1 className="font-medium font-poppins">{checkout.hora}hs.</h1>
+            <h1 className="font-medium font-montserrat">{checkout.hora}hs.</h1>
           </div>
           <div className="w-full h-auto rounded-md border-gray-200 border mt-1 p-2">
             <div className="flex justify-between">
@@ -144,44 +144,44 @@ export default function successful() {
                 {delivery === "domicilioActual" ? (
                   <>
                     <div className="mt-1">
-                      <h1 className="font-semibold text-sm font-poppins">Horario de envío</h1>
-                      <span className="text-gray-400 text-sm font-normal font-poppins">
+                      <h1 className="font-semibold text-sm font-montserrat">Horario de envío</h1>
+                      <span className="text-gray-400 text-sm font-normal font-montserrat">
                         {checkout.hPersonalizado === "" ? demora + " min." : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
-                      <h2 className="font-poppins text-sm  font-semibold">Domicilio</h2>
-                      <span className="font-poppins text-sm font-normal text-gray-400">{checkout.domicilio} </span>
+                      <h2 className="font-montserrat text-sm  font-semibold">Domicilio</h2>
+                      <span className="font-montserrat text-sm font-normal text-gray-400">{checkout.domicilio} </span>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="mt-1">
-                      <h1 className="font-semibold text-sm font-poppins">Horario de retiro</h1>
-                      <span className="text-gray-400 text-sm font-poppins  font-normal">
+                      <h1 className="font-semibold text-sm font-montserrat">Horario de retiro</h1>
+                      <span className="text-gray-400 text-sm font-montserrat  font-normal">
                         {checkout.hPersonalizado === "" ? demora : checkout.hPersonalizado + "hs."}</span>
                     </div>
                     <div className="mt-1">
-                      <h2 className="font-poppins text-sm font-semibold">Retira por local</h2>
-                      <span className="text-gray-400 text-sm font-normal font-poppins"> {checkout.cliente}</span>
+                      <h2 className="font-montserrat text-sm font-semibold">Retira por local</h2>
+                      <span className="text-gray-400 text-sm font-normal font-montserrat"> {checkout.cliente}</span>
                     </div>
                   </>
                 )}
               </div>
             </div>
             <div className="mt-1">
-              <h2 className="font-poppins text-sm font-semibold ">Medio de pago</h2>
-              <span className="text-gray-400 text-sm font-normal font-poppins"> {checkout.medioDePago}</span>
+              <h2 className="font-montserrat text-sm font-semibold ">Medio de pago</h2>
+              <span className="text-gray-400 text-sm font-normal font-montserrat"> {checkout.medioDePago}</span>
             </div>
             <div >
               {checkout.comentarios && (
                 <div className="mt-1">
-                  <p className="font-poppins text-sm font-semibold">Comentarios</p>
-                  <span className="text-gray-400 font-poppins text-sm font-normal"> {checkout.comentarios}</span>
+                  <p className="font-montserrat text-sm font-semibold">Comentarios</p>
+                  <span className="text-gray-400 font-montserrat text-sm font-normal"> {checkout.comentarios}</span>
                 </div>
               )}
             </div>
-            <h2 className="font-poppins text-base font-semibold mt-1">Pedido</h2>
-            <div className="w-full font-poppins relative">
+            <h2 className="font-montserrat text-base font-semibold mt-1">Pedido</h2>
+            <div className="w-full font-montserrat relative">
               {available && hasProductosEfectivo()?.length > 0 && hasProductosGeneral()?.length > 0 && (
                 <>
                   <div className='my-2'>
@@ -242,14 +242,14 @@ export default function successful() {
                     <div className=" w-auto p-2  my-2">
                       <p className="text-red-500 text-center font-normal text-sm">Se aplica el {descuento}% de descuento abonando</p>
                     </div>
-                    <div className='flex font-poppins text-sm justify-between w-full items-center py-1 mt-2'>
+                    <div className='flex font-montserrat text-sm justify-between w-full items-center py-1 mt-2'>
                       <p className='font-semibold'>Subtotal</p>
                       <p className='font-semibold'>{formatearNumero(totalAmount)}</p>
                     </div>
                   </>
                 )}
               </div>
-              <div className="flex justify-between text-sm font-semibold font-poppins items-center mt-4">
+              <div className="flex justify-between text-sm font-semibold font-montserrat items-center mt-4">
                 <p>Total</p>
                 <p>{formatearNumero(checkout.total)}</p>
               </div>
@@ -258,11 +258,11 @@ export default function successful() {
 
         </div>
         <div className="text-center gap-2 flex justify-between items-end py-2">
-          <h1 className="text-sm font-semibold  text-neutral-800 font-poppins">Guarda el detalle de tu pedido.</h1>
+          <h1 className="text-sm font-semibold  text-neutral-800 font-montserrat">Guarda el detalle de tu pedido.</h1>
           <button
             onClick={handleCapture}
             style={{ backgroundColor: "#FD3307" }}
-            className="rounded-xl text-white flex gap-2 justify-center items-center px-3  p-2 font-poppins text-base  shadow-md">
+            className="rounded-xl text-white flex gap-2 justify-center items-center px-3  p-2 font-montserrat text-base  shadow-md">
             Descargar <FaDownload size={16} /> </button>
         </div>
       </div>
