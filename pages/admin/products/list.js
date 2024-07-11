@@ -124,7 +124,7 @@ export default function Products() {
           <div className="bg-white flex w-full lg:w-1/2  items-center gap-x-2">
             <div
               className="flex  justify-between items-center w-full  h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border
-                         rounded-xl appearance-none focus:outline-none focus:shadow-outline"
+                         rounded-lg appearance-none focus:outline-none focus:shadow-outline"
             >
               <input
                 id="query"
@@ -132,16 +132,16 @@ export default function Products() {
                 type="text"
                 placeholder="¿Que Desea Buscar?"
                 onChange={handleChangeSearch}
-                className="w-full border-none text-sm rounded-xl text-gray-200 placeholder:text-gray-400 placeholder:font-montserrat  focus:outline-none focus:ring-0"
+                className="w-full border-none text-sm rounded-lg text-gray-200 placeholder:text-gray-400 placeholder:font-montserrat  focus:outline-none focus:ring-0"
               />
               <Search01Icon color="#BFBFBF" width={20} />
             </div>
           </div>
 
-          <div className="w-full lg:w-1/2 h-10 rounded-xl appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
+          <div className="w-full lg:w-1/2 h-10 rounded-lg appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
             <select
               onChange={handleCategoryChange}
-              className="h-10 border border-gray-200 font-montserrat focus:ring-0 focus:ring-gray-200 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-xl  block w-full p-2.5 "
+              className="h-10 border border-gray-200 font-montserrat focus:ring-0 focus:border-gray-300 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-lg  block w-full p-2.5 "
             >
               <option className="text-gray-200 text-sm font-montserrat" value="">
                 Seleccione una categoria
@@ -155,7 +155,7 @@ export default function Products() {
           </div>
           <button
             className="px-3 whitespace-nowrap h-10 w-full md:w-1/3  font-montserrat font-normal
-                       rounded-xl  text-sm border text-white bg-red-600"
+                       rounded-lg  text-sm border text-white bg-red-600"
             type="button"
             onClick={() =>
               router.push("/admin/products/create")
@@ -165,7 +165,7 @@ export default function Products() {
           </button>
           <button
             className="h-10 whitespace-nowrap w-full md:w-1/3 px-3 font-montserrat font-normal
-                        rounded-xl  text-sm border  bg-red-600 text-white"
+                        rounded-lg  text-sm border  bg-red-600 text-white"
             type="button"
             onClick={() => {
               router.push("/admin/products/updatePrices");

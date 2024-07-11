@@ -5,6 +5,7 @@ import { createProduct } from "services/fetchData";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import ControllerInput from "components/ControllerInput";
+import cloudinaryImage from "utils/cloudinaryImage";
 
 export default function Create() {
   const [renderProducts, setRenderProductos] = useState("pizzas");
@@ -30,7 +31,7 @@ export default function Create() {
           <div className="w-full lg:w-1/4 h-10 mb-5 outline-none  focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
             <select
               onChange={handleCategoryChange}
-              className="h-10  font-montserrat focus:ring-0  border-gray-300 focus:ring-gray-200  text-gray-400 text-sm rounded-xl  w-full p-2.5 "
+              className="h-10  font-montserrat focus:ring-0  border-gray-200 focus:border-gray-300  text-gray-400 text-sm rounded-lg  w-full p-2.5 "
             >
               {categorias.map(item => (
                 <option key={item} value={item} className="text-sm font-montserrat font-medium">
@@ -76,7 +77,7 @@ export default function Create() {
           >
             {({ setFieldValue, values, handleChange }) => (
               <Form
-                className="border border-gray-300 p-4 rounded-xl"
+                className="border border-gray-200 p-4 rounded-lg"
               >
                 <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-4 md:space-y-0">
                   <ControllerInput
@@ -91,7 +92,7 @@ export default function Create() {
                         id="categoria"
                         name="categoria"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-xl    focus:border-gray-200"
+                  									rounded-lg    focus:border-gray-200"
                       />
                     </label>
                   </div>
@@ -119,7 +120,7 @@ export default function Create() {
                             id="precioExtra"
                             name="precioExtra"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											                  rounded-xl  focus:border-gray-200"
+											                  rounded-lg  focus:border-gray-300 focus:ring-0"
                           />
                         </label>
                       </div>
@@ -208,7 +209,7 @@ export default function Create() {
                                 value={values.cantidadMaxima}
                                 onChange={handleChange}
                                 className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													                  rounded-xl focus:border-gray-200"
+													                  rounded-lg focus:border-gray-200"
                               />
                             </label>
                           </div>
@@ -241,7 +242,7 @@ export default function Create() {
                                 name="tamanio"
                                 value={values.tamanio}
                                 className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													  rounded-xl focus:border-gray-200"
+													  rounded-lg focus:border-gray-200"
                               />
                             </label>
                           </div>
@@ -249,11 +250,25 @@ export default function Create() {
                       </div>
                     </>
                   )}
+                  <div className=" w-full mx-auto">
+                    <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
+                      Cargar Imagen
+                      <input
+                        name="imagen"
+                        type="file"
+                        onChange={e => cloudinaryImage(e.target, setFieldValue)}
+                        className="w-full h-10  mt-2  text-xs leading-tight text-gray-700 border-gray-200 
+                  									 appearance-none focus:outline-none focus:shadow-outline
+                                    file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-lg
+                                    file:font-normal"
+                      />
+                    </label>
+                  </div>
 
 
                   <button
                     className="w-44 h-12 col-start-2
-                       						 rounded-xl  text-sm 
+                       						 rounded-lg  text-sm 
                        						 border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500 translate-x-1"
                     type="submit"
                   >

@@ -12,7 +12,7 @@ const ControllerInput = ({ label, name }) => {
                     id={name}
                     name={name}
                     className="p-2 w-full h-10 text-sm leading-tight text-gray-700  
-                             border-gray-200 border rounded-xl focus:border-gray-200"
+                             border-gray-200 border rounded-lg focus:ring-0 focus:border-gray-300"
                 />
             </label>
         </div>

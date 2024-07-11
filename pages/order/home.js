@@ -186,7 +186,7 @@ export default function Home() {
   return (
     <Layout>
       <Toaster />
-      <div className="pt-[90px] mx-auto w-full rounded-3xl relative">
+      <div className="pt-[70px] mx-auto w-full rounded-3xl relative">
         <div className="w-full flex items-center justify-between">
           <div>
             <p className="text-left w-full font-montserrat text-base  font-semibold">¡Arma tu pizza como quieras!</p>
@@ -270,7 +270,7 @@ export default function Home() {
               className={
                 renderProducts !== "empanadas"
                   ? "w-48  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-48 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-300 tracking-wide"
+                  : "w-48 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-200 tracking-wide"
               }
             >
               Canastitas & Empanadas
@@ -282,7 +282,7 @@ export default function Home() {
               className={
                 renderProducts !== "pizzas"
                   ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-300 tracking-wide"
+                  : "w-28 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-200 tracking-wide"
               }
             >
               Pizzas
@@ -295,7 +295,7 @@ export default function Home() {
               className={
                 renderProducts !== "promociones"
                   ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-300 tracking-wide"
+                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-200 tracking-wide"
               }
             >
               Promociones
@@ -310,7 +310,7 @@ export default function Home() {
               className={
                 renderProducts !== "porciones"
                   ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-300 tracking-wide"
+                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-200 tracking-wide"
               }
             >
               Porciones
@@ -325,7 +325,7 @@ export default function Home() {
               className={
                 renderProducts !== "bebidas"
                   ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold  text-neutral-800 text-sm font-montserrat border-b border-gray-300 tracking-wide"
+                  : "w-28 font-semibold  text-neutral-800 text-sm font-montserrat border-b border-gray-200 tracking-wide"
               }
             >
               Bebidas
@@ -355,7 +355,7 @@ export default function Home() {
             orderPromo.length > 0 && (
               <div className="w-full fixed bottom-2 mx-auto px-3 md:w-4/5 lg:w-3/5">
                 <div
-                  className="flex justify-between items-center  rounded-xl mx-auto text-center   
+                  className="flex justify-between items-center  rounded-lg mx-auto text-center   
 									   w-full md:w-4/5 lg:w-3/5 p-3 bg-red-600  text-white text-base font-semibold "
                 >
                   <button

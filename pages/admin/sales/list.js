@@ -48,7 +48,7 @@ export default function Sales() {
         <div className="w-full h-auto mx-auto ">
           <div className=" py-5 w-full lg:px-0 h-auto flex justify-center lg:justify-start items-center">
             <div className="w-full flex flex-col justify-between font-montserrat  
-                            p-4 h-20 font-bold bg-white rounded-xl border border-gray-200">
+                            p-4 h-20 font-bold bg-white rounded-lg border border-gray-200">
               <h2 className="font-semibold  text-sm whitespace-nowrap">
                 VENTAS DEL DÍA: <span className="font-medium">$ {totalSale}</span>
               </h2>
@@ -70,7 +70,7 @@ export default function Sales() {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className="w-full  md:w-72 bg-white rounded-xl h-auto  p-3 border"
+                          className="w-full  md:w-72 bg-white rounded-lg h-auto  p-3 border"
                         >
                           <div className="w-full text-sm">
                             <h2 className="text-right text-xs text-gray-500"><span className="text-xs">{item.hora}hs.</span></h2>
@@ -84,7 +84,7 @@ export default function Sales() {
                           <div className="flex justify-end  gap-3 w-full font-montserrat">
                             <button
                               onClick={() => handleOpenModal(item)}
-                              className="px-4 py-2 w-auto rounded-xl text-xs font-medium border 
+                              className="px-4 py-2 w-auto rounded-lg text-xs font-medium border 
 														 focus:outline-none focus:ring transition 
 														text-white bg-red-600  hover:bg-red-500 
 														active:bg-blue-200 focus:ring-blue-300"

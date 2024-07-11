@@ -38,7 +38,7 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
                             height={130}
                             objectFit="contain"
                             objectPosition="center"
-                            className="rounded-xl "
+                            className="rounded-lg "
                             alt={nombre}
                         />
                     </a>

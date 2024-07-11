@@ -181,34 +181,34 @@ export default function Checkout() {
               <div className="h-full">
 
                 <div className="px-3">
-                  <div className="bg-[#fdfcfc] shadow-sm p-2 rounded-lg">
+                  <div className="border border-gray-200 p-2 py-3 rounded-lg">
                     <div>
                       {delivery === "domicilioActual" ? (
-                        <>
+                        <div className="flex justify-between">
                           <h2 className="font-montserrat text-neutral-800 font-semibold text-sm">Dirección de envío</h2>
-                          <p className="font-montserrat text-gray-600 text-sm">{user.direccion} </p>
-                        </>
+                          <p className="font-montserrat text-gray-600 px-1 text-sm">{user.direccion} </p>
+                        </div>
                       ) : (
-                        <>
+                        <div className="flex justify-between">
                           <h2 className="font-montserrat text-neutral-800 font-semibold text-sm">Retira por local</h2>
-                          <p className="font-montserrat text-gray-600 text-sm">{user.nombre}</p>
-                        </>
+                          <p className="font-montserrat text-gray-600 px-1 text-sm">{user.nombre}</p>
+                        </div>
                       )}
                     </div>
                     <div className="bg-red-500 p-px my-2"></div>
                     {user?.hPersonalizado ? (
-                      <div>
+                      <div className="flex justify-between">
                         <h2 className="font-montserrat font-semibold text-sm text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo"}
                         </h2>
-                        <p className="font-montserrat text-sm text-gray-600">{user?.hPersonalizado}hs.</p>
+                        <p className="font-montserrat px-1 text-sm text-gray-600">{user?.hPersonalizado}hs.</p>
                       </div>
                     ) : (
-                      <div>
+                      <div className="flex justify-between">
                         <h2 className="font-montserrat font-semibold text-sm text-neutral-800">
                           {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo en"}
                         </h2>
-                        <p className="font-montserrat text-sm text-gray-600">{demora}m.</p>
+                        <p className="font-montserrat px-1 text-sm text-gray-600">{demora} minutos</p>
                       </div>
                     )}
                   </div>
@@ -216,15 +216,15 @@ export default function Checkout() {
 
                 <div className="flex flex-col gap-6 px-3 my-6">
                   <div>
-                    <h2 className="font-montserrat text-sm font-semibold pb-1 text-neutral-800">Comentarios adicionales</h2>
+                    <h2 className="font-montserrat text-xs font-medium pb-1 pl-1 text-neutral-800">Comentarios adicionales</h2>
                     <Field
                       id="comentarios"
                       name="comentarios"
-                      className="border border-gray-200 rounded-lg w-full p-2 focus:border-gray-300 focus:ring-0"
+                      className="border border-gray-200 rounded-lg w-full p-2 focus:border-gray-200 focus:ring-0"
                     />
                   </div>
                   <div className="h-full">
-                    <h2 className="font-montserrat font-semibold text-sm pb-1 text-neutral-800">Medios de pago</h2>
+                    <h2 className="font-montserrat font-medium text-xs pb-1 pl-1 text-neutral-800">Medios de pago</h2>
                     {verificarSoloEfectivo() ? (
                       <p>solo podes abonar en efectivo</p>
                     ) : (
@@ -233,7 +233,7 @@ export default function Checkout() {
                           <Field
                             as="select"
                             name="medioDePago"
-                            className=" border-none font-montserrat p-3  text-gray-900 font-normal text-sm rounded-xl  block w-full focus:ring-gray-300 "
+                            className=" border-none font-montserrat p-3  text-gray-900 font-normal text-sm rounded-lg  block w-full focus:ring-gray-300 "
                           >
                             {medios.map((item, index) => (
                               <option key={index} value={item} className="text-sm text-gray-500 font-montserrat font-semibold">
@@ -249,7 +249,7 @@ export default function Checkout() {
                               type="number"
                               name="pagaCon"
                               className="border rounded-lg placeholder:text-gray-400  
-                                       border-gray-200 font-montserrat text-sm w-full p-3 focus:ring-0 focus:border-gray-300"
+                                       border-gray-200 font-montserrat text-sm w-full p-3 focus:ring-0 focus:border-gray-200"
                               placeholder="¿Con cuanto vas a pagar?"
                             />
                           )}
@@ -329,7 +329,7 @@ export default function Checkout() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="text-center w-full font-montserrat rounded-lg justify-center items-center flex p-4 text-white bg-red-600 font-semibold hover:-translate-y-1 transition-all duration-500"
+                    className="text-center w-full font-montserrat rounded-lg justify-center items-center flex p-3 px-4 text-white bg-red-600 font-medium hover:-translate-y-1 transition-all duration-500"
                   >
                     {isSubmitting ? (
                       <ColorRing

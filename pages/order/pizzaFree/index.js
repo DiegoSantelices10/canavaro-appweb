@@ -317,7 +317,7 @@ export default function Index() {
             id="comentarios"
             name="comentarios"
             type="text"
-            className="border border-gray-300 rounded-md w-full p-2"
+            className="border border-gray-200 rounded-md w-full p-2"
           />
         </div>
       </div>

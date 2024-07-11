@@ -44,7 +44,7 @@ export default function Register() {
                   <div className="mb-3">
                     <Field
                       id="username"
-                      className="shadow w-full font-montserrat font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+                      className="shadow w-full font-montserrat font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
                       placeholder="Introduce tu usuario"
                       type="text"
                       name="username"
@@ -53,7 +53,7 @@ export default function Register() {
                   <div>
                     <Field
                       id="password"
-                      className="shadow w-full font-montserrat bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
+                      className="shadow w-full font-montserrat bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
                       placeholder="Introduce tu contraseña"
                       type="password"
                       name="password"

@@ -166,7 +166,7 @@ export default function Calcular({ data }) {
                                     name="chica"
                                     onChange={onChangeValue}
                                     checked={select === "chica"}
-                                    className="mx-auto p-4 rounded-xl focus:ring-0 focus:text-red-600 hover:text-red-600 checked:text-red-600"
+                                    className="mx-auto p-4 rounded-lg focus:ring-0 focus:text-red-600 hover:text-red-600 checked:text-red-600"
                                 />
                                 <h3 className="font-semibold font-montserrat text-white text-sm">Chica</h3>
                             </div>
@@ -178,7 +178,7 @@ export default function Calcular({ data }) {
                                     name="mediana"
                                     onChange={onChangeValue}
                                     checked={select === "mediana"}
-                                    className="mx-auto p-4 rounded-xl focus:ring-0 focus:text-red-600 hover:text-red-600 checked:text-red-600"
+                                    className="mx-auto p-4 rounded-lg focus:ring-0 focus:text-red-600 hover:text-red-600 checked:text-red-600"
                                 />
                                 <h3 className="font-semibold text-center text-white text-sm">Mediana</h3>
                             </div>
@@ -190,7 +190,7 @@ export default function Calcular({ data }) {
                                     name="gigante"
                                     onChange={onChangeValue}
                                     checked={select === "gigante"}
-                                    className="mx-auto p-4 rounded-xl focus:ring-0 focus:text-red-600 hover:text-red-600 checked:text-red-600"
+                                    className="mx-auto p-4 rounded-lg focus:ring-0 focus:text-red-600 hover:text-red-600 checked:text-red-600"
                                 />
                                 <h3 className="font-semibold text-white text-sm">Gigante</h3>
                             </div>
@@ -202,7 +202,7 @@ export default function Calcular({ data }) {
                             .sort((a, b) => a.nombre.localeCompare(b.nombre))
                             .map((item) => (
 
-                                <div key={item._id} className="w-[205px] shadow-gray-600 shadow-inner rounded-2xl border-gray-400">
+                                <div key={item._id} className="w-[205px] shadow-gray-600 shadow-inner rounded-lg border-gray-400">
                                     <h2 className=" font-medium font-montserrat text-white text-center text-xs mt-4 uppercase ">{item.nombre}</h2>
                                     <h2 className=" font-medium font-montserrat text-gray-400 text-center text-xs uppercase ">{formatearNumero(item.precioPizza[select])}</h2>
 

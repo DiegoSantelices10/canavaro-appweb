@@ -177,7 +177,7 @@ export default function Update({ data }) {
           >
             {({ setFieldValue, values, handleChange }) => (
               <Form
-                className="border border-gray-200 p-4  rounded-xl"
+                className="border border-gray-200 p-4  rounded-lg"
               >
                 <div className="md:grid  md:grid-cols-2  justify-items-end gap-4 space-y-2 lg:space-y-0 md:space-y-0">
                   <div className="w-full mx-auto">
@@ -187,7 +187,7 @@ export default function Update({ data }) {
                         id="nombre"
                         name="nombre"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-xl  focus:border-gray-200"
+                  									rounded-lg  focus:border-gray-300 focus:right-0"
                       />
                     </label>
                   </div>
@@ -199,7 +199,7 @@ export default function Update({ data }) {
                         id="categoria"
                         name="categoria"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-xl   focus:border-gray-200"
+                  									rounded-lg   focus:border-gray-300 focus:right-0"
                       />
                     </label>
                   </div>
@@ -211,7 +211,7 @@ export default function Update({ data }) {
                           id="descripcion"
                           name="descripcion"
                           className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-xl   focus:border-gray-200"
+                  									rounded-lg   focus:border-gray-300 focus:right-0"
                         />
                       </label>
                     </div>
@@ -225,7 +225,7 @@ export default function Update({ data }) {
                           id="precio"
                           name="precio"
                           className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-xl   focus:border-gray-200"
+											  rounded-lg focus:border-gray-300 focus:right-0"
                         />
                       </label>
                     </div>
@@ -257,7 +257,7 @@ export default function Update({ data }) {
                             id="precioExtra"
                             name="precioExtra"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											                  rounded-xl  focus:border-gray-200"
+											                  rounded-lg focus:border-gray-300 focus:right-0"
                           />
                         </label>
                       </div>
@@ -272,7 +272,7 @@ export default function Update({ data }) {
                             id="precioPizza.gigante"
                             name="precioPizza.gigante"
                             className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-xl focus:border-gray-200"
+											  rounded-lg focus:border-gray-300 focus:right-0"
                           />
                         </label>
                       </div>
@@ -283,7 +283,7 @@ export default function Update({ data }) {
                             id="precioPizza.mediana"
                             name="precioPizza.mediana"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-xl focus:border-gray-200"
+                  									rounded-lg focus:border-gray-300 focus:right-0"
                           />
                         </label>
                       </div>
@@ -294,7 +294,7 @@ export default function Update({ data }) {
                             id="precioPizza.chica"
                             name="precioPizza.chica"
                             className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-xl focus:border-gray-200"
+                  									rounded-lg focus:border-gray-300 focus:right-0"
                           />
                         </label>
                       </div>
@@ -365,7 +365,7 @@ export default function Update({ data }) {
                                 value={values.cantidadMaxima}
                                 onChange={handleChange}
                                 className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													                  rounded-md shadow   focus:border-gray-200"
+													                  rounded-lg  focus:border-gray-300 focus:right-0"
                               />
                             </label>
                           </div>
@@ -408,7 +408,7 @@ export default function Update({ data }) {
                   )}
 
                   <button
-                    className="w-48 h-12  col-start-2 rounded-xl  text-sm 
+                    className="w-48 h-12  col-start-2 rounded-lg  text-sm 
                        				border text-white bg-red-600 hover:bg-red-500 font-normal font-montserrat"
                     type="submit"
                   >

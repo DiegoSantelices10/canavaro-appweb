@@ -37,7 +37,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
 
-        <div className="inline-block align-bottom  rounded-xl text-left overflow-hidden w-full shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div className="inline-block align-bottom  rounded-lg text-left overflow-hidden w-full shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
               {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
                 <p className="text-sm font-normal  mt-2 text-red-500">Se aplica el {promoEfectivo.descuento}% de descuento, excepto soloEfectivo</p>
               )}
-              <div className="border-t-2 border-gray-300 my-3"></div>
+              <div className="border-t-2 border-gray-200 my-3"></div>
 
               <div className="flex font-bold justify-between items-center text-gray-900">
                 <h2>Total</h2>

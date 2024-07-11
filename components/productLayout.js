@@ -241,7 +241,7 @@ export default function ProductLayout({
               name="comentarios"
               type="text"
               ref={comentarioRef}
-              className="border border-gray-300 rounded-xl w-full p-2"
+              className="border border-gray-200 rounded-lg w-full p-2"
             />
           </label>
         </div>

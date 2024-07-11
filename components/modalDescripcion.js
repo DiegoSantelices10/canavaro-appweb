@@ -11,7 +11,7 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
           <div className="absolute inset-0  bg-gray-200 opacity-50"></div>
         </div>
 
-        <div className="relative inline-block align-bottom w-full  rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div className="relative inline-block align-bottom w-full  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}

@@ -80,7 +80,7 @@ const AccessMenu = () => {
 
   return (
     <>
-      <div className="w-full bg-red-600 rounded-xl  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-2">
+      <div className="w-full bg-red-600 rounded-lg  h-16 lg:h-full relative flex justify-between mx-auto lg:flex  lg:flex-col lg:justify-start lg:items-center gap-4 p-2">
         <div className="lg:flex lg:justify-center lg:items-center hidden mt-5">
           <Image height={100} width={100} src={"/images/logocanavaro.webp"} />
         </div>
@@ -180,7 +180,7 @@ const AccessMenu = () => {
       {isOpen && (
         <AnimatePresence>
           <motion.div
-            className="w-2/5 h-56 mt-2 fixed z-10 bg-red-600 rounded-xl grid gap-4 p-3 pt-8 pb-4"
+            className="w-2/5 h-56 mt-2 fixed z-10 bg-red-600 rounded-lg grid gap-4 p-3 pt-8 pb-4"
             initial="closed"
             animate="open"
             exit="closed"

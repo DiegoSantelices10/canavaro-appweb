@@ -35,7 +35,7 @@ function DigitalMenu() {
                     key={data._id}
                 >
                     <div
-                        className="flex bg-zinc-800 rounded-2xl justify-between items-center h-full  gap-x-2">
+                        className="flex bg-zinc-800 rounded-lg justify-between items-center h-full  gap-x-2">
                         <Image
                             className="rounded-l-xl"
                             src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
@@ -48,7 +48,7 @@ function DigitalMenu() {
                         <div className="relative w-full h-full flex flex-col justify-between">
                             <div>
                                 <h1 className="font-medium font-montserrat text-base text-white">{data.nombre}</h1>
-                                <p className="text-gray-400 font-montserrat font-light text-xs">{data.descripcion}</p>
+                                <p className="text-gray-300 font-montserrat  text-xs">{data.descripcion}</p>
                             </div>
                             {data.categoria === 'pizzas' ? (
                                 <div className='flex font-montserrat justify-center gap-5 mt-2'>
@@ -93,7 +93,7 @@ function DigitalMenu() {
                         <div className="w-full flex items-center">
                             <Link href={"/welcomeLogo"}>
                                 <a
-                                    className={`p-2 px-5 rounded-xl font-normal  font-montserrat  text-sm  mx-auto 
+                                    className={`p-2 px-5 rounded-lg font-normal  font-montserrat  text-sm  mx-auto 
                                hover:bg-black hover:text-white bg-white  text-gray-900   
                                  hover:-translate-y-1 transition-all duration-500`}
                                 >
@@ -109,30 +109,30 @@ function DigitalMenu() {
 
                 <button
                     onClick={() => setRenderProductos('promociones')}
-                    className={renderProductos === 'promociones' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'promociones' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Combos
                 </button>
                 <button
                     onClick={() => setRenderProductos('pizzas')}
-                    className={renderProductos === 'pizzas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'pizzas' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
                     Pizzas
                 </button>
                 <button
                     onClick={() => setRenderProductos('bebidas')}
-                    className={renderProductos === 'bebidas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'bebidas' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Bebidas
                 </button>
                 <button
                     onClick={() => setRenderProductos('porciones')}
-                    className={renderProductos === 'porciones' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'porciones' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Porciones
                 </button>
                 <button
                     onClick={() => setRenderProductos('empanadas')}
-                    className={renderProductos === 'empanadas' ? 'bg-white rounded-2xl p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    className={renderProductos === 'empanadas' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
                     Empanadas & Canastitas
                 </button>

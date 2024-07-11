@@ -249,33 +249,38 @@ export default function Cart({ data }) {
                       <div className="flex flex-col justify-center items-center mt-5">
                         {type === "domicilioActual" ? (
                           <div className="w-full grid gap-6">
-                            <div className="w-full">
-                              <Field
-                                id="direccion"
-                                name="direccion"
-                                className="border-t-0 border-l-0 border-r-0 border-b-1 p-1 px-2 border-gray-300 focus:border-gray-400   w-full  text-sm focus:ring-0 rounded"
-                                placeholder="Ingresa tu domicilio, Barrio"
-                              />{" "}
-                              <ErrorMessage name="direccion">
-                                {msg => {
-                                  return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
-                                }}
-                              </ErrorMessage>
+                            <div className="flex flex-col md:flex-row gap-3">
+                              <div className="w-full">
+                                <Field
+                                  id="direccion"
+                                  name="direccion"
+                                  className="border-t-0 border-l-0 border-r-0 border-b-1 p-1 px-2 border-gray-200 focus:border-gray-400   w-full  text-sm focus:ring-0 rounded placeholder:text-sm"
+                                  placeholder="Ingresa tu domicilio, Barrio"
+                                />{" "}
+                                <ErrorMessage name="direccion">
+                                  {msg => {
+                                    return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
+                                  }}
+                                </ErrorMessage>
+                              </div>
+
+                              <div className="w-full">
+                                <Field
+                                  id="telefono"
+                                  name="telefono"
+                                  type="number"
+                                  className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-200 focus:border-gray-400   w-full p-1 px-2 text-sm focus:ring-0 rounded placeholder:text-sm"
+                                  placeholder="Ingresa tu telefono"
+                                />
+                                <ErrorMessage name="telefono">
+                                  {msg => {
+                                    return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
+                                  }}
+                                </ErrorMessage>
+                              </div>
                             </div>
-                            <div className="w-full">
-                              <Field
-                                id="telefono"
-                                name="telefono"
-                                className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-300 focus:border-gray-400   w-full p-1 px-2 text-sm focus:ring-0 rounded"
-                                placeholder="Ingresa tu telefono"
-                              />
-                              <ErrorMessage name="telefono">
-                                {msg => {
-                                  return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
-                                }}
-                              </ErrorMessage>
-                            </div>
-                            <div className="p-3 py-5 rounded-lg shadow-sm bg-[#fdfcfc] min-w-min text-sm">
+
+                            <div className="p-3 py-5 rounded-lg border border-gray-200 min-w-min text-sm">
                               {open ? (
                                 <>
                                   <h1 className="font-medium text-center text-gray-800  mt-1 font-montserrat">
@@ -295,7 +300,7 @@ export default function Cart({ data }) {
                                         <Field
                                           id="hPersonalizado"
                                           name="hPersonalizado"
-                                          className="border-b-1 border-gray-300 bg-[#fdfcfc] placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
+                                          className="border-b-1 border-gray-200 placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
                                           placeholder="Horario de entrega"
                                         />
                                       </div>
@@ -319,7 +324,7 @@ export default function Cart({ data }) {
                             <Field
                               id="nombre"
                               name="nombre"
-                              className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-300 focus:border-gray-400 focus:ring-0 rounded w-full p-1 px-2 text-sm"
+                              className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-200 focus:border-gray-400 focus:ring-0 rounded w-full p-1 px-2 text-sm"
                               placeholder="Ingresa tu nombre"
                             />
                             <ErrorMessage name="nombre">
@@ -328,7 +333,7 @@ export default function Cart({ data }) {
                               }}
                             </ErrorMessage>
 
-                            <div className="p-3 py-5 rounded-lg shadow-sm bg-[#fdfcfc] min-w-min text-sm mt-6">
+                            <div className="p-3 py-5 rounded-lg border border-gray-200 min-w-min text-sm mt-6">
                               {open ? (
                                 <>
                                   <h1 className="font-medium text-center text-gray-600 text-sm mt-1 font-montserrat">
@@ -348,7 +353,7 @@ export default function Cart({ data }) {
                                         <Field
                                           id="hPersonalizado"
                                           name="hPersonalizado"
-                                          className="border-b-1 border-gray-300 bg-[#fdfcfc] placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
+                                          className="border-b-1 border-gray-200 placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
                                           placeholder="Horario de entrega"
                                         />
                                       </div>
@@ -465,7 +470,7 @@ export default function Cart({ data }) {
                       </div>
                       <button
                         type="submit"
-                        className="text-center text-sm font-montserrat rounded-lg w-auto p-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
+                        className="text-center text-sm font-montserrat rounded-lg w-auto p-3 px-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
                       >
                         Continuar el pago
                       </button>

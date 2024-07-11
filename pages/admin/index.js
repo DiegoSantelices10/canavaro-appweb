@@ -233,7 +233,7 @@ export default function HomeAdmin() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full  md:w-72 border-gray-200  rounded-xl h-auto  p-3 border"
+                  className="w-full  md:w-72 border-gray-200  rounded-lg h-auto  p-3 border"
                 >
                   <div className="w-full text-sm text-gray-800">
                     <h2 className="text-right text-xs ">{item.hora} hs.</h2>
@@ -247,7 +247,7 @@ export default function HomeAdmin() {
                   <div className="flex justify-end  gap-3 w-full font-montserrat">
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="px-4 py-2 w-auto rounded-xl text-xs font-medium border  
+                      className="px-4 py-2 w-auto rounded-lg text-xs font-medium border  
 														 focus:outline-none focus:ring transition 
 														text-slate-700  hover:bg-blue-100 
 														active:bg-blue-200 focus:ring-blue-300"
@@ -257,7 +257,7 @@ export default function HomeAdmin() {
                     </button>
                     <button
                       onClick={() => handleDelete(item?._id)}
-                      className="px-4 py-2 w-auto rounded-xl text-xs font-medium border 
+                      className="px-4 py-2 w-auto rounded-lg text-xs font-medium border 
 												focus:outline-none focus:ring transition text-white 
 											bg-red-600   
 											hover:border-white "

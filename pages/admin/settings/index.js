@@ -37,7 +37,7 @@ export default function Settings() {
 					className="flex justify-start items-center mt-2 gap-4"
 				>
 					<input
-						className="border border-gray-300 p-2 rounded-lg"
+						className="border border-gray-200 p-2 rounded-lg"
 						name='porcentaje'
 						type="number"
 						value={porcentaje}

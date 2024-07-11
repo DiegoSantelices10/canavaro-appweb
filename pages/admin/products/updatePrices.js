@@ -109,12 +109,12 @@ const UpdatePrices = () => {
                   type="number"
                   ref={priceRef}
                   className="p-2 h-9 w-full text-sm leading-tight text-gray-700  border-gray-200 border
-                            rounded-xl focus:border-gray-200"
+                            rounded-lg focus:border-gray-200"
                 />
               </div>
               <button
                 onClick={handleUpdateEmpanadas}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-xl shadow-md hover:bg-red-500"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-lg shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>
@@ -126,12 +126,12 @@ const UpdatePrices = () => {
                   type="number"
                   ref={priceDocenaRef}
                   className="p-2 h-9 w-full  text-sm leading-tight text-gray-700  border-gray-200 border
-                            rounded-xl focus:border-gray-200"
+                            rounded-lg focus:border-gray-200"
                 />
               </div>
               <button
                 onClick={handleUpdateEmpanadasPorDocena}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-xl shadow-md hover:bg-red-500"
+                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-lg shadow-md hover:bg-red-500"
               >
                 Actualizar
               </button>

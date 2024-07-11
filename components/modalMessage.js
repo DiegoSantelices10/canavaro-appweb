@@ -144,7 +144,7 @@ const ModalMessage = ({
             </div>
             <div>
               <button
-                className="p-4 mt-8 rounded-2xl font-medium font-montserrat w-full shadow text-white bg-red-500 mx-auto text-center"
+                className="p-4 mt-8 rounded-lg font-medium font-montserrat w-full shadow text-white bg-red-500 mx-auto text-center"
                 onClick={handleClose}>{type !== 'return home' ? 'Continuar con el pedido' : 'Aceptar'}</button>
             </div>
           </motion.div>

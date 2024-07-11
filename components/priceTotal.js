@@ -55,7 +55,7 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
         <div className="w-full font-montserrat mb-20 relative">
             {available && hasProductosEfectivo().length > 0 && hasProductosGeneral().length > 0 && (
                 <>
-                    <div className='p-2 border rounded-xl border-red-500 my-2'>
+                    <div className='p-2 border rounded-lg border-red-500 my-2'>
                         {hasProductosGeneral().map(product => (
                             <div key={product._id} className='flex justify-between items-center w-full py-1'>
                                 <h3 className='text-sm font-semibold text-slate-800'>{product.nombre} <span className='text-xs text-gray-800 font-light'>{product.categoria === "empanadas" ? ` ${product.cant}u` : ` ${product.cantidad}u`}</span> </h3>
@@ -89,7 +89,7 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
             <div className='mb-6'>
                 {hasProductosEfectivo().length === 0 && values.medioDePago === 'Efectivo' && available && (
                     <>
-                        <div className="bg-red-500 w-auto p-2 rounded-xl my-2">
+                        <div className="bg-red-500 w-auto p-2 rounded-lg my-2">
                             <p className="text-white text-center font-normal text-sm">¡ Abonando en efectivo tenes un {descuento}% de descuento !</p>
                         </div>
                         <div className='flex px-2 justify-between w-full items-center py-1 mt-2'>

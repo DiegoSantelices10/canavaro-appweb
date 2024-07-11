@@ -115,7 +115,7 @@ export default function Promotion({
             <div
               className={
                 orderPromo.length >= 1
-                  ? "rounded-full  w-7 h-7 flex items-center justify-center  shadow  bg-slate-50"
+                  ? "rounded-full  w-7 h-7 flex items-center justify-center  shadow-sm  bg-slate-50"
                   : "invisible"
               }
             >
@@ -131,7 +131,7 @@ export default function Promotion({
               </button>
             </div>
             <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
-            <div className="rounded-full  h-8 flex items-center w-8 justify-center  shadow  bg-slate-50">
+            <div className="rounded-full  h-8 flex items-center w-8 justify-center  shadow-sm  bg-slate-50">
               <button
                 type="button"
                 className="text-green-500 font-normal text-2xl justify-center items-center"

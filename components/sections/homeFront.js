@@ -43,12 +43,12 @@ function HomeFront() {
             <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
           </div>
           <p className="font-montserrat text-3xl lg:text-5xl text-center font-bold text-gray-200">Pizzeria Canavaro</p>
-          <p className="text-sm md:text-base font-normal text-white ">¡Todo lo que necesitas en un solo lugar!</p>
+          <p className="text-sm font-montserrat md:text-base font-normal text-white ">¡Todo lo que necesitas en un solo lugar!</p>
 
           <div className="w-full flex items-center mt-3">
             <Link href={"/digitalMenu"}>
               <a
-                className={`p-2 px-4 rounded-lg font-normal  font-montserrat  text-base  mx-auto 
+                className={`p-2 px-6 rounded-lg font-medium  font-montserrat  text-sm  mx-auto 
                           hover:bg-black hover:text-white bg-white text-red-600  
                           hover:-translate-y-1 transition-all duration-500`}
               >
@@ -62,18 +62,18 @@ function HomeFront() {
           className="md:w-1/3 lg:mt-0  
                          mx-auto flex flex-col 
                         justify-center items-center gap-1 text-center">
-          <div className="flex flex-col justify-center items-center relative">
-            <div className="absolute bg-black rounded-xl opacity-50 h-full w-full z-0"></div>
-            <div className="z-10 p-6 rounded-xl">
-              <h1 className="text-xl text-gray-200 font-semibold">¡Nosotros te lo llevamos!</h1>
-              <h1 className="text-base text-gray-200 font-normal">Delivery & Take Away</h1>
-              <p className="text-sm lg:text-base text-zinc-200 font-normal">De martes a domingo de 19 a 23hs.</p>
-              <p className="text-zinc-200  text-sm lg:text-base">Pelliza 1794 - Olivos</p>
+          <div className="flex font-montserrat flex-col justify-center items-center relative">
+            <div className="absolute bg-black rounded-lg opacity-50 h-full w-full z-0"></div>
+            <div className="z-10 p-6 rounded-lg font-montserrat">
+              <h1 className="text-bse text-gray-200 font-semibold">¡Nosotros te lo llevamos!</h1>
+              <h1 className="text-sm text-gray-200 font-normal">Delivery & Take Away</h1>
+              <p className="text-sm  text-zinc-200 font-normal">De martes a domingo de 19 a 23hs.</p>
+              <p className="text-zinc-200  text-sm ">Pelliza 1794 - Olivos</p>
               {deliveryButton.available && (
                 <div className="w-full flex items-center mt-3">
                   <Link href={"/welcomeLogo"}>
                     <a
-                      className={`p-2 px-4 rounded-lg font-normal  font-montserrat  text-base  mx-auto 
+                      className={`p-2 px-6 rounded-lg font-medium  font-montserrat  text-sm  mx-auto 
                           hover:bg-black hover:text-white bg-red-600  text-white 
                           hover:-translate-y-1 transition-all duration-500`}
                     >
@@ -86,7 +86,7 @@ function HomeFront() {
           </div>
         </div>
       </motion.div>
-      <div className="w-full flex justify-start items-start gap-4 p-1 px-5 bg-red-600 z-50">
+      <div className="w-full flex justify-center md:justify-start items-start gap-4 p-1 px-5 bg-red-600 z-50">
         <div className="flex items-center">
           <h1 className="text-white font-montserrat tracking-wider font-light text-sm">
             Desarrollado por <span

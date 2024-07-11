@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function CardPromotion({ data: { nombre, descripcion, imagen } }) {
   return (
-    <div className="rounded-md shadow-sm bg-[#fdfcfc]">
+    <div>
       <div className="relative w-[255px]">
         <div className="w-auto">
           <Link href={`/order/products/${convertToPath(nombre)}`}>
@@ -17,7 +17,7 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen } })
                 height={130}
                 objectFit="cover"
                 objectPosition="center"
-                className="rounded-md"
+                className="rounded-lg"
                 alt={nombre}
               />
             </a>

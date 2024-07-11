@@ -5,7 +5,7 @@ import Link from "next/link";
 const CardEfectivo = ({ data: { nombre, descripcion, precio } }) => {
 
     return (
-        <div className="rounded-lg bg-[#fdfcfc] shadow-sm p-3">
+        <div className="shadow-sm rounded-lg bg-[#fcfcfc] p-3 border-gray-200">
             <Link href={`/order/products/${convertToPath(nombre)}`}>
                 <a>
                     <div className="w-60 flex flex-col h-full justify-between font-montserrat">

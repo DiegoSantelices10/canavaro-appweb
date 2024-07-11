@@ -127,7 +127,7 @@ const CircleAnimation = () => {
             rel="noreferrer"
             href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20confirmar%20mi%20pedido%20de:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}%0ATotal:%20$%20${checkout.total}%0APaga%20con:%20${checkout.medioDePago}`}
           >
-            <div className="flex items-center gap-2  bg-green-500  p-3 text-white font-semibold rounded-xl shadow-md">
+            <div className="flex items-center gap-2  bg-green-500  p-3 text-white font-semibold rounded-lg shadow-md">
               <FaWhatsapp size={18} />
               Ir a whatsapp</div>
           </a>
@@ -246,7 +246,7 @@ const CircleAnimation = () => {
           <button
             onClick={handleCapture}
             style={{ backgroundColor: "#FD3307" }}
-            className="rounded-xl text-white flex gap-2 justify-center items-center px-3  p-2 font-montserrat text-base  shadow-md">
+            className="rounded-lg text-white flex gap-2 justify-center items-center px-3  p-2 font-montserrat text-base  shadow-md">
             Descargar <FaDownload size={16} /> </button>
         </div>
       </div>
