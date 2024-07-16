@@ -155,7 +155,7 @@ export default function Cart({ data }) {
   );
 
   return (
-    <div className="font-montserrat shadow-md mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2 h-full   rounded-t-3xl py-3 ">
+    <div className="font-montserrat shadow-md mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2 h-screen  rounded-t-3xl py-3 ">
       <Toaster />
       <Formik
         initialValues={{
@@ -191,7 +191,7 @@ export default function Cart({ data }) {
       >
         {({ setFieldValue }) => {
           return (
-            <div className="bg-white">
+            <div className="bg-white pb-4">
               {currentProducto && (
                 <ModalDescripcion show={showModal} handleClose={handleCloseModal} pedido={currentProducto} />
               )}
