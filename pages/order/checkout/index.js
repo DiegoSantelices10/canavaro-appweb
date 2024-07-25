@@ -112,8 +112,16 @@ export default function Checkout() {
           total: totalAmount || "",
         }}
         onSubmit={async values => {
-          setIsSubmitting(true);
+          const valuesCurrent = {
+            ...values,
+            cliente: user?.nombre,
+            domicilio: user?.direccion,
+            telefono: user?.telefono,
+            hPersonalizado: user?.hPersonalizado,
+            productos: orderList,
 
+          };
+          setIsSubmitting(true);
 
           const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH:mm");
           const fecha = moment.tz("America/Argentina/Buenos_Aires").format("DD/MM");
@@ -121,7 +129,7 @@ export default function Checkout() {
           if (values.domicilio !== "") {
             try {
               const res = await axios.post("/api/sales/", {
-                ...values,
+                ...valuesCurrent,
                 tipoEnvio: "Envio a domicilio",
                 hora,
                 fecha,
@@ -146,7 +154,7 @@ export default function Checkout() {
           } else {
             try {
               const res = await axios.post("/api/sales/", {
-                ...values,
+                ...valuesCurrent,
                 tipoEnvio: "Retira por local",
                 hora,
                 fecha,

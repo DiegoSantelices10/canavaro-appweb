@@ -227,7 +227,7 @@ const Successful = () => {
                 {hasProductosEfectivo()?.length === 0 && checkout.medioDePago === 'Efectivo' && available && (
                   <>
                     <div className=" w-auto p-2  my-2">
-                      <p className="text-red-500 text-center font-normal text-sm">Se aplica el {descuento}% de descuento abonando</p>
+                      <p className="text-red-500 text-center font-normal text-sm">Se aplica el {descuento}% de descuento</p>
                     </div>
                     <div className='flex font-montserrat text-sm justify-between w-full items-center py-1 mt-2'>
                       <p className='font-semibold'>Subtotal</p>

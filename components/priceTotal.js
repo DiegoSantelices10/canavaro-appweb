@@ -55,6 +55,8 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) 
             } else {
                 setFieldValue('total', totalAmount)
             }
+        } else {
+            setFieldValue('total', totalAmount)
         }
     }, [values.medioDePago, orderList])
 
