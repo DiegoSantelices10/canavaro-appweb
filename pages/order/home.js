@@ -21,6 +21,8 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { formatearNumero, totalExtrasProductos } from "libs/items";
 import CardEfectivo from "components/cardEfectivo";
+import { getPromo } from "services/fetchData";
+import { setSetting } from "store/reducers/settingSlice";
 
 
 export default function Home() {
@@ -63,6 +65,19 @@ export default function Home() {
         />
       ));
   };
+
+  useEffect(() => {
+    (async () => {
+      const { data, status } = await getPromo();
+      if (status === 200) {
+        const barra = data.find(item => item.nombre === "Promo Barra")
+        const efectivo = data.find(item => item.nombre === "Promo efectivo")
+        dispatch(setSetting({ promoBarra: barra, promoEfectivo: efectivo }));
+        localStorage.setItem('promo efectivo', JSON.stringify(efectivo))
+      }
+    })()
+
+  }, [])
 
   useEffect(() => {
     if (orderPromo !== null) {

@@ -13,7 +13,6 @@ import { ColorRing } from "react-loader-spinner";
 import { setUser } from "store/reducers/userSlice";
 import PriceTotal from "components/priceTotal";
 import { formatearNumero } from "libs/items";
-import { setSetting } from "store/reducers/settingSlice";
 import { socket } from "socket";
 import { getUrl } from "utils/getUrl";
 
@@ -52,10 +51,7 @@ export default function Checkout() {
     return res
   };
   useEffect(() => {
-    if (Object.keys(promoEfectivo).length === 0) {
-      const res = JSON.parse(localStorage.getItem('promo efectivo'))
-      dispatch(setSetting({ promoEfectivo: res }))
-    }
+
     if (orderList.length === 0) {
       const {
         nombre,
@@ -104,7 +100,6 @@ export default function Checkout() {
       </div>
 
       <Formik
-        enableReinitialize
         initialValues={{
           cliente: user?.nombre || "",
           domicilio: user?.direccion || "",
@@ -315,9 +310,7 @@ export default function Checkout() {
 
                   </div>
                   <PriceTotal
-                    orderList={orderList}
                     promoEfectivo={promoEfectivo}
-                    totalPedido={totalAmount}
                   />
                 </div>
 

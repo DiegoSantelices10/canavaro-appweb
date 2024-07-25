@@ -19,12 +19,8 @@ function HomeFront() {
       if (status === 200) {
 
         const delivery = data.find(item => item.nombre === "Delivery")
-        const barra = data.find(item => item.nombre === "Promo Barra")
-        const efectivo = data.find(item => item.nombre === "Promo efectivo")
-        dispatch(setSetting({ deliveryButton: delivery, promoBarra: barra, promoEfectivo: efectivo }));
+        dispatch(setSetting({ deliveryButton: delivery }));
         localStorage.setItem('buttom delivery', { buttomDelivery: delivery[0] })
-        localStorage.setItem('promo efectivo', JSON.stringify(efectivo))
-
       }
     })()
 

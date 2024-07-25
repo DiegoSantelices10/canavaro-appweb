@@ -2,10 +2,15 @@
 import { useFormikContext } from 'formik';
 import { formatearNumero } from 'libs/items';
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { setSetting } from 'store/reducers/settingSlice';
 
-const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orderList }) => {
+const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) => {
     const { values, setFieldValue } = useFormikContext();
     const [subTotal, setSubTotal] = useState(0);
+    const { totalAmount, orderList } = useSelector(state => state.order);
+
+    const dispatch = useDispatch();
 
     const hasProductosEfectivo = () => {
         return orderList.filter(product => product.categoria === "soloEfectivo");
@@ -13,9 +18,19 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
     const hasProductosGeneral = () => {
         return orderList.filter(product => product.categoria !== "soloEfectivo");
     }
+
+    const getPromoEfectivo = () => {
+        if (Object.keys(promoEfectivo).length === 0) {
+            const res = JSON.parse(localStorage.getItem('promo efectivo'))
+            dispatch(setSetting({ promoEfectivo: res }))
+        }
+        return JSON.parse(localStorage.getItem('promo efectivo'))
+
+    }
     useEffect(() => {
         const productosEfectivo = hasProductosEfectivo()
         const productosGeneral = hasProductosGeneral()
+        const { available, descuento } = getPromoEfectivo();
 
         if (available) {
             if (values.medioDePago === 'Efectivo') {
@@ -32,16 +47,16 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
                     const convert = Math.floor(total + sumEfectivo);
                     setFieldValue('total', convert)
                 } else if (productosGeneral.length > 0) {
-                    const desc = values.total * (descuento / 100)
-                    const total = values.total - desc
+                    const desc = totalAmount * (descuento / 100)
+                    const total = totalAmount - desc
                     const convert = Math.floor(total);
                     setFieldValue('total', convert)
                 }
             } else {
-                setFieldValue('total', totalPedido)
+                setFieldValue('total', totalAmount)
             }
         }
-    }, [values.medioDePago])
+    }, [values.medioDePago, orderList])
 
 
     const renderSubtotal = (descuento) => {
@@ -94,7 +109,7 @@ const PriceTotal = ({ totalPedido, promoEfectivo: { available, descuento }, orde
                         </div>
                         <div className='flex px-2 justify-between w-full items-center py-1 mt-2'>
                             <p className='font-normal'>Subtotal</p>
-                            <p className='font-normal'>{formatearNumero(totalPedido)}</p>
+                            <p className='font-normal'>{formatearNumero(totalAmount)}</p>
                         </div>
                     </>
                 )}

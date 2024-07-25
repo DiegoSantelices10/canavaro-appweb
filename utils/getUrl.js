@@ -9,7 +9,6 @@ export const getUrl = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             // Solo se ejecutará en el cliente
-            console.log(window.location.hostname);
             const url = window.location.hostname;
             setFullUrl(url);
         }
