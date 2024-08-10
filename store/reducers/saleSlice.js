@@ -22,10 +22,17 @@ export const saleSlice = createSlice({
       const newList = state.renderSales.filter(item => item._id !== payload);
       state.renderSales = newList;
     },
+    viewSale: (state, { payload }) => {
+      const newList = state?.renderSales?.map(item =>
+        item._id === payload ?
+          { ...item, visto: true } : item
+      );
+      state.renderSales = newList;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setSaleData, addSale, updateSale, setRenderSaleData } = saleSlice.actions;
+export const { setSaleData, addSale, updateSale, setRenderSaleData, viewSale } = saleSlice.actions;
 
 export default saleSlice.reducer;

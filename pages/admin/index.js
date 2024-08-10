@@ -3,13 +3,13 @@ import Layout from "components/admin/layout";
 import ModalPedido from "components/modalPedido";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Button from "components/buttonDemora";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addSale,
   setRenderSaleData,
   setSaleData,
-  updateSale
+  updateSale,
+  viewSale
 } from "store/reducers/saleSlice";
 import axios from "axios";
 import { Howl } from "howler";
@@ -18,18 +18,15 @@ import { setSetting } from "store/reducers/settingSlice";
 import { socket } from "socket";
 import Link from "next/link";
 import PercentIcon from "public/images/porcentaje";
+import OrderDelay from "components/OrderDelay";
+import CheckGroup from "components/CheckGroup";
 
 
 
 export default function HomeAdmin() {
   const [showModal, setShowModal] = useState(false);
   const [currentPedido, setCurrentPedido] = useState(null);
-  const [data, setData] = useState(null);
-  const [selectedDomicilio, setSelectedDomicilio] = useState({});
-
   const [barra, setBarra] = useState([]);
-
-  const [selectedLocal, setSelectedLocal] = useState({});
   const { renderSales } = useSelector(state => state.sale);
   const dispatch = useDispatch();
   const sound = new Howl({
@@ -41,7 +38,6 @@ export default function HomeAdmin() {
   }
 
   useEffect(() => {
-    getDelay()
     getSales()
   }, []);
 
@@ -63,18 +59,12 @@ export default function HomeAdmin() {
     })
   }, [])
 
-  const getDelay = async () => {
-    try {
-      const res = await axios.get("/api/delay");
-      const local = res.data.find(item => item.tipo === "localActual");
-      setSelectedLocal({ ...local, demora: local.demoraActual });
-      const domicilio = res.data.find(item => item.tipo === "domicilioActual");
-      setSelectedDomicilio({ ...domicilio, demora: domicilio.demoraActual });
-      setData(res.data);
-    } catch (error) {
-      alert("Error al obtener los datos")
-    }
-  }
+  useEffect(() => {
+    socket.on('visto', (data) => {
+      dispatch(viewSale(data));
+    })
+  }, [])
+
 
   const getSales = async () => {
     try {
@@ -94,8 +84,25 @@ export default function HomeAdmin() {
     setBarra(res.data)
   }
 
+  const onViewSale = async (id) => {
+    try {
+      const res = await axios.put(`/api/sales/${id}`, { visto: true });
+      if (res.status === 200) {
+        try {
+          socket.emit('enviar-visto', id)
+          dispatch(viewSale(id));
+        } catch (error) {
+          alert("Error al realizar la accion")
+        }
+      }
+    } catch (error) {
+      alert("Error al realizar la accion")
+    }
+  }
+
 
   const handleOpenModal = pedido => {
+    onViewSale(pedido._id)
     setCurrentPedido(pedido);
     setShowModal(true);
   };
@@ -104,25 +111,7 @@ export default function HomeAdmin() {
     setShowModal(false);
   };
 
-  const handlePutTime = async value => {
-    if (value.tipoEnvio === "local") {
-      const local = data.find(item => item.tipo === "localActual");
-      setSelectedLocal(value);
-      try {
-        await axios.put(`/api/delay/${local._id}`, { demoraActual: value.demora });
-      } catch (error) {
-        alert("Error al actualizar los datos")
-      }
-    } else {
-      const domicilio = data.find(item => item.tipo === "domicilioActual");
-      setSelectedDomicilio(value);
-      try {
-        await axios.put(`/api/delay/${domicilio._id}`, { demoraActual: value.demora });
-      } catch (error) {
-        alert("Error al actualizar los datos")
-      }
-    }
-  };
+
 
   const handleDelete = async id => {
     try {
@@ -162,69 +151,22 @@ export default function HomeAdmin() {
 
   return (
     <Layout>
-
       {currentPedido && (
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
       <div className="min-h-screen w-full lg:p-4 ">
         <div className="w-full  mx-auto lg:rounded-md  h-auto gap-4">
-          <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
-            <div className="w-full text-center py-2">
-              <h1 className="font-medium font-montserrat ">Demora domicilio</h1>
-              <div className="flex w-full gap-3 justify-center mt-2">
-                {data
-                  ?.filter(item => item.tipoEnvio === "domicilio")
-                  .map(item => (
-                    <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
-                  ))}
-              </div>
-            </div>
 
+          <OrderDelay />
 
-            <div className="w-full  text-center py-2">
-              <h1 className="font-medium font-montserrat ">Demora local</h1>
-              <div className="flex w-full gap-3 justify-center mt-2">
-                {data
-                  ?.filter(item => item.tipoEnvio === "local")
-                  .map(item => (
-                    <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
-                  ))}
-              </div>
-            </div>
-          </div>
           <hr />
-          <div className="rounded-md mx-auto flex flex-col items-center justify-center lg:hidden mt-4">
-            {barra?.map(item => (
-              <div
-                key={item._id}
-                className="mt-2 w-1/2 flex justify-between items-center "
-              >
-                <h1 className=" font-montserrat">
-                  {item.nombre}
-                </h1>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    id={item._id}
-                    type="checkbox"
-                    className="sr-only peer"
-                    checked={item.available}
-                    onChange={() => promoBarra(item._id, item.available)}
-                  />
-                  <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
-                   rounded-full 
-                  dark:bg-gray-200 peer-checked:after:translate-x-full 
-                  after:content-[''] after:absolute 
-                  after:top-[2px] after:left-[2px] after:bg-white   
-                  after:rounded-full after:h-4 after:w-4 after:transition-all 
-                 dark:border-gray-600 peer-checked:bg-red-600 "></div>
-                </label>
 
-              </div>
-            ))}
+          <CheckGroup barra={barra} promoBarra={promoBarra} />
 
-          </div>
+
         </div>
-        <div className="w-full  relative mx-auto text-center px-2 mt-5">
+        <div className="w-full  relative mx-auto text-center mt-5">
+
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-montserrat">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
@@ -233,7 +175,7 @@ export default function HomeAdmin() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="w-full  md:w-72 border-gray-200  rounded-lg h-auto  p-3 border"
+                  className={`w-full sm:w-80  md:w-80 border ${item?.visto !== true ? "border-gray-200" : "border-red-500"}  rounded-lg h-auto  p-3 border`}
                 >
                   <div className="w-full text-sm text-gray-800">
                     <h2 className="text-right text-xs ">{item.hora} hs.</h2>
@@ -244,13 +186,12 @@ export default function HomeAdmin() {
                       <h5 className="font-normal text-xs text-gray-700">{item?.tipoEnvio}</h5>
                     </div>
                   </div>
-                  <div className="flex justify-end  gap-3 w-full font-montserrat">
+                  <div className={`flex justify-end items-center  gap-3 w-full font-montserrat`}>
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="px-4 py-2 w-auto rounded-lg text-xs font-medium border  
-														 focus:outline-none focus:ring transition 
-														text-slate-700  hover:bg-blue-100 
-														active:bg-blue-200 focus:ring-blue-300"
+                      className="px-4 py-2 w-auto rounded-lg text-xs font-medium   
+														 focus:outline-none focus:ring-0 focus:border-none transition 
+														text-red-500  hover:bg-slate-100 bg-gray-50"
                       type="submit"
                     >
                       Ver pedido
@@ -258,9 +199,7 @@ export default function HomeAdmin() {
                     <button
                       onClick={() => handleDelete(item?._id)}
                       className="px-4 py-2 w-auto rounded-lg text-xs font-medium border 
-												focus:outline-none focus:ring transition text-white 
-											bg-red-600   
-											hover:border-white "
+												focus:outline-none focus:ring transition text-white bg-red-600 hover:border-white"
                       type="submit"
                     >
                       Liberar
@@ -273,6 +212,7 @@ export default function HomeAdmin() {
             )}
 
           </div>
+
         </div>
         <Link
           href={"/calcular"}

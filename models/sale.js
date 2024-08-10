@@ -48,6 +48,9 @@ const saleSchema = new Schema(
     liberado: {
       type: Boolean,
     },
+    visto: {
+      type: Boolean,
+    }
   },
   {
     timestamp: true,
