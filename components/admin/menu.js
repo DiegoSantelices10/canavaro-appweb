@@ -94,7 +94,7 @@ const AccessMenu = () => {
             toggle={setOpen}
           />
         </div>
-        <div className="w-11/12 lg:w-full hidden lg:block lg:pt-10 pt-0">
+        <div className="w-11/12 lg:w-full hidden lg:block lg:pt-10 pt-0 pl-1">
           <div>
             <Link href="/admin" passHref>
               <button

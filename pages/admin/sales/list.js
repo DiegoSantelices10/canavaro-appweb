@@ -70,7 +70,7 @@ export default function Sales() {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className="w-full  md:w-72 bg-white rounded-lg h-auto  p-3 border"
+                          className={`w-full sm:w-80  md:w-80 border ${item?.visto !== true ? "border-gray-200" : "border-red-500"} rounded-lg h-auto  p-3 border`}
                         >
                           <div className="w-full text-sm">
                             <h2 className="text-right text-xs text-gray-500"><span className="text-xs">{item.hora}hs.</span></h2>
