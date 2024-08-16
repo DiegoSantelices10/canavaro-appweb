@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import ProductLayout from "components/productLayout";
+import ProductLayout from "components/ProductLayout";
 import { convertToPath } from "libs/items";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { getProducts } from "services/fetchData";
 import { formatearNumero } from "libs/items";
 import Delete02Icon from "public/images/delete-02-stroke-rounded";
-import RadioButton from "components/radioButton";
+import RadioButton from "components/RadioButton";
 
 export default function Calcular({ data }) {
     const [select, setSelect] = useState("gigante");

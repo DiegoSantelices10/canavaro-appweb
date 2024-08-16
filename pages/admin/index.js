@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import Layout from "components/admin/layout";
-import ModalPedido from "components/modalPedido";
+import Layout from "components/Admin/Layout";
+import ModalPedido from "components/ModalPedido";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";

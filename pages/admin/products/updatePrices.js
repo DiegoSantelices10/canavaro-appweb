@@ -1,4 +1,4 @@
-import Layout from "components/admin/layout";
+import Layout from "components/Admin/Layout";
 import React, { useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import { useSelector } from "react-redux";
@@ -85,15 +85,6 @@ const UpdatePrices = () => {
     }
   };
 
-  // const handleUpdateExtra = async () => {
-  //   const pricesUpdate = priceExtraRef.current.value;
-  //   try {
-  //     const response = await axios.put("/api/products/", { precio: pricesUpdate });
-  //     response.status === 200 && alert("Precio extra actualizado!");
-  //   } catch (error) {
-  //     alert("Error al actualizar los datos");
-  //   }
-  // };
 
   return (
     <Layout>

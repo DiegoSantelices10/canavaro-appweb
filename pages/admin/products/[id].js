@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";
-import Layout from "components/admin/layout";
+import Layout from "components/Admin/Layout";
 import toast, { Toaster } from "react-hot-toast";
 
 import { useRouter } from "next/router";

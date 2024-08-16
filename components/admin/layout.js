@@ -1,4 +1,4 @@
-import AccessMenu from "components/admin/menu";
+import AccessMenu from "components/Admin/AccessMenu";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 

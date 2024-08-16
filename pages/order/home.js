@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useState, useEffect } from "react";
-import CardPromotion from "components/cardPromotion";
-import Layout from "components/layout";
+import CardPromotion from "components/CardPromotion";
+import Layout from "components/Layout";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "components/Card";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,7 +20,7 @@ import { setExtras, setProductData } from "store/reducers/productSlice";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { formatearNumero, totalExtrasProductos } from "libs/items";
-import CardEfectivo from "components/cardEfectivo";
+import CardEfectivo from "components/CardEfectivo";
 import { getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
 

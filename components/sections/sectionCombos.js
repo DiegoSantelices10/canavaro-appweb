@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 
-export default function sectionCombos({ products }) {
+export default function SectionCombos({ products }) {
   return (
     <div className=" w-full  bg-zinc-900">
       <div className="relative p-2 h-full  

@@ -1,5 +1,5 @@
 import axios from "axios";
-import Layout from "components/admin/layout";
+import Layout from "components/Admin/Layout";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";

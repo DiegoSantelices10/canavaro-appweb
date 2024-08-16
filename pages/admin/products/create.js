@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
-import Layout from "components/admin/layout";
+import Layout from "components/Admin/Layout";
 import { createProduct } from "services/fetchData";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";

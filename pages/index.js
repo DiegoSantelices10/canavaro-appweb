@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unknown-property */
 import React, { useEffect } from "react";
-import HomeFront from "components/sections/homeFront";
+import HomeFront from "components/Sections/HomeFront";
 import { setExtras, setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
 import { getProducts } from "services/fetchData";
 import { useDispatch } from 'react-redux'
-import SectionZona from "components/sections/sectionZona";
+import SectionZona from "components/Sections/SectionZona";
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
-import CustomArrow from "components/CustomArrows/CustomArrow";
+import CustomArrow from "components/CustomArrows";
 
 
 export default function index({ data }) {

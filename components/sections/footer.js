@@ -1,6 +1,6 @@
 import { FaLinkedin } from "react-icons/fa"
 
-export default function footer() {
+export default function Footer() {
   return (
     <div className="w-full bg-sky-950 bg-opacity-20 h-32 flex flex-col justify-center items-center">
       <div>

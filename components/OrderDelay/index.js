@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import axios from 'axios';
-import Button from 'components/buttonDemora';
+import Button from 'components/ButtonDemora';
 import React, { useEffect, useState } from 'react'
 
 const OrderDelay = () => {

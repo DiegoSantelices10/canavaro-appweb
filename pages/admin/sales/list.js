@@ -1,5 +1,5 @@
-import Layout from "components/admin/layout";
-import ModalPedido from "components/modalPedido";
+import Layout from "components/Admin/Layout";
+import ModalPedido from "components/ModalPedido";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSaleData } from "store/reducers/saleSlice";

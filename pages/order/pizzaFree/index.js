@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 
 import { v4 as uuidv4 } from "uuid";
-import ModalMessage from "components/modalMessage";
+import ModalMessage from "components/ModalMessage";
 
 export default function Index() {
   const [select, setSelect] = useState("gigante");

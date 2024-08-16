@@ -4,8 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import PizzaInfo from "./pizzaInfo";
-import Promotion from "./promotion";
+import PizzaInfo from "./PizzaInfo";
 import { v4 as uuidv4 } from "uuid";
 
 
@@ -25,8 +24,10 @@ import {
 } from "store/reducers/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
-import ModalMessage from "./modalMessage";
+import ModalMessage from "./ModalMessage";
 import { formatearNumero, totalExtrasProductos } from "libs/items";
+import Promotion from "./Promotion";
+
 export default function ProductLayout({
   data,
   data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
