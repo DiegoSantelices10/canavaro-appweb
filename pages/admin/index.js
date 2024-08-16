@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-import Layout from "components/Admin/Layout";
-import ModalPedido from "components/ModalPedido";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +18,8 @@ import Link from "next/link";
 import PercentIcon from "public/images/porcentaje";
 import OrderDelay from "components/OrderDelay";
 import CheckGroup from "components/CheckGroup";
+import ModalPedido from "components/ModalPedido";
+import Layout from "components/Admin/Layout";
 
 
 

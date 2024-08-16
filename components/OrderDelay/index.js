@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import axios from 'axios';
-import Button from 'components/ButtonDemora';
+import ButtonDemora from 'components/ButtonDemora';
 import React, { useEffect, useState } from 'react'
 
 const OrderDelay = () => {
@@ -54,7 +54,7 @@ const OrderDelay = () => {
                     {data
                         ?.filter(item => item.tipoEnvio === "domicilio")
                         .map(item => (
-                            <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
+                            <ButtonDemora handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
                         ))}
                 </div>
             </div>
@@ -66,7 +66,7 @@ const OrderDelay = () => {
                     {data
                         ?.filter(item => item.tipoEnvio === "local")
                         .map(item => (
-                            <Button handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
+                            <ButtonDemora handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
                         ))}
                 </div>
             </div>

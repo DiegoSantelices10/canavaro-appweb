@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-export default function Button({ handlePutTime, data, selected }) {
+export default function ButtonDemora({ handlePutTime, data, selected }) {
   return (
     <div>
       <button

@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";
-import Layout from "components/Admin/Layout";
 import toast, { Toaster } from "react-hot-toast";
 
 import { useRouter } from "next/router";
 import { getProducts, updateProduct } from "services/fetchData";
 import { IoChevronBack } from "react-icons/io5";
+import Layout from "components/Admin/Layout";
 
 export default function Update({ data }) {
   const [renderProducts, setRenderProductos] = useState("empanadas");
