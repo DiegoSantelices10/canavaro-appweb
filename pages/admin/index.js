@@ -16,10 +16,10 @@ import { setSetting } from "store/reducers/settingSlice";
 import { socket } from "socket";
 import Link from "next/link";
 import PercentIcon from "public/images/porcentaje";
-import OrderDelay from "components/OrderDelay";
 import CheckGroup from "components/CheckGroup";
 import ModalPedido from "components/ModalPedido";
 import Layout from "components/Admin/Layout";
+import OrderDelay from "components/OrderDelay";
 
 
 
