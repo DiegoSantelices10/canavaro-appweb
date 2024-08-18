@@ -35,7 +35,6 @@ export default function Cart({ data }) {
   const { promoBarra } = useSelector(state => state.setting);
   const { products } = useSelector(state => state.product);
 
-
   const [open, setOpen] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState(null);
@@ -46,7 +45,6 @@ export default function Cart({ data }) {
   const [type, setType] = useState("domicilioActual");
   const router = useRouter();
   const dispatch = useDispatch();
-
 
   const hoursDelivery = () => {
     if (hora >= 19 && hora < 23) {
@@ -121,7 +119,7 @@ export default function Cart({ data }) {
 
     if (res) {
       value.map(item => dispatch(addPromoOrderList({ ...item })));
-      toast.success('Se agrego al pedido!')
+      toast.success("Se agrego al pedido!");
       dispatch(clearOrderPromo());
       dispatch(calculateSubTotal());
       dispatch(calculateTotalQuantity());
@@ -130,28 +128,32 @@ export default function Cart({ data }) {
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
-        direccion: Yup.string()
-          .required("La dirección es obligatoria")
-          .max(70, "La dirección no puede tener más de 70 caracteres"),
-        telefono: Yup.string()
-          .required('El teléfono es obligatorio')
-          .matches(/^[0-9]+$/, 'El teléfono solo puede contener números')
-          .min(10, 'El teléfono debe tener al menos 10 caracteres')
-          .max(15, 'El teléfono no puede tener más de 15 caracteres'),
-        hPersonalizado: Yup.string().matches(/^(\d+(:\d+)?)?$/, {
-          message: 'El horario debe contener solo números o ser de tipo HH:mm',
-          excludeEmptyString: true,
-        }).notRequired(),
-      }
+          direccion: Yup.string()
+            .required("La dirección es obligatoria")
+            .max(70, "La dirección no puede tener más de 70 caracteres"),
+          telefono: Yup.string()
+            .required("El teléfono es obligatorio")
+            .matches(/^[0-9]+$/, "El teléfono solo puede contener números")
+            .min(10, "El teléfono debe tener al menos 10 caracteres")
+            .max(15, "El teléfono no puede tener más de 15 caracteres"),
+          hPersonalizado: Yup.string()
+            .matches(/^(\d+(:\d+)?)?$/, {
+              message: "El horario debe contener solo números o ser de tipo HH:mm",
+              excludeEmptyString: true,
+            })
+            .notRequired(),
+        }
       : {
-        nombre: Yup.string()
-          .required("El nombre es obligatorio")
-          .max(30, "El nombre no puede tener más de 30 caracteres"),
-        hPersonalizado: Yup.string().matches(/^(\d+(:\d+)?)?$/, {
-          message: 'El horario debe contener solo números o ser de tipo HH:mm',
-          excludeEmptyString: true,
-        }).notRequired(),
-      }
+          nombre: Yup.string()
+            .required("El nombre es obligatorio")
+            .max(30, "El nombre no puede tener más de 30 caracteres"),
+          hPersonalizado: Yup.string()
+            .matches(/^(\d+(:\d+)?)?$/, {
+              message: "El horario debe contener solo números o ser de tipo HH:mm",
+              excludeEmptyString: true,
+            })
+            .notRequired(),
+        }
   );
 
   return (
@@ -175,8 +177,8 @@ export default function Cart({ data }) {
             direccion: values.direccion,
             hPersonalizado: values.hPersonalizado,
             orderListLocal: orderList,
-          }
-          localStorage.setItem('pedido', JSON.stringify(pedidoStorage))
+          };
+          localStorage.setItem("pedido", JSON.stringify(pedidoStorage));
           dispatch(
             setUser({
               nombre: values.nombre,
@@ -259,7 +261,11 @@ export default function Cart({ data }) {
                                 />{" "}
                                 <ErrorMessage name="direccion">
                                   {msg => {
-                                    return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
+                                    return (
+                                      <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">
+                                        {msg}
+                                      </div>
+                                    );
                                   }}
                                 </ErrorMessage>
                               </div>
@@ -274,7 +280,11 @@ export default function Cart({ data }) {
                                 />
                                 <ErrorMessage name="telefono">
                                   {msg => {
-                                    return <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">{msg}</div>;
+                                    return (
+                                      <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">
+                                        {msg}
+                                      </div>
+                                    );
                                   }}
                                 </ErrorMessage>
                               </div>
@@ -287,14 +297,16 @@ export default function Cart({ data }) {
                                     Tiempo de envío: {demora} min.
                                   </h1>
                                   <p className="text-center text-xs text-gray-400 font-normal font-montserrat">
-                                    o elige un horario que sea mayor al tiempo de envío {" "}
+                                    o elige un horario que sea mayor al tiempo de envío{" "}
                                     <button
                                       type="button"
                                       className="text-gray-800 font-montserrat"
                                       onClick={() => setShowHourEdit(!showHourEdit)}
-                                    >Ingresa aqui</button>
+                                    >
+                                      Ingresa aqui
+                                    </button>
                                   </p>
-                                  {showHourEdit &&
+                                  {showHourEdit && (
                                     <>
                                       <div className="w-full mx-auto flex justify-center mt-3">
                                         <Field
@@ -306,11 +318,15 @@ export default function Cart({ data }) {
                                       </div>
                                       <ErrorMessage name="hPersonalizado">
                                         {msg => {
-                                          return <div className="text-red-500 font-montserrat font-normal text-xs">{msg}</div>;
+                                          return (
+                                            <div className="text-red-500 font-montserrat font-normal text-xs">
+                                              {msg}
+                                            </div>
+                                          );
                                         }}
                                       </ErrorMessage>
                                     </>
-                                  }
+                                  )}
                                 </>
                               ) : (
                                 <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-montserrat">
@@ -329,7 +345,11 @@ export default function Cart({ data }) {
                             />
                             <ErrorMessage name="nombre">
                               {msg => {
-                                return <div className="text-red-500 font-normal font-montserrat text-xs text-left pt-1 pl-2">{msg}</div>;
+                                return (
+                                  <div className="text-red-500 font-normal font-montserrat text-xs text-left pt-1 pl-2">
+                                    {msg}
+                                  </div>
+                                );
                               }}
                             </ErrorMessage>
 
@@ -340,14 +360,16 @@ export default function Cart({ data }) {
                                     Tiempo de retiro: {demora} min.
                                   </h1>
                                   <p className="text-center text-xs text-gray-400 font-normal font-montserrat">
-                                    o elige un horario que sea mayor al tiempo de retiro {" "}
+                                    o elige un horario que sea mayor al tiempo de retiro{" "}
                                     <button
                                       type="button"
                                       className="text-gray-800 font-montserrat"
                                       onClick={() => setShowHourEdit(!showHourEdit)}
-                                    >Ingresa aqui</button>
+                                    >
+                                      Ingresa aqui
+                                    </button>
                                   </p>
-                                  {showHourEdit &&
+                                  {showHourEdit && (
                                     <>
                                       <div className="w-full mx-auto flex justify-center mt-3">
                                         <Field
@@ -363,7 +385,7 @@ export default function Cart({ data }) {
                                         }}
                                       </ErrorMessage>
                                     </>
-                                  }
+                                  )}
                                 </>
                               ) : (
                                 <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-montserrat">
@@ -377,22 +399,23 @@ export default function Cart({ data }) {
                     </div>
                   </div>
                 </div>
-                {!orderList.some(item => item.categoria === 'bebidas') && (
-
+                {!orderList.some(item => item.categoria === "bebidas") && (
                   <div className="p-3">
-                    <h1 className="font-montserrat font-bold text-gray-800 text-base">¿ Deseas agregar alguna bebida ?</h1>
+                    <h1 className="font-montserrat font-bold text-gray-800 text-base">
+                      ¿ Deseas agregar alguna bebida ?
+                    </h1>
                     <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
                       <style jsx>
                         {`
-                      .flexp::-webkit-scrollbar-thumb {
-                        background: #FFFFFF;
-                        border-radius: 20px;
-                      }
+                          .flexp::-webkit-scrollbar-thumb {
+                            background: #ffffff;
+                            border-radius: 20px;
+                          }
 
-                      .flexp::-webkit-scrollbar {
-                        height: 5px;
-                      }
-                    `}
+                          .flexp::-webkit-scrollbar {
+                            height: 5px;
+                          }
+                        `}
                       </style>
 
                       {renderBebidas("bebidas")}
@@ -404,10 +427,11 @@ export default function Cart({ data }) {
                   <button
                     onClick={() => addCartPromo(orderPromo)}
                     type="button"
-                    className={`${orderPromo.length < 1
-                      ? "invisible"
-                      : "p-3 font-medium w-full font-montserrat mb-3 bg-red-600 rounded-lg text-white  hover:-translate-y-1 transition-all duration-500"
-                      }`}
+                    className={`${
+                      orderPromo.length < 1
+                        ? "invisible"
+                        : "p-3 font-medium w-full font-montserrat mb-3 bg-red-600 rounded-lg text-white  hover:-translate-y-1 transition-all duration-500"
+                    }`}
                   >
                     Agregar al carrito
                   </button>
@@ -432,11 +456,7 @@ export default function Cart({ data }) {
                                     item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) ||
                                     ""}
                                 </p>
-                                {item.extra && (
-                                  <p className="text-gray-400 text-sm">
-                                    extra: {item.extra}
-                                  </p>
-                                )}
+                                {item.extra && <p className="text-gray-400 text-sm">extra: {item.extra}</p>}
                                 <p className="text-sm text-gray-400">{formatearNumero(item.precio * item.cantidad)}</p>
                               </div>
                               <div className="flex justify-center gap-3">
