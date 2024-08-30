@@ -2,8 +2,8 @@ import User from "models/user";
 import dbConnect from "utils/mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { serialize } from "cookie";
-
+// import { serialize } from "cookie";
+import { setCookie } from "cookies-next"
 const handler = async (req, res) => {
   const { method } = req;
   try {
@@ -11,7 +11,7 @@ const handler = async (req, res) => {
       const { username, password } = req.body;
       const generateToken = payload => {
         // Genera un token JWT con los datos del usuario
-        const token = jwt.sign(payload, "canavaro", { expiresIn: "1h" });
+        const token = jwt.sign(payload, "canavaro", { expiresIn: "4h" });
         return token;
       };
 
@@ -30,15 +30,16 @@ const handler = async (req, res) => {
         password: user.password,
       });
 
-      res.setHeader(
-        "Set-Cookie",
-        serialize("token", token, {
-          httpOnly: true,
-          sameSite: "strict",
-          maxAge: 21600, // Tiempo de expiración de la cookie en segundos
-          path: "/admin", // Ruta de la cookie, ajusta según tus necesidades
-        })
-      );
+      setCookie("token", token, { req, res, maxAge: 21600 });
+      // res.setHeader(
+      //   "Set-Cookie",
+      //   serialize("token", token, {
+      //     httpOnly: true,
+      //     sameSite: "strict",
+      //     maxAge: 21600, // Tiempo de expiración de la cookie en segundos
+      //     path: "/admin", // Ruta de la cookie, ajusta según tus necesidades
+      //   })
+      // );
 
       return res.status(201).json({ token, user: user.username });
     }

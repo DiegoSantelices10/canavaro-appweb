@@ -5,22 +5,37 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { setProductData } from "store/reducers/productSlice";
 import { getProductsFront } from "services/fetchData";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import PencilEdit02Icon from "public/images/pencil-edit-02-stroke-rounded";
 import Search01Icon from "public/images/search-01-stroke-rounded";
+import Table from "components/Table";
+import { createColumnHelper } from "@tanstack/react-table";
+import HeaderTitle from "components/HeaderTitle";
+import Select from "components/Select";
 
 
 
-export default function Products() {
+const Products = () => {
   const [renderProductos, setRenderProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const { products } = useSelector(state => state.product);
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const columnHelper = createColumnHelper()
+
+  const compararDisponibilidad = (objeto1, objeto2) => {
+    if (objeto1.categoria > objeto2.categoria) {
+      return -1;
+    }
+    if (objeto1.categoria < objeto2.categoria) {
+      return 1;
+    }
+    return 0;
+  }
 
   useEffect(() => {
     (async () => {
@@ -72,9 +87,8 @@ export default function Products() {
     }
   };
 
-  const handleCategoryChange = event => {
-    const cat = event.target.value;
-    const res = products.filter(products => products.categoria === cat);
+  const handleCategoryChange = categoria => {
+    const res = products.filter(products => products.categoria === categoria);
     res.sort((a, b) => a.nombre.localeCompare(b.nombre));
     setRenderProductos(res);
   };
@@ -91,12 +105,7 @@ export default function Products() {
     }
   }
 
-  const compararDisponibilidad = (objeto1, objeto2) => {
-    if (objeto1.available === objeto2.available) {
-      return 0;
-    }
-    return objeto1.available ? 1 : -1;
-  }
+
   const deleteItem = async (id) => {
     toast((t) => (
       <div className="text-gray-900 flex justify-start gap-3 items-center font-montserrat w-auto">
@@ -115,47 +124,95 @@ export default function Products() {
     ));
   }
 
+  const columns = [
+    columnHelper.accessor('nombre', {
+      header: () => 'Nombre',
+      cell: info => <h2 className="text-left font-medium pl-2">{info.getValue()}</h2>,
+    }),
+    columnHelper.accessor('categoria', {
+      header: () => 'Categoría',
+      cell: info => info.getValue(),
+    }),
+    columnHelper.accessor('disponible', {
+      header: () => 'Disponible',
+      cell: info => {
+        const id = info.row.original._id; // Accede al id de la fila
+        const available = info.row.original.available;
+        return (
+          <div className=" flex justify-center items-center">
+            <label className="inline-flex items-center cursor-pointer">
+              <input
+                id={id}
+                type="checkbox"
+                onChange={() => handleCheckboxChange(id, available)}
+                checked={available}
+                className="sr-only peer" />
+              <div className="relative w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-200 
+              peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full 
+              peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:start-[3px] 
+              after:bg-white  after:border focus:outline-none focus:right-0 after:rounded-full 
+              after:h-3.5 after:w-3.5 after:transition-all  peer-checked:bg-red-500"></div>
+            </label>
+          </div>
+        )
+      },
+    }),
+    columnHelper.accessor('editar', {
+      header: () => 'Editar',
+      cell: info => {
+        const id = info.row.original._id; // Accede al id de la fila
+        return (
+          <div className="flex justify-center">
+            <Link href={`/admin/products/${id}`}>
+              <a>
+                <PencilEdit02Icon color={"#1C27C5"} />
+              </a>
+            </Link>
+          </div>
+        );
+      },
+    }),
+    columnHelper.accessor('Eliminar', {
+      header: () => <span>Eliminar</span>,
+      cell: info => {
+        const id = info.row.original._id; // Accede al id de la fila
+        return (
+          <button onClick={() => deleteItem(id)}>
+            <Delete02Icon color={"#DB1313"} />
+          </button>
+        )
+      },
+    }),
+  ]
+
+
+
   return (
     <Layout>
-      <Toaster />
-      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full  md:px-3 mx-auto lg:items-center gap-x-4 lg:justify-between py-4 h-auto">
-        <div className="flex flex-col sm:flex-col md:flex-row w-full gap-4">
+      <HeaderTitle title="Productos" />
+      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full mx-auto lg:items-center gap-x-4 lg:justify-between mt-6 pb-4 h-auto">
+        <div className="flex flex-col sm:flex-col md:flex-row items-end w-full gap-4 ">
 
-          <div className="bg-white flex w-full lg:w-1/2  items-center gap-x-2">
-            <div
-              className="flex  justify-between items-center w-full  h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border
-                         rounded-lg appearance-none focus:outline-none focus:shadow-outline"
-            >
-              <input
-                id="query"
-                name="query"
-                type="text"
-                placeholder="¿Que Desea Buscar?"
-                onChange={handleChangeSearch}
-                className="w-full border-none text-sm rounded-lg text-gray-200 placeholder:text-gray-400 placeholder:font-montserrat  focus:outline-none focus:ring-0"
-              />
-              <Search01Icon color="#BFBFBF" width={20} />
-            </div>
+          <div className="flex w-full justify-between items-center h-10  pr-3 py-2 text-sm leading-tight text-gray-700 border
+                            rounded-lg appearance-none focus:outline-none focus:shadow-outline">
+            <input
+              id="query"
+              name="query"
+              type="text"
+              placeholder="¿Que Desea Buscar?"
+              onChange={handleChangeSearch}
+              className="w-full border-none text-sm rounded-lg text-gray-700 placeholder:text-gray-400 placeholder:font-montserrat  focus:outline-none focus:ring-0"
+            />
+            <Search01Icon color="#BFBFBF" width={20} />
           </div>
 
-          <div className="w-full lg:w-1/2 h-10 rounded-lg appearance-none focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
-            <select
-              onChange={handleCategoryChange}
-              className="h-10 border border-gray-200 font-montserrat focus:ring-0 focus:border-gray-300 focus:right-0 focus:outline-none text-gray-400 text-sm rounded-lg  block w-full p-2.5 "
-            >
-              <option className="text-gray-200 text-sm font-montserrat" value="">
-                Seleccione una categoria
-              </option>
-              {categorias.map(item => (
-                <option key={item} value={item} className="text-sm font-montserrat font-medium">
-                  {item}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button
-            className="px-3 whitespace-nowrap h-10 w-full md:w-1/3  font-montserrat font-normal
-                       rounded-lg  text-sm border text-white bg-red-600"
+          <Select
+            label="Categoria"
+            data={categorias}
+            handleChange={handleCategoryChange}
+          />
+          <button className="px-3 whitespace-nowrap h-10 w-full md:w-1/3 hover font-montserrat font-normal
+                             rounded-lg  text-sm border text-white bg-red-600 hover:bg-red-500"
             type="button"
             onClick={() =>
               router.push("/admin/products/create")
@@ -163,9 +220,9 @@ export default function Products() {
           >
             Producto Nuevo
           </button>
-          <button
-            className="h-10 whitespace-nowrap w-full md:w-1/3 px-3 font-montserrat font-normal
-                        rounded-lg  text-sm border  bg-red-600 text-white"
+
+          <button className="px-3 whitespace-nowrap h-10 w-full md:w-1/3 hover font-montserrat font-normal
+                             rounded-lg  text-sm border text-white bg-red-600 hover:bg-red-500"
             type="button"
             onClick={() => {
               router.push("/admin/products/updatePrices");
@@ -173,10 +230,18 @@ export default function Products() {
           >
             Actualizar precios
           </button>
+
         </div>
       </div>
-
-      <div className="w-full px-1 md:px-3 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
+      <div className="mt-3">
+        {renderProductos.length > 0 && (
+          <Table
+            data={renderProductos}
+            columns={columns}
+          />
+        )}
+      </div>
+      {/* <div className="w-full px-1 md:px-3 mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid lg:grid-cols-3 gap-3">
         {renderProductos.map(({ _id, nombre, imagen, available, categoria }) => {
           return (
             <div key={_id} className="bg-white h-auto ">
@@ -228,9 +293,9 @@ export default function Products() {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </Layout >
   );
 }
 
-
+export default Products;

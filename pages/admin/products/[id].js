@@ -3,14 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import { useRouter } from "next/router";
 import { getProducts, updateProduct } from "services/fetchData";
-import { IoChevronBack } from "react-icons/io5";
 import Layout from "components/Admin/Layout";
+import HeaderTitle from "components/HeaderTitle";
+import ControllerInput from "components/ControllerInput";
 
-export default function Update({ data }) {
+const Update = ({ data }) => {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [productRender, setProductRender] = useState({});
   const router = useRouter();
@@ -20,110 +21,12 @@ export default function Update({ data }) {
     setRenderProductos(data?.categoria);
   }, []);
 
-  const modelProducto = value => {
-    const {
-      nombre,
-      descripcion,
-      categoria,
-      imagen,
-      cantidadMaxima,
-      precio,
-      isCantidad,
-      precioExtra,
-      precioPizza,
-      addEmpanadas,
-      addPizzas,
-      tamanio,
-      formato,
-    } = value;
-    let model;
-    if (value.categoria === "promociones") {
-      model = {
-        nombre,
-        descripcion,
-        categoria,
-        imagen,
-        cantidadMaxima,
-        precio,
-        addEmpanadas,
-        addPizzas,
-        tamanio,
-      };
-    }
-    if (categoria === "pizzas") {
-      model = {
-        nombre,
-        descripcion,
-        categoria,
-        imagen,
-        precioPizza,
-      };
-    }
-    if (categoria === "empanadas") {
-      model = {
-        nombre,
-        descripcion,
-        categoria,
-        precioExtra,
-        imagen,
-        precio,
-        formato,
-      };
-    }
-    if (categoria === "bebidas") {
-      model = {
-        nombre,
-        descripcion,
-        categoria,
-        imagen,
-        precio,
-      };
-    }
-
-    if (categoria === "porciones") {
-      model = {
-        nombre,
-        descripcion,
-        categoria,
-        imagen,
-        precio,
-      };
-    }
-
-    if (categoria === "extras") {
-      model = {
-        nombre,
-        categoria,
-        isCantidad,
-        imagen,
-        precio,
-      };
-    }
-
-    return model;
-  };
-
-  const backNavigate = () => {
-    router.back()
-  }
-
   return (
     <Layout>
+      <HeaderTitle title="Editar Producto" isBack />
       <section className="w-full flex justify-start items-start h-screen">
-        <Toaster />
-
         <div className="w-full  p-2 mt-10">
-          <div className="flex  justify-center relative items-center">
-            <button onClick={backNavigate} className="absolute left-2 self-start items-start">
-              <IoChevronBack className="text-gray-900" size={25} />
-            </button>
-            <h1 className="text-xl text-center md:text-3xl font-montserrat font-semibold text-zinc-800">
-              ¡Actualizar producto!
-            </h1>
-          </div>
-
           <p className="font-montserrat text-base font-medium mt-5 mb-2">Categoria: <span className="font-normal text-gray-500">{data.categoria}</span></p>
-
           <Formik
             initialValues={{
               nombre: productRender?.nombre || "",
@@ -145,8 +48,17 @@ export default function Update({ data }) {
               tamanio: productRender?.tamanio || "",
             }}
             onSubmit={async (values, { resetForm }) => {
+              const filteredValues = Object.fromEntries(
+                Object.entries(values).filter(([key, value]) => {
+                  if (typeof value === 'object' && value !== null) {
+                    // Si es un objeto anidado, verificar los valores internos
+                    return Object.values(value).some(v => v !== "");
+                  }
+                  return value !== "";
+                })
+              );
               if (values.imagen.public_id) {
-                const model = modelProducto({ ...values, imagen: "" });
+                const model = { ...filteredValues, imagen: "" };
                 await updateProduct(data._id, model)
                   .then(res => {
                     if (res.success) {
@@ -159,8 +71,8 @@ export default function Update({ data }) {
                     toast.error('Hubo error al cargar los datos!')
                   });
               } else {
-                const model = modelProducto(values);
-                await updateProduct(data._id, model)
+
+                await updateProduct(data._id, filteredValues)
                   .then(res => {
                     if (res.success) {
                       toast.success('Producto actualizado!')
@@ -179,240 +91,204 @@ export default function Update({ data }) {
               <Form
                 className="border border-gray-200 p-4  rounded-lg"
               >
-                <div className="md:grid  md:grid-cols-2  justify-items-end gap-4 space-y-2 lg:space-y-0 md:space-y-0">
-                  <div className="w-full mx-auto">
-                    <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
-                      Nombre del producto
-                      <Field
-                        id="nombre"
-                        name="nombre"
-                        className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-lg  focus:border-gray-300 focus:right-0"
-                      />
-                    </label>
-                  </div>
+                <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-4 md:space-y-0">
+                  <ControllerInput
+                    label="Nombre del producto"
+                    name="nombre"
+                  />
 
-                  <div className=" hidden w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
+                  <div className="hidden w-full mx-auto">
+                    <label className="block text-sm text-gray-700 font-montserrat font-normal">
                       Categoria
                       <Field
                         id="categoria"
                         name="categoria"
                         className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-lg   focus:border-gray-300 focus:right-0"
+                  									rounded-lg    focus:border-gray-200"
                       />
                     </label>
                   </div>
                   {renderProducts !== 'extras' && (
-                    <div className=" w-full mx-auto ">
-                      <label className="block text-sm  text-slate-400 font-montserrat font-normal">
-                        Descripcion
-                        <Field
-                          id="descripcion"
-                          name="descripcion"
-                          className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-lg   focus:border-gray-300 focus:right-0"
-                        />
-                      </label>
-                    </div>
+                    <ControllerInput
+                      label="Descripción"
+                      name="descripcion"
+                    />
+
                   )}
 
                   {renderProducts !== "pizzas" && (
-                    <div className=" w-full mx-auto">
-                      <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
-                        Precio
-                        <Field
-                          id="precio"
-                          name="precio"
-                          className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-lg focus:border-gray-300 focus:right-0"
-                        />
-                      </label>
-                    </div>
+                    <ControllerInput
+                      label="Precio"
+                      name="precio"
+                    />
                   )}
 
                   {renderProducts === "empanadas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <p className="block  text-sm  text-slate-400 font-montserrat font-normal">Formato</p>
+                        <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
+                          Precio Extra <span className="text-gray-900 font-light text-xs">se le suma al precio actual de la unidad</span>
+                          <Field
+                            id="precioExtra"
+                            name="precioExtra"
+                            className="p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
+											                  rounded-lg  focus:border-gray-300 focus:ring-0"
+                          />
+                        </label>
+                      </div>
+                      <div className=" w-full mx-auto">
+                        <p className="block  text-xs  text-gray-900 font-montserrat font-normal">Formato</p>
                         <div
                           role="group"
                           aria-labelledby="my-radio-group"
-                          className="w-full text-base  text-slate-400 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
+                          className="w-full text-xs  text-gray-900 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
                         >
-                          <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
+                          <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
                             <Field type="radio" name="formato" value="canastita" className="mx-5" />
                             Canastita
                           </label>
-                          <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
+                          <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
                             <Field type="radio" name="formato" value="empanada" className="mx-5" />
                             Empanada
                           </label>
                         </div>
                       </div>
-                      <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
-                          Precio Extra <span className="text-gray-400 font-light text-xs">se le suma al precio actual de la unidad</span>
-                          <Field
-                            id="precioExtra"
-                            name="precioExtra"
-                            className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											                  rounded-lg focus:border-gray-300 focus:right-0"
-                          />
-                        </label>
-                      </div>
                     </>
                   )}
                   {renderProducts === "pizzas" && (
                     <>
-                      <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
-                          Precio gigante
-                          <Field
-                            id="precioPizza.gigante"
-                            name="precioPizza.gigante"
-                            className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-											  rounded-lg focus:border-gray-300 focus:right-0"
-                          />
-                        </label>
-                      </div>
-                      <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
-                          Precio mediana
-                          <Field
-                            id="precioPizza.mediana"
-                            name="precioPizza.mediana"
-                            className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-lg focus:border-gray-300 focus:right-0"
-                          />
-                        </label>
-                      </div>
-                      <div className=" w-full mx-auto">
-                        <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
-                          Precio chica
-                          <Field
-                            id="precioPizza.chica"
-                            name="precioPizza.chica"
-                            className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-lg focus:border-gray-300 focus:right-0"
-                          />
-                        </label>
-                      </div>
+                      <ControllerInput
+                        label="Precio gigante"
+                        name='precioPizza.gigante'
+                      />
+                      <ControllerInput
+                        label="Precio mediana"
+                        name='precioPizza.mediana'
+                      />
+                      <ControllerInput
+                        label="Precio chica"
+                        name='precioPizza.chica'
+                      />
                     </>
                   )}
                   {renderProducts === "extras" && (
                     <div className=" w-full mx-auto">
-                      <p className="block  text-sm  text-gray-400 font-montserrat font-normal">Cantidad, si o no?</p>
+                      <p className="block  text-xs  text-gray-900 font-montserrat font-normal">Cantidad, si o no?</p>
                       <div
                         role="group"
                         aria-labelledby="my-radio-group"
-                        className="w-full text-base  text-gray-400 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
+                        className="w-full text-base  text-gray-900 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
                       >
-                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
-                          <Field type="radio" name="isCantidad" value="si" className="mx-5" checked={values.isCantidad === 'si'} />
+                        <label className="block  text-sm  text-gray-900 font-montserrat font-normal">
+                          <Field type="radio" name="isCantidad" value="si" className="mx-5" />
                           Si
                         </label>
-                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
-                          <Field type="radio" name="isCantidad" value="no" className="mx-5" checked={values.isCantidad === 'no'} />
+                        <label className="block  text-sm  text-gray-900 font-montserrat font-normal">
+                          <Field type="radio" name="isCantidad" value="no" className="mx-5" />
                           No
                         </label>
                       </div>
                     </div>
                   )}
 
+                  {
+                    renderProducts !== "bebidas" &&
+                    renderProducts !== "empanadas" &&
+                    renderProducts !== "pizzas" &&
+                    renderProducts !== "extras" &&
+                    renderProducts !== "porciones"
+                    && (
+                      <>
+                        <div className="w-full mx-auto">
+                          <div className=" w-full mx-auto">
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-normal">¿La promo cuenta con empanadas?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
+                            >
+                              <label >
+                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3" />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3" />
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          {values.addEmpanadas === "si" && (
+                            <div className=" w-full mx-auto">
+                              <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
+                                Ingresa la cantidad de empanadas
+                                <Field
+                                  id="cantidadMaxima"
+                                  name="cantidadMaxima"
+                                  value={values.cantidadMaxima}
+                                  onChange={handleChange}
+                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
+													                  rounded-lg focus:border-gray-200"
+                                />
+                              </label>
+                            </div>
+                          )}
+                        </div>
+                        <div className="w-full mx-auto">
+                          <div className=" w-full mx-auto">
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-normal">¿La promo cuenta con Pizza?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
+                            >
+                              <label>
+                                <Field type="radio" name="addPizzas" value="si" className="mx-3" />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addPizzas" value="no" className="mx-3" />
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          {values.addPizzas === "si" && (
+                            <div className=" w-full mx-auto">
+                              <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
+                                Ingresa el tamaño de la pizza
+                                <Field
+                                  id="tamanio"
+                                  name="tamanio"
+                                  value={values.tamanio}
+                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
+													  rounded-lg focus:border-gray-200"
+                                />
+                              </label>
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
                   <div className=" w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
+                    <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
                       Cargar Imagen
                       <input
                         name="imagen"
                         type="file"
                         onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10  mt-2  text-xs leading-tight text-gray-700 border-gray-200 
+                        className="w-full h-10 file:h-10  text-xs leading-tight text-gray-900 border-gray-200 
                   									 appearance-none focus:outline-none focus:shadow-outline
                                     file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-lg
-                                    file:font-normal
-                                    "
+                                    file:font-normal"
                       />
                     </label>
                   </div>
-                  {renderProducts === "promociones" && (
-                    <>
-                      <div className="w-full mx-auto">
-                        <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-slate-400 font-montserrat font-normal">¿La promo cuenta con empanadas?</p>
-                          <div
-                            role="group"
-                            aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-slate-400 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
-                          >
-                            <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
-                              <Field type="radio" name="addEmpanadas" value="si" className="mx-5" />
-                              Si
-                            </label>
-                            <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
-                              <Field type="radio" name="addEmpanadas" value="no" className="mx-5" />
-                              No
-                            </label>
-                          </div>
-                        </div>
-                        {values.addEmpanadas === "si" && (
-                          <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
-                              Ingresa la cantidad de empanadas
-                              <Field
-                                id="cantidadMaxima"
-                                name="cantidadMaxima"
-                                value={values.cantidadMaxima}
-                                onChange={handleChange}
-                                className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													                  rounded-lg  focus:border-gray-300 focus:right-0"
-                              />
-                            </label>
-                          </div>
-                        )}
-                      </div>
-                      <div className="w-full mx-auto">
-                        <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-slate-400 font-montserrat font-normal">¿La promo cuenta con Pizza?</p>
-                          <div
-                            role="group"
-                            aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-base  text-slate-400 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
-                          >
-                            <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
-                              <Field type="radio" name="addPizzas" value="si" className="mx-5" />
-                              Si
-                            </label>
-                            <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
-                              <Field type="radio" name="addPizzas" value="no" className="mx-5" />
-                              No
-                            </label>
-                          </div>
-                        </div>
-                        {values.addPizzas === "si" && (
-                          <div className=" w-full mx-auto">
-                            <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
-                              Ingresa el tamaño de la pizza
-                              <Field
-                                id="tamanio"
-                                name="tamanio"
-                                value={values.tamanio}
-                                className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													  rounded-md shadow   focus:border-gray-200"
-                              />
-                            </label>
-                          </div>
-                        )}
-                      </div>
-                    </>
-                  )}
-
                   <button
-                    className="w-48 h-12  col-start-2 rounded-lg  text-sm 
-                       				border text-white bg-red-600 hover:bg-red-500 font-normal font-montserrat"
+                    className="w-44 h-12 col-start-2
+                       						 rounded-lg  text-sm 
+                       						 border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500 translate-x-1"
                     type="submit"
                   >
-                    Actualizar Producto
+                    Agregar Producto
                   </button>
                 </div>
               </Form>
@@ -435,3 +311,5 @@ export async function getServerSideProps(context) {
 
   return { props: { data } };
 }
+
+export default Update;

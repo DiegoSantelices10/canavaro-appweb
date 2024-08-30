@@ -1,11 +1,43 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { getPromo } from 'services/fetchData';
+import { setSetting } from 'store/reducers/settingSlice';
 
 const CheckGroup = (props) => {
-    const {
-        barra,
-        promoBarra
-    } = props;
+
+    const { dispatch } = props;
+
+    const [barra, setBarra] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const res = await getPromo();
+            const efectivo = res.data.find(item => item.nombre === "Promo efectivo")
+            dispatch(setSetting({ promoEfectivo: efectivo }));
+            setBarra(res.data)
+        })()
+    }, [])
+
+    const promoBarra = async (id, available) => {
+        try {
+            const response = await axios.put(`/api/settings/promo/${id}`, { available: !available })
+            if (response.status === 200) {
+                const updatedBarra = barra?.map(item => {
+                    if (item._id === id) {
+                        return {
+                            ...item,
+                            available: !available
+                        };
+                    }
+                    return item;
+                });
+                setBarra(updatedBarra);
+            }
+        } catch (error) {
+            alert("Error al realizar la accion")
+        }
+    }
 
     return (
         <div className="rounded-md mx-auto flex flex-col items-center justify-center lg:hidden mt-4">

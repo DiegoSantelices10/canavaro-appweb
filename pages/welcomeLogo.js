@@ -8,7 +8,7 @@ export default function WelcomeLogo() {
     router.push("/welcomeLogo");
     setTimeout(() => {
       router.push("/order/home");
-    }, 3000);
+    }, 1500);
   }, []);
 
   return (

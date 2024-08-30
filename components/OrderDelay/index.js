@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import axios from 'axios';
-import ButtonDemora from 'components/ButtonDemora';
 import React, { useEffect, useState } from 'react'
 
 const OrderDelay = () => {
@@ -47,29 +45,49 @@ const OrderDelay = () => {
     };
 
     return (
-        <div className="w-full flex-row lg:flex  rounded-md h-auto py-2">
-            <div className="w-full text-center py-2">
-                <h1 className="font-medium font-montserrat ">Demora domicilio</h1>
-                <div className="flex w-full gap-3 justify-center mt-2">
-                    {data
-                        ?.filter(item => item.tipoEnvio === "domicilio")
-                        .map(item => (
-                            <ButtonDemora handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedDomicilio} />
+        <div className="w-full flex-col flex lg:flex-row gap-4 gap-y-4 rounded-md h-auto py-2">
+            {data?.length > 0 && (
+                <div className="w-full text-left">
+                    <h1 className="font-medium font-montserrat pb-1">Demora domicilio</h1>
+                    <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-lg p-1">
+                        {data?.filter(item => item.tipoEnvio === "domicilio").map((item) => (
+                            <li key={item._id}
+                                className='cursor-pointer'
+                            >
+                                <a
+                                    onClick={() => handlePutTime(item)}
+                                    className={`flex justify-center py-2 text-sm font-montserrat sm:text-base ${selectedDomicilio.demora === item.demora ? 'bg-white font-medium  rounded-lg shadow-sm text-red-500' : ''
+                                        }`}
+                                >
+                                    {item.demora}
+                                </a>
+                            </li>
                         ))}
+                    </ul>
                 </div>
-            </div>
+            )}
 
 
-            <div className="w-full  text-center py-2">
-                <h1 className="font-medium font-montserrat ">Demora local</h1>
-                <div className="flex w-full gap-3 justify-center mt-2">
-                    {data
-                        ?.filter(item => item.tipoEnvio === "local")
-                        .map(item => (
-                            <ButtonDemora handlePutTime={handlePutTime} key={item._id} data={item} selected={selectedLocal} />
+            {data?.length > 0 && (
+                <div className="w-full text-left">
+                    <h1 className="font-medium font-montserrat pb-1">Demora local</h1>
+                    <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-lg p-1">
+                        {data?.filter(item => item.tipoEnvio === "local").map((item) => (
+                            <li key={item._id}
+                                className='cursor-pointer'
+                            >
+                                <a
+                                    onClick={() => handlePutTime(item)}
+                                    className={`flex justify-center py-2 text-sm font-montserrat sm:text-base ${selectedLocal.demora === item.demora ? 'bg-white font-medium  rounded-lg shadow-sm text-red-500' : ''
+                                        }`}
+                                >
+                                    {item.demora}
+                                </a>
+                            </li>
                         ))}
+                    </ul>
                 </div>
-            </div>
+            )}
         </div>
     )
 }

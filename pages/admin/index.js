@@ -11,8 +11,6 @@ import {
 } from "store/reducers/saleSlice";
 import axios from "axios";
 import { Howl } from "howler";
-import { getPromo } from "services/fetchData";
-import { setSetting } from "store/reducers/settingSlice";
 import { socket } from "socket";
 import Link from "next/link";
 import PercentIcon from "public/images/porcentaje";
@@ -20,13 +18,14 @@ import CheckGroup from "components/CheckGroup";
 import ModalPedido from "components/ModalPedido";
 import Layout from "components/Admin/Layout";
 import OrderDelay from "components/OrderDelay";
+import HeaderTitle from "components/HeaderTitle";
 
 
 
-export default function HomeAdmin() {
+
+const HomeAdmin = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentPedido, setCurrentPedido] = useState(null);
-  const [barra, setBarra] = useState([]);
   const { renderSales } = useSelector(state => state.sale);
   const dispatch = useDispatch();
   const sound = new Howl({
@@ -78,10 +77,6 @@ export default function HomeAdmin() {
     } catch (error) {
       alert("Error al obtener los datos")
     }
-    const res = await getPromo();
-    const efectivo = res.data.find(item => item.nombre === "Promo efectivo")
-    dispatch(setSetting({ promoEfectivo: efectivo }));
-    setBarra(res.data)
   }
 
   const onViewSale = async (id) => {
@@ -129,44 +124,21 @@ export default function HomeAdmin() {
     }
   };
 
-  const promoBarra = async (id, available) => {
-    try {
-      const response = await axios.put(`/api/settings/promo/${id}`, { available: !available })
-      if (response.status === 200) {
-        const updatedBarra = barra?.map(item => {
-          if (item._id === id) {
-            return {
-              ...item,
-              available: !available
-            };
-          }
-          return item;
-        });
-        setBarra(updatedBarra);
-      }
-    } catch (error) {
-      alert("Error al realizar la accion")
-    }
-  }
+
 
   return (
     <Layout>
       {currentPedido && (
         <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
       )}
-      <div className="min-h-screen w-full lg:p-4 ">
-        <div className="w-full  mx-auto lg:rounded-md  h-auto gap-4">
-
+      <HeaderTitle title="Pedidos" />
+      <div className="w-full mt-6">
+        <div className="w-full mx-auto lg:rounded-md h-auto gap-4">
           <OrderDelay />
-
-          <hr />
-
-          <CheckGroup barra={barra} promoBarra={promoBarra} />
-
-
+          <hr className="mt-6 md:hidden" />
+          <CheckGroup dispatch={dispatch} />
         </div>
         <div className="w-full  relative mx-auto text-center mt-5">
-
           <div className="flex flex-wrap justify-start gap-4 mx-auto font-montserrat">
             {renderSales?.length > 0 ? (
               renderSales.map((item, index) => (
@@ -208,7 +180,7 @@ export default function HomeAdmin() {
                 </motion.div>
               ))
             ) : (
-              <p className="text-center w-full font-semibold font-montserrat">No Hay pedidos</p>
+              ''
             )}
 
           </div>
@@ -228,16 +200,7 @@ export default function HomeAdmin() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { req, res } = context;
+export default HomeAdmin;
 
-  const token = req.headers.cookie?.includes("token") || req.cookies.token;
-  if (!token) {
-    res.setHeader("location", "/admin/auth/login"); // Redirigir al usuario a la página de inicio de sesión
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
-  }
 
-  return { props: {} };
-}
+
