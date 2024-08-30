@@ -6,78 +6,92 @@ import toast from "react-hot-toast";
 import ControllerInput from "components/ControllerInput";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/Admin/Layout";
+import useCategories from "Hooks/useCategories";
+import Select from "components/Select";
+import HeaderTitle from "components/HeaderTitle";
 
-export default function Create() {
+const Create = () => {
   const [renderProducts, setRenderProductos] = useState("pizzas");
   const router = useRouter();
 
+  const { categories } = useCategories();
 
-
-  const handleCategoryChange = event => {
-    const cat = event.target.value;
-    setRenderProductos(cat);
+  const handleCategoryChange = value => {
+    setRenderProductos(value);
   };
-
-  const categorias = ['pizzas', 'empanadas', 'promociones', 'porciones', 'bebidas', 'extras', 'soloEfectivo']
 
   return (
     <Layout>
-      <section className="w-full flex justify-start items-start h-screen">
-        <div className="w-full md:p-10">
-          <h1 className="text-xl text-center md:text-4xl font-montserrat font-semibold text-zinc-800 my-4">
-            ¡Producto nuevo!
-          </h1>
-          <p className="text-gray-400 font-normal text-xs font-montserrat">Seleccione una categoria</p>
-          <div className="w-full lg:w-1/4 h-10 mb-5 outline-none  focus:outline-none focus:shadow-outline focus:ring-white focus:right-0-0">
-            <select
-              onChange={handleCategoryChange}
-              className="h-10  font-montserrat focus:ring-0  border-gray-200 focus:border-gray-300  text-gray-400 text-sm rounded-lg  w-full p-2.5 "
-            >
-              {categorias.map(item => (
-                <option key={item} value={item} className="text-sm font-montserrat font-medium">
-                  {item}
-                </option>
-              ))}
-            </select>
-          </div>
+      <section className="w-full space-y-8">
+        <HeaderTitle title="Nuevo producto" isBack />
 
-          <Formik
-            initialValues={{
-              nombre: "",
-              descripcion: "",
-              precio: "",
-              precioPizza: {
-                gigante: "",
-                mediana: "",
-                chica: "",
-              },
-              isCantidad: "",
-              categoria: renderProducts,
-              imagen: "",
-              cantidadMaxima: "",
-              addEmpanadas: "",
-              formato: "",
-              addPizzas: "",
-              tamanio: "",
-            }}
-            onSubmit={async (values, { resetForm }) => {
-              await createProduct(values)
-                .then(res => {
-                  if (res.message === "ok") {
-                    toast.success('Creado con exito!')
-                  }
-                  router.push("list")
-                  resetForm();
-                })
-                .catch(() => {
-                  toast.error('Error al crear al producto.')
-                });
-            }}
-            enableReinitialize
-          >
-            {({ setFieldValue, values, handleChange }) => (
-              <Form
-                className="border border-gray-200 p-4 rounded-lg"
+        <Formik
+          initialValues={{
+            nombre: "",
+            descripcion: "",
+            precio: "",
+            precioPizza: {
+              gigante: "",
+              mediana: "",
+              chica: "",
+            },
+            isCantidad: "",
+            categoria: renderProducts,
+            categoriaNueva: "",
+            imagen: "",
+            cantidadMaxima: "",
+            addEmpanadas: "",
+            formato: "",
+            addPizzas: "",
+            tamanio: "",
+          }}
+          onSubmit={async (values, { resetForm }) => {
+            if (values.categoriaNueva !== '') {
+              values.categoria = values.categoriaNueva;
+              values.categoriaNueva = '';
+            }
+            const filteredValues = Object.fromEntries(
+              Object.entries(values).filter(([key, value]) => {
+                if (typeof value === 'object' && value !== null) {
+                  // Si es un objeto anidado, verificar los valores internos
+                  return Object.values(value).some(v => v !== "");
+                }
+                return value !== "";
+              })
+            );
+
+            await createProduct(filteredValues)
+              .then(res => {
+                if (res.message === "ok") {
+                  toast.success('Creado con exito!')
+                }
+                router.push("list")
+                resetForm();
+              })
+              .catch(() => {
+                toast.error('Error al crear al producto.')
+              });
+          }
+          }
+          enableReinitialize
+        >
+          {({ setFieldValue, values, handleChange }) => (
+            <Form>
+              <div className="flex gap-8 items-end">
+                <Select
+                  label="Categoria"
+                  data={categories}
+                  handleChange={handleCategoryChange}
+                  newOption
+                />
+                <ControllerInput
+                  label="Categoria nueva"
+                  name='categoriaNueva'
+                  disabled={renderProducts !== 'categoria nueva'}
+                />
+              </div>
+              <div
+                className="border border-gray-200 p-4 rounded-lg mt-8"
               >
                 <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-4 md:space-y-0">
                   <ControllerInput
@@ -85,8 +99,8 @@ export default function Create() {
                     name="nombre"
                   />
 
-                  <div className=" hidden w-full mx-auto">
-                    <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
+                  <div className="hidden w-full mx-auto">
+                    <label className="block text-sm text-gray-700 font-montserrat font-normal">
                       Categoria
                       <Field
                         id="categoria"
@@ -114,28 +128,28 @@ export default function Create() {
                   {renderProducts === "empanadas" && (
                     <>
                       <div className=" w-full mx-auto">
-                        <label className="block  text-xs  text-gray-400 font-montserrat font-normal">
-                          Precio Extra <span className="text-gray-300 font-light text-xs">se le suma al precio actual de la unidad</span>
+                        <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
+                          Precio Extra <span className="text-gray-900 font-light text-xs">se le suma al precio actual de la unidad</span>
                           <Field
                             id="precioExtra"
                             name="precioExtra"
-                            className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+                            className="p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
 											                  rounded-lg  focus:border-gray-300 focus:ring-0"
                           />
                         </label>
                       </div>
                       <div className=" w-full mx-auto">
-                        <p className="block  text-xs  text-gray-400 font-montserrat font-normal">Formato</p>
+                        <p className="block  text-xs  text-gray-900 font-montserrat font-normal">Formato</p>
                         <div
                           role="group"
                           aria-labelledby="my-radio-group"
-                          className="w-full text-base  text-gray-400 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
+                          className="w-full text-xs  text-gray-900 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
                         >
-                          <label className="block  text-xs  text-gray-400 font-montserrat font-normal">
+                          <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
                             <Field type="radio" name="formato" value="canastita" className="mx-5" />
                             Canastita
                           </label>
-                          <label className="block  text-xs  text-gray-400 font-montserrat font-normal">
+                          <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
                             <Field type="radio" name="formato" value="empanada" className="mx-5" />
                             Empanada
                           </label>
@@ -161,17 +175,17 @@ export default function Create() {
                   )}
                   {renderProducts === "extras" && (
                     <div className=" w-full mx-auto">
-                      <p className="block  text-xxs  text-gray-400 font-montserrat font-normal">Cantidad, si o no?</p>
+                      <p className="block  text-xs  text-gray-900 font-montserrat font-normal">Cantidad, si o no?</p>
                       <div
                         role="group"
                         aria-labelledby="my-radio-group"
-                        className="w-full text-base  text-gray-400 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
+                        className="w-full text-base  text-gray-900 font-montserrat font-medium flex justify-center items-center h-10 gap-10"
                       >
-                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
+                        <label className="block  text-sm  text-gray-900 font-montserrat font-normal">
                           <Field type="radio" name="isCantidad" value="si" className="mx-5" />
                           Si
                         </label>
-                        <label className="block  text-sm  text-gray-400 font-montserrat font-normal">
+                        <label className="block  text-sm  text-gray-900 font-montserrat font-normal">
                           <Field type="radio" name="isCantidad" value="no" className="mx-5" />
                           No
                         </label>
@@ -179,85 +193,91 @@ export default function Create() {
                     </div>
                   )}
 
-                  {(renderProducts === "promociones" || renderProducts === "soloEfectivo") && (
-                    <>
-                      <div className="w-full mx-auto">
-                        <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-gray-400 font-montserrat font-normal">¿La promo cuenta con empanadas?</p>
-                          <div
-                            role="group"
-                            aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-sm  text-gray-400 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
-                          >
-                            <label >
-                              <Field type="radio" name="addEmpanadas" value="si" className="mx-3" />
-                              Si
-                            </label>
-                            <label>
-                              <Field type="radio" name="addEmpanadas" value="no" className="mx-3" />
-                              No
-                            </label>
-                          </div>
-                        </div>
-                        {values.addEmpanadas === "si" && (
+                  {
+                    renderProducts !== "bebidas" &&
+                    renderProducts !== "empanadas" &&
+                    renderProducts !== "pizzas" &&
+                    renderProducts !== "extras" &&
+                    renderProducts !== "porciones"
+                    && (
+                      <>
+                        <div className="w-full mx-auto">
                           <div className=" w-full mx-auto">
-                            <label className="block  text-xs  text-gray-400 font-montserrat font-normal">
-                              Ingresa la cantidad de empanadas
-                              <Field
-                                id="cantidadMaxima"
-                                name="cantidadMaxima"
-                                value={values.cantidadMaxima}
-                                onChange={handleChange}
-                                className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-normal">¿La promo cuenta con empanadas?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
+                            >
+                              <label >
+                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3" />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3" />
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          {values.addEmpanadas === "si" && (
+                            <div className=" w-full mx-auto">
+                              <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
+                                Ingresa la cantidad de empanadas
+                                <Field
+                                  id="cantidadMaxima"
+                                  name="cantidadMaxima"
+                                  value={values.cantidadMaxima}
+                                  onChange={handleChange}
+                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
 													                  rounded-lg focus:border-gray-200"
-                              />
-                            </label>
-                          </div>
-                        )}
-                      </div>
-                      <div className="w-full mx-auto">
-                        <div className=" w-full mx-auto">
-                          <p className="block  text-sm  text-gray-400 font-montserrat font-normal">¿La promo cuenta con Pizza?</p>
-                          <div
-                            role="group"
-                            aria-labelledby="my-radio-group"
-                            className="p-2 w-full text-sm  text-gray-400 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
-                          >
-                            <label>
-                              <Field type="radio" name="addPizzas" value="si" className="mx-3" />
-                              Si
-                            </label>
-                            <label>
-                              <Field type="radio" name="addPizzas" value="no" className="mx-3" />
-                              No
-                            </label>
-                          </div>
+                                />
+                              </label>
+                            </div>
+                          )}
                         </div>
-                        {values.addPizzas === "si" && (
+                        <div className="w-full mx-auto">
                           <div className=" w-full mx-auto">
-                            <label className="block  text-xs  text-gray-400 font-montserrat font-normal">
-                              Ingresa el tamaño de la pizza
-                              <Field
-                                id="tamanio"
-                                name="tamanio"
-                                value={values.tamanio}
-                                className=" p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-													  rounded-lg focus:border-gray-200"
-                              />
-                            </label>
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-normal">¿La promo cuenta con Pizza?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-normal flex justify-center items-center h-10 gap-10"
+                            >
+                              <label>
+                                <Field type="radio" name="addPizzas" value="si" className="mx-3" />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addPizzas" value="no" className="mx-3" />
+                                No
+                              </label>
+                            </div>
                           </div>
-                        )}
-                      </div>
-                    </>
-                  )}
+                          {values.addPizzas === "si" && (
+                            <div className=" w-full mx-auto">
+                              <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
+                                Ingresa el tamaño de la pizza
+                                <Field
+                                  id="tamanio"
+                                  name="tamanio"
+                                  value={values.tamanio}
+                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
+													  rounded-lg focus:border-gray-200"
+                                />
+                              </label>
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
                   <div className=" w-full mx-auto">
-                    <label className="block  text-sm  text-slate-400 font-montserrat font-normal">
+                    <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
                       Cargar Imagen
                       <input
                         name="imagen"
                         type="file"
                         onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10  mt-2  text-xs leading-tight text-gray-700 border-gray-200 
+                        className="w-full h-10 file:h-10  text-xs leading-tight text-gray-900 border-gray-200 
                   									 appearance-none focus:outline-none focus:shadow-outline
                                     file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-lg
                                     file:font-normal"
@@ -275,13 +295,14 @@ export default function Create() {
                     Agregar Producto
                   </button>
                 </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
+              </div>
+            </Form>
+          )
+          }
+        </Formik>
       </section>
     </Layout>
   );
 }
 
-
+export default Create;

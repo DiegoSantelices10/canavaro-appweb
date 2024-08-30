@@ -23,6 +23,7 @@ import { formatearNumero, totalExtrasProductos } from "libs/items";
 import CardEfectivo from "components/CardEfectivo";
 import { getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
+import TabsCategories from "components/Tabs/TabsCategories";
 
 
 export default function Home() {
@@ -86,6 +87,7 @@ export default function Home() {
   }, [orderPromo]);
 
   useEffect(() => {
+
     dispatch(clearOrderPromo());
     dispatch(setQuantityDemanded(0));
     if (products?.length <= 0) {
@@ -159,7 +161,7 @@ export default function Home() {
   };
 
   const addCartPromo = value => {
-    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "porciones" || item.categoria === "soloEfectivo");
+    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "porciones");
 
     if (res) {
       setTotalCant(0);
@@ -263,90 +265,11 @@ export default function Home() {
         </>
 
 
-        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full mt-4">
-          <style jsx>
-            {`
-              .flexp::-webkit-scrollbar-thumb {
-                background: #ffffff;
-                border-radius: 20px;
-              }
-
-              .flexp::-webkit-scrollbar {
-                height: 0px;
-              }
-            `}
-          </style>
-          <div>
-            <button
-              onClick={() => {
-                setRenderProductos("empanadas");
-                clearTotal();
-              }}
-              className={
-                renderProducts !== "empanadas"
-                  ? "w-48  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-48 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-200 tracking-wide"
-              }
-            >
-              Canastitas & Empanadas
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() => setRenderProductos("pizzas")}
-              className={
-                renderProducts !== "pizzas"
-                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold  text-neutral-800  text-sm font-montserrat border-b border-gray-200 tracking-wide"
-              }
-            >
-              Pizzas
-            </button>
-          </div>
-
-          <div>
-            <button
-              onClick={() => setRenderProductos("promociones")}
-              className={
-                renderProducts !== "promociones"
-                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-200 tracking-wide"
-              }
-            >
-              Promociones
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() => {
-                setRenderProductos("porciones");
-                clearTotal();
-              }}
-              className={
-                renderProducts !== "porciones"
-                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold   text-neutral-800 text-sm font-montserrat border-b border-gray-200 tracking-wide"
-              }
-            >
-              Porciones
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() => {
-                setRenderProductos("bebidas");
-                clearTotal();
-              }}
-              className={
-                renderProducts !== "bebidas"
-                  ? "w-28  font-medium font-montserrat text-sm text-gray-400"
-                  : "w-28 font-semibold  text-neutral-800 text-sm font-montserrat border-b border-gray-200 tracking-wide"
-              }
-            >
-              Bebidas
-            </button>
-          </div>
-        </div>
+        <TabsCategories
+          products={products}
+          renderProducts={renderProducts}
+          setRenderProductos={setRenderProductos}
+          clearTotal={clearTotal} />
 
         <div className="py-6">
           {

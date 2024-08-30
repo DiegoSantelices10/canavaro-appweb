@@ -9,15 +9,15 @@ const Layout = ({ children }) => {
       <Head>
         <title>Pizzeria Canavaro</title>
       </Head>
-      <div className="w-full lg:w-2/12  lg:h-full lg:fixed p-2">
-        <AccessMenu />
-      </div>
       <Toaster />
-
-
-      <main className="max-h-max  w-full lg:w-10/12 lg:absolute lg:right-0 p-2">
-        {children}
-      </main>
+      <div className="grid grid-cols-12 w-full">
+        <div className="col-span-12 lg:col-span-2 relative">
+          <AccessMenu />
+        </div>
+        <main className="col-span-12 p-2 lg:col-span-10 w-full">
+          {children}
+        </main>
+      </div>
     </div>
   );
 };

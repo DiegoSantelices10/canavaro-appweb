@@ -208,9 +208,7 @@ export default function ProductLayout({
           <div className="w-full ">
             <h1 className="font-semibold text-lg font-montserrat text-zinc-800">{nombre}</h1>
             <p className=" font-normal text-sm  text-gray-400 font-montserrat">{descripcion}</p>
-            {(categoria === "promociones" || categoria === "soloEfectivo") && (
-              <p className=" font-normal font-montserrat text-sm text-gray-400">{formatearNumero(precio)}</p>
-            )}
+            <p className=" font-normal font-montserrat text-sm text-gray-400">{formatearNumero(precio)}</p>
             <hr className="mt-4" />
           </div>
           <div className="text-sm font-semibold text-left my-1 z-20 ">

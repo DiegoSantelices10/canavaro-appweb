@@ -1,10 +1,12 @@
 import axios from "axios";
 import Layout from "components/Admin/Layout";
+import HeaderTitle from "components/HeaderTitle";
+import Tabs from "components/Tabs";
 import { useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-export default function Settings() {
+const Settings = () => {
 
 	const [porcentaje, setPorcentaje] = useState(0);
 	const { promoEfectivo } = useSelector(state => state.setting);
@@ -25,33 +27,73 @@ export default function Settings() {
 		}
 	}
 
+	const sections = [
+		{
+			id: "1",
+			label: "Promociones",
+			content:
+				<div className="grid grid-cols-2">
+					<div className=" border p-3 rounded-lg col-span-2 sm:col-span-1 md:col-span-1 lg:col-span-1">
+						<p className="text-sm font-montserrat text-center font-bold">Descuento por pago en efectivo</p>
+						<p className="text-xs text-gray-400 font-montserrat text-center">Descuento actual es {promoEfectivo?.descuento}</p>
+						<div
+							className="grid w-full gap-4 mt-6"
+						>
+							<div className="">
+								<label className="text-xs px-1 font-montserrat text-gray-400">Porcentaje</label>
+								<input
+									className="border border-gray-200 p-2 w-full rounded-lg focus:outline-none focus:ring-0"
+									name='porcentaje'
+									type="number"
+									value={porcentaje}
+									onChange={onChangePorcentaje}
+								/>
+							</div>
+							<button
+								onClick={onSubmit}
+								className="bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 rounded-lg"
+							>
+								Actualizar
+							</button>
+						</div>
+					</div>
+				</div>
+		},
+		{
+			id: "2",
+			label: "Demora",
+			content: <div className="grid gap-3 py-3">
+				<h1 className="text-3xl font-montserrat tracking-wider font-bold">Demora</h1>
+				<hr />
+			</div>
+		},
+		{
+			id: "3",
+			label: "Medios de pago",
+			content: <div className="grid gap-3 py-3">
+				<h1 className="text-3xl font-montserrat tracking-wider font-bold">Medios de pago</h1>
+				<hr />
+			</div>
+		},
+		{
+			id: "4",
+			label: "Categorias",
+			content: <div className="grid gap-3 py-3">
+				<h1 className="text-3xl font-montserrat tracking-wider font-bold">Categorias</h1>
+				<hr />
+			</div>
+		}
+	]
+
 	return (
 		<Layout>
-			<Toaster />
-			<div
-				className="p-4"
-			>
-				<p className="text-sm font-montserrat font-medium">Pago en efectivo, el porcentaje de descuento es: {promoEfectivo?.descuento}%</p>
-				<p className="text-xs font-montserrat font-normal text-gray-500">Agregar solo el numero ej: 5 o 10</p>
-				<div
-					className="flex justify-start items-center mt-2 gap-4"
-				>
-					<input
-						className="border border-gray-200 p-2 rounded-lg"
-						name='porcentaje'
-						type="number"
-						value={porcentaje}
-						onChange={onChangePorcentaje}
-					/>
-					<button
-						onClick={onSubmit}
-						className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg"
-					>
-						Actualizar
-					</button>
-				</div>
-
+			<HeaderTitle title="Configuración" />
+			<div className="mt-6">
+				<Tabs sections={sections} />
 			</div>
+
 		</Layout>
 	);
 }
+
+export default Settings;
