@@ -41,7 +41,7 @@ const Sales = () => {
       )}
       <HeaderTitle title="Ventas" />
       <div className="w-full mx-auto mt-6">
-        <div className="border p-3 mx-auto rounded-lg w-1/2">
+        <div className="border p-3 mx-auto rounded-lg w-full lg:w-1/2">
           <p className="text-sm font-montserrat text-center font-bold">Ventas diarias</p>
           <div className="mt-6 flex items-center gap-1">
             <p className="font-montserrat font-medium">N° de ventas:</p>

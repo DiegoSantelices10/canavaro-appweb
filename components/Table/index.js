@@ -20,10 +20,10 @@ const Table = (props) => {
     })
 
     return (
-        <div className=" w-full bg-green-200"
+        <div
             {...rest}
         >
-            <table className='w-full border'>
+            <table className='w-full'>
                 <thead>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}
@@ -31,7 +31,7 @@ const Table = (props) => {
                         >
                             {headerGroup.headers.map(header => (
                                 <th key={header.id}
-                                    className='font-montserrat p-3 text-sm'
+                                    className='font-montserrat text-sm'
                                 >
                                     {header.isPlaceholder
                                         ? null

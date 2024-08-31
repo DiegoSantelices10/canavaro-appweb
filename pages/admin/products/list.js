@@ -7,7 +7,7 @@ import { getProductsFront } from "services/fetchData";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import PencilEdit02Icon from "public/images/pencil-edit-02-stroke-rounded";
 import Search01Icon from "public/images/search-01-stroke-rounded";
@@ -126,8 +126,8 @@ const Products = () => {
 
   const columns = [
     columnHelper.accessor('nombre', {
-      header: () => 'Nombre',
-      cell: info => <h2 className="text-left font-medium pl-2">{info.getValue()}</h2>,
+      header: () => <h1 className="text-left pl-2">Nombre</h1>,
+      cell: info => <h2 className="text-left font-medium">{info.getValue()}</h2>,
     }),
     columnHelper.accessor('categoria', {
       header: () => 'Categoría',
@@ -158,7 +158,7 @@ const Products = () => {
       },
     }),
     columnHelper.accessor('editar', {
-      header: () => 'Editar',
+      header: () => '',
       cell: info => {
         const id = info.row.original._id; // Accede al id de la fila
         return (
@@ -173,7 +173,7 @@ const Products = () => {
       },
     }),
     columnHelper.accessor('Eliminar', {
-      header: () => <span>Eliminar</span>,
+      header: () => '',
       cell: info => {
         const id = info.row.original._id; // Accede al id de la fila
         return (
@@ -189,6 +189,7 @@ const Products = () => {
 
   return (
     <Layout>
+      <Toaster />
       <HeaderTitle title="Productos" />
       <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full mx-auto lg:items-center gap-x-4 lg:justify-between mt-6 pb-4 h-auto">
         <div className="flex flex-col sm:flex-col md:flex-row items-end w-full gap-4 ">

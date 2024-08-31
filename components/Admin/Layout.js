@@ -1,6 +1,5 @@
 import AccessMenu from "components/Admin/AccessMenu";
 import Head from "next/head";
-import { Toaster } from "react-hot-toast";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
@@ -9,7 +8,6 @@ const Layout = ({ children }) => {
       <Head>
         <title>Pizzeria Canavaro</title>
       </Head>
-      <Toaster />
       <div className="grid grid-cols-12 w-full">
         <div className="col-span-12 lg:col-span-2 relative">
           <AccessMenu />

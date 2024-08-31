@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 import { useRouter } from "next/router";
 import { getProducts, updateProduct } from "services/fetchData";
 import Layout from "components/Admin/Layout";
 import HeaderTitle from "components/HeaderTitle";
 import ControllerInput from "components/ControllerInput";
+
 
 const Update = ({ data }) => {
   const [renderProducts, setRenderProductos] = useState("empanadas");
@@ -23,6 +24,7 @@ const Update = ({ data }) => {
 
   return (
     <Layout>
+      <Toaster />
       <HeaderTitle title="Editar Producto" isBack />
       <section className="w-full flex justify-start items-start h-screen">
         <div className="w-full  p-2 mt-10">

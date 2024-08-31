@@ -3,7 +3,7 @@ import Layout from "components/Admin/Layout";
 import HeaderTitle from "components/HeaderTitle";
 import Tabs from "components/Tabs";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 const Settings = () => {
@@ -21,7 +21,7 @@ const Settings = () => {
 		try {
 			const response = await axios.put(`/api/settings/promo/${id}`, { descuento: porcentaje })
 			console.log('response', response);
-			toast.success('Creado con exito!')
+			toast.success('Actualizado con exito!')
 		} catch (error) {
 			alert("Error al realizar la accion")
 		}
@@ -75,18 +75,11 @@ const Settings = () => {
 				<hr />
 			</div>
 		},
-		{
-			id: "4",
-			label: "Categorias",
-			content: <div className="grid gap-3 py-3">
-				<h1 className="text-3xl font-montserrat tracking-wider font-bold">Categorias</h1>
-				<hr />
-			</div>
-		}
 	]
 
 	return (
 		<Layout>
+			<Toaster />
 			<HeaderTitle title="Configuración" />
 			<div className="mt-6">
 				<Tabs sections={sections} />
