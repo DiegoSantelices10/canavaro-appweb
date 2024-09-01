@@ -5,10 +5,10 @@ export default function WelcomeLogo() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/welcomeLogo");
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       router.push("/order/home");
     }, 1500);
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
