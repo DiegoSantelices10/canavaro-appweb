@@ -11,17 +11,17 @@ const HeaderTitle = ({ title, isBack }) => {
     }
 
     return (
-        <div className="grid gap-3 mt-6">
-            <div className='flex gap-4 px-2'>
+        <div className="grid gap-3 my-6">
+            <div className='flex md:gap-4 md:px-2 relative justify-center'>
                 {isBack &&
                     (
 
                         <button onClick={backNavigate}>
-                            <IoChevronBack className="text-gray-900" size={25} />
+                            <IoChevronBack className="text-gray-900 absolute left-0 bottom-1" size={25} />
                         </button>
                     )
                 }
-                <h1 className="text-3xl font-montserrat tracking-wider font-bold text-center sm:text-left">{title}</h1>
+                <h1 className="text-3xl font-montserrat tracking-wider font-bold text-center">{title}</h1>
             </div>
             <hr />
         </div>

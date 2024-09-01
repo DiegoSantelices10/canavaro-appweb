@@ -7,7 +7,7 @@ const ControllerInput = ({ label, name, disabled }) => {
     return (
         <div className="w-full mx-auto">
             <label className="block text-xs text-gray-900 font-montserrat">
-                {label}
+                <span className='font-semibold'>{label}</span>
                 <Field
                     disabled={disabled}
                     id={name}

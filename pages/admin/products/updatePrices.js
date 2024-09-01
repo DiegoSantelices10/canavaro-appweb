@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import HeaderTitle from "components/HeaderTitle";
 
 const UpdatePrices = () => {
   const { products } = useSelector(state => state.product);
@@ -53,12 +54,13 @@ const UpdatePrices = () => {
   };
 
   const handleUpdatePizzas = async () => {
-    try {
-      const response = await axios.put("/api/products/", updateData);
-      response.status === 200 && alert("Productos actualizados!");
-    } catch (error) {
-      alert("Error al actualizar los datos");
-    }
+    console.log('entro')
+    // try {
+    //   const response = await axios.put("/api/products/", updateData);
+    //   response.status === 200 && alert("Productos actualizados!");
+    // } catch (error) {
+    //   alert("Error al actualizar los datos");
+    // }
   };
 
   const handleUpdateEmpanadas = async () => {
@@ -88,69 +90,81 @@ const UpdatePrices = () => {
 
   return (
     <Layout>
-      <div className="lg:flex w-full justify-between items-center h-auto p-2 gap-4">
+      <HeaderTitle title="Actualizar Precios" isBack />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
 
-        <div className="mx-auto p-2 h-auto  w-full  lg:w-1/2">
-          <p className="text-center font-montserrat font-semibold">Actualizá el precio de las empanadas</p>
-          <div className=" md:flex lg:flex  justify-between w-full gap-2 mt-2">
-            <div className="w-full flex items-end">
-              <div className="w-full">
-                <p className="font-montserrat text-sm font-normal text-gray-900">Precio x unidad</p>
-                <input
-                  type="number"
-                  ref={priceRef}
-                  className="p-2 h-9 w-full text-sm leading-tight text-gray-700  border-gray-200 border
-                            rounded-lg focus:border-gray-200"
-                />
-              </div>
-              <button
-                onClick={handleUpdateEmpanadas}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-lg shadow-md hover:bg-red-500"
-              >
-                Actualizar
-              </button>
+        <div className="border p-3 rounded-lg">
+          <p className="text-sm font-montserrat text-center font-bold">Precio x docena</p>
+          <div className="grid w-full gap-4 mt-6">
+            <div className="">
+              <label className="text-xs px-1 font-montserrat text-gray-400">Precio x docena</label>
+              <input
+                className="border border-gray-200 p-2 w-full rounded-lg focus:outline-none focus:ring-0"
+                type="number"
+                name='unidad'
+                ref={priceRef}
+              />
             </div>
-            <div className="w-full flex items-end mt-3">
-              <div className="w-full">
-                <p className="font-montserrat text-sm font-normal text-gray-900 ">Precio x docena</p>
-                <input
-                  type="number"
-                  ref={priceDocenaRef}
-                  className="p-2 h-9 w-full  text-sm leading-tight text-gray-700  border-gray-200 border
-                            rounded-lg focus:border-gray-200"
-                />
-              </div>
-              <button
-                onClick={handleUpdateEmpanadasPorDocena}
-                className="bg-red-600 text-sm h-9 ml-2 p-2 whitespace-nowrap text-white font-medium font-montserrat px-3 rounded-lg shadow-md hover:bg-red-500"
-              >
-                Actualizar
-              </button>
-            </div>
+            <button
+              onClick={handleUpdateEmpanadasPorDocena}
+              className="bg-red-600 hover:bg-red-500 text-white font-normal py-2 px-4 rounded-lg font-montserrat"
+            >
+              Actualizar
+            </button>
           </div>
         </div>
 
-        <div className=" lg:w-1/3 w-full px-2 mt-3 lg:mt-0 flex flex-col items-center  p-2   mx-auto border-none outline-none shadow border border-gray-200 rounded-md">
-          <p className="font-montserrat font-semibold">Actualizá el precio de las pizzas</p>
-          <input
-            className=" file:cursor-pointer text-gray-500 text-xs w-5/5 mt-6 file:font-medium font-montserrat file:bg-red-600 file:text-white file:border-none file:p-2 file:rounded file:text-xs "
-            type="file"
-            title="Importar archivo"
-            accept=".xlsx, .xls"
-            onChange={handleFileUpload}
-          />
-          {updateData.length > 0 && (
+        <div className="border p-3 rounded-lg">
+          <p className="text-sm font-montserrat text-center font-bold">Precio x unidad</p>
+          <div className="grid w-full gap-4 mt-6">
+            <div>
+              <label className="text-xs px-1 font-montserrat text-gray-400">Precio x unidad</label>
+              <input
+                className="border border-gray-200 p-2 w-full rounded-lg focus:outline-none focus:ring-0"
+                type="number"
+                name='docena'
+                ref={priceDocenaRef}
+              />
+            </div>
             <button
-              onClick={handleUpdatePizzas}
-              className="bg-sky-800 text-sm mt-2 sm:mt-0 p-2 whitespace-nowrap text-white font-semibold font-montserrat px-3 rounded-md shadow-md hover:bg-sky-700"
+              onClick={handleUpdateEmpanadas}
+              className="bg-red-600 hover:bg-red-500 text-white font-normal py-2 px-4 rounded-lg font-montserrat"
             >
-              Actualizar pizzas
+              Actualizar
             </button>
-          )}
+          </div>
         </div>
+        <div className="border p-3 rounded-lg h-full flex flex-col justify-between items-center space-y-4 sm:space-y-0">
+          <div>
+            <p className="text-sm font-montserrat text-center font-bold">Precio pizzas</p>
+            <p className="font-montserrat text-gray-500 text-xs text-center">Actualizá el precio de las pizzas</p>
+          </div>
+          <div>
+            <label
+              htmlFor="file"
+              className="cursor-pointer text-xs w-5/5 mt-6 font-medium font-montserrat bg-red-600 hover:bg-red-500 text-white border-none p-2 rounded"
+            >
+              <input
+                id="file"
+                className="hidden"
+                type="file"
+                title="Importar archivo"
+                accept=".xlsx, .xls"
+                onChange={handleFileUpload}
+              />
+              Selecciona un archivo
+            </label>
+          </div>
 
+          <button
+            disabled
+            onClick={handleUpdatePizzas}
+            className="bg-red-600 hover:bg-red-500 text-white font-normal py-2 px-4 rounded-lg w-full font-montserrat"
+          >
+            Actualizar pizzas
+          </button>
+        </div>
       </div>
-      <hr />
 
       <div className="w-full px-2 pb-5 md:w-11/12 lg:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3  lg:grid lg:grid-cols-4 gap-3">
         {updateData.length !== 0 &&

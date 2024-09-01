@@ -80,7 +80,7 @@ const AccessMenu = () => {
 
   return (
     <>
-      <div className="w-full bg-red-600  h-16 lg:h-screen  mx-auto p-2">
+      <div className="w-full bg-red-600  h-16 lg:h-screen lg:fixed lg:w-2/12  mx-auto p-2">
         <div className="h-full flex justify-between lg:flex lg:flex-col">
           <div className="lg:flex lg:justify-center lg:items-center hidden mt-5">
             <Image height={100} width={100} src={"/images/logocanavaro.webp"} />

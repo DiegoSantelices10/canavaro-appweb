@@ -266,7 +266,6 @@ export default function Home() {
 
 
         <TabsCategories
-          products={products}
           renderProducts={renderProducts}
           setRenderProductos={setRenderProductos}
           clearTotal={clearTotal} />

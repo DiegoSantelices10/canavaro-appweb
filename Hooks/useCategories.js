@@ -7,9 +7,18 @@ const useCategories = () => {
     const [categories, setCategories] = useState([])
     const { products } = useSelector(state => state.product);
 
+    const reorderCategories = (categories) => {
+        const promoCategory = categories.filter(category => category.includes("Promo"));
+        const otherCategories = categories.filter(category => !category.includes("Promo"));
+
+        return [...promoCategory, ...otherCategories];
+    };
     const renderCategory = () => {
         const categories = [...new Set(products?.map(producto => producto.categoria))];
-        setCategories(categories);
+
+        const reOrder = reorderCategories(categories);
+
+        setCategories(reOrder);
     }
 
     useEffect(() => {
