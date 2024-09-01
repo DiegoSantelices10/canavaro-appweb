@@ -28,13 +28,10 @@ const Products = () => {
   const columnHelper = createColumnHelper()
 
   const compararDisponibilidad = (objeto1, objeto2) => {
-    if (objeto1.categoria > objeto2.categoria) {
-      return -1;
+    if (objeto1.available === objeto2.available) {
+      return 0;
     }
-    if (objeto1.categoria < objeto2.categoria) {
-      return 1;
-    }
-    return 0;
+    return objeto1.available ? 1 : -1;
   }
 
   useEffect(() => {
