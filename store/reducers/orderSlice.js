@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	orderList: [],
 	orderPromo: [],
+	bebidas: [],
 	quantityDemanded: 0,
+	quantityDemandedDrinks: 0,
 	totalQuantity: 0,
 	totalAmount: 0,
 	delivery: "domicilioActual",
@@ -27,6 +29,9 @@ export const orderSlice = createSlice({
 		setQuantityDemanded: (state, action) => {
 			state.quantityDemanded = action.payload;
 		},
+		setQuantityDemandedDrinks: (state, action) => {
+			state.quantityDemandedDrinks = action.payload;
+		},
 		addProductPizza: (state, action) => {
 			if (action.payload.categoria === "pizzas") {
 				const productIndex = state.orderPromo.findIndex(item => item.tamanio === action.payload.tamanio);
@@ -47,6 +52,24 @@ export const orderSlice = createSlice({
 		},
 		setOrderListLocal: (state, action) => {
 			state.orderList = action.payload
+		},
+		addDrinksPromo: (state, action) => {
+			const productIndex = state.bebidas.findIndex(item => item._id === action.payload._id);
+			if (productIndex >= 0) {
+				state.bebidas[productIndex].cantidad += 1;
+			} else {
+				const tempProduct = { ...action.payload, cantidad: 1 };
+				state.bebidas.push(tempProduct);
+			}
+		},
+		decrementDrinksPromo: (state, action) => {
+			const productIndex = state.bebidas.findIndex(item => item._id === action.payload._id);
+			if (state.bebidas[productIndex].cantidad > 1) {
+				state.bebidas[productIndex].cantidad -= 1;
+			} else if (state.bebidas[productIndex].cantidad === 1) {
+				const newList = state.bebidas.filter(item => item._id !== action.payload._id);
+				state.bebidas = newList;
+			}
 		},
 		addProductPromo: (state, action) => {
 			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
@@ -80,6 +103,9 @@ export const orderSlice = createSlice({
 		},
 		clearOrderList: (state, action) => {
 			state.orderList = [];
+		},
+		clearDrinks: (state, action) => {
+			state.bebidas = [];
 		},
 		removeProduct: (state, action) => {
 			state.orderPromo = state.orderPromo.filter(product => product._id !== action.payload._id);
@@ -123,11 +149,15 @@ export const orderSlice = createSlice({
 export const {
 	addProductPizza,
 	addProductEmpanada,
+	addDrinksPromo,
+	decrementDrinksPromo,
 	addProductPromo,
+	setQuantityDemandedDrinks,
 	decrementProductPromo,
 	decrementProductPizza,
 	removeProduct,
 	setDemora,
+	clearDrinks,
 	calculateSubTotal,
 	calculateTotalQuantity,
 	addPromoOrderList,

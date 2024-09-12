@@ -21,6 +21,8 @@ import {
   clearOrderPromo,
   decrementProductPizza,
   setQuantityDemanded,
+  clearDrinks,
+  setQuantityDemandedDrinks,
 } from "store/reducers/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -30,9 +32,9 @@ import Promotion from "./Promotion";
 
 export default function ProductLayout({
   data,
-  data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio },
+  data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio, cantidadExtras },
 }) {
-  const { orderPromo, orderList, quantityDemanded } = useSelector(state => state.order);
+  const { orderPromo, orderList, quantityDemanded, bebidas, quantityDemandedDrinks } = useSelector(state => state.order);
   const { extras } = useSelector(state => state.product);
 
   const [selectCombo, setSelectCombo] = useState('');
@@ -54,13 +56,32 @@ export default function ProductLayout({
     return pre?.cantidad ? pre.cantidad : 0;
   };
 
+
+
   const result = () => {
+    if (data.addEmpanadas === 'si' && data.addExtras === 'si') {
+      if (quantityDemanded < 1 && quantityDemandedDrinks < 1 && orderPromo.length > 0) {
+        return true;
+      }
+      return false;
+    }
+
     if (data.addEmpanadas === 'si') {
       if (quantityDemanded < 1 && orderPromo.length > 0) {
         return true;
       }
       return false;
     }
+
+    if (data.addExtras === 'si') {
+      if (quantityDemandedDrinks < 1 && bebidas.length > 0) {
+        return true;
+      }
+      return false;
+    }
+
+
+
     if (orderPromo.some(item => item.categoria === 'pizzas')) {
       return true;
     }
@@ -73,7 +94,6 @@ export default function ProductLayout({
 
 
   const incrementCartPizza = data => {
-    console.log('data', data);
     dispatch(addProductPizza(data));
   };
 
@@ -82,6 +102,9 @@ export default function ProductLayout({
   };
 
   const returnHome = () => {
+    dispatch(setQuantityDemanded(0));
+    dispatch(setQuantityDemandedDrinks(0));
+    dispatch(clearDrinks());
     dispatch(clearOrderPromo());
     router.push("/order/home");
   };
@@ -104,6 +127,21 @@ export default function ProductLayout({
         };
         dispatch(addPromoOrderList(promo));
         toast.success("Se agrego al pedido!");
+      } else if (data.addExtras === 'si') {
+        const promo = {
+          _id: idGenerator,
+          nombre,
+          descripcion,
+          products: [...value, ...bebidas],
+          categoria,
+          cantidadExtras,
+          comentarios: comentarioRef.current.value,
+          cantidadMaxima,
+          precio: precio + totalExtra,
+          cantidad: 1,
+        };
+        dispatch(addPromoOrderList(promo));
+        toast.success("Se agrego al pedido!");
       } else {
         const promo = {
           _id: idGenerator,
@@ -111,6 +149,7 @@ export default function ProductLayout({
           descripcion,
           products: [...value],
           categoria,
+          cantidadExtras,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
           precio: precio + totalExtra,
@@ -120,33 +159,53 @@ export default function ProductLayout({
         toast.success("Se agrego al pedido!");
       }
     } else {
-      value.map(item => {
-        if (item.categoria !== 'extras') {
-          dispatch(addPromoOrderList({
-            ...item,
-            comentarios: comentarioRef.current.value,
-            precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
-            extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
-          }))
-        }
-        if (item.categoria === 'extras') {
-          return (
+
+      if (extraPizza.length > 0) {
+        value.map(item => {
+          if (item.categoria !== 'extras') {
             dispatch(addPromoOrderList({
               ...item,
+              comentarios: comentarioRef.current.value,
+              precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
+              extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
             }))
-          )
+          }
+          if (item.categoria === 'extras') {
+            return (
+              dispatch(addPromoOrderList({
+                ...item,
+              }))
+            )
+          }
+          return null;
         }
-        return null;
+
+        );
+        toast.success("Se agrego al pedido!");
+      } else if (bebidas.length > 0) {
+        const promo = {
+          _id: idGenerator,
+          nombre,
+          descripcion,
+          products: [...bebidas],
+          categoria,
+          comentarios: comentarioRef.current.value,
+          cantidadExtras,
+          precio: precio + totalExtra,
+          cantidad: 1,
+        };
+        dispatch(addPromoOrderList(promo));
+        toast.success("Se agrego al pedido!");
+      } else {
+        value.map(item => dispatch(addPromoOrderList({ ...item }))
+        )
       }
-
-      );
-      toast.success("Se agrego al pedido!");
+      dispatch(clearDrinks());
+      dispatch(clearOrderPromo());
+      dispatch(setQuantityDemanded(0));
+      router.push("/order/home");
     }
-
-    dispatch(clearOrderPromo());
-    dispatch(setQuantityDemanded(0));
-    router.push("/order/home");
-  };
+  }
 
   const handleCloseModal = () => {
     addCartPromo(orderPromo);
@@ -161,7 +220,7 @@ export default function ProductLayout({
 
   const openModal = () => {
     if (extras.length > 0 && orderPromo.length === 1) {
-      if (orderPromo[0].cantidad === 1) {
+      if (orderPromo[0].cantidad === 1 && data.addExtras !== 'si') {
         setInfo({
           title: "Extras a tu pizza",
         });

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 const Select = ({ data, handleChange, label, newOption }) => {
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useState('pizzas');
     const [isOpen, setIsOpen] = useState(false);
 
     const handleSelect = (item) => {
@@ -31,7 +31,7 @@ const Select = ({ data, handleChange, label, newOption }) => {
 
     return (
         <div className="relative w-full">
-            <p className="text-gray-900 font-normal text-xs font-montserrat">{label}</p>
+            <p className="text-gray-900 font-semibold text-xs font-montserrat">{label}</p>
             <button
                 type='button'
                 onClick={() => setIsOpen(!isOpen)}

@@ -26,9 +26,8 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
                 <MultiplicationSignCircleIcon color={"#000000"} />
               </button>
             </div>
-            <div className="w-full mt-6">
+            <div className="w-full mt-6 mb-3">
               <h2 className="text-base font-montserrat">{pedido.nombre}</h2>
-              <p className="font-normal font-montserrat  text-sm text-gray-400 ">{pedido.descripcion}</p>
             </div>
             <hr />
             <div className="py-4">

@@ -131,7 +131,7 @@ const Products = () => {
       cell: info => info.getValue(),
     }),
     columnHelper.accessor('disponible', {
-      header: () => 'Disponible',
+      header: () => 'Disp',
       cell: info => {
         const id = info.row.original._id; // Accede al id de la fila
         const available = info.row.original.available;

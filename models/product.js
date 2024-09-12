@@ -32,7 +32,6 @@ const productoSchema = new Schema(
         type: Number,
       },
     },
-
     addEmpanadas: {
       type: String,
     },
@@ -46,7 +45,13 @@ const productoSchema = new Schema(
     formato: {
       type: String,
     },
+    cantidadExtras: {
+      type: Number,
+    },
     addPizzas: {
+      type: String,
+    },
+    addExtras: {
       type: String,
     },
     tamanio: {
@@ -57,6 +62,9 @@ const productoSchema = new Schema(
     },
     available: {
       type: Boolean,
+    },
+    extras: {
+      type: Array,
     },
   },
   {

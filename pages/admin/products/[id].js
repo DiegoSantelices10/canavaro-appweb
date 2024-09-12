@@ -10,12 +10,16 @@ import { getProducts, updateProduct } from "services/fetchData";
 import Layout from "components/Admin/Layout";
 import HeaderTitle from "components/HeaderTitle";
 import ControllerInput from "components/ControllerInput";
+import MultiSelect from "components/MultiSelect";
+import useDrinks from "Hooks/useDrinks";
 
 
 const Update = ({ data }) => {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [productRender, setProductRender] = useState({});
   const router = useRouter();
+  const { drinks } = useDrinks();
+
 
   useEffect(() => {
     setProductRender(data);
@@ -41,12 +45,15 @@ const Update = ({ data }) => {
                 chica: productRender?.precioPizza?.chica || "",
               },
               categoria: renderProducts,
+              extras: productRender?.extras || [],
+              addExtras: productRender?.addExtras || "no",
+              cantidadExtras: productRender?.cantidadExtras || "",
               isCantidad: productRender?.isCantidad || "",
               imagen: productRender?.imagen || "",
               cantidadMaxima: productRender?.cantidadMaxima || "",
-              addEmpanadas: productRender?.addEmpanadas || "",
+              addEmpanadas: productRender?.addEmpanadas || "no",
               formato: productRender?.formato || "",
-              addPizzas: productRender?.addPizzas || "",
+              addPizzas: productRender?.addPizzas || "no",
               tamanio: productRender?.tamanio || "",
             }}
             onSubmit={async (values, { resetForm }) => {
@@ -93,7 +100,7 @@ const Update = ({ data }) => {
               <Form
                 className="md:border md:border-gray-200 md:p-4  md:rounded-lg"
               >
-                <div className="md:grid  md:grid-cols-2 mt-4 justify-items-end gap-4 space-y-4 md:space-y-0">
+                <div className="md:grid  md:grid-cols-2 lg:grid-cols-3 mt-4  gap-8 space-y-4 md:space-y-0">
                   <ControllerInput
                     label="Nombre del producto"
                     name="nombre"
@@ -158,6 +165,7 @@ const Update = ({ data }) => {
                       </div>
                     </>
                   )}
+
                   {renderProducts === "pizzas" && (
                     <>
                       <ControllerInput
@@ -174,6 +182,7 @@ const Update = ({ data }) => {
                       />
                     </>
                   )}
+
                   {renderProducts === "extras" && (
                     <div className=" w-full mx-auto">
                       <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">Cantidad, si o no?</p>
@@ -211,11 +220,11 @@ const Update = ({ data }) => {
                               className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
                             >
                               <label >
-                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3" />
+                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3 focus:ring-0" />
                                 Si
                               </label>
                               <label>
-                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3" />
+                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3 focus:ring-0" />
                                 No
                               </label>
                             </div>
@@ -229,13 +238,14 @@ const Update = ({ data }) => {
                                   name="cantidadMaxima"
                                   value={values.cantidadMaxima}
                                   onChange={handleChange}
-                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
+                                  className=" p-2 w-full h-10 font-normal  text-sm leading-tight text-gray-900  border-gray-200 border
 													                  rounded-lg focus:border-gray-200"
                                 />
                               </label>
                             </div>
                           )}
                         </div>
+
                         <div className="w-full mx-auto">
                           <div className=" w-full mx-auto">
                             <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Pizza?</p>
@@ -245,11 +255,11 @@ const Update = ({ data }) => {
                               className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
                             >
                               <label>
-                                <Field type="radio" name="addPizzas" value="si" className="mx-3" />
+                                <Field type="radio" name="addPizzas" value="si" className="mx-3 focus:ring-0" />
                                 Si
                               </label>
                               <label>
-                                <Field type="radio" name="addPizzas" value="no" className="mx-3" />
+                                <Field type="radio" name="addPizzas" value="no" className="mx-3 focus:ring-0" />
                                 No
                               </label>
                             </div>
@@ -262,16 +272,53 @@ const Update = ({ data }) => {
                                   id="tamanio"
                                   name="tamanio"
                                   value={values.tamanio}
-                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
-													  rounded-lg focus:border-gray-200"
+                                  className=" p-2 w-full h-10 font-normal  text-sm leading-tight text-gray-900  border-gray-200 border
+													                    rounded-lg focus:border-gray-200"
                                 />
                               </label>
                             </div>
                           )}
                         </div>
+
+                        <div className="w-full mx-auto">
+                          <div className=" w-full mx-auto">
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Bebidas?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
+                            >
+                              <label>
+                                <Field type="radio" name="addExtras" value="si" className="mx-3 focus:ring-0" />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addExtras" value="no" className="mx-3 focus:ring-0" />
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          {values.addExtras === "si" && (
+                            <div className=" w-full mx-auto space-y-4">
+                              <ControllerInput
+                                name='cantidadExtras'
+                                type='number'
+                                label='Ingresa la cantidad de bebidas'
+                              />
+                              <MultiSelect
+                                data={drinks}
+                                label="Selecciona las bebidas disponibles"
+                              />
+                            </div>
+                          )}
+                        </div>
+
                       </>
                     )}
-                  <div className=" w-full mx-auto">
+                </div>
+
+                <div className="w-full block md:flex justify-between items-end mt-3 pb-5 md:pb-0">
+                  <div className=" w-auto">
                     <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
                       Cargar Imagen
                       <input
@@ -286,13 +333,14 @@ const Update = ({ data }) => {
                     </label>
                   </div>
                   <button
-                    className="w-44 h-12 col-start-2
+                    className="md:w-44 h-12 col-start-2 mt-6 md:mt-0 w-full
                        						 rounded-lg  text-sm 
                        						 border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500"
                     type="submit"
                   >
                     Agregar Producto
                   </button>
+
                 </div>
               </Form>
             )}
