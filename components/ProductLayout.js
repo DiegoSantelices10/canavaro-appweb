@@ -8,7 +8,7 @@ import PizzaInfo from "./PizzaInfo";
 import { v4 as uuidv4 } from "uuid";
 
 
-import { Toaster, toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 
@@ -204,9 +204,9 @@ export default function ProductLayout({
       } else {
         value.map(item => dispatch(addPromoOrderList({ ...item }))
         )
+        toast.success("Se agrego al pedido!");
         router.push("/order/home");
       }
-      console.log('paso');
 
       dispatch(clearDrinks());
       dispatch(clearOrderPromo());
@@ -242,6 +242,8 @@ export default function ProductLayout({
   }
   return (
     <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 shadow-md">
+      <Toaster />
+
       {showModal && (
         <ModalMessage
           showModal={showModal}
@@ -254,7 +256,6 @@ export default function ProductLayout({
           setShowModal={setShowModal}
         />
       )}
-      <Toaster />
       <Image
         src={imagen?.url || "/images/sin-imagen-id.png"}
         layout="responsive"
