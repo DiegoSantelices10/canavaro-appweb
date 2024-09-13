@@ -1,5 +1,6 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
+import useDrinks from "Hooks/useDrinks";
 import Add01Icon from "public/images/add-01-stroke-rounded";
 import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 import { useEffect, useState } from "react";
@@ -20,6 +21,7 @@ export default function Promotion({
 
   const { orderPromo, quantityDemanded, quantityDemandedDrinks, bebidas } = useSelector(state => state.order);
   const { products } = useSelector(state => state.product);
+  const { drinks } = useDrinks();
 
   useEffect(() => {
     dispatch(setQuantityDemanded(cantMax || 0));
@@ -33,6 +35,18 @@ export default function Promotion({
       setSelectCombo(res);
     }
   }, []);
+
+
+  const listAvailableDrinks = () => {
+    const updatedExtras = extras.filter(extra => {
+      const matchingDrink = drinks.find(drink => drink._id === extra._id);
+
+      // Si no hay matching drink o si available es true, mantenemos el extra
+      return !(matchingDrink && matchingDrink.available === false);
+    });
+
+    return updatedExtras;
+  };
 
 
   const addItems = value => {
@@ -87,6 +101,7 @@ export default function Promotion({
   const quantityZeroDrinks = _id => {
     return bebidas?.find(item => item._id === _id);
   };
+
 
   return (
     <div className="mt-4">
@@ -190,7 +205,7 @@ export default function Promotion({
               </p>
             </div>
           )}
-          {extras?.map(({ _id, nombre }) => (
+          {listAvailableDrinks()?.map(({ _id, nombre }) => (
             <div key={_id}>
               <div className=" font-montserrat flex justify-between items-center my-5 p-1  ">
                 <div className="w-1/2 text-zinc-800 font-medium text-base font-montserrat">
