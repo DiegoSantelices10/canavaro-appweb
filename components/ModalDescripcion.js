@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
-import MultiplicationSignCircleIcon from "public/images/multiplication-sign-circle-stroke-rounded";
+import { MultiplicationSignIcon } from "public/images/exit-icon";
 
 const ModalDescripcion = ({ handleClose, show, pedido }) => {
   const showHideClassName = show ? "fixed z-40 inset-0 overflow-y-auto" : "hidden";
@@ -23,20 +23,19 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
               <button
                 className="absolute top-4 right-4"
                 onClick={handleClose}>
-                <MultiplicationSignCircleIcon color={"#000000"} />
+                <MultiplicationSignIcon />
               </button>
             </div>
             <div className="w-full mt-6 mb-3">
-              <h2 className="text-base font-montserrat">{pedido.nombre}</h2>
+              <h2 className="text-base text-center font-montserrat">{pedido.nombre}</h2>
             </div>
-            <hr />
-            <div className="py-4">
+            <div className="p-4 border rounded-lg space-y-2">
               {pedido.products.map(item => {
                 return (
                   <div
                     className="flex  items-center gap-1"
                     key={item._id}>
-                    <p className="font-normal text-gray-800 text-sm">
+                    <p className="font-medium text-gray-800 text-sm">
                       {item.nombre}
                     </p>
                     <p>

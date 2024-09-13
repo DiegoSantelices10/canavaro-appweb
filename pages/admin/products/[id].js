@@ -31,8 +31,8 @@ const Update = ({ data }) => {
       <Toaster />
       <HeaderTitle title="Editar Producto" isBack />
       <section className="w-full flex justify-start items-start h-screen">
-        <div className="w-full">
-          <p className="font-montserrat text-base font-medium mt-5 mb-2">Categoria: <span className="font-normal text-gray-500">{data.categoria}</span></p>
+        <div className="w-full space-y-4 pt-4">
+          <p className="pl-2 font-montserrat text-base font-medium">Categoria: <span className="font-normal text-gray-500">{data.categoria}</span></p>
           <Formik
             initialValues={{
               nombre: productRender?.nombre || "",
@@ -213,6 +213,40 @@ const Update = ({ data }) => {
                       <>
                         <div className="w-full mx-auto">
                           <div className=" w-full mx-auto">
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Bebidas?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
+                            >
+                              <label>
+                                <Field type="radio" name="addExtras" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500 " />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addExtras" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500 " />
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          {values.addExtras === "si" && (
+                            <div className=" w-full mx-auto space-y-4">
+                              <ControllerInput
+                                name='cantidadExtras'
+                                type='number'
+                                label='Ingresa la cantidad de bebidas'
+                              />
+                              <MultiSelect
+                                values={values}
+                                data={drinks}
+                                label="Selecciona las bebidas disponibles"
+                              />
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="w-full mx-auto">
+                          <div className=" w-full mx-auto">
                             <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con empanadas?</p>
                             <div
                               role="group"
@@ -220,11 +254,11 @@ const Update = ({ data }) => {
                               className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
                             >
                               <label >
-                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3 focus:ring-0" />
+                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 Si
                               </label>
                               <label>
-                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3 focus:ring-0" />
+                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 No
                               </label>
                             </div>
@@ -238,7 +272,7 @@ const Update = ({ data }) => {
                                   name="cantidadMaxima"
                                   value={values.cantidadMaxima}
                                   onChange={handleChange}
-                                  className=" p-2 w-full h-10 font-normal  text-sm leading-tight text-gray-900  border-gray-200 border
+                                  className=" p-2 w-full h-10 focus:ring-0 focus:ring-white font-normal  text-sm leading-tight text-gray-900  border-gray-200 border
 													                  rounded-lg focus:border-gray-200"
                                 />
                               </label>
@@ -255,11 +289,11 @@ const Update = ({ data }) => {
                               className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
                             >
                               <label>
-                                <Field type="radio" name="addPizzas" value="si" className="mx-3 focus:ring-0" />
+                                <Field type="radio" name="addPizzas" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 Si
                               </label>
                               <label>
-                                <Field type="radio" name="addPizzas" value="no" className="mx-3 focus:ring-0" />
+                                <Field type="radio" name="addPizzas" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 No
                               </label>
                             </div>
@@ -272,7 +306,7 @@ const Update = ({ data }) => {
                                   id="tamanio"
                                   name="tamanio"
                                   value={values.tamanio}
-                                  className=" p-2 w-full h-10 font-normal  text-sm leading-tight text-gray-900  border-gray-200 border
+                                  className=" p-2 w-full h-10 font-normal focus:ring-0 focus:ring-white  text-sm leading-tight text-gray-900  border-gray-200 border
 													                    rounded-lg focus:border-gray-200"
                                 />
                               </label>
@@ -280,38 +314,6 @@ const Update = ({ data }) => {
                           )}
                         </div>
 
-                        <div className="w-full mx-auto">
-                          <div className=" w-full mx-auto">
-                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Bebidas?</p>
-                            <div
-                              role="group"
-                              aria-labelledby="my-radio-group"
-                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                            >
-                              <label>
-                                <Field type="radio" name="addExtras" value="si" className="mx-3 focus:ring-0" />
-                                Si
-                              </label>
-                              <label>
-                                <Field type="radio" name="addExtras" value="no" className="mx-3 focus:ring-0" />
-                                No
-                              </label>
-                            </div>
-                          </div>
-                          {values.addExtras === "si" && (
-                            <div className=" w-full mx-auto space-y-4">
-                              <ControllerInput
-                                name='cantidadExtras'
-                                type='number'
-                                label='Ingresa la cantidad de bebidas'
-                              />
-                              <MultiSelect
-                                data={drinks}
-                                label="Selecciona las bebidas disponibles"
-                              />
-                            </div>
-                          )}
-                        </div>
 
                       </>
                     )}

@@ -4,7 +4,6 @@ import Add01Icon from "public/images/add-01-stroke-rounded";
 import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
 
 
 import { addDrinksPromo, addProductPromo, clearDrinks, clearOrderPromo, decrementDrinksPromo, decrementProductPromo, setQuantityDemanded, setQuantityDemandedDrinks } from "store/reducers/orderSlice";
@@ -21,7 +20,6 @@ export default function Promotion({
 
   const { orderPromo, quantityDemanded, quantityDemandedDrinks, bebidas } = useSelector(state => state.order);
   const { products } = useSelector(state => state.product);
-  const [extrasBebidas, setExtrasBebidas] = useState([]);
 
   useEffect(() => {
     dispatch(setQuantityDemanded(cantMax || 0));
@@ -36,15 +34,6 @@ export default function Promotion({
     }
   }, []);
 
-  useEffect(() => {
-    const newList = extras?.map(item => {
-      return {
-        _id: uuidv4(),
-        nombre: item
-      };
-    })
-    setExtrasBebidas(newList);
-  }, []);
 
   const addItems = value => {
     if (value.categoria === 'bebidas') {
@@ -201,7 +190,7 @@ export default function Promotion({
               </p>
             </div>
           )}
-          {extrasBebidas?.map(({ _id, nombre }) => (
+          {extras?.map(({ _id, nombre }) => (
             <div key={_id}>
               <div className=" font-montserrat flex justify-between items-center my-5 p-1  ">
                 <div className="w-1/2 text-zinc-800 font-medium text-base font-montserrat">

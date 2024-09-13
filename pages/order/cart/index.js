@@ -14,7 +14,7 @@ import {
   setDelivery,
   setDemora,
 } from "store/reducers/orderSlice";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 
 import { clearUser, setUser } from "store/reducers/userSlice";
 import axios from "axios";
@@ -28,6 +28,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { formatearNumero } from "libs/items";
 import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import AlignBoxMiddleLeftIcon from "public/images/align-box-middle-left-stroke-rounded";
+import ControllerInput from "components/ControllerInput";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora, orderPromo, delivery } = useSelector(state => state.order);
@@ -128,32 +129,32 @@ export default function Cart({ data }) {
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
-          direccion: Yup.string()
-            .required("La dirección es obligatoria")
-            .max(70, "La dirección no puede tener más de 70 caracteres"),
-          telefono: Yup.string()
-            .required("El teléfono es obligatorio")
-            .matches(/^[0-9]+$/, "El teléfono solo puede contener números")
-            .min(10, "El teléfono debe tener al menos 10 caracteres")
-            .max(15, "El teléfono no puede tener más de 15 caracteres"),
-          hPersonalizado: Yup.string()
-            .matches(/^(\d+(:\d+)?)?$/, {
-              message: "El horario debe contener solo números o ser de tipo HH:mm",
-              excludeEmptyString: true,
-            })
-            .notRequired(),
-        }
+        direccion: Yup.string()
+          .required("La dirección es requerida")
+          .max(70, "La dirección no puede tener más de 70 caracteres"),
+        telefono: Yup.string()
+          .required("El teléfono es requerido")
+          .matches(/^[0-9]+$/, "El teléfono solo puede contener números")
+          .min(10, "El teléfono debe tener al menos 10 caracteres")
+          .max(15, "El teléfono no puede tener más de 15 caracteres"),
+        hPersonalizado: Yup.string()
+          .matches(/^(\d+(:\d+)?)?$/, {
+            message: "El horario debe contener solo números o ser de tipo HH:mm",
+            excludeEmptyString: true,
+          })
+          .notRequired(),
+      }
       : {
-          nombre: Yup.string()
-            .required("El nombre es obligatorio")
-            .max(30, "El nombre no puede tener más de 30 caracteres"),
-          hPersonalizado: Yup.string()
-            .matches(/^(\d+(:\d+)?)?$/, {
-              message: "El horario debe contener solo números o ser de tipo HH:mm",
-              excludeEmptyString: true,
-            })
-            .notRequired(),
-        }
+        nombre: Yup.string()
+          .required("El nombre es requerido")
+          .max(30, "El nombre no puede tener más de 30 caracteres"),
+        hPersonalizado: Yup.string()
+          .matches(/^(\d+(:\d+)?)?$/, {
+            message: "El horario debe contener solo números o ser de tipo HH:mm",
+            excludeEmptyString: true,
+          })
+          .notRequired(),
+      }
   );
 
   return (
@@ -253,12 +254,11 @@ export default function Cart({ data }) {
                           <div className="w-full grid gap-6">
                             <div className="flex flex-col md:flex-row gap-3">
                               <div className="w-full">
-                                <Field
-                                  id="direccion"
+                                <ControllerInput
                                   name="direccion"
-                                  className="border-t-0 border-l-0 border-r-0 border-b-1 p-1 px-2 border-gray-200 focus:border-gray-400   w-full  text-sm focus:ring-0 rounded placeholder:text-sm"
-                                  placeholder="Ingresa tu domicilio, Barrio"
-                                />{" "}
+                                  label="Dirección"
+                                  placeholder="Ingresa tu domicilio, barrio"
+                                />
                                 <ErrorMessage name="direccion">
                                   {msg => {
                                     return (
@@ -271,11 +271,10 @@ export default function Cart({ data }) {
                               </div>
 
                               <div className="w-full">
-                                <Field
-                                  id="telefono"
+                                <ControllerInput
                                   name="telefono"
                                   type="number"
-                                  className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-200 focus:border-gray-400   w-full p-1 px-2 text-sm focus:ring-0 rounded placeholder:text-sm"
+                                  label="Teléfono"
                                   placeholder="Ingresa tu telefono"
                                 />
                                 <ErrorMessage name="telefono">
@@ -309,10 +308,8 @@ export default function Cart({ data }) {
                                   {showHourEdit && (
                                     <>
                                       <div className="w-full mx-auto flex justify-center mt-3">
-                                        <Field
-                                          id="hPersonalizado"
+                                        <ControllerInput
                                           name="hPersonalizado"
-                                          className="border-b-1 border-gray-200 placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
                                           placeholder="Horario de entrega"
                                         />
                                       </div>
@@ -337,10 +334,9 @@ export default function Cart({ data }) {
                           </div>
                         ) : (
                           <div className="w-full mx-auto">
-                            <Field
-                              id="nombre"
+                            <ControllerInput
                               name="nombre"
-                              className="border-t-0 border-l-0 border-r-0 border-b-1 border-gray-200 focus:border-gray-400 focus:ring-0 rounded w-full p-1 px-2 text-sm"
+                              label='Nombre'
                               placeholder="Ingresa tu nombre"
                             />
                             <ErrorMessage name="nombre">
@@ -372,10 +368,8 @@ export default function Cart({ data }) {
                                   {showHourEdit && (
                                     <>
                                       <div className="w-full mx-auto flex justify-center mt-3">
-                                        <Field
-                                          id="hPersonalizado"
+                                        <ControllerInput
                                           name="hPersonalizado"
-                                          className="border-b-1 border-gray-200 placeholder:text-xs focus:border-gray-400 border-t-0 border-r-0 border-l-0 rounded w-2/5 p-1 px-2 text-sm text-center focus:ring-0"
                                           placeholder="Horario de entrega"
                                         />
                                       </div>
@@ -427,11 +421,10 @@ export default function Cart({ data }) {
                   <button
                     onClick={() => addCartPromo(orderPromo)}
                     type="button"
-                    className={`${
-                      orderPromo.length < 1
-                        ? "invisible"
-                        : "p-3 font-medium w-full font-montserrat mb-3 bg-red-600 rounded-lg text-white  hover:-translate-y-1 transition-all duration-500"
-                    }`}
+                    className={`${orderPromo.length < 1
+                      ? "invisible"
+                      : "p-3 font-medium w-full font-montserrat mb-3 bg-red-600 rounded-lg text-white  hover:-translate-y-1 transition-all duration-500"
+                      }`}
                   >
                     Agregar al carrito
                   </button>

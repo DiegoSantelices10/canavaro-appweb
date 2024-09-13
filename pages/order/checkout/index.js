@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import axios from "axios";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiChevronsLeft } from "react-icons/fi";
@@ -15,6 +15,7 @@ import { formatearNumero } from "libs/items";
 import { socket } from "socket";
 import { getUrl } from "utils/getUrl";
 import MeansOfPayment from "components/MeansOfPayment";
+import ControllerInput from "components/ControllerInput";
 
 
 export default function Checkout() {
@@ -218,11 +219,9 @@ export default function Checkout() {
 
                 <div className="flex flex-col gap-6 px-3 my-6">
                   <div>
-                    <h2 className="font-montserrat text-xs font-medium pb-1 pl-1 text-neutral-800">Comentarios adicionales</h2>
-                    <Field
-                      id="comentarios"
+                    <ControllerInput
                       name="comentarios"
-                      className="border border-gray-200 rounded-lg w-full p-2 focus:border-gray-200 focus:ring-0"
+                      label='Comentarios adicionales'
                     />
                   </div>
 

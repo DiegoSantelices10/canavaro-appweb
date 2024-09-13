@@ -11,7 +11,7 @@ const HeaderTitle = ({ title, isBack }) => {
     }
 
     return (
-        <div className="grid gap-3 my-6">
+        <div className="grid gap-3">
             <div className='flex md:gap-4 md:px-2 relative justify-center'>
                 {isBack &&
                     (

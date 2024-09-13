@@ -27,9 +27,8 @@ const Create = () => {
   return (
     <Layout>
       <Toaster />
-      <section className="w-full space-y-8">
+      <section className="w-full h-full">
         <HeaderTitle title="Nuevo producto" isBack />
-
         <Formik
           initialValues={{
             nombre: "",
@@ -84,7 +83,7 @@ const Create = () => {
           enableReinitialize
         >
           {({ setFieldValue, values, handleChange }) => (
-            <Form>
+            <Form className="space-y-8 pt-8">
               <div className="grid gap-4 lg:flex lg:gap-8 items-end">
                 <Select
                   label="Categoria"
@@ -99,7 +98,7 @@ const Create = () => {
                 />
               </div>
               <div
-                className="md:border md:border-gray-200  md:p-4  md:rounded-lg mt-4"
+                className="md:border md:border-gray-200 h-full  md:p-4  md:rounded-lg"
               >
                 <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:mt-4  justify-items-end gap-8 space-y-4 md:space-y-0">
                   <ControllerInput
@@ -132,6 +131,26 @@ const Create = () => {
                     />
                   )}
 
+                  {renderProducts === "extras" && (
+                    <div className=" w-full mx-auto">
+                      <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">Cantidad</p>
+                      <div
+                        role="group"
+                        aria-labelledby="my-radio-group"
+                        className="w-full text-base  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
+                      >
+                        <label className="block  text-sm  text-gray-900 font-montserrat font-semibold">
+                          <Field type="radio" name="isCantidad" value="si" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
+                          Si
+                        </label>
+                        <label className="block  text-sm  text-gray-900 font-montserrat font-semibold">
+                          <Field type="radio" name="isCantidad" value="no" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
+                          No
+                        </label>
+                      </div>
+                    </div>
+                  )}
+
                   {renderProducts === "empanadas" && (
                     <>
                       <div className=" w-full mx-auto">
@@ -154,11 +173,11 @@ const Create = () => {
                           className="w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
                         >
                           <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
-                            <Field type="radio" name="formato" value="canastita" className="mx-5 focus:ring-0 focus:ring-white" />
+                            <Field type="radio" name="formato" value="canastita" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                             Canastita
                           </label>
                           <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
-                            <Field type="radio" name="formato" value="empanada" className="mx-5 focus:ring-0 focus:ring-white" />
+                            <Field type="radio" name="formato" value="empanada" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                             Empanada
                           </label>
                         </div>
@@ -183,26 +202,6 @@ const Create = () => {
                     </>
                   )}
 
-                  {renderProducts === "extras" && (
-                    <div className=" w-full mx-auto">
-                      <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">Cantidad</p>
-                      <div
-                        role="group"
-                        aria-labelledby="my-radio-group"
-                        className="w-full text-base  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                      >
-                        <label className="block  text-sm  text-gray-900 font-montserrat font-semibold">
-                          <Field type="radio" name="isCantidad" value="si" className="mx-5" />
-                          Si
-                        </label>
-                        <label className="block  text-sm  text-gray-900 font-montserrat font-semibold">
-                          <Field type="radio" name="isCantidad" value="no" className="mx-5" />
-                          No
-                        </label>
-                      </div>
-                    </div>
-                  )}
-
                   {
                     renderProducts !== "bebidas" &&
                     renderProducts !== "empanadas" &&
@@ -211,6 +210,39 @@ const Create = () => {
                     renderProducts !== "porciones"
                     && (
                       <>
+                        <div className="w-full mx-auto">
+                          <div className=" w-full mx-auto">
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Bebidas?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
+                            >
+                              <label>
+                                <Field type="radio" name="addExtras" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addExtras" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          {values.addExtras === "si" && (
+                            <div className=" w-full mx-auto space-y-4">
+                              <ControllerInput
+                                name='cantidadExtras'
+                                type='number'
+                                label='Ingresa la cantidad de bebidas'
+                              />
+                              <MultiSelect
+                                values={values}
+                                data={drinks}
+                                label="Selecciona las bebidas disponibles"
+                              />
+                            </div>
+                          )}
+                        </div>
 
                         <div className="w-full mx-auto">
                           <div className=" w-full mx-auto">
@@ -221,11 +253,11 @@ const Create = () => {
                               className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
                             >
                               <label >
-                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3 focus:ring-0 focus:ring-white" />
+                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 Si
                               </label>
                               <label>
-                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3 focus:ring-0 focus:ring-white" />
+                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 No
                               </label>
                             </div>
@@ -239,7 +271,7 @@ const Create = () => {
                                   name="cantidadMaxima"
                                   value={values.cantidadMaxima}
                                   onChange={handleChange}
-                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
+                                  className=" p-2 w-full h-10 focus:ring-0 focus:ring-white  text-sm leading-tight text-gray-900  border-gray-200 border
 													                  rounded-lg focus:border-gray-200"
                                 />
                               </label>
@@ -256,11 +288,11 @@ const Create = () => {
                               className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
                             >
                               <label>
-                                <Field type="radio" name="addPizzas" value="si" className="mx-3 focus:ring-0 focus:ring-white" />
+                                <Field type="radio" name="addPizzas" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 Si
                               </label>
                               <label>
-                                <Field type="radio" name="addPizzas" value="no" className="mx-3 focus:ring-0 focus:ring-white" />
+                                <Field type="radio" name="addPizzas" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
                                 No
                               </label>
                             </div>
@@ -275,47 +307,13 @@ const Create = () => {
                                   id="tamanio"
                                   name="tamanio"
                                   value={values.tamanio}
-                                  className=" p-2 w-full h-10  text-sm leading-tight text-gray-900  border-gray-200 border
+                                  className=" p-2 w-full h-10 focus:ring-0 focus:ring-white  text-sm leading-tight text-gray-900  border-gray-200 border
 													                    rounded-lg focus:border-gray-200"
                                 />
                               </label>
                             </div>
                           )}
                         </div>
-
-                        <div className="w-full mx-auto">
-                          <div className=" w-full mx-auto">
-                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Bebidas?</p>
-                            <div
-                              role="group"
-                              aria-labelledby="my-radio-group"
-                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                            >
-                              <label>
-                                <Field type="radio" name="addExtras" value="si" className="mx-3 focus:ring-0 focus:ring-white" />
-                                Si
-                              </label>
-                              <label>
-                                <Field type="radio" name="addExtras" value="no" className="mx-3 focus:ring-0 focus:ring-white" />
-                                No
-                              </label>
-                            </div>
-                          </div>
-                          {values.addExtras === "si" && (
-                            <div className=" w-full mx-auto space-y-4">
-                              <ControllerInput
-                                name='cantidadExtras'
-                                type='number'
-                                label='Ingresa la cantidad de bebidas'
-                              />
-                              <MultiSelect
-                                data={drinks}
-                                label="Selecciona las bebidas disponibles"
-                              />
-                            </div>
-                          )}
-                        </div>
-
                       </>
                     )}
                 </div>

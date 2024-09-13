@@ -185,6 +185,7 @@ export default function ProductLayout({
         );
         router.push("/order/home");
         toast.success("Se agrego al pedido!");
+
       } else if (bebidas.length > 0) {
         const promo = {
           _id: idGenerator,
@@ -205,6 +206,8 @@ export default function ProductLayout({
         )
         router.push("/order/home");
       }
+      console.log('paso');
+
       dispatch(clearDrinks());
       dispatch(clearOrderPromo());
       dispatch(setQuantityDemanded(0));

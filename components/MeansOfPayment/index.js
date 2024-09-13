@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import ControllerInput from 'components/ControllerInput';
 import { Field } from 'formik';
 import Image from 'next/image';
 import React from 'react'
@@ -12,7 +13,7 @@ const MeansOfPayment = (props) => {
     } = props;
     return (
         <div className="h-full">
-            <h2 className="font-montserrat font-medium text-xs pb-1 pl-1 text-neutral-800">Medios de pago</h2>
+            <h2 className="font-montserrat font-semibold text-xs pb-1 pl-1 text-gray-900">Medios de pago</h2>
             {verificarSoloEfectivo() ? (
                 <p>solo podes abonar en efectivo</p>
             ) : (
@@ -21,7 +22,7 @@ const MeansOfPayment = (props) => {
                         <Field
                             as="select"
                             name="medioDePago"
-                            className=" border-none font-montserrat p-3  text-gray-900 font-normal text-sm rounded-lg  block w-full focus:ring-gray-300 "
+                            className=" border-none font-montserrat px-3 py-2.5  text-gray-900 font-normal text-sm rounded-lg  block w-full focus:ring-gray-300 "
                         >
                             {medios.map((item, index) => (
                                 <option key={index} value={item} className="text-sm text-gray-500 font-montserrat font-semibold">
@@ -32,12 +33,10 @@ const MeansOfPayment = (props) => {
                     </div>
                     <div className="mt-8">
                         {values.medioDePago === "Efectivo" && (
-                            <Field
-                                id="pagaCon"
+                            <ControllerInput
                                 type="number"
                                 name="pagaCon"
-                                className="border rounded-lg placeholder:text-gray-400  
-                           border-gray-200 font-montserrat text-sm w-full p-3 focus:ring-0 focus:border-gray-200"
+                                label='Efectivo'
                                 placeholder="¿Con cuanto vas a pagar?"
                             />
                         )}
