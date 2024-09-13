@@ -61,7 +61,7 @@ const MultiSelect = ({ data, label, values }) => {
                                             }
                                             `}
                                     </style>
-                                    {data.map((drink, index) => {
+                                    {data?.filter(item => item.available === true).map((drink, index) => {
                                         const isChecked = values?.extras.some(item => item.nombre === drink.nombre)
 
                                         return (
