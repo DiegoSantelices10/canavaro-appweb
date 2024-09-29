@@ -57,7 +57,7 @@ export default function Home() {
       .map(data => <Card key={data._id} data={data} />);
   };
 
-  const categoriasDestacables = products?.filter(product => !categoriasNoDestacables.includes(product.categoria));
+  const productosDestacables = products?.filter(product => !categoriasNoDestacables.includes(product.categoria));
 
 
   useEffect(() => {
@@ -193,6 +193,18 @@ export default function Home() {
     setTotalPrice(0);
   };
 
+
+  const groupedProducts = productosDestacables
+    .filter(producto => producto.available && producto.destacable)
+    .reduce((acc, producto) => {
+      if (!acc[producto.categoria]) {
+        acc[producto.categoria] = [];
+      }
+      acc[producto.categoria].push(producto);
+      return acc;
+    }, {});
+
+
   return (
     <Layout>
       <div className="pt-[70px] mx-auto w-full rounded-3xl relative">
@@ -231,40 +243,33 @@ export default function Home() {
           </div>
         </>
 
-        <>
-          {categoriasDestacables.length > 0 && (
-            <div>
-              {categoriasDestacables.map((producto) => {
-                const productosFiltrados = products?.filter(item => item.categoria === producto.categoria);
-                if (productosFiltrados.length > 0) {
-                  return (
-                    <div key={producto._id}>
-                      <p className="text-base font-bold font-montserrat text-neutral-800">
-                        {producto.categoria.charAt(0).toUpperCase() + producto.categoria.slice(1)}
-                      </p>
-                      <div className="flex overflow-x-scroll flexp space-x-6 w-full py-1">
-                        <style jsx>
-                          {`
-                            .flexp::-webkit-scrollbar-thumb {
-                              background: #ffffff;
-                              border-radius: 20px;
-                            }
-
-                            .flexp::-webkit-scrollbar {
-                              height: 5px;
-                            }
-                          `}
-                        </style>
-                        {productosFiltrados.map(data => <CardEfectivo key={data._id} data={data} />)}
-                      </div>
-                    </div>
-                  );
+        <div>
+          {Object.entries(groupedProducts).map(([categoria, productosFiltrados]) => {
+            return (
+              <div key={categoria}>
+                <p className="text-base font-bold font-montserrat text-neutral-800">
+                  {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
+                </p>
+                <div className="flex overflow-x-scroll flexp space-x-6 w-full py-1">
+                  <style jsx>
+                    {`
+                .flexp::-webkit-scrollbar-thumb {
+                  background: #ffffff;
+                  border-radius: 20px;
                 }
-                return null; // Si no hay productos disponibles, no renderizamos nada
-              })}
-            </div>
-          )}
-        </>
+                .flexp::-webkit-scrollbar {
+                  height: 5px;
+                }
+              `}
+                  </style>
+                  {productosFiltrados.map((data) => (
+                    <CardEfectivo key={data._id} data={data} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <TabsCategories
           renderProducts={renderProducts}
           setRenderProductos={setRenderProductos}

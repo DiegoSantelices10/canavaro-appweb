@@ -124,7 +124,7 @@ const Products = () => {
   const columns = [
     columnHelper.accessor('nombre', {
       header: () => <h1 className="text-left pl-2">Nombre</h1>,
-      cell: info => <h2 className="text-left font-medium text-sm md:text-base">{info.getValue()}</h2>,
+      cell: info => <h2 className="text-left font-medium text-sm md:text-sm">{info.getValue()}</h2>,
     }),
     columnHelper.accessor('categoria', {
       header: () => 'Categoría',

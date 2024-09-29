@@ -82,9 +82,10 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
         return sumTotal - (sumTotal * (descuento / 100));
     }
 
+
+
     return (
         <div className="w-full font-montserrat mb-20 relative">
-
             {available && hasProductosEfectivo().length > 0 && hasProductosGeneral().length > 0 && (
                 <>
                     <div className='p-2 border rounded-lg border-red-500 my-2'>
@@ -127,6 +128,9 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
 
                     ))}
                 </>
+            )}
+            {promoBarra?.available && delivery === 'localActual' && (
+                <p className='text-xs text-red-500 text-center'>Se aplicó 10% de descuento por retiro en el local</p>
             )}
 
             <div className='mb-6'>

@@ -26,7 +26,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
   };
 
   const conDescuento = () => {
-    return productos.some(p => p.categoria !== 'soloEfectivo');
+    return productos.some(p => p.categoria !== 'solo efectivo');
   }
   return (
     <div className={showHideClassName}>
@@ -142,7 +142,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 ))}
               </>
               {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
-                <p className="text-sm font-normal  mt-2 text-red-500">Se aplica el {promoEfectivo.descuento}% de descuento, excepto soloEfectivo</p>
+                <p className="text-sm font-normal  mt-2 text-red-500">Se aplicó el {promoEfectivo.descuento}% de descuento, excepto solo efectivo</p>
               )}
               <div className="border-t-2 border-gray-200 my-3"></div>
 
