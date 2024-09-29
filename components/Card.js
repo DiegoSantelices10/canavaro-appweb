@@ -31,9 +31,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
   };
 
 
-  const hasPromoEfectivo = () => {
-    return orderPromo?.find(item => item.categoria === "soloEfectivo");
-  };
+
   return (
     <div>
       <div className="py-3">
@@ -72,19 +70,17 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
 
                 <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
 
-                {!hasPromoEfectivo() && (
-                  <div className="rounded-full w-8 h-8 grid content-center  shadow-sm  bg-gray-50">
-                    <button
-                      type="button"
-                      className="text-green-500 text-2xl font-normal flex justify-center items-center"
-                      onClick={e => {
-                        addItems({ _id, nombre, precio, precioExtra, categoria });
-                      }}
-                    >
-                      <Add01Icon color={"bg-green-500"} width={18} height={18} />
-                    </button>
-                  </div>
-                )}
+                <div className="rounded-full w-8 h-8 grid content-center  shadow-sm  bg-gray-50">
+                  <button
+                    type="button"
+                    className="text-green-500 text-2xl font-normal flex justify-center items-center"
+                    onClick={e => {
+                      addItems({ _id, nombre, precio, precioExtra, categoria });
+                    }}
+                  >
+                    <Add01Icon color={"bg-green-500"} width={18} height={18} />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

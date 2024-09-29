@@ -25,6 +25,11 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
     return `${segmento1} ${segmento2} ${segmento3}`;
   };
 
+  console.log('pedido', pedido);
+  console.log('promo efectivo', promoEfectivo);
+
+
+
   const conDescuento = () => {
     return productos.some(p => p.categoria !== 'solo efectivo');
   }
