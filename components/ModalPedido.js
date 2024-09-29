@@ -147,7 +147,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 ))}
               </>
               {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
-                <p className="text-sm font-normal  mt-2 text-red-500">Se aplicó el {promoEfectivo.descuento}% de descuento, excepto solo efectivo</p>
+                <p className="text-xs font-normal  mt-2 text-red-500">Se aplicó el {promoEfectivo.descuento}% de descuento, excepto solo efectivo</p>
               )}
               <div className="border-t-2 border-gray-200 my-3"></div>
 
