@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { createProduct } from "services/fetchData";
 import { useRouter } from "next/router";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import ControllerInput from "components/ControllerInput";
 import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/Admin/Layout";
@@ -26,7 +26,6 @@ const Create = () => {
 
   return (
     <Layout>
-      <Toaster />
       <section className="w-full h-full">
         <HeaderTitle title="Nuevo producto" isBack />
         <Formik
@@ -46,6 +45,7 @@ const Create = () => {
             imagen: "",
             cantidadMaxima: "",
             formato: "",
+            destacable: false,
             cantidadExtras: "",
             addEmpanadas: "no",
             addPizzas: "no",
@@ -314,6 +314,27 @@ const Create = () => {
                             </div>
                           )}
                         </div>
+                        {renderProducts !== "promociones" && (
+                          <div className="w-full mx-auto">
+                            <div className=" w-full mx-auto">
+                              <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿Promo destacable?</p>
+                              <div className=" flex justify-center items-center">
+                                <label className="inline-flex items-center cursor-pointer">
+                                  <Field
+                                    name="destacable"
+                                    type="checkbox"
+                                    className="sr-only peer" />
+                                  <div className="relative w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-200 
+                                                  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full 
+                                                  peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:start-[3px] 
+                                                  after:bg-white  after:border focus:outline-none focus:right-0 after:rounded-full 
+                                                  after:h-3.5 after:w-3.5 after:transition-all  peer-checked:bg-red-500"></div>
+                                </label>
+                              </div>
+                            </div>
+
+                          </div>
+                        )}
                       </>
                     )}
                 </div>

@@ -3,7 +3,7 @@ import Layout from "components/Admin/Layout";
 import HeaderTitle from "components/HeaderTitle";
 import Tabs from "components/Tabs";
 import { useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 const Settings = () => {
@@ -79,7 +79,6 @@ const Settings = () => {
 
 	return (
 		<Layout>
-			<Toaster />
 			<HeaderTitle title="Configuración" />
 			<div className="mt-6">
 				<Tabs sections={sections} />

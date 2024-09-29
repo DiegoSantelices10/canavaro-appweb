@@ -22,7 +22,6 @@ import {
   decrementProductPizza,
   setQuantityDemanded,
   clearDrinks,
-  setQuantityDemandedDrinks,
 } from "store/reducers/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -55,8 +54,6 @@ export default function ProductLayout({
     const pre = orderPromo.find(item => item._id === _id);
     return pre?.cantidad ? pre.cantidad : 0;
   };
-
-
 
   const result = () => {
     if (data.addEmpanadas === 'si' && data.addExtras === 'si') {
@@ -102,8 +99,6 @@ export default function ProductLayout({
   };
 
   const returnHome = () => {
-    dispatch(setQuantityDemanded(0));
-    dispatch(setQuantityDemandedDrinks(0));
     dispatch(clearDrinks());
     dispatch(clearOrderPromo());
     router.push("/order/home");
@@ -122,11 +117,12 @@ export default function ProductLayout({
           categoria,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
-          precio: precio + totalExtra,
+          precio,
           cantidad: 1,
         };
-        dispatch(addPromoOrderList(promo));
         toast.success("Se agrego al pedido!");
+        dispatch(addPromoOrderList(promo));
+        console.log('1')
         router.push("/order/home");
       } else if (data.addExtras === 'si') {
         const promo = {
@@ -141,8 +137,9 @@ export default function ProductLayout({
           precio: precio + totalExtra,
           cantidad: 1,
         };
-        dispatch(addPromoOrderList(promo));
+        console.log('2')
         toast.success("Se agrego al pedido!");
+        dispatch(addPromoOrderList(promo));
         router.push("/order/home");
       } else {
         const promo = {
@@ -154,11 +151,12 @@ export default function ProductLayout({
           cantidadExtras,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
-          precio: precio + totalExtra,
+          precio,
           cantidad: 1,
         };
-        dispatch(addPromoOrderList(promo));
+        console.log('3')
         toast.success("Se agrego al pedido!");
+        dispatch(addPromoOrderList(promo));
         router.push("/order/home");
       }
     } else {
@@ -183,9 +181,9 @@ export default function ProductLayout({
           return null;
         }
         );
-        router.push("/order/home");
+        console.log('4')
         toast.success("Se agrego al pedido!");
-
+        router.push("/order/home");
       } else if (bebidas.length > 0) {
         const promo = {
           _id: idGenerator,
@@ -198,20 +196,21 @@ export default function ProductLayout({
           precio: precio + totalExtra,
           cantidad: 1,
         };
-        dispatch(addPromoOrderList(promo));
+        console.log('5')
         toast.success("Se agrego al pedido!");
+        dispatch(addPromoOrderList(promo));
         router.push("/order/home");
       } else {
-        value.map(item => dispatch(addPromoOrderList({ ...item }))
-        )
+        value.map(item => dispatch(addPromoOrderList({ ...item })))
+        console.log('6')
         toast.success("Se agrego al pedido!");
         router.push("/order/home");
       }
+      console.log('7');
 
       dispatch(clearDrinks());
       dispatch(clearOrderPromo());
       dispatch(setQuantityDemanded(0));
-      router.push("/order/home");
     }
   }
 

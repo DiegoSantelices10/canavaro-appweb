@@ -63,25 +63,23 @@ const ModalMessage = ({
             <div className="w-full">
               <h2 className="text-base font-semibold  text-center">{title}</h2>
             </div>
-            <hr className=" bg-gray-500 mt-3" />
+            <hr className=" bg-gray-500 my-3" />
             <div
-              className="grid md:grid-cols-2 gap-x-3"
+              className="grid md:grid-cols-2 gap-6 pt-4"
             >
               {extras.length > 0 && orderExtras(extras)?.map(item => (
                 <div
                   key={item._id}
-                  className="flex justify-between items-start w-full gap-2 mb-2 pt-4">
-                  <div className="w-2/5">
-                    <Image
-                      className="rounded-md"
-                      src={item.imagen?.url || "/images/producto-sin-imagen.png"}
-                      objectFit='cover'
-                      objectPosition='center'
-                      width={140}
-                      height={140}
-                      alt={item.nombre} />
-                  </div>
-                  <div className="w-full self-start">
+                  className="flex justify-between items-center w-full gap-2">
+                  <Image
+                    className="rounded-md"
+                    src={item.imagen?.url || "/images/producto-sin-imagen.png"}
+                    objectFit='cover'
+                    objectPosition='center'
+                    width={80}
+                    height={80}
+                    alt={item.nombre} />
+                  <div className="w-full">
                     <h1 className="font-semibold text-sm font-montserrat text-neuttral-800">{item.nombre}</h1>
                     <p className="text-gray-400 font-normal text-sm">{formatearNumero(item.precio)}</p>
                   </div>
@@ -123,15 +121,15 @@ const ModalMessage = ({
                         </div>
                       </div>
                     ) : (
-                      <div className="w-1/2 flex justify-center">
+                      <div className="w-1/2 flex justify-end">
                         {extraPizza.includes(item) ? (
                           <p
-                            className="text-lg text-center  rounded-md  p-1 px-3"
+                            className="text-base text-center  rounded-md  p-1 px-3"
                           >Listo!</p>
                         ) : (
                           <button
                             onClick={() => addExtra(item)}
-                            className="bg-green-500 rounded-lg font-normal shadow text-sm text-white p-2 px-4 font-montserrat"
+                            className="bg-green-500 rounded-lg font-normal shadow text-sm text-white p-1.5 px-3 font-montserrat"
                           >
                             Agregar
                           </button>

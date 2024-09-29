@@ -13,6 +13,7 @@ import {
   removeItemCart,
   setDelivery,
   setDemora,
+  setTotalAmount,
 } from "store/reducers/orderSlice";
 import { Formik, Form, ErrorMessage } from "formik";
 
@@ -60,10 +61,7 @@ export default function Cart({ data }) {
     dispatch(calculateTotalQuantity());
   }, [orderList]);
 
-  useEffect(() => {
-    const { demoraActual } = data.find(item => item?.tipo === type);
-    dispatch(setDemora(demoraActual));
-  }, [type]);
+
 
   useEffect(() => {
     hoursDelivery();
@@ -71,6 +69,12 @@ export default function Cart({ data }) {
     dispatch(setDelivery("domicilioActual"));
     dispatch(clearUser());
   }, []);
+
+  useEffect(() => {
+    descuentoBarra()
+    const { demoraActual } = data.find(item => item?.tipo === type);
+    dispatch(setDemora(demoraActual));
+  }, [type]);
 
   const obtenerPromo = async () => {
     try {
@@ -108,6 +112,7 @@ export default function Cart({ data }) {
       setField("nombre", "");
     }
   };
+
   const renderBebidas = renderProductos => {
     return products
       ?.filter(item => item.categoria === renderProductos && item.available === true)
@@ -126,6 +131,7 @@ export default function Cart({ data }) {
       dispatch(calculateTotalQuantity());
     }
   };
+
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
       ? {
@@ -156,6 +162,19 @@ export default function Cart({ data }) {
           .notRequired(),
       }
   );
+
+  const descuentoBarra = () => {
+    if (promoBarra?.available && type === 'localActual') {
+      const descuento = (totalAmount * 10) / 100;
+      const precioActual = totalAmount - descuento;
+      const convert = Math.floor(precioActual);
+
+      dispatch(setTotalAmount(convert));
+    } else {
+      dispatch(calculateSubTotal());
+    }
+  }
+
 
   return (
     <div className="font-montserrat shadow-md mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2 h-screen  rounded-t-3xl py-3 ">
@@ -215,7 +234,7 @@ export default function Cart({ data }) {
                   <div className="py-2">
                     <div className="">
                       {promoBarra?.available && (
-                        <div className="w-full mx-auto text-center font-bold">
+                        <div className="w-full mx-auto text-center text-sm font-bold">
                           Retirando por el local tenes un 10% de descuento.
                         </div>
                       )}

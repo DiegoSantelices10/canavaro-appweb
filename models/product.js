@@ -45,6 +45,9 @@ const productoSchema = new Schema(
     formato: {
       type: String,
     },
+    destacable: {
+      type: Boolean
+    },
     cantidadExtras: {
       type: Number,
     },

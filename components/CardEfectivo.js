@@ -9,10 +9,12 @@ const CardEfectivo = ({ data: { nombre, descripcion, precio } }) => {
             <Link href={`/order/products/${convertToPath(nombre)}`}>
                 <a>
                     <div className="w-60 flex flex-col h-full justify-between font-montserrat">
-                        <div>
-                            <p className=" text-gray-800 text-sm font-semibold">{nombre}</p>
-                            <p className=" text-gray-400 text-xs tracking-wider">{descripcion}</p>
-                            <p className=" text-gray-400 text-sm font-montserrat py-1">{formatearNumero(precio)}</p>
+                        <div className="space-y-2">
+                            <div>
+                                <p className=" text-gray-800 text-sm font-semibold">{nombre}</p>
+                                <p className=" text-gray-400 text-xs tracking-wider">{descripcion}</p>
+                            </div>
+                            <p className=" text-gray-400 text-sm font-montserrat">{formatearNumero(precio)}</p>
                         </div>
                     </div>
 

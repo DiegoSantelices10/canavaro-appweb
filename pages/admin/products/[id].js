@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import cloudinaryImage from "utils/cloudinaryImage";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import { useRouter } from "next/router";
 import { getProducts, updateProduct } from "services/fetchData";
@@ -28,7 +28,6 @@ const Update = ({ data }) => {
 
   return (
     <Layout>
-      <Toaster />
       <HeaderTitle title="Editar Producto" isBack />
       <section className="w-full flex justify-start items-start h-screen">
         <div className="w-full space-y-4 pt-4">
@@ -49,6 +48,7 @@ const Update = ({ data }) => {
               addExtras: productRender?.addExtras || "no",
               cantidadExtras: productRender?.cantidadExtras || "",
               isCantidad: productRender?.isCantidad || "",
+              destacable: productRender?.destacable || false,
               imagen: productRender?.imagen || "",
               cantidadMaxima: productRender?.cantidadMaxima || "",
               addEmpanadas: productRender?.addEmpanadas || "no",
@@ -313,7 +313,27 @@ const Update = ({ data }) => {
                             </div>
                           )}
                         </div>
+                        {renderProducts !== "promociones" && (
+                          <div className="w-full mx-auto">
+                            <div className=" w-full mx-auto">
+                              <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿Promo destacable?</p>
+                              <div className=" flex justify-center items-center">
+                                <label className="inline-flex items-center cursor-pointer">
+                                  <Field
+                                    name="destacable"
+                                    type="checkbox"
+                                    className="sr-only peer" />
+                                  <div className="relative w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-200 
+                                                  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full 
+                                                  peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:start-[3px] 
+                                                  after:bg-white  after:border focus:outline-none focus:right-0 after:rounded-full 
+                                                  after:h-3.5 after:w-3.5 after:transition-all  peer-checked:bg-red-500"></div>
+                                </label>
+                              </div>
+                            </div>
 
+                          </div>
+                        )}
 
                       </>
                     )}
@@ -329,15 +349,14 @@ const Update = ({ data }) => {
                         onChange={e => cloudinaryImage(e.target, setFieldValue)}
                         className="w-full h-10 file:h-10  text-xs leading-tight text-gray-900 border-gray-200 
                   									 appearance-none focus:outline-none focus:shadow-outline
-                                    file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-lg
+                                    file:bg-red-600 file:text-white file:border-none file:p-1 file:px-3 file:rounded-lg
                                     file:font-normal"
                       />
                     </label>
                   </div>
                   <button
-                    className="md:w-44 h-12 col-start-2 mt-6 md:mt-0 w-full
-                       						 rounded-lg  text-sm 
-                       						 border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500"
+                    className="w-full md:w-44 h-10 col-start-2 rounded-lg mt-6 md:mt-0  text-sm 
+                                border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500"
                     type="submit"
                   >
                     Agregar Producto

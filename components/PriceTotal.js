@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setSetting } from 'store/reducers/settingSlice';
 
-const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) => {
+const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, promoBarra, delivery }) => {
     const { values, setFieldValue } = useFormikContext();
     const [subTotal, setSubTotal] = useState(0);
     const { totalAmount, orderList } = useSelector(state => state.order);
@@ -13,11 +13,12 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) 
     const dispatch = useDispatch();
 
     const hasProductosEfectivo = () => {
-        return orderList.filter(product => product.categoria === "soloEfectivo");
+        return orderList.filter(product => product.categoria === "solo efectivo");
     }
     const hasProductosGeneral = () => {
-        return orderList.filter(product => product.categoria !== "soloEfectivo");
+        return orderList.filter(product => product.categoria !== "solo efectivo");
     }
+
 
     const getPromoEfectivo = () => {
         if (Object.keys(promoEfectivo).length === 0) {
@@ -25,13 +26,10 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) 
             dispatch(setSetting({ promoEfectivo: res }))
         }
         return JSON.parse(localStorage.getItem('promo efectivo'))
-
     }
-    useEffect(() => {
-        const productosEfectivo = hasProductosEfectivo()
-        const productosGeneral = hasProductosGeneral()
-        const { available, descuento } = getPromoEfectivo();
 
+
+    const promoEfectivoCalculo = (productosEfectivo, productosGeneral, available, descuento) => {
         if (available) {
             if (values.medioDePago === 'Efectivo') {
                 if (productosEfectivo.length > 0 && productosGeneral.length > 0) {
@@ -58,6 +56,22 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) 
         } else {
             setFieldValue('total', totalAmount)
         }
+    }
+    useEffect(() => {
+        const productosEfectivo = hasProductosEfectivo()
+        const productosGeneral = hasProductosGeneral()
+        const { available, descuento } = getPromoEfectivo();
+
+
+
+        if (!promoBarra?.available) {
+            promoEfectivoCalculo(productosEfectivo, productosGeneral, available, descuento)
+        }
+
+        if (promoBarra?.available && delivery === 'domicilioActual') {
+            promoEfectivoCalculo(productosEfectivo, productosGeneral, available, descuento)
+        }
+
     }, [values.medioDePago, orderList])
 
 
@@ -70,6 +84,7 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) 
 
     return (
         <div className="w-full font-montserrat mb-20 relative">
+
             {available && hasProductosEfectivo().length > 0 && hasProductosGeneral().length > 0 && (
                 <>
                     <div className='p-2 border rounded-lg border-red-500 my-2'>
@@ -79,17 +94,27 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) 
                                 <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
                             </div>
                         ))}
-                        <hr className='my-1' />
-                        <div className='flex items-center justify-between'>
-                            <p className='py-1 text-sm font-semibold text-slate-800'>Subtotal</p>
-                            <p className='text-sm'>{formatearNumero(subTotal)}</p>
-                        </div>
-                        {values.medioDePago === 'Efectivo' && (
-                            <div className='flex text-red-500 items-center justify-between w-full'>
-                                <p className='text-xs'>Abonando en efectivo, descuento del {descuento}%</p>
-                                <p className='text-sm'>{formatearNumero(renderSubtotal(descuento))}</p>
-                            </div>
-                        )}
+
+                        {
+                            promoBarra?.available && delivery === 'localActual' ? (
+                                <div />
+                            ) : (
+                                <>
+                                    <hr className='my-1' />
+                                    <div className='flex items-center justify-between'>
+                                        <p className='py-1 text-sm font-semibold text-slate-800'>Subtotal</p>
+                                        <p className='text-sm'>{formatearNumero(subTotal)}</p>
+                                    </div>
+                                    {values.medioDePago === 'Efectivo' && (
+                                        <div className='flex text-red-500 items-center justify-between w-full'>
+                                            <p className='text-xs'>Abonando en efectivo, {descuento}% de descuento</p>
+                                            <p className='text-sm'>{formatearNumero(renderSubtotal(descuento))}</p>
+                                        </div>
+                                    )}
+                                </>
+                            )
+                        }
+
                     </div>
                     <h3 className='text-xs px-2 font-medium mt-2 text-gray-400'>Solo efectivo</h3>
                     {hasProductosEfectivo().map(product => (
@@ -103,16 +128,24 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento } }) 
                     ))}
                 </>
             )}
+
             <div className='mb-6'>
                 {hasProductosEfectivo().length === 0 && values.medioDePago === 'Efectivo' && available && (
                     <>
-                        <div className="bg-red-500 w-auto p-2 rounded-lg my-2">
-                            <p className="text-white text-center font-normal text-sm">¡ Abonando en efectivo tenes un {descuento}% de descuento !</p>
-                        </div>
-                        <div className='flex px-2 justify-between w-full items-center py-1 mt-2'>
-                            <p className='font-normal'>Subtotal</p>
-                            <p className='font-normal'>{formatearNumero(totalAmount)}</p>
-                        </div>
+                        {promoBarra?.available && delivery === 'localActual' ? (
+                            <div />
+                        ) : (
+                            <>
+                                <div className="bg-red-500 w-auto p-2 rounded-lg my-2">
+                                    <p className="text-white text-center font-normal text-sm">Abonando en efectivo, {descuento}% de descuento</p>
+                                </div>
+                                <div className='flex px-2 justify-between w-full items-center py-1 mt-2'>
+                                    <p className='font-normal'>Subtotal</p>
+                                    <p className='font-normal'>{formatearNumero(totalAmount)}</p>
+                                </div>
+                            </>
+                        )}
+
                     </>
                 )}
             </div>

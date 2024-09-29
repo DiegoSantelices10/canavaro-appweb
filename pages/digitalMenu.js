@@ -35,9 +35,9 @@ function DigitalMenu() {
                     key={data._id}
                 >
                     <div
-                        className="flex bg-zinc-800 rounded-lg justify-between items-center h-full  gap-x-2">
+                        className="flex bg-white p-1 rounded justify-between items-center h-full  gap-x-2">
                         <Image
-                            className="rounded-l-xl"
+                            className="rounded-[4px]"
                             src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
                             width={160}
                             height={160}
@@ -47,35 +47,35 @@ function DigitalMenu() {
                         />
                         <div className="relative w-full h-full flex flex-col justify-between">
                             <div>
-                                <h1 className="font-medium font-montserrat text-base text-white">{data.nombre}</h1>
-                                <p className="text-gray-300 font-montserrat  text-xs">{data.descripcion}</p>
+                                <h1 className="font-semibold font-montserrat text-left text-base ">{data.nombre}</h1>
+                                <p className="text-gray-500 font-montserrat text-left  text-xs">{data.descripcion}</p>
                             </div>
                             {data.categoria === 'pizzas' ? (
                                 <div className='flex font-montserrat justify-center gap-5 mt-2'>
 
                                     {data.precioPizza.gigante && (
                                         <div>
-                                            <p className="text-xs font-normal text-gray-300 px-1 text-center ">Gigante</p>
-                                            <p className="text-lg font-montserrat tracking-wider font-normal   px-1 text-white text-center">{formatearNumero(data.precioPizza.gigante)}</p>
+                                            <p className="text-xs font-medium  px-1 text-center ">Gigante</p>
+                                            <p className="text-lg font-montserrat tracking-wider font-semibold   px-1  text-center">{formatearNumero(data.precioPizza.gigante)}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.mediana && (
                                         <div>
-                                            <p className="text-xs font-normal text-gray-300 px-1 text-center ">Mediana</p>
-                                            <p className="text-lg font-montserrat tracking-wider font-normal   px-1 text-center text-white ">{formatearNumero(data.precioPizza.mediana)}</p>
+                                            <p className="text-xs font-medium  px-1 text-center ">Mediana</p>
+                                            <p className="text-lg font-montserrat tracking-wider font-semibold   px-1 text-center ">{formatearNumero(data.precioPizza.mediana)}</p>
                                         </div>
                                     )}
                                     {data.precioPizza.chica && (
                                         <div>
-                                            <p className="text-xs font-normal text-gray-300 px-1 text-center ">Chica</p>
-                                            <p className="text-lg font-montserrat tracking-wider font-normal   px-1 text-center text-white">{formatearNumero(data.precioPizza.chica)}</p>
+                                            <p className="text-xs font-medium  px-1 text-center ">Chica</p>
+                                            <p className="text-lg font-montserrat tracking-wider font-semibold   px-1 text-center ">{formatearNumero(data.precioPizza.chica)}</p>
                                         </div>
                                     )}
 
                                 </div>
                             ) : (
                                 <div>
-                                    <p className="text-xl tracking-wider font-montserrat font-normal text-white"> {data.precioExtra ? `${formatearNumero(data.precioExtra + data.precio)}` : formatearNumero(data.precio)}</p>
+                                    <p className="text-xl tracking-wider text-right pr-2 font-montserrat font-semibold"> {data.precioExtra ? `${formatearNumero(data.precioExtra + data.precio)}` : formatearNumero(data.precio)}</p>
                                 </div>
                             )}
                         </div>
@@ -85,7 +85,7 @@ function DigitalMenu() {
     };
 
     return (
-        <div className='bg-gradient-to-l from-zinc-800 to-black min-h-screen'>
+        <div className='bg-gradient-to-t from-zinc-900 to-zinc-800 min-h-screen'>
             <div className='flex justify-between px-3 items-center'>
                 <h1 className='text-white font-bold font-montserrat text-xl tracking-wider'>CANAVARO</h1>
                 <div className='py-5'>
@@ -106,7 +106,6 @@ function DigitalMenu() {
             </div>
             <hr />
             <div className=' px-6 py-4 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-normal  font-montserrat'>
-
                 <button
                     onClick={() => setRenderProductos('promociones')}
                     className={renderProductos === 'promociones' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
@@ -137,8 +136,8 @@ function DigitalMenu() {
                     Empanadas & Canastitas
                 </button>
             </div>
-            <div className="lg:px-2">
-                <div className=' grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:p-3  pb-4'>
+            <div >
+                <div className=' grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-2 lg:px-4 pb-4'>
                     {renderStore(renderProductos)}
                 </div>
             </div>

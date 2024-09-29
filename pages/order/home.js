@@ -17,13 +17,14 @@ import {
 
 import { v4 as uuidv4 } from "uuid";
 import { setExtras, setProductData } from "store/reducers/productSlice";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import axios from "axios";
 import { formatearNumero, totalExtrasProductos } from "libs/items";
 import CardEfectivo from "components/CardEfectivo";
 import { getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
 import TabsCategories from "components/Tabs/TabsCategories";
+import { categoriasNoDestacables } from "utils";
 
 
 export default function Home() {
@@ -56,16 +57,8 @@ export default function Home() {
       .map(data => <Card key={data._id} data={data} />);
   };
 
-  const renderEfectivo = () => {
-    return products
-      ?.filter(item => item.categoria === "soloEfectivo" && item.available === true)
-      .map(data => (
-        <CardEfectivo
-          key={data._id}
-          data={data}
-        />
-      ));
-  };
+  const categoriasDestacables = products?.filter(product => !categoriasNoDestacables.includes(product.categoria));
+
 
   useEffect(() => {
     (async () => {
@@ -202,7 +195,6 @@ export default function Home() {
 
   return (
     <Layout>
-      <Toaster />
       <div className="pt-[70px] mx-auto w-full rounded-3xl relative">
         <div className="w-full flex items-center justify-between">
           <div>
@@ -240,36 +232,43 @@ export default function Home() {
         </>
 
         <>
-          {products?.find(product => product.categoria === "soloEfectivo" && product.available === true)
-            && (
-              <div className="mt-4">
-                <p className="text-base font-bold font-montserrat text-neutral-800">Promos en efectivo</p>
-                <div className="flex overflow-x-scroll flexp  space-x-6 w-full py-2 px-0.5">
-                  <style jsx>
-                    {`
-              .flexp::-webkit-scrollbar-thumb {
-                background: #ffffff;
-                border-radius: 20px;
-              }
+          {categoriasDestacables.length > 0 && (
+            <div>
+              {categoriasDestacables.map((producto) => {
+                const productosFiltrados = products?.filter(item => item.categoria === producto.categoria);
+                if (productosFiltrados.length > 0) {
+                  return (
+                    <div key={producto._id}>
+                      <p className="text-base font-bold font-montserrat text-neutral-800">
+                        {producto.categoria.charAt(0).toUpperCase() + producto.categoria.slice(1)}
+                      </p>
+                      <div className="flex overflow-x-scroll flexp space-x-6 w-full py-1">
+                        <style jsx>
+                          {`
+                            .flexp::-webkit-scrollbar-thumb {
+                              background: #ffffff;
+                              border-radius: 20px;
+                            }
 
-              .flexp::-webkit-scrollbar {
-                height: 5px;
-              }
-            `}
-                  </style>
-                  {renderEfectivo()}
-                </div>
-              </div>
-            )}
-
+                            .flexp::-webkit-scrollbar {
+                              height: 5px;
+                            }
+                          `}
+                        </style>
+                        {productosFiltrados.map(data => <CardEfectivo key={data._id} data={data} />)}
+                      </div>
+                    </div>
+                  );
+                }
+                return null; // Si no hay productos disponibles, no renderizamos nada
+              })}
+            </div>
+          )}
         </>
-
-
         <TabsCategories
           renderProducts={renderProducts}
           setRenderProductos={setRenderProductos}
           clearTotal={clearTotal} />
-
         <div className="py-6">
           {
             renderProducts === "empanadas" && (

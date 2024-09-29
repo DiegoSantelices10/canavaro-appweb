@@ -22,7 +22,7 @@ export default function Checkout() {
 
   const user = useSelector(state => state.user);
   const { totalAmount, orderList, demora, delivery } = useSelector(state => state.order);
-  const { promoBarra, promoEfectivo } = useSelector(state => state.setting);
+  const { promoEfectivo, promoBarra } = useSelector(state => state.setting);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export default function Checkout() {
   }
 
   const verificarSoloEfectivo = () => {
-    const res = orderList.every(pedido => pedido.categoria === 'soloEfectivo');
+    const res = orderList.every(pedido => pedido.categoria === 'solo efectivo');
     return res
   };
   useEffect(() => {
@@ -76,15 +76,6 @@ export default function Checkout() {
     }
   }, [])
 
-
-  useEffect(() => {
-    if (promoBarra?.available && delivery === "localActual") {
-      const desc = totalAmount * 0.10
-      const total = totalAmount - desc
-      const convert = Math.floor(total);
-      dispatch(setTotalAmount(convert))
-    }
-  }, [])
 
   return (
     <div className=" mx-auto relative w-full md:shadow-md  sm:w-4/5 md:w-3/5 lg:w-1/2 mt-2 h-full">
@@ -232,6 +223,8 @@ export default function Checkout() {
                   />
 
                   <PriceTotal
+                    delivery={delivery}
+                    promoBarra={promoBarra}
                     promoEfectivo={promoEfectivo}
                   />
                 </div>

@@ -24,6 +24,8 @@ export default function Promotion({
   const { drinks } = useDrinks();
 
   useEffect(() => {
+    dispatch(setQuantityDemanded(0));
+    dispatch(setQuantityDemandedDrinks(0));
     dispatch(setQuantityDemanded(cantMax || 0));
     dispatch(setQuantityDemandedDrinks(cantidadExtras || 0));
     dispatch(clearOrderPromo())
