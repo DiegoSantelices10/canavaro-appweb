@@ -33,9 +33,9 @@ const UpdatePrices = () => {
               },
             };
           }
-
-          return null; // Manejar casos donde no se encuentre el precio correspondiente
+          return false;
         });
+
       setUpdateData(combinedArray);
     }
   }, [data]);
@@ -53,14 +53,18 @@ const UpdatePrices = () => {
     };
   };
 
+
   const handleUpdatePizzas = async () => {
-    console.log('entro')
-    // try {
-    //   const response = await axios.put("/api/products/", updateData);
-    //   response.status === 200 && alert("Productos actualizados!");
-    // } catch (error) {
-    //   alert("Error al actualizar los datos");
-    // }
+    const cleanArray = updateData.filter(Boolean);
+
+    console.log('entro pizzas', cleanArray);
+
+    try {
+      const response = await axios.put("/api/products/", cleanArray);
+      response.status === 200 && alert("Productos actualizados!");
+    } catch (error) {
+      alert("Error al actualizar los datos");
+    }
   };
 
   const handleUpdateEmpanadas = async () => {
@@ -157,9 +161,8 @@ const UpdatePrices = () => {
           </div>
 
           <button
-            disabled
             onClick={handleUpdatePizzas}
-            className="bg-red-600 hover:bg-red-500 text-white font-normal py-2 px-4 rounded-lg w-full font-montserrat"
+            className="bg-red-600 cursor-pointer hover:bg-red-500 text-white font-normal py-2 px-4 rounded-lg w-full font-montserrat"
           >
             Actualizar pizzas
           </button>
@@ -168,31 +171,37 @@ const UpdatePrices = () => {
 
       <div className="w-full px-2 pb-5 md:w-11/12 lg:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3  lg:grid lg:grid-cols-4 gap-3">
         {updateData.length !== 0 &&
-          updateData.map(({ _id, nombre, precioPizza }) => (
-            <div
-              key={_id}
-              className="flex font-montserrat p-2 justify-between relative h-24 border border-gray-200 rounded-md "
-            >
-              <h1 className="font-bold text-sm w-3/5">{nombre}</h1>
-              <div className="absolute text-sm font-semibold bottom-2 right-4 justify-between w-auto">
-                {precioPizza?.chica && (
-                  <h2 className="flex justify-between text-gray-500">
-                    Chica: <span className="ml-2 font-medium text-black ">$ {precioPizza?.chica}</span>
-                  </h2>
-                )}
-                {precioPizza?.mediana && (
-                  <h2 className="flex justify-between text-gray-500">
-                    Mediana: <span className="ml-2 font-medium text-black ">$ {precioPizza?.mediana}</span>
-                  </h2>
-                )}
-                {precioPizza?.gigante && (
-                  <h2 className="flex justify-between text-gray-500">
-                    Gigante: <span className="ml-2 font-medium text-black ">$ {precioPizza?.gigante}</span>
-                  </h2>
-                )}
-              </div>
-            </div>
-          ))}
+          updateData.map((producto) => {
+            if (producto !== false) {
+              return (
+                <div
+                  key={producto?._id}
+                  className="flex font-montserrat p-2 justify-between relative h-24 border border-gray-200 rounded-md "
+                >
+                  <h1 className="font-bold text-sm w-3/5">{producto?.nombre}</h1>
+                  <div className="absolute text-sm font-semibold bottom-2 right-4 justify-between w-auto">
+                    {producto?.precioPizza?.chica && (
+                      <h2 className="flex justify-between text-gray-500">
+                        Chica: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.chica}</span>
+                      </h2>
+                    )}
+                    {producto?.precioPizza?.mediana && (
+                      <h2 className="flex justify-between text-gray-500">
+                        Mediana: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.mediana}</span>
+                      </h2>
+                    )}
+                    {producto?.precioPizza?.gigante && (
+                      <h2 className="flex justify-between text-gray-500">
+                        Gigante: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.gigante}</span>
+                      </h2>
+                    )}
+                  </div>
+                </div>
+              )
+            }
+            return null
+
+          })}
       </div>
     </Layout>
   );
