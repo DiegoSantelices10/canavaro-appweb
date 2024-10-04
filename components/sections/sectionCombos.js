@@ -15,7 +15,7 @@ export default function SectionCombos({ products }) {
         <div className="h-full w-full mx-auto text-white overflow-y-auto">
           <div className="flex flex-col gap-y-5 mt-4">
             {products
-              ?.filter(item => item?.nombre.includes("Combo"))
+              ?.filter(item => item?.nombre?.includes("Combo"))
               ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
               .map(producto => {
                 return (

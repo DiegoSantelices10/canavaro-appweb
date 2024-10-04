@@ -43,7 +43,7 @@ export default function Home() {
   const renderPromotions = () => {
     // eslint-disable-next-line dot-notation
     const combos = products
-      ?.filter(item => item.nombre.includes("Combo"))
+      ?.filter(item => item.nombre?.includes("Combo"))
       ?.sort((a, b) => a.nombre.localeCompare(b.nombre));
     const otraPromos = products?.filter(item => item.categoria === "promociones" && !item.nombre.includes("Combo"));
     const ordenado = [...combos, ...otraPromos];
