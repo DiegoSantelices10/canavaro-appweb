@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { FaWhatsapp } from "react-icons/fa"
+
 import { getPromo } from "services/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setSetting } from "store/reducers/settingSlice";
@@ -27,14 +29,13 @@ function HomeFront() {
   }, [])
   return (
     <div className="font-montserrat w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
-
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
-        className="flex items-center flex-col md:flex-row gap-y-36 md:gap-0 justify-center  w-full relative flex-grow "
+        className="flex items-center pb-4 flex-col md:flex-row gap-y-20 md:gap-0 justify-center  w-full relative flex-grow "
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5 }}>
-        <div className="  md:w-1/2  flex flex-col justify-center items-center">
+        <div className="md:w-1/2  flex flex-col justify-center p-6 items-center">
           <div className="md:absolute md:bottom-4 md:right-4 md:w-28">
             <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
           </div>
@@ -54,10 +55,7 @@ function HomeFront() {
           </div>
         </div>
 
-        <div
-          className="md:w-1/3 lg:mt-0  
-                         mx-auto flex flex-col 
-                        justify-center items-center gap-1 text-center">
+        <div className="md:w-1/3 lg:mt-0 mx-auto flex space-y-4 flex-col justify-center items-center gap-4 text-center">
           <div className="flex font-montserrat flex-col justify-center items-center relative">
             <div className="absolute bg-black rounded-lg opacity-50 h-full w-full z-0"></div>
             <div className="z-10 p-6 rounded-lg font-montserrat">
@@ -79,6 +77,17 @@ function HomeFront() {
                 </div>
               )}
             </div>
+          </div>
+          <div className="md:absolute transition-all duration-500 focus:-translate-y-2 hover:-translate-y-2 md:bottom-6 md:z-30 md:left-6 flex gap-4 justify-center items-center">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20hacer%20un%20pedido`}
+            >
+              <div className="flex items-center bg-green-500 p-3 text-white font-semibold rounded-full shadow-md">
+                <FaWhatsapp size={36} />
+              </div>
+            </a>
           </div>
         </div>
       </motion.div>

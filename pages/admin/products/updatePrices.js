@@ -4,6 +4,8 @@ import * as XLSX from "xlsx";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import HeaderTitle from "components/HeaderTitle";
+import Table from "components/Table";
+import { createColumnHelper } from "@tanstack/react-table";
 
 const UpdatePrices = () => {
   const { products } = useSelector(state => state.product);
@@ -13,7 +15,7 @@ const UpdatePrices = () => {
   const priceDocenaRef = useRef();
   // const priceExtraRef = useRef();
 
-
+  const columnHelper = createColumnHelper()
 
   useEffect(() => {
     if (data.length > 0) {
@@ -35,8 +37,9 @@ const UpdatePrices = () => {
           }
           return false;
         });
+      const newData = combinedArray.filter(Boolean);
 
-      setUpdateData(combinedArray);
+      setUpdateData(newData);
     }
   }, [data]);
 
@@ -55,12 +58,8 @@ const UpdatePrices = () => {
 
 
   const handleUpdatePizzas = async () => {
-    const cleanArray = updateData.filter(Boolean);
-
-    console.log('entro pizzas', cleanArray);
-
     try {
-      const response = await axios.put("/api/products/", cleanArray);
+      const response = await axios.put("/api/products/", updateData);
       response.status === 200 && alert("Productos actualizados!");
     } catch (error) {
       alert("Error al actualizar los datos");
@@ -91,12 +90,33 @@ const UpdatePrices = () => {
     }
   };
 
+  const columns = [
+    columnHelper.accessor('nombre', {
+      header: () => <h1 className="text-left pl-2">Nombre</h1>,
+      cell: info => <h2 className="text-left font-medium text-sm md:text-sm">{info.getValue()}</h2>,
+    }),
+    columnHelper.accessor('precioPizza', {
+      id: "gigante",
+      header: () => 'Gigante',
+      cell: info => `${info.getValue()?.gigante ? '$' + info.getValue()?.gigante : ''}`,
+    }),
+    columnHelper.accessor('precioPizza', {
+      id: "mediana",
+      header: () => 'Mediana',
+      cell: info => `${info.getValue()?.mediana ? '$' + info.getValue()?.mediana : ''}`,
+    }),
+    columnHelper.accessor('precioPizza', {
+      id: "chica",
+      header: () => 'Chica',
+      cell: info => `${info.getValue()?.chica ? '$' + info.getValue()?.chica : ''}`,
+    }),
+  ]
+
 
   return (
     <Layout>
       <HeaderTitle title="Actualizar Precios" isBack />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full pt-8">
         <div className="border p-3 rounded-lg">
           <p className="text-sm font-montserrat text-center font-bold">Precio x docena</p>
           <div className="grid w-full gap-4 mt-6">
@@ -106,7 +126,7 @@ const UpdatePrices = () => {
                 className="border border-gray-200 p-2 w-full rounded-lg focus:outline-none focus:ring-0"
                 type="number"
                 name='unidad'
-                ref={priceRef}
+                ref={priceDocenaRef}
               />
             </div>
             <button
@@ -127,7 +147,7 @@ const UpdatePrices = () => {
                 className="border border-gray-200 p-2 w-full rounded-lg focus:outline-none focus:ring-0"
                 type="number"
                 name='docena'
-                ref={priceDocenaRef}
+                ref={priceRef}
               />
             </div>
             <button
@@ -167,41 +187,49 @@ const UpdatePrices = () => {
             Actualizar pizzas
           </button>
         </div>
+
       </div>
 
-      <div className="w-full px-2 pb-5 md:w-11/12 lg:w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3  lg:grid lg:grid-cols-4 gap-3">
-        {updateData.length !== 0 &&
-          updateData.map((producto) => {
-            if (producto !== false) {
-              return (
-                <div
-                  key={producto?._id}
-                  className="flex font-montserrat p-2 justify-between relative h-24 border border-gray-200 rounded-md "
-                >
-                  <h1 className="font-bold text-sm w-3/5">{producto?.nombre}</h1>
-                  <div className="absolute text-sm font-semibold bottom-2 right-4 justify-between w-auto">
-                    {producto?.precioPizza?.chica && (
-                      <h2 className="flex justify-between text-gray-500">
-                        Chica: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.chica}</span>
-                      </h2>
-                    )}
-                    {producto?.precioPizza?.mediana && (
-                      <h2 className="flex justify-between text-gray-500">
-                        Mediana: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.mediana}</span>
-                      </h2>
-                    )}
-                    {producto?.precioPizza?.gigante && (
-                      <h2 className="flex justify-between text-gray-500">
-                        Gigante: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.gigante}</span>
-                      </h2>
-                    )}
-                  </div>
-                </div>
-              )
-            }
-            return null
+      <div className="w-full py-5">
 
-          })}
+        {updateData.length !== 0 &&
+          <Table
+            data={updateData}
+            columns={columns}
+
+          />
+          // updateData.map((producto) => {
+          //   if (producto !== false) {
+          //     return (
+          //       <div
+          //         key={producto?._id}
+          //         className="flex font-montserrat p-2 justify-between relative h-24 border border-gray-200 rounded-md "
+          //       >
+          //         <h1 className="font-bold text-sm w-3/5">{producto?.nombre}</h1>
+          //         <div className="absolute text-sm font-semibold bottom-2 right-4 justify-between w-auto">
+          //           {producto?.precioPizza?.chica && (
+          //             <h2 className="flex justify-between text-gray-500">
+          //               Chica: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.chica}</span>
+          //             </h2>
+          //           )}
+          //           {producto?.precioPizza?.mediana && (
+          //             <h2 className="flex justify-between text-gray-500">
+          //               Mediana: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.mediana}</span>
+          //             </h2>
+          //           )}
+          //           {producto?.precioPizza?.gigante && (
+          //             <h2 className="flex justify-between text-gray-500">
+          //               Gigante: <span className="ml-2 font-medium text-black ">$ {producto?.precioPizza?.gigante}</span>
+          //             </h2>
+          //           )}
+          //         </div>
+          //       </div>
+          //     )
+          //   }
+          //   return null
+
+          // })
+        }
       </div>
     </Layout>
   );
