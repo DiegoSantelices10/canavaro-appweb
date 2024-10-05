@@ -7,6 +7,8 @@ import 'react-multi-carousel/lib/styles.css';
 import { setProductData } from 'store/reducers/productSlice';
 import Image from 'next/image'
 import { formatearNumero } from 'libs/items';
+import useCategories from 'Hooks/useCategories';
+import { capitalizeFirstLetter } from 'utils';
 
 
 
@@ -17,6 +19,7 @@ function DigitalMenu() {
 
     const { products } = useSelector(state => state.product);
     const dispatch = useDispatch()
+    const { categories } = useCategories();
 
     useEffect(() => {
         if (products?.length <= 0) {
@@ -25,6 +28,9 @@ function DigitalMenu() {
         }
 
     }, []);
+
+    console.log('categories', categories);
+
 
     const renderStore = renderProductos => {
         return products
@@ -106,35 +112,16 @@ function DigitalMenu() {
             </div>
             <hr />
             <div className=' px-6 py-4 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-normal  font-montserrat'>
-                <button
-                    onClick={() => setRenderProductos('promociones')}
-                    className={renderProductos === 'promociones' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                {categories && categories.map((category, index) => (
 
-                    Combos
-                </button>
-                <button
-                    onClick={() => setRenderProductos('pizzas')}
-                    className={renderProductos === 'pizzas' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
-                    Pizzas
-                </button>
-                <button
-                    onClick={() => setRenderProductos('bebidas')}
-                    className={renderProductos === 'bebidas' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
+                    <button
+                        key={index}
+                        onClick={() => setRenderProductos(category)}
+                        className={renderProductos === category ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
 
-                    Bebidas
-                </button>
-                <button
-                    onClick={() => setRenderProductos('porciones')}
-                    className={renderProductos === 'porciones' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
-
-                    Porciones
-                </button>
-                <button
-                    onClick={() => setRenderProductos('empanadas')}
-                    className={renderProductos === 'empanadas' ? 'bg-white rounded-lg p-0.5 px-4 tracking-wider text-sm' : 'text-sm text-white tracking-wider bg-transparent p-1 px-4'}>
-
-                    Empanadas & Canastitas
-                </button>
+                        {capitalizeFirstLetter(category)}
+                    </button>
+                ))}
             </div>
             <div >
                 <div className=' grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-2 lg:px-4 pb-4'>

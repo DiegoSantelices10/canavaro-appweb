@@ -16,7 +16,7 @@ export default function Product({ data }) {
   useEffect(() => {
     if (products?.length <= 0) {
       const res = JSON.parse(localStorage.getItem("productos"));
-      const extras = res.filter(item => item.categoria === 'extras' && item.available === true)
+      const extras = res?.filter(item => item.categoria === 'extras' && item.available === true)
       dispatch(setExtras(extras))
       dispatch(setProductData(res));
     }
