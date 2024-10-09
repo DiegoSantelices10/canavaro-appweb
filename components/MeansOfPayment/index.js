@@ -88,7 +88,7 @@ const MeansOfPayment = (props) => {
                                     <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                                 </div>
                                 <p className="font-montserrat text-center text-xs text-gray-400">
-                                    El reintegro lo realiza el banco, tope $5000 por mes.
+                                    El reintegro lo realiza el banco, tope $6500 por mes.
                                 </p>
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     Abonas al momento de confirmar el pedido por whatsapp
