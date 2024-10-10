@@ -104,9 +104,6 @@ export default function Promotion({
     return bebidas?.find(item => item._id === _id);
   };
 
-  const res = products.filter(item => item.categoria === "promociones");
-  console.log('res', res);
-
   return (
     <div className="mt-4">
       {(nombre === "Combo 4" || nombre === "Combo 5") && (
@@ -121,7 +118,7 @@ export default function Promotion({
               checked={select === "Combo 1"}
             />
             {products
-              ?.filter(item => item.nombre.includes("Combo 1"))
+              ?.filter(item => item.nombre === "Combo 1")
               .map(producto => {
                 return (
                   <div key={producto._id}>
@@ -141,7 +138,7 @@ export default function Promotion({
               checked={select === "Combo 2"}
             />
             {products
-              ?.filter(item => item.nombre.includes("Combo 2"))
+              ?.filter(item => item.nombre === "Combo 2")
               .map(producto => {
                 return (
                   <div key={producto._id}>
