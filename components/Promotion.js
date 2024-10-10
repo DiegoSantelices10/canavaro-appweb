@@ -104,7 +104,11 @@ export default function Promotion({
     return bebidas?.find(item => item._id === _id);
   };
 
+  console.log('producst', products);
 
+
+  const res = products.filter(item => item.nombre === "Combo 1");
+  console.log('res', res);
   return (
     <div className="mt-4">
       {(nombre === "Combo 4" || nombre === "Combo 5") && (
