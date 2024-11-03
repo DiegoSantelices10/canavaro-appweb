@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { FaWhatsapp } from "react-icons/fa"
+// import { FaWhatsapp } from "react-icons/fa"
 
 import { getPromo } from "services/fetchData";
 import { useDispatch, useSelector } from "react-redux";
@@ -78,7 +78,7 @@ function HomeFront() {
               )}
             </div>
           </div>
-          <div className="md:absolute transition-all duration-500 focus:-translate-y-2 hover:-translate-y-2 md:bottom-6 md:z-30 md:left-6 flex gap-4 justify-center items-center">
+          {/* <div className="md:absolute transition-all duration-500 focus:-translate-y-2 hover:-translate-y-2 md:bottom-6 md:z-30 md:left-6 flex gap-4 justify-center items-center">
             <a
               target="_blank"
               rel="noreferrer"
@@ -88,7 +88,7 @@ function HomeFront() {
                 <FaWhatsapp size={36} />
               </div>
             </a>
-          </div>
+          </div> */}
         </div>
       </motion.div>
       <div className="w-full flex justify-center md:justify-start items-start gap-4 p-1 px-5 bg-red-600 z-50">
