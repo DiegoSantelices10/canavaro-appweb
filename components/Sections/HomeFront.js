@@ -31,18 +31,18 @@ function HomeFront() {
     <div className="font-montserrat w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
-        className="flex items-center pb-4 flex-col md:flex-row gap-y-20 md:gap-0 justify-center  w-full relative flex-grow "
+        className="flex items-center pb-4 flex-col md:flex-row gap-y-28 md:gap-0 justify-center  w-full relative flex-grow "
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5 }}>
-        <div className="md:w-1/2  flex flex-col justify-center p-6 items-center">
+        <div className="md:w-1/2  flex flex-col justify-center p-6 items-center z-40">
           <div className="md:absolute md:bottom-4 md:right-4 md:w-28">
             <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
           </div>
           <p className="font-montserrat text-3xl lg:text-5xl text-center font-bold text-gray-200">Pizzeria Canavaro</p>
           <p className="text-sm font-montserrat md:text-base font-normal text-white ">¡Todo lo que necesitas en un solo lugar!</p>
 
-          <div className="w-full flex items-center mt-3">
+          <div className="w-full flex items-center mt-3 md:mt-6">
             <Link href={"/digitalMenu"}>
               <a
                 className={`p-2 px-6 rounded-lg font-medium  font-montserrat  text-sm  mx-auto 
