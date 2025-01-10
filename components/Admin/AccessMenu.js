@@ -39,22 +39,43 @@ const AccessMenu = () => {
     }
   };
 
-  const promoBarra = async (id, available) => {
+  const promoBarra = async (id, available, item) => {
     const idImage = "67816cd547f387e5c3442668"
 
     try {
-      const response = await axios.put(`/api/settings/${id === idImage ? "imageModal" : "promo"}/${id === idImage ? idImage : id}`, { available: !available })
-      if (response.status === 200) {
-        const updatedBarra = barra?.map(item => {
-          if (item._id === id) {
-            return {
-              ...item,
-              available: !available
-            };
-          }
-          return item;
-        });
-        setBarra(updatedBarra);
+      if (item.imagen) {
+
+        const response = await axios.put(`/api/settings/${id === idImage ? "imageModal" : "promo"}/${id === idImage ? idImage : id}`,
+          {
+            imagen: item.imagen,
+            available: !available,
+          })
+        if (response.status === 200) {
+          const updatedBarra = barra?.map(item => {
+            if (item._id === id) {
+              return {
+                ...item,
+                available: !available
+              };
+            }
+            return item;
+          });
+          setBarra(updatedBarra);
+        }
+      } else {
+        const response = await axios.put(`/api/settings/${id === idImage ? "imageModal" : "promo"}/${id === idImage ? idImage : id}`, { available: !available })
+        if (response.status === 200) {
+          const updatedBarra = barra?.map(item => {
+            if (item._id === id) {
+              return {
+                ...item,
+                available: !available
+              };
+            }
+            return item;
+          });
+          setBarra(updatedBarra);
+        }
       }
     } catch (error) {
       alert("Error al realizar la accion")
@@ -159,7 +180,7 @@ const AccessMenu = () => {
                     type="checkbox"
                     className="sr-only peer"
                     checked={item.available}
-                    onChange={() => promoBarra(item._id, item.available)}
+                    onChange={() => promoBarra(item._id, item.available, item)}
                   />
                   <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
                    rounded-full 

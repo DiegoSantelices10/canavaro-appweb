@@ -15,7 +15,7 @@ export const uploadImage = async filePath => {
 export const updateImage = async filePath => {
 	return await cloudinary.uploader.upload(filePath, {
 		folder: "canavaro",
-		public_id: "canavaro/uyzgjxzorre1t3yvhvvj",
+		public_id: "canavaro/canavaro/uyzgjxzorre1t3yvhvvj",
 		overwrite: true,
 	})
 }

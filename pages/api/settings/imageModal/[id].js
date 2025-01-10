@@ -9,9 +9,9 @@ const handler = async (req, res) => {
 
     try {
         if (method === "PUT") {
-            console.log('body', body);
 
-            const image = await updateImage(body.imagen);
+            const image = await updateImage(body.imagen.url);
+
             const imageCloud = {
                 url: image.secure_url,
                 public_id: image.public_id,
