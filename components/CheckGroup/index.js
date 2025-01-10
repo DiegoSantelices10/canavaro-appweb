@@ -33,7 +33,7 @@ const CheckGroup = (props) => {
             if (item.imagen) {
                 const response = await axios.put(`/api/settings/${id === idImage ? "imageModal" : "promo"}/${id === idImage ? idImage : id}`,
                     {
-                        ...item,
+                        imagen: item.imagen,
                         available: !available,
                     })
                 if (response.status === 200) {
