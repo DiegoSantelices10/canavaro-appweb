@@ -53,7 +53,7 @@ const CheckGroup = (props) => {
                     className="flex justify-between items-center"
                 >
                     <h1 className="text-sm font-montserrat">
-                        {item.nombre}
+                        {item.nombre || "Imagen destacable"}
                     </h1>
                     <label className="relative inline-flex items-center cursor-pointer">
                         <input

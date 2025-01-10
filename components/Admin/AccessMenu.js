@@ -151,7 +151,7 @@ const AccessMenu = () => {
                 className="mt-2 w-full flex justify-between items-center gap-5"
               >
                 <h1 className="text-white font-montserrat text-sm">
-                  {item.nombre}
+                  {item.nombre || "Imagen destacable"}
                 </h1>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
