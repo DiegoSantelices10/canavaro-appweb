@@ -2,9 +2,11 @@ import axios from "axios";
 import Layout from "components/Admin/Layout";
 import HeaderTitle from "components/HeaderTitle";
 import Tabs from "components/Tabs";
+import { Form, Formik } from "formik";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import cloudinaryImage from "utils/cloudinaryImage";
 
 const Settings = () => {
 
@@ -61,10 +63,62 @@ const Settings = () => {
 		},
 		{
 			id: "2",
-			label: "Demora",
-			content: <div className="grid gap-3 py-3">
-				<h1 className="text-3xl font-montserrat tracking-wider font-bold">Demora</h1>
-				<hr />
+			label: "Home",
+			content: <div className="grid grid-cols-2">
+				<div className=" border p-3 space-y-4 rounded-lg col-span-2 sm:col-span-1 md:col-span-1 lg:col-span-1">
+					<p className="text-sm font-montserrat text-center font-bold">Imagen Destacable Home</p>
+					<Formik
+						initialValues={{
+							imagen: '',
+						}}
+						onSubmit={async (values, { resetForm }) => {
+
+							const valueSumbit = {
+								available: true,
+								imagen: values?.imagen
+							}
+
+							try {
+								// const idImage = "67815790a64f8c07fcf6f5db"
+								const response = await axios.post(`/api/settings/imageModal`, valueSumbit)
+
+								// const response = await axios.put(`/api/settings/imageModal/${idImage}`, valueSumbit)
+								if (response.data.success) {
+									resetForm();
+									toast.success('Actualizado con exito!')
+								}
+							} catch (error) {
+								alert("Error al realizar la accion")
+							}
+						}}
+					>
+						{({ setFieldValue }) => (
+							<Form>
+								<div className="w-auto">
+									<input
+										name="imagen"
+										type="file"
+										accept="image/png, image/jpeg, image/jpg"
+										onChange={e => cloudinaryImage(e.target, setFieldValue)}
+										className="w-full h-8 file:h-8 file:cursor-pointer  text-xs leading-tight text-gray-900 border-gray-200 
+                                  						appearance-none focus:outline-none focus:shadow-outline
+                                 					  file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-lg
+                                  						file:font-normal"
+									/>
+								</div>
+								<div className="flex justify-end">
+									<button
+										className="w-full md:w-44 h-10 col-start-2 rounded-lg mt-6 text-sm 
+									border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500"
+										type="submit"
+									>
+										Actualizar
+									</button>
+								</div>
+							</Form>
+						)}
+					</Formik>
+				</div>
 			</div>
 		},
 		{

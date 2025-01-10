@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { AiOutlineLogout } from "react-icons/ai";
-import { getPromo, logout } from "services/fetchData";
+import { getImageModal, getPromo, logout } from "services/fetchData";
 import Image from "next/image";
 import axios from "axios";
 
@@ -25,8 +25,8 @@ const AccessMenu = () => {
   useEffect(() => {
     (async () => {
       const res = await getPromo();
-
-      setBarra(res.data)
+      const imageModal = await getImageModal();
+      setBarra([...res.data, ...imageModal]);
     })();
 
   }, []);
@@ -40,9 +40,10 @@ const AccessMenu = () => {
   };
 
   const promoBarra = async (id, available) => {
+    const idImage = "677f53314567575ad6c433b9"
 
     try {
-      const response = await axios.put(`/api/settings/promo/${id}`, { available: !available })
+      const response = await axios.put(`/api/settings/${id === idImage ? "imageModal" : "promo"}/${id === idImage ? idImage : id}`, { available: !available })
       if (response.status === 200) {
         const updatedBarra = barra?.map(item => {
           if (item._id === id) {
@@ -98,7 +99,7 @@ const AccessMenu = () => {
             <div>
               <Link href="/admin" passHref>
                 <button
-                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-2 rounded-lg ${selected === "/admin" ? " bg-white text-red-500 tracking-wider" : "text-white"
+                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-1 px-2 rounded-md ${selected === "/admin" ? " bg-white text-red-500 tracking-wider" : "text-white"
                     } mx-auto w-auto h-auto`}
                 >
                   <p className="text-base font-montserrat lg:text-left md:text-center text-center">Pedidos</p>
@@ -108,7 +109,7 @@ const AccessMenu = () => {
             <div>
               <Link href="/admin/products/list" passHref>
                 <button
-                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-2 rounded-md ${selected === "/admin/products/list"
+                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-1 px-2 rounded-md ${selected === "/admin/products/list"
                     ? "bg-white text-red-500 tracking-wider"
                     : "font-normal text-white"
                     } mx-auto w-auto  h-auto  `}
@@ -120,7 +121,7 @@ const AccessMenu = () => {
             <div>
               <Link href="/admin/sales/list" passHref>
                 <button
-                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-2 rounded-md ${selected === "/admin/sales/list"
+                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-1 px-2 rounded-md ${selected === "/admin/sales/list"
                     ? "bg-white text-red-500 tracking-wider"
                     : "font-normal text-white"
                     } mx-auto w-auto h-auto `}
@@ -132,7 +133,7 @@ const AccessMenu = () => {
             <div>
               <Link href="/admin/settings" passHref>
                 <button
-                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-2 rounded-md ${selected === "/admin/settings"
+                  className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-1 px-2 rounded-md ${selected === "/admin/settings"
                     ? "bg-white text-red-500 tracking-wider"
                     : "font-normal text-white"
                     } mx-auto w-auto  h-auto  `}
@@ -149,7 +150,7 @@ const AccessMenu = () => {
                 key={item._id + 'menu'}
                 className="mt-2 w-full flex justify-between items-center gap-5"
               >
-                <h1 className="text-white font-montserrat">
+                <h1 className="text-white font-montserrat text-sm">
                   {item.nombre}
                 </h1>
                 <label className="relative inline-flex items-center cursor-pointer">

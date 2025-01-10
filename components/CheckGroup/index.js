@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { getPromo } from 'services/fetchData';
+import { getImageModal, getPromo } from 'services/fetchData';
 import { setSetting } from 'store/reducers/settingSlice';
 
 const CheckGroup = (props) => {
@@ -13,15 +13,21 @@ const CheckGroup = (props) => {
     useEffect(() => {
         (async () => {
             const res = await getPromo();
+            const imageModal = await getImageModal();
+
             const efectivo = res.data.find(item => item.nombre === "Promo efectivo")
             dispatch(setSetting({ promoEfectivo: efectivo }));
-            setBarra(res.data)
+            console.log('res', res.data);
+
+            setBarra([...res.data, ...imageModal]);
         })()
     }, [])
 
     const promoBarra = async (id, available) => {
+        const idImage = "677f53314567575ad6c433b9"
+
         try {
-            const response = await axios.put(`/api/settings/promo/${id}`, { available: !available })
+            const response = await axios.put(`/api/settings/${id === idImage ? "imageModal" : "promo"}/${id === idImage ? idImage : id}`, { available: !available })
             if (response.status === 200) {
                 const updatedBarra = barra?.map(item => {
                     if (item._id === id) {
@@ -40,13 +46,13 @@ const CheckGroup = (props) => {
     }
 
     return (
-        <div className="rounded-md mx-auto flex flex-col items-center justify-center lg:hidden mt-4">
+        <div className="grid gap-4 grid-cols-2 justify-center items-center mx-auto w-full lg:hidden mt-4">
             {barra?.map(item => (
                 <div
                     key={item._id}
-                    className="mt-2 w-1/2 flex justify-between items-center "
+                    className="flex justify-between items-center"
                 >
-                    <h1 className=" font-montserrat">
+                    <h1 className="text-sm font-montserrat">
                         {item.nombre}
                     </h1>
                     <label className="relative inline-flex items-center cursor-pointer">

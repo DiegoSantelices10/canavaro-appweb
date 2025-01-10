@@ -14,7 +14,6 @@ export const createProduct = async (req, res) => {
         url: result.secure_url,
         public_id: result.public_id,
       };
-      console.log('imageCloud', imageCloud);
 
       newProduct = new Producto({
         imagen: imageCloud,

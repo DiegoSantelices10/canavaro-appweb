@@ -93,3 +93,12 @@ export const getDelay = async () => {
     throw new Error("Failed to log out");
   }
 };
+
+export const getImageModal = async () => {
+  try {
+    const { data } = await axios.get("/api/settings/imageModal");
+    return data;
+  } catch (error) {
+    throw new Error("Failed to log out");
+  }
+};

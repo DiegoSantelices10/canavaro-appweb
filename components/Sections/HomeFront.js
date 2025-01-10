@@ -3,23 +3,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { FaWhatsapp } from "react-icons/fa"
 
-import { getPromo } from "services/fetchData";
+import { getImageModal, getPromo } from "services/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setSetting } from "store/reducers/settingSlice";
+import ModalHome from "components/ModalHome";
 
 function HomeFront() {
-  const dispatch = useDispatch();
 
+  const [imageModal, setImageModal] = useState({});
+  const dispatch = useDispatch();
   const { deliveryButton } = useSelector(state => state.setting);
 
   useEffect(() => {
     (async () => {
       const { data, status } = await getPromo();
-      if (status === 200) {
+      const imageModal = await getImageModal();
+      setImageModal(...imageModal);
 
+      if (status === 200) {
         const delivery = data.find(item => item.nombre === "Delivery")
         dispatch(setSetting({ deliveryButton: delivery }));
         localStorage.setItem('buttom delivery', { buttomDelivery: delivery[0] })
@@ -29,6 +33,9 @@ function HomeFront() {
   }, [])
   return (
     <div className="font-montserrat w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
+      {
+        imageModal.available && <ModalHome imagen={imageModal.imagen} />
+      }
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
         className="flex items-center pb-4 flex-col md:flex-row gap-y-28 md:gap-0 justify-center  w-full relative flex-grow "

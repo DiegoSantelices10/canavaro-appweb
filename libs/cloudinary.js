@@ -12,6 +12,14 @@ export const uploadImage = async filePath => {
 	});
 };
 
+export const updateImage = async filePath => {
+	return await cloudinary.uploader.upload(filePath, {
+		folder: "canavaro",
+		public_id: "canavaro/h019wfoxixlnox6c8cz2",
+		overwrite: true,
+	})
+}
+
 export const deleteImage = async id => {
 	return await cloudinary.uploader.destroy(id);
 };
