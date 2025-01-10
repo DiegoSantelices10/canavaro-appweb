@@ -24,7 +24,7 @@ const CheckGroup = (props) => {
     }, [])
 
     const promoBarra = async (id, available) => {
-        const idImage = "677f53314567575ad6c433b9"
+        const idImage = "67816cd547f387e5c3442668"
 
         try {
             const response = await axios.put(`/api/settings/${id === idImage ? "imageModal" : "promo"}/${id === idImage ? idImage : id}`, { available: !available })
