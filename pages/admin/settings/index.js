@@ -79,10 +79,9 @@ const Settings = () => {
 							}
 
 							try {
-								// const idImage = "67815790a64f8c07fcf6f5db"
-								const response = await axios.post(`/api/settings/imageModal`, valueSumbit)
+								const idImage = "67816cd547f387e5c3442668"
 
-								// const response = await axios.put(`/api/settings/imageModal/${idImage}`, valueSumbit)
+								const response = await axios.put(`/api/settings/imageModal/${idImage}`, valueSumbit)
 								if (response.data.success) {
 									resetForm();
 									toast.success('Actualizado con exito!')
