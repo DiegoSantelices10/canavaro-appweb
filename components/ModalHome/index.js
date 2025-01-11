@@ -13,17 +13,18 @@ const ModalHome = (props) => {
     return (
         <>
             {imagen.available && isOpen ? (
-                <div className='flex-1 justify-center items-center p-4'>
+                <div>
                     <motion.div
-                        initial={{ opacity: 0, y: -100 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.5 }}
-                        className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50 overflow-hidden"
+                        initial={{ y: "100%", opacity: 0 }} // Empieza fuera de la pantalla, en la parte inferior
+                        animate={{ y: "0%", opacity: 1 }}  // Se mueve hacia el centro y aparece
+                        exit={{ y: "100%", opacity: 0 }}   // Vuelve a salir hacia abajo al cerrar
+                        transition={{ duration: 0.8, ease: "easeOut" }} //
+                        className="fixed inset-0 flex justify-center items-center z-50 overflow-hidden"
                     >
                         <div className="relative rounded-lg shadow-lg flex justify-center items-center overflow-hidden">
                             <div
                                 onClick={() => setIsOpen(false)}
-                                className="absolute cursor-pointer bg-gray-400/30 rounded-lg p-0.5 right-3 top-3 z-10"
+                                className="absolute cursor-pointer bg-gray-300/30 rounded-lg p-0.5 right-3 top-3 z-10"
                             >
                                 <MultiplicationSignIcon className="text-white" />
                             </div>
