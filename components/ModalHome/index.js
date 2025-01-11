@@ -28,13 +28,11 @@ const ModalHome = (props) => {
                             >
                                 <MultiplicationSignIcon className="text-white" />
                             </div>
-                            {imagen && (
-                                <img
-                                    src={imagen.imagen.url}
-                                    alt="imagen"
-                                    className="object-contain max-h-[90vh] max-w-full"
-                                />
-                            )}
+                            <img
+                                src={imagen.imagen.url}
+                                alt="imagen"
+                                className="object-contain max-h-[90vh] max-w-full"
+                            />
                         </div>
                     </motion.div>
                 </div>) : (
