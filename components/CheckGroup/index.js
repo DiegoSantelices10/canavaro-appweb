@@ -14,11 +14,9 @@ const CheckGroup = (props) => {
         (async () => {
             const res = await getPromo();
             const imageModal = await getImageModal();
-            console.log('imageModal', imageModal);
 
             const efectivo = res.data.find(item => item.nombre === "Promo efectivo")
             dispatch(setSetting({ promoEfectivo: efectivo }));
-            console.log('res', res.data);
 
             setBarra([...res.data, ...imageModal]);
         })()

@@ -3,7 +3,6 @@ import Producto from "models/product";
 
 export const createProduct = async (req, res) => {
   const producto = req.body;
-  console.log('req.body', producto);
 
 
   try {

@@ -29,8 +29,6 @@ function DigitalMenu() {
 
     }, []);
 
-    console.log('categories', categories);
-
 
     const renderStore = renderProductos => {
         return products
