@@ -1,69 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import { MultiplicationSignIcon } from 'public/images/exit-icon';
+import React from 'react';
 import Modal from 'react-modal';
+import { motion } from "framer-motion";
 
 Modal.setAppElement('#__next');
 
 const ModalHome = (props) => {
     const { imagen } = props;
 
-    const [modalIsOpen, setIsOpen] = useState(false);
-
-    useEffect(() => {
-        openModal();
-    }, []);
-
-    const openModal = () => {
-        setIsOpen(true);
-    };
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-    console.log('imagen', imagen.url);
+    const [isOpen, setIsOpen] = React.useState(true);
 
     return (
-        <Modal
-            closeTimeoutMS={200}
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={{
-                overlay: {
-                    backgroundColor: 'transparent',
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    overflow: 'hidden', // Asegura que no haya scroll
-                },
-                content: {
-                    top: '50%',
-                    left: '50%',
-                    right: 'auto',
-                    bottom: 'auto',
-                    marginRight: '-50%',
-                    transform: 'translate(-50%, -50%)',
-                    padding: 0,
-                    borderWidth: 0,
-                    backgroundColor: 'transparent',
-                    height: '90%',
-                    width: '90%',
-                }
-            }}
-        >
-            {imagen && (
-                <div className='flex-1 w-full h-full flex justify-center'>
-                    <img
-                        src={imagen.url}
-                        alt="imagen"
-                        className='object-contain'
-                    />
-                </div>
+        <>
+            {imagen.available && isOpen ? (
+                <div className='flex-1 justify-center items-center p-4'>
+                    <motion.div
+                        initial={{ opacity: 0, y: -100 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.5 }}
+                        className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50 overflow-hidden"
+                    >
+                        <div className="relative rounded-lg shadow-lg flex justify-center items-center overflow-hidden">
+                            <div
+                                onClick={() => setIsOpen(false)}
+                                className="absolute cursor-pointer bg-gray-400/30 rounded-lg p-0.5 right-3 top-3 z-10"
+                            >
+                                <MultiplicationSignIcon className="text-white" />
+                            </div>
+                            {imagen && (
+                                <img
+                                    src={imagen.imagen.url}
+                                    alt="imagen"
+                                    className="object-contain max-h-[90vh] max-w-full"
+                                />
+                            )}
+                        </div>
+                    </motion.div>
+                </div>) : (
+                <div className='hidden' />
             )}
-        </Modal >
+        </>
+
     );
 };
 

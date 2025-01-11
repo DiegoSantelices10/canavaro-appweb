@@ -9,8 +9,12 @@ const handler = async (req, res) => {
 
     try {
         if (method === "PUT") {
-
-            const image = await updateImage(body.imagen.url);
+            let image
+            if (body.imagen.url) {
+                image = await updateImage(body.imagen.url);
+            } else {
+                image = await updateImage(body.imagen);
+            }
 
             const imageCloud = {
                 url: image.secure_url,
