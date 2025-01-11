@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster, toast } from "react-hot-toast";
@@ -179,24 +178,17 @@ export default function Index() {
         />
       )}
       <Toaster />
-      <Image
+      <img
         src={"/images/pizzafree.webp"}
-        className="-z-10"
-        layout="responsive"
-        objectFit="contain"
-        objectPosition="top"
-        width={300}
-        height={300}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-
+        className="z-0 inset-0 w-full h-full bg-green-300 object-contain"
         alt={"img"} />
 
       <button onClick={returnHome}>
         <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
-      <div className="w-full h-auto -mt-60 sm:-mt-72 md:-mt-72 lg:-mt-80">
+      <div className="w-full ">
         <div className="flex flex-col  w-full ">
-          <div className="w-full bg-white rounded-t-3xl p-4">
+          <div className="w-full bg-white rounded-t-3xl p-4 -mt-12">
             <h1 className="font-semibold text-lg text-neutral-800 font-montserrat">Arma tu pizza</h1>
             <p className=" font-normal text-sm  text-gray-400 font-montserrat">Elegi los gustos que quieras</p>
           </div>
