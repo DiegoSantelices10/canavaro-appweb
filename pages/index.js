@@ -9,15 +9,31 @@ import SectionZona from "components/Sections/SectionZona";
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import CustomArrow from "components/CustomArrows";
+import axios from "axios";
 
 
 export default function index({ data }) {
 
+
   const dispatch = useDispatch()
   useEffect(() => {
+
     localStorage.setItem("productos", JSON.stringify(data));
     addExtras()
   }, []);
+
+  const postButtonWhatsapp = async () => {
+    try {
+      const res = await axios.post("/api/settings/promo", {
+        nombre: "Boton whatsapp",
+        available: true
+      });
+      console.log('res', res);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const addExtras = () => {
     const extras = data.filter(item => item.categoria === 'extras' && item.available === true)
@@ -56,6 +72,9 @@ export default function index({ data }) {
           customButtonGroup={<CustomArrow />}
           arrows={false}
         >
+          <button onClick={() => postButtonWhatsapp()}>
+            enviar
+          </button>
           <HomeFront />
           <SectionZona />
         </Carousel>
