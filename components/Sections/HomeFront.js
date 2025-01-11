@@ -10,10 +10,12 @@ import { getImageModal, getPromo } from "services/fetchData";
 import { useDispatch, useSelector } from "react-redux";
 import { setSetting } from "store/reducers/settingSlice";
 import ModalHome from "components/ModalHome";
+import { FaWhatsapp } from "react-icons/fa";
 
 function HomeFront() {
 
   const [imageModal, setImageModal] = useState({});
+  const [buttonWhatsapp, setButtonWhatsapp] = useState({});
   const dispatch = useDispatch();
   const { deliveryButton } = useSelector(state => state.setting);
 
@@ -25,6 +27,8 @@ function HomeFront() {
 
       if (status === 200) {
         const delivery = data.find(item => item.nombre === "Delivery")
+        const whatsapp = data.find(item => item.nombre === "Boton whatsapp")
+        setButtonWhatsapp(whatsapp)
         dispatch(setSetting({ deliveryButton: delivery }));
         localStorage.setItem('buttom delivery', { buttomDelivery: delivery[0] })
       }
@@ -83,17 +87,19 @@ function HomeFront() {
               )}
             </div>
           </div>
-          {/* <div className="md:absolute transition-all duration-500 focus:-translate-y-2 hover:-translate-y-2 md:bottom-6 md:z-30 md:left-6 flex gap-4 justify-center items-center">
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20hacer%20un%20pedido`}
-            >
-              <div className="flex items-center bg-green-500 p-3 text-white font-semibold rounded-full shadow-md">
-                <FaWhatsapp size={36} />
-              </div>
-            </a>
-          </div> */}
+          {buttonWhatsapp.available && (
+            <div className="md:absolute transition-all duration-500 focus:-translate-y-2 hover:-translate-y-2 md:bottom-6 md:z-30 md:left-6 flex gap-4 justify-center items-center">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20hacer%20un%20pedido`}
+              >
+                <div className="flex items-center bg-green-500 p-3 text-white font-semibold rounded-full shadow-md">
+                  <FaWhatsapp size={36} />
+                </div>
+              </a>
+            </div>
+          )}
         </div>
       </motion.div>
       <div className="w-full flex justify-center md:justify-start items-start gap-4 p-1 px-5 bg-red-600 z-50">
