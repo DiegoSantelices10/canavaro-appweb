@@ -30,7 +30,7 @@ export const formatearNumero = (numero) => {
 
 export const totalExtrasProductos = (extras) => {
 	return extras.reduce((total, empanada) => {
-		if (empanada.precioExtra && empanada.cantidad) {
+		if (empanada.precioExtra > 0 || empanada.precioExtra !== undefined) {
 			return total + (empanada.precioExtra * empanada.cantidad);
 		} else {
 			return total;

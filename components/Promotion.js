@@ -285,6 +285,7 @@ export default function Promotion({
                         <div className="font-montserrat flex justify-between items-center my-5 p-1  ">
                           <div className="w-1/2 text-zinc-800 font-medium text-base font-montserrat">
                             <h2>{nombre}</h2>
+                            {precioExtra > 0 && <p className="text-xs font-montserrat text-red-400">${precioExtra} x u.</p>}
                           </div>
                           <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
                             <div

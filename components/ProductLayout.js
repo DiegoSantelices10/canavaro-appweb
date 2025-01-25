@@ -116,7 +116,7 @@ export default function ProductLayout({
           categoria,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
-          precio,
+          precio: precio + totalExtra,
           cantidad: 1,
         };
         toast.success("Se agrego al pedido!");
@@ -148,7 +148,7 @@ export default function ProductLayout({
           cantidadExtras,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
-          precio,
+          precio: precio + totalExtra,
           cantidad: 1,
         };
         toast.success("Se agrego al pedido!");
