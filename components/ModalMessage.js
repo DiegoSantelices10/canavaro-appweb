@@ -15,7 +15,7 @@ const ModalMessage = ({
   extras,
   info: { title, type }
 }) => {
-  const showHideClassName = showModal ? "fixed z-40 inset-0 overflow-y-auto mx-auto py-10" : "hidden";
+  const showHideClassName = showModal ? "fixed z-[9990] inset-0 overflow-y-auto mx-auto py-10" : "hidden";
   const dispatch = useDispatch();
 
   const addItems = value => {
