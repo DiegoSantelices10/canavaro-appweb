@@ -74,7 +74,7 @@ function HomeFront() {
               <p className="text-zinc-200  text-sm ">Pelliza 1794 - Olivos</p>
               {deliveryButton.available && (
                 <div className="w-full flex items-center mt-3">
-                  <Link href={"/welcomeLogo"}>
+                  <Link href={"/order/home"}>
                     <a
                       className={`p-2 px-6 rounded-lg font-medium  font-montserrat  text-sm  mx-auto 
                           hover:bg-black hover:text-white bg-red-600  text-white 

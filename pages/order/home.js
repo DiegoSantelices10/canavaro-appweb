@@ -20,7 +20,6 @@ import { setExtras, setProductData } from "store/reducers/productSlice";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { formatearNumero, totalExtrasProductos } from "libs/items";
-import CardEfectivo from "components/CardEfectivo";
 import { getProducts, getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
 import TabsCategories from "components/Tabs/TabsCategories";
@@ -84,10 +83,7 @@ export default function Home({ data }) {
 
     dispatch(clearOrderPromo());
     dispatch(setQuantityDemanded(0));
-    if (products?.length <= 0) {
-      const res = JSON.parse(localStorage.getItem("productos"));
-      dispatch(setProductData(res));
-    }
+  
 
     (async () => {
       const res = await axios.get("/api/promo");
@@ -208,7 +204,7 @@ export default function Home({ data }) {
 
   return (
     <Layout>
-      <div className="pt-[70px] mx-auto w-full rounded-3xl relative">
+      <div className="pt-[80px] mx-auto w-full rounded-3xl relative">
         <div className="w-full flex items-center justify-between">
           <div>
             <p className="text-left w-full font-montserrat text-base  font-semibold">¡Arma tu pizza como quieras!</p>
@@ -244,7 +240,7 @@ export default function Home({ data }) {
           </div>
         </>
 
-        <div>
+        <div className="space-y-4 mt-4">
           {Object.entries(groupedProducts).map(([categoria, productosFiltrados]) => {
             return (
               <div key={categoria}>
@@ -264,7 +260,7 @@ export default function Home({ data }) {
               `}
                   </style>
                   {productosFiltrados.map((data) => (
-                    <CardEfectivo key={data._id} data={data} />
+                    <CardPromotion key={data._id} data={data} />
                   ))}
                 </div>
               </div>
