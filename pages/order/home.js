@@ -37,9 +37,6 @@ export default function Home({ data }) {
   const { products, extras } = useSelector(state => state.product);
   const { orderPromo } = useSelector(state => state.order);
 
-  console.log('products', products);
-  
-
   const idGenerator = uuidv4();
 
   const dispatch = useDispatch();
