@@ -9,12 +9,12 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
             <style jsx>
                 {`
             .flexp::-webkit-scrollbar-thumb {
-              background: #ffffff;
+              background: #dc2626;
               border-radius: 20px;
             }
 
             .flexp::-webkit-scrollbar {
-              height: 0px;
+              height: 4px;
             }
           `}
             </style>
@@ -29,7 +29,7 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
                         className={
                             renderProducts !== categoria
                                 ? "whitespace-nowrap px-3 font-medium font-montserrat text-sm text-gray-400"
-                                : "whitespace-nowrap px-3 font-semibold  text-neutral-800 focus:ring-0 focus:outline-none  text-sm font-montserrat border-b-2 border-red-400 pb-2 tracking-wide"
+                                : "whitespace-nowrap px-3 font-semibold  text-neutral-800 focus:ring-0 focus:outline-none  text-sm font-montserrat  pb-2 tracking-wide"
                         }
                     >
                         {categoria === 'empanadas' ? 'empanadas & canastitas' : categoria}

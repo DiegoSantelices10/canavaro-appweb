@@ -32,7 +32,7 @@ export default function Promotion({
     dispatch(clearDrinks());
     if (nombre === 'Combo 4' || nombre === 'Combo 5') {
       const { _id, nombre, descripcion } =
-        products.filter(item => item.categoria === "promociones").find(item => item.nombre === select) || {};
+        products.filter(item => item.categoria === "Combos" || item.categoria === "promociones").find(item => item.nombre === select) || {};
       const res = { _id, nombre, descripcion };
       setSelectCombo(res);
     }
@@ -90,7 +90,7 @@ export default function Promotion({
     setSelect(e.target.value);
     if (products !== null) {
       const { _id, nombre, descripcion } =
-        products.filter(item => item.categoria === "promociones").find(item => item.nombre === e.target.value) || {};
+        products.filter(item => item.categoria === "promociones" || item.categoria === "Combos").find(item => item.nombre === e.target.value) || {};
       const res = { _id, nombre, descripcion };
       setSelectCombo(res);
     }

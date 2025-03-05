@@ -21,13 +21,14 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { formatearNumero, totalExtrasProductos } from "libs/items";
 import CardEfectivo from "components/CardEfectivo";
-import { getPromo } from "services/fetchData";
+import { getProducts, getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
 import TabsCategories from "components/Tabs/TabsCategories";
 import { categoriasNoDestacables } from "utils";
+import { wrapper } from "store/app/store";
 
 
-export default function Home() {
+export default function Home({ data }) {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalCant, setTotalCant] = useState(0);
@@ -37,17 +38,17 @@ export default function Home() {
   const { products, extras } = useSelector(state => state.product);
   const { orderPromo } = useSelector(state => state.order);
 
+  console.log('products', products);
+  
+
   const idGenerator = uuidv4();
 
   const dispatch = useDispatch();
   const renderPromotions = () => {
     // eslint-disable-next-line dot-notation
-    const combos = products
-      ?.filter(item => item.nombre?.includes("Combo"))
-      ?.sort((a, b) => a.nombre.localeCompare(b.nombre));
-    const otraPromos = products?.filter(item => item.categoria === "promociones" && !item.nombre.includes("Combo"));
-    const ordenado = [...combos, ...otraPromos];
-    return ordenado?.filter(item => item.available === true).map(data => <CardPromotion key={data._id} data={data} />);
+
+    const promos = products?.filter(item => item.categoria === "promociones");
+    return promos?.filter(item => item.available === true).map(data => <CardPromotion key={data._id} data={data} />);
   };
 
   const renderStore = renderProductos => {
@@ -229,12 +230,12 @@ export default function Home() {
               <style jsx>
                 {`
               .flexp::-webkit-scrollbar-thumb {
-                background: #ffffff;
+                background: #dc2626;
                 border-radius: 20px;
               }
 
               .flexp::-webkit-scrollbar {
-                height: 5px;
+                height: 4px;
               }
             `}
               </style>
@@ -254,11 +255,11 @@ export default function Home() {
                   <style jsx>
                     {`
                 .flexp::-webkit-scrollbar-thumb {
-                  background: #ffffff;
+                  background: #dc2626;
                   border-radius: 20px;
                 }
                 .flexp::-webkit-scrollbar {
-                  height: 5px;
+                  height: 4px;
                 }
               `}
                   </style>
@@ -325,3 +326,14 @@ export default function Home() {
     </Layout>
   );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ res }) => {
+  res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
+  const data = await getProducts();
+  store.dispatch(setProductData(data));
+  return {
+    props: {
+      data,
+    },
+  };
+});
