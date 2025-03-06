@@ -1,9 +1,16 @@
 import useCategories from 'Hooks/useCategories';
 import React from 'react'
+import { capitalizeFirstLetter } from 'utils';
 
 function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
 
     const { categories } = useCategories();
+    const combosYPromo = categories.filter(item => item === 'Combos' || item === 'promociones');
+    const pizzasYEmpanadas = categories.filter(item => item === 'empanadas' || item === 'pizzas');
+    const resto = categories.filter(item => item !== 'Combos' && item !== 'promociones' && item !== 'empanadas' && item !== 'pizzas');
+
+    const newListCategories = [...pizzasYEmpanadas,...combosYPromo, ...resto];
+
     return (
         <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full mt-4">
             <style jsx>
@@ -18,7 +25,7 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
             }
           `}
             </style>
-            {categories.filter((categoria) => categoria !== 'extras').map((categoria, index) => (
+            {newListCategories.filter((categoria) => categoria !== 'extras').map((categoria, index) => (
                 <div
                     key={index}>
                     <button
@@ -32,7 +39,7 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
                                 : "whitespace-nowrap px-3 font-semibold  text-neutral-800 focus:ring-0 focus:outline-none  text-sm font-montserrat  pb-2 tracking-wide"
                         }
                     >
-                        {categoria === 'empanadas' ? 'empanadas & canastitas' : categoria}
+                        {categoria === 'empanadas' ? 'Empanadas & Canastitas' : capitalizeFirstLetter(categoria)}
                     </button>
                 </div>
             ))}

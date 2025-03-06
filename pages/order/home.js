@@ -204,7 +204,7 @@ export default function Home({ data }) {
       <div className="pt-[40px] mx-auto w-full rounded-3xl relative">
       
         <>
-          <h1 className="text-base font-bold font-montserrat text-neutral-800 mt-6">Nuestros combos</h1>
+          <h1 className="text-base font-bold font-montserrat text-neutral-800 mt-6">Nuestras promociones</h1>
           <div className="py-2">
             <div className="flex overflow-x-scroll flexp h-auto p-0.5 space-x-6 w-full">
               <style jsx>
