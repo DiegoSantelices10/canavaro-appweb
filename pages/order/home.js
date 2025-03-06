@@ -201,21 +201,8 @@ export default function Home({ data }) {
 
   return (
     <Layout>
-      <div className="pt-[80px] mx-auto w-full rounded-3xl relative">
-        <div className="w-full flex items-center justify-between">
-          <div>
-            <p className="text-left w-full font-montserrat text-base  font-semibold">¡Arma tu pizza como quieras!</p>
-
-          </div>
-          <Link href={"/order/pizzaFree"}>
-            <a
-              onClick={() => clearTotal()}
-              className="rounded-lg font-montserrat font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-3">
-              Ingresa aqui
-            </a>
-          </Link>
-        </div>
-
+      <div className="pt-[40px] mx-auto w-full rounded-3xl relative">
+      
         <>
           <h1 className="text-base font-bold font-montserrat text-neutral-800 mt-6">Nuestros combos</h1>
           <div className="py-2">
@@ -276,6 +263,23 @@ export default function Home({ data }) {
                   Cada 12 empanadas o canastitas, tenes promo!
                 </p>
               </div>
+            )
+          }
+          {
+             renderProducts === "pizzas" && (
+              <div className="w-full flex items-center justify-between">
+               <div>
+                <p className="text-left w-full font-montserrat text-base font-semibold">¡Arma tu pizza!</p>
+              </div>
+              <Link href={"/order/pizzaFree"}>
+                <a
+                  onClick={() => clearTotal()}
+                  className="rounded-lg font-montserrat font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
+                  Ingresa aqui
+                </a>
+              </Link>
+           
+            </div>
             )
           }
 

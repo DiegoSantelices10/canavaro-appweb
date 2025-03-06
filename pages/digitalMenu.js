@@ -29,7 +29,10 @@ function DigitalMenu() {
 
     }, []);
 
+    const combosYPromo = categories.filter(item => item === 'Combos' || item === 'promociones');
+    const resto = categories.filter(item => item !== 'Combos' && item !== 'promociones');
 
+    const newListCategories = [...combosYPromo, ...resto];
     const renderStore = renderProductos => {
         return products
             ?.filter(item => item.categoria === renderProductos && item.available === true)
@@ -110,7 +113,7 @@ function DigitalMenu() {
             </div>
             <hr />
             <div className=' px-6 py-4 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-normal  font-montserrat'>
-                {categories && categories.map((category, index) => (
+                {categories && newListCategories.map((category, index) => (
 
                     <button
                         key={index}

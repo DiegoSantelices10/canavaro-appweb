@@ -36,7 +36,7 @@ function HomeFront() {
 
   }, [])
   return (
-    <div className="font-montserrat w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
+    <div className="relative font-montserrat w-full min-h-screen mx-auto flex flex-col bg-no-repeat bg-cover bg-[url('/images/fondonuevo.webp')] md:bg-[url('/images/porcionfuga.jpg')]">
       <ModalHome imagen={imageModal} />
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
