@@ -30,6 +30,7 @@ import { formatearNumero } from "libs/items";
 import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import AlignBoxMiddleLeftIcon from "public/images/align-box-middle-left-stroke-rounded";
 import ControllerInput from "components/ControllerInput";
+import Collapsable from "components/Collapsable";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora, orderPromo, delivery } = useSelector(state => state.order);
@@ -121,7 +122,7 @@ export default function Cart({ data }) {
   };
 
   const addCartPromo = value => {
-    const res = value.find(item => item.categoria === "bebidas");
+    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "Postres");
 
     if (res) {
       value.map(item => dispatch(addPromoOrderList({ ...item })));
@@ -217,7 +218,7 @@ export default function Cart({ data }) {
               {currentProducto && (
                 <ModalDescripcion show={showModal} handleClose={handleCloseModal} pedido={currentProducto} />
               )}
-              <Form>
+              <Form className="space-y-4">
                 <div className="px-3">
                   <div className="flex items-center gap-3 py-2">
                     <Link href={"/order/home"}>
@@ -413,13 +414,17 @@ export default function Cart({ data }) {
                   </div>
                 </div>
                 {!orderList.some(item => item.categoria === "bebidas") && (
-                  <div className="p-3">
-                    <h1 className="font-montserrat font-bold text-gray-800 text-base">
-                      ¿ Deseas agregar alguna bebida ?
-                    </h1>
-                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
-                      <style jsx>
-                        {`
+                  <Collapsable
+                    title={
+                      <h1 className="font-montserrat text-base font-bold text-gray-800">
+                        ¿ Deseas agregar alguna bebida ?
+                      </h1>
+                    }
+                  >
+                    <div className="p-0">
+                      <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
+                        <style jsx>
+                          {`
                           .flexp::-webkit-scrollbar-thumb {
                             background: #ffffff;
                             border-radius: 20px;
@@ -429,11 +434,40 @@ export default function Cart({ data }) {
                             height: 5px;
                           }
                         `}
-                      </style>
+                        </style>
 
-                      {renderBebidas("bebidas")}
+                        {renderBebidas("bebidas")}
+                      </div>
                     </div>
-                  </div>
+                  </Collapsable>
+                )}
+                {!orderList.some(item => item.categoria === "Postres") && (
+                  <Collapsable
+                    title={
+                      <h1 className="font-montserrat text-base font-bold text-gray-800">
+                        ¿ Deseas agregar algun postre ?
+                      </h1>
+                    }
+                  >
+                    <div className="p-0">
+                      <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
+                        <style jsx>
+                          {`
+                          .flexp::-webkit-scrollbar-thumb {
+                            background: #ffffff;
+                            border-radius: 20px;
+                          }
+
+                          .flexp::-webkit-scrollbar {
+                            height: 5px;
+                          }
+                        `}
+                        </style>
+
+                        {renderBebidas("Postres")}
+                      </div>
+                    </div>
+                  </Collapsable>
                 )}
 
                 <div className="p-3 mb-16 pb-10 rounded-md">
@@ -441,18 +475,18 @@ export default function Cart({ data }) {
                     onClick={() => addCartPromo(orderPromo)}
                     type="button"
                     className={`${orderPromo.length < 1
-                      ? "invisible"
+                      ? "hidden"
                       : "p-3 font-medium w-full font-montserrat mb-3 bg-red-600 rounded-lg text-white  hover:-translate-y-1 transition-all duration-500"
                       }`}
                   >
                     Agregar al carrito
                   </button>
-                  <h1 className="text-gray-800 font-bold font-montserrat px-2 text-base mt-3">Detalle pedido</h1>
+                  <h1 className="text-gray-800 font-bold font-montserrat px-2 text-base">Detalle pedido</h1>
                   <hr />
                   {orderList.map((item, index) => {
                     return (
                       <div key={index}>
-                        <div className="font-montserrat py-6">
+                        <div className="font-montserrat py-2">
                           <div className="p-2 rounded-md">
                             <div className="flex justify-between items-center gap-x-2">
                               <div className="w-full ">

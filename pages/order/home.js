@@ -80,7 +80,7 @@ export default function Home({ data }) {
 
     dispatch(clearOrderPromo());
     dispatch(setQuantityDemanded(0));
-  
+
 
     (async () => {
       const res = await axios.get("/api/promo");
@@ -148,7 +148,7 @@ export default function Home({ data }) {
   };
 
   const addCartPromo = value => {
-    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "porciones");
+    const res = value.find(item => item.categoria === "Postres" || item.categoria === "bebidas" || item.categoria === "porciones");
 
     if (res) {
       setTotalCant(0);
@@ -202,7 +202,7 @@ export default function Home({ data }) {
   return (
     <Layout>
       <div className="pt-[40px] mx-auto w-full rounded-3xl relative">
-      
+
         <>
           <h1 className="text-base font-bold font-montserrat text-neutral-800 mt-6">Nuestras promociones</h1>
           <div className="py-2">
@@ -266,31 +266,34 @@ export default function Home({ data }) {
             )
           }
           {
-             renderProducts === "pizzas" && (
+            renderProducts === "pizzas" && (
               <div className="w-full flex items-center justify-between">
-               <div>
-                <p className="text-left w-full font-montserrat text-base font-semibold">¡Arma tu pizza!</p>
+                <div>
+                  <p className="text-left w-full font-montserrat text-base font-semibold">¡Arma tu pizza!</p>
+                </div>
+                <Link href={"/order/pizzaFree"}>
+                  <a
+                    onClick={() => clearTotal()}
+                    className="rounded-lg font-montserrat font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
+                    Ingresa aqui
+                  </a>
+                </Link>
+
               </div>
-              <Link href={"/order/pizzaFree"}>
-                <a
-                  onClick={() => clearTotal()}
-                  className="rounded-lg font-montserrat font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
-                  Ingresa aqui
-                </a>
-              </Link>
-           
-            </div>
             )
           }
 
         </div>
 
         <div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 md:gap-x-4 lg:gap-x-4 mb-10">{renderStore(renderProducts)}</div>
+          <div
+            className="grid md:grid-cols-2 lg:grid-cols-2 md:gap-x-4 lg:gap-x-4 mb-10">
+            {renderStore(renderProducts)}
+          </div>
         </div>
 
         <div className="relative flex justify-center">
-          {(renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
+          {(renderProducts === "Postres" || renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
             orderPromo.length > 0 && (
               <div className="w-full fixed bottom-2 mx-auto px-3 md:w-4/5 lg:w-3/5">
                 <div

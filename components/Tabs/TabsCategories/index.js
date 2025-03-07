@@ -9,7 +9,7 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
     const pizzasYEmpanadas = categories.filter(item => item === 'empanadas' || item === 'pizzas');
     const resto = categories.filter(item => item !== 'Combos' && item !== 'promociones' && item !== 'empanadas' && item !== 'pizzas');
 
-    const newListCategories = [...pizzasYEmpanadas,...combosYPromo, ...resto];
+    const newListCategories = [...pizzasYEmpanadas, ...combosYPromo, ...resto];
 
     return (
         <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full mt-4">

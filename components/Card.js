@@ -35,7 +35,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
   return (
     <div>
       <div className="py-3">
-        {categoria === "empanadas" || categoria === "bebidas" || categoria === "porciones" ? (
+        {categoria === "Postres" || categoria === "empanadas" || categoria === "bebidas" || categoria === "porciones" ? (
           <div className="flex justify-between items-center gap-x-2">
             <Image
               className="rounded-lg"

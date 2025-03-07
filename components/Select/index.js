@@ -51,9 +51,9 @@ const Select = ({ data, handleChange, label, newOption }) => {
                         variants={menuVariants}
                     >
                         <ul className="absolute bg-white divide-y shadow  w-full mt-2 rounded-lg overflow-y-auto z-10">
-                            {data.map((item) => (
+                            {data.map((item, index) => (
                                 <li
-                                    key={item}
+                                    key={index}
                                     onClick={() => handleSelect(item)}
                                     className="p-2 px-3 text-sm font-montserrat font-normal hover:bg-gray-100 cursor-pointer"
                                 >

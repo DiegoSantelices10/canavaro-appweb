@@ -15,6 +15,7 @@ import MultiSelect from "components/MultiSelect";
 const Create = () => {
   const [renderProducts, setRenderProductos] = useState("pizzas");
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { categories } = useCategories();
   const { drinks } = useDrinks();
@@ -53,6 +54,7 @@ const Create = () => {
             tamanio: "",
           }}
           onSubmit={async (values, { resetForm }) => {
+            setIsLoading(true);
             if (values.categoriaNueva !== '') {
               values.categoria = values.categoriaNueva;
               values.categoriaNueva = '';
@@ -354,6 +356,7 @@ const Create = () => {
                     </label>
                   </div>
                   <button
+                    disabled={isLoading}
                     className="w-full md:w-44 h-10 col-start-2 rounded-lg mt-6 md:mt-0  text-sm 
                                 border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500"
                     type="submit"

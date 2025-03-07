@@ -39,8 +39,12 @@ const productoSchema = new Schema(
       type: Number,
     },
     imagen: {
-      url: String,
-      public_id: String,
+      url: {
+        type: String,
+      },
+      public_id: {
+        type: String,
+      },
     },
     formato: {
       type: String,

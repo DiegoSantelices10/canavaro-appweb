@@ -250,7 +250,7 @@ export default function ProductLayout({
       )}
       <img
         src={imagen?.url || "/images/sin-imagen-id.png"}
-        className="z-0 inset-0 w-full h-full bg-green-300 object-contain"
+        className="z-0 inset-0  bg-green-300 object-contain"
         alt={nombre}
       />
 
@@ -259,7 +259,7 @@ export default function ProductLayout({
         <FiChevronsLeft className="absolute text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
 
-      <div className="w-full bg-white rounded-t-3xl p-4 relative -mt-10 z-40">
+      <div className="w-full bg-white rounded-t-3xl p-4 relative -mt-20 z-40">
         <div className="flex flex-col w-full ">
           <div className="w-full ">
             <h1 className="font-semibold text-lg font-montserrat text-zinc-800">{nombre}</h1>

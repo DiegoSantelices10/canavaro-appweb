@@ -7,6 +7,7 @@ const useCategories = () => {
     const [categories, setCategories] = useState([])
     const { products } = useSelector(state => state.product);
 
+
     const renderCategory = () => {
         const categories = [...new Set(products?.map(producto => producto.categoria))];
         setCategories(categories);
