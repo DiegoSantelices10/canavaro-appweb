@@ -231,7 +231,7 @@ export default function Home({ data }) {
                 <p className="text-base font-bold font-montserrat text-neutral-800">
                   {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
                 </p>
-                <div className="flex overflow-x-scroll flexp space-x-6 w-full py-1">
+                <div className="flex overflow-x-scroll flexp space-x-6 w-full py-2">
                   <style jsx>
                     {`
                 .flexp::-webkit-scrollbar-thumb {
