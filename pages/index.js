@@ -11,8 +11,7 @@ import "react-multi-carousel/lib/styles.css";
 import CustomArrow from "components/CustomArrows";
 
 
-export default function index({ data }) {
-
+const Home = ({ data }) => {
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function index({ data }) {
 
 
   const addExtras = () => {
-    const extras = data.filter(item => item.categoria === 'extras' && item.available === true)
+    const extras = data?.filter(item => item.categoria === 'extras' && item.available === true)
     dispatch(setExtras(extras))
   }
 
@@ -79,3 +78,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ r
     },
   };
 });
+
+export default Home;

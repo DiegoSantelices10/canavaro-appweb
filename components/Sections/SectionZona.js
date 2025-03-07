@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function SectionZona() {
+const SectionZona = () => {
   return (
     <div className=" bg-black w-full h-full">
       <div className="relative p-2 h-full  
@@ -54,3 +54,5 @@ export default function SectionZona() {
     </div>
   );
 }
+
+export default SectionZona;

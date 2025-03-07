@@ -12,7 +12,7 @@ import { setSetting } from "store/reducers/settingSlice";
 import ModalHome from "components/ModalHome";
 import { FaWhatsapp } from "react-icons/fa";
 
-function HomeFront() {
+const HomeFront = () => {
 
   const [imageModal, setImageModal] = useState({});
   const [buttonWhatsapp, setButtonWhatsapp] = useState({});
@@ -72,7 +72,7 @@ function HomeFront() {
               <h1 className="text-sm text-gray-200 font-normal">Delivery & Take Away</h1>
               <p className="text-sm  text-zinc-200 font-normal">De martes a domingo de 19 a 23hs.</p>
               <p className="text-zinc-200  text-sm ">Pelliza 1794 - Olivos</p>
-              {deliveryButton.available && (
+              {deliveryButton?.available && (
                 <div className="w-full flex items-center mt-3">
                   <Link href={"/order/home"}>
                     <a
@@ -87,7 +87,7 @@ function HomeFront() {
               )}
             </div>
           </div>
-          {buttonWhatsapp.available && (
+          {buttonWhatsapp?.available && (
             <div className="md:absolute transition-all duration-500 focus:-translate-y-2 hover:-translate-y-2 md:bottom-6 md:z-30 md:left-6 flex gap-4 justify-center items-center">
               <a
                 target="_blank"
