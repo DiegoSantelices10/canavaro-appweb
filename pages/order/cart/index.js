@@ -416,7 +416,7 @@ export default function Cart({ data }) {
                 {!orderList.some(item => item.categoria === "bebidas") && (
                   <Collapsable
                     title={
-                      <h1 className="font-montserrat text-base font-bold text-gray-800">
+                      <h1 className="font-montserrat text-sm font-bold text-gray-800">
                         ¿ Deseas agregar alguna bebida ?
                       </h1>
                     }
@@ -444,7 +444,7 @@ export default function Cart({ data }) {
                 {!orderList.some(item => item.categoria === "Postres") && (
                   <Collapsable
                     title={
-                      <h1 className="font-montserrat text-base font-bold text-gray-800">
+                      <h1 className="font-montserrat text-sm font-bold text-gray-800">
                         ¿ Deseas agregar algun postre ?
                       </h1>
                     }
@@ -470,7 +470,7 @@ export default function Cart({ data }) {
                   </Collapsable>
                 )}
 
-                <div className="p-3 mb-16 pb-10 rounded-md">
+                <div className="p-3  pb-20 rounded-md">
                   <button
                     onClick={() => addCartPromo(orderPromo)}
                     type="button"

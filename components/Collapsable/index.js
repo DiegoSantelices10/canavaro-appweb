@@ -12,7 +12,7 @@ const Collapsable = ({ children, title }) => {
                 {...getToggleProps()}
             >
                 {title}
-                {isExpanded ? <FaAngleUp /> : <FaAngleDown />}
+                {isExpanded ? <FaAngleUp /> : <FaAngleDown className='text-red-600' />}
 
             </button>
             <section {...getCollapseProps()}>{children}</section>

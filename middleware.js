@@ -6,12 +6,9 @@ export async function middleware(req) {
 
     // Si no hay token y la ruta no es '/admin/auth/login', redirige a la página de login
     if (!token && nextUrl.pathname !== '/admin/auth/login') {
-        console.log('no paso por el middleware');
         nextUrl.pathname = '/admin/auth/login';
         return NextResponse.redirect(nextUrl);
     }
-    console.log('paso por el middleware');
-
 
     return NextResponse.next();
 }
