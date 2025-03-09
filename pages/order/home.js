@@ -27,7 +27,7 @@ import { categoriasNoDestacables } from "utils";
 import { wrapper } from "store/app/store";
 
 
-export default function Home({ data }) {
+export default function Home() {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalCant, setTotalCant] = useState(0);

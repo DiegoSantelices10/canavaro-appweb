@@ -118,8 +118,20 @@ const Successful = () => {
           <h2 className="text-gray-800 font-montserrat text-base font-bold w-full py-2">¡Ya recibimos tu pedido! </h2>
         </motion.div>
       </motion.div>
-      <div className="p-2 w-full md:w-1/2 lg:w-2/5 mx-auto shadow-sm">
+      <div className="px-2  w-full md:w-1/2 lg:w-2/5 mx-auto shadow-sm">
         <div id="container-pedido">
+          <div className="flex justify-center items-center flex-col gap-2">
+            <p className=" text-sm font-montserrat font-medium">¡Confirma tu pedido por whatsapp!</p>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20confirmar%20mi%20pedido%20de:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}%0ATotal:%20$%20${checkout.total}%0APaga%20con:%20${checkout.medioDePago}`}
+            >
+              <div className="flex items-center text-sm gap-2 font-montserrat  bg-green-500 p-2 px-3 text-white font-semibold rounded-lg shadow-md">
+                <FaWhatsapp size={18} />
+                Ir a whatsapp</div>
+            </a>
+          </div>
           <div className="flex justify-between items-center p-1">
             <p className=" font-semibold font-montserrat text-base">
 
@@ -251,18 +263,7 @@ const Successful = () => {
             className="rounded-lg text-white bg-red-600 flex gap-2 justify-center items-center px-3  p-2 font-montserrat text-sm  shadow-md">
             Descargar <FaDownload size={16} /> </button>
         </div>
-        <div className="flex justify-center items-center flex-col gap-4 mt-8">
-          <p className=" text-base font-montserrat font-semibold">¡Confirma tu pedido por whatsapp!</p>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20confirmar%20mi%20pedido%20de:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}%0ATotal:%20$%20${checkout.total}%0APaga%20con:%20${checkout.medioDePago}`}
-          >
-            <div className="flex items-center gap-2 font-montserrat  bg-green-500 p-2 px-3 text-white font-semibold rounded-lg shadow-md">
-              <FaWhatsapp size={18} />
-              Ir a whatsapp</div>
-          </a>
-        </div>
+
       </div>
 
     </div >
