@@ -59,7 +59,7 @@ const MeansOfPayment = (props) => {
                         {values.medioDePago === "Cuenta DNI" && (
                             <>
                                 <p className="font-montserrat text-center font-semibold">
-                                    De lunes a viernes 20% de reintegro
+                                    Jueves y Viernes 20% de reintegro
                                 </p>
                                 <p className="font-montserrat text-center font-semibold">
                                     pagando con Cuenta DNI
@@ -88,7 +88,7 @@ const MeansOfPayment = (props) => {
                                     <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
                                 </div>
                                 <p className="font-montserrat text-center text-xs text-gray-400">
-                                    El reintegro lo realiza el banco, tope $7500 por mes.
+                                    El reintegro lo realiza el banco, tope $8500 por mes.
                                 </p>
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     Abonas al momento de confirmar el pedido por whatsapp
