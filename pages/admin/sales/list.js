@@ -61,15 +61,14 @@ const Sales = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className={`w-full sm:w-80  md:w-80 border ${item?.visto !== true ? "border-gray-200" : "border-red-500"} rounded-lg h-auto  p-3 border`}
+                    className={`w-full sm:w-80  md:w-80 shadow-sm  ${item?.visto !== true ? "shadow-gray-300" : "shadow-red-400"} rounded-lg h-auto  p-3 `}
                   >
                     <div className="w-full text-sm">
                       <h2 className="text-right text-xs text-gray-500"><span className="text-xs">{item.hora}hs.</span></h2>
                       <div className="text-left py-3 font-medium">
-                        <h5 className="font-semibold">{item?.cliente}</h5>
-                        <h5 className="text-sm font-semibold">{item?.domicilio}</h5>
+                        <h5 className="font-semibold">{item?.cliente ? item?.cliente : item?.domicilio}</h5>
 
-                        <h5 className="font-normal text-xs text-gray-400">{item?.tipoEnvio}</h5>
+                        <h5 className="font-normal text-xs text-gray-400">{item?.telefono}</h5>
                       </div>
                     </div>
                     <div className="flex justify-end  gap-3 w-full font-montserrat">
