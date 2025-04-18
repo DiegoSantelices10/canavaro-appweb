@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function CardPromotion({ data: { nombre, descripcion, imagen } }) {
   return (
     <div>
-      <div className="w-64 relative h-36 overflow-hidden rounded-lg">
+      <div className="w-60 relative h-36 overflow-hidden rounded-lg">
         {/* Fondo blureado */}
         <img
           src={imagen?.url || "/images/sin-imagen-center.png"}

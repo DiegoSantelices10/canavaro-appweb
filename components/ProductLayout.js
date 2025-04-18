@@ -249,12 +249,12 @@ export default function ProductLayout({
         />
       )}
       <div className="h-80 w-full relative">
-      <img
-        src={imagen?.url || "/images/sin-imagen-id.png"}
-        className="z-0"
-        alt={nombre}
+        <img
+          src={imagen?.url || "/images/sin-imagen-id.png"}
+          className="z-0"
+          alt={nombre}
         />
-        </div>
+      </div>
 
       <button
         onClick={returnHome}>

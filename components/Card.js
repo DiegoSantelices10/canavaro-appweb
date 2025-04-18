@@ -38,7 +38,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
         {categoria === "Postres" || categoria === "empanadas" || categoria === "bebidas" || categoria === "porciones" ? (
           <div className="flex justify-between items-center gap-x-2">
             <Image
-              className="rounded-lg"
+              className="rounded-lg overflow-hidden"
               src={imagen?.url || "/images/producto-sin-imagen.png"}
               width={140}
               height={140}
