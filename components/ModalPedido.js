@@ -60,7 +60,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: -50 }}
-            className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+            className="bg-white px-4 pt-5 pb-4 sm:pb-4"
           >
             <div className="flex justify-end h-full w-full">
               <button onClick={handleClose}>
@@ -142,36 +142,43 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
 
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <p className="text-sm font-medium  mt-4 text-gray-500 font-montserrat">{capitalizeFirstLetter(categoria?.categoria)}</p>
+                    <p className="text-sm font-medium tracking-wide mt-4 text-gray-500 font-montserrat">{capitalizeFirstLetter(categoria?.categoria)}</p>
                     <hr />
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
                       .map((item, index) => {
                         return (
-                          <div key={index} className="py-1 font-montserrat text-base text-neutral-800">
+                          <div key={index} className="py-1 font-montserrat text-sm text-neutral-800">
                             <div className="flex justify-between items-center font-montserrat">
-                              <div className="font-semibold">
-                                {item?.cant || item?.cantidad} x
-                                <span className="pl-1 font-semibold text-gray-800">
-                                  {item.categoria === "pizzas" && getShortSize(item?.tamanio)}
-                                </span>
-                                <span className=" text-base font-normal">
-                                  {" "}
-                                  {item.nombre}
-                                </span>
+                              <div className="font-semibold flex gap-1">
+                                <div className="flex gap-1 items-start">
+                                  <h2>
+                                    {item?.cant || item?.cantidad}
+                                  </h2>
+                                  <p>x</p>
+                                </div>
+                                <div className="flex gap-1">
+                                  <span className="font-semibold text-gray-800">
+                                    {item.categoria === "pizzas" && getShortSize(item?.tamanio)}
+                                  </span>
+                                  <span className="font-normal line-clamp-1 text-gray-800 pr-2">
+                                    {" "}
+                                    {item.nombre}
+                                  </span>
+                                </div>
                               </div>
                               <p className="whitespace-nowrap">{formatearNumero(item.precio * item.cantidad)}</p>
                             </div>
                             {categoria.categoria === 'pizzas' && <p className="font-normal text-gray-500  text-sm w-11/12">{item.descripcion}</p>}
                             {item.extra && (
-                              <p className="text-gray-500 text-sm font-normal">
+                              <p className="text-gray-500  font-normal">
                                 Extra: {item.extra}
                               </p>
                             )}
                             {item.products &&
                               item.products.map(producto => (
                                 <div key={producto._id}>
-                                  <p className="font-normal text-sm text-gray-500">
+                                  <p className="font-normal text-gray-500">
                                     {producto.cantidad && `${producto.cantidad}  `}<span>{producto.nombre}</span>
                                   </p>
                                 </div>

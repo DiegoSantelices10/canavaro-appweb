@@ -153,7 +153,7 @@ const HomeAdmin = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`w-full sm:w-80  md:w-80 shadow-sm ${item?.visto !== true ? "shadow-gray-300" : "shadow-red-400"}  rounded-lg h-auto  p-3`}
+                  className={`w-full grid grid-cols-1 justify-between  md:w-80 shadow-sm ${item?.visto !== true ? "shadow-gray-300" : "shadow-red-400"}  rounded-lg h-auto  p-3`}
                 >
                   <div className="w-full text-sm text-gray-800">
                     <h2 className="text-right text-xs ">{item.hora} hs.</h2>

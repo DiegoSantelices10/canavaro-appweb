@@ -5,6 +5,7 @@ import { FaWhatsapp, FaDownload } from "react-icons/fa"
 import React, { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import { formatearNumero } from "libs/items";
+import { capitalizeFirstLetter } from "utils";
 
 
 const Successful = () => {
@@ -220,7 +221,7 @@ const Successful = () => {
               )}
               {hasProductosGeneral()?.length === 0 && hasProductosEfectivo().map(product => (
                 <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                  <h3 className='text-sm font-semibold '>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
+                  <h3 className='text-sm font-semibold'>{product.nombre.length > 20 ? product.nombre.substring(0, 20) + "..." : product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
                   <div className='flex gap-4 items-center'>
                     <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
                   </div>
@@ -228,7 +229,13 @@ const Successful = () => {
               ))}
               {hasProductosEfectivo()?.length === 0 && hasProductosGeneral().map(product => (
                 <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                  <h3 className='text-sm font-semibold '>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cant ? product.cant : product.cantidad}u`}</span></h3>
+                  <h3 className='text-sm font-semibold line-clamp-1'>
+                    {product.categoria === "pizzas"
+                      ? capitalizeFirstLetter(product.tamanio) + " " + product.nombre
+                      : product.nombre
+                    }
+                    <span className='text-xs text-gray-400'>{` ${product.cant ? product.cant : product.cantidad}u`}</span>
+                  </h3>
                   <div className='flex gap-4 items-center'>
                     <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
                   </div>
