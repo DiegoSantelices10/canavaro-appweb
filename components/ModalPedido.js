@@ -129,7 +129,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 </div>
 
                 {pedido?.comentarios && (
-                  <div className="flex gap-1 items-center">
+                  <div className="flex gap-1 items-start">
                     <h2 className="font-semibold text-sm text-gray-500">
                       Comentarios:
                     </h2>
