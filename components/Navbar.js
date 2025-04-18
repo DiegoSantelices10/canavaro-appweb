@@ -21,7 +21,7 @@ export default function Navbar() {
         </div>
         {orderList.length > 0 && (
 
-          <div className="rounded-lg p-1.5 px-2.5 flex gap-2 items-center   bg-white hover:bg-red-500  hover:-translate-y-1 transition-all duration-500">
+          <div className="rounded-lg py-2 px-2.5 flex gap-2 items-center   bg-white hover:bg-red-500  hover:-translate-y-1 transition-all duration-500">
             {loader ?
               <ColorRing
                 visible={true}
@@ -34,9 +34,9 @@ export default function Navbar() {
               /> : (
                 <Link href={"/order/cart"} >
                   <a className="flex justify-center items-center gap-2" onClick={handleLoader}>
-                    <ShoppingCart02Icon className="text-red-600 w-6 h-6 hover:text-white" />
-                    <div className="rounded-full flex justify-center items-center h-7 w-7 bg-red-500">
-                      <p className="font-semibold text-white">{orderList.length}</p>
+                    <ShoppingCart02Icon className="text-red-600 w-5 h-5 hover:text-white" />
+                    <div className="rounded-full flex justify-center items-center h-5 w-5 bg-red-500">
+                      <p className="font-semibold text-white text-sm">{orderList.length}</p>
                     </div>
                   </a>
                 </Link>

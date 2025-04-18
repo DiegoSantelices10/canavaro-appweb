@@ -248,11 +248,13 @@ export default function ProductLayout({
           setShowModal={setShowModal}
         />
       )}
+      <div className="h-80 w-full relative">
       <img
         src={imagen?.url || "/images/sin-imagen-id.png"}
-        className="z-0 inset-0  bg-green-300 object-contain"
+        className="z-0"
         alt={nombre}
-      />
+        />
+        </div>
 
       <button
         onClick={returnHome}>

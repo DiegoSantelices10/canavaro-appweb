@@ -16,7 +16,7 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
             <style jsx>
                 {`
             .flexp::-webkit-scrollbar-thumb {
-              background: #dc2626;
+              background: #f4f4f4;
               border-radius: 20px;
             }
 
