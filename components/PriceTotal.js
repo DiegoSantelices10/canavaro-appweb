@@ -82,7 +82,8 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
         return sumTotal - (sumTotal * (descuento / 100));
     }
 
-
+    console.log('promoBarra', promoBarra?.available);
+    console.log('delivery', delivery);
 
     return (
         <div className="w-full font-montserrat mb-20 relative">
@@ -117,6 +118,7 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
                         }
 
                     </div>
+
                     <h3 className='text-xs px-2 font-medium mt-2 text-gray-400'>Solo efectivo</h3>
                     {hasProductosEfectivo().map(product => (
                         <div key={product._id} className='flex px-2 justify-between w-full items-center py-1'>

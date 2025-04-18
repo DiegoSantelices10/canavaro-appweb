@@ -220,7 +220,8 @@ const Successful = () => {
                   ))}
                 </>
               )}
-              {hasProductosGeneral()?.length === 0 && hasProductosEfectivo().map(product => (
+
+              {hasProductosEfectivo()?.map(product => (
                 <div key={product._id} className='flex justify-between w-full items-center py-1'>
                   <h3 className='text-sm font-semibold'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
                   <div className='flex gap-4 items-center'>
@@ -228,7 +229,7 @@ const Successful = () => {
                   </div>
                 </div>
               ))}
-              {hasProductosEfectivo()?.length === 0 && hasProductosGeneral().map(product => (
+              {hasProductosGeneral()?.map(product => (
                 <div key={product._id} className='flex justify-between w-full items-center py-1'>
                   <h3 className='text-sm font-semibold line-clamp-1'>
                     {product.categoria === "pizzas"
