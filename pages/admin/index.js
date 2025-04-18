@@ -124,7 +124,13 @@ const HomeAdmin = () => {
     }
   };
 
+  const separarNumero = numero => {
+    const segmento1 = numero.substring(0, 2);
+    const segmento2 = numero.substring(2, 6);
+    const segmento3 = numero.substring(6, 10);
 
+    return `${segmento1} ${segmento2} ${segmento3}`;
+  };
 
   return (
     <Layout>
@@ -147,15 +153,14 @@ const HomeAdmin = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`w-full sm:w-80  md:w-80 border ${item?.visto !== true ? "border-gray-200" : "border-red-500"}  rounded-lg h-auto  p-3 border`}
+                  className={`w-full sm:w-80  md:w-80 shadow-sm ${item?.visto !== true ? "shadow-gray-300" : "shadow-red-400"}  rounded-lg h-auto  p-3`}
                 >
                   <div className="w-full text-sm text-gray-800">
                     <h2 className="text-right text-xs ">{item.hora} hs.</h2>
                     <div className="text-left py-3 font-medium">
-                      <h5 className="font-semibold">{item?.cliente}</h5>
-                      <h5 className="text-sm font-semibold ">{item?.domicilio}</h5>
+                      <h5 className="font-semibold">{item?.cliente ? item?.cliente : item?.domicilio}</h5>
 
-                      <h5 className="font-normal text-xs text-gray-700">{item?.tipoEnvio}</h5>
+                      <h5 className="font-normal text-xs text-gray-700">{separarNumero(item?.telefono)}</h5>
                     </div>
                   </div>
                   <div className={`flex justify-end items-center  gap-3 w-full font-montserrat`}>

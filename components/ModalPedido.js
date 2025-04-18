@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { formatearNumero } from "libs/items";
 import { AiOutlineClose } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { capitalizeFirstLetter } from "utils";
 const ModalPedido = ({ handleClose, show, pedido }) => {
   const { promoEfectivo } = useSelector(state => state.setting);
   const showHideClassName = show ? "fixed z-10 inset-0 overflow-y-auto w-full" : "hidden";
@@ -29,6 +30,21 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
   const conDescuento = () => {
     return productos.some(p => p.categoria !== 'solo efectivo');
   }
+
+  function getShortSize(tamaño) {
+    switch (tamaño.toLowerCase()) {
+      case 'gigante':
+        return 'Gig';
+      case 'mediana':
+        return 'Med';
+      case 'chica':
+        return 'Chi';
+      default:
+        return '';
+    }
+  }
+
+
   return (
     <div className={showHideClassName}>
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-montserrat">
@@ -56,52 +72,77 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
             </div>
             <div className="font-normal text-left text-base font-montserrat mt-4 text-gray-800">
               <div className="flex justify-between w-full ">
-                <h2 className="font-semibold">
-                  Fecha: <span className="font-normal text-base">{pedido?.fecha}</span>
+                <h2 className="font-semibold text-gray-500 text-sm">
+                  Fecha <span className="font-normal text-sm">{pedido?.fecha}</span>
                 </h2>
-                <h2 className="font-semibold">
-                  Hora: <span className="font-normal text-base">{pedido?.hora}</span>
+                <h2 className="font-semibold text-gray-500 text-sm">
+                  Hora <span className="font-normal text-sm">{pedido?.hora}</span>
                 </h2>
               </div>
-              {pedido?.cliente && (
-                <h2 className="font-semibold mt-1">
-                  Cliente: <span className="font-normal  text-base">{pedido.cliente}</span>
-                </h2>
-              )}
 
-              {pedido.domicilio && (
-                <h2 className="font-semibold mt-1">
-                  Direccion: <span className="font-normal text-base">{pedido?.domicilio}</span>
-                </h2>
-              )}
-              {pedido?.telefono && (
-                <h2 className="font-semibold mt-1">
-                  Telefono: <span className="font-normal text-base">{separarNumero(pedido?.telefono)}</span>
-                </h2>
-              )}
-              <h2 className="font-semibold mt-1">
-                Tipo de envio: <span className="font-normal text-base">{pedido?.tipoEnvio}</span>
-              </h2>
-              {pedido.hPersonalizado !== "" && (
-                <h2 className="font-semibold mt-1">
-                  Horario de {pedido.domicilio ? "entrega" : "retiro"}: <span className="font-normal text-base">{pedido?.hPersonalizado}hs.</span>
-                </h2>
+              <div className="shadow shadow-gray-300 space-y-2 rounded-lg px-3 py-3 mt-2">
+                {pedido?.cliente && (
+                  <div className="flex justify-between items-center w-full">
+                    <h2 className="font-semibold text-sm text-gray-500">
+                      Cliente
+                    </h2>
+                    <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido.cliente}</span>
+                  </div>
+                )}
 
-              )}
-              <h2 className="font-semibold mt-1">
-                Medio de pago: <span className="font-normal text-base">{pedido?.medioDePago}</span>
-              </h2>
+                {pedido?.domicilio && (
+                  <div className="flex justify-between items-center w-full">
+                    <h2 className="font-semibold text-sm text-gray-500">
+                      Direccion
+                    </h2>
+                    <h2 className="font-medium text-gray-500 tracking-wide text-sm">{pedido.domicilio}</h2>
+                  </div>
+                )}
+                {pedido?.telefono && (
+                  <div className="flex justify-between items-center w-full">
+                    <h2 className="font-semibold text-sm text-gray-500">
+                      Telefono
+                    </h2>
+                    <span className="font-medium text-gray-500 tracking-wide text-sm">{separarNumero(pedido?.telefono)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between items-center w-full">
+                  <h2 className="font-semibold text-sm text-gray-500">
+                    Tipo de envio
+                  </h2>
+                  <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.tipoEnvio}</span>
+                </div>
+                {pedido.hPersonalizado !== "" && (
+                  <div className="flex justify-between items-center w-full">
+                    <h2 className="font-semibold text-sm text-gray-500">
+                      Horario de {pedido.domicilio ? "entrega" : "retiro"}
+                    </h2>
+                    <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.hPersonalizado}hs.</span>
+                  </div>
 
-              {pedido?.comentarios && (
-                <h2 className="font-semibold mt-1">
-                  Comentarios: <span className="font-normal text-base">{pedido?.comentarios}</span>
-                </h2>
-              )}
+                )}
+                <div className="flex justify-between items-center w-full">
+                  <h2 className="font-semibold text-sm text-gray-500">
+                    Medio de pago
+                  </h2>
+                  <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.medioDePago}</span>
+                </div>
+
+                {pedido?.comentarios && (
+                  <div className="flex gap-1 items-center">
+                    <h2 className="font-semibold text-sm text-gray-500">
+                      Comentarios:
+                    </h2>
+                    <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.comentarios}</span>
+                  </div>
+                )}
+              </div>
+
               <>
 
                 {categoriasId?.map(categoria => (
                   <div key={categoria.id}>
-                    <p className="text-sm font-medium  mt-4 text-gray-500 font-montserrat">{categoria?.categoria}</p>
+                    <p className="text-sm font-medium  mt-4 text-gray-500 font-montserrat">{capitalizeFirstLetter(categoria?.categoria)}</p>
                     <hr />
                     {productos
                       ?.filter(producto => producto?.categoria === categoria.categoria)
@@ -111,12 +152,12 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                             <div className="flex justify-between items-center font-montserrat">
                               <div className="font-semibold">
                                 {item?.cant || item?.cantidad} x
+                                <span className="pl-1 font-semibold text-gray-800">
+                                  {item.categoria === "pizzas" && getShortSize(item?.tamanio)}
+                                </span>
                                 <span className=" text-base font-normal">
                                   {" "}
                                   {item.nombre}
-                                </span>
-                                <span className=" pl-1 font-normal ">
-                                  {item.categoria === "pizzas" && item?.tamanio}
                                 </span>
                               </div>
                               <p className="whitespace-nowrap">{formatearNumero(item.precio * item.cantidad)}</p>
