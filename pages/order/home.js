@@ -216,8 +216,6 @@ export default function Home() {
 
               .flexp::-webkit-scrollbar {
                 height: 4px;
-                position: absolute;
-                top: 0px;
               }
             `}
               </style>
@@ -243,19 +241,12 @@ export default function Home() {
                 }
                 .flexp::-webkit-scrollbar {
                   height: 4px;
-                  position: absolute;
-                  top: 0px;
                 }
               `}
                   </style>
-                  <div
-                  style={{ direction: "ltr" }}
-                  >
-
                   {productosFiltrados.map((data) => (
                     <CardPromotion key={data._id} data={data} />
                   ))}
-                  </div>
                 </div>
               </div>
             );
