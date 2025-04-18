@@ -10,7 +10,7 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen } })
           <a className="font-bold text-sm text-gray-800">
             <img
               src={imagen?.url || "/images/sin-imagen-center.png"}
-              className="rounded-lg object-cover w-full h-36"
+              className="rounded-lg object-contain w-full h-40"
               alt={nombre}
             />
           </a>
