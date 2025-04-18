@@ -204,9 +204,9 @@ export default function Home() {
       <div className="pt-[40px] mx-auto w-full rounded-3xl relative">
 
         <>
-          <h1 className="text-base font-medium font-montserrat tracking-wide text-neutral-800 mt-6">Nuestras promociones</h1>
+          <h1 className="text-base font-semibold font-montserrat tracking-wide text-neutral-800 mt-6">Nuestras promociones</h1>
           <div className="py-2 ">
-            <div className="flex overflow-x-scroll flexp h-auto p-0.5 space-x-6 w-full">
+            <div className="flex overflow-x-scroll top-0 flexp h-auto p-0.5 space-x-6 w-full">
               <style jsx>
                 {`
               .flexp::-webkit-scrollbar-thumb {
@@ -216,9 +216,12 @@ export default function Home() {
 
               .flexp::-webkit-scrollbar {
                 height: 4px;
+                position: absolute;
+                top: 0px;
               }
             `}
               </style>
+             
               {renderPromotions()}
             </div>
           </div>
@@ -228,7 +231,7 @@ export default function Home() {
           {Object.entries(groupedProducts).map(([categoria, productosFiltrados]) => {
             return (
               <div key={categoria}>
-                <p className="text-base font-medium font-montserrat tracking-wide text-neutral-800">
+                <p className="text-base font-semibold font-montserrat tracking-wide text-neutral-800">
                   {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
                 </p>
                 <div className="flex overflow-x-scroll flexp space-x-6 w-full py-2">
@@ -240,12 +243,19 @@ export default function Home() {
                 }
                 .flexp::-webkit-scrollbar {
                   height: 4px;
+                  position: absolute;
+                  top: 0px;
                 }
               `}
                   </style>
+                  <div
+                  style={{ direction: "ltr" }}
+                  >
+
                   {productosFiltrados.map((data) => (
                     <CardPromotion key={data._id} data={data} />
                   ))}
+                  </div>
                 </div>
               </div>
             );
