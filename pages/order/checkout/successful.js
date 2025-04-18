@@ -26,6 +26,7 @@ const Successful = () => {
     }, 0);
     setSubTotal(sumGeneral)
   }, [])
+  console.log('orderList', orderList);
 
 
   const handleCapture = () => {
@@ -221,7 +222,7 @@ const Successful = () => {
               )}
               {hasProductosGeneral()?.length === 0 && hasProductosEfectivo().map(product => (
                 <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                  <h3 className='text-sm font-semibold'>{product.nombre.length > 20 ? product.nombre.substring(0, 20) + "..." : product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
+                  <h3 className='text-sm font-semibold'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
                   <div className='flex gap-4 items-center'>
                     <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
                   </div>

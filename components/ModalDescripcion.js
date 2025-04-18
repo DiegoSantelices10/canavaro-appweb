@@ -21,7 +21,7 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
           >
             <div className=" overflow-hidden h-full   mx-auto  ">
               <button
-                className="absolute top-4 right-4"
+                className="absolute top-4 right-4 bg-slate-500"
                 onClick={handleClose}>
                 <MultiplicationSignIcon />
               </button>
