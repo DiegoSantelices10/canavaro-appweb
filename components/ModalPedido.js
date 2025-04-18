@@ -129,9 +129,9 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 </div>
 
                 {pedido?.comentarios && (
-                  <div className="flex gap-1 items-start">
+                  <div className="space-y-1">
                     <h2 className="font-semibold text-sm text-gray-500">
-                      Comentarios:
+                      Comentarios
                     </h2>
                     <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.comentarios}</span>
                   </div>
