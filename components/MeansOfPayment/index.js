@@ -41,7 +41,7 @@ const MeansOfPayment = (props) => {
                             />
                         )}
                         {values.medioDePago === "Mercado Pago" && (
-                            <>
+                            <div className='text-sm'>
                                 <p className="font-montserrat text-center font-semibold ">
                                     por transferencia a <span className="text-md font-semibold font-montserrat text-sky-500">pizzeria.canavaro</span>
                                 </p>
@@ -49,15 +49,15 @@ const MeansOfPayment = (props) => {
                                     o mediante QR
                                 </p>
                                 <div className="flex justify-center w-full">
-                                    <Image src="/images/logo-mercadopago.png" width={100} height={100} alt="logoMP" />
+                                    <Image src="/images/logo-mercadopago.png" width={80} height={80} alt="logoMP" />
                                 </div>
                                 <p className="font-montserrat text-center text-xs text-gray-400 font-normal">
                                     Abonas al momento de confirmar el pedido por whatsapp
                                 </p>
-                            </>
+                            </div>
                         )}
                         {values.medioDePago === "Cuenta DNI" && (
-                            <>
+                            <div className='text-sm'>
                                 <p className="font-montserrat text-center font-semibold">
                                     Jueves y Viernes 20% de reintegro
                                 </p>
@@ -65,7 +65,7 @@ const MeansOfPayment = (props) => {
                                     pagando con Cuenta DNI
                                 </p>
                                 <div className="flex justify-center w-full">
-                                    <Image src="/images/cuenta-dni.jpg" width={170} height={70} alt="logoOpen" />
+                                    <Image src="/images/cuenta-dni.jpg" width={130} height={50} alt="logoOpen" />
                                 </div>
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     El reintegro lo realiza la billetera virtual, tope $6000 por mes.
@@ -73,10 +73,10 @@ const MeansOfPayment = (props) => {
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     Abonas al momento de confirmar el pedido por whatsapp
                                 </p>
-                            </>
+                            </div>
                         )}
                         {values.medioDePago === "Open Pay" && (
-                            <>
+                            <div className='text-sm'>
                                 <p className="font-montserrat text-center font-semibold ">
                                     Los martes y viernes
                                 </p>
@@ -85,7 +85,7 @@ const MeansOfPayment = (props) => {
                                 </p>
 
                                 <div className="flex justify-center w-full">
-                                    <Image src="/images/openpay.png" width={180} height={70} alt="logoOpen" />
+                                    <Image src="/images/openpay.png" width={160} height={60} alt="logoOpen" />
                                 </div>
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     El reintegro lo realiza el banco, tope $8500 por mes.
@@ -93,7 +93,7 @@ const MeansOfPayment = (props) => {
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     Abonas al momento de confirmar el pedido por whatsapp
                                 </p>
-                            </>
+                            </div>
                         )}
                     </div>
                 </>

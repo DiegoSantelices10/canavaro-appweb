@@ -9,10 +9,9 @@ import { capitalizeFirstLetter } from "utils";
 
 
 const Successful = () => {
-  const { checkout, demora, delivery, orderList, totalAmount } = useSelector(state => state.order);
-  const { promoEfectivo: { available, descuento } } = useSelector(state => state.setting);
+  const { checkout, demora, delivery, orderList } = useSelector(state => state.order);
+  const { promoEfectivo: { available, descuento }, promoBarra } = useSelector(state => state.setting);
   const [subTotal, setSubTotal] = useState(0);
-
   const hasProductosEfectivo = () => {
     return orderList.filter(product => product.categoria === "solo efectivo");
   }
@@ -184,105 +183,170 @@ const Successful = () => {
 
             <h2 className="font-montserrat text-sm font-semibold mt-2 p-1">Pedido</h2>
             <div className="w-full space-y-2 font-montserrat relative p-3 shadow shadow-gray-300 rounded-lg">
-              {available && hasProductosEfectivo()?.length > 0 && hasProductosGeneral()?.length > 0 && (
+
+              {available && hasProductosEfectivo()?.length > 0 || hasProductosGeneral()?.length > 0 ? (
                 <>
                   <div className='my-2 '>
                     {hasProductosGeneral()?.map(product => (
-                      <div key={product._id} className='flex justify-between items-center w-full py-1'>
-                        <h3 className='text-sm font-semibold text-gray-500'>{product.nombre} <span className='text-xs  font-light'>{product.categoria === "empanadas" ? `x ${product.cant}` : `x ${product.cantidad}`}</span> </h3>
-                        <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                      <div
+                        key={product._id}
+                      >
+                        <div className='flex justify-between items-center w-full py-1'>
+                          <h3 className='text-sm font-semibold text-gray-500'>
+                            {(product.categoria === "pizzas" && product.tamanio) ? capitalizeFirstLetter(product.tamanio) + " " + product.nombre : product.nombre}
+                            <span className='text-xs text-gray-500  font-medium'>{product.categoria === "empanadas" ? ` x ${product.cant}` : ` x ${product.cantidad}`}</span> </h3>
+                          <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                        </div>
+                        {product?.descripcion && product.categoria !== "promociones" && (
+                          <div className='flex justify-between w-full items-center py-0.5'>
+                            <h3 className='text-xs font-medium text-gray-500'>{product.descripcion}</h3>
+                          </div>
+                        )}
+                        {product?.products && (
+                          product.products.map(item => (
+                            <div key={item._id} className='flex justify-between w-full items-center py-0.5'>
+
+                              <h3 className='text-xs font-medium text-gray-500'>
+                                {item?.tamanio
+                                  ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
+                                  : item.nombre
+                                }
+                                <span className='text-xs text-gray-500 font-medium'>{` x ${item.cant ? item.cant : item.cantidad}`}</span>
+                              </h3>
+
+                            </div>
+                          ))
+                        )}
                       </div>
                     ))}
-                    {checkout.medioDePago === 'Efectivo' && (
+                    <div>
+                      {checkout.medioDePago === 'Efectivo' && available && !promoBarra?.available && (
+                        <div className="space-y-2">
+                          <div className='flex mt-4 text-gray-500 items-center justify-between w-full'>
+                            <h2 className="text-sm font-semibold">Subtotal</h2>
+                            <p className='text-sm font-medium'>{formatearNumero(subTotal)}</p>
+                          </div>
+                          <hr />
+                          <div className="flex justify-between items-center">
+                            <p className='text-xs text-red-500 font-medium'>Abonando en efectivo, descuento del {descuento}%</p>
+                            <p className='text-sm font-medium'>{formatearNumero(renderSubtotal(descuento))}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {hasProductosEfectivo()?.map(product => (
+                      <div key={product._id}>
+
+                        <div className='flex justify-between w-full items-center py-1'>
+                          <h3 className='text-sm font-semibold text-gray-500'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
+                          <div className='flex gap-4 items-center'>
+                            <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                          </div>
+                        </div>
+                        {product?.products && (
+                          product.products.map(item => (
+                            <div key={item._id} className='flex justify-between w-full items-center py-0.5'>
+
+                              <h3 className='text-xs font-medium text-gray-500'>
+                                {item?.tamanio
+                                  ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
+                                  : item.nombre
+                                }
+                                <span className='text-xs text-gray-500 font-medium'>{` x ${item.cant ? item.cant : item.cantidad}`}</span>
+                              </h3>
+
+                            </div>
+                          ))
+                        )}
+                      </div>
+
+                    ))}
+                    {/* {checkout.medioDePago === 'Efectivo' && (
                       <>
                         <hr className='my-1' />
                         <div className='flex items-center justify-between'>
                           <p className='py-1 text-sm font-semibold '>Subtotal</p>
-                          <p className='text-sm'>{formatearNumero(subTotal)}</p>
+                          <p className='text-sm'>{formatearNumero(checkout.productos?.map(item => item.precio).reduce((a, b) => a + b, 0))}</p>
                         </div>
                       </>
-                    )}
-                    {checkout.medioDePago === 'Efectivo' && (
+                    )} */}
+
+                    {/* {checkout.medioDePago === 'Efectivo' && promoBarra?.available && (
                       <div className='flex text-red-500 items-center justify-between w-full'>
                         <p className='text-xs'>Abonando en efectivo, descuento del {descuento}%</p>
                         <p className='text-sm'>{formatearNumero(renderSubtotal(descuento))}</p>
                       </div>
-                    )}
+                    )} */}
                   </div>
-                  <h3 className='text-xs font-medium text-gray-400'>Solo efectivo{`${checkout.medioDePago === 'Efectivo' ? ", no aplica el descuento" : ""}`}</h3>
+
+                </>
+              ) : (
+                <>
                   {hasProductosEfectivo()?.map(product => (
                     <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                      <h3 className='text-sm font-semibold text-gray-500'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
+                      <h3 className='text-sm font-semibold text-gray-500'>{product.nombre}<span className='text-xs text-gray-400'>{` x ${product.cantidad}`}</span></h3>
                       <div className='flex gap-4 items-center'>
                         <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
                       </div>
                     </div>
+                  ))}
+                  {hasProductosGeneral()?.map(product => (
+                    <div
+                      key={product._id}
+                    >
+                      <div className='flex justify-between w-full items-center py-1'>
+                        <h3 className='text-sm font-semibold text-gray-500 line-clamp-1 pr-3'>
+                          {product?.tamanio
+                            ? capitalizeFirstLetter(product.tamanio) + " " + product.nombre
+                            : product.nombre
+                          }
+                          <span className='text-xs text-gray-500 font-medium'>{` x ${product.cant ? product.cant : product.cantidad}`}</span>
+                        </h3>
+                        <div className='flex gap-4 items-center'>
+                          <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                        </div>
+                      </div>
+                      <div>
+                        {product?.products && (
+                          product.products.map(item => (
+                            <div key={item._id} className='flex justify-between w-full items-center py-0.5'>
 
+                              <h3 className='text-xs font-medium text-gray-500'>
+                                {item?.tamanio
+                                  ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
+                                  : item.nombre
+                                }
+                                <span className='text-xs text-gray-500 font-medium'>{` x ${item.cant ? item.cant : item.cantidad}`}</span>
+                              </h3>
+
+                            </div>
+                          ))
+                        )}
+                        {product?.descripcion && product.categoria !== "promociones" && (
+                          <div className='flex justify-between w-full items-center py-0.5'>
+                            <h3 className='text-xs font-medium text-gray-500'>{product.descripcion}</h3>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   ))}
                 </>
               )}
 
-              {hasProductosEfectivo()?.map(product => (
-                <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                  <h3 className='text-sm font-semibold text-gray-500'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
-                  <div className='flex gap-4 items-center'>
-                    <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
-                  </div>
-                </div>
-              ))}
-              {hasProductosGeneral()?.map(product => (
-                <div
-                  key={product._id}
-                >
-                  <div className='flex justify-between w-full items-center py-1'>
-                    <h3 className='text-sm font-semibold text-gray-500 line-clamp-1 pr-3'>
-                      {product?.tamanio
-                        ? capitalizeFirstLetter(product.tamanio) + " " + product.nombre
-                        : product.nombre
-                      }
-                      <span className='text-xs text-gray-500 font-medium'>{` ${product.cant ? product.cant : product.cantidad}u`}</span>
-                    </h3>
-                    <div className='flex gap-4 items-center'>
-                      <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
-                    </div>
-                  </div>
-                  <div>
-                    {product?.products && (
-                      product.products.map(item => (
-                        <div key={item._id} className='flex justify-between w-full items-center py-0.5'>
-
-                          <h3 className='text-xs font-medium text-gray-500'>
-                            {item?.tamanio
-                              ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
-                              : item.nombre
-                            }
-                            <span className='text-xs text-gray-500 font-medium'>{` ${item.cant ? item.cant : item.cantidad}u`}</span>
-                          </h3>
-
-                        </div>
-                      ))
-                    )}
-                    {product?.descripcion && (
-                      <div className='flex justify-between w-full items-center py-0.5'>
-                        <h3 className='text-xs font-medium text-gray-500'>{product.descripcion}</h3>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-
               <div>
-                {hasProductosEfectivo()?.length === 0 && checkout.medioDePago === 'Efectivo' && available && (
-                  <>
-                    <div className=" w-auto p-2  my-2">
-                      <p className="text-red-500 text-center font-normal text-xs">Se aplica el {available && delivery === "localActual" ? 10 : descuento}% de descuento</p>
-                    </div>
-                    <div className='flex font-montserrat text-sm justify-between w-full items-center py-1 mt-2'>
-                      <p className='font-semibold'>Subtotal</p>
-                      <p className='font-semibold'>{formatearNumero(totalAmount)}</p>
-                    </div>
-                  </>
-                )}
+                {
+                  (promoBarra?.available) && delivery === "localActual" && (
+                    <>
+                      <div className='flex font-montserrat text-sm justify-between w-full items-center py-1 mt-2'>
+                        <p className='font-semibold'>Subtotal</p>
+                        <p className='font-semibold'>{formatearNumero(checkout.productos?.map(item => item.cantidad ? item.precio * item.cantidad : item.precio).reduce((a, b) => a + b, 0))}</p>
+                      </div>
+                      <div className=" w-auto">
+                        <p className="text-red-500 text-right font-medium text-xs">Se aplica el {available && promoBarra?.available && delivery === "localActual" ? 10 : descuento}% de descuento</p>
+                      </div>
+                    </>
+                  )
+                }
               </div>
               <div className="flex justify-between text-sm font-semibold font-montserrat items-center pt-5">
                 <p>Total</p>

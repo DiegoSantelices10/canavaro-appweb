@@ -91,7 +91,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                 )}
 
                 {pedido?.domicilio && (
-                  <div className="flex justify-between items-center w-full">
+                  <div className="flex justify-between items-start w-full gap-2">
                     <h2 className="font-semibold text-sm text-gray-500">
                       Direccion
                     </h2>
