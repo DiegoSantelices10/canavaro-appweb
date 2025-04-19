@@ -250,6 +250,7 @@ const Successful = () => {
                     {product?.products && (
                       product.products.map(item => (
                         <div key={item._id} className='flex justify-between w-full items-center py-0.5'>
+
                           <h3 className='text-xs font-medium text-gray-500'>
                             {item?.tamanio
                               ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
@@ -257,8 +258,14 @@ const Successful = () => {
                             }
                             <span className='text-xs text-gray-500 font-medium'>{` ${item.cant ? item.cant : item.cantidad}u`}</span>
                           </h3>
+
                         </div>
                       ))
+                    )}
+                    {product?.descripcion && (
+                      <div className='flex justify-between w-full items-center py-0.5'>
+                        <h3 className='text-xs font-medium text-gray-500'>{product.descripcion}</h3>
+                      </div>
                     )}
                   </div>
                 </div>
