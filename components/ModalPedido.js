@@ -159,7 +159,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                                 </div>
                                 <div className="flex gap-1">
                                   <span className="font-semibold text-gray-800">
-                                    {item.categoria === "pizzas" && getShortSize(item?.tamanio)}
+                                    {item?.tamanio && getShortSize(item?.tamanio)}
                                   </span>
                                   <span className="font-normal line-clamp-1 text-gray-800 pr-2">
                                     {" "}

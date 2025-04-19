@@ -82,18 +82,19 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
         return sumTotal - (sumTotal * (descuento / 100));
     }
 
-    console.log('promoBarra', promoBarra?.available);
-    console.log('delivery', delivery);
 
     return (
         <div className="w-full font-montserrat mb-20 relative">
             {available && hasProductosEfectivo().length > 0 && hasProductosGeneral().length > 0 && (
                 <>
-                    <div className='p-2 border rounded-lg border-red-500 my-2'>
+                    {promoBarra?.available && delivery === 'localActual' && (
+                        <p className='text-xs text-red-500 font-medium tracking-wide text-center'>Se aplicó 10% de descuento por retiro en el local</p>
+                    )}
+                    <div className='p-2 shadow shadow-red-400 rounded-lg my-2'>
                         {hasProductosGeneral().map(product => (
                             <div key={product._id} className='flex justify-between items-center w-full py-1'>
-                                <h3 className='text-sm font-semibold text-slate-800'>{product.nombre} <span className='text-xs text-gray-800 font-light'>{product.categoria === "empanadas" ? ` ${product.cant}u` : ` ${product.cantidad}u`}</span> </h3>
-                                <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                                <h3 className='text-sm font-semibold text-gray-500 line-clamp-1 pr-3'>{product.nombre} <span className='text-xs text-gray-800 font-light'>{product.categoria === "empanadas" ? ` ${product.cant}u` : ` ${product.cantidad}u`}</span> </h3>
+                                <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
                             </div>
                         ))}
 
@@ -104,8 +105,8 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
                                 <>
                                     <hr className='my-1' />
                                     <div className='flex items-center justify-between'>
-                                        <p className='py-1 text-sm font-semibold text-slate-800'>Subtotal</p>
-                                        <p className='text-sm'>{formatearNumero(subTotal)}</p>
+                                        <p className='py-1 text-sm font-semibold text-gray-500'>Subtotal</p>
+                                        <p className='text-sm text-gray-500 font-medium'>{formatearNumero(subTotal)}</p>
                                     </div>
                                     {values.medioDePago === 'Efectivo' && (
                                         <div className='flex text-red-500 items-center justify-between w-full'>
@@ -119,21 +120,19 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
 
                     </div>
 
-                    <h3 className='text-xs px-2 font-medium mt-2 text-gray-400'>Solo efectivo</h3>
+                    <h3 className='text-xs px-2 font-medium mt-4 text-gray-500'>Solo efectivo</h3>
                     {hasProductosEfectivo().map(product => (
                         <div key={product._id} className='flex px-2 justify-between w-full items-center py-1'>
-                            <h3 className='text-sm font-semibold text-slate-800'>{product.nombre}<span className='text-xs text-gray-800 font-light'>{` ${product.cantidad}u`}</span></h3>
+                            <h3 className='text-sm font-semibold text-gray-500'>{product.nombre}<span className='text-xs text-gray-800 font-light'>{` ${product.cantidad}u`}</span></h3>
                             <div className='flex gap-4 items-center'>
-                                <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                                <h3 className='text-sm font-medium text-gray-500'>{formatearNumero(product.precio * product.cantidad)}</h3>
                             </div>
                         </div>
 
                     ))}
                 </>
             )}
-            {promoBarra?.available && delivery === 'localActual' && (
-                <p className='text-xs text-red-500 text-center'>Se aplicó 10% de descuento por retiro en el local</p>
-            )}
+
 
             <div className='mb-6'>
                 {hasProductosEfectivo().length === 0 && values.medioDePago === 'Efectivo' && available && (

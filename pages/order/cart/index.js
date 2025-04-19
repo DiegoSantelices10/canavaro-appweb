@@ -235,7 +235,7 @@ export default function Cart({ data }) {
                   <div className="py-2">
                     <div className="">
                       {promoBarra?.available && (
-                        <div className="w-full mx-auto text-center text-sm font-bold">
+                        <div className="w-full mx-auto text-center tracking-wide text-sm font-semibold">
                           Retirando por el local tenes un 10% de descuento.
                         </div>
                       )}

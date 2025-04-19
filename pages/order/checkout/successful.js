@@ -117,79 +117,80 @@ const Successful = () => {
               margin: "auto",
             }}
           />
-          <h2 className="text-gray-800 font-montserrat text-base font-bold w-full py-2">¡Ya recibimos tu pedido! </h2>
+          <h2 className="text-gray-800 font-montserrat text-sm mt-2 font-bold w-full">¡Ya recibimos tu pedido! </h2>
         </motion.div>
       </motion.div>
       <div className="px-2  w-full md:w-1/2 lg:w-2/5 mx-auto shadow-sm">
         <div id="container-pedido">
           <div className="flex justify-center items-center flex-col gap-2">
-            <p className=" text-sm font-montserrat font-medium">¡Confirma tu pedido por whatsapp!</p>
+            <p className=" text-sm font-montserrat text-gray-500 font-medium">¡Confirma tu pedido por whatsapp!</p>
             <a
               target="_blank"
               rel="noreferrer"
               href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20confirmar%20mi%20pedido%20de:%20${checkout.domicilio !== "" ? checkout.domicilio : checkout.cliente}%0ATotal:%20$%20${checkout.total}%0APaga%20con:%20${checkout.medioDePago}`}
             >
-              <div className="flex items-center text-sm gap-2 font-montserrat  bg-green-500 p-2 px-3 text-white font-semibold rounded-lg shadow-md">
-                <FaWhatsapp size={18} />
-                Ir a whatsapp</div>
+              <div className="flex items-center text-sm gap-1 font-montserrat  bg-green-500 p-2 px-3 text-white font-semibold rounded-lg shadow-md">
+                <FaWhatsapp size={16} />
+                Ir a whatsapp
+              </div>
             </a>
           </div>
-          <div className="flex justify-between items-center p-1">
-            <p className=" font-semibold font-montserrat text-base">
+          <div className="flex justify-between items-center p-1 mt-4">
+            <p className=" font-semibold font-montserrat text-sm text-gray-800">
 
               Detalle del pedido
             </p>
-            <h1 className="font-medium font-montserrat">{checkout.hora}hs.</h1>
+            <h1 className="font-semibold text-gray-800 text-sm font-montserrat">{checkout.hora}hs.</h1>
           </div>
-          <div className="w-full h-auto rounded-md border-gray-200 border mt-1">
-            <div className="grid gap-4 p-3">
+          <div className="w-full h-auto mt-1">
+            <div className="grid gap-2 p-3 shadow shadow-gray-300 rounded-lg ">
               {delivery === "domicilioActual" ? (
                 <>
                   <div className="flex justify-between items-center">
-                    <h1 className="font-semibold text-sm font-montserrat">Horario de envío</h1>
-                    <span className="text-[13px] font-semibold tracking-wide font-montserrat bg-red-500 text-white px-2 p-1 rounded-md">
+                    <h1 className="font-semibold text-sm font-montserrat text-gray-500">Horario de envío</h1>
+                    <span className="text-[13px] font-medium tracking-wide font-montserrat bg-red-500 text-white px-2 p-1 rounded-md">
                       {checkout.hPersonalizado === "" ? demora + " minutos" : checkout.hPersonalizado + "hs."}</span>
                   </div>
                   <div className="flex justify-between">
-                    <h2 className="font-montserrat text-sm  font-semibold">Domicilio</h2>
-                    <span className="font-montserrat text-sm font-normal ">{checkout.domicilio} </span>
+                    <h2 className="font-montserrat text-sm  font-semibold text-gray-500">Domicilio</h2>
+                    <span className="font-montserrat text-sm font-medium  text-gray-500">{checkout.domicilio} </span>
                   </div>
                 </>
               ) : (
                 <>
                   <div className="flex justify-between">
-                    <h1 className="font-semibold text-sm font-montserrat">Horario de retiro</h1>
-                    <span className=" text-sm font-montserrat  font-normal">
+                    <h1 className="font-semibold text-sm font-montserrat text-gray-500">Horario de retiro</h1>
+                    <span className=" text-sm font-montserrat  font-medium text-gray-500">
                       {checkout.hPersonalizado === "" ? demora + " minutos" : checkout.hPersonalizado + "hs."}</span>
                   </div>
                   <div className="flex justify-between">
-                    <h2 className="font-montserrat text-sm font-semibold">Retira por local</h2>
-                    <span className="text-sm font-normal font-montserrat"> {checkout.cliente}</span>
+                    <h2 className="font-montserrat text-sm text-gray-500 font-semibold">Retira por local</h2>
+                    <span className="text-sm text-gray-500 font-montserrat font-medium"> {checkout.cliente}</span>
                   </div>
                 </>
               )}
               <div className="flex justify-between">
-                <h2 className="font-montserrat text-sm font-semibold ">Medio de pago</h2>
-                <span className="text-sm font-normal font-montserrat"> {checkout.medioDePago}</span>
+                <h2 className="font-montserrat text-gray-500 text-sm font-semibold ">Medio de pago</h2>
+                <span className="text-sm font-medium text-gray-500 font-montserrat"> {checkout.medioDePago}</span>
               </div>
               {checkout.comentarios && (
                 <div className="flex justify-between">
-                  <p className="font-montserrat text-sm font-semibold">Comentarios</p>
-                  <span className="font-montserrat text-sm font-normal"> {checkout.comentarios}</span>
+                  <p className="font-montserrat text-sm font-semibold text-gray-500">Comentarios</p>
+                  <span className="font-montserrat text-sm font-medium text-gray-500"> {checkout.comentarios}</span>
                 </div>
               )}
             </div>
             <hr />
 
-            <h2 className="font-montserrat text-base font-semibold mt-2 p-3">Pedido</h2>
-            <div className="w-full font-montserrat relative px-3">
+            <h2 className="font-montserrat text-sm font-semibold mt-2 p-1">Pedido</h2>
+            <div className="w-full space-y-2 font-montserrat relative p-3 shadow shadow-gray-300 rounded-lg">
               {available && hasProductosEfectivo()?.length > 0 && hasProductosGeneral()?.length > 0 && (
                 <>
-                  <div className='my-2'>
+                  <div className='my-2 '>
                     {hasProductosGeneral()?.map(product => (
                       <div key={product._id} className='flex justify-between items-center w-full py-1'>
-                        <h3 className='text-sm font-semibold '>{product.nombre} <span className='text-xs  font-light'>{product.categoria === "empanadas" ? `x ${product.cant}` : `x ${product.cantidad}`}</span> </h3>
-                        <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                        <h3 className='text-sm font-semibold text-gray-500'>{product.nombre} <span className='text-xs  font-light'>{product.categoria === "empanadas" ? `x ${product.cant}` : `x ${product.cantidad}`}</span> </h3>
+                        <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
                       </div>
                     ))}
                     {checkout.medioDePago === 'Efectivo' && (
@@ -211,9 +212,9 @@ const Successful = () => {
                   <h3 className='text-xs font-medium text-gray-400'>Solo efectivo{`${checkout.medioDePago === 'Efectivo' ? ", no aplica el descuento" : ""}`}</h3>
                   {hasProductosEfectivo()?.map(product => (
                     <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                      <h3 className='text-sm font-semibold '>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
+                      <h3 className='text-sm font-semibold text-gray-500'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
                       <div className='flex gap-4 items-center'>
-                        <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                        <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
                       </div>
                     </div>
 
@@ -223,23 +224,42 @@ const Successful = () => {
 
               {hasProductosEfectivo()?.map(product => (
                 <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                  <h3 className='text-sm font-semibold'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
+                  <h3 className='text-sm font-semibold text-gray-500'>{product.nombre}<span className='text-xs text-gray-400'>{` ${product.cantidad}u`}</span></h3>
                   <div className='flex gap-4 items-center'>
-                    <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                    <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
                   </div>
                 </div>
               ))}
               {hasProductosGeneral()?.map(product => (
-                <div key={product._id} className='flex justify-between w-full items-center py-1'>
-                  <h3 className='text-sm font-semibold line-clamp-1'>
-                    {product.categoria === "pizzas"
-                      ? capitalizeFirstLetter(product.tamanio) + " " + product.nombre
-                      : product.nombre
-                    }
-                    <span className='text-xs text-gray-400'>{` ${product.cant ? product.cant : product.cantidad}u`}</span>
-                  </h3>
-                  <div className='flex gap-4 items-center'>
-                    <h3 className='text-sm'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                <div
+                  key={product._id}
+                >
+                  <div className='flex justify-between w-full items-center py-1'>
+                    <h3 className='text-sm font-semibold text-gray-500 line-clamp-1 pr-3'>
+                      {product?.tamanio
+                        ? capitalizeFirstLetter(product.tamanio) + " " + product.nombre
+                        : product.nombre
+                      }
+                      <span className='text-xs text-gray-500 font-medium'>{` ${product.cant ? product.cant : product.cantidad}u`}</span>
+                    </h3>
+                    <div className='flex gap-4 items-center'>
+                      <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
+                    </div>
+                  </div>
+                  <div>
+                    {product?.products && (
+                      product.products.map(item => (
+                        <div key={item._id} className='flex justify-between w-full items-center py-0.5'>
+                          <h3 className='text-xs font-medium text-gray-500'>
+                            {item?.tamanio
+                              ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
+                              : item.nombre
+                            }
+                            <span className='text-xs text-gray-500 font-medium'>{` ${item.cant ? item.cant : item.cantidad}u`}</span>
+                          </h3>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               ))}
@@ -248,7 +268,7 @@ const Successful = () => {
                 {hasProductosEfectivo()?.length === 0 && checkout.medioDePago === 'Efectivo' && available && (
                   <>
                     <div className=" w-auto p-2  my-2">
-                      <p className="text-red-500 text-center font-normal text-xs">Se aplica el {descuento}% de descuento</p>
+                      <p className="text-red-500 text-center font-normal text-xs">Se aplica el {available && delivery === "localActual" ? 10 : descuento}% de descuento</p>
                     </div>
                     <div className='flex font-montserrat text-sm justify-between w-full items-center py-1 mt-2'>
                       <p className='font-semibold'>Subtotal</p>
@@ -257,7 +277,7 @@ const Successful = () => {
                   </>
                 )}
               </div>
-              <div className="flex pb-3 justify-between text-sm font-semibold font-montserrat items-center mt-4">
+              <div className="flex justify-between text-sm font-semibold font-montserrat items-center pt-5">
                 <p>Total</p>
                 <p>{formatearNumero(checkout.total)}</p>
               </div>
