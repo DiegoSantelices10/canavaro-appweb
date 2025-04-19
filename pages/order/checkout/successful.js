@@ -233,6 +233,21 @@ const Successful = () => {
                           </div>
                         </div>
                       )}
+                      {
+                        checkout.medioDePago === 'Efectivo' && available && delivery !== "localActual" && (
+                          <div className="space-y-2">
+                            <div className='flex mt-4 text-gray-500 items-center justify-between w-full'>
+                              <h2 className="text-sm font-semibold">Subtotal</h2>
+                              <p className='text-sm font-medium'>{formatearNumero(subTotal)}</p>
+                            </div>
+                            <hr />
+                            <div className="flex justify-between items-center">
+                              <p className='text-xs text-red-500 font-medium'>Abonando en efectivo, descuento del {descuento}%</p>
+                              <p className='text-sm font-medium'>{formatearNumero(renderSubtotal(descuento))}</p>
+                            </div>
+                          </div>
+                        )
+                      }
                     </div>
                     {hasProductosEfectivo()?.map(product => (
                       <div key={product._id}>
