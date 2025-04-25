@@ -38,54 +38,54 @@ function DigitalMenu() {
             ?.filter(item => item.categoria === renderProductos && item.available === true)
             ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
             .map(data => (
-                
-                    <div
+
+                <div
                     key={data._id}
 
-                        className=" bg-white p-1 rounded flex justify-between items-center w-full md:min-w-[430px] gap-x-2">
-                        <Image
-                            className="rounded-[4px]"
-                            src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
-                            width={160}
-                            height={160}
-                            objectFit='cover'
-                            objectPosition='center'
-                            alt={data.nombre}
-                        />
-                        <div className="w-full h-full flex flex-col justify-between px-1">
-                            <div>
-                                <h1 className="font-semibold font-montserrat text-left text-base ">{data.nombre}</h1>
-                                <p className="text-gray-500 font-montserrat text-left  text-xs">{data.descripcion?.length > 75 ? data.descripcion.substring(0, 75) + "..." : data.descripcion}</p>
-                            </div>
-                            {data.categoria === 'pizzas' ? (
-                                <div className='flex font-montserrat justify-center gap-5 mt-2'>
-
-                                    {data.precioPizza.gigante && (
-                                        <div>
-                                            <p className="text-xs font-medium  px-1 text-center ">Gigante</p>
-                                            <p className="text-base font-montserrat tracking-wider font-semibold   px-1  text-center">{formatearNumero(data.precioPizza.gigante)}</p>
-                                        </div>
-                                    )}
-                                    {data.precioPizza.mediana && (
-                                        <div>
-                                            <p className="text-xs font-medium  px-1 text-center ">Mediana</p>
-                                            <p className="text-base font-montserrat tracking-wider font-semibold   px-1 text-center ">{formatearNumero(data.precioPizza.mediana)}</p>
-                                        </div>
-                                    )}
-                                    {data.precioPizza.chica && (
-                                        <div>
-                                            <p className="text-xs font-medium  px-1 text-center ">Chica</p>
-                                            <p className="text-base font-montserrat tracking-wider font-semibold   px-1 text-center ">{formatearNumero(data.precioPizza.chica)}</p>
-                                        </div>
-                                    )}
-
-                                </div>
-                            ) : (
-                                <div>
-                                    <p className="text-xl tracking-wider text-right pr-2 font-montserrat font-semibold"> {data.precioExtra ? `${formatearNumero(data.precioExtra + data.precio)}` : formatearNumero(data.precio)}</p>
-                                </div>
-                            )}
+                    className=" bg-white p-1 rounded flex justify-between items-center w-full gap-x-2">
+                    <Image
+                        className="rounded-[4px]"
+                        src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
+                        width={160}
+                        height={160}
+                        objectFit='cover'
+                        objectPosition='center'
+                        alt={data.nombre}
+                    />
+                    <div className="w-full h-full flex flex-col justify-between px-1">
+                        <div>
+                            <h1 className="font-semibold font-montserrat text-left text-base ">{data.nombre}</h1>
+                            <p className="text-gray-500 font-montserrat text-left  text-xs">{data.descripcion?.length > 75 ? data.descripcion.substring(0, 75) + "..." : data.descripcion}</p>
                         </div>
+                        {data.categoria === 'pizzas' ? (
+                            <div className='flex font-montserrat justify-center gap-5 mt-2'>
+
+                                {data.precioPizza.gigante && (
+                                    <div>
+                                        <p className="text-xs font-medium  px-1 text-center ">Gigante</p>
+                                        <p className="text-base font-montserrat tracking-wider font-semibold   px-1  text-center">{formatearNumero(data.precioPizza.gigante)}</p>
+                                    </div>
+                                )}
+                                {data.precioPizza.mediana && (
+                                    <div>
+                                        <p className="text-xs font-medium  px-1 text-center ">Mediana</p>
+                                        <p className="text-base font-montserrat tracking-wider font-semibold   px-1 text-center ">{formatearNumero(data.precioPizza.mediana)}</p>
+                                    </div>
+                                )}
+                                {data.precioPizza.chica && (
+                                    <div>
+                                        <p className="text-xs font-medium  px-1 text-center ">Chica</p>
+                                        <p className="text-base font-montserrat tracking-wider font-semibold   px-1 text-center ">{formatearNumero(data.precioPizza.chica)}</p>
+                                    </div>
+                                )}
+
+                            </div>
+                        ) : (
+                            <div>
+                                <p className="text-xl tracking-wider text-right pr-2 font-montserrat font-semibold"> {data.precioExtra ? `${formatearNumero(data.precioExtra + data.precio)}` : formatearNumero(data.precio)}</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
             ));
     };

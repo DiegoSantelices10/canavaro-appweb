@@ -11,30 +11,35 @@ const ModalHome = (props) => {
     const [isOpen, setIsOpen] = React.useState(true);
 
     return (
-        <div  onClick={() => setIsOpen(false)}>
+        <div onClick={() => setIsOpen(false)}>
             {imagen.available && isOpen ? (
                 <div className='w-full'>
                     <motion.div
-                        initial={{ y: "100%", opacity: 0 }} // Empieza fuera de la pantalla, en la parte inferior
-                        animate={{ y: "0%", opacity: 1 }}  // Se mueve hacia el centro y aparece
-                        exit={{ y: "100%", opacity: 0 }}   // Vuelve a salir hacia abajo al cerrar
-                        transition={{ duration: 0.8, ease: "easeOut" }} //
-                        className=" w-full absolute inset-0 flex justify-center items-center z-50 overflow-hidden"
+                        initial={{ y: "100%", opacity: 0 }}
+                        animate={{ y: "0%", opacity: 1 }}
+                        exit={{ y: "100%", opacity: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="w-full h-full fixed inset-0 flex justify-center items-center z-50 overflow-hidden "
                     >
-                        <div className="relative rounded-lg shadow-lg flex justify-center items-center overflow-hidden">
+                        <div
+                            className="relative bg-white p-1 rounded-lg shadow-lg max-w-[90vw] max-h-[90vh] overflow-auto"
+                        >
                             <div
                                 onClick={() => setIsOpen(false)}
                                 className="absolute cursor-pointer bg-gray-700 rounded-lg p-0.5 right-3 top-3 z-10"
                             >
-                                <MultiplicationSignIcon className="text-white" />
+                                <MultiplicationSignIcon className="text-white" size={10} />
                             </div>
-                            <img
-                                src={imagen.imagen.url}
-                                alt="imagen"
-                                className="object-contain sm:max-w-sm md:max-w-md"
-                            />
+                            {imagen?.imagen?.url && (
+                                <img
+                                    src={imagen.imagen.url}
+                                    alt="imagen"
+                                    className="object-contain max-w-full max-h-[80vh]"
+                                />
+                            )}
                         </div>
                     </motion.div>
+
                 </div>) : (
                 <div className='hidden' />
             )}

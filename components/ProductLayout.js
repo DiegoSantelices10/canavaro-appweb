@@ -233,7 +233,7 @@ export default function ProductLayout({
   }
 
   return (
-    <div className="relative  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-2/5">
+    <div className="relative  mx-auto w-full  sm:w-4/5 md:w-3/5 ">
       <Toaster />
 
       {showModal && (
@@ -248,17 +248,27 @@ export default function ProductLayout({
           setShowModal={setShowModal}
         />
       )}
-      <div className="h-80 w-full relative">
+      <div className="w-full relative h-80 overflow-hidden ">
+        {/* Fondo blureado */}
         <img
-          src={imagen?.url || "/images/sin-imagen-id.png"}
-          className="z-0"
-          alt={nombre}
+          src={imagen?.url || "/images/sin-imagen-center.png"}
+          alt={`fondo-${nombre}`}
+          className="absolute top-0 left-0 w-full h-full object-cover filter blur-md scale-110 z-0"
         />
+
+        {/* Imagen principal */}
+        <div className="relative z-10 flex items-center justify-center w-full h-full">
+          <img
+            src={imagen?.url || "/images/sin-imagen-center.png"}
+            className="object-contain max-h-full"
+            alt={nombre}
+          />
+        </div>
       </div>
 
       <button
         onClick={returnHome}>
-        <FiChevronsLeft className="absolute text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
+        <FiChevronsLeft className="absolute z-50 text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
 
       <div className="w-full bg-white rounded-t-3xl p-4 relative -mt-20 z-40">
