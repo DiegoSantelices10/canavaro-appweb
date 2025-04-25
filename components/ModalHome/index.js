@@ -22,7 +22,7 @@ const ModalHome = (props) => {
                         className="w-full h-full fixed inset-0 flex justify-center items-center z-50 overflow-hidden "
                     >
                         <div
-                            className="relative bg-white p-1 rounded-lg shadow-lg max-w-[90vw] max-h-[90vh] overflow-auto"
+                            className="relative bg-white p-0.5 rounded shadow-lg max-w-[90vw] max-h-[90vh] overflow-auto"
                         >
                             <div
                                 onClick={() => setIsOpen(false)}
@@ -34,7 +34,7 @@ const ModalHome = (props) => {
                                 <img
                                     src={imagen.imagen.url}
                                     alt="imagen"
-                                    className="object-contain max-w-full max-h-[80vh]"
+                                    className="object-contain rounded max-w-full max-h-[80vh]"
                                 />
                             )}
                         </div>

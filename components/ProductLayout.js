@@ -233,7 +233,7 @@ export default function ProductLayout({
   }
 
   return (
-    <div className="relative  mx-auto w-full  sm:w-4/5 md:w-3/5 ">
+    <div className="relative  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2">
       <Toaster />
 
       {showModal && (
@@ -248,7 +248,7 @@ export default function ProductLayout({
           setShowModal={setShowModal}
         />
       )}
-      <div className="w-full relative h-80 overflow-hidden ">
+      <div className="w-full relative h-80 overflow-hidden rounded-b-xl">
         {/* Fondo blureado */}
         <img
           src={imagen?.url || "/images/sin-imagen-center.png"}
@@ -271,13 +271,12 @@ export default function ProductLayout({
         <FiChevronsLeft className="absolute z-50 text-neutral-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
       </button>
 
-      <div className="w-full bg-white rounded-t-3xl p-4 relative -mt-20 z-40">
+      <div className="w-full p-4 relative  z-40">
         <div className="flex flex-col w-full ">
-          <div className="w-full ">
-            <h1 className="font-semibold text-lg font-montserrat text-zinc-800">{nombre}</h1>
-            <p className=" font-normal text-sm  text-gray-400 font-montserrat">{descripcion}</p>
-            <p className=" font-normal font-montserrat text-sm text-gray-400">{formatearNumero(precio)}</p>
-            <hr className="mt-4" />
+          <div className="w-full  p-2 rounded-lg shadow">
+            <h1 className="font-bold font-montserrat text-neutral-800">{nombre}</h1>
+            <p className=" font-medium text-sm  text-gray-400 font-montserrat">{descripcion}</p>
+            <p className=" font-medium font-montserrat text-sm text-gray-400">{formatearNumero(precio)}</p>
           </div>
           <div className="text-sm font-semibold text-left my-1 z-20 ">
             {categoria === "pizzas" ? (
