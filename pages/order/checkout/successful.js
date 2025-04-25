@@ -217,6 +217,11 @@ const Successful = () => {
                             </div>
                           ))
                         )}
+                        {product?.comentarios && (
+                          <div className='flex justify-between w-full items-center py-0.5'>
+                            <h3 className='text-xs font-medium text-gray-500'>Comentarios: {product.comentarios}</h3>
+                          </div>
+                        )}
                       </div>
                     ))}
                     <div>
@@ -273,6 +278,11 @@ const Successful = () => {
                             </div>
                           ))
                         )}
+                        {product?.comentarios && (
+                          <div className='flex justify-between w-full items-center py-0.5'>
+                            <h3 className='text-xs font-medium text-gray-500'>Comentarios: {product.comentarios}</h3>
+                          </div>
+                        )}
                       </div>
 
                     ))}
@@ -303,6 +313,11 @@ const Successful = () => {
                       <div className='flex gap-4 items-center'>
                         <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>
                       </div>
+                      {product?.comentarios && (
+                        <div className='flex justify-between w-full items-center py-0.5'>
+                          <h3 className='text-xs font-medium text-gray-500'>Comentarios: {product.comentarios}</h3>
+                        </div>
+                      )}
                     </div>
                   ))}
                   {hasProductosGeneral()?.map(product => (
@@ -343,6 +358,11 @@ const Successful = () => {
                           </div>
                         )}
                       </div>
+                      {product?.comentarios && (
+                        <div className='flex justify-between w-full items-center py-0.5'>
+                          <h3 className='text-xs font-medium text-gray-500'>Comentarios: {product.comentarios}</h3>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </>

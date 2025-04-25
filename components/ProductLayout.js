@@ -195,7 +195,11 @@ export default function ProductLayout({
         dispatch(addPromoOrderList(promo));
         router.push("/order/home");
       } else {
-        value.map(item => dispatch(addPromoOrderList({ ...item })))
+
+        value.map(item => dispatch(addPromoOrderList({
+          ...item,
+          comentarios: comentarioRef.current.value,
+        })))
         toast.success("Se agrego al pedido!");
         router.push("/order/home");
       }
