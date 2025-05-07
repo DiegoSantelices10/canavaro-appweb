@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function CardPromotion({ data: { nombre, descripcion, imagen } }) {
   return (
-    <div>
+    <div className="w-60">
       <div className="w-60 relative h-36 overflow-hidden rounded-lg">
         {/* Fondo blureado */}
         <img
@@ -27,7 +27,7 @@ export default function CardPromotion({ data: { nombre, descripcion, imagen } })
 
       <div className="pt-2 pb-1 px-1 w-full flex flex-col flex-wrap">
         <Link href={`/order/products/${convertToPath(nombre)}`}>
-          <a className="font-semibold text-sm font-montserrat text-neutral-800 ">{nombre.length > 65 ? nombre.substring(0, 65) + "..." : nombre}</a>
+          <a className="font-semibold text-sm font-montserrat text-neutral-800 ">{nombre}</a>
         </Link>
 
       </div>

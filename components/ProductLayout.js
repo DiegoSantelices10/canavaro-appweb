@@ -316,7 +316,7 @@ export default function ProductLayout({
           </label>
         </div>
       </div>
-      <div className="fixed bottom-3 z-50 mx-auto flex justify-center w-full sm:w-4/5 md:w-3/5 lg:w-2/5 px-4">
+      <div className="fixed bottom-3 z-50 mx-auto flex justify-center w-full sm:w-4/5 md:w-3/5 lg:w-1/2 px-4">
         <button
           className={`${result() > 0
             ? "flex justify-center gap-3 text-center font-montserrat rounded-lg w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-medium"

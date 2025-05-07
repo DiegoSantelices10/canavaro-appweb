@@ -149,7 +149,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                       .map((item, index) => {
                         return (
                           <div key={index} className="py-1 font-montserrat text-sm text-neutral-800">
-                            <div className="flex justify-between items-center font-montserrat">
+                            <div className="flex justify-between items-start font-montserrat">
                               <div className="font-semibold flex gap-1">
                                 <div className="flex gap-1 items-start">
                                   <h2>
@@ -161,7 +161,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                                   <span className="font-semibold text-gray-800">
                                     {item?.tamanio && getShortSize(item?.tamanio)}
                                   </span>
-                                  <span className="font-normal line-clamp-1 text-gray-800 pr-2">
+                                  <span className="font-normal text-gray-800 pr-2">
                                     {" "}
                                     {item.nombre}
                                   </span>

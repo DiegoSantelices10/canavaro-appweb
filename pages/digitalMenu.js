@@ -42,7 +42,7 @@ function DigitalMenu() {
                 <div
                     key={data._id}
 
-                    className=" bg-white p-1 rounded flex justify-between items-center w-full gap-x-2">
+                    className=" bg-white p-1 rounded flex justify-between items-start w-full gap-x-1">
                     <Image
                         className="rounded-[4px]"
                         src={data?.imagen?.url || "/images/producto-sin-imagen.png"}
@@ -54,8 +54,8 @@ function DigitalMenu() {
                     />
                     <div className="w-full h-full flex flex-col justify-between px-1">
                         <div>
-                            <h1 className="font-semibold font-montserrat text-left text-base ">{data.nombre}</h1>
-                            <p className="text-gray-500 font-montserrat text-left  text-xs">{data.descripcion?.length > 75 ? data.descripcion.substring(0, 75) + "..." : data.descripcion}</p>
+                            <h1 className="font-semibold font-montserrat text-left text-sm ">{data.nombre}</h1>
+                            <p className="text-gray-500 font-montserrat text-left  text-xs">{data.descripcion}</p>
                         </div>
                         {data.categoria === 'pizzas' ? (
                             <div className='flex font-montserrat justify-center gap-5 mt-2'>
