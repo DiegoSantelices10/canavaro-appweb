@@ -58,18 +58,10 @@ const MeansOfPayment = (props) => {
                         )}
                         {values.medioDePago === "Cuenta DNI" && (
                             <div className='text-sm'>
-                                <p className="font-montserrat text-center font-semibold">
-                                    Jueves y Viernes 20% de reintegro
-                                </p>
-                                <p className="font-montserrat text-center font-semibold">
-                                    pagando con Cuenta DNI
-                                </p>
                                 <div className="flex justify-center w-full">
                                     <Image src="/images/cuenta-dni.jpg" width={130} height={50} alt="logoOpen" />
                                 </div>
-                                <p className="font-montserrat text-center text-xs text-gray-400">
-                                    El reintegro lo realiza la billetera virtual, tope $6000 por mes.
-                                </p>
+                           
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     Abonas al momento de confirmar el pedido por whatsapp
                                 </p>
