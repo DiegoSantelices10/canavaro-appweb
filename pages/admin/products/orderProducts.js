@@ -20,8 +20,7 @@ const orderProducts = () => {
 
     useEffect(() => {
 
-        const res = productsList
-            .filter(product => product.categoria === categoryCurrent)
+        const res = productsList?.filter(product => product.categoria === categoryCurrent)
             .map((product) => ({
                 id: product._id,
                 name: product.nombre,
@@ -38,10 +37,11 @@ const orderProducts = () => {
 
 
     const handleCategoryChange = (categoria) => {
+        console.log('categoria', categoria);
+
 
         setCategoryCurrent(categoria)
-        const res = productsList
-            .filter((product) => product.categoria === categoria)
+        const res = productsList?.filter((product) => product.categoria === categoria)
             .map((product) => ({
                 id: product._id,
                 name: product.nombre,
@@ -57,7 +57,7 @@ const orderProducts = () => {
 
     const onOrderChange = async (value) => {
 
-        const body = value.map((item, index) => {
+        const body = value?.map((item, index) => {
             return {
                 _id: item.id,
                 idOrder: index + 1,
@@ -93,7 +93,7 @@ const orderProducts = () => {
                     data={categories}
                     handleChange={handleCategoryChange}
                 />
-                {renderProductos.length > 0 &&
+                {renderProductos?.length > 0 &&
                     <div className='md:flex-row gap-4 w-full flex flex-col space-y-4 md:space-y-0'>
                         <button className="px-3 whitespace-nowrap h-10 w-full md:w-2/5  hover font-montserrat font-normal
                              rounded-lg  text-sm border text-white bg-red-600 hover:bg-red-500"
