@@ -37,7 +37,6 @@ const orderProducts = () => {
 
 
     const handleCategoryChange = (categoria) => {
-        console.log('categoria', categoria);
 
 
         setCategoryCurrent(categoria)
@@ -49,7 +48,6 @@ const orderProducts = () => {
             }));
 
         const result = ordenarPorProductOrderId(res);
-        console.log('result', result);
 
 
         setRenderProductos(result);
@@ -80,8 +78,6 @@ const orderProducts = () => {
             alert("Error al actualizar los datos");
         }
     }
-
-    console.log('categories', categories);
 
 
     return (

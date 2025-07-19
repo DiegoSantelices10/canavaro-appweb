@@ -359,7 +359,7 @@ const Update = ({ data }) => {
                                 border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500"
                     type="submit"
                   >
-                    Agregar Producto
+                    Actualizar Producto
                   </button>
 
                 </div>

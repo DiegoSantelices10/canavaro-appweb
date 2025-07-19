@@ -14,7 +14,7 @@ import { capitalizeFirstLetter, CategoriesOrder, ordenarPorProductOrderIdHome } 
 
 // eslint-disable-next-line react/prop-types
 function DigitalMenu() {
-    const [renderProductos, setRenderProductos] = useState('promociones')
+    const [renderProductos, setRenderProductos] = useState('Combos')
     const { deliveryButton } = useSelector(state => state.setting);
 
     const { products } = useSelector(state => state.product);
@@ -49,7 +49,6 @@ function DigitalMenu() {
     }
 
     const categoriesOrdenadas = ordenarCategorias(categories);
-    console.log(categoriesOrdenadas);
 
 
     const render = (renderProductos) => {

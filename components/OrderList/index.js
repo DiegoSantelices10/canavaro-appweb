@@ -28,7 +28,6 @@ const OrderList = (props) => {
         const oldIndex = people.findIndex((person) => person.id === active.id);
         const newIndex = people.findIndex((person) => person.id === over.id);
 
-        console.log(arrayMove(people, oldIndex, newIndex));
         onOrderChange(arrayMove(people, oldIndex, newIndex))
         return arrayMove(people, oldIndex, newIndex);
       });

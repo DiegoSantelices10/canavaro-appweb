@@ -25,7 +25,6 @@ const Successful = () => {
     }, 0);
     setSubTotal(sumGeneral)
   }, [])
-  console.log('orderList', orderList);
 
 
   const handleCapture = () => {
