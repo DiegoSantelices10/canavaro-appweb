@@ -8,7 +8,7 @@ import { setProductData } from 'store/reducers/productSlice';
 import Image from 'next/image'
 import { formatearNumero } from 'libs/items';
 import useCategories from 'Hooks/useCategories';
-import { capitalizeFirstLetter, CategoriesOrder } from 'utils';
+import { capitalizeFirstLetter, CategoriesOrder, ordenarPorProductOrderIdHome } from 'utils';
 
 
 
@@ -47,22 +47,22 @@ function DigitalMenu() {
 
         return categoriasCopia;
     }
-    console.log('before', categories);
 
     const categoriesOrdenadas = ordenarCategorias(categories);
     console.log(categoriesOrdenadas);
 
 
-    const combosYPromo = categories.filter(item => item === 'Combos' || item === 'promociones');
-    const resto = categories.filter(item => item !== 'Combos' && item !== 'promociones');
+    const render = (renderProductos) => {
+        const filtrados = products
+            ?.filter(item => item.categoria === renderProductos && item.available === true);
 
-    const newListCategories = [...combosYPromo, ...resto];
+        const ordenados = ordenarPorProductOrderIdHome(filtrados);
+        return ordenados
+    };
+
     const renderStore = renderProductos => {
-        return products
-            ?.filter(item => item.categoria === renderProductos && item.available === true)
-            ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+        return render(renderProductos)
             .map(data => (
-
                 <div
                     key={data._id}
 
@@ -136,7 +136,7 @@ function DigitalMenu() {
             </div>
             <hr />
             <div className=' px-6 py-4 flex flex-wrap justify-center md:justify-center my-3 gap-2 gap-x-6 font-normal  font-montserrat'>
-                {categories && newListCategories.map((category, index) => (
+                {categories && categoriesOrdenadas.map((category, index) => (
 
                     <button
                         key={index}
