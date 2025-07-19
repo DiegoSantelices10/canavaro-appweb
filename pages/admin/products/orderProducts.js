@@ -45,7 +45,7 @@ const orderProducts = () => {
             .map((product) => ({
                 id: product._id,
                 name: product.nombre,
-                idOrder: product.productOrder.id
+                idOrder: product?.productOrder?.id || 0
             }));
 
         const result = ordenarPorProductOrderId(res);
