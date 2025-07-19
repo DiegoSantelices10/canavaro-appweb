@@ -31,6 +31,7 @@ import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import AlignBoxMiddleLeftIcon from "public/images/align-box-middle-left-stroke-rounded";
 import ControllerInput from "components/ControllerInput";
 import Collapsable from "components/Collapsable";
+import { ordenarPorProductOrderIdHome } from "utils";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora, orderPromo, delivery } = useSelector(state => state.order);
@@ -114,11 +115,13 @@ export default function Cart({ data }) {
     }
   };
 
-  const renderBebidas = renderProductos => {
-    return products
-      ?.filter(item => item.categoria === renderProductos && item.available === true)
-      ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
-      .map(data => <CardCart key={data._id} data={data} />);
+  const renderList = (category) => {
+    const filtrados = products
+      ?.filter(item => item.categoria === category && item.available === true);
+
+    const ordenados = ordenarPorProductOrderIdHome(filtrados);
+
+    return ordenados.map(data => <CardCart key={data._id} data={data} />);
   };
 
   const addCartPromo = value => {
@@ -436,7 +439,7 @@ export default function Cart({ data }) {
                         `}
                         </style>
 
-                        {renderBebidas("bebidas")}
+                        {renderList("bebidas")}
                       </div>
                     </div>
                   </Collapsable>
@@ -464,7 +467,7 @@ export default function Cart({ data }) {
                         `}
                         </style>
 
-                        {renderBebidas("Postres")}
+                        {renderList("Postres")}
                       </div>
                     </div>
                   </Collapsable>

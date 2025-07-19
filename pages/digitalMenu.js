@@ -8,7 +8,7 @@ import { setProductData } from 'store/reducers/productSlice';
 import Image from 'next/image'
 import { formatearNumero } from 'libs/items';
 import useCategories from 'Hooks/useCategories';
-import { capitalizeFirstLetter } from 'utils';
+import { capitalizeFirstLetter, CategoriesOrder } from 'utils';
 
 
 
@@ -28,6 +28,30 @@ function DigitalMenu() {
         }
 
     }, []);
+
+    const ordenarCategorias = (categories) => {
+        // Copia el array para no mutar el original
+        const categoriasCopia = [...categories];
+
+        // Ordena según CategoriesOrder, y si no está, lo pone al final
+        categoriasCopia.sort((a, b) => {
+            const indexA = CategoriesOrder.indexOf(a);
+            const indexB = CategoriesOrder.indexOf(b);
+
+            // Si no está en CategoriesOrder, index será -1
+            if (indexA === -1 && indexB === -1) return 0;
+            if (indexA === -1) return 1; // a va después
+            if (indexB === -1) return -1; // b va después
+            return indexA - indexB;
+        });
+
+        return categoriasCopia;
+    }
+    console.log('before', categories);
+
+    const categoriesOrdenadas = ordenarCategorias(categories);
+    console.log(categoriesOrdenadas);
+
 
     const combosYPromo = categories.filter(item => item === 'Combos' || item === 'promociones');
     const resto = categories.filter(item => item !== 'Combos' && item !== 'promociones');

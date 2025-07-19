@@ -23,7 +23,7 @@ import { formatearNumero, totalExtrasProductos } from "libs/items";
 import { getProducts, getPromo } from "services/fetchData";
 import { setSetting } from "store/reducers/settingSlice";
 import TabsCategories from "components/Tabs/TabsCategories";
-import { categoriasNoDestacables } from "utils";
+import { categoriasNoDestacables, ordenarPorProductOrderIdHome } from "utils";
 import { wrapper } from "store/app/store";
 
 
@@ -47,11 +47,20 @@ export default function Home() {
     return promos?.filter(item => item.available === true).map(data => <CardPromotion key={data._id} data={data} />);
   };
 
-  const renderStore = renderProductos => {
-    return products
-      ?.filter(item => item.categoria === renderProductos && item.available === true)
-      ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
-      .map(data => <Card key={data._id} data={data} />);
+  const renderCombos = () => {
+    const filtrados = products?.filter(item => item.categoria === 'Combos' && item.available === true);
+    const ordenados = ordenarPorProductOrderIdHome(filtrados);
+
+    return ordenados.map(data => <CardPromotion key={data._id} data={data} />);
+  };
+
+  const renderStore = (renderProductos) => {
+    const filtrados = products
+      ?.filter(item => item.categoria === renderProductos && item.available === true);
+
+    const ordenados = ordenarPorProductOrderIdHome(filtrados);
+
+    return ordenados.map(data => <Card key={data._id} data={data} />);
   };
 
   const productosDestacables = products?.filter(product => !categoriasNoDestacables.includes(product.categoria));
@@ -221,6 +230,27 @@ export default function Home() {
               </style>
 
               {renderPromotions()}
+            </div>
+          </div>
+        </>
+        <>
+          <h1 className="text-base font-bold font-montserrat tracking-wide text-neutral-800 mt-6">Nuestras combos</h1>
+          <div className="py-2 ">
+            <div className="flex overflow-x-scroll top-0 flexp h-auto p-0.5 space-x-6 w-full">
+              <style jsx>
+                {`
+              .flexp::-webkit-scrollbar-thumb {
+                background: #f4f4f4;
+                border-radius: 20px;
+              }
+
+              .flexp::-webkit-scrollbar {
+                height: 4px;
+              }
+            `}
+              </style>
+
+              {renderCombos()}
             </div>
           </div>
         </>

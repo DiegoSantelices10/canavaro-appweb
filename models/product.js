@@ -2,6 +2,9 @@ import { model, models, Schema } from "mongoose";
 
 const productoSchema = new Schema(
   {
+    productOrder: {
+      id: { type: Number },
+    },
     nombre: {
       type: String,
       index: false,

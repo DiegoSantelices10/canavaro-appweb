@@ -3,25 +3,52 @@ import Producto from "models/product";
 export const updatePrices = async (req, res) => {
     const updateData = req.body;
     try {
-        if (Array.isArray(updateData)) {
-            const updateOperations = updateData.map(productData => {
-                const { _id, precioPizza } = productData;
+        if (Array.isArray(updateData.orderCurrent)) {
 
-                return {
-                    updateMany: {
-                        filter: { _id }, // Suponiendo que _id es el ID del producto
-                        update: { $set: { 'precioPizza.gigante': precioPizza.gigante, 'precioPizza.mediana': precioPizza.mediana, 'precioPizza.chica': precioPizza.chica } }
-                    }
-                };
-            });
 
-            const response = await Producto.bulkWrite(updateOperations);
-            if (response) {
-                return res.status(200).json({
-                    success: true,
-                    message: "Productos actualizados exitosamente",
+            if (updateData.orderSaved) {
+                const updateOperations = updateData.orderCurrent.map(productData => {
+
+                    return {
+                        updateMany: {
+                            filter: {
+                                '_id'
+                                    : productData._id
+                            }, // Suponiendo que _id es el ID del producto
+                            update: { $set: { 'productOrder.id': productData.idOrder } }
+                        }
+                    };
                 });
+
+                const response = await Producto.bulkWrite(updateOperations);
+                if (response) {
+                    return res.status(200).json({
+                        success: true,
+                        message: "Productos actualizados exitosamente",
+                    });
+                }
+
+            } else {
+                const updateOperations = updateData.map(productData => {
+                    const { _id, precioPizza } = productData;
+
+                    return {
+                        updateMany: {
+                            filter: { _id }, // Suponiendo que _id es el ID del producto
+                            update: { $set: { 'precioPizza.gigante': precioPizza.gigante, 'precioPizza.mediana': precioPizza.mediana, 'precioPizza.chica': precioPizza.chica } }
+                        }
+                    };
+                });
+
+                const response = await Producto.bulkWrite(updateOperations);
+                if (response) {
+                    return res.status(200).json({
+                        success: true,
+                        message: "Productos actualizados exitosamente",
+                    });
+                }
             }
+
         } else {
             const updateOperation = {
                 updateMany: {
