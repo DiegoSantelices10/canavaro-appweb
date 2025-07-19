@@ -12,7 +12,7 @@ import { ordenarPorProductOrderId } from 'utils';
 const orderProducts = () => {
     const [renderProductos, setRenderProductos] = useState([]);
     const [orderCurrent, setOrderCurrent] = useState([]);
-    const [categoryCurrent, setCategoryCurrent] = useState([]);
+    const [categoryCurrent, setCategoryCurrent] = useState('pizzas');
 
 
     const { categories, productsList } = useCategories();
@@ -21,7 +21,7 @@ const orderProducts = () => {
     useEffect(() => {
 
         const res = productsList
-            .filter(product => product.categoria === 'pizzas')
+            .filter(product => product.categoria === categoryCurrent)
             .map((product) => ({
                 id: product._id,
                 name: product.nombre,
@@ -30,7 +30,6 @@ const orderProducts = () => {
 
         const result = ordenarPorProductOrderId(res);
 
-        console.log('result: ', result);
 
 
         setRenderProductos(result);
@@ -50,6 +49,7 @@ const orderProducts = () => {
             }));
 
         const result = ordenarPorProductOrderId(res);
+        console.log('result', result);
 
 
         setRenderProductos(result);
@@ -80,6 +80,9 @@ const orderProducts = () => {
             alert("Error al actualizar los datos");
         }
     }
+
+    console.log('categories', categories);
+
 
     return (
         <Layout>
