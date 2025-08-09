@@ -55,6 +55,7 @@ function DigitalMenu() {
         const filtrados = products
             ?.filter(item => item.categoria === renderProductos && item.available === true);
 
+
         const ordenados = ordenarPorProductOrderIdHome(filtrados);
         return ordenados
     };

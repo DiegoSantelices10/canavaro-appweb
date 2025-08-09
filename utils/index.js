@@ -15,8 +15,13 @@ export const ordenarPorProductOrderId = (productos) => {
 }
 
 export const ordenarPorProductOrderIdHome = (productos) => {
-    if (productos[0]?.idOrder !== "undefined") {
-        return [...productos]?.sort((a, b) => a.productOrder.id - b.productOrder.id);
+
+    if (productos[0]?.productOrder?._id !== undefined) {
+        return [...productos]?.sort((a, b) => {
+            const aOrder = a.productOrder?._id || 999999;
+            const bOrder = b.productOrder?._id || 999999;
+            return aOrder - bOrder;
+        });
     }
     return productos;
 }
