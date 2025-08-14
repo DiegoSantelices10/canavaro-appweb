@@ -1,3 +1,4 @@
+
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
 import useDrinks from "Hooks/useDrinks";
@@ -12,7 +13,7 @@ import { addDrinksPromo, addProductPromo, clearDrinks, clearOrderPromo, decremen
 export default function Promotion({
   cantMax,
   data,
-  data: { _id, nombre, categoria, descripcion, precio, addEmpanadas, extras, cantidadExtras, addExtras },
+  data: { _id, nombre, categoria, descripcion, precio, addEmpanadas, extras, cantidadExtras, addExtras, addPostres, cantidadPostres },
   setSelectCombo,
 }) {
   const [select, setSelect] = useState("Combo 1");
@@ -41,15 +42,17 @@ export default function Promotion({
 
   const listAvailableDrinks = () => {
     const updatedExtras = extras.filter(extra => {
+      // Filtrar solo extras cuya categoría sea 'bebidas'
+      if (extra.categoria !== 'bebidas') return false;
       const matchingDrink = drinks.find(drink => drink._id === extra._id);
-
       // Si no hay matching drink o si available es true, mantenemos el extra
       return !(matchingDrink && matchingDrink.available === false);
     });
-
     return updatedExtras;
   };
 
+  // Filtra solo los extras de categoría 'Postres' y disponibles
+  const updatedDesserts = extras.filter(extra => extra.categoria === 'Postres');
 
   const addItems = value => {
     if (value.categoria === 'bebidas') {
@@ -256,6 +259,23 @@ export default function Promotion({
               <hr />
             </div>
           ))}
+        </div>
+      )}
+
+      {addPostres === "si" && (
+        <div>
+          {updatedDesserts && updatedDesserts?.map(
+            ({ _id, nombre }) => (
+              <div key={_id} className="p-2 pr-4 py-8 w-full flex justify-between items-center">
+                <div className=" text-zinc-800 font-medium text-base font-montserrat">
+                  <h2>{nombre}</h2>
+                </div>
+                <div className=" text-zinc-800 font-medium text-lg font-montserrat">
+                  <h2>x {cantidadPostres}</h2>
+                </div>
+              </div>
+            )
+          )}
         </div>
       )}
 

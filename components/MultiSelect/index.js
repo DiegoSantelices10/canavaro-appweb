@@ -47,7 +47,7 @@ const MultiSelect = ({ data, label, values }) => {
                         <FieldArray
                             name="extras"
                             render={arrayHelpers => (
-                                <ul className="absolute bottom-0 bg-gray-50 divide-y shadow h-60 flexp  w-full mt-2 rounded-lg overflow-y-auto z-10">
+                                <ul className="absolute bottom-0 bg-gray-50 divide-y shadow max-h-52 flexp  w-full mt-2 rounded-lg overflow-y-auto z-10">
                                     <style>
                                         {`
                                             .flexp::-webkit-scrollbar-thumb {

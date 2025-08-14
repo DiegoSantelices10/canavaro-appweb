@@ -30,7 +30,7 @@ import Promotion from "./Promotion";
 
 export default function ProductLayout({
   data,
-  data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio, cantidadExtras },
+  data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio, cantidadExtras, cantidadPostres },
 }) {
   const { orderPromo, orderList, quantityDemanded, bebidas, quantityDemandedDrinks } = useSelector(state => state.order);
   const { extras } = useSelector(state => state.product);
@@ -39,6 +39,15 @@ export default function ProductLayout({
   const [showModal, setShowModal] = useState(false);
   const [extraPizza, setExtraPizza] = useState([]);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
+
+
+  const isDesserts = () => {
+    if (data?.extras) {
+      return data.extras.filter(extra => extra.categoria === "Postres");
+    }
+  };
+
+
 
   const comentarioRef = useRef();
   const router = useRouter();
@@ -122,13 +131,18 @@ export default function ProductLayout({
         toast.success("Se agrego al pedido!");
         dispatch(addPromoOrderList(promo));
         router.push("/order/home");
-      } else if (data.addExtras === 'si') {
+      } else if (data.addExtras === 'si' || data.addPostres === 'si') {
         const promo = {
           _id: idGenerator,
           nombre,
           descripcion,
-          products: [...value, ...bebidas],
+          products: [
+            ...value,
+            ...(bebidas && bebidas.length > 0 && bebidas),
+            ...(isDesserts() && isDesserts().length > 0 && isDesserts()),
+          ],
           categoria,
+          cantidadPostres,
           cantidadExtras,
           comentarios: comentarioRef.current.value,
           cantidadMaxima,
@@ -179,12 +193,16 @@ export default function ProductLayout({
         );
         toast.success("Se agrego al pedido!");
         router.push("/order/home");
-      } else if (bebidas.length > 0) {
+      } else if (bebidas.length > 0 || isDesserts()?.length > 0) {
         const promo = {
           _id: idGenerator,
           nombre,
           descripcion,
-          products: [...bebidas],
+          products: [
+            ...(bebidas && bebidas.length > 0 && bebidas),
+            ...(isDesserts() && isDesserts().length > 0 && isDesserts()),
+          ],
+          cantidadPostres,
           categoria,
           comentarios: comentarioRef.current.value,
           cantidadExtras,

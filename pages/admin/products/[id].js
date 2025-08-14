@@ -12,6 +12,7 @@ import HeaderTitle from "components/HeaderTitle";
 import ControllerInput from "components/ControllerInput";
 import MultiSelect from "components/MultiSelect";
 import useDrinks from "Hooks/useDrinks";
+import useDessert from "Hooks/useDessert";
 
 
 const Update = ({ data }) => {
@@ -19,6 +20,7 @@ const Update = ({ data }) => {
   const [productRender, setProductRender] = useState({});
   const router = useRouter();
   const { drinks } = useDrinks();
+  const { dessert } = useDessert();
 
 
   useEffect(() => {
@@ -55,6 +57,8 @@ const Update = ({ data }) => {
               formato: productRender?.formato || "",
               addPizzas: productRender?.addPizzas || "no",
               tamanio: productRender?.tamanio || "",
+              addPostres: productRender?.addPostres || "no",
+              cantidadPostres: productRender?.cantidadPostres || "",
             }}
             onSubmit={async (values, { resetForm }) => {
               const filteredValues = Object.fromEntries(
@@ -208,8 +212,10 @@ const Update = ({ data }) => {
                     renderProducts !== "empanadas" &&
                     renderProducts !== "pizzas" &&
                     renderProducts !== "extras" &&
-                    renderProducts !== "porciones"
-                    && (
+                    renderProducts !== "porciones" &&
+                    renderProducts !== "postres" &&
+                    renderProducts !== "Postres" &&
+                    (
                       <>
                         <div className="w-full mx-auto">
                           <div className=" w-full mx-auto">
@@ -310,6 +316,39 @@ const Update = ({ data }) => {
 													                    rounded-lg focus:border-gray-200"
                                 />
                               </label>
+                            </div>
+                          )}
+                        </div>
+                        <div className="w-full mx-auto">
+                          <div className=" w-full mx-auto">
+                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Postres?</p>
+                            <div
+                              role="group"
+                              aria-labelledby="my-radio-group"
+                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
+                            >
+                              <label>
+                                <Field type="radio" name="addPostres" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
+                                Si
+                              </label>
+                              <label>
+                                <Field type="radio" name="addPostres" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
+                                No
+                              </label>
+                            </div>
+                          </div>
+                          {values.addPostres === "si" && (
+                            <div className=" w-full mx-auto space-y-4">
+                              <ControllerInput
+                                name='cantidadPostres'
+                                type='number'
+                                label='Ingresa la cantidad de postres'
+                              />
+                              <MultiSelect
+                                values={values}
+                                data={dessert}
+                                label="Selecciona los postres disponibles"
+                              />
                             </div>
                           )}
                         </div>

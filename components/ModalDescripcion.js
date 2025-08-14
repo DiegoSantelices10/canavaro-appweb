@@ -30,7 +30,7 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
               <h2 className="text-base text-center font-montserrat">{pedido.nombre}</h2>
             </div>
             <div className="p-4 border rounded-lg space-y-2">
-              {pedido.products.map(item => {
+              {pedido?.products.map(item => {
                 return (
                   <div
                     className="flex  items-center gap-1"
@@ -39,7 +39,10 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
                       {item.nombre}
                     </p>
                     <p>
-                      {item.cantidad && <span className="font-normal text-sm pl-1 text-gray-400">{item.cantidad}u</span>}
+                      {item.categoria === 'Postres'
+                        ? pedido.cantidadPostres && <span className="font-normal text-sm pl-1 text-gray-400">{pedido.cantidadPostres}u</span>
+                        : item.cantidad && <span className="font-normal text-sm pl-1 text-gray-400">{item.cantidad}u</span>
+                      }
                     </p>
                   </div>
                 );

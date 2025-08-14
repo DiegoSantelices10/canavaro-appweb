@@ -76,6 +76,12 @@ const productoSchema = new Schema(
     extras: {
       type: Array,
     },
+    addPostres: {
+      type: String,
+    },
+    cantidadPostres: {
+      type: Number,
+    },
   },
   {
     timestamp: true,

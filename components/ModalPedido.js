@@ -179,7 +179,10 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                               item.products.map(producto => (
                                 <div key={producto._id}>
                                   <p className="font-normal text-gray-500">
-                                    {producto.cantidad && `${producto.cantidad}  `}<span>{producto.nombre}</span>
+                                    {producto.categoria === 'Postres'
+                                      ? item.cantidadPostres && `${item.cantidadPostres}  `
+                                      : producto.cantidad && `${producto.cantidad}  `}
+                                    <span>{producto.nombre}</span>
                                   </p>
                                 </div>
                               ))}
