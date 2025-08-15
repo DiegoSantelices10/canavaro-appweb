@@ -210,7 +210,7 @@ const Successful = () => {
                                   ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
                                   : item.nombre
                                 }
-                                <span className='text-xs text-gray-500 font-medium'>{` x ${item.cant ? item.cant : item.cantidad}`}</span>
+                                <span className='text-xs text-gray-500 font-medium'>{` x ${item.cant ? item.cant : item.cantidad ? item.cantidad : product.cantidadPostres}`}</span>
                               </h3>
 
                             </div>
@@ -271,9 +271,8 @@ const Successful = () => {
                                   ? capitalizeFirstLetter(item.tamanio) + " " + item.nombre
                                   : item.nombre
                                 }
-                                <span className='text-xs text-gray-500 font-medium'>{` x ${item.cant ? item.cant : item.cantidad}`}</span>
+                                <span className='text-xs text-gray-500 font-medium'>{` x ${item.cant ? item.cant : item.cantidad ? item.cantidad : product.cantidadPostres}`}</span>
                               </h3>
-
                             </div>
                           ))
                         )}
@@ -329,7 +328,7 @@ const Successful = () => {
                             ? capitalizeFirstLetter(product.tamanio) + " " + product.nombre
                             : product.nombre
                           }
-                          <span className='text-xs text-gray-500 font-medium'>{` x ${product.cant ? product.cant : product.cantidad}`}</span>
+                          <span className='text-xs text-gray-500 font-medium'>{` x ${product.cant ? product.cant : product.cantidad ? product.cantidad : orderList.cantidadPostres}`}</span>
                         </h3>
                         <div className='flex gap-4 items-center'>
                           <h3 className='text-sm text-gray-500 font-medium'>{formatearNumero(product.precio * product.cantidad)}</h3>

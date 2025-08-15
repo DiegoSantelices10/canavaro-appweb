@@ -138,8 +138,8 @@ export default function ProductLayout({
           descripcion,
           products: [
             ...value,
-            ...(bebidas && bebidas.length > 0 && bebidas),
-            ...(isDesserts() && isDesserts().length > 0 && isDesserts()),
+            ...(Array.isArray(bebidas) && bebidas.length > 0 ? bebidas : []),
+            ...(Array.isArray(isDesserts()) && isDesserts().length > 0 ? isDesserts() : []),
           ],
           categoria,
           cantidadPostres,
@@ -199,8 +199,8 @@ export default function ProductLayout({
           nombre,
           descripcion,
           products: [
-            ...(bebidas && bebidas.length > 0 && bebidas),
-            ...(isDesserts() && isDesserts().length > 0 && isDesserts()),
+            ...(Array.isArray(bebidas) && bebidas.length > 0 ? bebidas : []),
+            ...(Array.isArray(isDesserts()) && isDesserts().length > 0 ? isDesserts() : []),
           ],
           cantidadPostres,
           categoria,
