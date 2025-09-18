@@ -5,6 +5,7 @@ import OrderList from 'components/OrderList';
 import Select from 'components/Select'
 import useCategories from 'Hooks/useCategories'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 import { ordenarPorProductOrderId } from 'utils';
 
 
@@ -26,6 +27,9 @@ const orderProducts = () => {
                 name: product.nombre,
                 ...(product?.productOrder?.id !== undefined && { idOrder: product?.productOrder?.id })
             }));
+        console.log('====================================');
+        console.log(res);
+        console.log('====================================');
 
         const result = ordenarPorProductOrderId(res);
 
@@ -73,9 +77,9 @@ const orderProducts = () => {
 
         try {
             const response = await axios.put("/api/products/", newData);
-            response.status === 200 && alert("Productos actualizados!");
+            response.status === 200 && toast.success("Se actualizo la lista de forma correcta");
         } catch (error) {
-            alert("Error al actualizar los datos");
+            toast.error("Error al actualizar los datos");
         }
     }
 

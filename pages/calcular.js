@@ -106,7 +106,7 @@ export default function Calcular({ data }) {
 
 
     return (
-        <div className="mx-auto w-full bg-gray-900">
+        <div className="mx-auto w-full bg-gray-900 min-h-screen ">
             <div className="w-full h-auto">
                 <div className="flex flex-col p-2 lg:gap-8 gap-4 w-full">
                     <div className="w-full sticky top-0 bg-slate-900 flex flex-col md:flex-row  items-center justify-around rounded-md shadow-gray-600 shadow p-2 py-4">
