@@ -29,7 +29,8 @@ export const updatePrices = async (req, res) => {
                 }
 
             } else {
-                const updateOperations = updateData.map(productData => {
+
+                const updateOperations = updateData.orderCurrent.map(productData => {
                     const { _id, precioPizza } = productData;
 
                     return {

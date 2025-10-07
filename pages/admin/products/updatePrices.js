@@ -18,11 +18,14 @@ const UpdatePrices = () => {
   const columnHelper = createColumnHelper()
 
   useEffect(() => {
+
     if (data.length > 0) {
+
       const combinedArray = products
         .filter(item => item.categoria === "pizzas")
         .map(pizza => {
           const pizzaPrecio = data.find(item => item.nombre === pizza.nombre);
+
 
           if (pizzaPrecio) {
             return {
@@ -44,24 +47,49 @@ const UpdatePrices = () => {
   }, [data]);
 
   const handleFileUpload = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
     const reader = new FileReader();
-    reader.readAsBinaryString(e.target.files[0]);
+    reader.readAsArrayBuffer(file);
     reader.onload = e => {
-      const data = e.target.result;
-      const workbook = XLSX.read(data, { type: "binary" });
-      const sheetName = workbook?.SheetNames[0];
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheetName = workbook?.SheetNames[1]; // Hoja 2 (índice 1)
       const sheet = workbook?.Sheets[sheetName];
-      const parsedData = XLSX.utils.sheet_to_json(sheet);
+
+      // Obtener datos sin headers específicos
+      const rawData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+      // Procesar datos manualmente desde la fila 2 (índice 1)
+      const parsedData = rawData.slice(1).map(row => ({
+        nombre: row[0], // Columna A
+        gigante: row[1], // Columna E
+        mediana: row[2], // Columna F  
+        chica: row[3]    // Columna G
+      })).filter(item => item.nombre); // Filtrar filas vacías
+
+      console.log("Datos parseados:", parsedData);
       setData(parsedData);
+    };
+
+    reader.onerror = (error) => {
+      console.error('Error leyendo archivo:', error);
+      alert('Error al leer el archivo');
     };
   };
 
 
   const handleUpdatePizzas = async () => {
     try {
-      const response = await axios.put("/api/products/", updateData);
+      // Enviar los datos en el formato que espera el backend
+      const response = await axios.put("/api/products/", {
+        orderCurrent: updateData,
+        orderSaved: false
+      });
       response.status === 200 && alert("Productos actualizados!");
     } catch (error) {
+      console.error("Error:", error);
       alert("Error al actualizar los datos");
     }
   };
