@@ -89,6 +89,24 @@ export const orderSlice = createSlice({
 				state.orderPromo = newList;
 			}
 		},
+		addProductDirect: (state, action) => {
+			const productIndex = state.orderList.findIndex(item => item._id === action.payload._id);
+			if (productIndex >= 0) {
+				state.orderList[productIndex].cantidad += 1;
+			} else {
+				const tempProduct = { ...action.payload, cantidad: 1 };
+				state.orderList.push(tempProduct);
+			}
+		},
+		decrementProductDirect: (state, action) => {
+			const productIndex = state.orderList.findIndex(item => item._id === action.payload._id);
+			if (state.orderList[productIndex].cantidad > 1) {
+				state.orderList[productIndex].cantidad -= 1;
+			} else if (state.orderList[productIndex].cantidad === 1) {
+				const newList = state.orderList.filter(item => item._id !== action.payload._id);
+				state.orderList = newList;
+			}
+		},
 		decrementProductPizza: (state, action) => {
 			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
 			if (state.orderPromo[productIndex].cantidad > 1) {
@@ -162,6 +180,8 @@ export const {
 	calculateTotalQuantity,
 	addPromoOrderList,
 	setOrderListLocal,
+	addProductDirect,
+	decrementProductDirect,
 	clearOrderPromo,
 	setQuantityDemanded,
 	setCheckout,

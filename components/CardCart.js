@@ -4,7 +4,7 @@ import Image from "next/image";
 import Add01Icon from "public/images/add-01-stroke-rounded";
 import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
+import { addProductDirect, decrementProductDirect } from "store/reducers/orderSlice";
 
 const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } }) => {
     const { orderPromo } = useSelector(state => state.order);
@@ -12,11 +12,11 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
     const dispatch = useDispatch();
 
     const addItems = value => {
-        dispatch(addProductPromo(value));
+        dispatch(addProductDirect(value));
     };
 
     const decrementItems = value => {
-        dispatch(decrementProductPromo(value));
+        dispatch(decrementProductDirect(value));
     };
 
     const productQuantity = _id => {

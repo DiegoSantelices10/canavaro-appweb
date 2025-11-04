@@ -6,10 +6,8 @@ import { MdOutlineDeliveryDining, MdOutlineEmojiPeople } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  addPromoOrderList,
   calculateSubTotal,
   calculateTotalQuantity,
-  clearOrderPromo,
   removeItemCart,
   setDelivery,
   setDemora,
@@ -25,7 +23,7 @@ import moment from "moment-timezone";
 import { setPromoBarra } from "store/reducers/settingSlice";
 import { getDelay } from "services/fetchData";
 import CardCart from "components/CardCart";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { formatearNumero } from "libs/items";
 import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import AlignBoxMiddleLeftIcon from "public/images/align-box-middle-left-stroke-rounded";
@@ -34,7 +32,7 @@ import Collapsable from "components/Collapsable";
 import { ordenarPorProductOrderIdHome } from "utils";
 
 export default function Cart({ data }) {
-  const { orderList, totalAmount, demora, orderPromo, delivery } = useSelector(state => state.order);
+  const { orderList, totalAmount, demora, delivery } = useSelector(state => state.order);
   const { nombre, direccion, telefono } = useSelector(state => state.user);
   const { promoBarra } = useSelector(state => state.setting);
   const { products } = useSelector(state => state.product);
@@ -124,17 +122,17 @@ export default function Cart({ data }) {
     return ordenados.map(data => <CardCart key={data._id} data={data} />);
   };
 
-  const addCartPromo = value => {
-    const res = value.find(item => item.categoria === "bebidas" || item.categoria === "Postres");
+  // const addCartPromo = value => {
+  //   const res = value.find(item => item.categoria === "bebidas" || item.categoria === "Postres");
 
-    if (res) {
-      value.map(item => dispatch(addPromoOrderList({ ...item })));
-      toast.success("Se agrego al pedido!");
-      dispatch(clearOrderPromo());
-      dispatch(calculateSubTotal());
-      dispatch(calculateTotalQuantity());
-    }
-  };
+  //   if (res) {
+  //     value.map(item => dispatch(addPromoOrderList({ ...item })));
+  //     toast.success("Se agrego al pedido!");
+  //     dispatch(clearOrderPromo());
+  //     dispatch(calculateSubTotal());
+  //     dispatch(calculateTotalQuantity());
+  //   }
+  // };
 
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
@@ -416,18 +414,17 @@ export default function Cart({ data }) {
                     </div>
                   </div>
                 </div>
-                {!orderList.some(item => item.categoria === "bebidas") && (
-                  <Collapsable
-                    title={
-                      <h1 className="font-montserrat text-sm font-bold text-gray-800">
-                        ¿ Deseas agregar alguna bebida ?
-                      </h1>
-                    }
-                  >
-                    <div className="p-0">
-                      <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
-                        <style jsx>
-                          {`
+                <Collapsable
+                  title={
+                    <h1 className="font-montserrat text-sm font-bold text-gray-800">
+                      ¿ Deseas agregar alguna bebida ?
+                    </h1>
+                  }
+                >
+                  <div className="p-0">
+                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
+                      <style jsx>
+                        {`
                           .flexp::-webkit-scrollbar-thumb {
                             background: #ffffff;
                             border-radius: 20px;
@@ -437,25 +434,23 @@ export default function Cart({ data }) {
                             height: 5px;
                           }
                         `}
-                        </style>
+                      </style>
 
-                        {renderList("bebidas")}
-                      </div>
+                      {renderList("bebidas")}
                     </div>
-                  </Collapsable>
-                )}
-                {!orderList.some(item => item.categoria === "Postres") && (
-                  <Collapsable
-                    title={
-                      <h1 className="font-montserrat text-sm font-bold text-gray-800">
-                        ¿ Deseas agregar algun postre ?
-                      </h1>
-                    }
-                  >
-                    <div className="p-0">
-                      <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
-                        <style jsx>
-                          {`
+                  </div>
+                </Collapsable>
+                <Collapsable
+                  title={
+                    <h1 className="font-montserrat text-sm font-bold text-gray-800">
+                      ¿ Deseas agregar algun postre ?
+                    </h1>
+                  }
+                >
+                  <div className="p-0">
+                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
+                      <style jsx>
+                        {`
                           .flexp::-webkit-scrollbar-thumb {
                             background: #ffffff;
                             border-radius: 20px;
@@ -465,16 +460,15 @@ export default function Cart({ data }) {
                             height: 5px;
                           }
                         `}
-                        </style>
+                      </style>
 
-                        {renderList("Postres")}
-                      </div>
+                      {renderList("Postres")}
                     </div>
-                  </Collapsable>
-                )}
+                  </div>
+                </Collapsable>
 
                 <div className="p-3  pb-20 rounded-md">
-                  <button
+                  {/* <button
                     onClick={() => addCartPromo(orderPromo)}
                     type="button"
                     className={`${orderPromo.length < 1
@@ -483,7 +477,7 @@ export default function Cart({ data }) {
                       }`}
                   >
                     Agregar al carrito
-                  </button>
+                  </button> */}
                   <h1 className="text-gray-800 font-bold font-montserrat px-2 text-base">Detalle pedido</h1>
                   <hr />
                   {orderList.map((item, index) => {
