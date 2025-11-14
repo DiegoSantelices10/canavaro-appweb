@@ -50,8 +50,12 @@ const HomeFront = () => {
           </div>
           <p className="font-montserrat text-3xl lg:text-5xl text-center font-bold text-gray-200">Pizzeria Canavaro</p>
           <p className="text-sm font-montserrat md:text-base font-normal text-white ">¡Todo lo que necesitas en un solo lugar!</p>
+          <div className="flex gap-4 justify-between items-center mx-auto w-fit rounded-md px-2 py-1 mt-2">
+            <h1 className=" text-gray-200 font-semibold">Telefono nuevo</h1>
+            <h1 className=" text-gray-200 text-lg bg-red-500/60 px-4 py-1 rounded-md font-semibold">2197 8752</h1>
+          </div>
 
-          <div className="w-full flex items-center mt-3 md:mt-6">
+          <div className="w-full flex items-center mt-1 md:mt-6">
             <Link href={"/digitalMenu"}>
               <a
                 className={`p-2 px-6 rounded-lg font-medium  font-montserrat  text-sm  mx-auto 
@@ -70,6 +74,7 @@ const HomeFront = () => {
             <div className="z-10 p-6 rounded-lg font-montserrat">
               <h1 className="text-bse text-gray-200 font-semibold">¡Nosotros te lo llevamos!</h1>
               <h1 className="text-sm text-gray-200 font-normal">Delivery & Take Away</h1>
+
               <p className="text-sm  text-zinc-200 font-normal">De martes a domingo de 19 a 23hs.</p>
               <p className="text-zinc-200  text-sm ">Pelliza 1794 - Olivos</p>
               {deliveryButton?.available && (
@@ -101,7 +106,7 @@ const HomeFront = () => {
             </div>
           )}
         </div>
-      </motion.div>
+      </motion.div >
       <div className="w-full flex justify-center md:justify-start items-start gap-4 p-1 px-5 bg-red-600 z-50">
         <div className="flex items-center">
           <h1 className="text-white font-montserrat tracking-wider font-light text-sm">
@@ -114,7 +119,7 @@ const HomeFront = () => {
           </h1>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

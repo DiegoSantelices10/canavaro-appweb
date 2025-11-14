@@ -24,7 +24,7 @@ const SectionZona = () => {
             </div>
             <div className=" w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
               <h1 className="font-bold  text-xl">TELEFONO DE CONTACTO</h1>
-              <p className="font-normal">4711 3259</p>
+              <p className="font-normal">2197 8752</p>
               <p className="font-normal">11 2714 5669</p>
             </div>
             <div className=" w-full sm:w-1/2 md:w-1/3 lg:w-1/3">
