@@ -55,7 +55,7 @@ const UpdatePrices = () => {
     reader.onload = e => {
       const data = new Uint8Array(e.target.result);
       const workbook = XLSX.read(data, { type: "array" });
-      const sheetName = workbook?.SheetNames[1]; // Hoja 2 (índice 1)
+      const sheetName = workbook?.SheetNames[0]; // Hoja 1 (índice 0)
       const sheet = workbook?.Sheets[sheetName];
 
       // Obtener datos sin headers específicos
