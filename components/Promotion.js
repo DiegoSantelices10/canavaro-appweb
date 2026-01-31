@@ -293,7 +293,7 @@ export default function Promotion({
           ) : (
             <div className="bg-red-600 w-auto p-2 rounded-lg">
               <p className="text-white text-center font-normal">
-                Selecciona {quantityDemandedPostres} de {cantidadPostres} postres para completar la promo
+                Selecciona {quantityDemandedPostres} postres para completar la promo
               </p>
             </div>
           )}
