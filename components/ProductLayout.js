@@ -21,6 +21,7 @@ import {
   decrementProductPizza,
   setQuantityDemanded,
   clearDrinks,
+  clearPostres,
 } from "store/reducers/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -32,21 +33,13 @@ export default function ProductLayout({
   data,
   data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, precio, cantidadExtras, cantidadPostres },
 }) {
-  const { orderPromo, orderList, quantityDemanded, bebidas, quantityDemandedDrinks } = useSelector(state => state.order);
+  const { orderPromo, orderList, quantityDemanded, bebidas, quantityDemandedDrinks, postres, quantityDemandedPostres } = useSelector(state => state.order);
   const { extras } = useSelector(state => state.product);
 
   const [selectCombo, setSelectCombo] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [extraPizza, setExtraPizza] = useState([]);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
-
-
-  const isDesserts = () => {
-    if (data?.extras) {
-      return data.extras.filter(extra => extra.categoria === "Postres");
-    }
-  };
-
 
 
   const comentarioRef = useRef();
@@ -80,6 +73,13 @@ export default function ProductLayout({
 
     if (data.addExtras === 'si') {
       if (quantityDemandedDrinks < 1 && bebidas.length > 0) {
+        return true;
+      }
+      return false;
+    }
+
+    if (data.addPostres === 'si') {
+      if (quantityDemandedPostres < 1 && postres.length > 0) {
         return true;
       }
       return false;
@@ -139,7 +139,7 @@ export default function ProductLayout({
           products: [
             ...value,
             ...(Array.isArray(bebidas) && bebidas.length > 0 ? bebidas : []),
-            ...(Array.isArray(isDesserts()) && isDesserts().length > 0 ? isDesserts() : []),
+            ...(Array.isArray(postres) && postres.length > 0 ? postres : []),
           ],
           categoria,
           cantidadPostres,
@@ -193,14 +193,14 @@ export default function ProductLayout({
         );
         toast.success("Se agrego al pedido!");
         router.push("/order/home");
-      } else if (bebidas.length > 0 || isDesserts()?.length > 0) {
+      } else if (bebidas.length > 0 || postres.length > 0) {
         const promo = {
           _id: idGenerator,
           nombre,
           descripcion,
           products: [
             ...(Array.isArray(bebidas) && bebidas.length > 0 ? bebidas : []),
-            ...(Array.isArray(isDesserts()) && isDesserts().length > 0 ? isDesserts() : []),
+            ...(Array.isArray(postres) && postres.length > 0 ? postres : []),
           ],
           cantidadPostres,
           categoria,
@@ -223,6 +223,7 @@ export default function ProductLayout({
       }
 
       dispatch(clearDrinks());
+      dispatch(clearPostres());
       dispatch(clearOrderPromo());
       dispatch(setQuantityDemanded(0));
     }
