@@ -30,7 +30,7 @@ import Promotion from "./Promotion";
 
 export default function ProductLayout({
   data,
-  data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, tamanio, precio, cantidadExtras, cantidadPostres },
+  data: { _id, nombre, descripcion, categoria, cantidadMaxima, imagen, precio, cantidadExtras, cantidadPostres },
 }) {
   const { orderPromo, orderList, quantityDemanded, bebidas, quantityDemandedDrinks } = useSelector(state => state.order);
   const { extras } = useSelector(state => state.product);

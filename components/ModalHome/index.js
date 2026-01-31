@@ -12,7 +12,7 @@ const ModalHome = (props) => {
 
     return (
         <div onClick={() => setIsOpen(false)}>
-            {imagen.available && isOpen ? (
+            {imagen?.available && isOpen ? (
                 <div className='w-full'>
                     <motion.div
                         initial={{ y: "100%", opacity: 0 }}

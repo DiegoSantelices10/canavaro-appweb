@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
-import { addDrinksPromo, addProductPromo, clearDrinks, clearOrderPromo, decrementDrinksPromo, decrementProductPromo, setQuantityDemanded, setQuantityDemandedDrinks } from "store/reducers/orderSlice";
+import { addDrinksPromo, addPostresPromo, addProductPromo, clearDrinks, clearPostres, clearOrderPromo, decrementDrinksPromo, decrementPostresPromo, decrementProductPromo, setQuantityDemanded, setQuantityDemandedDrinks, setQuantityDemandedPostres } from "store/reducers/orderSlice";
 
 export default function Promotion({
   cantMax,
@@ -18,19 +18,24 @@ export default function Promotion({
 }) {
   const [select, setSelect] = useState("Combo 1");
 
+
+
   const dispatch = useDispatch();
 
-  const { orderPromo, quantityDemanded, quantityDemandedDrinks, bebidas } = useSelector(state => state.order);
+  const { orderPromo, quantityDemanded, quantityDemandedDrinks, quantityDemandedPostres, bebidas, postres } = useSelector(state => state.order);
   const { products } = useSelector(state => state.product);
   const { drinks } = useDrinks();
 
   useEffect(() => {
     dispatch(setQuantityDemanded(0));
     dispatch(setQuantityDemandedDrinks(0));
+    dispatch(setQuantityDemandedPostres(0));
     dispatch(setQuantityDemanded(cantMax || 0));
     dispatch(setQuantityDemandedDrinks(cantidadExtras || 0));
+    dispatch(setQuantityDemandedPostres(Number(cantidadPostres) || 0));
     dispatch(clearOrderPromo())
     dispatch(clearDrinks());
+    dispatch(clearPostres());
     if (nombre === 'Combo 4' || nombre === 'Combo 5') {
       const { _id, nombre, descripcion } =
         products.filter(item => item.categoria === "Combos" || item.categoria === "promociones").find(item => item.nombre === select) || {};
@@ -57,6 +62,8 @@ export default function Promotion({
   const addItems = value => {
     if (value.categoria === 'bebidas') {
       dispatch(addDrinksPromo(value));
+    } else if (value.categoria === 'Postres') {
+      dispatch(addPostresPromo(value));
     } else {
       dispatch(addProductPromo(value));
     }
@@ -65,6 +72,8 @@ export default function Promotion({
   const decrementItems = value => {
     if (value.categoria === 'bebidas') {
       dispatch(decrementDrinksPromo(value));
+    } else if (value.categoria === 'Postres') {
+      dispatch(decrementPostresPromo(value));
     } else {
       dispatch(decrementProductPromo(value));
     }
@@ -76,6 +85,10 @@ export default function Promotion({
 
   const setQuantityDrinks = value => {
     dispatch(setQuantityDemandedDrinks(value));
+  };
+
+  const setQuantityPostres = value => {
+    dispatch(setQuantityDemandedPostres(value));
   };
 
 
@@ -105,6 +118,15 @@ export default function Promotion({
 
   const quantityZeroDrinks = _id => {
     return bebidas?.find(item => item._id === _id);
+  };
+
+  const postresQuantity = _id => {
+    const pre = postres?.find(item => item._id === _id);
+    return pre?.cantidad ? pre.cantidad : 0;
+  };
+
+  const quantityZeroPostres = _id => {
+    return postres?.find(item => item._id === _id);
   };
 
   return (
@@ -263,19 +285,68 @@ export default function Promotion({
       )}
 
       {addPostres === "si" && (
-        <div>
-          {updatedDesserts && updatedDesserts?.map(
-            ({ _id, nombre }) => (
-              <div key={_id} className="p-2 pr-4 py-8 w-full flex justify-between items-center">
-                <div className=" text-zinc-800 font-medium text-base font-montserrat">
+        <div className="font-montserrat">
+          {quantityDemandedPostres < 1 ? (
+            <div className="bg-green-500 w-auto p-2 rounded-lg">
+              <p className="text-white text-center font-normal">¡ Se completo la cantidad requerida !</p>
+            </div>
+          ) : (
+            <div className="bg-red-600 w-auto p-2 rounded-lg">
+              <p className="text-white text-center font-normal">
+                Selecciona {quantityDemandedPostres} de {cantidadPostres} postres para completar la promo
+              </p>
+            </div>
+          )}
+          {updatedDesserts?.map(({ _id, nombre }) => (
+            <div key={_id}>
+              <div className=" font-montserrat flex justify-between items-center my-5 p-1  ">
+                <div className="w-1/2 text-zinc-800 font-medium text-base font-montserrat">
                   <h2>{nombre}</h2>
                 </div>
-                <div className=" text-zinc-800 font-medium text-lg font-montserrat">
-                  <h2>x {cantidadPostres}</h2>
+                <div className=" flex items-center justify-center  w-auto  text-end gap-3 text-base">
+                  <div
+                    className={
+                      quantityZeroPostres(_id)
+                        ? "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+                        : "invisible"
+                    }
+                  >
+                    <button
+                      type="button"
+                      className="text-red-500 font-normal text-2xl flex justify-center items-center"
+                      onClick={e => {
+                        setQuantityPostres(quantityDemandedPostres + 1);
+                        decrementItems({ _id, nombre, categoria: "Postres", precio: 0 });
+                      }}
+                    >
+                      <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
+                    </button>
+                  </div>
+
+                  <span className="font-normal text-xl  h-6">{postresQuantity(_id) === 0 ? "" : postresQuantity(_id)}</span>
+                  <div
+                    className={
+                      quantityDemandedPostres === 0
+                        ? `invisible`
+                        : "rounded-full w-8 h-8 grid content-center  shadow  bg-slate-50"
+                    }
+                  >
+                    <button
+                      type="button"
+                      className="text-green-500 font-normal text-2xl flex justify-center items-center"
+                      onClick={e => {
+                        setQuantityPostres(quantityDemandedPostres - 1);
+                        addItems({ _id, nombre, categoria: "Postres", precio: 0 });
+                      }}
+                    >
+                      <Add01Icon color={"bg-green-500"} width={18} height={18} />
+                    </button>
+                  </div>
                 </div>
               </div>
-            )
-          )}
+              <hr />
+            </div>
+          ))}
         </div>
       )}
 

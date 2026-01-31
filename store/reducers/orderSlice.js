@@ -4,8 +4,10 @@ const initialState = {
 	orderList: [],
 	orderPromo: [],
 	bebidas: [],
+	postres: [],
 	quantityDemanded: 0,
 	quantityDemandedDrinks: 0,
+	quantityDemandedPostres: 0,
 	totalQuantity: 0,
 	totalAmount: 0,
 	delivery: "domicilioActual",
@@ -31,6 +33,9 @@ export const orderSlice = createSlice({
 		},
 		setQuantityDemandedDrinks: (state, action) => {
 			state.quantityDemandedDrinks = action.payload;
+		},
+		setQuantityDemandedPostres: (state, action) => {
+			state.quantityDemandedPostres = action.payload;
 		},
 		addProductPizza: (state, action) => {
 			if (action.payload.categoria === "pizzas") {
@@ -69,6 +74,24 @@ export const orderSlice = createSlice({
 			} else if (state.bebidas[productIndex].cantidad === 1) {
 				const newList = state.bebidas.filter(item => item._id !== action.payload._id);
 				state.bebidas = newList;
+			}
+		},
+		addPostresPromo: (state, action) => {
+			const productIndex = state.postres.findIndex(item => item._id === action.payload._id);
+			if (productIndex >= 0) {
+				state.postres[productIndex].cantidad += 1;
+			} else {
+				const tempProduct = { ...action.payload, cantidad: 1 };
+				state.postres.push(tempProduct);
+			}
+		},
+		decrementPostresPromo: (state, action) => {
+			const productIndex = state.postres.findIndex(item => item._id === action.payload._id);
+			if (state.postres[productIndex].cantidad > 1) {
+				state.postres[productIndex].cantidad -= 1;
+			} else if (state.postres[productIndex].cantidad === 1) {
+				const newList = state.postres.filter(item => item._id !== action.payload._id);
+				state.postres = newList;
 			}
 		},
 		addProductPromo: (state, action) => {
@@ -125,6 +148,9 @@ export const orderSlice = createSlice({
 		clearDrinks: (state, action) => {
 			state.bebidas = [];
 		},
+		clearPostres: (state, action) => {
+			state.postres = [];
+		},
 		removeProduct: (state, action) => {
 			state.orderPromo = state.orderPromo.filter(product => product._id !== action.payload._id);
 		},
@@ -169,13 +195,17 @@ export const {
 	addProductEmpanada,
 	addDrinksPromo,
 	decrementDrinksPromo,
+	addPostresPromo,
+	decrementPostresPromo,
 	addProductPromo,
 	setQuantityDemandedDrinks,
+	setQuantityDemandedPostres,
 	decrementProductPromo,
 	decrementProductPizza,
 	removeProduct,
 	setDemora,
 	clearDrinks,
+	clearPostres,
 	calculateSubTotal,
 	calculateTotalQuantity,
 	addPromoOrderList,
