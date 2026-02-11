@@ -40,13 +40,13 @@ const HomeFront = () => {
       <ModalHome imagen={imageModal} />
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
-        className="relative flex flex-col w-full flex-grow z-10"
+        className="relative flex flex-col w-full flex-grow z-10 gap-8 items-center justify-center"
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5 }}>
 
         {/* Contenido Superior Centrado */}
-        <div className="flex-grow flex flex-col justify-center items-center px-4 gap-6 md:gap-10">
+        <div className=" flex flex-col justify-center items-center px-4 gap-6 md:gap-6">
           <div className="flex flex-col justify-center items-center text-center">
             <div className="mb-4">
               <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
@@ -60,7 +60,7 @@ const HomeFront = () => {
             <div className="z-10 p-8 flex flex-col items-center text-center">
               <h1 className="text-xl text-gray-100 font-semibold mb-1">¡Nosotros te lo llevamos!</h1>
               <p className="text-base text-gray-300 mb-2">Delivery & Take Away</p>
-              <h2 className="text-2xl text-white font-bold mb-4">Tel. 2197 8752</h2>
+              <h2 className="text-xl text-white font-bold mb-2">Tel. 2197 8752</h2>
               <p className="text-sm text-gray-200">De martes a domingo de 19 a 23hs.</p>
               <p className="text-sm text-gray-300">Pelliza 1794 - Olivos</p>
               {deliveryButton?.available && (
@@ -77,7 +77,7 @@ const HomeFront = () => {
         </div>
 
         {/* Botón de Menú Abajo */}
-        <div className="w-full flex justify-center pb-10 md:pb-10">
+        <div className="w-full flex justify-center pb-12 md:pb-16">
           <Link href={"/digitalMenu"}>
             <a className="p-3 px-10 rounded-full font-bold font-montserrat text-lg bg-white text-red-600 hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl">
               Men&uacute;
