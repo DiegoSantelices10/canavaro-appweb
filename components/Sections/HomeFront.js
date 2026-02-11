@@ -40,51 +40,33 @@ const HomeFront = () => {
       <ModalHome imagen={imageModal} />
       <div className="absolute inset-0 bg-black bg-opacity-40 h-full"> </div>
       <motion.div
-        className="flex items-center pb-4 flex-col md:flex-row gap-y-28 md:gap-0 justify-center  w-full relative flex-grow "
+        className="relative flex flex-col w-full flex-grow z-10"
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5 }}>
-        <div className="md:w-1/2  flex flex-col justify-center p-6 items-center z-40">
-          <div className="md:absolute md:bottom-4 md:right-4 md:w-28">
-            <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
-          </div>
-          <p className="font-montserrat text-3xl lg:text-5xl text-center font-bold text-gray-200">Pizzeria Canavaro</p>
-          <p className="text-sm font-montserrat md:text-base font-normal text-white ">¡Todo lo que necesitas en un solo lugar!</p>
-          <div className="flex gap-4 justify-between items-center mx-auto w-fit rounded-md px-2 py-1 mt-2">
-            <h1 className=" text-gray-200 font-semibold">Telefono nuevo</h1>
-            <h1 className=" text-gray-200 text-lg bg-red-500/60 px-4 py-1 rounded-md font-semibold">2197 8752</h1>
+
+        {/* Contenido Superior Centrado */}
+        <div className="flex-grow flex flex-col justify-center items-center px-4 gap-6 md:gap-10">
+          <div className="flex flex-col justify-center items-center text-center">
+            <div className="mb-4">
+              <Image src="/images/logocanavaro.webp" width={130} height={130} alt="logo" />
+            </div>
+            <p className="font-montserrat text-4xl lg:text-6xl font-bold text-gray-200">Pizzeria Canavaro</p>
+            <p className="text-base font-montserrat md:text-xl font-normal text-white mt-2">¡Todo lo que necesitas en un solo lugar!</p>
           </div>
 
-          <div className="w-full flex items-center mt-1 md:mt-6">
-            <Link href={"/digitalMenu"}>
-              <a
-                className={`p-2 px-6 rounded-lg font-medium  font-montserrat  text-sm  mx-auto 
-                          hover:bg-black hover:text-white bg-white text-red-600  
-                          hover:-translate-y-1 transition-all duration-500`}
-              >
-                Men&uacute;
-              </a>
-            </Link>
-          </div>
-        </div>
-
-        <div className="md:w-1/3 lg:mt-0 mx-auto flex space-y-4 flex-col justify-center items-center gap-4 text-center">
-          <div className="flex font-montserrat flex-col justify-center items-center relative">
-            <div className="absolute bg-black rounded-lg opacity-50 h-full w-full z-0"></div>
-            <div className="z-10 p-6 rounded-lg font-montserrat">
-              <h1 className="text-bse text-gray-200 font-semibold">¡Nosotros te lo llevamos!</h1>
-              <h1 className="text-sm text-gray-200 font-normal">Delivery & Take Away</h1>
-
-              <p className="text-sm  text-zinc-200 font-normal">De martes a domingo de 19 a 23hs.</p>
-              <p className="text-zinc-200  text-sm ">Pelliza 1794 - Olivos</p>
+          <div className="flex font-montserrat flex-col justify-center items-center relative overflow-hidden rounded-xl shadow-2xl">
+            <div className="absolute inset-0 bg-black opacity-60 z-0"></div>
+            <div className="z-10 p-8 flex flex-col items-center text-center">
+              <h1 className="text-xl text-gray-100 font-semibold mb-1">¡Nosotros te lo llevamos!</h1>
+              <p className="text-base text-gray-300 mb-2">Delivery & Take Away</p>
+              <h2 className="text-2xl text-white font-bold mb-4">Tel. 2197 8752</h2>
+              <p className="text-sm text-gray-200">De martes a domingo de 19 a 23hs.</p>
+              <p className="text-sm text-gray-300">Pelliza 1794 - Olivos</p>
               {deliveryButton?.available && (
-                <div className="w-full flex items-center mt-3">
+                <div className="mt-6">
                   <Link href={"/order/home"}>
-                    <a
-                      className={`p-2 px-6 rounded-lg font-medium  font-montserrat  text-sm  mx-auto 
-                          hover:bg-black hover:text-white bg-red-600  text-white 
-                          hover:-translate-y-1 transition-all duration-500`}
-                    >
+                    <a className="inline-block p-3 px-8 rounded-full font-bold font-montserrat text-base bg-red-600 text-white hover:bg-red-700 hover:-translate-y-1 transition-all duration-300 shadow-lg">
                       Hac&eacute; tu pedido
                     </a>
                   </Link>
@@ -92,21 +74,31 @@ const HomeFront = () => {
               )}
             </div>
           </div>
-          {buttonWhatsapp?.available && (
-            <div className="md:absolute transition-all duration-500 focus:-translate-y-2 hover:-translate-y-2 md:bottom-6 md:z-30 md:left-6 flex gap-4 justify-center items-center">
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20hacer%20un%20pedido`}
-              >
-                <div className="flex items-center bg-green-500 p-3 text-white font-semibold rounded-full shadow-md">
-                  <FaWhatsapp size={36} />
-                </div>
-              </a>
-            </div>
-          )}
         </div>
-      </motion.div >
+
+        {/* Botón de Menú Abajo */}
+        <div className="w-full flex justify-center pb-10 md:pb-10">
+          <Link href={"/digitalMenu"}>
+            <a className="p-3 px-10 rounded-full font-bold font-montserrat text-lg bg-white text-red-600 hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl">
+              Men&uacute;
+            </a>
+          </Link>
+        </div>
+
+        {/* Botón de WhatsApp flotante o posicionado */}
+        {buttonWhatsapp?.available && (
+          <div className="fixed bottom-24 right-6 z-40">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`https://api.whatsapp.com/send?phone=5491127145669&text=¡Hola!%20quiero%20hacer%20un%20pedido`}
+              className="flex items-center bg-green-500 p-4 text-white rounded-full shadow-2xl hover:scale-110 transition-transform duration-300"
+            >
+              <FaWhatsapp size={32} />
+            </a>
+          </div>
+        )}
+      </motion.div>
       <div className="w-full flex justify-center md:justify-start items-start gap-4 p-1 px-5 bg-red-600 z-50">
         <div className="flex items-center">
           <h1 className="text-white font-montserrat tracking-wider font-light text-sm">
