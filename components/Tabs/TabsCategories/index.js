@@ -1,6 +1,7 @@
 import useCategories from 'Hooks/useCategories';
 import React from 'react'
 import { capitalizeFirstLetter } from 'utils';
+import { motion } from 'framer-motion';
 
 function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
 
@@ -12,37 +13,47 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
     const newListCategories = [...pizzasYEmpanadas, ...combosYPromo, ...resto];
 
     return (
-        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full mt-4">
-            <style jsx>
+        <div className="flex overflow-x-auto no-scrollbar items-center gap-2 py-4 px-1">
+            <style jsx global>
                 {`
-            .flexp::-webkit-scrollbar-thumb {
-              background: #f4f4f4;
-              border-radius: 20px;
-            }
-
-            .flexp::-webkit-scrollbar {
-              height: 4px;
-            }
-          `}
+                  .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                  }
+                  .no-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                  }
+                `}
             </style>
-            {newListCategories.filter((categoria) => categoria !== 'extras').map((categoria, index) => (
-                <div
-                    key={index}>
-                    <button
-                        onClick={() => {
-                            setRenderProductos(categoria);
-                            clearTotal();
-                        }}
-                        className={
-                            renderProducts !== categoria
-                                ? "whitespace-nowrap px-3 font-medium font-montserrat text-sm text-gray-400"
-                                : "whitespace-nowrap px-3 font-semibold  text-neutral-800 focus:ring-0 focus:outline-none  text-sm font-montserrat  pb-2 tracking-wide"
-                        }
-                    >
-                        {categoria === 'empanadas' ? 'Empanadas & Canastitas' : capitalizeFirstLetter(categoria)}
-                    </button>
-                </div>
-            ))}
+            {newListCategories.filter((categoria) => categoria !== 'extras').map((categoria, index) => {
+                const isActive = renderProducts === categoria;
+                return (
+                    <div key={index} className="relative flex-shrink-0">
+                        <button
+                            onClick={() => {
+                                setRenderProductos(categoria);
+                                clearTotal();
+                            }}
+                            className={`
+                                relative z-10 whitespace-nowrap px-6 py-2.5 rounded-2xl font-montserrat text-sm transition-all duration-300
+                                ${isActive
+                                    ? "text-white font-bold shadow-lg shadow-red-200"
+                                    : "text-neutral-500 font-medium hover:bg-neutral-100"
+                                }
+                            `}
+                        >
+                            {isActive && (
+                                <motion.div
+                                    layoutId="activeTab"
+                                    className="absolute inset-0 bg-red-600 rounded-2xl -z-10"
+                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                />
+                            )}
+                            {categoria === 'empanadas' ? 'Empanadas & Canastitas' : capitalizeFirstLetter(categoria)}
+                        </button>
+                    </div>
+                );
+            })}
         </div>
     )
 }

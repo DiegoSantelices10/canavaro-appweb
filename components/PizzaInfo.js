@@ -4,6 +4,7 @@
 import { formatearNumero } from "libs/items";
 import Add01Icon from "public/images/add-01-stroke-rounded";
 import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function PizzaInfo({
   data: {
@@ -19,170 +20,82 @@ export default function PizzaInfo({
     const pre = cart.find(item => item.tamanio === tamanio);
     return pre?.cantidad ? pre.cantidad : 0;
   };
-  const quantityZero = tamanio => {
-    return cart.find(item => item.tamanio === tamanio);
+
+  const hasQuantity = tamanio => {
+    return cart.some(item => item.tamanio === tamanio);
   };
 
   const removeSpaces = str => {
     return str.replace(/\s/g, "");
   };
 
+  const renderSizeRow = (tamanioLabel, price, tamanioKey) => {
+    if (price === null || price === 0) return null;
+
+    return (
+      <div className="flex items-center justify-between py-5 border-b border-neutral-100 last:border-0">
+        <div>
+          <h3 className="text-lg font-bold text-neutral-800 font-montserrat">{tamanioLabel}</h3>
+          <p className="text-neutral-500 font-medium font-montserrat text-sm">{formatearNumero(price)}</p>
+        </div>
+
+        <div className="flex items-center gap-3 bg-neutral-100 p-1 rounded-2xl">
+          <AnimatePresence mode="wait">
+            {hasQuantity(tamanioKey) && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                className="flex items-center gap-3"
+              >
+                <button
+                  type="button"
+                  className="w-9 h-9 flex items-center justify-center bg-neutral-800 rounded-xl text-white shadow-sm active:scale-90 transition-transform"
+                  onClick={() =>
+                    decrementCart({
+                      _id: removeSpaces(nombre) + tamanioKey,
+                      nombre,
+                      categoria,
+                      tamanio: tamanioKey,
+                      precio: price,
+                    })
+                  }
+                >
+                  <MinusSignIcon width={16} height={16} color="white" />
+                </button>
+                <span className="font-bold text-neutral-800 text-sm w-4 text-center font-montserrat">
+                  {productQuantity(tamanioKey)}
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <button
+            type="button"
+            className="w-9 h-9 flex items-center justify-center bg-neutral-800 rounded-xl text-white shadow-md active:scale-95 transition-transform"
+            onClick={() =>
+              incrementCart({
+                _id: removeSpaces(nombre) + tamanioKey,
+                nombre,
+                categoria,
+                tamanio: tamanioKey,
+                precio: price,
+              })
+            }
+          >
+            <Add01Icon width={18} height={18} color="white" />
+          </button>
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <>
-      {" "}
-      {gigante !== null && gigante !== 0 && (
-        <div className="font-montserrat grid grid-cols-2 z-20 items-start justify-between w-full my-3 ">
-          <div className="text-lg font-medium text-neutral-800">
-            <h2>Gigante</h2>
-            <h2 className='text-gray-400 font-normal font-montserrat text-sm'>{formatearNumero(gigante)}</h2>
-          </div>
-          <div className=" flex  items-center justify-end bottom-0 right-0 w-auto   text-end gap-3 text-base">
-            <div
-              className={
-                quantityZero("gigante") ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
-              }
-            >
-              <button
-                type="button"
-                className="text-red-500 font-normal text-2xl flex justify-center items-center "
-                onClick={() =>
-                  decrementCart({
-                    _id: removeSpaces(nombre) + "gigante",
-                    nombre,
-                    categoria,
-                    tamanio: "gigante",
-                    precio: gigante,
-                  })
-                }
-              >
-                <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
-
-              </button>
-            </div>
-
-            <span className="font-normal text-xl  h-6">{productQuantity("gigante") === 0 ? "" : productQuantity("gigante")}</span>
-            <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
-              <button
-                type="button"
-                className="text-green-500 font-normal text-2xl flex justify-center items-center"
-                onClick={() =>
-                  incrementCart({
-                    _id: removeSpaces(nombre) + "gigante",
-                    nombre,
-                    categoria,
-                    tamanio: "gigante",
-                    precio: gigante,
-                  })
-                }
-              >
-                <Add01Icon color={"bg-green-500"} width={18} height={18} />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {mediana !== null && mediana !== 0 && (
-        <div className="font-montserrat grid grid-cols-2 justify-between items-start my-3">
-          <div className="text-lg font-medium text-neutral-800">
-            <h1>Mediana</h1>
-            <h2 className='text-gray-400 font-normal font-montserrat text-sm'>{formatearNumero(mediana)}</h2>
-          </div>
-          <div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
-            <div
-              className={
-                quantityZero("mediana") ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
-              }
-            >
-              <button
-                type="button"
-                className="text-red-500 font-normal text-2xl flex justify-center items-center "
-                onClick={() =>
-                  decrementCart({
-                    _id: removeSpaces(nombre) + "mediana",
-                    nombre,
-                    categoria,
-                    tamanio: "mediana",
-                    precio: mediana,
-                  })
-                }
-              >
-                <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
-
-              </button>
-            </div>
-
-            <span className="font-normal text-xl  h-6">{productQuantity("mediana") === 0 ? "" : productQuantity("mediana")}</span>
-            <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
-              <button
-                type="button"
-                className="text-green-500 font-normal text-2xl flex justify-center items-center"
-                onClick={() =>
-                  incrementCart({
-                    _id: removeSpaces(nombre) + "mediana",
-                    nombre,
-                    categoria,
-                    tamanio: "mediana",
-                    precio: mediana,
-                  })
-                }
-              >
-                <Add01Icon color={"bg-green-500"} width={18} height={18} />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {chica !== null && chica !== 0 && (
-        <div className=" font-montserrat grid grid-cols-2 justify-between items-start my-3">
-          <div className="text-lg font-medium text-neutral-800">
-            <h2>Chica</h2>
-            <h2 className='text-gray-400 font-normal font-montserrat text-sm'>{formatearNumero(chica)}</h2>
-          </div>
-          <div className=" flex items-center justify-end bottom-0 right-0 w-auto  text-end gap-3 text-base">
-            <div
-              className={
-                quantityZero("chica") ? "rounded-full w-7 h-7 grid content-center  shadow  bg-slate-50" : "invisible"
-              }
-            >
-              <button
-                type="button"
-                className="text-red-500 font-normal text-2xl flex justify-center items-center "
-                onClick={() =>
-                  decrementCart({
-                    _id: removeSpaces(nombre) + "chica",
-                    nombre,
-                    categoria,
-                    tamanio: "chica",
-                    precio: chica,
-                  })
-                }
-              >
-                <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
-              </button>
-            </div>
-
-            <span className="font-normal text-xl  h-6">{productQuantity("chica") === 0 ? "" : productQuantity("chica")}</span>
-            <div className="rounded-full w-8 h-8 grid content-center p-0 shadow  bg-slate-50">
-              <button
-                type="button"
-                className="text-green-500 font-normal text-2xl flex justify-center items-center"
-                onClick={() =>
-                  incrementCart({
-                    _id: removeSpaces(nombre) + "chica",
-                    nombre,
-                    categoria,
-                    tamanio: "chica",
-                    precio: chica,
-                  })
-                }
-              >
-                <Add01Icon color={"bg-green-500"} width={18} height={18} />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="mt-2 px-1">
+      {renderSizeRow("Gigante", gigante, "gigante")}
+      {renderSizeRow("Mediana", mediana, "mediana")}
+      {renderSizeRow("Chica", chica, "chica")}
+    </div>
   );
 }
+

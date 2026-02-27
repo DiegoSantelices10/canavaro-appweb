@@ -6,10 +6,10 @@ import Add01Icon from "public/images/add-01-stroke-rounded";
 import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductPromo, decrementProductPromo } from "store/reducers/orderSlice";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, precioExtra } }) => {
   const { orderPromo } = useSelector(state => state.order);
-
   const dispatch = useDispatch();
 
   const addItems = value => {
@@ -20,97 +20,123 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
     dispatch(decrementProductPromo(value));
   };
 
-
-
   const productQuantity = _id => {
     const pre = orderPromo?.find(item => item._id === _id);
     return pre?.cantidad ? pre.cantidad : 0;
   };
-  const quantityZero = _id => {
-    return orderPromo?.find(item => item._id === _id);
+
+  const hasQuantity = _id => {
+    return orderPromo?.some(item => item._id === _id);
   };
 
-
+  const isQuickAddCategory = () => {
+    const cat = categoria?.toLowerCase();
+    return cat === "postres" || cat === "empanadas" || cat === "bebidas" || cat === "porciones";
+  };
 
   return (
-    <div>
-      <div className="py-3">
-        {(() => {
-          const cat = categoria?.toLowerCase();
-          return cat === "postres" || cat === "empanadas" || cat === "bebidas" || cat === "porciones";
-        })() ? (
-          <div className="flex justify-between items-center gap-x-2">
-            <Image
-              className="rounded-lg overflow-hidden"
-              src={imagen?.url || "/images/producto-sin-imagen.png"}
-              width={140}
-              height={140}
-              objectFit='cover'
-              objectPosition='center'
-              alt={nombre}
-            />
-            <div className="relative w-full h-24 self-start">
-              <h1 className="font-semibold font-montserrat text-sm text-neutral-800">{nombre}</h1>
-              <p className="text-gray-400 text-xs tracking-wider">{descripcion}</p>
-              <p className="text-sm py-1 text-gray-400">{precioExtra ? `${formatearNumero(precioExtra + precio)}` : formatearNumero(precio)}</p>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="relative py-4 border-b border-neutral-100 last:border-0"
+    >
+      <div className="flex gap-4 items-center">
+        {/* Image Section */}
+        <div className="relative flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28">
+          {isQuickAddCategory() ? (
+            <div className="w-full h-full relative">
+              <Image
+                className="rounded-2xl overflow-hidden"
+                src={imagen?.url || "/images/producto-sin-imagen.png"}
+                layout="fill"
+                objectFit="cover"
+                alt={nombre}
+              />
+            </div>
+          ) : (
+            <Link href={`/order/products/${convertToPath(nombre)}`}>
+              <a className="block w-full h-full relative">
+                <Image
+                  className="rounded-2xl overflow-hidden"
+                  src={imagen?.url || "/images/producto-sin-imagen.png"}
+                  layout="fill"
+                  objectFit="cover"
+                  alt={nombre}
+                />
+              </a>
+            </Link>
+          )}
+        </div>
 
-              <div className="absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
-                <div
-                  className={
-                    quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow-sm  bg-gray-50" : "invisible"
-                  }
-                >
-                  <button
-                    type="button"
-                    className="text-red-500 text-2xl font-normal flex justify-center items-center"
-                    onClick={e => {
-                      decrementItems({ _id, nombre, precio, precioExtra, categoria });
-                    }}
-                  >
-                    <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
-                  </button>
-                </div>
-
-                <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
-
-                <div className="rounded-full w-8 h-8 grid content-center  shadow-sm  bg-gray-50">
-                  <button
-                    type="button"
-                    className="text-green-500 text-2xl font-normal flex justify-center items-center"
-                    onClick={e => {
-                      addItems({ _id, nombre, precio, precioExtra, categoria });
-                    }}
-                  >
-                    <Add01Icon color={"bg-green-500"} width={18} height={18} />
-                  </button>
-                </div>
-              </div>
+        {/* Content Section */}
+        <div className="flex flex-col flex-1 min-w-0 pr-2">
+          <div className="flex justify-between items-start gap-2">
+            <div>
+              <h3 className="font-bold font-montserrat text-neutral-800 text-sm sm:text-base leading-tight">
+                {nombre}
+              </h3>
+              <p className="text-neutral-400 text-xs mt-1 line-clamp-2 font-montserrat leading-tight">
+                {descripcion}
+              </p>
             </div>
           </div>
-        ) : (
-          <Link href={`/order/products/${convertToPath(nombre)}`}>
-            <a>
-              <div className="flex justify-between items-center gap-x-2">
-                <Image
-                  className="rounded-md"
-                  src={imagen?.url || "/images/producto-sin-imagen.png"}
-                  objectFit='cover'
-                  objectPosition='center'
-                  width={140}
-                  height={140}
-                  alt={nombre} />
-                <div className="w-full self-start">
-                  <h1 className="font-semibold text-sm font-montserrat text-neuttral-800">{nombre}</h1>
-                  <p className="text-gray-400 text-xs">{descripcion}</p>
-                  {categoria?.toLowerCase() !== "pizzas" && <p className="text-gray-400  text-sm py-1">{formatearNumero(precio)}</p>}
-                </div>
+
+          <div className="mt-3 flex items-center justify-between">
+            <div>
+              {categoria?.toLowerCase() !== "pizzas" && (
+                <p className="font-bold text-neutral-900 text-base font-montserrat">
+                  {precioExtra ? formatearNumero(precioExtra + precio) : formatearNumero(precio)}
+                </p>
+              )}
+            </div>
+
+            {isQuickAddCategory() ? (
+              <div className="flex items-center gap-3 bg-neutral-100 p-1 rounded-2xl">
+                <AnimatePresence mode="wait">
+                  {hasQuantity(_id) && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      className="flex items-center gap-3"
+                    >
+                      <button
+                        type="button"
+                        className="w-9 h-9 flex items-center justify-center bg-neutral-800 rounded-xl text-white shadow-sm active:scale-90 transition-transform"
+                        onClick={() => decrementItems({ _id, nombre, precio, precioExtra, categoria })}
+                      >
+                        <MinusSignIcon width={16} height={16} color="white" />
+                      </button>
+                      <span className="font-bold text-neutral-800 text-sm w-4 text-center font-montserrat">
+                        {productQuantity(_id)}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <button
+                  type="button"
+                  className="w-9 h-9 flex items-center justify-center bg-neutral-800 rounded-xl text-white shadow-md active:scale-95 transition-transform"
+                  onClick={() => addItems({ _id, nombre, precio, precioExtra, categoria })}
+                >
+                  <Add01Icon width={18} height={18} color="white" />
+                </button>
               </div>
-            </a>
-          </Link>
-        )}
+
+
+            ) : (
+              <Link href={`/order/products/${convertToPath(nombre)}`}>
+                <a className="px-5 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-[11px] sm:text-xs font-bold rounded-xl transition-all shadow-sm whitespace-nowrap">
+                  {categoria?.toLowerCase() === "pizzas" ? "Seleccionar tamaño" : "Ver más"}
+                </a>
+              </Link>
+            )}
+
+
+          </div>
+        </div>
       </div>
-      <hr />
-    </div>
+    </motion.div>
   );
 };
 

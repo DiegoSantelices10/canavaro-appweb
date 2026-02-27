@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FiChevronsLeft } from "react-icons/fi";
+import { FiChevronLeft, FiShoppingCart, FiPlus, FiMinus } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -28,8 +28,8 @@ import { formatearNumero } from "libs/items";
 import Delete02Icon from "public/images/delete-02-stroke-rounded";
 import AlignBoxMiddleLeftIcon from "public/images/align-box-middle-left-stroke-rounded";
 import ControllerInput from "components/ControllerInput";
-import Collapsable from "components/Collapsable";
 import { ordenarPorProductOrderIdHome } from "utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Cart({ data }) {
   const { orderList, totalAmount, demora, delivery } = useSelector(state => state.order);
@@ -41,6 +41,10 @@ export default function Cart({ data }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState(null);
   const [showHourEdit, setShowHourEdit] = useState(false);
+
+  // Estados para "Ver más"
+  const [expandedDrinks, setExpandedDrinks] = useState(false);
+  const [expandedDesserts, setExpandedDesserts] = useState(false);
 
   const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
 
@@ -61,8 +65,6 @@ export default function Cart({ data }) {
     dispatch(calculateTotalQuantity());
   }, [orderList]);
 
-
-
   useEffect(() => {
     hoursDelivery();
     obtenerPromo();
@@ -71,9 +73,11 @@ export default function Cart({ data }) {
   }, []);
 
   useEffect(() => {
-    descuentoBarra()
-    const { demoraActual } = data.find(item => item?.tipo === type);
-    dispatch(setDemora(demoraActual));
+    descuentoBarra();
+    const currentData = data.find(item => item?.tipo === type);
+    if (currentData) {
+      dispatch(setDemora(currentData.demoraActual));
+    }
   }, [type]);
 
   const obtenerPromo = async () => {
@@ -84,7 +88,7 @@ export default function Cart({ data }) {
         dispatch(setPromoBarra({ promoBarra: barra[0] }));
       }
     } catch (error) {
-      throw new Error("Failed to log out");
+      console.error("Error al obtener promo:", error);
     }
   };
 
@@ -113,26 +117,67 @@ export default function Cart({ data }) {
     }
   };
 
-  const renderList = (category) => {
+  const descuentoBarra = () => {
+    if (promoBarra?.available && type === 'localActual') {
+      const descuento = (totalAmount * 10) / 100;
+      const precioActual = totalAmount - descuento;
+      const convert = Math.floor(precioActual);
+      dispatch(setTotalAmount(convert));
+    } else {
+      dispatch(calculateSubTotal());
+    }
+  };
+
+  const renderSectionList = (category, isExpanded, setIsExpanded) => {
     const filtrados = products
       ?.filter(item => item.categoria?.toLowerCase() === category?.toLowerCase() && item.available === true);
 
+    if (!filtrados || filtrados.length === 0) return null;
+
     const ordenados = ordenarPorProductOrderIdHome(filtrados);
+    const displayedItems = isExpanded ? ordenados : ordenados.slice(0, 3);
 
-    return ordenados.map(data => <CardCart key={data._id} data={data} />);
+    return (
+      <div className="mb-8">
+        <h3 className="text-sm font-black font-montserrat text-neutral-800 uppercase tracking-wider mb-4 px-1">
+          ¿Deseas agregar {category === "bebidas" ? "una bebida" : "un postre"}?
+        </h3>
+        <div className="flex overflow-x-auto space-x-8 pb-4 px-1 no-scrollbar">
+          {displayedItems.map(item => (
+            <CardCart key={item._id} data={item} />
+          ))}
+          {!isExpanded && ordenados.length > 3 && (
+            <button
+              type="button"
+              onClick={() => setIsExpanded(true)}
+              className="flex-shrink-0 w-32 h-32 flex flex-col items-center justify-center rounded-lg text-neutral-800 hover:bg-neutral-200 transition-all shadow-md group border border-red-200"
+            >
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform">
+                <FiPlus size={24} className="text-red-500" />
+              </div>
+              <span className="font-black text-[10px] font-montserrat text-red-500 uppercase tracking-widest px-4 text-center">
+                Ver más {category}
+              </span>
+            </button>
+          )}
+          {isExpanded && ordenados.length > 3 && (
+            <button
+              type="button"
+              onClick={() => setIsExpanded(false)}
+              className="flex-shrink-0 w-44 h-40 flex flex-col items-center justify-center bg-neutral-100 rounded-[48px] text-neutral-800 hover:bg-neutral-200 transition-all shadow-md group border border-neutral-200"
+            >
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform">
+                <FiMinus size={24} className="text-neutral-500" />
+              </div>
+              <span className="font-black text-[10px] font-montserrat uppercase tracking-widest px-4 text-center">
+                Ver menos
+              </span>
+            </button>
+          )}
+        </div>
+      </div>
+    );
   };
-
-  // const addCartPromo = value => {
-  //   const res = value.find(item => item.categoria === "bebidas" || item.categoria === "Postres");
-
-  //   if (res) {
-  //     value.map(item => dispatch(addPromoOrderList({ ...item })));
-  //     toast.success("Se agrego al pedido!");
-  //     dispatch(clearOrderPromo());
-  //     dispatch(calculateSubTotal());
-  //     dispatch(calculateTotalQuantity());
-  //   }
-  // };
 
   const validationSchema = Yup.object().shape(
     type === "domicilioActual"
@@ -165,21 +210,8 @@ export default function Cart({ data }) {
       }
   );
 
-  const descuentoBarra = () => {
-    if (promoBarra?.available && type === 'localActual') {
-      const descuento = (totalAmount * 10) / 100;
-      const precioActual = totalAmount - descuento;
-      const convert = Math.floor(precioActual);
-
-      dispatch(setTotalAmount(convert));
-    } else {
-      dispatch(calculateSubTotal());
-    }
-  }
-
-
   return (
-    <div className="font-montserrat shadow-md mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2 h-screen  rounded-t-3xl py-3 ">
+    <div className="min-h-screen bg-neutral-50 font-montserrat">
       <Toaster />
       <Formik
         initialValues={{
@@ -215,339 +247,225 @@ export default function Cart({ data }) {
       >
         {({ setFieldValue }) => {
           return (
-            <div className="bg-white pb-4">
-              {currentProducto && (
-                <ModalDescripcion show={showModal} handleClose={handleCloseModal} pedido={currentProducto} />
-              )}
-              <Form className="space-y-4">
-                <div className="px-3">
-                  <div className="flex items-center gap-3 py-2">
-                    <Link href={"/order/home"}>
-                      <a>
-                        <FiChevronsLeft
-                          className=" text-slate-800 bg-slate-50 rounded-md shadow p-1 top-4 left-4"
-                          size={30}
-                        />
-                      </a>
-                    </Link>
-                    <h2 className="font-montserrat font-bold text-lg">Tu pedido</h2>
-                  </div>
-
-                  <div className="py-2">
-                    <div className="">
-                      {promoBarra?.available && (
-                        <div className="w-full mx-auto text-center tracking-wide text-sm font-semibold">
-                          Retirando por el local tenes un 10% de descuento.
-                        </div>
-                      )}
-                      <div className="flex justify-center w-full gap-3 text-sm bg-[#fdfcfc] shadow-sm p-2 rounded-lg">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            changeTypeDelivery("domicilioActual", setFieldValue);
-                          }}
-                          className={
-                            type === "domicilioActual"
-                              ? "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-red-600 shadow text-white font-semibold p-3"
-                              : "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-white shadow  font-normal p-3"
-                          }
-                        >
-                          <MdOutlineDeliveryDining size={20} />
-                          Delivery
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            changeTypeDelivery("localActual", setFieldValue);
-                          }}
-                          className={
-                            type === "localActual"
-                              ? "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-red-600 shadow text-white font-semibold p-3"
-                              : "w-1/2 rounded-lg flex font-montserrat items-center justify-center gap-2 bg-white shadow font-normal p-3"
-                          }
-                        >
-                          <MdOutlineEmojiPeople size={20} />
-                          Retiro
-                        </button>
-                      </div>
-                      <div className="flex flex-col justify-center items-center mt-5">
-                        {type === "domicilioActual" ? (
-                          <div className="w-full grid gap-6">
-                            <div className="flex flex-col md:flex-row gap-3">
-                              <div className="w-full">
-                                <ControllerInput
-                                  name="direccion"
-                                  label="Dirección"
-                                  placeholder="Ingresa tu domicilio, barrio"
-                                />
-                                <ErrorMessage name="direccion">
-                                  {msg => {
-                                    return (
-                                      <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">
-                                        {msg}
-                                      </div>
-                                    );
-                                  }}
-                                </ErrorMessage>
-                              </div>
-
-                              <div className="w-full">
-                                <ControllerInput
-                                  name="telefono"
-                                  type="number"
-                                  label="Teléfono"
-                                  placeholder="Ingresa tu telefono"
-                                />
-                                <ErrorMessage name="telefono">
-                                  {msg => {
-                                    return (
-                                      <div className="text-red-500 font-montserrat font-normal text-xs pt-1 pl-2">
-                                        {msg}
-                                      </div>
-                                    );
-                                  }}
-                                </ErrorMessage>
-                              </div>
-                            </div>
-
-                            <div className="p-3 py-5 rounded-lg border border-gray-200 min-w-min text-sm">
-                              {open ? (
-                                <>
-                                  <h1 className="font-medium text-center text-gray-800  mt-1 font-montserrat">
-                                    Tiempo de envío: {demora} min.
-                                  </h1>
-                                  <p className="text-center text-xs text-gray-400 font-normal font-montserrat">
-                                    o elige un horario que sea mayor al tiempo de envío{" "}
-                                    <button
-                                      type="button"
-                                      className="text-gray-800 font-montserrat"
-                                      onClick={() => setShowHourEdit(!showHourEdit)}
-                                    >
-                                      Ingresa aqui
-                                    </button>
-                                  </p>
-                                  {showHourEdit && (
-                                    <>
-                                      <div className="w-full mx-auto flex justify-center mt-3">
-                                        <ControllerInput
-                                          name="hPersonalizado"
-                                          placeholder="Horario de entrega"
-                                        />
-                                      </div>
-                                      <ErrorMessage name="hPersonalizado">
-                                        {msg => {
-                                          return (
-                                            <div className="text-red-500 font-montserrat font-normal text-xs">
-                                              {msg}
-                                            </div>
-                                          );
-                                        }}
-                                      </ErrorMessage>
-                                    </>
-                                  )}
-                                </>
-                              ) : (
-                                <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-montserrat">
-                                  Delivery de 19:30 a 23hs.
-                                </h1>
-                              )}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="w-full mx-auto">
-                            <ControllerInput
-                              name="nombre"
-                              label='Nombre'
-                              placeholder="Ingresa tu nombre"
-                            />
-                            <ErrorMessage name="nombre">
-                              {msg => {
-                                return (
-                                  <div className="text-red-500 font-normal font-montserrat text-xs text-left pt-1 pl-2">
-                                    {msg}
-                                  </div>
-                                );
-                              }}
-                            </ErrorMessage>
-
-                            <div className="p-3 py-5 rounded-lg border border-gray-200 min-w-min text-sm mt-6">
-                              {open ? (
-                                <>
-                                  <h1 className="font-medium text-center text-gray-600 text-sm mt-1 font-montserrat">
-                                    Tiempo de retiro: {demora} min.
-                                  </h1>
-                                  <p className="text-center text-xs text-gray-400 font-normal font-montserrat">
-                                    o elige un horario que sea mayor al tiempo de retiro{" "}
-                                    <button
-                                      type="button"
-                                      className="text-gray-800 font-montserrat"
-                                      onClick={() => setShowHourEdit(!showHourEdit)}
-                                    >
-                                      Ingresa aqui
-                                    </button>
-                                  </p>
-                                  {showHourEdit && (
-                                    <>
-                                      <div className="w-full mx-auto flex justify-center mt-3">
-                                        <ControllerInput
-                                          name="hPersonalizado"
-                                          placeholder="Horario de entrega"
-                                        />
-                                      </div>
-                                      <ErrorMessage name="hPersonalizado">
-                                        {msg => {
-                                          return <div className="text-red-500 -font-medium text-sm">{msg}</div>;
-                                        }}
-                                      </ErrorMessage>
-                                    </>
-                                  )}
-                                </>
-                              ) : (
-                                <h1 className="font-medium text-center text-gray-800 text-sm mt-1 font-montserrat">
-                                  Retiro de 19:30 a 23hs.
-                                </h1>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+            <div className="max-w-2xl mx-auto pb-32">
+              <Form className="flex flex-col">
+                {/* Custom Sticky Header */}
+                <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md px-6 py-4 flex items-center gap-4 border-b border-neutral-100">
+                  <Link href={"/order/home"}>
+                    <a className="w-10 h-10 flex items-center justify-center bg-neutral-100 rounded-xl text-neutral-800 active:scale-90 transition-transform shadow-sm">
+                      <FiChevronLeft size={24} />
+                    </a>
+                  </Link>
+                  <h1 className="font-black text-xl text-neutral-900 uppercase tracking-tighter">Tu Pedido</h1>
                 </div>
-                <Collapsable
-                  title={
-                    <h1 className="font-montserrat text-sm font-bold text-gray-800">
-                      ¿ Deseas agregar alguna bebida ?
-                    </h1>
-                  }
-                >
-                  <div className="p-0">
-                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
-                      <style jsx>
-                        {`
-                          .flexp::-webkit-scrollbar-thumb {
-                            background: #ffffff;
-                            border-radius: 20px;
-                          }
 
-                          .flexp::-webkit-scrollbar {
-                            height: 5px;
-                          }
-                        `}
-                      </style>
+                <div className="px-6 pt-6 space-y-8">
+                  {/* Promo Section */}
+                  {promoBarra?.available && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-neutral-900 text-white p-4 rounded-2xl text-center text-sm font-bold shadow-lg"
+                    >
+                      🎁 Retirando por el local tenés un 10% de descuento.
+                    </motion.div>
+                  )}
 
-                      {renderList("bebidas")}
+                  {/* Delivery Selection */}
+                  <div className="bg-white p-2 rounded-2xl shadow-sm flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => changeTypeDelivery("domicilioActual", setFieldValue)}
+                      className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all ${type === "domicilioActual" ? 'bg-neutral-900 text-white shadow-md' : 'bg-transparent text-neutral-500 hover:bg-neutral-50'}`}
+                    >
+                      <MdOutlineDeliveryDining size={24} />
+                      <span className="text-sm">Delivery</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => changeTypeDelivery("localActual", setFieldValue)}
+                      className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all ${type === "localActual" ? 'bg-neutral-900 text-white shadow-md' : 'bg-transparent text-neutral-500 hover:bg-neutral-50'}`}
+                    >
+                      <MdOutlineEmojiPeople size={24} />
+                      <span className="text-sm">Retiro</span>
+                    </button>
+                  </div>
+
+                  {/* Form Inputs */}
+                  <div className="space-y-4">
+                    {type === "domicilioActual" ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <ControllerInput
+                            name="direccion"
+                            label="Dirección de entrega"
+                            placeholder="Ej: Av. Principal 123, Barrio Norte"
+                          />
+                          <ErrorMessage name="direccion" component="div" className="text-red-500 text-[10px] font-bold px-2 uppercase" />
+                        </div>
+                        <div className="space-y-1">
+                          <ControllerInput
+                            name="telefono"
+                            type="number"
+                            label="Tu Teléfono"
+                            placeholder="Ej: 3811234567"
+                          />
+                          <ErrorMessage name="telefono" component="div" className="text-red-500 text-[10px] font-bold px-2 uppercase" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-1">
+                        <ControllerInput
+                          name="nombre"
+                          label='Tu Nombre'
+                          placeholder="Ingresa quién retira el pedido"
+                        />
+                        <ErrorMessage name="nombre" component="div" className="text-red-500 text-[10px] font-bold px-2 uppercase" />
+                      </div>
+                    )}
+
+                    {/* Time Alert Section */}
+                    <div className="bg-neutral-100 p-5 rounded-2xl border border-neutral-200">
+                      {open ? (
+                        <div className="text-center">
+                          <p className="text-neutral-800 font-bold text-sm">
+                            ⏳ Tiempo estimado: <span className="text-neutral-950 underline decoration-neutral-300">{demora} min.</span>
+                          </p>
+                          <button
+                            type="button"
+                            className="mt-2 text-[11px] text-neutral-500 font-bold uppercase tracking-widest hover:text-neutral-900 transition-colors"
+                            onClick={() => setShowHourEdit(!showHourEdit)}
+                          >
+                            {showHourEdit ? 'Ocultar ajuste' : '¿Programar horario?'}
+                          </button>
+                          <AnimatePresence>
+                            {showHourEdit && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="mt-4 pt-4 border-t border-neutral-200"
+                              >
+                                <ControllerInput
+                                  name="hPersonalizado"
+                                  placeholder="Ej: 21:30"
+                                />
+                                <ErrorMessage name="hPersonalizado" component="div" className="text-red-500 text-[10px] font-bold mt-1 uppercase" />
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <p className="text-center text-neutral-500 font-bold text-sm">
+                          🌙 {type === "domicilioActual" ? "Delivery" : "Retiro"} disponible de 19:30 a 23:00hs.
+                        </p>
+                      )}
                     </div>
                   </div>
-                </Collapsable>
-                <Collapsable
-                  title={
-                    <h1 className="font-montserrat text-sm font-bold text-gray-800">
-                      ¿ Deseas agregar algun postre ?
-                    </h1>
-                  }
-                >
-                  <div className="p-0">
-                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
-                      <style jsx>
-                        {`
-                          .flexp::-webkit-scrollbar-thumb {
-                            background: #ffffff;
-                            border-radius: 20px;
-                          }
 
-                          .flexp::-webkit-scrollbar {
-                            height: 5px;
-                          }
-                        `}
-                      </style>
+                  {/* Horizontal Lists with "Ver más" */}
+                  {renderSectionList("bebidas", expandedDrinks, setExpandedDrinks)}
+                  {renderSectionList("Postres", expandedDesserts, setExpandedDesserts)}
 
-                      {renderList("Postres")}
-                    </div>
-                  </div>
-                </Collapsable>
+                  {/* Order Detail Section */}
+                  <div className="bg-white rounded-[32px] p-6 shadow-sm border border-neutral-100">
+                    <h2 className="text-lg font-black font-montserrat text-neutral-900 uppercase tracking-tighter mb-4 flex items-center gap-2">
+                      Tu Detalle
+                    </h2>
 
-                <div className="p-3  pb-20 rounded-md">
-                  {/* <button
-                    onClick={() => addCartPromo(orderPromo)}
-                    type="button"
-                    className={`${orderPromo.length < 1
-                      ? "hidden"
-                      : "p-3 font-medium w-full font-montserrat mb-3 bg-red-600 rounded-lg text-white  hover:-translate-y-1 transition-all duration-500"
-                      }`}
-                  >
-                    Agregar al carrito
-                  </button> */}
-                  <h1 className="text-gray-800 font-bold font-montserrat px-2 text-base">Detalle pedido</h1>
-                  <hr />
-                  {orderList.map((item, index) => {
-                    return (
-                      <div key={index}>
-                        <div className="font-montserrat py-2">
-                          <div className="p-2 rounded-md">
-                            <div className="flex justify-between items-center gap-x-2">
-                              <div className="w-full ">
-                                <a className="font-semibold text-neutral-800">
-                                  {item.nombre}
-                                  <span className="text-gray-400 font-normal text-sm">
-                                    {" "}
-                                    {item.cant ? item.cant : item.cantidad}u
-                                  </span>
-                                </a>
-                                <p className="text-gray-400 text-xs tracking-wider">
-                                  {item?.descripcion ||
-                                    item?.tamanio?.charAt(0).toUpperCase() + item?.tamanio?.slice(1) ||
-                                    ""}
-                                </p>
-                                {item.extra && <p className="text-gray-400 text-sm">extra: {item.extra}</p>}
-                                <p className="text-sm text-gray-400">{formatearNumero(item.precio * item.cantidad)}</p>
+                    <div className="divide-y divide-neutral-100">
+                      {orderList.map((item, index) => (
+                        <div key={index} className="py-5 first:pt-0 last:pb-0">
+                          <div className="flex justify-between items-start gap-4">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <span className="font-extrabold text-neutral-400 text-xs">{item.cant || item.cantidad}x</span>
+                                <h4 className="font-extrabold text-neutral-800 text-sm font-montserrat uppercase">{item.nombre}</h4>
                               </div>
-                              <div className="flex justify-center gap-3">
+                              <p className="text-[11px] text-neutral-400 font-medium font-montserrat mt-1 uppercase tracking-tight">
+                                {item?.descripcion || item?.tamanio || ""}
+                              </p>
+                              {item.extra && <p className="text-[10px] text-emerald-600 font-bold mt-1 uppercase">+ extra: {item.extra}</p>}
+                            </div>
+
+                            <div className="flex flex-col items-end gap-3">
+                              <p className="font-black text-neutral-900 text-sm">
+                                {formatearNumero(item.precio * item.cantidad)}
+                              </p>
+                              <div className="flex gap-2">
                                 {item?.products && (
                                   <button
                                     type="button"
                                     onClick={() => handleOpenModal(item)}
-                                    className="font-normal font-montserrat text-xs w-auto "
+                                    className="w-8 h-8 flex items-center justify-center bg-neutral-50 rounded-lg text-neutral-400 hover:text-blue-600 transition-colors shadow-sm"
                                   >
-                                    <AlignBoxMiddleLeftIcon color={"#1618A4"} />
+                                    <AlignBoxMiddleLeftIcon width={16} height={16} />
                                   </button>
                                 )}
-                                <button type="button" onClick={() => deleteItem(item._id)}>
-                                  {<Delete02Icon color={"red"} />}
+                                <button
+                                  type="button"
+                                  onClick={() => deleteItem(item._id)}
+                                  className="w-8 h-8 flex items-center justify-center bg-neutral-50 rounded-lg text-neutral-400 hover:text-red-500 transition-colors shadow-sm"
+                                >
+                                  <Delete02Icon width={16} height={16} />
                                 </button>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <hr />
-                      </div>
-                    );
-                  })}
-                </div>
-                {orderList.length > 0 ? (
-                  <div className="font-montserrat fixed bottom-0 w-full  sm:w-4/5 md:w-3/5 lg:w-1/2 bg-white">
-                    <div className="flex justify-between items-center p-3 font-montserrat">
-                      <div>
-                        <p className="font-bold text-xl text-neutral-800">Subtotal</p>
-                        <h3 className="text-xl">{formatearNumero(totalAmount)}</h3>
-                      </div>
-                      <button
-                        type="submit"
-                        className="text-center text-sm font-montserrat rounded-lg w-auto p-3 px-4 text-white font-medium bg-red-600 hover:bg-red-800 hover:-translate-y-1 transition-all duration-500"
-                      >
-                        Continuar el pago
-                      </button>
+                      ))}
                     </div>
+
+                    {orderList.length === 0 && (
+                      <div className="text-center py-10 space-y-2">
+                        <div className="w-16 h-16 bg-neutral-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <FiShoppingCart size={24} className="text-neutral-300" />
+                        </div>
+                        <p className="text-neutral-800 font-black font-montserrat uppercase text-sm">El carrito está vacío</p>
+                        <p className="text-neutral-400 text-xs font-medium">Por favor, agrega productos desde el menú</p>
+                        <Link href="/order/home">
+                          <a className="inline-block mt-4 text-[10px] font-black uppercase text-neutral-900 underline tracking-widest">Volver al Menú</a>
+                        </Link>
+                      </div>
+                    )}
                   </div>
-                ) : (
-                  <div>
-                    <p className="text-center w-full font-bold text-lg font-montserrat">Tu Carrito esta vacio</p>
-                    <p className="text-center w-full font-medium text-sm text-gray-500 h-full font-montserrat">
-                      Por favor, regresa para realizar un pedido
-                    </p>
-                  </div>
-                )}
+                </div>
+
+                {/* Footer Banner */}
+                <AnimatePresence>
+                  {orderList.length > 0 && (
+                    <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 max-w-lg">
+                      <motion.div
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 100, opacity: 0 }}
+                        className="flex justify-between items-center rounded-3xl p-4 bg-neutral-950/80 backdrop-blur-xl text-white border border-neutral-800 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                      >
+                        <div className="flex flex-col items-start pl-2">
+                          <p className="text-[9px] uppercase font-black text-neutral-500 tracking-[0.2em] mb-0.5">Total estimado</p>
+                          <p className="font-black text-xl font-montserrat tracking-tighter">
+                            {formatearNumero(totalAmount)}
+                          </p>
+                        </div>
+                        <button
+                          type="submit"
+                          className="flex items-center gap-2 px-8 py-4 bg-white text-neutral-950 rounded-2xl font-black font-montserrat text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all active:scale-95"
+                        >
+                          Continuar
+                          <FiShoppingCart size={16} />
+                        </button>
+                      </motion.div>
+                    </div>
+                  )}
+                </AnimatePresence>
               </Form>
+              {currentProducto && (
+                <ModalDescripcion
+                  show={showModal}
+                  handleClose={handleCloseModal}
+                  pedido={currentProducto}
+                />
+              )}
             </div>
           );
         }}
@@ -561,11 +479,11 @@ export const getServerSideProps = async () => {
     const data = await getDelay();
     return {
       props: {
-        // Pasa el estado hidratado como prop al componente de Next.js
         data,
       },
     };
   } catch (error) {
-    alert("Error al obtener los productos");
+    console.error("Error al obtener delay:", error);
+    return { props: { data: [] } };
   }
 };

@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
 import { formatearNumero } from "libs/items";
 import Image from "next/image";
-import Add01Icon from "public/images/add-01-stroke-rounded";
-import MinusSignIcon from "public/images/minus-sign-stroke-rounded";
+import { FiPlus, FiMinus } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductDirect, decrementProductDirect } from "store/reducers/orderSlice";
+import { motion, AnimatePresence } from "framer-motion";
 
 const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio } }) => {
-    const { orderPromo } = useSelector(state => state.order);
-
+    const { orderList } = useSelector(state => state.order);
     const dispatch = useDispatch();
 
     const addItems = value => {
@@ -20,65 +19,67 @@ const CardCart = ({ data: { _id, nombre, imagen, descripcion, categoria, precio 
     };
 
     const productQuantity = _id => {
-        const pre = orderPromo?.find(item => item._id === _id);
-        return pre?.cantidad ? pre.cantidad : 0;
+        const item = orderList?.find(item => item._id === _id);
+        return item?.cantidad ? item.cantidad : 0;
     };
 
-    const quantityZero = _id => {
-        return orderPromo?.find(item => item._id === _id);
-    };
+    const quantity = productQuantity(_id);
+
     return (
-        <div className="rounded-md relative ">
-            <div className="relative bg-white  rounded-t-md" style={{ width: "160px", height: "100px" }}>
-                <div className="w-full">
-                    <a className="font-bold text-sm text-gray-800">
-                        <Image
-                            src={imagen?.url || "/images/producto-sin-imagen.png"}
-                            width={220}
-                            height={130}
-                            objectFit="contain"
-                            objectPosition="center"
-                            className="rounded-lg "
-                            alt={nombre}
-                        />
-                    </a>
-                </div>
+        <div className="flex-shrink-0 w-32 flex flex-col items-center group">
+            {/* Image Container - Slightly wider than tall */}
+            <div className="relative w-32 h-32 rounded-lg overflow-hidden mb-4 ring-2 ring-transparent group-hover:ring-neutral-200 transition-all duration-300 shadow-lg bg-neutral-100">
+                <Image
+                    src={imagen?.url || "/images/producto-sin-imagen.png"}
+                    layout="fill"
+                    objectFit="cover"
+                    className="group-hover:scale-110 transition-transform duration-700"
+                    alt={nombre}
+                />
+
+                {/* Quantity Badge Overlaid */}
+                <AnimatePresence>
+                    {quantity > 0 && (
+                        <motion.div
+                            initial={{ scale: 0, rotate: -20 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            exit={{ scale: 0, rotate: 20 }}
+                            className="absolute top-4 right-4 z-20 bg-neutral-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shadow-2xl border-2 border-white"
+                        >
+                            {quantity}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
-            <div className=" h-24 rounded-b-md px-1 py-2 ">
-                <p className=" text-gray-800 text-sm font-bold ">{nombre}</p>
-                <p className=" text-gray-400 text-sm font-poppins">{formatearNumero(precio)}</p>
 
-                <div className=" absolute flex items-center justify-center bottom-0 right-0 w-auto  text-end gap-3 text-base">
-                    <div
-                        className={
-                            quantityZero(_id) ? "rounded-full w-7 h-7 grid content-center  shadow-sm  bg-slate-50" : "invisible"
-                        }
+            {/* Info Section */}
+            <div className="text-center w-full px-2">
+                <h4 className="text-xs font-black font-montserrat text-neutral-900 uppercase truncate tracking-tight mb-1">
+                    {nombre}
+                </h4>
+                <p className="text-xs font-black text-neutral-400 font-montserrat mb-4">
+                    {formatearNumero(precio)}
+                </p>
+
+                {/* Minimal Controls */}
+                <div className="flex items-center justify-center gap-3">
+                    {quantity > 0 && (
+                        <button
+                            type="button"
+                            onClick={() => decrementItems({ _id, nombre, precio, categoria })}
+                            className="w-9 h-9 flex items-center justify-center bg-white border border-neutral-200 text-neutral-800 rounded-xl active:scale-90 transition-all shadow-sm hover:bg-neutral-50"
+                        >
+                            <FiMinus size={16} />
+                        </button>
+                    )}
+
+                    <button
+                        type="button"
+                        onClick={() => addItems({ _id, nombre, precio, categoria })}
+                        className={`w-9 h-9 flex items-center justify-center ${quantity > 0 ? 'bg-neutral-900 text-white' : 'bg-white border border-neutral-200 text-neutral-800'} rounded-xl active:scale-95 transition-all shadow-md hover:brightness-110`}
                     >
-                        <button
-                            type="button"
-                            className="text-red-500 text-3xl flex justify-center items-center "
-                            onClick={e => {
-                                decrementItems({ _id, nombre, precio, categoria });
-                            }}
-                        >
-                            <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
-                        </button>
-                    </div>
-
-                    <span className="font-normal text-xl  h-6">{productQuantity(_id) === 0 ? "" : productQuantity(_id)}</span>
-
-                    <div className="rounded-full w-8 h-8 grid content-center  shadow-sm  bg-slate-50">
-                        <button
-                            type="button"
-                            className="text-green-500 text-3xl flex justify-center items-center"
-                            onClick={e => {
-                                addItems({ _id, nombre, precio, categoria });
-                            }}
-                        >
-                            <Add01Icon color={"bg-green-500"} width={18} height={18} />
-
-                        </button>
-                    </div>
+                        <FiPlus size={16} />
+                    </button>
                 </div>
             </div>
         </div>

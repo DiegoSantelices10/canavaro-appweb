@@ -27,6 +27,10 @@ import { categoriasNoDestacables, ordenarPorProductOrderIdHome } from "utils";
 import { wrapper } from "store/app/store";
 
 
+import PromotionBanner from "components/PromotionBanner";
+import { motion } from "framer-motion";
+
+
 export default function Home() {
   const [renderProducts, setRenderProductos] = useState("empanadas");
   const [totalPrice, setTotalPrice] = useState(0);
@@ -101,8 +105,10 @@ export default function Home() {
 
     if (extras?.length <= 0) {
       const res = JSON.parse(localStorage.getItem("productos"));
-      const extras = res.filter(item => item.categoria?.toLowerCase() === 'extras' && item.available === true)
-      dispatch(setExtras(extras))
+      if (res) {
+        const extras = res.filter(item => item.categoria?.toLowerCase() === 'extras' && item.available === true)
+        dispatch(setExtras(extras))
+      }
     }
   }, []);
 
@@ -216,70 +222,61 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="pt-[40px] mx-auto w-full rounded-3xl relative">
+      <div className="pt-16 pb-24 mx-auto w-full relative">
+        <PromotionBanner />
 
-        <>
-          <h1 className="text-base font-bold font-montserrat tracking-wide text-neutral-800 mt-6">Nuestras promociones</h1>
-          <div className="py-2 ">
-            <div className="flex overflow-x-scroll top-0 flexp h-auto p-0.5 space-x-6 w-full">
-              <style jsx>
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-extrabold font-montserrat tracking-tight text-neutral-800">
+              Nuestras Promociones
+            </h2>
+            <div className="h-1 w-12 bg-red-600 rounded-full"></div>
+          </div>
+          <div className="py-2">
+            <div className="flex overflow-x-auto pb-4 gap-6 no-scrollbar">
+              <style jsx global>
                 {`
-              .flexp::-webkit-scrollbar-thumb {
-                background: #f4f4f4;
-                border-radius: 20px;
-              }
-
-              .flexp::-webkit-scrollbar {
-                height: 4px;
-              }
-            `}
+                  .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                  }
+                  .no-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                  }
+                `}
               </style>
-
               {renderPromotions()}
             </div>
           </div>
-        </>
-        <>
-          <h1 className="text-base font-bold font-montserrat tracking-wide text-neutral-800 mt-6">Nuestras combos</h1>
-          <div className="py-2 ">
-            <div className="flex overflow-x-scroll top-0 flexp h-auto p-0.5 space-x-6 w-full">
-              <style jsx>
-                {`
-              .flexp::-webkit-scrollbar-thumb {
-                background: #f4f4f4;
-                border-radius: 20px;
-              }
+        </div>
 
-              .flexp::-webkit-scrollbar {
-                height: 4px;
-              }
-            `}
-              </style>
-
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-extrabold font-montserrat tracking-tight text-neutral-800">
+              Nuestros Combos
+            </h2>
+            <div className="h-1 w-12 bg-red-600 rounded-full"></div>
+          </div>
+          <div className="py-2">
+            <div className="flex overflow-x-auto pb-4 gap-6 no-scrollbar">
               {renderCombos()}
             </div>
           </div>
-        </>
+        </div>
 
-        <div className="space-y-4 mt-4">
+        <div className="space-y-10 mt-4">
           {Object.entries(groupedProducts).map(([categoria, productosFiltrados]) => {
             return (
-              <div key={categoria}>
-                <p className="text-base font-bold font-montserrat tracking-wide text-neutral-800">
-                  {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
-                </p>
-                <div className="flex overflow-x-scroll flexp space-x-6 w-full py-2">
-                  <style jsx>
-                    {`
-                .flexp::-webkit-scrollbar-thumb {
-                  background: #f4f4f4;
-                  border-radius: 20px;
-                }
-                .flexp::-webkit-scrollbar {
-                  height: 4px;
-                }
-              `}
-                  </style>
+              <div key={categoria} className="relative">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-extrabold font-montserrat tracking-tight text-neutral-800 uppercase">
+                    {categoria}
+                  </h2>
+                  <span className="text-xs font-medium text-neutral-400 bg-neutral-100 px-2 py-1 rounded-full">
+                    {productosFiltrados.length} Items
+                  </span>
+                </div>
+                <div className="flex overflow-x-auto pb-4 gap-6 no-scrollbar">
                   {productosFiltrados.map((data) => (
                     <CardPromotion key={data._id} data={data} />
                   ))}
@@ -288,43 +285,52 @@ export default function Home() {
             );
           })}
         </div>
-        <TabsCategories
-          renderProducts={renderProducts}
-          setRenderProductos={setRenderProductos}
-          clearTotal={clearTotal} />
-        <div className="py-6">
+
+        <div className="mt-12 sticky top-14 z-30 bg-white/80 backdrop-blur-md py-2 -mx-3 px-3 border-b border-neutral-100">
+          <TabsCategories
+            renderProducts={renderProducts}
+            setRenderProductos={setRenderProductos}
+            clearTotal={clearTotal} />
+        </div>
+
+        <div className="py-8">
           {
             renderProducts === "empanadas" && (
-              <div className="p-2 bg-red-600 rounded-lg">
-                <p className="text-sm font-medium font-montserrat text-white text-center">
-                  Cada 12 empanadas o canastitas, tenes promo!
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3"
+              >
+                <div className="flex-shrink-0 w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white text-lg">
+                  ✨
+                </div>
+                <p className="text-sm font-semibold font-montserrat text-red-700">
+                  ¡Promo activa! Llevando 12 empanadas o canastitas aplicamos precio especial automáticamente.
                 </p>
-              </div>
+              </motion.div>
             )
           }
           {
             renderProducts === "pizzas" && (
-              <div className="w-full flex items-center justify-between">
+              <div className="w-full flex items-center justify-between bg-neutral-50 p-4 rounded-2xl border border-neutral-100 shadow-sm">
                 <div>
-                  <p className="text-left w-full font-montserrat text-base font-semibold">¡Arma tu pizza!</p>
+                  <p className="text-left font-montserrat text-lg font-bold text-neutral-800">¡Armá tu pizza!</p>
+                  <p className="text-sm text-neutral-500">Elegí tus ingredientes favoritos</p>
                 </div>
                 <Link href={"/order/pizzaFree"}>
                   <a
                     onClick={() => clearTotal()}
-                    className="rounded-lg font-montserrat font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
-                    Ingresa aqui
+                    className="rounded-xl font-montserrat font-bold w-auto bg-red-600 hover:bg-red-700 transition-colors text-white shadow-lg shadow-red-200 p-3 text-sm px-6">
+                    Empezar
                   </a>
                 </Link>
-
               </div>
             )
           }
-
         </div>
 
-        <div>
-          <div
-            className="grid md:grid-cols-2 lg:grid-cols-2 md:gap-x-4 lg:gap-x-4 mb-10">
+        <div className="mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
             {renderStore(renderProducts)}
           </div>
         </div>
@@ -335,35 +341,40 @@ export default function Home() {
             return category === "postres" || category === "empanadas" || category === "bebidas" || category === "porciones";
           })() && (
               orderPromo.length > 0 && (
-                <div className="w-full fixed bottom-2 mx-auto px-3 md:w-4/5 lg:w-3/5">
-                  <div
-                    className="flex justify-between items-center  rounded-lg mx-auto text-center   
-									   w-full md:w-4/5 lg:w-3/5 p-3 bg-red-600  text-white text-base font-semibold "
+                <div className="w-full fixed bottom-8 left-0 right-0 mx-auto px-4 z-40 max-w-lg">
+                  <motion.div
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="flex justify-between items-center rounded-3xl mx-auto shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-4 bg-neutral-950/80 text-white border border-neutral-800 backdrop-blur-md"
                   >
                     <button
                       onClick={() => addCartPromo(orderPromo)}
-                      className={`${orderPromo.length < 1
-                        ? "invisible"
-                        : "p-2 px-3 font-medium font-montserrat bg-slate-50 rounded-lg text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
-                        }`}
+                      className="px-6 py-3.5 font-bold font-montserrat bg-white rounded-2xl text-neutral-950 text-sm hover:bg-neutral-200 transition-all active:scale-95 shadow-lg"
                     >
-                      Agregar al carrito
+                      Sumar al carrito
                     </button>
 
-                    <div className="flex items-center gap-x-5 text-white font-semibold">
-                      <p className="font-medium text-xl">{totalPrice !== 0 && formatearNumero(totalPrice)}</p>
-                      <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
-                        <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
+                    <div className="flex items-center gap-5">
+                      <div className="text-right">
+                        <p className="text-[10px] uppercase font-bold text-neutral-500 tracking-widest mb-0.5">Subtotal</p>
+                        <p className="font-extrabold text-2xl leading-none font-montserrat tracking-tight">
+                          {totalPrice !== 0 && formatearNumero(totalPrice)}
+                        </p>
+                      </div>
+                      <div className="h-14 w-14 rounded-2xl bg-neutral-800 flex justify-center items-center border border-neutral-700 shadow-inner">
+                        <p className="text-white text-xl font-black">{totalCant}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
+
               )
             )}
         </div>
 
       </div>
     </Layout>
+
   );
 }
 

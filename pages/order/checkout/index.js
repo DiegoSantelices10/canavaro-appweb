@@ -3,7 +3,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FiChevronsLeft } from "react-icons/fi";
+import { FiChevronsLeft, FiMapPin, FiClock, FiUser } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment-timezone";
 import { setCheckout, setDelivery, setDemora, setOrderListLocal, setTotalAmount } from "store/reducers/orderSlice";
@@ -16,6 +16,8 @@ import { socket } from "socket";
 import { getUrl } from "utils/getUrl";
 import MeansOfPayment from "components/MeansOfPayment";
 import ControllerInput from "components/ControllerInput";
+import { motion, AnimatePresence } from "framer-motion";
+import PromotionBanner from "components/PromotionBanner";
 
 
 export default function Checkout() {
@@ -89,6 +91,12 @@ export default function Checkout() {
           <h2 className="font-montserrat font-bold tracking-wider text-lg">Tu pedido</h2>
         </div>
       </div>
+
+      {delivery === "domicilioActual" && (
+        <div className="px-3">
+          <PromotionBanner />
+        </div>
+      )}
 
       <Formik
         initialValues={{
@@ -175,36 +183,36 @@ export default function Checkout() {
               <div className="h-full">
 
                 <div className="px-3">
-                  <div className="border border-gray-200 p-2 py-3 rounded-lg">
-                    <div>
-                      {delivery === "domicilioActual" ? (
-                        <div className="flex justify-between">
-                          <h2 className="font-montserrat text-neutral-800 font-semibold text-sm">Dirección de envío</h2>
-                          <p className="font-montserrat text-gray-600 px-1 text-sm">{user.direccion} </p>
-                        </div>
-                      ) : (
-                        <div className="flex justify-between">
-                          <h2 className="font-montserrat text-neutral-800 font-semibold text-sm">Retira por local</h2>
-                          <p className="font-montserrat text-gray-600 px-1 text-sm">{user.nombre}</p>
-                        </div>
-                      )}
+                  <div className="bg-white rounded-[32px] p-6 shadow-sm border border-neutral-100 space-y-5">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-neutral-100 rounded-xl flex items-center justify-center text-neutral-500 flex-shrink-0">
+                        {delivery === "domicilioActual" ? <FiMapPin size={20} /> : <FiUser size={20} />}
+                      </div>
+                      <div className="flex-1">
+                        <h2 className="text-[10px] font-black uppercase text-neutral-400 tracking-widest mb-1">
+                          {delivery === "domicilioActual" ? "Dirección de envío" : "Retira por local"}
+                        </h2>
+                        <p className="font-extrabold text-neutral-800 text-sm font-montserrat uppercase">
+                          {delivery === "domicilioActual" ? user.direccion : user.nombre}
+                        </p>
+                      </div>
                     </div>
-                    <div className="bg-red-500 p-px my-2"></div>
-                    {user?.hPersonalizado ? (
-                      <div className="flex justify-between">
-                        <h2 className="font-montserrat font-semibold text-sm text-neutral-800">
-                          {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo"}
-                        </h2>
-                        <p className="font-montserrat px-1 text-sm text-gray-600">{user?.hPersonalizado}hs.</p>
+
+                    <div className="h-px bg-neutral-100 w-full"></div>
+
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-neutral-100 rounded-xl flex items-center justify-center text-neutral-500 flex-shrink-0">
+                        <FiClock size={20} />
                       </div>
-                    ) : (
-                      <div className="flex justify-between">
-                        <h2 className="font-montserrat font-semibold text-sm text-neutral-800">
-                          {delivery === "domicilioActual" ? "Horario de entrega" : "Retiralo en"}
+                      <div className="flex-1">
+                        <h2 className="text-[10px] font-black uppercase text-neutral-400 tracking-widest mb-1">
+                          {delivery === "domicilioActual" ? (user?.hPersonalizado ? "Horario de entrega" : "Tiempo estimado") : (user?.hPersonalizado ? "Retiralo" : "Retiralo en")}
                         </h2>
-                        <p className="font-montserrat px-1 text-sm text-gray-600">{demora} minutos</p>
+                        <p className="font-extrabold text-neutral-800 text-sm font-montserrat uppercase">
+                          {user?.hPersonalizado ? `${user.hPersonalizado}hs.` : `${demora} minutos`}
+                        </p>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
 
@@ -229,30 +237,44 @@ export default function Checkout() {
                   />
                 </div>
 
-                <div className="mx-auto font-montserrat px-3 sm:w-4/5 md:w-3/5 lg:w-1/2 fixed w-full bottom-2 bg-white">
-                  <div className='flex items-center p-2 gap-2 justify-between w-full text-lg'>
-                    <p className='font-semibold'>Total</p>
-                    <p className='font-semibold'>{formatearNumero(values.total)}</p>
+                <AnimatePresence>
+                  <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 max-w-lg">
+                    <motion.div
+                      initial={{ y: 100, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 100, opacity: 0 }}
+                      className="flex justify-between items-center rounded-3xl p-4 bg-neutral-950/80 backdrop-blur-xl text-white border border-neutral-800 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                    >
+                      <div className="flex flex-col items-start pl-2">
+                        <p className="text-[9px] uppercase font-black text-neutral-500 tracking-[0.2em] mb-0.5">Total a pagar</p>
+                        <p className="font-black text-xl font-montserrat tracking-tighter">
+                          {formatearNumero(values.total)}
+                        </p>
+                      </div>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="flex items-center gap-2 px-8 py-4 bg-white text-neutral-950 rounded-2xl font-black font-montserrat text-xs uppercase tracking-wider hover:bg-neutral-200 transition-all active:scale-95 disabled:opacity-50"
+                      >
+                        {isSubmitting ? (
+                          <ColorRing
+                            visible={true}
+                            height="20"
+                            width="20"
+                            ariaLabel="blocks-loading"
+                            wrapperStyle={{}}
+                            wrapperClass="blocks-wrapper"
+                            colors={['#000000', '#000000', '#000000', '#000000', '#000000']}
+                          />
+                        ) : (
+                          <>
+                            Confirmar
+                          </>
+                        )}
+                      </button>
+                    </motion.div>
                   </div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="text-center w-full font-montserrat rounded-lg justify-center items-center flex p-3 px-4 text-white bg-red-600 font-medium hover:-translate-y-1 transition-all duration-500"
-                  >
-                    {isSubmitting ? (
-                      <ColorRing
-                        visible={true}
-                        height="30"
-                        width="30"
-                        ariaLabel="blocks-loading"
-                        wrapperStyle={{}}
-                        wrapperClass="blocks-wrapper"
-                        colors={['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']}
-                      />
-                    ) : "Confirmar pedido"}
-
-                  </button>
-                </div>
+                </AnimatePresence>
               </div>
 
             </Form >
