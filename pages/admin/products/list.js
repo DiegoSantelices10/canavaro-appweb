@@ -197,9 +197,9 @@ const Products = () => {
   return (
     <Layout>
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Gestión de Productos</h1>
-          <p className="text-slate-500 mt-1">Crea, edita y organiza el catálogo de la pizzería.</p>
+        <div className="px-2 md:px-0">
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight text-center md:text-left">Gestión de Productos</h1>
+          <p className="text-slate-500 mt-1 text-center md:text-left text-sm">Crea, edita y organiza el catálogo de la pizzería.</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <Link href="/admin/products/create" passHref>
@@ -224,7 +224,7 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="bg-slate-900/5 p-6 rounded-[2.5rem] border border-slate-100 mb-10 relative">
+      <div className="bg-slate-900/5 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 mb-6 md:mb-10 relative">
         <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none"></div>
         <div className="relative flex flex-col lg:flex-row gap-6 items-end">
           <div className="relative flex-1 group w-full">

@@ -22,7 +22,7 @@ const Table = (props) => {
     return (
         <div
             {...rest}
-            className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-xl shadow-slate-200/40"
+            className="overflow-hidden rounded-2xl md:rounded-3xl border border-slate-100 bg-white shadow-xl shadow-slate-200/40"
         >
             <table className='w-full border-collapse'>
                 <thead>
@@ -32,7 +32,7 @@ const Table = (props) => {
                         >
                             {headerGroup.headers.map(header => (
                                 <th key={header.id}
-                                    className='px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-center'
+                                    className='px-2 md:px-6 py-4 text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest text-center'
                                 >
                                     {header.isPlaceholder
                                         ? null
@@ -53,7 +53,7 @@ const Table = (props) => {
                         >
                             {row.getVisibleCells().map(cell => (
                                 <td key={cell.id}
-                                    className='px-6 py-4 text-sm font-medium text-slate-600'
+                                    className='px-2 md:px-6 py-4 text-xs md:text-sm font-medium text-slate-600'
                                 >
                                     <div className="flex justify-center items-center">
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
