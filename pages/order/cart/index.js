@@ -156,7 +156,7 @@ export default function Cart({ data }) {
                 <FiPlus size={24} className="text-red-500" />
               </div>
               <span className="font-black text-[10px] font-montserrat text-red-500 uppercase tracking-widest px-4 text-center">
-                Ver más {category}
+                Ver más
               </span>
             </button>
           )}
@@ -164,9 +164,9 @@ export default function Cart({ data }) {
             <button
               type="button"
               onClick={() => setIsExpanded(false)}
-              className="flex-shrink-0 w-44 h-40 flex flex-col items-center justify-center bg-neutral-100 rounded-[48px] text-neutral-800 hover:bg-neutral-200 transition-all shadow-md group border border-neutral-200"
+              className="flex-shrink-0 w-32 h-32 flex flex-col items-center justify-center bg-neutral-100 rounded-lg text-neutral-800 hover:bg-neutral-200 transition-all shadow-md group border border-neutral-200"
             >
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-2 shadow-sm group-hover:scale-110 transition-transform">
                 <FiMinus size={24} className="text-neutral-500" />
               </div>
               <span className="font-black text-[10px] font-montserrat uppercase tracking-widest px-4 text-center">
