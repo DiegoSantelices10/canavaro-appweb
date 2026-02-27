@@ -42,11 +42,7 @@ const Sales = () => {
           <p className="text-slate-500 mt-2 font-medium">Revisa el rendimiento diario y los pedidos completados con éxito.</p>
         </div>
 
-        <div className="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-6 relative overflow-hidden group min-w-[280px]">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-green-500/10 transition-colors duration-500"></div>
-          <div className="p-4 bg-green-50 text-green-600 rounded-2xl shadow-sm relative z-10">
-            <FiDollarSign size={28} />
-          </div>
+        <div className="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-6 relative overflow-hidden group">
           <div className="relative z-10">
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Ventas totales</p>
             <h2 className="text-4xl font-black text-slate-900 tracking-tight">{sales?.length || 0}</h2>
@@ -92,24 +88,14 @@ const Sales = () => {
                     <span className="text-sm font-bold font-mono tracking-wider">{item?.telefono || "N/A"}</span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-slate-50 rounded-2xl text-center border border-slate-50 group-hover:bg-slate-100 transition-colors">
-                      <span className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Items</span>
-                      <span className="text-lg font-black text-slate-900">{item?.productos?.length || 0}</span>
-                    </div>
-                    <div className="p-4 bg-red-50 rounded-2xl text-center border border-red-50 group-hover:bg-red-100 transition-colors">
-                      <span className="block text-[9px] font-black text-red-400 uppercase tracking-widest mb-1">Total</span>
-                      <span className="text-lg font-black text-red-600">${item?.total}</span>
-                    </div>
-                  </div>
                 </div>
 
                 <button
                   onClick={() => handleOpenModal(item)}
-                  className="w-full py-4.5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] bg-slate-900 text-white hover:bg-red-600 transition-all active:scale-95 shadow-xl shadow-slate-900/10 flex items-center justify-center gap-3 group/btn"
+                  className="w-full py-4 rounded-[1.25rem] text-[11px] font-black uppercase tracking-[0.25em] bg-gradient-to-r from-slate-900 to-slate-800 text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 active:scale-[0.98] shadow-lg shadow-slate-900/20 hover:shadow-red-500/30 flex items-center justify-center gap-3 group/btn border border-white/10"
                 >
-                  <span>VER RESUMEN</span>
-                  <FiChevronRight className="text-lg group-hover/btn:translate-x-1 transition-transform" />
+                  <span className="relative z-10">VER RESUMEN</span>
+                  <FiChevronRight className="text-lg group-hover/btn:translate-x-1 transition-transform duration-300 relative z-10" />
                 </button>
               </motion.div>
             ))
