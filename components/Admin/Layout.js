@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
       <Toaster position="top-right" />
 
       {/* Main Content - Offset by sidebar on Desktop */}
-      <main className="lg:ml-64 bg-green-100 w-full p-4 md:p-6 pt-24 lg:pt-10">
+      <main className="lg:ml-64  w-full p-4 md:p-6 pt-24 lg:pt-10">
         <div className="w-full lg:max-w-7xl mx-auto h-full">
           {children}
         </div>

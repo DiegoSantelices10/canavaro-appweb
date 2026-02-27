@@ -224,9 +224,9 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="bg-slate-900/5 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 mb-6 md:mb-10 relative">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none"></div>
-        <div className="relative flex flex-col lg:flex-row gap-6 items-end">
+      <div className="md:bg-slate-900/5 md:p-6 md:rounded-[2.5rem] md:border md:border-slate-100 mb-8 md:mb-10 relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none hidden md:block"></div>
+        <div className="relative flex flex-col lg:flex-row gap-4 md:gap-6 items-end">
           <div className="relative flex-1 group w-full">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Búsqueda Rápida</p>
             <div className="relative">
@@ -239,7 +239,7 @@ const Products = () => {
                 type="text"
                 placeholder="Escribe el nombre del producto..."
                 onChange={handleChangeSearch}
-                className="w-full pl-14 pr-6 py-4 bg-white shadow-sm border-2 border-transparent rounded-[1.5rem] text-sm text-slate-700 placeholder:text-slate-400 focus:border-red-500/20 focus:shadow-xl focus:shadow-red-500/5 transition-all outline-none"
+                className="w-full pl-14 pr-6 py-4 bg-white shadow-sm md:shadow-none border border-slate-100 md:border-transparent rounded-2xl md:rounded-[1.5rem] text-sm text-slate-700 placeholder:text-slate-400 focus:border-red-500/20 focus:shadow-xl focus:shadow-red-500/5 transition-all outline-none"
               />
             </div>
           </div>
