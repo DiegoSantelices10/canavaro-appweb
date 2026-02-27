@@ -259,7 +259,7 @@ export default function Cart({ data }) {
                   <h1 className="font-black text-xl text-neutral-900 uppercase tracking-tighter">Tu Pedido</h1>
                 </div>
 
-                <div className="px-6 pt-6 space-y-8">
+                <div className="px-4 space-y-8">
                   {/* Promo Section */}
                   {promoBarra?.available && (
                     <motion.div

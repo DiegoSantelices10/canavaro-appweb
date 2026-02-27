@@ -126,8 +126,8 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
 
             ) : (
               <Link href={`/order/products/${convertToPath(nombre)}`}>
-                <a className="px-5 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-[11px] sm:text-xs font-bold rounded-xl transition-all shadow-sm whitespace-nowrap">
-                  {categoria?.toLowerCase() === "pizzas" ? "Seleccionar tamaño" : "Ver más"}
+                <a className="px-3.5 py-1.5 border border-neutral-200 hover:border-red-600 hover:text-red-600 text-neutral-400 text-[9px] font-black uppercase tracking-[0.15em] rounded-xl transition-all active:scale-95 whitespace-nowrap bg-white shadow-sm">
+                  {categoria?.toLowerCase() === "pizzas" ? "Elegir tamaño" : "Ver más"}
                 </a>
               </Link>
             )}

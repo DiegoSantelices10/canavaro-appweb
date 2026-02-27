@@ -222,7 +222,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="pt-16 pb-24 mx-auto w-full relative">
+      <div className="pt-24 mx-auto w-full relative">
         <PromotionBanner />
 
         <div className="mb-8">

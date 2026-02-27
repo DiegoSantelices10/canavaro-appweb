@@ -51,7 +51,7 @@ const MeansOfPayment = (props) => {
                                 />
                             </div>
                         ) : (
-                            <div className="bg-sky-50 p-5 rounded-2xl border border-sky-100 flex flex-col items-center text-center gap-4">
+                            <div className="bg-white p-5 rounded-2xl border border-sky-100 flex flex-col items-center text-center gap-4">
                                 <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white text-xl shadow-lg shadow-sky-200">
                                     💬
                                 </div>
@@ -59,23 +59,23 @@ const MeansOfPayment = (props) => {
                                     <p className="font-montserrat font-black text-sky-900 text-sm uppercase tracking-tight">
                                         Pago por WhatsApp
                                     </p>
-                                    <p className="font-montserrat text-sky-700 text-[11px] font-bold leading-relaxed max-w-[200px] mx-auto uppercase">
+                                    <p className="font-montserrat text-sky-700 text-[11px] font-bold leading-relaxed max-w-[250px] mx-auto uppercase">
                                         Al confirmar tu pedido, te enviaremos el QR o Alias por WhatsApp para completar el pago.
                                     </p>
                                 </div>
 
                                 {values.medioDePago === "Mercado Pago" && (
-                                    <div className="pt-2 opacity-50 grayscale hover:grayscale-0 transition-all flex justify-center">
+                                    <div className="pt-2 transition-all flex justify-center">
                                         <Image src="/images/logo-mercadopago.png" width={80} height={35} objectFit="contain" alt="logoMP" />
                                     </div>
                                 )}
                                 {values.medioDePago === "Cuenta DNI" && (
-                                    <div className="pt-2 opacity-50 grayscale hover:grayscale-0 transition-all flex justify-center">
+                                    <div className="pt-2 transition-all flex justify-center">
                                         <Image src="/images/cuenta-dni.jpg" width={100} height={40} objectFit="contain" alt="logoOpen" />
                                     </div>
                                 )}
                                 {values.medioDePago === "Open Pay" && (
-                                    <div className="pt-2 opacity-50 grayscale hover:grayscale-0 transition-all flex justify-center">
+                                    <div className="pt-2 transition-all flex justify-center">
                                         <Image src="/images/openpay.png" width={120} height={45} objectFit="contain" alt="logoOpen" />
                                     </div>
                                 )}
