@@ -203,8 +203,14 @@ export default function Promotion({
         <div className="space-y-6">
           {addExtras === "si" && (
             <div className="font-montserrat">
-              <div className={`mb-4 p-4 rounded-2xl text-center font-bold text-sm shadow-sm transition-all ${quantityDemandedDrinks < 1 ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-neutral-900 text-white'}`}>
-                {quantityDemandedDrinks < 1 ? "¡Bebidas completadas!" : `Seleccioná ${quantityDemandedDrinks} bebidas`}
+              <div className={`mb-6 p-2 rounded-2xl w-full border text-center transition-all ${quantityDemandedDrinks < 1 ? 'bg-emerald-50 border-emerald-100' : 'bg-white border-neutral-300'}`}>
+                <p className="text-sm font-montserrat text-neutral-500">
+                  {quantityDemandedDrinks < 1 ? (
+                    <span className="text-emerald-600 font-bold">¡Bebidas completadas!</span>
+                  ) : (
+                    <>Seleccioná <span className="text-base">{quantityDemandedDrinks}</span> bebidas más</>
+                  )}
+                </p>
               </div>
               <div className="divide-y divide-neutral-100">
                 {listAvailableDrinks()?.map((drink) => (
@@ -233,8 +239,14 @@ export default function Promotion({
 
           {addPostres === "si" && (
             <div className="font-montserrat">
-              <div className={`mb-4 p-4 rounded-2xl text-center font-bold text-sm shadow-sm transition-all ${quantityDemandedPostres < 1 ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-neutral-900 text-white'}`}>
-                {quantityDemandedPostres < 1 ? "¡Postres completados!" : `Seleccioná ${quantityDemandedPostres} postres`}
+              <div className={`mb-6 p-2 rounded-2xl w-full border text-center transition-all ${quantityDemandedPostres < 1 ? 'bg-emerald-50 border-emerald-100' : 'bg-white border-neutral-300'}`}>
+                <p className="text-sm font-montserrat text-neutral-500">
+                  {quantityDemandedPostres < 1 ? (
+                    <span className="text-emerald-600 font-bold">¡Postres completados!</span>
+                  ) : (
+                    <>Seleccioná <span className=" text-base">{quantityDemandedPostres}</span> postres más</>
+                  )}
+                </p>
               </div>
               <div className="divide-y divide-neutral-100">
                 {updatedDesserts?.map((dessert) => (
@@ -263,8 +275,14 @@ export default function Promotion({
 
           {addEmpanadas === "si" && (
             <div className="font-montserrat">
-              <div className={`mb-4 p-4 rounded-2xl text-center font-bold text-sm shadow-sm transition-all ${quantityDemanded < 1 ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-neutral-900 text-white'}`}>
-                {quantityDemanded < 1 ? "¡Empanadas completadas!" : `Seleccioná ${quantityDemanded} empanadas`}
+              <div className={`mb-6 p-2 rounded-2xl w-full border text-center transition-all ${quantityDemanded < 1 ? 'bg-emerald-50 border-emerald-100' : 'bg-white border-neutral-300'}`}>
+                <p className="text-sm font-montserrat text-neutral-500">
+                  {quantityDemanded < 1 ? (
+                    <span className="text-emerald-600 font-bold">¡Empanadas completadas!</span>
+                  ) : (
+                    <>Seleccioná <span className="text-base">{quantityDemanded}</span> empanadas más</>
+                  )}
+                </p>
               </div>
               <div className="divide-y divide-neutral-100">
                 {products
