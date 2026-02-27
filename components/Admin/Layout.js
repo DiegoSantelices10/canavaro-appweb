@@ -5,19 +5,29 @@ import { Toaster } from "react-hot-toast";
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
   return (
-    <div className="h-screen w-full lg:flex block ">
+    <div className="min-h-screen w-full lg:flex bg-slate-50">
       <Head>
-        <title>Pizzeria Canavaro</title>
+        <title>Canavaro Admin</title>
       </Head>
-      <div className="grid grid-cols-12 w-full">
-        <div className="col-span-12 lg:col-span-2 relative">
-          <AccessMenu />
-        </div>
-        <Toaster />
-        <main className="col-span-12 p-2 lg:col-span-10 w-full">
-          {children}
-        </main>
+
+      {/* Sidebar - Fixed width on Desktop, Hidden on Mobile to prevent layout shifts */}
+      <div className="hidden lg:block lg:w-64 lg:h-screen lg:fixed lg:left-0 lg:top-0 z-30">
+        <AccessMenu />
       </div>
+
+      {/* Mobile Header is handled inside AccessMenu as fixed element */}
+      <div className="lg:hidden">
+        <AccessMenu />
+      </div>
+
+      <Toaster position="top-right" />
+
+      {/* Main Content - Offset by sidebar on Desktop */}
+      <main className="flex-1 lg:ml-64 w-full p-6 pt-24 lg:pt-10 transition-all duration-300">
+        <div className="max-w-7xl mx-auto h-full">
+          {children}
+        </div>
+      </main>
     </div>
   );
 };

@@ -80,7 +80,7 @@ export default function Cart({ data }) {
     try {
       const { data, status } = await axios.get("/api/settings/promo");
       if (status === 200) {
-        const barra = data?.filter(item => item.nombre === "Promo barra");
+        const barra = data?.filter(item => item.nombre?.toLowerCase() === "promo barra");
         dispatch(setPromoBarra({ promoBarra: barra[0] }));
       }
     } catch (error) {
@@ -115,7 +115,7 @@ export default function Cart({ data }) {
 
   const renderList = (category) => {
     const filtrados = products
-      ?.filter(item => item.categoria === category && item.available === true);
+      ?.filter(item => item.categoria?.toLowerCase() === category?.toLowerCase() && item.available === true);
 
     const ordenados = ordenarPorProductOrderIdHome(filtrados);
 

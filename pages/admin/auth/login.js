@@ -1,82 +1,112 @@
 import { Formik, Form, Field } from "formik";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronRight, FaLock, FaUser } from "react-icons/fa";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setAuth } from "store/reducers/authSlice";
 import { Toaster, toast } from "react-hot-toast";
 
-
-
 export default function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-
-
   return (
-    <div className="h-screen bg-gradient-to-r from-slate-900 to-slate-800 ">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+      <Toaster
+        toastOptions={{
+          style: {
+            background: '#1e293b',
+            color: '#fff',
+            borderRadius: '10px',
+            border: '1px solid #334155'
+          },
+        }}
+      />
 
-      <Toaster />
+      <div className="max-w-md w-full relative z-10">
+        <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-slate-700/50">
+          <div className="p-8 sm:p-12">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-tr from-red-600 to-red-500 mb-6 shadow-lg shadow-red-600/30">
+                <FaLock className="text-2xl text-white" />
+              </div>
+              <h1 className="text-3xl font-bold text-white tracking-tight">Bienvenido</h1>
+              <p className="text-slate-400 mt-2 text-sm">Ingresa a tu cuenta para continuar</p>
+            </div>
 
-      <div className="h-full w-full lg:w-2/5 md:w-3/5 sm:w-3/5 flex items-center justify-center lg:justify-between mx-auto">
-        <div
-          className="grid content-center rounded-md shadow-lg bg-white  w-full h-full p-10 
-								 lg:h-auto  md:h-auto sm:h-auto"
-        >
-          <div className="w-auto mx-auto pt-10 pb-4">
-            <h1 className="font-extrabold text-center text-3xl font-montserrat">¡Bienvenido!</h1>
-          </div>
-          <div className="flex flex-col gap-3">
             <Formik
-              initialValues={{
-                username: "",
-                password: "",
-              }}
-              onSubmit={async values => {
-                await axios
-                  .post("/api/auth/login", values)
-                  .then(res => {
-                    if (res.data.token) {
-                      localStorage.setItem("token", JSON.stringify(res.data.token));
-                      dispatch(setAuth({ username: res.data.user, token: res.data.token }));
-                      toast.success("Ingresando a la cuenta!");
-                      router.push("/admin/");
-                    }
-                  })
-                  .catch(error => {
-                    if (error.response.status === 401) {
-                      toast.error("Credenciales incorrectas!")
-                    }
-                  });
+              initialValues={{ username: "", password: "" }}
+              onSubmit={async (values, { setSubmitting }) => {
+                try {
+                  const res = await axios.post("/api/auth/login", values);
+                  if (res.data.token) {
+                    localStorage.setItem("token", JSON.stringify(res.data.token));
+                    dispatch(setAuth({ username: res.data.user, token: res.data.token }));
+                    toast.success("¡Acceso concedido!");
+                    router.push("/admin/");
+                  }
+                } catch (error) {
+                  if (error.response?.status === 401) {
+                    toast.error("Credenciales incorrectas");
+                  } else {
+                    toast.error("Error al iniciar sesión");
+                  }
+                } finally {
+                  setSubmitting(false);
+                }
               }}
             >
-              {() => (
-                <Form>
-                  <div className="mb-3">
-                    <Field
-                      id="username"
-                      className="shadow w-full font-montserrat font-semibold bg-slate-50  text-sm border-none text-center  h-12 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
-                      placeholder="Introduce tu usuario"
-                      name="username"
-                    />
-                  </div>
+              {({ isSubmitting }) => (
+                <Form className="space-y-5">
                   <div>
-                    <Field
-                      id="password"
-                      type="password"
-                      className="shadow w-full font-montserrat bg-slate-50 font-semibold text-sm  text-center border-none h-12 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-200 mt-1"
-                      placeholder="Introduce tu contraseña"
-                      name="password"
-                    />
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <FaUser className="text-slate-500 group-focus-within:text-red-500 transition-colors" />
+                      </div>
+                      <Field
+                        id="username"
+                        name="username"
+                        className="block w-full pl-11 pr-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all duration-300"
+                        placeholder="Usuario"
+                      />
+                    </div>
                   </div>
-                  <div className="flex" style={{ justifyContent: "flex-end" }}>
+
+                  <div>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <FaLock className="text-slate-500 group-focus-within:text-red-500 transition-colors" />
+                      </div>
+                      <Field
+                        id="password"
+                        name="password"
+                        type="password"
+                        className="block w-full pl-11 pr-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all duration-300"
+                        placeholder="Contraseña"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
                     <button
                       type="submit"
-                      className=" w-auto text-right shadow  p-2 rounded-md bg-slate-50 hover:bg-black hover:text-white hover:-translate-y-1 transition-all duration-500  
-													 font-semibold mt-3"
+                      disabled={isSubmitting}
+                      className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-[0_0_20px_rgba(220,38,38,0.3)] text-sm font-semibold text-white bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-red-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
                     >
-                      <FaChevronRight size={30} />
+                      {isSubmitting ? (
+                        <span className="flex items-center gap-2">
+                          <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Ingresando...
+                        </span>
+                      ) : (
+                        <>
+                          <span>Iniciar Sesión</span>
+                          <FaChevronRight className="text-xs" />
+                        </>
+                      )}
                     </button>
                   </div>
                 </Form>

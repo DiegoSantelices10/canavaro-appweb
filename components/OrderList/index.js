@@ -45,10 +45,12 @@ const OrderList = (props) => {
           items={people}
           strategy={verticalListSortingStrategy}
         >
-          <div className="space-y-8 w-full">
+          <div className="space-y-4 w-full">
             {people?.map((user, index) => (
-              <div key={user.id} className="flex gap-4">
-                <div className="shadow rounded-md bg-gray-50 p-4 w-12 text-center font-poppins">{index + 1}</div>
+              <div key={user.id} className="flex items-center gap-4 group">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-slate-900 text-white rounded-2xl font-black text-sm shadow-lg shadow-slate-900/10 transition-transform group-hover:scale-110">
+                  {index + 1}
+                </div>
                 <SortableItem user={user} />
               </div>
             ))}

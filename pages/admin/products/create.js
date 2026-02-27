@@ -8,10 +8,12 @@ import cloudinaryImage from "utils/cloudinaryImage";
 import Layout from "components/Admin/Layout";
 import useCategories from "Hooks/useCategories";
 import Select from "components/Select";
-import HeaderTitle from "components/HeaderTitle";
-import useDrinks from "Hooks/useDrinks";
 import MultiSelect from "components/MultiSelect";
+import useDrinks from "Hooks/useDrinks";
 import useDessert from "Hooks/useDessert";
+import HeaderTitle from "components/HeaderTitle";
+
+
 
 const Create = () => {
   const [renderProducts, setRenderProductos] = useState("pizzas");
@@ -28,387 +30,264 @@ const Create = () => {
 
   return (
     <Layout>
-      <section className="w-full h-full">
-        <HeaderTitle title="Nuevo producto" isBack />
-        <Formik
-          initialValues={{
-            nombre: "",
-            descripcion: "",
-            precio: "",
-            precioPizza: {
-              gigante: "",
-              mediana: "",
-              chica: "",
-            },
-            isCantidad: "",
-            categoria: renderProducts,
-            extras: [],
-            categoriaNueva: "",
-            imagen: "",
-            cantidadMaxima: "",
-            formato: "",
-            destacable: false,
-            cantidadExtras: "",
-            addEmpanadas: "no",
-            addPizzas: "no",
-            addExtras: "no",
-            addPostres: "no",
-            cantidadPostres: "",
-            tamanio: "",
-          }}
-          onSubmit={async (values, { resetForm }) => {
-            setIsLoading(true);
-            if (values.categoriaNueva !== '') {
-              values.categoria = values.categoriaNueva;
-              values.categoriaNueva = '';
-            }
-            const filteredValues = Object.fromEntries(
-              Object.entries(values).filter(([key, value]) => {
-                if (typeof value === 'object' && value !== null) {
-                  // Si es un objeto anidado, verificar los valores internos
-                  return Object.values(value).some(v => v !== "");
-                }
-                return value !== "";
-              })
-            );
+      <div className="mb-10 lg:mb-14">
+        <HeaderTitle title="Nuevo Producto" isBack />
+        <p className="text-slate-500 mt-2">Completa los datos para añadir un nuevo ítem al menú.</p>
+      </div>
 
-            await createProduct(filteredValues)
-              .then(res => {
-                if (res.message === "ok") {
-                  toast.success('Creado con exito!')
-                }
-                router.push("list")
-                resetForm();
-              })
-              .catch(() => {
-                toast.error('Error al crear al producto.')
-              });
+      <Formik
+        initialValues={{
+          nombre: "", descripcion: "", precio: "",
+          precioPizza: { gigante: "", mediana: "", chica: "" },
+          isCantidad: "", categoria: renderProducts, extras: [],
+          categoriaNueva: "", imagen: "", cantidadMaxima: "",
+          formato: "", destacable: false, cantidadExtras: "",
+          addEmpanadas: "no", addPizzas: "no", addExtras: "no",
+          addPostres: "no", cantidadPostres: "", tamanio: "",
+        }}
+        onSubmit={async (values, { resetForm }) => {
+          setIsLoading(true);
+          if (values.categoriaNueva !== '') {
+            values.categoria = values.categoriaNueva;
+            values.categoriaNueva = '';
           }
-          }
-          enableReinitialize
-        >
-          {({ setFieldValue, values, handleChange }) => (
-            <Form className="space-y-8 pt-8">
-              <div className="grid gap-4 lg:flex lg:gap-8 items-end">
+          const filteredValues = Object.fromEntries(
+            Object.entries(values).filter(([key, value]) => {
+              if (typeof value === 'object' && value !== null) {
+                return Object.values(value).some(v => v !== "");
+              }
+              return value !== "";
+            })
+          );
+
+          await createProduct(filteredValues)
+            .then(res => {
+              if (res.message === "ok") {
+                toast.success('¡Creado con éxito!')
+              }
+              router.push("list")
+              resetForm();
+            })
+            .catch(() => {
+              toast.error('Error al crear el producto.')
+            })
+            .finally(() => setIsLoading(false));
+        }}
+        enableReinitialize
+      >
+        {({ setFieldValue, values, handleChange }) => (
+          <Form className="space-y-8">
+            <div className="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
                 <Select
-                  label="Categoria"
+                  label="Categoría del Producto"
                   data={categories}
                   handleChange={handleCategoryChange}
                   newOption
+                  className="w-full"
                 />
                 <ControllerInput
-                  label="Categoria nueva"
+                  label="Nombre de la nueva categoría"
                   name='categoriaNueva'
                   disabled={renderProducts !== 'categoria nueva'}
                 />
               </div>
-              <div
-                className="md:border md:border-gray-200 h-full  md:p-4  md:rounded-lg"
-              >
-                <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:mt-4  justify-items-end gap-8 space-y-4 md:space-y-0">
-                  <ControllerInput
-                    label="Nombre del producto"
-                    name="nombre"
-                  />
-                  <div className="hidden w-full mx-auto">
-                    <label className="block text-sm text-gray-700 font-montserrat font-normal">
-                      Categoria
-                      <Field
-                        id="categoria"
-                        name="categoria"
-                        className="p-2 w-full h-10  text-sm leading-tight text-gray-700  border-gray-200 border
-                  									rounded-lg    focus:border-gray-200"
-                      />
-                    </label>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <ControllerInput label="Nombre del Producto" name="nombre" />
+
+                {renderProducts.toLowerCase() !== 'extras' && (
+                  <ControllerInput label="Descripción" name="descripcion" />
+                )}
+
+                {renderProducts.toLowerCase() !== "pizzas" && (
+                  <ControllerInput label="Precio" name="precio" type="number" />
+                )}
+
+                {renderProducts.toLowerCase() === "extras" && (
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">¿Requiere Cantidad?</p>
+                    <div className="flex gap-4 bg-slate-50 p-1.5 rounded-2xl w-fit">
+                      <label className={`
+                        flex items-center gap-2 px-6 py-2 rounded-xl cursor-pointer transition-all
+                        ${values.isCantidad === 'si' ? "bg-white text-red-600 shadow-sm font-bold" : "text-slate-400 hover:text-slate-600"}
+                      `}>
+                        <Field type="radio" name="isCantidad" value="si" className="hidden" />
+                        Sí
+                      </label>
+                      <label className={`
+                        flex items-center gap-2 px-6 py-2 rounded-xl cursor-pointer transition-all
+                        ${values.isCantidad === 'no' ? "bg-white text-red-600 shadow-sm font-bold" : "text-slate-400 hover:text-slate-600"}
+                      `}>
+                        <Field type="radio" name="isCantidad" value="no" className="hidden" />
+                        No
+                      </label>
+                    </div>
                   </div>
-                  {renderProducts !== 'extras' && (
-                    <ControllerInput
-                      label="Descripción"
-                      name="descripcion"
-                    />
+                )}
 
-                  )}
+                {renderProducts.toLowerCase() === "pizzas" && (
+                  <>
+                    <ControllerInput label="Precio Gigante" name='precioPizza.gigante' type="number" />
+                    <ControllerInput label="Precio Mediana" name='precioPizza.mediana' type="number" />
+                    <ControllerInput label="Precio Chica" name='precioPizza.chica' type="number" />
+                  </>
+                )}
 
-                  {renderProducts !== "pizzas" && (
-                    <ControllerInput
-                      label="Precio"
-                      name="precio"
-                    />
-                  )}
-
-                  {renderProducts === "extras" && (
-                    <div className=" w-full mx-auto">
-                      <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">Cantidad</p>
-                      <div
-                        role="group"
-                        aria-labelledby="my-radio-group"
-                        className="w-full text-base  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                      >
-                        <label className="block  text-sm  text-gray-900 font-montserrat font-semibold">
-                          <Field type="radio" name="isCantidad" value="si" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                          Si
-                        </label>
-                        <label className="block  text-sm  text-gray-900 font-montserrat font-semibold">
-                          <Field type="radio" name="isCantidad" value="no" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                          No
-                        </label>
+                {renderProducts.toLowerCase() === "empanadas" && (
+                  <>
+                    <ControllerInput label="Precio Extra (Unidad)" name="precioExtra" type="number" />
+                    <div className="space-y-2 lg:col-span-2">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Formato de Empanada</p>
+                      <div className="flex gap-4 bg-slate-50 p-1.5 rounded-2xl w-fit">
+                        {[
+                          { value: 'canastita', label: 'Canastita' },
+                          { value: 'empanada', label: 'Empanada' }
+                        ].map(opt => (
+                          <label key={opt.value} className={`
+                            flex items-center gap-2 px-6 py-2 rounded-xl cursor-pointer transition-all
+                            ${values.formato === opt.value ? "bg-white text-red-600 shadow-sm font-bold" : "text-slate-400 hover:text-slate-600"}
+                          `}>
+                            <Field type="radio" name="formato" value={opt.value} className="hidden" />
+                            {opt.label}
+                          </label>
+                        ))}
                       </div>
                     </div>
-                  )}
+                  </>
+                )}
+              </div>
+            </div>
 
-                  {renderProducts === "empanadas" && (
-                    <>
-                      <div className=" w-full mx-auto">
-                        <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
-                          <span className="font-semibold">Precio extra</span>
-                          <span className="text-gray-900 font-light text-xs ml-2">se le suma al precio actual de la unidad</span>
-                          <Field
-                            id="precioExtra"
-                            name="precioExtra"
-                            className="p-2 w-full h-10 font-normal  text-sm leading-tight text-gray-900  border-gray-200 border
-											                  rounded-lg  focus:border-gray-300 focus:ring-0"
-                          />
-                        </label>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Media & Options */}
+              <div className="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+                <h3 className="text-lg font-bold text-slate-900 mb-6">Multimedia y Visibilidad</h3>
+                <div className="space-y-6">
+                  <div className="relative group">
+                    <input
+                      name="imagen"
+                      type="file"
+                      onChange={e => cloudinaryImage(e.target, setFieldValue)}
+                      className="hidden"
+                      id="file-create"
+                    />
+                    <label
+                      htmlFor="file-create"
+                      className="flex flex-col items-center justify-center w-full py-12 bg-slate-50 border-2 border-dashed border-slate-200 rounded-[2rem] cursor-pointer group-hover:bg-slate-100 group-hover:border-slate-300 transition-all overflow-hidden"
+                    >
+                      <div className="relative w-32 h-32 mb-4">
+                        <img
+                          src={values.imagen?.url ? values.imagen.url : (typeof values.imagen === 'string' && values.imagen !== '' ? values.imagen : "/images/producto-sin-imagen.png")}
+                          onError={(e) => { e.target.src = "/images/producto-sin-imagen.png" }}
+                          alt="Preview"
+                          className="w-full h-full object-cover rounded-2xl shadow-md group-hover:scale-105 transition-transform"
+                        />
                       </div>
-                      <div className=" w-full mx-auto">
-                        <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">Formato</p>
-                        <div
-                          role="group"
-                          aria-labelledby="my-radio-group"
-                          className="w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                        >
-                          <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
-                            <Field type="radio" name="formato" value="canastita" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                            Canastita
-                          </label>
-                          <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
-                            <Field type="radio" name="formato" value="empanada" className="mx-5 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                            Empanada
-                          </label>
-                        </div>
-                      </div>
-                    </>
-                  )}
+                      <span className="text-sm font-bold text-slate-500 font-montserrat tracking-tight">Subir Imagen del Producto</span>
+                    </label>
+                  </div>
 
-                  {renderProducts === "pizzas" && (
-                    <>
-                      <ControllerInput
-                        label="Precio gigante"
-                        name='precioPizza.gigante'
-                      />
-                      <ControllerInput
-                        label="Precio mediana"
-                        name='precioPizza.mediana'
-                      />
-                      <ControllerInput
-                        label="Precio chica"
-                        name='precioPizza.chica'
-                      />
-                    </>
-                  )}
+                  <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
+                    <div className="flex flex-col">
+                      <span className="text-sm font-bold text-slate-700">Producto Destacado</span>
+                      <span className="text-xs text-slate-400">Aparecerá en la sección principal</span>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <Field name="destacable" type="checkbox" className="sr-only peer" />
+                      <div className="w-11 h-6 bg-slate-200 rounded-full peer-checked:bg-red-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
 
-                  {
-                    renderProducts !== "bebidas" &&
-                    renderProducts !== "empanadas" &&
-                    renderProducts !== "pizzas" &&
-                    renderProducts !== "extras" &&
-                    renderProducts !== "porciones" &&
-                    renderProducts !== "postres" &&
-                    renderProducts !== 'Postres' &&
-                    (
-                      <>
-                        <div className="w-full mx-auto">
-                          <div className=" w-full mx-auto">
-                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Bebidas?</p>
-                            <div
-                              role="group"
-                              aria-labelledby="my-radio-group"
-                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                            >
-                              <label>
-                                <Field type="radio" name="addExtras" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                Si
-                              </label>
-                              <label>
-                                <Field type="radio" name="addExtras" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                No
-                              </label>
-                            </div>
-                          </div>
-                          {values.addExtras === "si" && (
-                            <div className=" w-full mx-auto space-y-4">
-                              <ControllerInput
-                                name='cantidadExtras'
-                                type='number'
-                                label='Ingresa la cantidad de bebidas'
-                              />
-                              <MultiSelect
-                                values={values}
-                                data={drinks}
-                                label="Selecciona las bebidas disponibles"
-                              />
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="w-full mx-auto">
-                          <div className=" w-full mx-auto">
-                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con empanadas?</p>
-                            <div
-                              role="group"
-                              aria-labelledby="my-radio-group"
-                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                            >
-                              <label >
-                                <Field type="radio" name="addEmpanadas" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                Si
-                              </label>
-                              <label>
-                                <Field type="radio" name="addEmpanadas" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                No
-                              </label>
-                            </div>
-                          </div>
-                          {values.addEmpanadas === "si" && (
-                            <div className=" w-full mx-auto">
-                              <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
-                                Ingresa la cantidad de empanadas
-                                <Field
-                                  id="cantidadMaxima"
-                                  name="cantidadMaxima"
-                                  value={values.cantidadMaxima}
-                                  onChange={handleChange}
-                                  className=" p-2 w-full h-10 focus:ring-0 focus:ring-white  text-sm leading-tight text-gray-900  border-gray-200 border
-													                  rounded-lg focus:border-gray-200"
-                                />
-                              </label>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="w-full mx-auto">
-                          <div className=" w-full mx-auto">
-                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Pizza?</p>
-                            <div
-                              role="group"
-                              aria-labelledby="my-radio-group"
-                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                            >
-                              <label>
-                                <Field type="radio" name="addPizzas" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                Si
-                              </label>
-                              <label>
-                                <Field type="radio" name="addPizzas" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                No
-                              </label>
-                            </div>
-                          </div>
-                          {values.addPizzas === "si" && (
-                            <div className=" w-full mx-auto">
-                              <label className="block  text-xs  text-gray-900 font-montserrat font-normal">
-                                <span className="font-montserrat font-semibold">
-                                  Ingresa el tamaño de la pizza
-                                </span>
-                                <Field
-                                  id="tamanio"
-                                  name="tamanio"
-                                  value={values.tamanio}
-                                  className=" p-2 w-full h-10 focus:ring-0 focus:ring-white  text-sm leading-tight text-gray-900  border-gray-200 border
-													                    rounded-lg focus:border-gray-200"
-                                />
-                              </label>
-                            </div>
-                          )}
-                        </div>
-                        <div className="w-full mx-auto">
-                          <div className=" w-full mx-auto">
-                            <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿La promo cuenta con Postres?</p>
-                            <div
-                              role="group"
-                              aria-labelledby="my-radio-group"
-                              className="p-2 w-full text-xs  text-gray-900 font-montserrat font-semibold flex justify-center items-center h-10 gap-10"
-                            >
-                              <label>
-                                <Field type="radio" name="addPostres" value="si" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                Si
-                              </label>
-                              <label>
-                                <Field type="radio" name="addPostres" value="no" className="mx-3 focus:ring-0 focus:ring-white checked:text-red-500 hover:text-red-500  focus:text-red-500" />
-                                No
-                              </label>
-                            </div>
-                          </div>
-                          {values.addPostres === "si" && (
-                            <div className=" w-full mx-auto space-y-4">
-                              <ControllerInput
-                                name='cantidadPostres'
-                                type='number'
-                                label='Ingresa la cantidad de postres'
-                              />
-                              <MultiSelect
-                                values={values}
-                                data={dessert}
-                                label="Selecciona los postres disponibles"
-                              />
-                            </div>
-                          )}
-                        </div>
-
-                        {renderProducts !== "promociones" && (
-                          <div className="w-full mx-auto">
-                            <div className=" w-full mx-auto">
-                              <p className="block  text-xs  text-gray-900 font-montserrat font-semibold">¿Promo destacable?</p>
-                              <div className=" flex justify-center items-center">
-                                <label className="inline-flex items-center cursor-pointer">
-                                  <Field
-                                    name="destacable"
-                                    type="checkbox"
-                                    className="sr-only peer" />
-                                  <div className="relative w-9 h-5 bg-gray-200 rounded-full peer dark:bg-gray-200 
-                                                  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full 
-                                                  peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:start-[3px] 
-                                                  after:bg-white  after:border focus:outline-none focus:right-0 after:rounded-full 
-                                                  after:h-3.5 after:w-3.5 after:transition-all  peer-checked:bg-red-500"></div>
+              {/* Additional Config */}
+              {renderProducts.toLowerCase() !== "bebidas" &&
+                renderProducts.toLowerCase() !== "empanadas" &&
+                renderProducts.toLowerCase() !== "pizzas" &&
+                renderProducts.toLowerCase() !== "extras" &&
+                renderProducts.toLowerCase() !== "porciones" &&
+                renderProducts.toLowerCase() !== "postres" &&
+                (
+                  <div className="bg-slate-900 p-8 rounded-[2rem] shadow-xl shadow-slate-900/10 text-white">
+                    <h3 className="text-lg font-bold mb-6">Configuración de Promociones</h3>
+                    <div className="space-y-6">
+                      <p className="text-slate-400 text-sm leading-relaxed">
+                        Si este producto es una promoción, configura aquí sus componentes adicionales.
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {[
+                          { id: 'addExtras', label: 'Bebidas', data: drinks, countKey: 'cantidadExtras', countLabel: 'Cant. Bebidas', name: 'extras' },
+                          { id: 'addEmpanadas', label: 'Empanadas', data: null, countKey: 'cantidadMaxima', countLabel: 'Cant. Empanadas' },
+                          { id: 'addPizzas', label: 'Pizzas', data: null, countKey: 'tamanio', countLabel: 'Tamaño Pizza', isSize: true },
+                          { id: 'addPostres', label: 'Postres', data: dessert, countKey: 'cantidadPostres', countLabel: 'Cant. Postres', name: 'extras' }
+                        ].map(opt => (
+                          <div key={opt.id} className="p-6 bg-slate-800/50 rounded-[2rem] border border-slate-700/30 space-y-5 transition-all hover:bg-slate-800 hover:border-slate-600/50">
+                            <div className="flex justify-between items-center">
+                              <span className="text-[10px] font-black text-white/90 uppercase tracking-[0.2em]">{opt.label}</span>
+                              <div className="flex gap-2 bg-slate-900/50 p-1 rounded-xl">
+                                <label className={`px-4 py-1.5 text-[10px] rounded-lg cursor-pointer transition-all font-black uppercase tracking-widest ${values[opt.id] === 'si' ? "bg-red-600 text-white shadow-lg shadow-red-600/20" : "text-slate-500 hover:text-slate-300"}`}>
+                                  <Field type="radio" name={opt.id} value="si" className="hidden" /> SÍ
+                                </label>
+                                <label className={`px-4 py-1.5 text-[10px] rounded-lg cursor-pointer transition-all font-black uppercase tracking-widest ${values[opt.id] === 'no' ? "bg-slate-700/50 text-slate-400" : "text-slate-500 hover:text-slate-300"}`}>
+                                  <Field type="radio" name={opt.id} value="no" className="hidden" /> NO
                                 </label>
                               </div>
                             </div>
 
+                            {values[opt.id] === 'si' && (
+                              <div className="space-y-4 pt-4 border-t border-slate-700/50 animate-in fade-in slide-in-from-top-2 duration-500">
+                                <div className="space-y-2">
+                                  {opt.isSize ? (
+                                    <Select
+                                      label={opt.countLabel}
+                                      data={['Gigante', 'Mediana', 'Chica']}
+                                      handleChange={(val) => setFieldValue(opt.countKey, val)}
+                                      placeholder="Seleccionar tamaño"
+                                    />
+                                  ) : (
+                                    <>
+                                      <label className="text-[10px] text-slate-400 font-bold uppercase tracking-widest ml-1">{opt.countLabel}</label>
+                                      <Field
+                                        name={opt.countKey}
+                                        className="w-full bg-slate-900/50 border-2 border-transparent focus:border-red-500/10 rounded-2xl py-3 px-4 text-sm font-bold text-white focus:ring-4 focus:ring-red-500/5 transition-all outline-none"
+                                        placeholder="..."
+                                      />
+                                    </>
+                                  )}
+                                </div>
+                                {opt.data && (
+                                  <div className="pt-2">
+                                    <MultiSelect
+                                      values={values}
+                                      data={opt.data}
+                                      label={`Seleccionar ${opt.label}`}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </>
-                    )}
-                </div>
-                <div className="w-full block md:flex justify-between items-end mt-3 pb-5 md:pb-0">
-                  <div className=" w-auto">
-                    <label className="block  text-xs  text-gray-900 font-montserrat font-semibold">
-                      Cargar Imagen
-                      <input
-                        name="imagen"
-                        type="file"
-                        onChange={e => cloudinaryImage(e.target, setFieldValue)}
-                        className="w-full h-10 file:h-10  text-xs leading-tight text-gray-900 border-gray-200 
-                                  appearance-none focus:outline-none focus:shadow-outline
-                                  file:bg-red-600 file:text-white file:border-none file:p-2 file:px-3 file:rounded-lg
-                                  file:font-normal"
-                      />
-                    </label>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <button
-                    disabled={isLoading}
-                    className="w-full md:w-44 h-10 col-start-2 rounded-lg mt-6 md:mt-0  text-sm 
-                                border text-white bg-red-600 font-normal font-montserrat hover:bg-red-500"
-                    type="submit"
-                  >
-                    Agregar Producto
-                  </button>
-                </div>
-              </div>
-            </Form>
-          )
-          }
-        </Formik>
-      </section>
+                )}
+            </div>
+
+            <div className="flex justify-end pt-6">
+              <button
+                disabled={isLoading}
+                className="w-full md:w-64 py-4 rounded-2xl bg-red-600 text-white font-bold text-lg hover:bg-red-700 transition-all active:scale-95 shadow-xl shadow-red-600/30 flex items-center justify-center gap-2"
+                type="submit"
+              >
+                {isLoading && <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
+                Crear Producto
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </Layout>
   );
 }

@@ -45,47 +45,48 @@ const OrderDelay = () => {
     };
 
     return (
-        <div className="w-full flex-col flex lg:flex-row gap-4 gap-y-4 rounded-md h-auto py-2">
+        <div className="flex flex-col sm:flex-row gap-8 w-full">
             {data?.length > 0 && (
-                <div className="w-full text-left">
-                    <h1 className="font-medium font-montserrat pb-1">Demora domicilio</h1>
-                    <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-lg p-1">
+                <div className="flex-1">
+                    <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 ml-1">Demora Domicilio</h2>
+                    <div className="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-100 flex gap-1">
                         {data?.filter(item => item.tipoEnvio === "domicilio").map((item) => (
-                            <li key={item._id}
-                                className='cursor-pointer'
+                            <button
+                                key={item._id}
+                                onClick={() => handlePutTime(item)}
+                                className={`
+                                    flex-[1] py-2.5 text-sm font-bold rounded-xl transition-all duration-300
+                                    ${selectedDomicilio.demora === item.demora
+                                        ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20"
+                                        : "text-slate-400 hover:text-slate-600 hover:bg-slate-50"}
+                                `}
                             >
-                                <a
-                                    onClick={() => handlePutTime(item)}
-                                    className={`flex justify-center py-2 text-sm font-montserrat sm:text-base ${selectedDomicilio.demora === item.demora ? 'bg-white font-medium  rounded-lg shadow-sm text-red-500' : ''
-                                        }`}
-                                >
-                                    {item.demora}
-                                </a>
-                            </li>
+                                {item.demora}
+                            </button>
                         ))}
-                    </ul>
+                    </div>
                 </div>
             )}
 
-
             {data?.length > 0 && (
-                <div className="w-full text-left">
-                    <h1 className="font-medium font-montserrat pb-1">Demora local</h1>
-                    <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-lg p-1">
+                <div className="flex-1">
+                    <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 ml-1">Demora Local</h2>
+                    <div className="bg-white p-1.5 rounded-2xl shadow-sm border border-slate-100 flex gap-1">
                         {data?.filter(item => item.tipoEnvio === "local").map((item) => (
-                            <li key={item._id}
-                                className='cursor-pointer'
+                            <button
+                                key={item._id}
+                                onClick={() => handlePutTime(item)}
+                                className={`
+                                    flex-[1] py-2.5 text-sm font-bold rounded-xl transition-all duration-300
+                                    ${selectedLocal.demora === item.demora
+                                        ? "bg-red-600 text-white shadow-lg shadow-red-600/20"
+                                        : "text-slate-400 hover:text-slate-600 hover:bg-slate-50"}
+                                `}
                             >
-                                <a
-                                    onClick={() => handlePutTime(item)}
-                                    className={`flex justify-center py-2 text-sm font-montserrat sm:text-base ${selectedLocal.demora === item.demora ? 'bg-white font-medium  rounded-lg shadow-sm text-red-500' : ''
-                                        }`}
-                                >
-                                    {item.demora}
-                                </a>
-                            </li>
+                                {item.demora}
+                            </button>
                         ))}
-                    </ul>
+                    </div>
                 </div>
             )}
         </div>

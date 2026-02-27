@@ -22,16 +22,17 @@ const Table = (props) => {
     return (
         <div
             {...rest}
+            className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-xl shadow-slate-200/40"
         >
-            <table className='w-full'>
+            <table className='w-full border-collapse'>
                 <thead>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}
-                            className="bg-white border-b"
+                            className="bg-slate-50/50 border-b border-slate-100"
                         >
                             {headerGroup.headers.map(header => (
                                 <th key={header.id}
-                                    className='font-montserrat text-sm'
+                                    className='px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-center'
                                 >
                                     {header.isPlaceholder
                                         ? null
@@ -45,16 +46,18 @@ const Table = (props) => {
                         </tr>
                     ))}
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-slate-50">
                     {table?.getRowModel().rows.map(row => (
                         <tr key={row.id}
-                            className="bg-white  border-b hover:bg-gray-50 dark:hover:bg-red-200"
+                            className="transition-colors hover:bg-slate-50 group"
                         >
                             {row.getVisibleCells().map(cell => (
                                 <td key={cell.id}
-                                    className='p-2 font-montserrat text-sm text-center'
+                                    className='px-6 py-4 text-sm font-medium text-slate-600'
                                 >
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    <div className="flex justify-center items-center">
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </div>
                                 </td>
                             ))}
                         </tr>

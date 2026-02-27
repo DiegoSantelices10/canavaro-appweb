@@ -87,7 +87,7 @@ export default function ProductLayout({
 
 
 
-    if (orderPromo.some(item => item.categoria === 'pizzas')) {
+    if (orderPromo.some(item => item.categoria?.toLowerCase() === 'pizzas')) {
       return true;
     }
 
@@ -173,7 +173,7 @@ export default function ProductLayout({
 
       if (extraPizza.length > 0) {
         value.map(item => {
-          if (item.categoria !== 'extras') {
+          if (item.categoria?.toLowerCase() !== 'extras') {
             dispatch(addPromoOrderList({
               ...item,
               comentarios: comentarioRef.current.value,
@@ -181,7 +181,7 @@ export default function ProductLayout({
               extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
             }))
           }
-          if (item.categoria === 'extras') {
+          if (item.categoria?.toLowerCase() === 'extras') {
             return (
               dispatch(addPromoOrderList({
                 ...item,

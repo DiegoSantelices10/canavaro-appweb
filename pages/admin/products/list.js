@@ -1,5 +1,4 @@
 import Layout from "components/Admin/Layout";
-import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { setProductData } from "store/reducers/productSlice";
@@ -13,8 +12,8 @@ import PencilEdit02Icon from "public/images/pencil-edit-02-stroke-rounded";
 import Search01Icon from "public/images/search-01-stroke-rounded";
 import Table from "components/Table";
 import { createColumnHelper } from "@tanstack/react-table";
-import HeaderTitle from "components/HeaderTitle";
 import Select from "components/Select";
+import { FiPlus, FiDollarSign, FiLayers } from "react-icons/fi";
 
 
 
@@ -22,7 +21,6 @@ const Products = () => {
   const [renderProductos, setRenderProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const { products } = useSelector(state => state.product);
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const columnHelper = createColumnHelper()
@@ -105,38 +103,50 @@ const Products = () => {
 
   const deleteItem = async (id) => {
     toast((t) => (
-      <div className="text-gray-900 flex justify-start gap-3 items-center font-montserrat w-auto">
-        <h1 className="font-normal">
-          ¿Confirmas la acción?
-        </h1>
-        <button
-          className="p-2 bg-red-500 text-white font-normal font-montserrat flex gap-1 item-center justify-center rounded-md"
-          onClick={() => deleteItemEndPoint(t.id, id)}>
-          <h1>
-            Eliminar
-          </h1>
-          <RiDeleteBin6Line size={17} className="text-white" />
-        </button>
+      <div className="flex flex-col gap-4 p-2 min-w-[280px]">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-red-100 rounded-lg text-red-600">
+            <RiDeleteBin6Line size={20} />
+          </div>
+          <p className="font-bold text-slate-900 text-sm">¿Eliminar este producto?</p>
+        </div>
+        <p className="text-xs text-slate-500 leading-relaxed -mt-2 ml-10">
+          Esta acción no se puede deshacer. El producto será borrado permanentemente.
+        </p>
+        <div className="flex justify-end gap-2 ml-10">
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="px-4 py-2 text-xs font-bold text-slate-400 hover:text-slate-600 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            onClick={() => deleteItemEndPoint(t.id, id)}
+            className="px-4 py-2 bg-red-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-red-600/20 hover:bg-red-700 transition-all active:scale-95"
+          >
+            Eliminar permanentemente
+          </button>
+        </div>
       </div>
-    ));
+    ), { duration: 5000, style: { borderRadius: '1.5rem', padding: '1rem' } });
   }
 
   const columns = [
     columnHelper.accessor('nombre', {
       header: () => <h1 className="text-left pl-2">Nombre</h1>,
-      cell: info => <h2 className="text-left font-medium text-sm md:text-sm">{info.getValue()}</h2>,
+      cell: info => <h2 className="text-left font-medium w-full text-sm md:text-sm">{info.getValue()}</h2>,
     }),
     columnHelper.accessor('categoria', {
-      header: () => 'Categoría',
-      cell: info => info.getValue(),
+      header: () => <div className="text-left">Categoría</div>,
+      cell: info => <div className="text-left w-full">{info.getValue()}</div>,
     }),
     columnHelper.accessor('disponible', {
-      header: () => 'Disp',
+      header: () => <div className="text-left">Disp</div>,
       cell: info => {
         const id = info.row.original._id;
         const available = info.row.original.available;
         return (
-          <div className=" flex justify-center items-center">
+          <div className="flex justify-start items-center w-full">
             <label className="inline-flex items-center cursor-pointer">
               <input
                 id={id}
@@ -155,11 +165,11 @@ const Products = () => {
       },
     }),
     columnHelper.accessor('editar', {
-      header: () => '',
+      header: () => <p className="text-left">Editar</p>,
       cell: info => {
         const id = info.row.original._id; // Accede al id de la fila
         return (
-          <div className="flex justify-center">
+          <div className="flex justify-start w-full">
             <Link href={`/admin/products/${id}`}>
               <a>
                 <PencilEdit02Icon color={"#1C27C5"} />
@@ -170,11 +180,11 @@ const Products = () => {
       },
     }),
     columnHelper.accessor('Eliminar', {
-      header: () => '',
+      header: () => <p className="text-left">Eliminar</p>,
       cell: info => {
         const id = info.row.original._id; // Accede al id de la fila
         return (
-          <button onClick={() => deleteItem(id)}>
+          <button className="flex justify-start w-full" onClick={() => deleteItem(id)}>
             <Delete02Icon color={"#DB1313"} />
           </button>
         )
@@ -186,57 +196,63 @@ const Products = () => {
 
   return (
     <Layout>
-      <HeaderTitle title="Productos" />
-      <div className="lg:flex grid grid-rows-1  gap-4 border-none  w-full mx-auto lg:items-center gap-x-4 lg:justify-between mt-6 pb-4 h-auto">
-        <div className="flex flex-col sm:flex-col md:flex-row items-end w-full gap-4 ">
+      <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Gestión de Productos</h1>
+          <p className="text-slate-500 mt-1">Crea, edita y organiza el catálogo de la pizzería.</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/admin/products/create" passHref>
+            <a className="flex items-center gap-2 px-6 py-3.5 rounded-2xl text-[13px] font-black bg-slate-900 text-white hover:bg-red-600 transition-all active:scale-95 shadow-xl shadow-slate-900/10">
+              <FiPlus className="text-lg" />
+              <span>NUEVO PRODUCTO</span>
+            </a>
+          </Link>
+          <Link href="/admin/products/updatePrices" passHref>
+            <a className="flex items-center gap-2 px-6 py-3.5 rounded-2xl text-[13px] font-black bg-white text-slate-600 border border-slate-100 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-95 shadow-sm">
+              <FiDollarSign className="text-slate-400 group-hover:text-red-500" />
+              <span>PRECIOS</span>
+            </a>
+          </Link>
+          <Link href="/admin/products/orderProducts" passHref>
+            <a className="flex items-center gap-2 px-6 py-3.5 rounded-2xl text-[13px] font-black bg-white text-slate-600 border border-slate-100 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-95 shadow-sm">
+              <FiLayers className="text-slate-400 group-hover:text-red-500" />
+              <span>ORDENAR</span>
+            </a>
+          </Link>
 
-          <div className="flex w-full justify-between items-center h-10 pr-3 py-2 text-sm leading-tight text-gray-700 border
-                            rounded-lg appearance-none focus:outline-none focus:shadow-outline">
-            <input
-              id="query"
-              name="query"
-              type="text"
-              placeholder="¿Que Desea Buscar?"
-              onChange={handleChangeSearch}
-              className="w-full border-none text-sm rounded-lg text-gray-700 placeholder:text-gray-400 placeholder:font-montserrat  focus:outline-none focus:ring-0"
-            />
-            <Search01Icon color="#BFBFBF" width={20} />
+        </div>
+      </div>
+
+      <div className="bg-slate-900/5 p-6 rounded-[2.5rem] border border-slate-100 mb-10 relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none"></div>
+        <div className="relative flex flex-col lg:flex-row gap-6 items-end">
+          <div className="relative flex-1 group w-full">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Búsqueda Rápida</p>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+                <Search01Icon color="#94a3b8" width={20} className="group-focus-within:text-red-600 transition-colors" />
+              </div>
+              <input
+                id="query"
+                name="query"
+                type="text"
+                placeholder="Escribe el nombre del producto..."
+                onChange={handleChangeSearch}
+                className="w-full pl-14 pr-6 py-4 bg-white shadow-sm border-2 border-transparent rounded-[1.5rem] text-sm text-slate-700 placeholder:text-slate-400 focus:border-red-500/20 focus:shadow-xl focus:shadow-red-500/5 transition-all outline-none"
+              />
+            </div>
           </div>
 
-          <Select
-            label="Categoria"
-            data={categorias}
-            handleChange={handleCategoryChange}
-          />
-          <button className="px-3 whitespace-nowrap h-10 w-full md:w-1/3 hover font-montserrat font-normal
-                             rounded-lg  text-sm border text-white bg-red-600 hover:bg-red-500"
-            type="button"
-            onClick={() =>
-              router.push("/admin/products/create")
-            }
-          >
-            Producto Nuevo
-          </button>
-
-          <button className="px-3 whitespace-nowrap h-10 w-full md:w-1/3 hover font-montserrat font-normal
-                             rounded-lg  text-sm border text-white bg-red-600 hover:bg-red-500"
-            type="button"
-            onClick={() => {
-              router.push("/admin/products/updatePrices");
-            }}
-          >
-            Actualizar precios
-          </button>
-          <button className="px-3 whitespace-nowrap h-10 w-full md:w-1/3 hover font-montserrat font-normal
-                             rounded-lg  text-sm border text-white bg-red-600 hover:bg-red-500"
-            type="button"
-            onClick={() => {
-              router.push("/admin/products/orderProducts");
-            }}
-          >
-            Ordenar Productos
-          </button>
-
+          <div className="w-full lg:w-80">
+            <Select
+              label="Filtrar por Categoría"
+              data={categorias}
+              placeholder="Seleccione una categoría"
+              handleChange={handleCategoryChange}
+              className="w-full"
+            />
+          </div>
         </div>
       </div>
       <div className="mt-3">

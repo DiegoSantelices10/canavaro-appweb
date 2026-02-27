@@ -22,7 +22,7 @@ const Home = ({ data }) => {
 
 
   const addExtras = () => {
-    const extras = data?.filter(item => item.categoria === 'extras' && item.available === true)
+    const extras = data?.filter(item => item.categoria?.toLowerCase() === 'extras' && item.available === true)
     dispatch(setExtras(extras))
   }
 

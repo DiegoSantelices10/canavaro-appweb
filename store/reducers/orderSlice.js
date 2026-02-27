@@ -38,7 +38,7 @@ export const orderSlice = createSlice({
 			state.quantityDemandedPostres = action.payload;
 		},
 		addProductPizza: (state, action) => {
-			if (action.payload.categoria === "pizzas") {
+			if (action.payload.categoria?.toLowerCase() === "pizzas") {
 				const productIndex = state.orderPromo.findIndex(item => item.tamanio === action.payload.tamanio);
 				productIndex >= 0 ? (state.orderPromo[productIndex].cantidad += 1) : state.orderPromo.push({ ...action.payload, cantidad: 1 });
 			}

@@ -1,29 +1,27 @@
 import { useRouter } from 'next/router';
 import React from 'react'
-import { IoChevronBack } from 'react-icons/io5';
+import { FiArrowLeft } from 'react-icons/fi';
 
 const HeaderTitle = ({ title, isBack }) => {
     const router = useRouter();
-
 
     const backNavigate = () => {
         router.back()
     }
 
     return (
-        <div className="grid gap-3">
-            <div className='flex md:gap-4 md:px-2 relative justify-center'>
-                {isBack &&
-                    (
-
-                        <button onClick={backNavigate}>
-                            <IoChevronBack className="text-gray-900 absolute left-0 bottom-1" size={25} />
-                        </button>
-                    )
-                }
-                <h1 className="text-3xl font-montserrat tracking-wider font-bold text-center">{title}</h1>
+        <div className="flex flex-col items-start gap-4 ">
+            {isBack && (
+                <button
+                    onClick={backNavigate}
+                    className="p-3 bg-white border border-slate-100 rounded-2xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-95 shadow-sm"
+                >
+                    <FiArrowLeft size={20} />
+                </button>
+            )}
+            <div>
+                <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">{title}</h1>
             </div>
-            <hr />
         </div>
     )
 }

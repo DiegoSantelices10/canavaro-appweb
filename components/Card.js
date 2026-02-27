@@ -35,7 +35,10 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
   return (
     <div>
       <div className="py-3">
-        {categoria === "Postres" || categoria === "empanadas" || categoria === "bebidas" || categoria === "porciones" ? (
+        {(() => {
+          const cat = categoria?.toLowerCase();
+          return cat === "postres" || cat === "empanadas" || cat === "bebidas" || cat === "porciones";
+        })() ? (
           <div className="flex justify-between items-center gap-x-2">
             <Image
               className="rounded-lg overflow-hidden"
@@ -99,7 +102,7 @@ const Card = ({ data: { _id, nombre, imagen, descripcion, categoria, precio, pre
                 <div className="w-full self-start">
                   <h1 className="font-semibold text-sm font-montserrat text-neuttral-800">{nombre}</h1>
                   <p className="text-gray-400 text-xs">{descripcion}</p>
-                  {categoria !== "pizzas" && <p className="text-gray-400  text-sm py-1">{formatearNumero(precio)}</p>}
+                  {categoria?.toLowerCase() !== "pizzas" && <p className="text-gray-400  text-sm py-1">{formatearNumero(precio)}</p>}
                 </div>
               </div>
             </a>

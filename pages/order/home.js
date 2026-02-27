@@ -43,12 +43,12 @@ export default function Home() {
   const renderPromotions = () => {
     // eslint-disable-next-line dot-notation
 
-    const promos = products?.filter(item => item.categoria === "promociones");
+    const promos = products?.filter(item => item.categoria?.toLowerCase() === "promociones");
     return promos?.filter(item => item.available === true).map(data => <CardPromotion key={data._id} data={data} />);
   };
 
   const renderCombos = () => {
-    const filtrados = products?.filter(item => item.categoria === 'Combos' && item.available === true);
+    const filtrados = products?.filter(item => item.categoria?.toLowerCase() === 'combos' && item.available === true);
     const ordenados = ordenarPorProductOrderIdHome(filtrados);
 
     return ordenados.map(data => <CardPromotion key={data._id} data={data} />);
@@ -56,14 +56,17 @@ export default function Home() {
 
   const renderStore = (renderProductos) => {
     const filtrados = products
-      ?.filter(item => item.categoria === renderProductos && item.available === true);
+      ?.filter(item => item.categoria?.toLowerCase() === renderProductos?.toLowerCase() && item.available === true);
 
     const ordenados = ordenarPorProductOrderIdHome(filtrados);
 
     return ordenados.map(data => <Card key={data._id} data={data} />);
   };
 
-  const productosDestacables = products?.filter(product => !categoriasNoDestacables.includes(product.categoria));
+  const productosDestacables = products?.filter(product => {
+    const category = product.categoria?.toLowerCase();
+    return !categoriasNoDestacables.some(c => c.toLowerCase() === category);
+  });
 
 
   useEffect(() => {
@@ -98,7 +101,7 @@ export default function Home() {
 
     if (extras?.length <= 0) {
       const res = JSON.parse(localStorage.getItem("productos"));
-      const extras = res.filter(item => item.categoria === 'extras' && item.available === true)
+      const extras = res.filter(item => item.categoria?.toLowerCase() === 'extras' && item.available === true)
       dispatch(setExtras(extras))
     }
   }, []);
@@ -157,7 +160,10 @@ export default function Home() {
   };
 
   const addCartPromo = value => {
-    const res = value.find(item => item.categoria === "Postres" || item.categoria === "bebidas" || item.categoria === "porciones");
+    const res = value.find(item => {
+      const category = item.categoria?.toLowerCase();
+      return category === "postres" || category === "bebidas" || category === "porciones";
+    });
 
     if (res) {
       setTotalCant(0);
@@ -324,33 +330,36 @@ export default function Home() {
         </div>
 
         <div className="relative flex justify-center">
-          {(renderProducts === "Postres" || renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
-            orderPromo.length > 0 && (
-              <div className="w-full fixed bottom-2 mx-auto px-3 md:w-4/5 lg:w-3/5">
-                <div
-                  className="flex justify-between items-center  rounded-lg mx-auto text-center   
+          {(() => {
+            const category = renderProducts?.toLowerCase();
+            return category === "postres" || category === "empanadas" || category === "bebidas" || category === "porciones";
+          })() && (
+              orderPromo.length > 0 && (
+                <div className="w-full fixed bottom-2 mx-auto px-3 md:w-4/5 lg:w-3/5">
+                  <div
+                    className="flex justify-between items-center  rounded-lg mx-auto text-center   
 									   w-full md:w-4/5 lg:w-3/5 p-3 bg-red-600  text-white text-base font-semibold "
-                >
-                  <button
-                    onClick={() => addCartPromo(orderPromo)}
-                    className={`${orderPromo.length < 1
-                      ? "invisible"
-                      : "p-2 px-3 font-medium font-montserrat bg-slate-50 rounded-lg text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
-                      }`}
                   >
-                    Agregar al carrito
-                  </button>
+                    <button
+                      onClick={() => addCartPromo(orderPromo)}
+                      className={`${orderPromo.length < 1
+                        ? "invisible"
+                        : "p-2 px-3 font-medium font-montserrat bg-slate-50 rounded-lg text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
+                        }`}
+                    >
+                      Agregar al carrito
+                    </button>
 
-                  <div className="flex items-center gap-x-5 text-white font-semibold">
-                    <p className="font-medium text-xl">{totalPrice !== 0 && formatearNumero(totalPrice)}</p>
-                    <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
-                      <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
+                    <div className="flex items-center gap-x-5 text-white font-semibold">
+                      <p className="font-medium text-xl">{totalPrice !== 0 && formatearNumero(totalPrice)}</p>
+                      <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
+                        <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )
-          )}
+              )
+            )}
         </div>
 
       </div>

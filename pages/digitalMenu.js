@@ -53,7 +53,7 @@ function DigitalMenu() {
 
     const render = (renderProductos) => {
         const filtrados = products
-            ?.filter(item => item.categoria === renderProductos && item.available === true);
+            ?.filter(item => item.categoria?.toLowerCase() === renderProductos?.toLowerCase() && item.available === true);
 
 
         const ordenados = ordenarPorProductOrderIdHome(filtrados);
@@ -84,7 +84,7 @@ function DigitalMenu() {
                             <h1 className="font-semibold font-montserrat text-left text-sm ">{data.nombre}</h1>
                             <p className="text-gray-500 font-montserrat text-left  text-xs">{data.descripcion}</p>
                         </div>
-                        {data.categoria === 'pizzas' ? (
+                        {data.categoria?.toLowerCase() === 'pizzas' ? (
                             <div className='flex font-montserrat justify-center gap-5 mt-2'>
 
                                 {data.precioPizza.gigante && (

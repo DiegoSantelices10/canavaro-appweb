@@ -5,21 +5,21 @@ import React from 'react'
 const ControllerInput = ({ label, name, disabled, type, placeholder }) => {
 
     return (
-        <div className="w-full mx-auto">
-            <label className="block text-xs space-y-1 text-gray-900 font-montserrat">
-                {label &&
-                    <span className='font-semibold pl-1'>{label}</span>
-                }
-                <Field
-                    disabled={disabled}
-                    id={name}
-                    type={type}
-                    placeholder={placeholder}
-                    name={name}
-                    className={`${disabled === true ? "bg-gray-200" : ""} p-2 w-full h-10 text-sm leading-tight text-gray-900  
-                             border-gray-200 border rounded-lg focus:ring-0 focus:border-gray-300`}
-                />
-            </label>
+        <div className="w-full">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">{label}</p>
+            <Field
+                disabled={disabled}
+                id={name}
+                type={type}
+                placeholder={placeholder || "..."}
+                name={name}
+                className={`
+                    w-full px-6 py-4 text-sm font-bold rounded-[1.5rem] transition-all outline-none shadow-sm border-2
+                    ${disabled
+                        ? "bg-slate-100 border-transparent text-slate-400 cursor-not-allowed"
+                        : "bg-white border-transparent text-slate-700 hover:shadow-md focus:border-red-500/10 focus:ring-4 focus:ring-red-500/5 focus:bg-white"}
+                `}
+            />
         </div>
     )
 }

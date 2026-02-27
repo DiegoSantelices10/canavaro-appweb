@@ -16,9 +16,11 @@ function SortableItem({ user }) {
       ref={setNodeRef}
       {...attributes}
       {...listeners}
-      className="bg-gray-50 p-4 rounded-md shadow-sm text-slate-950 w-full"
+      className="bg-white px-6 py-4 rounded-[1.5rem] shadow-sm border border-slate-100 text-slate-700 w-full hover:border-red-200 hover:shadow-md transition-all cursor-grab active:cursor-grabbing group"
     >
-      <h1 className="font-montserrat font-medium">{user.name}</h1>
+      <h1 className="font-bold text-sm tracking-tight group-hover:text-slate-950 transition-colors uppercase">
+        {user.name}
+      </h1>
     </div>
   );
 }

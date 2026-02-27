@@ -38,7 +38,7 @@ export default function Promotion({
     dispatch(clearPostres());
     if (nombre === 'Combo 4' || nombre === 'Combo 5') {
       const { _id, nombre, descripcion } =
-        products.filter(item => item.categoria === "Combos" || item.categoria === "promociones").find(item => item.nombre === select) || {};
+        products.filter(item => item.categoria?.toLowerCase() === "combos" || item.categoria?.toLowerCase() === "promociones").find(item => item.nombre === select) || {};
       const res = { _id, nombre, descripcion };
       setSelectCombo(res);
     }
@@ -48,7 +48,7 @@ export default function Promotion({
   const listAvailableDrinks = () => {
     const updatedExtras = extras.filter(extra => {
       // Filtrar solo extras cuya categoría sea 'bebidas'
-      if (extra.categoria !== 'bebidas') return false;
+      if (extra.categoria?.toLowerCase() !== 'bebidas') return false;
       const matchingDrink = drinks.find(drink => drink._id === extra._id);
       // Si no hay matching drink o si available es true, mantenemos el extra
       return !(matchingDrink && matchingDrink.available === false);
@@ -57,12 +57,13 @@ export default function Promotion({
   };
 
   // Filtra solo los extras de categoría 'Postres' y disponibles
-  const updatedDesserts = extras.filter(extra => extra.categoria === 'Postres');
+  const updatedDesserts = extras.filter(extra => extra.categoria?.toLowerCase() === 'postres');
 
   const addItems = value => {
-    if (value.categoria === 'bebidas') {
+    const category = value.categoria?.toLowerCase() || '';
+    if (category === 'bebidas') {
       dispatch(addDrinksPromo(value));
-    } else if (value.categoria === 'Postres') {
+    } else if (category === 'postres') {
       dispatch(addPostresPromo(value));
     } else {
       dispatch(addProductPromo(value));
@@ -70,9 +71,10 @@ export default function Promotion({
   };
 
   const decrementItems = value => {
-    if (value.categoria === 'bebidas') {
+    const category = value.categoria?.toLowerCase() || '';
+    if (category === 'bebidas') {
       dispatch(decrementDrinksPromo(value));
-    } else if (value.categoria === 'Postres') {
+    } else if (category === 'postres') {
       dispatch(decrementPostresPromo(value));
     } else {
       dispatch(decrementProductPromo(value));
@@ -106,7 +108,7 @@ export default function Promotion({
     setSelect(e.target.value);
     if (products !== null) {
       const { _id, nombre, descripcion } =
-        products.filter(item => item.categoria === "promociones" || item.categoria === "Combos").find(item => item.nombre === e.target.value) || {};
+        products.filter(item => item.categoria?.toLowerCase() === "promociones" || item.categoria?.toLowerCase() === "combos").find(item => item.nombre === e.target.value) || {};
       const res = { _id, nombre, descripcion };
       setSelectCombo(res);
     }
@@ -368,7 +370,7 @@ export default function Promotion({
                 )}
 
                 {products
-                  ?.filter(item => item.categoria === "empanadas" && item.available === true)
+                  ?.filter(item => item.categoria?.toLowerCase() === "empanadas" && item.available === true)
                   ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
                   .map(({ _id, nombre, precioExtra }) => {
                     return (
@@ -391,7 +393,7 @@ export default function Promotion({
                                 className="text-red-500 font-normal text-2xl flex justify-center items-center"
                                 onClick={e => {
                                   setQuantity(quantityDemanded + 1);
-                                  decrementItems({ _id, nombre, precioExtra });
+                                  decrementItems({ _id, nombre, precioExtra, categoria: "empanadas" });
                                 }}
                               >
                                 <MinusSignIcon color={"bg-red-500"} width={18} height={18} />
@@ -411,7 +413,7 @@ export default function Promotion({
                                 className="text-green-500 font-normal text-2xl flex justify-center items-center"
                                 onClick={e => {
                                   setQuantity(quantityDemanded - 1);
-                                  addItems({ _id, nombre, precioExtra });
+                                  addItems({ _id, nombre, precioExtra, categoria: "empanadas" });
                                 }}
                               >
                                 <Add01Icon color={"bg-green-500"} width={18} height={18} />

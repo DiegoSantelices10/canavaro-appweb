@@ -7,7 +7,7 @@ const useDrinks = () => {
     const { products } = useSelector(state => state.product);
 
     useEffect(() => {
-        const drinksList = products.filter(product => product.categoria === "bebidas");
+        const drinksList = products.filter(product => product.categoria?.toLowerCase() === "bebidas");
         setDrinks(drinksList);
     }, [products])
 

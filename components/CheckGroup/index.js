@@ -67,16 +67,16 @@ const CheckGroup = (props) => {
     }
 
     return (
-        <div className="grid gap-4 grid-cols-2 justify-center items-center mx-auto w-full lg:hidden mt-4">
+        <div className="flex flex-wrap gap-6 items-center w-full lg:hidden">
             {barra?.map(item => (
                 <div
                     key={item._id}
-                    className="flex justify-between items-center"
+                    className="flex items-center gap-3 bg-slate-800/50 px-4 py-2 rounded-2xl border border-slate-700/50 hover:bg-slate-800 transition-all"
                 >
-                    <h1 className="text-sm font-montserrat">
-                        {item.nombre || "Imagen destacable"}
-                    </h1>
-                    <label className="relative inline-flex items-center cursor-pointer">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">
+                        {item.nombre || "Banner"}
+                    </span>
+                    <label className="relative inline-flex items-center cursor-pointer scale-90">
                         <input
                             id={item._id}
                             type="checkbox"
@@ -84,15 +84,8 @@ const CheckGroup = (props) => {
                             checked={item.available}
                             onChange={() => promoBarra(item._id, item.available, item)}
                         />
-                        <div className="w-9 h-5 bg-gray-400 peer-focus:outline-none peer-focus:ring-0 
-                                    rounded-full 
-                                    dark:bg-gray-200 peer-checked:after:translate-x-full 
-                                    after:content-[''] after:absolute 
-                                    after:top-[2px] after:left-[2px] after:bg-white   
-                                    after:rounded-full after:h-4 after:w-4 after:transition-all 
-                                    dark:border-gray-600 peer-checked:bg-red-600 "></div>
+                        <div className="w-8 h-4 bg-slate-700 rounded-full peer-checked:bg-red-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:after:translate-x-4"></div>
                     </label>
-
                 </div>
             ))}
         </div>
