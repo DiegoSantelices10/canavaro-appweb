@@ -1,6 +1,7 @@
 import { FiShoppingCart, FiChevronsLeft } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster, toast } from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   addPromoOrderList,
   calculateSubTotal,
@@ -164,172 +165,190 @@ export default function Index() {
   }
 
   return (
-    <div className="relative min-h-screen  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2">
-      {showModal && (
-        <ModalMessage
-          handleClose={handleCloseModal}
-          addExtra={addExtra}
-          showModal={showModal}
-          orderPromo={orderPromo}
-          extraPizza={extraPizza}
-          setShowModal={setShowModal}
-          extras={extras}
-          info={info}
-        />
-      )}
+    <div className="relative min-h-screen bg-white pb-32 mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-1/2">
       <Toaster />
-      <img
-        src={"/images/pizzafree.webp"}
-        className="z-0 inset-0 w-full h-full bg-green-300 object-contain"
-        alt={"img"} />
 
-      <button onClick={returnHome}>
-        <FiChevronsLeft className="absolute text-slate-800 bg-slate-50  rounded-md shadow p-1 top-6 left-6" size={30} />
-      </button>
-      <div className="w-full ">
-        <div className="flex flex-col  w-full ">
-          <div className="w-full bg-white rounded-t-3xl p-4 -mt-12">
-            <h1 className="font-semibold text-lg text-neutral-800 font-montserrat">Arma tu pizza</h1>
-            <p className=" font-normal text-sm  text-gray-400 font-montserrat">Elegi los gustos que quieras</p>
-          </div>
-          <div className="flex w-full justify-around font-montserrat font-bold bg-white z-10">
-            <div className="grid content-center gap-2">
-              <input
-                id="chica"
-                type="radio"
-                value="chica"
-                name="chica"
-                onChange={onChangeValue}
-                checked={select === "chica"}
-                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
-              />
-              <h3 className="font-semibold font-montserrat text-sm">Chica</h3>
-            </div>
-            <div className="grid content-center gap-2">
-              <input
-                id="mediana"
-                type="radio"
-                value="mediana"
-                name="mediana"
-                onChange={onChangeValue}
-                checked={select === "mediana"}
-                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
-              />
-              <h3 className="font-semibold text-center text-sm">Mediana</h3>
-            </div>
-            <div className="grid content-center gap-2">
-              <input
-                id="gigante"
-                type="radio"
-                value="gigante"
-                name="gigante"
-                onChange={onChangeValue}
-                checked={select === "gigante"}
-                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
-              />
-              <h3 className="font-semibold text-sm">Gigante</h3>
-            </div>
-          </div>
-          <div className="text-center font-montserrat py-2 text-gray-400 text-base">
-            <p>puedes elegir hasta {select === "gigante" ? "4" : "2"} gustos</p>
-          </div>
-          <div className="px-3 rounded-md">
-            <div
-              className={
-                total === 1
-                  ? "bg-green-500 font-montserrat rounded-lg  w-full text-sm text-white p-3 mt-2 text-center font-semibold"
-                  : "bg-red-600 w-full font-montserrat rounded-lg text-white text-sm p-3 mt-2 text-center font-semibold"
-              }
-            >
-              {productTotal()}
-            </div>
-          </div>
-          <div className="text-sm font-semibold text-left bg-white p-3 my-1 z-20">
-            {products
-              .filter(
-                item => item.categoria === "pizzas" && item.nombre !== "Fugazzeta rellena" && item.available === true
-              )
-              ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+      <AnimatePresence>
+        {showModal && (
+          <ModalMessage
+            handleClose={handleCloseModal}
+            addExtra={addExtra}
+            showModal={showModal}
+            orderPromo={orderPromo}
+            extraPizza={extraPizza}
+            setShowModal={setShowModal}
+            extras={extras}
+            info={info}
+          />
+        )}
+      </AnimatePresence>
 
-              .map(item => {
-                return (
-                  <div key={item._id}>
+      <div className="relative mx-auto w-full h-72 sm:h-80 md:h-[400px] md:mt-4 md:rounded-[40px] overflow-hidden shadow-xl">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute inset-0 z-0"
+        >
+          <img
+            src={"/images/pizzafree.webp"}
+            alt="fondo"
+            className="absolute inset-0 w-full h-full object-cover blur-3xl scale-125 opacity-50"
+          />
+          <img
+            src={"/images/pizzafree.webp"}
+            alt="Arma tu pizza"
+            className="relative z-10 w-full h-full object-cover brightness-[0.9]"
+          />
+          <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/0 via-transparent to-black/30" />
+        </motion.div>
 
-                    <div className="flex justify-between items-center py-2  my-2 ">
-                      <h2 className="font-montserrat font-medium text-neutral-800 text-base">{item.nombre}</h2>
-                      <div className="w-auto  px-3 text-end space-x-4 text-base">
-                        <div className="flex w-full justify-around items-center gap-5">
-                          {radioSelect[item._id]?.fraccion && (
-                            <button
-                              onClick={() => clearFraction(item._id)}
-                              className="text-gray-400 text-xs font-semibold"
-                            >
-                              Deshacer
-                            </button>
-                          )}
-                          {select === "gigante" && (
-                            <div className="flex items-center justify-center gap-x-2">
-                              <h3 className="text-gray-400 text-sm font-montserrat">1/4</h3>
-                              <input
-                                type="radio"
-                                value="1/4"
-                                name={item.nombre}
-                                className="mx-auto rounded focus:ring-0 focus:text-sky-800"
-                                checked={radioSelect[item._id]?.fraccion === "1/4"}
-                                onChange={() => handleChangeRadioButton(item, "1/4")}
-                              />
-                            </div>
-                          )}
+        <button
+          onClick={returnHome}
+          className="absolute top-6 left-6 z-30 w-10 h-10 flex items-center justify-center bg-neutral-950/80 backdrop-blur-md rounded-xl text-white shadow-xl active:scale-90 transition-transform"
+        >
+          <FiChevronsLeft size={24} />
+        </button>
+      </div>
 
-                          <div className="flex items-center gap-x-2">
-                            <h3 className="text-gray-400 text-sm font-montserrat">1/2</h3>
-                            <input
-                              type="radio"
-                              value="1/2"
-                              name={item.nombre}
-                              className="mx-auto rounded focus:ring-0 focus:text-sky-800 hover:text-sky-800"
-                              checked={radioSelect[item._id]?.fraccion === "1/2"}
-                              onChange={() => handleChangeRadioButton(item, "1/2")}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <hr />
-                  </div>
-                );
-              })}
-          </div>
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="relative z-10 -mt-10 bg-white rounded-t-[40px] px-6 pt-8 pb-10 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] flex flex-col gap-6"
+      >
+        <div className="flex flex-col gap-1 text-center">
+          <h1 className="font-black font-montserrat text-neutral-900 text-2xl uppercase tracking-tighter">Arma tu pizza</h1>
+          <p className="font-medium text-sm text-neutral-400 font-montserrat">Elegí los gustos que quieras sumar</p>
         </div>
 
-        <div className="font-normal text-left text-sm pb-24 pt-5 bg-white p-3 max-h-full">
-          <h1 className="pb-1">Comentarios</h1>
-          <input
+        <div className="bg-neutral-50 p-2 rounded-2xl flex justify-between font-montserrat font-bold">
+          {["chica", "mediana", "gigante"].map(tam => (
+            <label
+              key={tam}
+              className={`flex-1 py-3 text-center rounded-xl cursor-pointer transition-all ${select === tam
+                ? "bg-white text-neutral-900 shadow-sm border border-neutral-200"
+                : "text-neutral-400 hover:text-neutral-600"
+                }`}
+            >
+              <input
+                type="radio"
+                name="tamanio"
+                value={tam}
+                checked={select === tam}
+                onChange={onChangeValue}
+                className="hidden"
+              />
+              <span className="capitalize text-sm">{tam}</span>
+            </label>
+          ))}
+        </div>
+
+        <div className="text-center font-montserrat text-sm font-bold text-neutral-400 uppercase tracking-widest">
+          PUEDES ELEGIR HASTA {select === "gigante" ? "4" : "2"} GUSTOS
+        </div>
+
+        <div
+          className={`rounded-2xl p-4 text-center font-montserrat font-black uppercase text-sm shadow-inner transition-colors ${total === 1
+            ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
+            : "bg-amber-50 text-amber-600 border border-amber-100"
+            }`}
+        >
+          {productTotal()}
+        </div>
+
+        <div className="divide-y divide-neutral-100 mt-2">
+          {products
+            .filter(
+              item => item.categoria === "pizzas" && item.nombre !== "Fugazzeta rellena" && item.available === true
+            )
+            ?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+            .map(item => (
+              <div key={item._id} className="py-4 flex flex-col gap-3">
+                <div className="flex justify-between items-center">
+                  <h2 className="font-montserrat font-black text-neutral-800 text-sm uppercase">{item.nombre}</h2>
+                  {radioSelect[item._id]?.fraccion && (
+                    <button
+                      onClick={() => clearFraction(item._id)}
+                      className="text-red-500 bg-red-50 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider hover:bg-red-100 transition-colors"
+                    >
+                      Deshacer
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex gap-2 justify-end">
+                  {select === "gigante" && (
+                    <label
+                      className={`flex items-center justify-center px-4 py-2 rounded-lg cursor-pointer transition-colors border font-montserrat text-sm font-bold ${radioSelect[item._id]?.fraccion === "1/4"
+                        ? "bg-neutral-900 border-neutral-900 text-white"
+                        : "bg-white border-neutral-200 text-neutral-400 hover:bg-neutral-50"
+                        }`}
+                    >
+                      <input
+                        type="radio"
+                        value="1/4"
+                        name={item.nombre}
+                        className="hidden"
+                        checked={radioSelect[item._id]?.fraccion === "1/4"}
+                        onChange={() => handleChangeRadioButton(item, "1/4")}
+                      />
+                      1/4
+                    </label>
+                  )}
+                  <label
+                    className={`flex items-center justify-center px-4 py-2 rounded-lg cursor-pointer transition-colors border font-montserrat text-sm font-bold ${radioSelect[item._id]?.fraccion === "1/2"
+                      ? "bg-neutral-900 border-neutral-900 text-white"
+                      : "bg-white border-neutral-200 text-neutral-400 hover:bg-neutral-50"
+                      }`}
+                  >
+                    <input
+                      type="radio"
+                      value="1/2"
+                      name={item.nombre}
+                      className="hidden"
+                      checked={radioSelect[item._id]?.fraccion === "1/2"}
+                      onChange={() => handleChangeRadioButton(item, "1/2")}
+                    />
+                    1/2
+                  </label>
+                </div>
+              </div>
+            ))}
+        </div>
+
+        <div className="flex flex-col gap-2 mt-4">
+          <label htmlFor="comentarios" className="font-black text-xs text-neutral-400 font-montserrat uppercase tracking-widest pl-1">
+            Comentarios adicionales
+          </label>
+          <textarea
             ref={comentariosRef}
             id="comentarios"
             name="comentarios"
-            type="text"
-            className="border border-gray-200 rounded-md w-full p-2"
+            placeholder="¿Algo especial para tener en cuenta?"
+            className="w-full h-28 p-4 bg-neutral-50 border border-neutral-100 rounded-2xl font-montserrat text-sm focus:ring-2 focus:ring-neutral-800 focus:outline-none transition-all resize-none text-neutral-700"
           />
         </div>
-      </div>
-      {total === 1 && (
-        <div className="bg-white w-full fixed bottom-0 p-3 z-30 border-gray-200  sm:w-4/5 md:w-3/5 lg:w-1/2">
-          <button
-            className={`${total === 1
-              ? "flex justify-center gap-3 text-center rounded-lg w-full p-4 bg-red-600  hover:-translate-y-1 transition-all font-montserrat duration-500 text-white text-base font-semibold "
-              : "invisible"
-              }`}
-            onClick={() => {
-              openModal();
-              // addCartPromo(radioSelect, select);
-            }}
-          >
-            Agregar al Carrito
-            <FiShoppingCart size={23} />{" "}
-          </button>
-        </div>
-      )}
+      </motion.div>
+
+      <AnimatePresence>
+        {total === 1 && (
+          <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 w-full sm:w-4/5 md:w-3/5 lg:w-1/2">
+            <motion.div
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              className="flex justify-center items-center rounded-3xl p-4 bg-neutral-950/80 backdrop-blur-xl text-white border border-neutral-800 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+            >
+              <button
+                onClick={openModal}
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-neutral-950 rounded-2xl font-black font-montserrat text-sm uppercase tracking-wider hover:bg-neutral-200 transition-all active:scale-95 w-full"
+              >
+                Agregar al Carrito
+                <FiShoppingCart size={18} />
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -247,7 +247,7 @@ export default function Cart({ data }) {
       >
         {({ setFieldValue }) => {
           return (
-            <div className="max-w-2xl mx-auto pb-32">
+            <div className="mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-1/2 pb-32">
               <Form className="flex flex-col">
                 {/* Custom Sticky Header */}
                 <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md px-6 py-4 flex items-center gap-4 border-b border-neutral-100">
@@ -265,7 +265,7 @@ export default function Cart({ data }) {
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-neutral-900 text-white p-4 rounded-2xl text-center text-sm font-bold shadow-lg"
+                      className="bg-red-600 text-white p-4 rounded-2xl text-center text-sm font-bold shadow-lg"
                     >
                       🎁 Retirando por el local tenés un 10% de descuento.
                     </motion.div>
@@ -434,7 +434,7 @@ export default function Cart({ data }) {
                 {/* Footer Banner */}
                 <AnimatePresence>
                   {orderList.length > 0 && (
-                    <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 max-w-lg">
+                    <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 w-full sm:w-4/5 md:w-3/5 lg:w-1/2">
                       <motion.div
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}

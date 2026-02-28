@@ -69,11 +69,13 @@ export const orderSlice = createSlice({
 		},
 		decrementDrinksPromo: (state, action) => {
 			const productIndex = state.bebidas.findIndex(item => item._id === action.payload._id);
-			if (state.bebidas[productIndex].cantidad > 1) {
-				state.bebidas[productIndex].cantidad -= 1;
-			} else if (state.bebidas[productIndex].cantidad === 1) {
-				const newList = state.bebidas.filter(item => item._id !== action.payload._id);
-				state.bebidas = newList;
+			if (productIndex >= 0) {
+				if (state.bebidas[productIndex].cantidad > 1) {
+					state.bebidas[productIndex].cantidad -= 1;
+				} else if (state.bebidas[productIndex].cantidad === 1) {
+					const newList = state.bebidas.filter(item => item._id !== action.payload._id);
+					state.bebidas = newList;
+				}
 			}
 		},
 		addPostresPromo: (state, action) => {
@@ -87,11 +89,13 @@ export const orderSlice = createSlice({
 		},
 		decrementPostresPromo: (state, action) => {
 			const productIndex = state.postres.findIndex(item => item._id === action.payload._id);
-			if (state.postres[productIndex].cantidad > 1) {
-				state.postres[productIndex].cantidad -= 1;
-			} else if (state.postres[productIndex].cantidad === 1) {
-				const newList = state.postres.filter(item => item._id !== action.payload._id);
-				state.postres = newList;
+			if (productIndex >= 0) {
+				if (state.postres[productIndex].cantidad > 1) {
+					state.postres[productIndex].cantidad -= 1;
+				} else if (state.postres[productIndex].cantidad === 1) {
+					const newList = state.postres.filter(item => item._id !== action.payload._id);
+					state.postres = newList;
+				}
 			}
 		},
 		addProductPromo: (state, action) => {
@@ -105,11 +109,13 @@ export const orderSlice = createSlice({
 		},
 		decrementProductPromo: (state, action) => {
 			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
-			if (state.orderPromo[productIndex].cantidad > 1) {
-				state.orderPromo[productIndex].cantidad -= 1;
-			} else if (state.orderPromo[productIndex].cantidad === 1) {
-				const newList = state.orderPromo.filter(item => item._id !== action.payload._id);
-				state.orderPromo = newList;
+			if (productIndex >= 0) {
+				if (state.orderPromo[productIndex].cantidad > 1) {
+					state.orderPromo[productIndex].cantidad -= 1;
+				} else if (state.orderPromo[productIndex].cantidad === 1) {
+					const newList = state.orderPromo.filter(item => item._id !== action.payload._id);
+					state.orderPromo = newList;
+				}
 			}
 		},
 		addProductDirect: (state, action) => {
@@ -123,20 +129,24 @@ export const orderSlice = createSlice({
 		},
 		decrementProductDirect: (state, action) => {
 			const productIndex = state.orderList.findIndex(item => item._id === action.payload._id);
-			if (state.orderList[productIndex].cantidad > 1) {
-				state.orderList[productIndex].cantidad -= 1;
-			} else if (state.orderList[productIndex].cantidad === 1) {
-				const newList = state.orderList.filter(item => item._id !== action.payload._id);
-				state.orderList = newList;
+			if (productIndex >= 0) {
+				if (state.orderList[productIndex].cantidad > 1) {
+					state.orderList[productIndex].cantidad -= 1;
+				} else if (state.orderList[productIndex].cantidad === 1) {
+					const newList = state.orderList.filter(item => item._id !== action.payload._id);
+					state.orderList = newList;
+				}
 			}
 		},
 		decrementProductPizza: (state, action) => {
 			const productIndex = state.orderPromo.findIndex(item => item._id === action.payload._id);
-			if (state.orderPromo[productIndex].cantidad > 1) {
-				state.orderPromo[productIndex].cantidad -= 1;
-			} else if (state.orderPromo[productIndex].cantidad === 1) {
-				const newList = state.orderPromo.filter(item => item._id !== action.payload._id);
-				state.orderPromo = newList;
+			if (productIndex >= 0) {
+				if (state.orderPromo[productIndex].cantidad > 1) {
+					state.orderPromo[productIndex].cantidad -= 1;
+				} else if (state.orderPromo[productIndex].cantidad === 1) {
+					const newList = state.orderPromo.filter(item => item._id !== action.payload._id);
+					state.orderPromo = newList;
+				}
 			}
 		},
 		clearOrderPromo: (state, action) => {

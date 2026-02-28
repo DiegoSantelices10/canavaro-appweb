@@ -42,6 +42,7 @@ export default function Promotion({
   }, []);
 
   const listAvailableDrinks = () => {
+    if (!Array.isArray(extras)) return [];
     const updatedExtras = extras.filter(extra => {
       if (extra.categoria?.toLowerCase() !== 'bebidas') return false;
       const matchingDrink = drinks.find(drink => drink._id === extra._id);
@@ -50,7 +51,7 @@ export default function Promotion({
     return updatedExtras;
   };
 
-  const updatedDesserts = extras.filter(extra => extra.categoria?.toLowerCase() === 'postres');
+  const updatedDesserts = Array.isArray(extras) ? extras.filter(extra => extra.categoria?.toLowerCase() === 'postres') : [];
 
   const addItems = value => {
     const category = value.categoria?.toLowerCase() || '';
@@ -214,7 +215,7 @@ export default function Promotion({
               </div>
               <div className="divide-y divide-neutral-100">
                 {listAvailableDrinks()?.map((drink) => (
-                  <div key={drink._id} className="flex justify-between items-center py-4 first:pt-0">
+                  <div key={drink._id} className="flex justify-between items-center py-4 first:pt-0 last:pb-0">
                     <h3 className="text-sm font-bold text-neutral-800 font-montserrat">{drink.nombre}</h3>
                     {renderQuantityControls(
                       drink._id,
@@ -250,7 +251,7 @@ export default function Promotion({
               </div>
               <div className="divide-y divide-neutral-100">
                 {updatedDesserts?.map((dessert) => (
-                  <div key={dessert._id} className="flex justify-between items-center py-4 first:pt-0">
+                  <div key={dessert._id} className="flex justify-between items-center first:pt-0">
                     <h3 className="text-sm font-bold text-neutral-800 font-montserrat">{dessert.nombre}</h3>
                     {renderQuantityControls(
                       dessert._id,

@@ -95,9 +95,9 @@ export default function ProductLayout({
           descripcion,
           products: [selectCombo, ...value],
           categoria,
-          comentarios: comentarioRef.current.value,
+          comentarios: comentarioRef.current?.value || "",
           cantidadMaxima,
-          precio: precio + totalExtra,
+          precio: (Number(precio) || 0) + totalExtra,
           cantidad: 1,
         };
         toast.success("¡Agregado al pedido!");
@@ -116,9 +116,9 @@ export default function ProductLayout({
           categoria,
           cantidadPostres,
           cantidadExtras,
-          comentarios: comentarioRef.current.value,
+          comentarios: comentarioRef.current?.value || "",
           cantidadMaxima,
-          precio: precio + totalExtra,
+          precio: (Number(precio) || 0) + totalExtra,
           cantidad: 1,
         };
         toast.success("¡Agregado al pedido!");
@@ -131,8 +131,8 @@ export default function ProductLayout({
           if (item.categoria?.toLowerCase() !== 'extras') {
             dispatch(addPromoOrderList({
               ...item,
-              comentarios: comentarioRef.current.value,
-              precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
+              comentarios: comentarioRef.current?.value || "",
+              precio: (Number(item.precio) || 0) + extraPizza.reduce((total, extra) => total + (Number(extra.precio) || 0), 0),
               extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
             }))
           } else {
@@ -153,9 +153,9 @@ export default function ProductLayout({
           ],
           cantidadPostres,
           categoria,
-          comentarios: comentarioRef.current.value,
+          comentarios: comentarioRef.current?.value || "",
           cantidadExtras,
-          precio: precio + totalExtra,
+          precio: (Number(precio) || 0) + totalExtra,
           cantidad: 1,
         };
         toast.success("¡Agregado al pedido!");
@@ -164,7 +164,7 @@ export default function ProductLayout({
       } else {
         value.map(item => dispatch(addPromoOrderList({
           ...item,
-          comentarios: comentarioRef.current.value,
+          comentarios: comentarioRef.current?.value || "",
         })))
         toast.success("¡Agregado al pedido!");
         router.push("/order/home");
@@ -189,7 +189,7 @@ export default function ProductLayout({
   }
 
   const openModal = () => {
-    if (extras.length > 0 && orderPromo.length === 1) {
+    if (Array.isArray(extras) && extras.length > 0 && orderPromo.length === 1) {
       if (orderPromo[0].cantidad === 1 && data.addExtras !== 'si') {
         setInfo({ title: "Extras a tu pizza" });
         setShowModal(true);
@@ -221,29 +221,12 @@ export default function ProductLayout({
       </AnimatePresence>
 
       {/* Header Section */}
-      <div className="relative w-full max-w-2xl mx-auto h-80 sm:h-96 md:h-[450px] md:mt-4 md:rounded-[40px] overflow-hidden shadow-2xl">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="absolute inset-0 z-0"
-        >
-          {/* Fondo desenfocado para ambiente */}
-          <img
-            src={imagen?.url || "/images/sin-imagen-center.png"}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover blur-3xl scale-125 opacity-50"
-          />
-
-          {/* Imagen principal */}
-          <img
-            src={imagen?.url || "/images/sin-imagen-center.png"}
-            alt={nombre}
-            className="relative z-10 w-full h-full object-cover brightness-[0.9]"
-          />
-
-          <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/0 via-transparent to-black/20" />
-        </motion.div>
-
+      <div className="relative mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-1/2 h-80 sm:h-96 md:h-[450px] md:mt-4 md:rounded-[40px] overflow-hidden shadow-2xl">
+        <img
+          src={imagen?.url || "/images/sin-imagen-center.png"}
+          alt={nombre}
+          className="relative z-10 w-full h-full object-cover brightness-[0.9]"
+        />
         <button
           onClick={returnHome}
           className="absolute top-6 left-6 z-30 w-10 h-10 flex items-center justify-center bg-neutral-950/80 backdrop-blur-md rounded-xl text-white shadow-xl active:scale-90 transition-transform"
@@ -256,7 +239,7 @@ export default function ProductLayout({
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="relative z-10 -mt-10 bg-white rounded-t-[40px] px-6 pt-8 pb-32 max-w-2xl mx-auto shadow-[0_-20px_50px_rgba(0,0,0,0.1)]"
+        className="relative z-10 -mt-10 bg-white rounded-t-[40px] px-5 pt-8 pb-2 mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-1/2 shadow-[0_-20px_50px_rgba(0,0,0,0.1)]"
       >
         <div className="flex flex-col mb-8">
           <div className="flex justify-between items-start gap-4">
@@ -312,7 +295,7 @@ export default function ProductLayout({
       {/* Footer Button Banner */}
       <AnimatePresence>
         {result() && (
-          <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 max-w-lg">
+          <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 w-full sm:w-4/5 md:w-3/5 lg:w-1/2">
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

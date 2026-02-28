@@ -15,10 +15,15 @@ export default function Product({ data }) {
 
   useEffect(() => {
     if (products?.length <= 0) {
-      const res = JSON.parse(localStorage.getItem("productos"));
-      const extras = res?.filter(item => item.categoria === 'extras' && item.available === true)
-      dispatch(setExtras(extras))
-      dispatch(setProductData(res));
+      const storedProducts = localStorage.getItem("productos");
+      if (storedProducts) {
+        const res = JSON.parse(storedProducts);
+        if (Array.isArray(res)) {
+          const extras = res.filter(item => item.categoria === 'extras' && item.available === true);
+          dispatch(setExtras(extras));
+          dispatch(setProductData(res));
+        }
+      }
     }
   }, []);
 

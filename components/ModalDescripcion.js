@@ -22,7 +22,7 @@ const ModalDescripcion = ({ handleClose, show, pedido }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-md bg-white rounded-[40px] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] overflow-hidden border border-neutral-100"
+            className="relative w-full sm:w-4/5 md:w-3/5 lg:w-1/2 bg-white rounded-[40px] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] overflow-hidden border border-neutral-100"
           >
             {/* Header */}
             <div className="relative p-8 pb-4 text-center">

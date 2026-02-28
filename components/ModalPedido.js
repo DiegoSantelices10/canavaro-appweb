@@ -89,11 +89,11 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
             )}
             <div className="flex justify-between border-b border-slate-50 py-1.5">
               <span className="text-slate-400 font-bold text-[11px] uppercase tracking-wider">Envío:</span>
-              <span className="text-slate-900 font-black uppercase tracking-widest text-[13px]">{pedido?.tipoEnvio}</span>
+              <span className="text-slate-900 font-black uppercase tracking-wider text-[13px]">{pedido?.tipoEnvio}</span>
             </div>
             <div className="flex justify-between border-b border-slate-50 py-1.5">
               <span className="text-slate-400 font-bold text-[11px] uppercase tracking-wider">Pago:</span>
-              <span className="text-slate-900 font-black uppercase tracking-widest text-[13px]">{pedido?.medioDePago}</span>
+              <span className="text-slate-900 font-black uppercase tracking-wider text-[13px]">{pedido?.medioDePago}</span>
             </div>
             {pedido.hPersonalizado && (
               <div className="flex justify-between border-b border-slate-100 py-3 bg-red-50 px-5 rounded-xl mt-2 shadow-sm">
@@ -128,7 +128,7 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
                     .map((item, index) => (
                       <div key={index} className="flex gap-5 items-start">
                         {/* Quantity Block */}
-                        <div className="flex items-center justify-center shrink-0 w-11 h-11 bg-red-600 rounded-lg text-white font-black text-lg">
+                        <div className="flex items-center justify-center shrink-0 w-8 h-8 bg-red-600 rounded-lg text-white font-black">
                           {item?.cant || item?.cantidad}
                         </div>
 

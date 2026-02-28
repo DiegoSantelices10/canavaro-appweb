@@ -58,7 +58,7 @@ const ModalMessage = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: -50 }}
-            className=" mx-auto  text-zinc-800 lg:w-3/5 md:w-4/5  w-full bg-white p-3 h-full py-5 rounded-3xl font-montserrat font-semibold"
+            className=" mx-auto text-zinc-800 w-full sm:w-4/5 md:w-3/5 lg:w-1/2 bg-white p-3 h-full py-5 rounded-3xl font-montserrat font-semibold"
           >
             <div className="w-full">
               <h2 className="text-base font-semibold  text-center">{title}</h2>

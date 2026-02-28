@@ -80,7 +80,7 @@ export default function Checkout() {
 
 
   return (
-    <div className=" mx-auto relative w-full md:shadow-md  sm:w-4/5 md:w-3/5 lg:w-1/2 mt-2 h-full">
+    <div className="mx-auto relative w-full md:shadow-md sm:w-4/5 md:w-3/5 lg:w-1/2 mt-2 h-full">
       <div className="p-3">
         <div className="flex items-center gap-3 py-2">
           <Link href={"/order/cart"}>
@@ -238,7 +238,7 @@ export default function Checkout() {
                 </div>
 
                 <AnimatePresence>
-                  <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 max-w-lg">
+                  <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 w-full sm:w-4/5 md:w-3/5 lg:w-1/2">
                     <motion.div
                       initial={{ y: 100, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}

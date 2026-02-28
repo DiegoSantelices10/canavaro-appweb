@@ -77,7 +77,7 @@ const Successful = () => {
       </div>
 
       {/* Ticket Container */}
-      <div className="px-6 max-w-lg mx-auto">
+      <div className="px-6 w-full max-w-md mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -207,7 +207,7 @@ const Successful = () => {
 
       {/* Floating Actions */}
       <AnimatePresence>
-        <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 max-w-lg space-y-3">
+        <div className="fixed bottom-8 left-0 right-0 mx-auto px-6 z-40 w-full max-w-md space-y-3">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

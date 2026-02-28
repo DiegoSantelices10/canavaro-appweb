@@ -315,7 +315,7 @@ export default function Home() {
               <div className="w-full flex items-center justify-between bg-neutral-50 p-4 rounded-2xl border border-neutral-100 shadow-sm">
                 <div>
                   <p className="text-left font-montserrat text-lg font-bold text-neutral-800">¡Armá tu pizza!</p>
-                  <p className="text-sm text-neutral-500">Elegí tus ingredientes favoritos</p>
+                  <p className="text-xs text-neutral-500">Elegí tus ingredientes favoritos</p>
                 </div>
                 <Link href={"/order/pizzaFree"}>
                   <a
@@ -341,7 +341,7 @@ export default function Home() {
             return category === "postres" || category === "empanadas" || category === "bebidas" || category === "porciones";
           })() && (
               orderPromo.length > 0 && (
-                <div className="w-full fixed bottom-8 left-0 right-0 mx-auto px-4 z-40 max-w-lg">
+                <div className="fixed bottom-8 left-0 right-0 mx-auto px-4 z-40 w-full sm:w-4/5 md:w-3/5 lg:w-1/2">
                   <motion.div
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
