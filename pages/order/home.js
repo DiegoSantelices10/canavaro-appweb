@@ -25,6 +25,7 @@ import { setSetting } from "store/reducers/settingSlice";
 import TabsCategories from "components/Tabs/TabsCategories";
 import { categoriasNoDestacables, ordenarPorProductOrderIdHome } from "utils";
 import { wrapper } from "store/app/store";
+import { cn } from "utils/cn";
 
 
 export default function Home() {
@@ -219,7 +220,7 @@ export default function Home() {
       <Layout>
         {/* ── Banner Efectivo ── */}
         {promoEfectivo?.available && promoEfectivo?.descuento > 0 && (
-          <div className="bg-[#dc2626] mt-14 px-5 py-4 flex items-center justify-between gap-4 relative overflow-hidden after:content-[''] after:absolute after:right-[70px] after:-top-[30px] after:w-[120px] after:h-[120px] after:rounded-full after:bg-white/10 after:pointer-events-none shadow-sm">
+          <div className="bg-[#dc2626] mt-16 px-5 py-4 flex items-center justify-between gap-4 relative overflow-hidden after:content-[''] after:absolute after:right-[70px] after:-top-[30px] after:w-[120px] after:h-[120px] after:rounded-full after:bg-white/10 after:pointer-events-none shadow-sm">
             <div className="flex flex-col gap-0.5 z-10">
               <p className="text-white font-montserrat font-bold text-lg leading-tight">
                 {promoEfectivo.descuento}% OFF en efectivo
@@ -233,9 +234,9 @@ export default function Home() {
             </div>
           </div>
         )}
-        <div className=" px-3 w-full relative py-8">
+        <div className={cn("px-3 w-full relative mt-14", promoEfectivo?.available && promoEfectivo?.descuento > 0 && "mt-6")}>
           {/* ── Promociones ── */}
-          <div className="mt-7">
+          <div>
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-montserrat font-bold text-xl text-neutral-900 whitespace-nowrap">
                 Nuestras Promociones
