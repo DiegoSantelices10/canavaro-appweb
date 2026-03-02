@@ -233,9 +233,7 @@ export default function Home() {
             </div>
           </div>
         )}
-        <div className=" px-3 w-full relative pb-6">
-
-
+        <div className=" px-3 w-full relative py-8">
           {/* ── Promociones ── */}
           <div className="mt-7">
             <div className="flex items-center justify-between mb-3">
