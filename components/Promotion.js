@@ -13,7 +13,7 @@ import { addDrinksPromo, addPostresPromo, addProductPromo, clearDrinks, clearPos
 export default function Promotion({
   cantMax,
   data,
-  data: { _id, nombre, categoria, descripcion, precio, addEmpanadas, extras, cantidadExtras, addExtras, addPostres, cantidadPostres },
+  data: { _id, nombre, categoria, descripcion, precio, addEmpanadas, extras = [], cantidadExtras, addExtras, addPostres, cantidadPostres },
   setSelectCombo,
 }) {
   const [select, setSelect] = useState("Combo 1");
@@ -37,19 +37,22 @@ export default function Promotion({
     dispatch(clearDrinks());
     dispatch(clearPostres());
     if (nombre === 'Combo 4' || nombre === 'Combo 5') {
-      const { _id, nombre, descripcion } =
-        products.filter(item => item.categoria === "Combos" || item.categoria === "promociones").find(item => item.nombre === select) || {};
-      const res = { _id, nombre, descripcion };
-      setSelectCombo(res);
+      const found = products
+        ?.filter(item => item.categoria === "Combos" || item.categoria === "promociones")
+        ?.find(item => item.nombre === select);
+      if (found) {
+        setSelectCombo({ _id: found._id, nombre: found.nombre, descripcion: found.descripcion });
+      }
     }
   }, []);
 
 
   const listAvailableDrinks = () => {
+    if (!Array.isArray(extras)) return [];
     const updatedExtras = extras.filter(extra => {
       // Filtrar solo extras cuya categoría sea 'bebidas'
       if (extra.categoria !== 'bebidas') return false;
-      const matchingDrink = drinks.find(drink => drink._id === extra._id);
+      const matchingDrink = drinks?.find(drink => drink._id === extra._id);
       // Si no hay matching drink o si available es true, mantenemos el extra
       return !(matchingDrink && matchingDrink.available === false);
     });
@@ -57,7 +60,7 @@ export default function Promotion({
   };
 
   // Filtra solo los extras de categoría 'Postres' y disponibles
-  const updatedDesserts = extras.filter(extra => extra.categoria === 'Postres');
+  const updatedDesserts = Array.isArray(extras) ? extras.filter(extra => extra.categoria === 'Postres') : [];
 
   const addItems = value => {
     if (value.categoria === 'bebidas') {
@@ -104,11 +107,13 @@ export default function Promotion({
 
   const onChangeValue = e => {
     setSelect(e.target.value);
-    if (products !== null) {
-      const { _id, nombre, descripcion } =
-        products.filter(item => item.categoria === "promociones" || item.categoria === "Combos").find(item => item.nombre === e.target.value) || {};
-      const res = { _id, nombre, descripcion };
-      setSelectCombo(res);
+    if (Array.isArray(products)) {
+      const found = products
+        .filter(item => item.categoria === "promociones" || item.categoria === "Combos")
+        .find(item => item.nombre === e.target.value);
+      if (found) {
+        setSelectCombo({ _id: found._id, nombre: found.nombre, descripcion: found.descripcion });
+      }
     }
   };
 

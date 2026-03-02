@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 
 import PizzaInfo from "./PizzaInfo";
@@ -40,7 +40,7 @@ export default function ProductLayout({
   const [showModal, setShowModal] = useState(false);
   const [extraPizza, setExtraPizza] = useState([]);
   const [info, setInfo] = useState({ title: "", description: "", status: true });
-
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const comentarioRef = useRef();
   const router = useRouter();
@@ -56,36 +56,26 @@ export default function ProductLayout({
     return pre?.cantidad ? pre.cantidad : 0;
   };
 
-  const result = () => {
+  // Función para determinar si el botón "Agregar al Carrito" debe mostrarse
+  const canAddToCart = useCallback(() => {
+    // Si ya estamos navegando, no mostrar el botón
+    if (isNavigating) return false;
+
     if (data.addEmpanadas === 'si' && data.addExtras === 'si') {
-      if (quantityDemanded < 1 && quantityDemandedDrinks < 1 && orderPromo.length > 0) {
-        return true;
-      }
-      return false;
+      return quantityDemanded < 1 && quantityDemandedDrinks < 1 && orderPromo.length > 0;
     }
 
     if (data.addEmpanadas === 'si') {
-      if (quantityDemanded < 1 && orderPromo.length > 0) {
-        return true;
-      }
-      return false;
+      return quantityDemanded < 1 && orderPromo.length > 0;
     }
 
     if (data.addExtras === 'si') {
-      if (quantityDemandedDrinks < 1 && bebidas.length > 0) {
-        return true;
-      }
-      return false;
+      return quantityDemandedDrinks < 1 && bebidas.length > 0;
     }
 
     if (data.addPostres === 'si') {
-      if (quantityDemandedPostres < 1 && postres.length > 0) {
-        return true;
-      }
-      return false;
+      return quantityDemandedPostres < 1 && postres.length > 0;
     }
-
-
 
     if (orderPromo.some(item => item.categoria === 'pizzas')) {
       return true;
@@ -94,9 +84,9 @@ export default function ProductLayout({
     if (quantityDemanded > 0) {
       return true;
     }
-    return false;
-  };
 
+    return false;
+  }, [isNavigating, data, quantityDemanded, quantityDemandedDrinks, quantityDemandedPostres, orderPromo, bebidas, postres]);
 
   const incrementCartPizza = data => {
     dispatch(addProductPizza(data));
@@ -107,94 +97,105 @@ export default function ProductLayout({
   };
 
   const returnHome = () => {
+    if (isNavigating) return;
+    setIsNavigating(true);
     dispatch(clearDrinks());
+    dispatch(clearPostres());
     dispatch(clearOrderPromo());
     router.push("/order/home");
   };
 
-  const addCartPromo = value => {
+  // Obtener comentarios de forma segura
+  const getComentarios = () => {
+    return comentarioRef.current?.value || "";
+  };
+
+  // Limpiar todo el estado de la promo
+  const cleanPromoState = () => {
+    dispatch(clearDrinks());
+    dispatch(clearPostres());
+    dispatch(clearOrderPromo());
+    dispatch(setQuantityDemanded(0));
+  };
+
+  // Navegar al home de forma segura (evitar doble navegación)
+  const safeNavigateHome = () => {
+    if (isNavigating) return;
+    setIsNavigating(true);
+    toast.success("Se agregó al pedido!");
+    router.push("/order/home");
+  };
+
+  const addCartPromo = (value) => {
+    // Evitar doble ejecución
+    if (isNavigating) return;
+
     const idGenerator = uuidv4();
-    const totalExtra = totalExtrasProductos(value)
+    const totalExtra = totalExtrasProductos(value);
+    const comentarios = getComentarios();
+
     if (data.addEmpanadas === "si") {
+      const basePromo = {
+        _id: idGenerator,
+        nombre,
+        descripcion,
+        categoria,
+        comentarios,
+        cantidadMaxima,
+        cantidad: 1,
+      };
+
       if (selectCombo) {
-        const promo = {
-          _id: idGenerator,
-          nombre,
-          descripcion,
+        // Promo con combo seleccionado + empanadas
+        dispatch(addPromoOrderList({
+          ...basePromo,
           products: [selectCombo, ...value],
-          categoria,
-          comentarios: comentarioRef.current.value,
-          cantidadMaxima,
           precio: precio + totalExtra,
-          cantidad: 1,
-        };
-        toast.success("Se agrego al pedido!");
-        dispatch(addPromoOrderList(promo));
-        router.push("/order/home");
+        }));
       } else if (data.addExtras === 'si' || data.addPostres === 'si') {
-        const promo = {
-          _id: idGenerator,
-          nombre,
-          descripcion,
+        // Promo con empanadas + bebidas/postres
+        dispatch(addPromoOrderList({
+          ...basePromo,
           products: [
             ...value,
             ...(Array.isArray(bebidas) && bebidas.length > 0 ? bebidas : []),
             ...(Array.isArray(postres) && postres.length > 0 ? postres : []),
           ],
-          categoria,
           cantidadPostres,
           cantidadExtras,
-          comentarios: comentarioRef.current.value,
-          cantidadMaxima,
           precio: precio + totalExtra,
-          cantidad: 1,
-        };
-        toast.success("Se agrego al pedido!");
-        dispatch(addPromoOrderList(promo));
-        router.push("/order/home");
+        }));
       } else {
-        const promo = {
-          _id: idGenerator,
-          nombre,
-          descripcion,
+        // Promo solo con empanadas
+        dispatch(addPromoOrderList({
+          ...basePromo,
           products: [...value],
-          categoria,
           cantidadExtras,
-          comentarios: comentarioRef.current.value,
-          cantidadMaxima,
           precio: precio + totalExtra,
-          cantidad: 1,
-        };
-        toast.success("Se agrego al pedido!");
-        dispatch(addPromoOrderList(promo));
-        router.push("/order/home");
+        }));
       }
-    } else {
 
+      // Limpiar estado y navegar
+      cleanPromoState();
+      safeNavigateHome();
+
+    } else {
+      // No es promo de empanadas
       if (extraPizza.length > 0) {
-        value.map(item => {
+        value.forEach(item => {
           if (item.categoria !== 'extras') {
             dispatch(addPromoOrderList({
               ...item,
-              comentarios: comentarioRef.current.value,
-              precio: item.precio + extraPizza.reduce((total, extra) => total + extra.precio, 0),
+              comentarios,
+              precio: item.precio + extraPizza.reduce((total, extra) => total + (extra.precio || 0), 0),
               extra: `${extraPizza.map(extra => extra.nombre).join(', ')}`
-            }))
+            }));
+          } else {
+            dispatch(addPromoOrderList({ ...item }));
           }
-          if (item.categoria === 'extras') {
-            return (
-              dispatch(addPromoOrderList({
-                ...item,
-              }))
-            )
-          }
-          return null;
-        }
-        );
-        toast.success("Se agrego al pedido!");
-        router.push("/order/home");
+        });
       } else if (bebidas.length > 0 || postres.length > 0) {
-        const promo = {
+        dispatch(addPromoOrderList({
           _id: idGenerator,
           nombre,
           descripcion,
@@ -204,44 +205,39 @@ export default function ProductLayout({
           ],
           cantidadPostres,
           categoria,
-          comentarios: comentarioRef.current.value,
+          comentarios,
           cantidadExtras,
           precio: precio + totalExtra,
           cantidad: 1,
-        };
-        toast.success("Se agrego al pedido!");
-        dispatch(addPromoOrderList(promo));
-        router.push("/order/home");
+        }));
       } else {
-
-        value.map(item => dispatch(addPromoOrderList({
+        value.forEach(item => dispatch(addPromoOrderList({
           ...item,
-          comentarios: comentarioRef.current.value,
-        })))
-        toast.success("Se agrego al pedido!");
-        router.push("/order/home");
+          comentarios,
+        })));
       }
 
-      dispatch(clearDrinks());
-      dispatch(clearPostres());
-      dispatch(clearOrderPromo());
-      dispatch(setQuantityDemanded(0));
+      // Limpiar estado y navegar
+      cleanPromoState();
+      safeNavigateHome();
     }
-  }
+  };
 
   const handleCloseModal = () => {
-    addCartPromo(orderPromo);
+    if (isNavigating) return;
     setShowModal(false);
-    dispatch(clearOrderPromo());
-    router.push("/order/home");
+    // addCartPromo ya se encarga de limpiar estado y navegar
+    addCartPromo(orderPromo);
   };
 
   const addExtra = (item) => {
-    setExtraPizza([...extraPizza, item]);
-  }
+    setExtraPizza(prev => [...prev, item]);
+  };
 
   const openModal = () => {
-    if (extras.length > 0 && orderPromo.length === 1) {
+    if (isNavigating) return;
+
+    if (extras && extras.length > 0 && orderPromo.length === 1) {
       if (orderPromo[0].cantidad === 1 && data.addExtras !== 'si') {
         setInfo({
           title: "Extras a tu pizza",
@@ -253,7 +249,7 @@ export default function ProductLayout({
     } else {
       addCartPromo(orderPromo);
     }
-  }
+  };
 
   return (
     <div className="relative  mx-auto w-full  sm:w-4/5 md:w-3/5 lg:w-1/2">
@@ -267,7 +263,7 @@ export default function ProductLayout({
           orderPromo={orderPromo}
           extraPizza={extraPizza}
           info={info}
-          extras={extras}
+          extras={extras || []}
           setShowModal={setShowModal}
         />
       )}
@@ -337,13 +333,14 @@ export default function ProductLayout({
       </div>
       <div className="fixed bottom-3 z-50 mx-auto flex justify-center w-full sm:w-4/5 md:w-3/5 lg:w-1/2 px-4">
         <button
-          className={`${result() > 0
+          className={`${canAddToCart()
             ? "flex justify-center gap-3 text-center font-montserrat rounded-lg w-full p-4 bg-red-600 hover:-translate-y-1 transition-all duration-500 text-white text-base font-medium"
             : "invisible"
             } `}
           onClick={() => {
             openModal();
           }}
+          disabled={isNavigating}
         >
           Agregar al Carrito
           <FiShoppingCart size={23} />{" "}

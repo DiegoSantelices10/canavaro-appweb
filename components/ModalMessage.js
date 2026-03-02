@@ -13,7 +13,7 @@ const ModalMessage = ({
   orderPromo,
   extraPizza,
   extras,
-  info: { title, type }
+  info: { title, type = '' }
 }) => {
   const showHideClassName = showModal ? "fixed z-[9990] inset-0 overflow-y-auto mx-auto py-10" : "hidden";
   const dispatch = useDispatch();

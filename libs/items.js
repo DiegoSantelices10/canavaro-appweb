@@ -29,9 +29,10 @@ export const formatearNumero = (numero) => {
 
 
 export const totalExtrasProductos = (extras) => {
+	if (!Array.isArray(extras)) return 0;
 	return extras.reduce((total, empanada) => {
-		if (empanada.precioExtra > 0 || empanada.precioExtra !== undefined) {
-			return total + (empanada.precioExtra * empanada.cantidad);
+		if (empanada.precioExtra !== undefined && empanada.precioExtra > 0) {
+			return total + (empanada.precioExtra * (empanada.cantidad || 1));
 		} else {
 			return total;
 		}
