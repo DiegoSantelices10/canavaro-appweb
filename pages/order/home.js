@@ -5,8 +5,8 @@ import Layout from "components/Layout";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "components/Card";
 import "react-toastify/dist/ReactToastify.css";
-
 import Link from "next/link";
+import Head from "next/head";
 import {
   addPromoOrderList,
   calculateSubTotal,
@@ -36,6 +36,7 @@ export default function Home() {
 
   const { products, extras } = useSelector(state => state.product);
   const { orderPromo } = useSelector(state => state.order);
+  const { promoEfectivo } = useSelector(state => state.setting);
 
   const idGenerator = uuidv4();
 
@@ -209,152 +210,154 @@ export default function Home() {
 
 
   return (
-    <Layout>
-      <div className="pt-[40px] mx-auto w-full rounded-3xl relative">
+    <>
+      <Head>
+        <title>Pizzería Canavaro | Pedí tus Pizzas y Empanadas Online</title>
+        <meta name="description" content="Pedí rápido y fácil en Pizzería Canavaro. Conocé nuestras promociones y combos de pizzas, empanadas y postres." />
+        <link rel="canonical" href="https://www.canavaro.com.ar/order/home" />
+      </Head>
+      <Layout>
+        {/* ── Banner Efectivo ── */}
+        {promoEfectivo?.available && promoEfectivo?.descuento > 0 && (
+          <div className="bg-[#dc2626] mt-14 px-5 py-4 flex items-center justify-between gap-4 relative overflow-hidden after:content-[''] after:absolute after:right-[70px] after:-top-[30px] after:w-[120px] after:h-[120px] after:rounded-full after:bg-white/10 after:pointer-events-none shadow-sm">
+            <div className="flex flex-col gap-0.5 z-10">
+              <p className="text-white font-montserrat font-bold text-lg leading-tight">
+                {promoEfectivo.descuento}% OFF en efectivo
+              </p>
+              <p className="text-white/80 text-xs font-medium font-montserrat mt-0.5">
+                Aprovechá este descuento pagando al recibir tu pedido.
+              </p>
+            </div>
+            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0 z-10 shadow-inner">
+              <span className="text-3xl drop-shadow-sm">💸</span>
+            </div>
+          </div>
+        )}
+        <div className=" px-3 w-full relative pb-6">
 
-        <>
-          <h1 className="text-base font-bold font-montserrat tracking-wide text-neutral-800 mt-6">Nuestras promociones</h1>
-          <div className="py-2 ">
-            <div className="flex overflow-x-scroll top-0 flexp h-auto p-0.5 space-x-6 w-full">
-              <style jsx>
-                {`
-              .flexp::-webkit-scrollbar-thumb {
-                background: #f4f4f4;
-                border-radius: 20px;
-              }
 
-              .flexp::-webkit-scrollbar {
-                height: 4px;
-              }
-            `}
-              </style>
-
+          {/* ── Promociones ── */}
+          <div className="mt-7">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="font-montserrat font-bold text-xl text-neutral-900 whitespace-nowrap">
+                Nuestras Promociones
+              </h2>
+              <div className="flex-1 h-[2px] bg-[#dc2626] ml-3 rounded-[2px] max-w-[40px]" />
+            </div>
+            <div className="flex overflow-x-auto gap-4 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
               {renderPromotions()}
             </div>
           </div>
-        </>
-        <>
-          <h1 className="text-base font-bold font-montserrat tracking-wide text-neutral-800 mt-6">Nuestras combos</h1>
-          <div className="py-2 ">
-            <div className="flex overflow-x-scroll top-0 flexp h-auto p-0.5 space-x-6 w-full">
-              <style jsx>
-                {`
-              .flexp::-webkit-scrollbar-thumb {
-                background: #f4f4f4;
-                border-radius: 20px;
-              }
 
-              .flexp::-webkit-scrollbar {
-                height: 4px;
-              }
-            `}
-              </style>
-
+          {/* ── Combos ── */}
+          <div className="mt-7">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="font-montserrat font-bold text-xl text-neutral-900 whitespace-nowrap">
+                Nuestros Combos
+              </h2>
+              <div className="flex-1 h-[2px] bg-[#dc2626] ml-3 rounded-[2px] max-w-[40px]" />
+            </div>
+            <div className="flex overflow-x-auto gap-4 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
               {renderCombos()}
             </div>
           </div>
-        </>
 
-        <div className="space-y-4 mt-4">
-          {Object.entries(groupedProducts).map(([categoria, productosFiltrados]) => {
-            return (
+          {/* ── Destacados por categoría ── */}
+          <div className="space-y-7 mt-7">
+            {Object.entries(groupedProducts).map(([categoria, productosFiltrados]) => (
               <div key={categoria}>
-                <p className="text-base font-bold font-montserrat tracking-wide text-neutral-800">
-                  {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
-                </p>
-                <div className="flex overflow-x-scroll flexp space-x-6 w-full py-2">
-                  <style jsx>
-                    {`
-                .flexp::-webkit-scrollbar-thumb {
-                  background: #f4f4f4;
-                  border-radius: 20px;
-                }
-                .flexp::-webkit-scrollbar {
-                  height: 4px;
-                }
-              `}
-                  </style>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="font-montserrat font-bold text-xl text-neutral-900 whitespace-nowrap">
+                    {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
+                  </h2>
+                  <div className="flex-1 h-[2px] bg-[#dc2626] ml-3 rounded-[2px] max-w-[40px]" />
+                </div>
+                <div className="flex overflow-x-auto gap-4 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                   {productosFiltrados.map((data) => (
                     <CardPromotion key={data._id} data={data} />
                   ))}
                 </div>
               </div>
-            );
-          })}
-        </div>
-        <TabsCategories
-          renderProducts={renderProducts}
-          setRenderProductos={setRenderProductos}
-          clearTotal={clearTotal} />
-        <div className="py-6">
-          {
-            renderProducts === "empanadas" && (
-              <div className="p-2 bg-red-600 rounded-lg">
-                <p className="text-sm font-medium font-montserrat text-white text-center">
-                  Cada 12 empanadas o canastitas, tenes promo!
+            ))}
+          </div>
+
+          {/* ── Tabs de categorías (sticky) ── */}
+          <div className="sticky top-[44px] z-40 bg-white -mx-3 px-3 pt-3 pb-2 border-b border-gray-100 mt-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+            <TabsCategories
+              renderProducts={renderProducts}
+              setRenderProductos={setRenderProductos}
+              clearTotal={clearTotal}
+            />
+          </div>
+
+          {/* ── Aviso por categoría ── */}
+          <div className="pt-4 pb-2">
+            {renderProducts === "empanadas" && (
+              <div className="bg-[#fff5f5] border border-[#fecaca] rounded-2xl px-4 py-3.5 flex items-center gap-3">
+                <div className="bg-[#dc2626] w-9 h-9 rounded-full flex items-center justify-center shrink-0">
+                  <span className="text-white text-base">✨</span>
+                </div>
+                <p className="text-sm font-montserrat font-semibold text-red-700 leading-snug">
+                  Llevando 12 empanadas o canastitas se aplica precio especial automáticamente.
                 </p>
               </div>
-            )
-          }
-          {
-            renderProducts === "pizzas" && (
-              <div className="w-full flex items-center justify-between">
+            )}
+
+            {renderProducts === "pizzas" && (
+              <div className="bg-gradient-to-br from-[#fef2f2] to-[#fee2e2] border border-[#fecaca] rounded-2xl p-4 flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-left w-full font-montserrat text-base font-semibold">¡Arma tu pizza!</p>
+                  <p className="font-montserrat text-base font-bold text-neutral-800">
+                    🍕 ¡Armá tu pizza!
+                  </p>
+                  <p className="text-xs text-gray-400 font-montserrat mt-0.5">
+                    Elegí los gustos que más te gusten
+                  </p>
                 </div>
                 <Link href={"/order/pizzaFree"}>
                   <a
                     onClick={() => clearTotal()}
-                    className="rounded-lg font-montserrat font-normal w-auto bg-red-600 hover:bg-red-500 whitespace-nowrap  text-white  shadow-md p-2 text-sm px-4">
-                    Ingresa aqui
+                    className="rounded-xl font-montserrat font-semibold bg-red-600 hover:bg-red-700 whitespace-nowrap text-white text-sm py-2.5 px-5 transition-colors duration-200 shadow-sm"
+                  >
+                    Comenzar
                   </a>
                 </Link>
-
               </div>
-            )
-          }
-
-        </div>
-
-        <div>
-          <div
-            className="grid md:grid-cols-2 lg:grid-cols-2 md:gap-x-4 lg:gap-x-4 mb-10">
-            {renderStore(renderProducts)}
+            )}
           </div>
-        </div>
 
-        <div className="relative flex justify-center">
-          {(renderProducts === "Postres" || renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") && (
+          {/* ── Grid de productos ── */}
+          <div className="mb-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-2 md:gap-x-4 lg:gap-x-4">
+              {renderStore(renderProducts)}
+            </div>
+          </div>
+
+          {/* ── Barra flotante inferior ── */}
+          {(renderProducts === "Postres" || renderProducts === "empanadas" || renderProducts === "bebidas" || renderProducts === "porciones") &&
             orderPromo.length > 0 && (
-              <div className="w-full fixed bottom-2 mx-auto px-3 md:w-4/5 lg:w-3/5">
-                <div
-                  className="flex justify-between items-center  rounded-lg mx-auto text-center   
-									   w-full md:w-4/5 lg:w-3/5 p-3 bg-red-600  text-white text-base font-semibold "
-                >
+              <div className="w-full fixed bottom-3 left-0 px-3 z-50 flex justify-center">
+                <div className="bg-[#dc2626] shadow-[0_-4px_24px_rgba(220,38,38,0.18)] flex justify-between items-center rounded-2xl w-full max-w-lg p-3 px-4 text-white">
                   <button
                     onClick={() => addCartPromo(orderPromo)}
-                    className={`${orderPromo.length < 1
-                      ? "invisible"
-                      : "p-2 px-3 font-medium font-montserrat bg-slate-50 rounded-lg text-neutral-800 text-sm hover:-translate-y-1 transition-all duration-500"
-                      }`}
+                    className="p-2 px-5 font-semibold font-montserrat bg-white rounded-xl text-neutral-800 text-sm hover:-translate-y-0.5 active:scale-95 transition-all duration-200 shadow-sm"
                   >
                     Agregar al carrito
                   </button>
-
-                  <div className="flex items-center gap-x-5 text-white font-semibold">
-                    <p className="font-medium text-xl">{totalPrice !== 0 && formatearNumero(totalPrice)}</p>
-                    <div className=" h-10 w-10 rounded-lg bg-white flex justify-center items-center">
-                      <p className="text-neutral-800 text-lg font-medium">{totalCant}</p>
+                  <div className="flex items-center gap-x-4">
+                    <p className="font-bold text-lg font-montserrat">
+                      {totalPrice !== 0 && formatearNumero(totalPrice)}
+                    </p>
+                    <div className="h-10 w-10 rounded-xl bg-white/20 flex justify-center items-center backdrop-blur-sm">
+                      <p className="text-white text-lg font-bold">{totalCant}</p>
                     </div>
                   </div>
                 </div>
               </div>
-            )
-          )}
-        </div>
+            )}
 
-      </div>
-    </Layout>
+        </div>
+      </Layout>
+    </>
   );
 }
 

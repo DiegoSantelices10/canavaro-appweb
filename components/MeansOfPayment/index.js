@@ -12,7 +12,7 @@ const MeansOfPayment = (props) => {
         medios
     } = props;
     return (
-        <div className="h-full">
+        <div className="h-full px-3">
             <h2 className="font-montserrat font-semibold text-xs pb-1 pl-1 text-gray-900">Medios de pago</h2>
             {verificarSoloEfectivo() ? (
                 <p>solo podes abonar en efectivo</p>
@@ -61,7 +61,7 @@ const MeansOfPayment = (props) => {
                                 <div className="flex justify-center w-full">
                                     <Image src="/images/cuenta-dni.jpg" width={130} height={50} alt="logoOpen" />
                                 </div>
-                           
+
                                 <p className="font-montserrat text-center text-xs text-gray-400">
                                     Abonas al momento de confirmar el pedido por whatsapp
                                 </p>

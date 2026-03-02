@@ -78,7 +78,7 @@ export default function Checkout() {
 
 
   return (
-    <div className=" mx-auto relative w-full md:shadow-md  sm:w-4/5 md:w-3/5 lg:w-1/2 mt-2 h-full">
+    <div className=" mx-auto relative w-full md:shadow-md sm:w-4/5 md:w-3/5 lg:w-1/2 mt-2 grid grid-rows-[auto_1fr] min-h-screen">
       <div className="p-3">
         <div className="flex items-center gap-3 py-2">
           <Link href={"/order/cart"}>
@@ -171,8 +171,8 @@ export default function Checkout() {
       >
         {({ values }) => {
           return (
-            <Form>
-              <div className="h-full">
+            <Form className="h-full">
+              <div className="h-full ">
 
                 <div className="px-3">
                   <div className="border border-gray-200 p-2 py-3 rounded-lg">
@@ -208,14 +208,28 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-6 px-3 my-6">
-                  <div>
+                <div className="flex flex-col gap-6 my-6">
+                  <div className="px-3">
                     <ControllerInput
                       name="comentarios"
                       label='Comentarios adicionales'
                     />
                   </div>
-
+                  {promoEfectivo?.available && promoEfectivo?.descuento > 0 && (
+                    <div className="bg-[#dc2626] px-5 py-4 flex items-center justify-between gap-4 relative overflow-hidden after:content-[''] after:absolute after:right-[70px] after:-top-[30px] after:w-[120px] after:h-[120px] after:rounded-full after:bg-white/10 after:pointer-events-none shadow-sm">
+                      <div className="flex flex-col gap-0.5 z-10">
+                        <p className="text-white font-montserrat font-bold text-lg leading-tight">
+                          {promoEfectivo.descuento}% OFF en efectivo
+                        </p>
+                        <p className="text-white/80 text-xs font-medium font-montserrat mt-0.5">
+                          Aprovechá este descuento pagando al recibir tu pedido.
+                        </p>
+                      </div>
+                      <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0 z-10 shadow-inner">
+                        <span className="text-3xl drop-shadow-sm">💸</span>
+                      </div>
+                    </div>
+                  )}
                   <MeansOfPayment
                     verificarSoloEfectivo={verificarSoloEfectivo}
                     values={values}

@@ -14,7 +14,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="w-full mx-auto fixed top-0 z-50 bg-red-600">
+    <nav className="w-full mx-auto fixed top-0 z-50 bg-red-600 shadow-sm">
       <div className="w-full flex justify-between p-2 px-3 h-full items-center sm:w-4/5 md:w-4/5 lg:w-3/5 mx-auto">
         <div className="font-montserrat tracking-wide">
           <p className="font-semibold text-lg lg:text-base text-white">CANAVARO</p>

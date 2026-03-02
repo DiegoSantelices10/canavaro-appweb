@@ -35,8 +35,8 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
                         }}
                         className={
                             renderProducts !== categoria
-                                ? "whitespace-nowrap px-3 font-medium font-montserrat text-sm text-gray-400"
-                                : "whitespace-nowrap px-3 font-semibold  text-neutral-800 focus:ring-0 focus:outline-none  text-sm font-montserrat  pb-2 tracking-wide"
+                                ? "whitespace-nowrap px-3 py-1.5 font-medium font-montserrat text-sm text-gray-400 transition-all duration-200"
+                                : "whitespace-nowrap px-4 py-1.5 font-semibold text-white bg-red-600 rounded-full text-sm font-montserrat tracking-wide transition-all duration-200"
                         }
                     >
                         {categoria === 'empanadas' ? 'Empanadas & Canastitas' : capitalizeFirstLetter(categoria)}

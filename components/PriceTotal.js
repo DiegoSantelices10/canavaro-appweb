@@ -84,7 +84,7 @@ const PriceTotal = ({ promoEfectivo, promoEfectivo: { available, descuento }, pr
 
 
     return (
-        <div className="w-full font-montserrat mb-20 relative">
+        <div className="w-full font-montserrat mb-20 relative px-3">
             {available && hasProductosEfectivo().length > 0 && hasProductosGeneral().length > 0 && (
                 <>
                     {promoBarra?.available && delivery === 'localActual' && (
