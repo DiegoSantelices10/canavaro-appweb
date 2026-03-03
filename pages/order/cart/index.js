@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FiChevronsLeft } from "react-icons/fi";
+import { FiChevronsLeft, FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { MdOutlineDeliveryDining, MdOutlineEmojiPeople } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -41,6 +41,8 @@ export default function Cart({ data }) {
   const [showModal, setShowModal] = useState(false);
   const [currentProducto, setCurrentProducto] = useState(null);
   const [showHourEdit, setShowHourEdit] = useState(false);
+  const [showAllBebidas, setShowAllBebidas] = useState(false);
+  const [showAllPostres, setShowAllPostres] = useState(false);
 
   const hora = moment.tz("America/Argentina/Buenos_Aires").format("HH");
 
@@ -113,13 +115,43 @@ export default function Cart({ data }) {
     }
   };
 
-  const renderList = (category) => {
+  const renderList = (category, showAll, setShowAll) => {
     const filtrados = products
       ?.filter(item => item.categoria === category && item.available === true);
 
     const ordenados = ordenarPorProductOrderIdHome(filtrados);
+    const hasMore = ordenados.length > 4;
 
-    return ordenados.map(data => <CardCart key={data._id} data={data} />);
+    const productsToShow = hasMore && !showAll ? ordenados.slice(0, 4) : ordenados;
+
+    return (
+      <>
+        {productsToShow.map(data => <CardCart key={data._id} data={data} />)}
+        {hasMore && (
+          <div className="flex flex-col items-start justify-center min-w-[140px] px-2 h-full">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowAll(!showAll);
+              }}
+              className="group flex flex-col items-center justify-center gap-2 w-full h-[140px] bg-white/80 border border-gray-100 hover:border-red-300 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 active:scale-95"
+            >
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-50 group-hover:bg-red-100 transition-colors duration-300">
+                {showAll ? (
+                  <FiChevronLeft className="text-red-500 transition-transform duration-300 group-hover:-translate-x-1" size={20} />
+                ) : (
+                  <FiChevronRight className="text-red-500 transition-transform duration-300 group-hover:translate-x-1" size={20} />
+                )}
+              </div>
+              <span className="font-montserrat font-bold text-sm text-gray-500 group-hover:text-red-500 transition-colors duration-300">
+                {showAll ? "Ver menos" : "Ver más"}
+              </span>
+            </button>
+          </div>
+        )}
+      </>
+    );
   };
 
   // const addCartPromo = value => {
@@ -436,7 +468,7 @@ export default function Cart({ data }) {
                         `}
                       </style>
 
-                      {renderList("bebidas")}
+                      {renderList("bebidas", showAllBebidas, setShowAllBebidas)}
                     </div>
                   </div>
                 </Collapsable>
@@ -462,7 +494,7 @@ export default function Cart({ data }) {
                         `}
                       </style>
 
-                      {renderList("Postres")}
+                      {renderList("Postres", showAllPostres, setShowAllPostres)}
                     </div>
                   </div>
                 </Collapsable>

@@ -292,10 +292,7 @@ export default function Home() {
           {/* ── Aviso por categoría ── */}
           <div className="pt-4 pb-2">
             {renderProducts === "empanadas" && (
-              <div className="bg-[#fff5f5] border border-[#fecaca] rounded-2xl px-4 py-3.5 flex items-center gap-3">
-                <div className="bg-[#dc2626] w-9 h-9 rounded-full flex items-center justify-center shrink-0">
-                  <span className="text-white text-base">✨</span>
-                </div>
+              <div className="bg-gradient-to-br to-[#fff3f3] from-[#ffffff] shadow-sm rounded-2xl p-4 flex items-center justify-between gap-3">
                 <p className="text-sm font-montserrat font-semibold text-red-700 leading-snug">
                   Llevando 12 empanadas o canastitas se aplica precio especial automáticamente.
                 </p>
@@ -303,7 +300,7 @@ export default function Home() {
             )}
 
             {renderProducts === "pizzas" && (
-              <div className="bg-gradient-to-br from-[#fef2f2] to-[#fee2e2] border border-[#fecaca] rounded-2xl p-4 flex items-center justify-between gap-3">
+              <div className="bg-gradient-to-br to-[#fff3f3] from-[#ffffff] shadow-sm rounded-2xl p-4 flex items-center justify-between gap-3">
                 <div>
                   <p className="font-montserrat text-base font-bold text-neutral-800">
                     🍕 ¡Armá tu pizza!
