@@ -294,7 +294,7 @@ export default function Home() {
             {renderProducts === "empanadas" && (
               <div className="bg-gradient-to-br to-[#fff3f3] from-[#ffffff] shadow-sm rounded-2xl p-4 flex items-center justify-between gap-3">
                 <p className="text-sm font-montserrat font-semibold text-red-700 leading-snug">
-                  Llevando 12 empanadas o canastitas se aplica precio especial automáticamente.
+                  Llevando más de 12 empanadas o canastitas se aplica la promo por docena.
                 </p>
               </div>
             )}
