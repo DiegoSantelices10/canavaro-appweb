@@ -1,6 +1,5 @@
 import { io } from 'socket.io-client';
 
-// "undefined" means the URL will be computed from the `window.location` object
-const URL = 'https://pizza-canavaro.online';
+const URL = 'http://149.50.131.39:8080';
 
 export const socket = io(URL);
