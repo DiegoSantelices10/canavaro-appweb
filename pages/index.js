@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import HomeFront from "components/Sections/HomeFront";
 import { setExtras, setProductData } from "store/reducers/productSlice";
 import { wrapper } from "store/app/store";
-import { getProducts } from "services/fetchData";
+import { getProductsFront } from "services/fetchData";
 import { useDispatch } from 'react-redux'
 import SectionZona from "components/Sections/SectionZona";
 import Carousel from 'react-multi-carousel';
@@ -11,20 +11,26 @@ import "react-multi-carousel/lib/styles.css";
 import CustomArrow from "components/CustomArrows";
 
 
-const Home = ({ data }) => {
+const Home = () => {
 
   const dispatch = useDispatch()
+
   useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await getProductsFront();
+        dispatch(setProductData(data));
+        localStorage.setItem("productos", JSON.stringify(data));
 
-    localStorage.setItem("productos", JSON.stringify(data));
-    addExtras()
+        const extras = data?.filter(item => item.categoria === 'extras' && item.available === true);
+        dispatch(setExtras(extras));
+      } catch (error) {
+        console.error("Error al cargar productos:", error);
+      }
+    };
+
+    loadProducts();
   }, []);
-
-
-  const addExtras = () => {
-    const extras = data?.filter(item => item.categoria === 'extras' && item.available === true)
-    dispatch(setExtras(extras))
-  }
 
 
   const responsive = {
@@ -69,13 +75,8 @@ const Home = ({ data }) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({ res }) => {
   res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
-  const data = await getProducts();
-  store.dispatch(setProductData(data));
   return {
-    props: {
-      // Pasa el estado hidratado como prop al componente de Next.js
-      data,
-    },
+    props: {},
   };
 });
 

@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { formatearNumero } from 'libs/items';
 import useCategories from 'Hooks/useCategories';
 import { capitalizeFirstLetter, CategoriesOrder, ordenarPorProductOrderIdHome } from 'utils';
+import { getProductsFront } from 'services/fetchData';
 
 
 
@@ -22,11 +23,34 @@ function DigitalMenu() {
     const { categories } = useCategories();
 
     useEffect(() => {
-        if (products?.length <= 0) {
-            const res = JSON.parse(localStorage.getItem("productos"));
-            dispatch(setProductData(res));
-        }
+        const loadProducts = async () => {
+            if (products?.length > 0) return;
 
+            // Intentar desde localStorage primero
+            const cached = localStorage.getItem("productos");
+            if (cached) {
+                try {
+                    const parsed = JSON.parse(cached);
+                    if (parsed?.length > 0) {
+                        dispatch(setProductData(parsed));
+                        return;
+                    }
+                } catch (e) {
+                    // localStorage corrupto, seguir al fetch
+                }
+            }
+
+            // Si no hay datos en store ni localStorage, cargar desde API
+            try {
+                const data = await getProductsFront();
+                dispatch(setProductData(data));
+                localStorage.setItem("productos", JSON.stringify(data));
+            } catch (error) {
+                console.error("Error al cargar productos:", error);
+            }
+        };
+
+        loadProducts();
     }, []);
 
     const ordenarCategorias = (categories) => {
