@@ -27,9 +27,7 @@ const orderProducts = () => {
                 name: product.nombre,
                 ...(product?.productOrder?.id !== undefined && { idOrder: product?.productOrder?.id })
             }));
-        console.log('====================================');
-        console.log(res);
-        console.log('====================================');
+
 
         const result = ordenarPorProductOrderId(res);
 

@@ -21,8 +21,7 @@ const Settings = () => {
 	const onSubmit = async () => {
 		const id = '6658f2017e3dee5fc80edd18'
 		try {
-			const response = await axios.put(`/api/settings/promo/${id}`, { descuento: porcentaje })
-			console.log('response', response);
+			await axios.put(`/api/settings/promo/${id}`, { descuento: porcentaje })
 			toast.success('Actualizado con exito!')
 		} catch (error) {
 			alert("Error al realizar la accion")

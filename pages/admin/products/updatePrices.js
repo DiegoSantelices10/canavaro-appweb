@@ -69,7 +69,6 @@ const UpdatePrices = () => {
         chica: row[3]    // Columna G
       })).filter(item => item.nombre); // Filtrar filas vacías
 
-      console.log("Datos parseados:", parsedData);
       setData(parsedData);
     };
 

@@ -81,9 +81,7 @@ function DigitalMenu() {
 
 
         const ordenados = ordenarPorProductOrderIdHome(filtrados);
-        console.log('====================================');
-        console.log(ordenados);
-        console.log('====================================');
+
         return ordenados
     };
 
