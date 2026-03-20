@@ -47,7 +47,7 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
 
   return (
     <div className={showHideClassName}>
-      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-montserrat">
+      <div className="flex items-center justify-center min-h-screen pt-4 pb-20 text-center sm:block sm:p-0 font-montserrat">
         <div onClick={handleClose} className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-slate-800 opacity-60 backdrop-blur-sm"></div>
         </div>
@@ -72,15 +72,15 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                   <span>{pedido?.hora} hs</span>
                 </div>
               </div>
-              <button 
-                onClick={handleClose} 
+              <button
+                onClick={handleClose}
                 className="text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition p-2 rounded-full focus:outline-none"
               >
                 <AiOutlineClose size={22} />
               </button>
             </div>
 
-            <div className="px-6 py-5 overflow-y-auto max-h-[70vh]">
+            <div className="px-4 py-5 overflow-y-auto max-h-[70vh]">
               {/* Sección: Datos del Cliente */}
               <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-6">
                 <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Información de Entrega</h3>
@@ -103,14 +103,14 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                       <span className="font-semibold text-slate-800">{pedido.domicilio}</span>
                     </div>
                   )}
-                  
+
                   <div>
                     <span className="block text-xs text-slate-400 font-medium mb-1">Tipo de Envío</span>
                     <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-blue-100 text-blue-700">
                       {pedido?.tipoEnvio}
                     </span>
                   </div>
-                  
+
                   {pedido.hPersonalizado !== "" && (
                     <div>
                       <span className="block text-xs text-slate-400 font-medium mb-1">
@@ -133,7 +133,7 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
               {/* Sección: Productos */}
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Productos</h3>
-                
+
                 <div className="space-y-4">
                   {categoriasId?.map(categoria => {
                     const productosCategoria = productos?.filter(producto => producto?.categoria === categoria.categoria);
@@ -144,7 +144,7 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                         <div className="bg-gray-50 px-4 py-2 border-b border-gray-100">
                           <p className="text-xs font-bold tracking-wide text-gray-500 uppercase">{capitalizeFirstLetter(categoria?.categoria)}</p>
                         </div>
-                        
+
                         <div className="divide-y divide-gray-100">
                           {productosCategoria.map((item, index) => (
                             <div key={index} className="p-4 bg-white transition hover:bg-slate-50">
@@ -160,7 +160,7 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                                       )}
                                       {item.nombre}
                                     </div>
-                                    
+
                                     {/* Detalles del producto */}
                                     {categoria.categoria === 'pizzas' && (
                                       <p className="text-xs text-slate-500 mt-1">{item.descripcion}</p>
@@ -189,7 +189,7 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                                     )}
                                   </div>
                                 </div>
-                                
+
                                 <div className="font-bold text-slate-800 whitespace-nowrap text-sm bg-slate-50 px-2 py-1 rounded">
                                   {formatearNumero(item.precio * item.cantidad)}
                                 </div>
@@ -205,19 +205,19 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
 
               {/* Pago y Totales */}
               <div className="bg-slate-50 rounded-xl p-5 border border-slate-100 flex flex-col gap-3">
-                
+
                 <div className="flex justify-between items-center text-sm">
                   <span className="font-medium text-slate-500">Medio de Pago</span>
                   <span className="font-bold text-slate-700">{pedido?.medioDePago}</span>
                 </div>
-                
+
                 {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
                   <div className="flex justify-between items-center text-sm">
                     <span className="font-medium text-emerald-600">Descuento aplicado</span>
                     <span className="font-bold text-emerald-600">-{promoEfectivo.descuento}%</span>
                   </div>
                 )}
-                
+
                 {pedido.pagaCon !== null && (
                   <div className="flex justify-between items-center text-sm">
                     <span className="font-medium text-slate-500">Abonará con:</span>
@@ -241,8 +241,8 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
               <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex justify-end">
                 <button
                   onClick={() => {
-                     handleDelete(pedido._id);
-                     handleClose();
+                    handleDelete(pedido._id);
+                    handleClose();
                   }}
                   className="w-full sm:w-auto px-6 py-3 rounded-xl text-base font-bold text-white bg-red-600 hover:bg-red-700 transition shadow-lg shadow-red-200 active:scale-95 focus:outline-none focus:ring-4 focus:ring-red-100"
                   type="button"
