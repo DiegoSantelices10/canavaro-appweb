@@ -5,7 +5,7 @@ import { formatearNumero } from "libs/items";
 import { AiOutlineClose } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { capitalizeFirstLetter } from "utils";
-const ModalPedido = ({ handleClose, show, pedido }) => {
+const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
   const { promoEfectivo } = useSelector(state => state.setting);
   const showHideClassName = show ? "fixed z-10 inset-0 overflow-y-auto w-full" : "hidden";
   let idIcrement = 1;
@@ -48,167 +48,209 @@ const ModalPedido = ({ handleClose, show, pedido }) => {
   return (
     <div className={showHideClassName}>
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 font-montserrat">
-        <div
-          onClick={handleClose}
-          className="fixed inset-0 transition-opacity" aria-hidden="true">
-          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        <div onClick={handleClose} className="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div className="absolute inset-0 bg-slate-800 opacity-60 backdrop-blur-sm"></div>
         </div>
 
-        <div className="inline-block align-bottom  rounded-lg text-left overflow-hidden w-full shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <div className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full w-full border border-gray-100">
           <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            exit={{ opacity: 0, y: -50 }}
-            className="bg-white px-4 pt-5 pb-4 sm:pb-4"
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            className="bg-white"
           >
-            <div className="flex justify-end h-full w-full">
-              <button onClick={handleClose}>
-                <AiOutlineClose
-                  className=" text-slate-200 bg-sky-900 bg-opacity-40 rounded-full p-1 top-4 left-4"
-                  size={30}
-                />
+            {/* Header del Modal */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50">
+              <div>
+                <h2 className="text-xl font-bold text-gray-800">Detalle del Pedido</h2>
+                <div className="flex items-center gap-2 text-xs text-gray-500 font-medium mt-1">
+                  <span>{pedido?.fecha}</span>
+                  <span>•</span>
+                  <span>{pedido?.hora} hs</span>
+                </div>
+              </div>
+              <button 
+                onClick={handleClose} 
+                className="text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition p-2 rounded-full focus:outline-none"
+              >
+                <AiOutlineClose size={22} />
               </button>
             </div>
-            <div className="font-normal text-left text-base font-montserrat mt-4 text-gray-800">
-              <div className="flex justify-between w-full ">
-                <h2 className="font-semibold text-gray-500 text-sm">
-                  Fecha <span className="font-normal text-sm">{pedido?.fecha}</span>
-                </h2>
-                <h2 className="font-semibold text-gray-500 text-sm">
-                  Hora <span className="font-normal text-sm">{pedido?.hora}</span>
-                </h2>
-              </div>
 
-              <div className="shadow shadow-gray-300 space-y-2 rounded-lg px-3 py-3 mt-2">
-                {pedido?.cliente && (
-                  <div className="flex justify-between items-center w-full">
-                    <h2 className="font-semibold text-sm text-gray-500">
-                      Cliente
-                    </h2>
-                    <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido.cliente}</span>
+            <div className="px-6 py-5 overflow-y-auto max-h-[70vh]">
+              {/* Sección: Datos del Cliente */}
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-6">
+                <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Información de Entrega</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  {pedido?.cliente && (
+                    <div>
+                      <span className="block text-xs text-slate-400 font-medium mb-1">Cliente</span>
+                      <span className="font-semibold text-slate-800">{pedido.cliente}</span>
+                    </div>
+                  )}
+                  {pedido?.telefono && (
+                    <div>
+                      <span className="block text-xs text-slate-400 font-medium mb-1">Teléfono</span>
+                      <span className="font-semibold text-slate-800">{separarNumero(pedido.telefono)}</span>
+                    </div>
+                  )}
+                  {pedido?.domicilio && (
+                    <div className="sm:col-span-2">
+                      <span className="block text-xs text-slate-400 font-medium mb-1">Dirección</span>
+                      <span className="font-semibold text-slate-800">{pedido.domicilio}</span>
+                    </div>
+                  )}
+                  
+                  <div>
+                    <span className="block text-xs text-slate-400 font-medium mb-1">Tipo de Envío</span>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-blue-100 text-blue-700">
+                      {pedido?.tipoEnvio}
+                    </span>
                   </div>
-                )}
-
-                {pedido?.domicilio && (
-                  <div className="flex justify-between items-start w-full gap-2">
-                    <h2 className="font-semibold text-sm text-gray-500">
-                      Direccion
-                    </h2>
-                    <h2 className="font-medium text-gray-500 tracking-wide text-sm">{pedido.domicilio}</h2>
-                  </div>
-                )}
-                {pedido?.telefono && (
-                  <div className="flex justify-between items-center w-full">
-                    <h2 className="font-semibold text-sm text-gray-500">
-                      Telefono
-                    </h2>
-                    <span className="font-medium text-gray-500 tracking-wide text-sm">{separarNumero(pedido?.telefono)}</span>
-                  </div>
-                )}
-                <div className="flex justify-between items-center w-full">
-                  <h2 className="font-semibold text-sm text-gray-500">
-                    Tipo de envio
-                  </h2>
-                  <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.tipoEnvio}</span>
-                </div>
-                {pedido.hPersonalizado !== "" && (
-                  <div className="flex justify-between items-center w-full">
-                    <h2 className="font-semibold text-sm text-gray-500">
-                      Horario de {pedido.domicilio ? "entrega" : "retiro"}
-                    </h2>
-                    <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.hPersonalizado}hs.</span>
-                  </div>
-
-                )}
-                <div className="flex justify-between items-center w-full">
-                  <h2 className="font-semibold text-sm text-gray-500">
-                    Medio de pago
-                  </h2>
-                  <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.medioDePago}</span>
+                  
+                  {pedido.hPersonalizado !== "" && (
+                    <div>
+                      <span className="block text-xs text-slate-400 font-medium mb-1">
+                        Horario de {pedido.domicilio ? "entrega" : "retiro"}
+                      </span>
+                      <span className="font-semibold text-slate-800">{pedido?.hPersonalizado} hs.</span>
+                    </div>
+                  )}
                 </div>
 
+                {/* Comentarios del pedido general */}
                 {pedido?.comentarios && (
-                  <div className="space-y-1">
-                    <h2 className="font-semibold text-sm text-gray-500">
-                      Comentarios
-                    </h2>
-                    <span className="font-medium text-gray-500 tracking-wide text-sm">{pedido?.comentarios}</span>
+                  <div className="mt-4 bg-amber-50 rounded-lg p-3 border border-amber-100">
+                    <span className="block text-xs text-amber-600 font-bold mb-1">Comentarios o notas:</span>
+                    <p className="text-sm text-slate-700">{pedido.comentarios}</p>
                   </div>
                 )}
               </div>
 
-              <>
+              {/* Sección: Productos */}
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Productos</h3>
+                
+                <div className="space-y-4">
+                  {categoriasId?.map(categoria => {
+                    const productosCategoria = productos?.filter(producto => producto?.categoria === categoria.categoria);
+                    if (!productosCategoria || productosCategoria.length === 0) return null;
 
-                {categoriasId?.map(categoria => (
-                  <div key={categoria.id}>
-                    <p className="text-sm font-medium tracking-wide mt-4 text-gray-500 font-montserrat">{capitalizeFirstLetter(categoria?.categoria)}</p>
-                    <hr />
-                    {productos
-                      ?.filter(producto => producto?.categoria === categoria.categoria)
-                      .map((item, index) => {
-                        return (
-                          <div key={index} className="py-1 font-montserrat text-sm text-neutral-800">
-                            <div className="flex justify-between items-start font-montserrat">
-                              <div className="font-semibold flex gap-1">
-                                <div className="flex gap-1 items-start">
-                                  <h2>
+                    return (
+                      <div key={categoria.id} className="border border-gray-100 rounded-xl overflow-hidden shadow-sm">
+                        <div className="bg-gray-50 px-4 py-2 border-b border-gray-100">
+                          <p className="text-xs font-bold tracking-wide text-gray-500 uppercase">{capitalizeFirstLetter(categoria?.categoria)}</p>
+                        </div>
+                        
+                        <div className="divide-y divide-gray-100">
+                          {productosCategoria.map((item, index) => (
+                            <div key={index} className="p-4 bg-white transition hover:bg-slate-50">
+                              <div className="flex justify-between items-start gap-3">
+                                <div className="flex gap-3">
+                                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">
                                     {item?.cant || item?.cantidad}
-                                  </h2>
-                                  <p>x</p>
+                                  </div>
+                                  <div>
+                                    <div className="font-semibold text-slate-800 text-sm">
+                                      {item?.tamanio && (
+                                        <span className="text-emerald-600 mr-1">{getShortSize(item?.tamanio)}</span>
+                                      )}
+                                      {item.nombre}
+                                    </div>
+                                    
+                                    {/* Detalles del producto */}
+                                    {categoria.categoria === 'pizzas' && (
+                                      <p className="text-xs text-slate-500 mt-1">{item.descripcion}</p>
+                                    )}
+                                    {item.extra && (
+                                      <p className="text-xs text-amber-600 font-medium mt-1">
+                                        Extra: {item.extra}
+                                      </p>
+                                    )}
+                                    {item.products && (
+                                      <div className="mt-1 space-y-1">
+                                        {item.products.map(producto => (
+                                          <p key={producto._id} className="text-xs text-slate-500 flex items-center gap-1">
+                                            <span className="font-semibold text-slate-700">
+                                              {producto.categoria === 'Postres'
+                                                ? item.cantidadPostres && `${item.cantidadPostres}x`
+                                                : producto.cantidad && `${producto.cantidad}x`}
+                                            </span>
+                                            {producto.nombre}
+                                          </p>
+                                        ))}
+                                      </div>
+                                    )}
+                                    {item.comentarios && (
+                                      <p className="text-xs italic text-slate-400 mt-2 bg-slate-50 p-2 rounded">&quot;{item.comentarios}&quot;</p>
+                                    )}
+                                  </div>
                                 </div>
-                                <div className="flex gap-1">
-                                  <span className="font-semibold text-gray-800">
-                                    {item?.tamanio && getShortSize(item?.tamanio)}
-                                  </span>
-                                  <span className="font-normal text-gray-800 pr-2">
-                                    {" "}
-                                    {item.nombre}
-                                  </span>
+                                
+                                <div className="font-bold text-slate-800 whitespace-nowrap text-sm bg-slate-50 px-2 py-1 rounded">
+                                  {formatearNumero(item.precio * item.cantidad)}
                                 </div>
                               </div>
-                              <p className="whitespace-nowrap">{formatearNumero(item.precio * item.cantidad)}</p>
                             </div>
-                            {categoria.categoria === 'pizzas' && <p className="font-normal text-gray-500  text-sm w-11/12">{item.descripcion}</p>}
-                            {item.extra && (
-                              <p className="text-gray-500  font-normal">
-                                Extra: {item.extra}
-                              </p>
-                            )}
-                            {item.products &&
-                              item.products.map(producto => (
-                                <div key={producto._id}>
-                                  <p className="font-normal text-gray-500">
-                                    {producto.categoria === 'Postres'
-                                      ? item.cantidadPostres && `${item.cantidadPostres}  `
-                                      : producto.cantidad && `${producto.cantidad}  `}
-                                    <span>{producto.nombre}</span>
-                                  </p>
-                                </div>
-                              ))}
-                            <p className="font-normal text-gray-400 text-sm w-11/12">{item.comentarios}</p>
-                          </div>
-                        );
-                      })}
-                  </div>
-                ))}
-              </>
-              {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
-                <p className="text-xs font-normal  mt-2 text-red-500">Se aplicó el {promoEfectivo.descuento}% de descuento, excepto solo efectivo</p>
-              )}
-              <div className="border-t-2 border-gray-200 my-3"></div>
-
-              <div className="flex font-bold justify-between items-center text-gray-900">
-                <h2>Total</h2>
-                <p className="text-2xl font-semibold">{formatearNumero(pedido.total)}</p>
-              </div>
-              {pedido.pagaCon !== null && (
-                <div className="flex justify-between items-center font-medium">
-                  <h2>Paga con</h2>
-                  <p>{formatearNumero(pedido.pagaCon)}</p>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              )}
+              </div>
+
+              {/* Pago y Totales */}
+              <div className="bg-slate-50 rounded-xl p-5 border border-slate-100 flex flex-col gap-3">
+                
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-medium text-slate-500">Medio de Pago</span>
+                  <span className="font-bold text-slate-700">{pedido?.medioDePago}</span>
+                </div>
+                
+                {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="font-medium text-emerald-600">Descuento aplicado</span>
+                    <span className="font-bold text-emerald-600">-{promoEfectivo.descuento}%</span>
+                  </div>
+                )}
+                
+                {pedido.pagaCon !== null && (
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="font-medium text-slate-500">Abonará con:</span>
+                    <span className="font-bold text-slate-700">{formatearNumero(pedido.pagaCon)}</span>
+                  </div>
+                )}
+
+                <hr className="border-slate-200 mt-1 mb-1" />
+
+                <div className="flex justify-between items-end">
+                  <span className="font-bold text-slate-500 uppercase tracking-widest text-xs mb-1">Total a Pagar</span>
+                  <span className="text-3xl font-black text-emerald-600 tracking-tight">
+                    {formatearNumero(pedido.total)}
+                  </span>
+                </div>
+              </div>
             </div>
+
+            {/* Footer Modal - Botón de Acción */}
+            {handleDelete && (
+              <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex justify-end">
+                <button
+                  onClick={() => {
+                     handleDelete(pedido._id);
+                     handleClose();
+                  }}
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl text-base font-bold text-white bg-red-600 hover:bg-red-700 transition shadow-lg shadow-red-200 active:scale-95 focus:outline-none focus:ring-4 focus:ring-red-100"
+                  type="button"
+                >
+                  Liberar Pedido
+                </button>
+              </div>
+            )}
           </motion.div>
         </div>
       </div>

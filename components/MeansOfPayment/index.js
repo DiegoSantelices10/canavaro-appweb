@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React from 'react'
 import { BsChatDotsFill } from 'react-icons/bs';
 
-const WhatsappPayInfo = ({ logo, logoWidth = 70, logoHeight = 40, logoAlt }) => (
+const WhatsappPayInfo = ({ logo, logoWidth = 70, logoHeight = 40, logoAlt, selectionCurrent }) => (
     <div className="mt-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 flex flex-col items-center gap-1.5 shadow-sm">
         <div className="w-9 h-9 rounded-full bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center shadow-md">
             <BsChatDotsFill className="text-white" size={17} />
@@ -14,7 +14,20 @@ const WhatsappPayInfo = ({ logo, logoWidth = 70, logoHeight = 40, logoAlt }) => 
         <p className="font-montserrat font-bold text-xs tracking-widest text-slate-800 uppercase text-center">
             Pago por WhatsApp
         </p>
-
+        {selectionCurrent === "Open Pay" && (
+            <div className="mt-3 rounded-xl px-4 py-3 flex flex-col items-center gap-1.5">
+                <p className="font-montserrat text-[10px] text-slate-500 text-center font-bold leading-snug uppercase tracking-wide max-w-xs">
+                    Martes y viernes con tarjeta de credito Banco Frances tenes reintegro.
+                </p>
+            </div>
+        )}
+        {selectionCurrent === "Cuenta DNI" && (
+            <div className="mt-3 rounded-xl px-4 py-3 flex flex-col items-center gap-1.5">
+                <p className="font-montserrat text-[10px] text-slate-500 text-center font-bold leading-snug uppercase tracking-wide max-w-xs">
+                    Aprovecha el reintegro de Cuenta DNI.
+                </p>
+            </div>
+        )}
         <p className="font-montserrat text-[10px] text-slate-500 text-center font-medium leading-snug uppercase tracking-wide max-w-xs">
             Al confirmar tu pedido, te enviaremos el QR o alias por WhatsApp para completar el pago.
         </p>
@@ -79,6 +92,7 @@ const MeansOfPayment = (props) => {
                             <WhatsappPayInfo
                                 logo="/images/cuenta-dni.jpg"
                                 logoWidth={130}
+                                selectionCurrent={values.medioDePago}
                                 logoHeight={50}
                                 logoAlt="Logo Cuenta DNI"
                             />
@@ -87,6 +101,7 @@ const MeansOfPayment = (props) => {
                         {values.medioDePago === 'Open Pay' && (
                             <WhatsappPayInfo
                                 logo="/images/openpay.png"
+                                selectionCurrent={values.medioDePago}
                                 logoWidth={160}
                                 logoHeight={60}
                                 logoAlt="Logo Open Pay"

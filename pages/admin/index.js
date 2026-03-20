@@ -135,7 +135,13 @@ const HomeAdmin = () => {
   return (
     <Layout>
       {currentPedido && (
-        <ModalPedido id={currentPedido._id} show={showModal} handleClose={handleCloseModal} pedido={currentPedido} />
+        <ModalPedido 
+          id={currentPedido._id} 
+          show={showModal} 
+          handleClose={handleCloseModal} 
+          pedido={currentPedido} 
+          handleDelete={handleDelete}
+        />
       )}
       <HeaderTitle title="Pedidos" />
       <div className="w-full mt-6">
@@ -153,31 +159,48 @@ const HomeAdmin = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`w-full grid grid-cols-1 justify-between  md:w-80 shadow-sm ${item?.visto !== true ? "shadow-gray-300" : "shadow-red-400"}  rounded-lg h-auto  p-3`}
+                  className={`relative w-full flex flex-col justify-between md:w-80 rounded-xl p-4 transition-all duration-300 ${
+                    item?.visto !== true 
+                      ? "bg-white border-l-4 border-l-red-500 shadow-lg shadow-red-100/50 transform hover:-translate-y-1" 
+                      : "bg-slate-50 border border-slate-200 shadow-sm opacity-95"
+                  }`}
                 >
                   <div className="w-full text-sm text-gray-800">
-                    <h2 className="text-right text-xs ">{item.hora} hs.</h2>
-                    <div className="text-left py-3 font-medium">
-                      <h5 className="font-semibold">{item?.cliente ? item?.cliente : item?.domicilio}</h5>
+                    <div className="flex justify-between items-center mb-2">
+                      {item?.visto !== true ? (
+                        <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-700">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                          </span>
+                          Nuevo
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">
+                          Lectura ✅
+                        </span>
+                      )}
+                      <h2 className="text-right text-xs font-semibold text-slate-500">{item.hora} hs.</h2>
+                    </div>
 
-                      <h5 className="font-normal text-xs text-gray-700">{separarNumero(item?.telefono)}</h5>
+                    <div className="text-left py-2 font-medium">
+                      <h5 className="font-bold text-base text-slate-800">{item?.cliente ? item?.cliente : item?.domicilio}</h5>
+                      <h5 className="font-medium text-xs text-slate-500 mt-1">{separarNumero(item?.telefono)}</h5>
                     </div>
                   </div>
-                  <div className={`flex justify-end items-center  gap-3 w-full font-montserrat`}>
+                  
+                  <div className={`flex justify-end items-center gap-2 w-full font-montserrat mt-2`}>
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="px-4 py-2 w-auto rounded-lg text-xs font-medium   
-														 focus:outline-none focus:ring-0 focus:border-none transition 
-														text-red-500  hover:bg-slate-100 bg-gray-50"
-                      type="submit"
+                      className="px-4 py-2 w-auto rounded-lg text-xs font-semibold focus:outline-none transition text-slate-700 bg-slate-200 hover:bg-slate-300"
+                      type="button"
                     >
                       Ver pedido
                     </button>
                     <button
                       onClick={() => handleDelete(item?._id)}
-                      className="px-4 py-2 w-auto rounded-lg text-xs font-medium border 
-												focus:outline-none focus:ring transition text-white bg-red-600 hover:border-white"
-                      type="submit"
+                      className="px-4 py-2 w-auto rounded-lg text-xs font-semibold focus:outline-none transition text-white bg-red-600 hover:bg-red-700"
+                      type="button"
                     >
                       Liberar
                     </button>
