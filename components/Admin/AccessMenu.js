@@ -152,6 +152,19 @@ const AccessMenu = () => {
               </Link>
             </div>
             <div>
+              <Link href="/admin/stock" passHref>
+                <button
+                  className={`transition duration-500 ease-in-out flex justify-between items-center hover:bg-white hover:text-red-500 w-full p-1 px-2 rounded-md ${selected === "/admin/stock"
+                    ? "bg-white text-red-500 tracking-wider"
+                    : "font-normal text-white"
+                    } mx-auto w-auto h-auto `}
+                >
+                  <p className="text-base font-montserrat lg:text-left md:text-center text-center">Stock</p>
+                  <span className="text-sm text-gray-400 font-semibold">Work in Progress</span>
+                </button>
+              </Link>
+            </div>
+            <div>
               <Link href="/admin/settings" passHref>
                 <button
                   className={`transition duration-500 ease-in-out hover:bg-white hover:text-red-500 w-full p-1 px-2 rounded-md ${selected === "/admin/settings"
@@ -241,6 +254,18 @@ const AccessMenu = () => {
                     } mx-auto w-auto h-auto `}
                 >
                   <p className="text-base font-montserrat">Ventas</p>
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link href="/admin/stock" passHref>
+                <button
+                  className={`${selected === "/admin/stock"
+                    ? "text-white tracking-wider font-semibold "
+                    : "font-normal text-white"
+                    } mx-auto w-auto h-auto `}
+                >
+                  <p className="text-base font-montserrat">Stock</p>
                 </button>
               </Link>
             </div>
