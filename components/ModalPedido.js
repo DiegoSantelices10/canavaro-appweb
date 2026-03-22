@@ -149,27 +149,31 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                           {productosCategoria.map((item, index) => (
                             <div key={index} className="p-4 bg-white transition hover:bg-slate-50">
                               <div className="flex justify-between items-start gap-3">
-                                <div className="flex gap-3 items-center">
-                                  <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-red-500 text-white flex items-center justify-center font-bold text-sm">
-                                    {item?.cant || item?.cantidad}
-                                  </div>
-                                  <span className="text-red-500 font-bold">x</span>
-                                  <div>
+                                <div className="flex flex-col w-full gap-1">
+                                  <div className="flex items-center gap-2">
+                                    <div className="flex-shrink-0 w-6 h-6 rounded-lg bg-gray-600 text-white flex items-center justify-center font-bold text-sm">
+                                      {item?.cant || item?.cantidad}
+                                    </div>
+                                    <span className="text-slate-600 font-bold">x</span>
                                     <div className="font-semibold text-slate-800 text-sm">
                                       {item?.tamanio && (
                                         <span className="text-emerald-600 mr-1">{getShortSize(item?.tamanio)}</span>
                                       )}
                                       {item.nombre}
                                     </div>
+                                  </div>
 
+                                  <div className="pl-12">
                                     {/* Detalles del producto */}
                                     {categoria.categoria === 'pizzas' && (
                                       <p className="text-xs text-slate-500 mt-1">{item.descripcion}</p>
                                     )}
-                                    {item.extra && (
-                                      <p className="text-xs text-amber-600 font-medium mt-1">
-                                        Extra: {item.extra}
-                                      </p>
+                                    {!item.extra && (
+                                      <div className="flex items-center w-fit gap-1 bg-gray-600 rounded-md px-4 py-0.5">
+                                        <p className="text-xs text-white font-medium italic">
+                                          Sin ajo!
+                                        </p>
+                                      </div>
                                     )}
                                     {item.products && (
                                       <div className="mt-1 space-y-1">
