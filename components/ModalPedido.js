@@ -149,10 +149,11 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                           {productosCategoria.map((item, index) => (
                             <div key={index} className="p-4 bg-white transition hover:bg-slate-50">
                               <div className="flex justify-between items-start gap-3">
-                                <div className="flex gap-3">
-                                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">
+                                <div className="flex gap-3 items-center">
+                                  <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-red-500 text-white flex items-center justify-center font-bold text-sm">
                                     {item?.cant || item?.cantidad}
                                   </div>
+                                  <span className="text-red-500 font-bold">x</span>
                                   <div>
                                     <div className="font-semibold text-slate-800 text-sm">
                                       {item?.tamanio && (
