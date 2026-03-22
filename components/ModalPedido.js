@@ -151,7 +151,7 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                               <div className="flex justify-between items-start gap-3">
                                 <div className="flex gap-3 items-center">
                                   <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-red-500 text-white flex items-center justify-center font-bold text-sm">
-                                    {item?.cant || item?.cantidad}
+                                    {item?.cant || item?.cantidad} u.
                                   </div>
                                   <span className="text-red-500 font-bold">x</span>
                                   <div>
