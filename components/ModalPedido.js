@@ -168,10 +168,10 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                                     {categoria.categoria === 'pizzas' && (
                                       <p className="text-xs text-slate-500 mt-1">{item.descripcion}</p>
                                     )}
-                                    {!item.extra && (
+                                    {item.extra && (
                                       <div className="flex items-center w-fit gap-1 bg-gray-600 rounded-md px-4 py-0.5">
                                         <p className="text-xs text-white font-medium italic">
-                                          Sin ajo!
+                                          Extra: {item.extra}
                                         </p>
                                       </div>
                                     )}
