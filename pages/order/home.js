@@ -243,7 +243,7 @@ export default function Home() {
               </h2>
               <div className="flex-1 h-[2px] bg-[#dc2626] ml-3 rounded-[2px] max-w-[40px]" />
             </div>
-            <div className="flex overflow-x-auto gap-4 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+            <div className="flex overflow-x-auto gap-4 pb-3 scrollbar-soft-gray">
               {renderPromotions()}
             </div>
           </div>
@@ -256,7 +256,7 @@ export default function Home() {
               </h2>
               <div className="flex-1 h-[2px] bg-[#dc2626] ml-3 rounded-[2px] max-w-[40px]" />
             </div>
-            <div className="flex overflow-x-auto gap-4 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+            <div className="flex overflow-x-auto gap-4 pb-3 scrollbar-soft-gray">
               {renderCombos()}
             </div>
           </div>
@@ -271,7 +271,7 @@ export default function Home() {
                   </h2>
                   <div className="flex-1 h-[2px] bg-[#dc2626] ml-3 rounded-[2px] max-w-[40px]" />
                 </div>
-                <div className="flex overflow-x-auto gap-4 pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                <div className="flex overflow-x-auto gap-4 pb-3 scrollbar-soft-gray">
                   {productosFiltrados.map((data) => (
                     <CardPromotion key={data._id} data={data} />
                   ))}
@@ -281,7 +281,7 @@ export default function Home() {
           </div>
 
           {/* ── Tabs de categorías (sticky) ── */}
-          <div className="sticky top-[44px] z-40 bg-white -mx-3 px-3 pt-3 pb-2 border-b border-gray-100 mt-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+          <div className="sticky top-[44px] z-40 bg-white -mx-3 px-3 pt-3 pb-2 border-b border-gray-100 mt-6 scrollbar-soft-gray overflow-x-auto">
             <TabsCategories
               renderProducts={renderProducts}
               setRenderProductos={setRenderProductos}

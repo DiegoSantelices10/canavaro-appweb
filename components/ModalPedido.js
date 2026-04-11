@@ -85,6 +85,12 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
               <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-6">
                 <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider mb-3">Información de Entrega</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  {pedido?.domicilio && (
+                    <div className="sm:col-span-2">
+                      <span className="block text-xs text-slate-400 font-medium mb-1">Dirección</span>
+                      <span className="font-semibold text-slate-800">{pedido.domicilio}</span>
+                    </div>
+                  )}
                   {pedido?.cliente && (
                     <div>
                       <span className="block text-xs text-slate-400 font-medium mb-1">Cliente</span>
@@ -95,12 +101,6 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
                     <div>
                       <span className="block text-xs text-slate-400 font-medium mb-1">Teléfono</span>
                       <span className="font-semibold text-slate-800">{separarNumero(pedido.telefono)}</span>
-                    </div>
-                  )}
-                  {pedido?.domicilio && (
-                    <div className="sm:col-span-2">
-                      <span className="block text-xs text-slate-400 font-medium mb-1">Dirección</span>
-                      <span className="font-semibold text-slate-800">{pedido.domicilio}</span>
                     </div>
                   )}
 
@@ -209,35 +209,44 @@ const ModalPedido = ({ handleClose, show, pedido, handleDelete }) => {
               </div>
 
               {/* Pago y Totales */}
-              <div className="bg-slate-50 rounded-xl p-5 border border-slate-100 flex flex-col gap-3">
+              {/* Sección: Resumen de Pago */}
+              <div className="mt-2 space-y-3 bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1 pl-1">Resumen de Pago</h3>
 
-                <div className="flex justify-between items-center text-sm">
-                  <span className="font-medium text-slate-500">Medio de Pago</span>
-                  <span className="font-bold text-slate-700">{pedido?.medioDePago}</span>
+                {/* Medio de Pago */}
+                <div className="flex justify-between items-center bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-sm">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Medio de Pago</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-slate-700">{pedido?.medioDePago}</span>
+                    {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
+                      <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-[10px] font-bold text-emerald-600 border border-emerald-100">
+                        -{promoEfectivo.descuento}% OFF
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                {promoEfectivo.available && pedido.medioDePago === "Efectivo" && conDescuento() && (
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-medium text-emerald-600">Descuento aplicado</span>
-                    <span className="font-bold text-emerald-600">-{promoEfectivo.descuento}%</span>
+                {/* Total a Pagar */}
+                <div className="flex justify-between items-center bg-white p-4 rounded-xl border-2 border-emerald-500/20 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
+                  <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-[0.15em]">Total a Pagar</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl font-black text-emerald-600 tracking-tight leading-none">
+                      {formatearNumero(pedido.total)}
+                    </span>
                   </div>
-                )}
-
-                {pedido.pagaCon !== null && (
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-medium text-slate-500">Abonará con:</span>
-                    <span className="font-bold text-slate-700">{formatearNumero(pedido.pagaCon)}</span>
-                  </div>
-                )}
-
-                <hr className="border-slate-200 mt-1 mb-1" />
-
-                <div className="flex justify-between items-end">
-                  <span className="font-bold text-slate-500 uppercase tracking-widest text-xs mb-1">Total a Pagar</span>
-                  <span className="text-3xl font-black text-emerald-600 tracking-tight">
-                    {formatearNumero(pedido.total)}
-                  </span>
                 </div>
+
+                {/* Abonará con y Vuelto */}
+                {pedido.pagaCon !== null && pedido.pagaCon > 0 && (
+                  <div className="grid grid-cols-1 gap-3">
+                    <div className="flex justify-between items-center bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-sm">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Abonará con</span>
+                      <span className="text-lg font-black text-slate-700">{formatearNumero(pedido.pagaCon)}</span>
+                    </div>
+
+                  </div>
+                )}
               </div>
             </div>
 

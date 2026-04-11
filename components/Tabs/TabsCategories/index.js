@@ -12,19 +12,7 @@ function TabsCategories({ renderProducts, setRenderProductos, clearTotal }) {
     const newListCategories = [...pizzasYEmpanadas, ...combosYPromo, ...resto];
 
     return (
-        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full mt-4">
-            <style jsx>
-                {`
-            .flexp::-webkit-scrollbar-thumb {
-              background: #f4f4f4;
-              border-radius: 20px;
-            }
-
-            .flexp::-webkit-scrollbar {
-              height: 4px;
-            }
-          `}
-            </style>
+        <div className="flex overflow-x-scroll flexp justify-between space-x-2 w-full mt-4 scrollbar-soft-gray">
             {newListCategories.filter((categoria) => categoria !== 'extras').map((categoria, index) => (
                 <div
                     key={index}>

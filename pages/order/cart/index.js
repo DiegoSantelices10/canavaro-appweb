@@ -454,20 +454,7 @@ export default function Cart({ data }) {
                   }
                 >
                   <div className="p-0">
-                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
-                      <style jsx>
-                        {`
-                          .flexp::-webkit-scrollbar-thumb {
-                            background: #ffffff;
-                            border-radius: 20px;
-                          }
-
-                          .flexp::-webkit-scrollbar {
-                            height: 5px;
-                          }
-                        `}
-                      </style>
-
+                    <div className="flex overflow-x-scroll flexp h-auto space-x-6 w-full px-0.5 pb-4 mt-4 scrollbar-soft-gray">
                       {renderList("bebidas", showAllBebidas, setShowAllBebidas)}
                     </div>
                   </div>
@@ -480,20 +467,7 @@ export default function Cart({ data }) {
                   }
                 >
                   <div className="p-0">
-                    <div className="flex overflow-x-scroll flexp h-auto  space-x-6 w-full px-0.5 py-2 mt-4  ">
-                      <style jsx>
-                        {`
-                          .flexp::-webkit-scrollbar-thumb {
-                            background: #ffffff;
-                            border-radius: 20px;
-                          }
-
-                          .flexp::-webkit-scrollbar {
-                            height: 5px;
-                          }
-                        `}
-                      </style>
-
+                    <div className="flex overflow-x-scroll flexp h-auto space-x-6 w-full px-0.5 pb-4 mt-4 scrollbar-soft-gray">
                       {renderList("Postres", showAllPostres, setShowAllPostres)}
                     </div>
                   </div>

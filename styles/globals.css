@@ -2,3 +2,45 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@layer utilities {
+  .scrollbar-soft-gray::-webkit-scrollbar {
+    height: 4px;
+  }
+  .scrollbar-soft-gray::-webkit-scrollbar-button,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:start,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:end,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:vertical:start:increment,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:vertical:start:decrement,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:vertical:end:increment,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:vertical:end:decrement,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:horizontal:start:increment,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:horizontal:start:decrement,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:horizontal:end:increment,
+  .scrollbar-soft-gray::-webkit-scrollbar-button:horizontal:end:decrement {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .scrollbar-soft-gray::-webkit-scrollbar-corner,
+  .scrollbar-soft-gray::-webkit-resizer {
+    display: none !important;
+  }
+  .scrollbar-soft-gray::-webkit-scrollbar-track {
+    background: #f3f4f6; /* gray-100 */
+    border-radius: 10px;
+  }
+  .scrollbar-soft-gray::-webkit-scrollbar-thumb {
+    background: #d1d5db; /* gray-300 */
+    border-radius: 10px;
+  }
+  .scrollbar-soft-gray::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af; /* gray-400 */
+  }
+  
+  /* Firefox */
+  .scrollbar-soft-gray {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f3f4f6;
+  }
+}
+
