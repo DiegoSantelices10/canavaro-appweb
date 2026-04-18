@@ -60,7 +60,7 @@ const HomeFront = () => {
             <div className="z-10 p-8 flex flex-col items-center text-center">
               <h1 className="text-xl text-gray-100 font-semibold mb-1">¡Nosotros te lo llevamos!</h1>
               <p className="text-base text-gray-300 mb-2">Delivery & Take Away</p>
-              <h2 className="text-xl text-white font-bold mb-2">Tel. 2197 8752</h2>
+              <h2 className="text-xl text-white font-bold mb-2">Tel. 4711-3259</h2>
               <p className="text-sm text-gray-200">De martes a domingo de 19 a 23hs.</p>
               <p className="text-sm text-gray-300">Pelliza 1794 - Olivos</p>
               {deliveryButton?.available && (
